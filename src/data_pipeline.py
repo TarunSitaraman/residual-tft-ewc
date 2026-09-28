@@ -744,3 +744,128 @@ def metrics_by_group(
     rows = {str(g): regression_metrics(sub[y_true], sub[y_pred]) for g, sub in df.groupby(group_col, sort=True)}
     rows["ALL"] = regression_metrics(df[y_true], df[y_pred])
     return pd.DataFrame(rows).T
+
+
+# ---------------------------------------------------------------------------
+# Reproducibility
+# ---------------------------------------------------------------------------
+
+
+def environment_info(repo_root: Path | None = None) -> dict:
+    """Library versions and the Git commit the code ran from, for results provenance.
+
+    ``git_dirty`` is True when tracked files differ from the commit, meaning the
+    numbers cannot be traced to that commit alone.
+    """
+    import platform
+    import subprocess
+
+    import sklearn
+
+    info = {
+        "python": platform.python_version(),
+        "numpy": np.__version__,
+        "pandas": pd.__version__,
+        "scikit-learn": sklearn.__version__,
+        "git_commit": None,
+        "git_dirty": None,
+    }
+    root = repo_root or find_repo_root()
+
+    def git(*args: str) -> str:
+        return subprocess.run(["git", "-C", str(root), *args], capture_output=True, text=True, check=True).stdout.strip()
+
+    try:
+        info["git_commit"] = git("rev-parse", "HEAD")
+        info["git_dirty"] = bool(git("status", "--porcelain", "--untracked-files=no"))
+    except (OSError, subprocess.CalledProcessError):
+        pass  # not a Git checkout (e.g. a zip export); left as None rather than guessed
+    return info
+
+
+# ---------------------------------------------------------------------------
+# Revised handover: ml_ready_dataset.csv audit
+# ---------------------------------------------------------------------------
+
+REVISED_TRAINING_FILE = "ml_ready_dataset.csv"
+MISSING_FLAG_SUFFIX = "_Missing"
+
+
+def audit_ml_ready(
+    ml_ready: pd.DataFrame,
+    ml_train: pd.DataFrame,
+    key: Sequence[str] = (GROUP_COL, "Cycling_Test", "Cycle_Index"),
+    atol: float = 1e-9,
+) -> dict:
+    """Compare the revised ``ml_ready_dataset.csv`` against the canonical ``ml_training_dataset.csv``.
+
+    The revised file is said to equal the canonical one except that temperatures are
+    pre-imputed with battery-level medians and ``<col>_Missing`` flags are added.
+    This checks that claim without modifying either input:
+
+    * ``schema``: columns only in one file.
+    * ``rows``: key coverage (rows in both / only one file, duplicate keys).
+    * ``shared_columns``: value mismatches in every shared column except the imputed
+      temperatures (NaN on both sides counts as equal).
+    * ``temperature``: per column, whether the flag marks exactly the canonical NaNs,
+      whether unflagged values are unchanged, and whether flagged values equal the
+      battery median over the battery's **whole** history (which would use
+      future validation/test rows, i.e. leakage) or the overall median fallback.
+    """
+    key = [c for c in key if c in ml_ready and c in ml_train]
+    extra = [c for c in ml_ready.columns if c not in ml_train.columns]
+    missing = [c for c in ml_train.columns if c not in ml_ready.columns]
+
+    merged = ml_train.merge(ml_ready, on=key, how="outer", suffixes=("_canon", "_ready"), indicator=True)
+    rows = {
+        "canonical_rows": len(ml_train),
+        "revised_rows": len(ml_ready),
+        "in_both": int((merged["_merge"] == "both").sum()),
+        "only_canonical": int((merged["_merge"] == "left_only").sum()),
+        "only_revised": int((merged["_merge"] == "right_only").sum()),
+        "duplicate_keys_canonical": int(ml_train.duplicated(subset=key).sum()),
+        "duplicate_keys_revised": int(ml_ready.duplicated(subset=key).sum()),
+    }
+    both = merged[merged["_merge"] == "both"]
+
+    temp_cols = [c for c in TEMPERATURE_COLUMNS if c in ml_train and c in ml_ready]
+    shared = [c for c in ml_train.columns if c in ml_ready.columns and c not in key and c not in temp_cols]
+    mismatch_rows = []
+    for c in shared:
+        a, b = both[f"{c}_canon"], both[f"{c}_ready"]
+        if pd.api.types.is_numeric_dtype(a) and pd.api.types.is_numeric_dtype(b):
+            equal = np.isclose(a.astype(float), b.astype(float), atol=atol, equal_nan=True)
+        else:
+            equal = (a.astype(str) == b.astype(str)) | (a.isna() & b.isna())
+        mismatch_rows.append({"column": c, "mismatches": int((~pd.Series(equal, index=a.index)).sum())})
+    shared_columns = pd.DataFrame(mismatch_rows, columns=["column", "mismatches"]).set_index("column")
+
+    groups = both[GROUP_COL].astype(str)
+    temp_rows = []
+    for c in temp_cols:
+        canon, ready = both[f"{c}_canon"].astype(float), both[f"{c}_ready"].astype(float)
+        flag_col = f"{c}{MISSING_FLAG_SUFFIX}"
+        row = {"column": c, "canonical_missing": int(canon.isna().sum()), "revised_missing": int(ready.isna().sum())}
+        if flag_col in both:
+            flag = both[flag_col].astype(float) == 1
+            imputed = ready[flag]
+            battery_median = canon.groupby(groups).transform("median")[flag]
+            overall_median = canon.median()
+            fallback = battery_median.isna()
+            row.update({
+                "flagged": int(flag.sum()),
+                "flag_equals_canonical_nan": bool((flag == canon.isna()).all()),
+                "unflagged_values_unchanged": bool(np.isclose(canon[~flag], ready[~flag], atol=atol).all()),
+                "imputed_eq_full_history_battery_median": int(np.isclose(imputed[~fallback], battery_median[~fallback], atol=1e-6).sum()),
+                "imputed_eq_overall_median_fallback": int(np.isclose(imputed[fallback], overall_median, atol=1e-6).sum()),
+                "imputed_unexplained": int(flag.sum())
+                - int(np.isclose(imputed[~fallback], battery_median[~fallback], atol=1e-6).sum())
+                - int(np.isclose(imputed[fallback], overall_median, atol=1e-6).sum()),
+            })
+        else:
+            row["flagged"] = None
+        temp_rows.append(row)
+    temperature = pd.DataFrame(temp_rows).set_index("column") if temp_rows else pd.DataFrame()
+
+    return {"schema": {"only_revised": extra, "only_canonical": missing}, "rows": rows,
+            "shared_columns": shared_columns, "temperature": temperature}

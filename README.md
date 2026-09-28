@@ -63,7 +63,7 @@ Cleaned cycling data
 ### 2.2 Temporal Alignment
 - Each cycling observation associates with the most recent RPT measurement **on or before** that cycle
 - Prevents assigning future health information to earlier observations
-- RPTs stored as a date only are read as 00:00 by default, so a cycle later that day uses that RPT; this convention is configurable and pending confirmation (see `docs/DECISIONS.md`)
+- RPTs stored as a date only are read as 00:00 by default, so a cycle later that day uses that RPT; this is the primary convention, with a planned sensitivity analysis under the end-of-day alternative (decision D3 in `docs/DECISIONS.md`)
 - Critical for time-series integrity
 
 ### 2.3 Dataset Structure
@@ -229,7 +229,7 @@ The novelty claim is therefore an integrated, battery-focused evaluation framewo
 ### 6.4 Alignment Assumptions
 - RPT alignment uses timestamps as stored with a backward join.
 - A date-only `Test_Date` is interpreted at midnight; a later cycle on that calendar day is treated as after that RPT.
-- This convention must be confirmed if the source system does not record the RPT time of day.
+- The source does not record the RPT time of day and the handover is final, so this cannot be confirmed; results will also be reported with same-day cycles assigned to the previous RPT (decision D3).
 
 ### 6.5 Continual Learning Approaches to Explore
 1. **Elastic Weight Consolidation (EWC)** — penalty-based retention of important weights

@@ -68,7 +68,7 @@ ML handover/
 ### 2.1 Loading the 7 CSV Files
 | File | Role | Key Columns |
 |------|------|-------------|
-| `cleaned_battery_data.csv` | Point-level raw data (post-cleaning) | Profiled only; schema must be confirmed before modelling |
+| `cleaned_battery_data.csv` | Point-level raw data (post-cleaning) | Profiled only; not used for modelling until a point-level feature pipeline is defined and validated (decision D2) |
 | `rpt_capacity_data.csv` | RPT measurements extracted | Battery_ID, RPT, Capacity_Ah, Test_Date |
 | `DATA_DICTIONARY.csv` | Column definitions | 27 columns with meanings/units |
 | `ml_training_dataset.csv` | SOH-labelled subset (recommended start) | 27 columns; rows before first RPT excluded |
@@ -102,7 +102,7 @@ ML handover/
 ### 2.4 Data Integrity Assumptions
 
 - The dictionary contains 27 columns. The modelling code derives 18 numeric inputs from the observed files rather than assuming the handover's older count of 22.
-- RPT alignment uses timestamps as stored with a backward join. A date-only `Test_Date` is interpreted at midnight, so a later cycle on the same calendar day is treated as after that RPT. This convention must be confirmed if the source system has an unknown RPT time of day.
+- RPT alignment uses timestamps as stored with a backward join. A date-only `Test_Date` is interpreted at midnight, so a later cycle on the same calendar day is treated as after that RPT. The RPT time of day is not recorded and the handover is final, so `"start"` is the primary convention and an end-of-day sensitivity analysis is planned (decision D3).
 - SOH is a step function between RPT measurements. Validation and test reports include the fraction of rows whose RPT interval was already seen during training.
 - The current baseline contains every battery group in its chronological split. It does not measure unseen-group generalization; the continual-learning stage must introduce complete groups sequentially and report adaptation, retention, and forgetting separately.
 
@@ -117,25 +117,25 @@ ML handover/
 | **Ridge regression** | Median imputation + missing indicators + scaling + Ridge | 18 numeric cycling inputs | `SOH_Percent` | Linear, extrapolating baseline for later-life evaluation |
 | **Histogram gradient boosting** | `HistGradientBoostingRegressor` | 18 numeric cycling inputs | `SOH_Percent` | Nonlinear baseline with native NaN handling; cannot extrapolate below training target range |
 
-**Baseline Metrics Target** (literature range, not a directly comparable guarantee):
-- RMSE: 0.8–1.5% (Braco 2022: 0.6-0.8%; Takahashi 2023: <1.48%)
-- MAE: proportionate to RMSE
-- Validation R²: >0.70
+**Metrics** (decision D8):
+- Primary: RMSE and MAE in SOH percentage points, per battery group and pooled.
+- MAPE for literature comparability; R² interpreted only on pooled results, because SOH is constant between RPTs and per-group R² is undefined or misleading over short test periods.
+- Literature ranges (RMSE 0.6–1.5 %: Braco 2022, Takahashi 2023) use other datasets and SOH definitions; they are context, not targets.
 
 ### 3.2 Proposed Continual Learning Model (Weeks 4-8)
 **Architecture: Temporal Fusion Transformer (TFT) + Elastic Weight Consolidation (EWC) + Multi-Task Reuse Head**
 
 ```mermaid
 graph TD
-A[Input: Variable-length sequences of 18 features plus explicit masks] --> B[TFT Encoder (time-aware attention)]
-    B --> C[Latent representation]
-    C --> D[Head 1: SOH_Percent Regression]
-    C --> E[Head 2: Reuse Suitability Classification]
-    D --> F[SOH_Percent output: %]
-    E --> G[Suitability category: {like-new, moderate, limited, recycle}]
-    
-    style D fill:#lightgreen,stroke:#333,stroke-width:2px
-    style E fill:#lightblue,stroke:#333,stroke-width:2px
+    A["Input: variable-length sequences of 18 features plus explicit masks"] --> B["TFT encoder (time-aware attention)"]
+    B --> C["Latent representation"]
+    C --> D["Head 1: SOH_Percent regression"]
+    C --> E["Head 2: reuse-suitability classification"]
+    D --> F["SOH_Percent output (%)"]
+    E --> G["Suitability category: like-new, moderate, limited, recycle"]
+
+    style D fill:#d9f2d9,stroke:#333,stroke-width:2px
+    style E fill:#d6e8f7,stroke:#333,stroke-width:2px
 ```
 
 #### 3.2.1 TFT Backbone
@@ -371,7 +371,7 @@ ML handover/
 
 ```bash
 # 1. Navigate to repo root
-cd /C/Users/Tarun/Downloads/ML\ handover
+cd path/to/your/clone
 
 # 2. Create .gitignore first (before any commits)
 cat > .gitignore << 'EOF'

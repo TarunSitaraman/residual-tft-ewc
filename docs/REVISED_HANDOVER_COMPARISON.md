@@ -45,3 +45,17 @@ its missingness flags must be treated as explicit model inputs.
 
 The revised package can still be mounted for inspection using `DATA_ROOT`, but
 the current notebooks expect the canonical `ml_training_dataset.csv` filename.
+
+## Audit
+
+When `ml_ready_dataset.csv` is placed in `DATA_ROOT` next to the canonical
+files, notebook 03 §9 checks it against `ml_training_dataset.csv`: same rows,
+identical shared values, flags matching the canonical missing temperatures, and
+whether the imputed values equal full-history battery medians (leakage). See
+decision D7 in `docs/DECISIONS.md`.
+
+## Open item
+
+This comparison does not state whether the revised package contains
+`DATA_DICTIONARY.csv` or whether it changed. Notebooks 01 and 03 require it;
+record the result of `cmp` between the two copies here.

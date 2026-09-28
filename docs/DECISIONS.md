@@ -1,14 +1,16 @@
 # Design decisions
 
-Methodological decisions for the data pipeline and evaluation, with the reasoning behind each and any open confirmation. Each entry states where the decision is implemented so results in the paper can be traced to code.
+Methodological decisions for the data pipeline and evaluation, with the reasoning behind each. Each entry states where the decision is implemented so results in the paper can be traced to code.
 
-Status values: **Adopted** (in use), **Pending confirmation** (in use as the default, awaiting the data owner), **Planned** (agreed, not yet implemented).
+Status values: **Adopted** (in use), **Planned** (agreed, not yet implemented).
+
+The data handover is final (28 Sep 2026): the data owner has provided every available file, and no further source information will arrive. Decisions that previously awaited the data owner are therefore taken by the team; where the source cannot settle a question, the paper reports a sensitivity analysis instead.
 
 ---
 
 ## D1. Model input features: 18, not 22
 
-**Status:** Pending confirmation (Darshan)
+**Status:** Adopted (team decision; handover final)
 
 `DATA_DICTIONARY.csv` documents **27** columns (the README previously said 28). Excluding identifiers and RPT/health columns leaves **18** model inputs:
 
@@ -29,7 +31,7 @@ Excluded:
 - **Identifiers / time:** `Battery_ID`, `Cycling_Test`, `Cycle_Date` (used for grouping, ordering and splitting).
 - **RPT / health columns:** `RPT`, `RPT_Number`, `Capacity_Ah`, `Reference_Capacity_Ah`, `SOH_Percent`, `Days_Since_RPT`. These are the target or derived from the RPT join, so using them as inputs would leak the target.
 
-The earlier "22 features" wording is treated as outdated or as a different counting convention. The code never hard-codes the count: notebook 03 derives it from the dictionary and the observed files.
+The earlier "22 features" wording in the handover notes is outdated or used a different counting convention; no source for 22 exists in the delivered files. The code never hard-codes the count: notebook 03 derives it from the dictionary and the observed files.
 
 **Implemented in:** `src/data_pipeline.py` (`HEALTH_COLUMNS`, `ID_COLUMNS`, `identify_cycling_features`, `model_feature_columns`), `notebooks/03_feature_engineering.ipynb` §3.
 
@@ -45,7 +47,7 @@ It must not be used directly for modelling until a separate point-level feature-
 
 ## D3. Same-day RPTs recorded as a date only
 
-**Status:** Pending confirmation (data owner)
+**Status:** Adopted — `"start"` as primary convention; sensitivity analysis under `"end"` planned
 
 Each cycle is aligned to the most recent RPT **on or before** its `Cycle_Date` (backward as-of join per battery). When `Test_Date` has no time of day, pandas reads it as 00:00. What a date-only RPT means physically is not documented; it could be:
 
@@ -57,7 +59,15 @@ Each cycle is aligned to the most recent RPT **on or before** its `Cycle_Date` (
 
 RPTs that carry a time of day are never shifted. Only cycles on the calendar day of a date-only RPT are affected.
 
-The default `"start"` matches the handover rule applied to timestamps as stored. Notebook 03 §6.1 counts the affected cycles and shows which conventions the stored datasets are consistent with. The team still has to confirm which convention is physically correct; if it is not `"start"`, the aligned datasets must be regenerated.
+The default `"start"` matches the handover rule applied to timestamps as stored, and it is the convention the delivered aligned datasets were built with. Notebook 03 §6.1 counts the affected cycles and confirms which conventions the stored datasets are consistent with.
+
+The handover is final and the RPT time of day is not recorded anywhere, so the physically correct convention cannot be confirmed. The paper therefore:
+
+1. uses `"start"` for all primary results;
+2. reports the share of cycles affected (cycles on the day of a date-only RPT);
+3. re-labels those cycles under `"end"` with `align_to_rpt` and re-reports the headline metrics, so reviewers can see the conclusion does not depend on this convention.
+
+Item 3 is **planned** (not yet implemented in notebook 04).
 
 **Implemented in:** `src/data_pipeline.py` (`effective_rpt_time`, `same_day_as_date_only_rpt`, `align_to_rpt`, `validate_rpt_alignment`, `validate_training_subset`), `notebooks/03_feature_engineering.ipynb` §1 (`DATE_ONLY_RPT`) and §6.1.
 
@@ -106,3 +116,40 @@ jupyter nbconvert --to notebook --execute notebooks/01_data_ingestion.ipynb --ou
 Executed notebooks go to an output directory so data-derived outputs are not committed. Only small `results/*.json` files (metrics, configuration, preprocessing table) may be versioned.
 
 **Implemented in:** `src/data_pipeline.py` (`resolve_data_root`, `check_data_files`), `data/README.md`, `.gitignore`.
+
+## D7. Revised handover file `ml_ready_dataset.csv` is audited, not adopted
+
+**Status:** Adopted
+
+The final handover package replaces `ml_training_dataset.csv` with `ml_ready_dataset.csv`: the same cycles plus `Test_Date` and `Temperature_{Mean,Min,Max}_Missing` flags, with missing temperatures pre-imputed using battery-level medians (overall median as fallback). The other five shared datasets are byte-identical to the previous package (`docs/REVISED_HANDOVER_COMPARISON.md`).
+
+`ml_training_dataset.csv` remains the canonical supervised input, because:
+
+- a battery-level median computed over a battery's whole history uses its later-life (validation/test) rows, which leaks future information into a chronological evaluation;
+- the baseline fits imputation on the training split only, which the pre-imputed file cannot reproduce.
+
+The revised file is useful in two ways: its missingness flags are exactly the explicit masks the proposed model needs, and it can be checked against the canonical file. Notebook 03 §9 audits it when present: identical rows and shared values, flags matching the canonical missing temperatures, and whether imputed values equal full-history battery medians. If a future experiment uses it, the imputed temperatures must be reset to missing (using the flags) and re-imputed from training rows only.
+
+**Implemented in:** `src/data_pipeline.py` (`REVISED_TRAINING_FILE`, `audit_ml_ready`), `notebooks/03_feature_engineering.ipynb` §9.
+
+## D8. Metrics: RMSE and MAE primary; R² only on pooled results
+
+**Status:** Adopted
+
+SOH is constant between RPTs, so one battery's validation or test period often spans only one or two SOH values. Per-battery R² is then undefined (constant target) or strongly negative even when the absolute error is small, which would misrepresent model quality. Therefore:
+
+- **Primary metrics:** RMSE and MAE in SOH percentage points, per battery group and pooled.
+- **MAPE:** reported for comparability with the literature; it is nearly proportional to MAE here because SOH stays close to 100 %.
+- **R²:** reported and interpreted only for pooled results; per-group R² is shown for completeness but not used for conclusions or targets.
+
+Literature error ranges (e.g. RMSE 0.6–1.5 %) come from other datasets and SOH definitions and are context, not targets (see `CLAUDE.md`).
+
+**Implemented in:** `src/data_pipeline.py` (`regression_metrics`, `metrics_by_group`), `notebooks/04_baseline_model.ipynb` §6.
+
+## D9. Every reported number is traceable to a commit
+
+**Status:** Adopted
+
+Result files record the configuration, random seed, feature list, data fingerprint (rows per group, date range, split sizes), library versions and the Git commit, together with whether the working tree had uncommitted changes (`git_dirty`). Numbers used in the paper must come from a run with `git_dirty: false`. Datasets are fingerprinted, not stored.
+
+**Implemented in:** `src/data_pipeline.py` (`environment_info`), `notebooks/04_baseline_model.ipynb` §7 (`results/baseline_metrics.json`).
