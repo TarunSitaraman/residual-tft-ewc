@@ -98,3 +98,15 @@ def test_backbone_settings_are_per_backbone():
     assert X.method_settings(cfg, "ewc") == {"lr": 1e-3, "epochs": 5}
     assert X.method_settings(cfg, "tft_ewc") == {"lr": 1e-2, "epochs": 5, "ewc_lambda": 10.0}
     assert X.backbone_of("tft_finetune") == "tft" and X.backbone_of("lwf") == "mlp"
+
+
+def test_fit_predict_neural_selects_lr_on_validation(ml_train):
+    from src import protocols as P
+
+    task = P.make_task(ml_train, "g1")
+    for model in ("mlp", "tft"):
+        preds, cfg = X.fit_predict(model, task.train, task.val, {"g1": task.test}, dp.model_feature_columns(ml_train),
+                                   mlp_kwargs=FAST, history=ml_train, lr_grid=[1e-3, 1e-2])
+        assert cfg["lr"] in (1e-3, 1e-2) and set(cfg["lr_val_rmse"]) == {1e-3, 1e-2}
+        assert cfg["lr"] == min(cfg["lr_val_rmse"], key=cfg["lr_val_rmse"].get)
+        assert cfg["lr_at_grid_edge"] is True and np.isfinite(preds["g1"]).all()

@@ -175,7 +175,9 @@ The earlier 80/60/40 % bands with application labels ("like-new", "moderate", "l
 - Pre-registered sensitivity analyses: cut-points shifted by ±2.5 pp (S-a1), a 3-class rule at 10/20 pp (S-a2), absolute-SOH classes if provenance is confirmed (S-b), fade rate per 100 days (S-c), and the `"end"` date-only convention (S-D3). None is used for selection.
 - The evaluation protocol (RPT-interval and cycle units, accuracy, macro-F1 with the number of classes present, linear-weighted kappa, confusion matrix, boundary share, majority and persistence baselines, per-step category matrix) is specified in `docs/REUSE_CATEGORIES.md` §4.
 
-**Implemented in:** `src/evaluation.py` (`REUSE_CUTPOINTS`, `REUSE_CLASS_NAMES`, `reuse_class`). The E10 evaluation itself is planned (W7).
+**Implemented in:** `src/evaluation.py` (`REUSE_CUTPOINTS`, `REUSE_CLASS_NAMES`, `reuse_class`); E10 evaluation in `src/reuse.py` (interval and cycle units, class metrics, baselines, per-step category matrix, cut-point variants), `src/experiments.py` (`reuse_*` metrics for every continual-learning run), `notebooks/08_reuse_assessment.ipynb` (Stage A models, baselines, sensitivity analyses) and notebooks 06–07 (category results after each step).
+
+**Sample size.** Each group's test period is its last 15 % of cycles, which typically spans only one or two RPT intervals, so the interval-level headline pools few samples (12 on the synthetic test data). Interval-level category results must be reported with their sample counts and interpreted as indicative; cycle-level results have more samples but are strongly correlated within an interval.
 
 ## D11. Hyperparameter tuning uses validation data only
 
@@ -217,7 +219,7 @@ Architecture and inputs:
 - **No static covariates:** battery identity is not an input, so every method is task-agnostic.
 - **Capacity-matched to the MLP:** `d_model = 8`, 2 heads gives about 12.0k parameters against the MLP's 13.1k, so differences reflect the architecture rather than model size.
 - **Window:** 8 cycles, fixed a priori; windows of 4 and 16 are reported as a sensitivity analysis.
-- The learning rate is tuned per backbone and λ per method under D11.
+- The learning rate is tuned per backbone and λ per method under D11. In Stage A (notebooks 05 and 08) the MLP and TFT select their learning rate on validation from the same grid, as Ridge selects its alpha.
 
 Evaluation follows `docs/RESEARCH_PLAN.md` Stage D: TFT + EWC against MLP + EWC (architecture), TFT fine-tuning (EWC), MLP replay and LwF (other families), and joint training on both backbones (upper bounds), on identical orders and seeds. Outcomes are reported as measured.
 

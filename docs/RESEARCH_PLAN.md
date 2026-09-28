@@ -108,6 +108,7 @@ E10: map predicted SOH to reuse categories and measure agreement with categories
 | `notebooks/05_reference_baselines.ipynb` | E2–E5 | A |
 | `notebooks/06_continual_learning.ipynb` | E4, E6–E8 | B, C |
 | `notebooks/07_tft_ewc.ipynb` | E9 with ablations, interpretation, window sensitivity | D |
+| `src/reuse.py`, `notebooks/08_reuse_assessment.ipynb` | E10 reuse categories: metrics, baselines, sensitivity | E |
 | `tests/` | Unit tests on synthetic data generated at test time into a temporary directory | all |
 
 ### Interfaces
@@ -153,7 +154,8 @@ class FineTune, Replay, EWC, LwF(Strategy);  class Joint: fit_all(tasks) ; predi
 | W4 | Reuse-category analysis (`docs/REUSE_CATEGORIES.md`) | — | Options and recommendation for E10 | done — team decisions pending (§6 of that document) |
 | W5 | Runner + notebooks 05/06, validation-only tuning (D11) | W1–W3 | E2–E8 results on synthetic data, then real data | code done (`src/experiments.py`, notebooks 05–06); real-data run blocked on W0 |
 | W6 | Proposed model: TFT + EWC (E9) | W5 | TFT strategy on the shared protocol, EWC reused from `src/continual_learning.py` | code done (D12, notebook 07); real-data run blocked on W0 |
-| W7 | Reuse head (E10), robustness (E11) | W4, W5 | Results and figures | later |
+| W7 | Reuse-category evaluation (E10) | W4, W5 | `src/reuse.py`, notebook 08, per-step category metrics in notebooks 06–07 | code done (D10); real-data run blocked on W0 |
+| W7b | Robustness to missing temperature (E11) | W5 | Masking vs. imputation comparison | later |
 | W8 | Paper: figures, tables, methods and results draft | W5–W7 | Manuscript draft | later |
 
 ## 6. Rules for all workstreams
@@ -171,5 +173,6 @@ class FineTune, Replay, EWC, LwF(Strategy);  class Joint: fit_all(tasks) ; predi
 | Step-function labels inflate within-group scores | E2 RPT-boundary split; report RPT-overlap share (D4) |
 | Groups differ in scale (capacity, protocol) | Relative SOH target; preprocessing fitted on first task only; report per-group results |
 | TFT adds cost without benefit on small data (six groups, short sequences) | Report TFT + EWC against the MLP ablations under identical conditions, with training time; state the outcome as measured |
-| Reuse thresholds not grounded for relative SOH | Resolve in W4 before implementing E10 |
+| Reuse thresholds not grounded for relative SOH | Resolved: relative-fade classes fixed before any real-data run (D10), with pre-registered sensitivity analyses |
+| Few RPT intervals per test period (E10 headline unit) | Report sample counts with every category metric, cycle-level results alongside, and treat interval-level results as indicative |
 | Real data never run | W0 is the first priority once data is mounted |

@@ -62,7 +62,8 @@ done
 | `05_reference_baselines.ipynb` | `ml_training_dataset.csv`, `final_battery_health_dataset.csv` |
 | `06_continual_learning.ipynb` | `ml_training_dataset.csv` |
 | `07_tft_ewc.ipynb` | `ml_training_dataset.csv` |
+| `08_reuse_assessment.ipynb` | `ml_training_dataset.csv`, `final_battery_health_dataset.csv` |
 
-Notebooks 03–07 write small JSON files to `results/` (`preprocessing_table.json`, `baseline_metrics.json`, `reference_baselines.json`, `cl_metrics.json`, `tft_ewc_metrics.json`). Notebooks 05–07 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile produces reportable numbers. Executing into `--output-dir` keeps outputs derived from the data out of the committed notebooks.
+Notebooks 03–08 write small JSON files to `results/` (`preprocessing_table.json`, `baseline_metrics.json`, `reference_baselines.json`, `cl_metrics.json`, `tft_ewc_metrics.json`, `reuse_assessment.json`). Notebooks 05–08 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile produces reportable numbers. Executing into `--output-dir` keeps outputs derived from the data out of the committed notebooks.
 
 See the root README for the SOH definition and temporal-alignment rules.
