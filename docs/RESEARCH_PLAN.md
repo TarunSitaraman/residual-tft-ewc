@@ -102,10 +102,12 @@ E10: map predicted SOH to reuse categories and measure agreement with categories
 | `src/protocols.py` | Task/stream construction, group orders, leave-one-group-out, RPT-boundary split, date-only relabelling | A, B |
 | `src/evaluation.py` | Accuracy matrix, CL metrics, bootstrap CIs, paired tests, aggregation | B |
 | `src/models/baseline_dnn.py` | Preprocessor fitted on first-task data, MLP regressor | C |
+| `src/models/tft_continual.py` | TFT for sequence-to-one estimation, causal cycle windows (D12) | D |
 | `src/continual_learning.py` | Strategy interface; fine-tune, joint, replay, EWC, LwF | C |
 | `src/experiments.py` | Runner: method × order × seed → accuracy matrices + results JSON | B, C |
 | `notebooks/05_reference_baselines.ipynb` | E2–E5 | A |
 | `notebooks/06_continual_learning.ipynb` | E4, E6–E8 | B, C |
+| `notebooks/07_tft_ewc.ipynb` | E9 with ablations, interpretation, window sensitivity | D |
 | `tests/` | Unit tests on synthetic data generated at test time into a temporary directory | all |
 
 ### Interfaces
@@ -150,7 +152,7 @@ class FineTune, Replay, EWC, LwF(Strategy);  class Joint: fit_all(tasks) ; predi
 | W3 | Models and strategies (`baseline_dnn.py`, `continual_learning.py` + tests) | — | Stage C methods | done |
 | W4 | Reuse-category analysis (`docs/REUSE_CATEGORIES.md`) | — | Options and recommendation for E10 | done — team decisions pending (§6 of that document) |
 | W5 | Runner + notebooks 05/06, validation-only tuning (D11) | W1–W3 | E2–E8 results on synthetic data, then real data | code done (`src/experiments.py`, notebooks 05–06); real-data run blocked on W0 |
-| W6 | Proposed model: TFT + EWC (E9) | W5 | TFT strategy on the shared protocol, EWC reused from `src/continual_learning.py` | next |
+| W6 | Proposed model: TFT + EWC (E9) | W5 | TFT strategy on the shared protocol, EWC reused from `src/continual_learning.py` | code done (D12, notebook 07); real-data run blocked on W0 |
 | W7 | Reuse head (E10), robustness (E11) | W4, W5 | Results and figures | later |
 | W8 | Paper: figures, tables, methods and results draft | W5–W7 | Manuscript draft | later |
 

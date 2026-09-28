@@ -77,11 +77,24 @@ def test_validation_evaluation_never_reads_test(ml_train):
 
 def test_tune_hyperparameters_selects_from_grid(ml_train):
     cfg = X.CLConfig(methods=("finetune", "replay"), n_orders=1, seeds=(0,), common_kwargs=FAST)
-    tuning = X.TuningConfig(grids={"replay": {"buffer_per_task": [20, 80]}}, n_orders=1)
+    tuning = X.TuningConfig(grids={"replay": {"buffer_per_task": [20, 80]}}, backbone_grid={"lr": [1e-3, 3e-3]}, n_orders=1)
     out = X.tune_hyperparameters(ml_train, cfg, tuning)
     chosen = out["selected"]["replay"]["buffer_per_task"]
     assert chosen in (20, 80) and isinstance(chosen, int)
     assert out["at_grid_edge"]["replay"]["buffer_per_task"] is True
     assert out["tuned_cl_config"].method_kwargs["replay"]["buffer_per_task"] == chosen
-    assert "finetune" not in out["selected"]  # nothing to tune
-    assert out["grid_summary"]["selected"].sum() == 1
+    assert "finetune" not in out["selected"]  # no method-specific grid
+    # Stage 1: one backbone (MLP) tuned by fine-tuning; its lr reaches every MLP method.
+    lr = out["backbone_selected"]["mlp"]["lr"]
+    assert lr in (1e-3, 3e-3) and set(out["backbone_selected"]) == {"mlp"}
+    assert X.method_settings(out["tuned_cl_config"], "replay")["lr"] == lr
+    assert out["grid_summary"]["selected"].sum() == 2  # one per stage
+    assert set(out["grid_summary"]["stage"]) == {"backbone:mlp", "method"}
+
+
+def test_backbone_settings_are_per_backbone():
+    cfg = X.CLConfig(common_kwargs={"lr": 1e-3, "epochs": 5}, backbone_kwargs={"tft": {"lr": 1e-2}},
+                     method_kwargs={"tft_ewc": {"ewc_lambda": 10.0}})
+    assert X.method_settings(cfg, "ewc") == {"lr": 1e-3, "epochs": 5}
+    assert X.method_settings(cfg, "tft_ewc") == {"lr": 1e-2, "epochs": 5, "ewc_lambda": 10.0}
+    assert X.backbone_of("tft_finetune") == "tft" and X.backbone_of("lwf") == "mlp"
