@@ -52,3 +52,36 @@ def test_write_results_adds_provenance(tmp_path, ml_train):
     report = json.loads(path.read_text())
     assert "environment" in report and "git_commit" in report["environment"]
     assert report["value"] is None and len(report["table"]) == 2
+
+
+# -- hyperparameter tuning (D11) ---------------------------------------------
+
+def test_tuning_orders_disjoint_from_evaluation(ml_train):
+    from src import protocols as P
+
+    cfg = X.CLConfig(n_orders=4)
+    evaluation = set(P.sample_orders(list(dp.BATTERY_GROUPS), 4, cfg.order_seed))
+    tuning = X.tuning_orders(ml_train, cfg, 3)
+    assert len(tuning) == 3 and not set(tuning) & evaluation
+
+
+def test_validation_evaluation_never_reads_test(ml_train):
+    from src import protocols as P
+
+    tasks = [P.Task(t.name, t.train, t.val, t.test.iloc[0:0]) for t in P.make_task_stream(ml_train, ["g1", "w8"])]
+    out = X.run_stream("finetune", tasks, seed=0, eval_split="val", **FAST)
+    assert out["R"].notna().all().all()
+    with pytest.raises(ValueError):
+        X.run_stream("finetune", tasks, seed=0, eval_split="train", **FAST)
+
+
+def test_tune_hyperparameters_selects_from_grid(ml_train):
+    cfg = X.CLConfig(methods=("finetune", "replay"), n_orders=1, seeds=(0,), common_kwargs=FAST)
+    tuning = X.TuningConfig(grids={"replay": {"buffer_per_task": [20, 80]}}, n_orders=1)
+    out = X.tune_hyperparameters(ml_train, cfg, tuning)
+    chosen = out["selected"]["replay"]["buffer_per_task"]
+    assert chosen in (20, 80) and isinstance(chosen, int)
+    assert out["at_grid_edge"]["replay"]["buffer_per_task"] is True
+    assert out["tuned_cl_config"].method_kwargs["replay"]["buffer_per_task"] == chosen
+    assert "finetune" not in out["selected"]  # nothing to tune
+    assert out["grid_summary"]["selected"].sum() == 1

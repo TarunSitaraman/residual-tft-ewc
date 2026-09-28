@@ -172,26 +172,29 @@ class CLConfig:
     method_kwargs: dict = field(default_factory=dict)       # per-method extras, e.g. {"ewc": {"ewc_lambda": 100}}
 
 
-def _task_errors(strategy, tasks: Sequence[P.Task], metric: str) -> dict[str, float]:
-    return {t.name: ev.task_error(t.test[TARGET], strategy.predict(t.test), metric) for t in tasks}
+def _task_errors(strategy, tasks: Sequence[P.Task], metric: str, split: str = "test") -> dict[str, float]:
+    if split not in ("test", "val"):
+        raise ValueError(f"split must be 'test' or 'val', got {split!r}")
+    return {t.name: ev.task_error(getattr(t, split)[TARGET], strategy.predict(getattr(t, split)), metric) for t in tasks}
 
 
-def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "RMSE", **kwargs) -> dict:
+def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "RMSE", eval_split: str = "test", **kwargs) -> dict:
     """Train ``method`` through ``tasks`` in order, evaluating every task after every step.
 
     Returns the accuracy matrix (all entries, including tasks not yet seen, which
     feed forward transfer), the untrained reference errors ``b_j``, CL metrics
-    and per-task training time.
+    and per-task training time. ``eval_split="val"`` evaluates on the validation
+    periods instead, for hyperparameter tuning; test periods are then never read.
     """
     features = dp.model_feature_columns(tasks[0].train)
     reference = make_strategy(method, features, seed=seed, **kwargs).initialise(tasks[0])
-    b = _task_errors(reference, tasks, metric)
+    b = _task_errors(reference, tasks, metric, eval_split)
 
     strategy = make_strategy(method, features, seed=seed, **kwargs)
     errors: dict[tuple[int, str], float] = {}
     for i, task in enumerate(tasks):
         strategy.fit_task(task)
-        for name, err in _task_errors(strategy, tasks, metric).items():
+        for name, err in _task_errors(strategy, tasks, metric, eval_split).items():
             errors[(i, name)] = err
     order = [t.name for t in tasks]
     R = ev.accuracy_matrix(errors, order)
@@ -245,6 +248,103 @@ def run_cl_experiment(df: pd.DataFrame, config: CLConfig) -> dict:
 
     return {"runs": pd.DataFrame(runs), "matrices": matrices, "joint": pd.DataFrame(joint_rows),
             "orders": orders, "config": asdict(config)}
+
+
+# ---------------------------------------------------------------------------
+# Hyperparameter tuning on validation data (decision D11)
+# ---------------------------------------------------------------------------
+
+#: Method-specific grids, fixed before any real-data run. Shared settings
+#: (learning rate, epochs, batch size, backbone) are not tuned, so no method
+#: receives a larger tuning budget than another.
+DEFAULT_GRIDS: dict[str, dict[str, list]] = {
+    "replay": {"buffer_per_task": [50, 100, 200, 400]},
+    "ewc": {"ewc_lambda": [1.0, 10.0, 100.0, 1_000.0, 10_000.0, 100_000.0]},
+    "lwf": {"alpha": [0.1, 0.5, 1.0, 2.0, 5.0]},
+}
+
+
+@dataclass
+class TuningConfig:
+    """Validation-only tuning grid.
+
+    Tuning streams use ``n_orders`` group orders that are guaranteed disjoint
+    from the evaluation orders of the matching ``CLConfig``, and are evaluated
+    on the tasks' validation periods only.
+    """
+
+    grids: dict = field(default_factory=lambda: {m: {k: list(v) for k, v in g.items()} for m, g in DEFAULT_GRIDS.items()})
+    n_orders: int = 3
+    seeds: tuple[int, ...] = (0,)
+    criterion: str = "final_avg_error"
+
+
+def _grid_points(grid: Mapping[str, Sequence]) -> list[dict]:
+    points = [{}]
+    for name, values in grid.items():
+        points = [{**p, name: v} for p in points for v in values]
+    return points
+
+
+def tuning_orders(df: pd.DataFrame, cl_config: CLConfig, n_orders: int) -> list[tuple[str, ...]]:
+    """Orders for tuning, disjoint from ``cl_config``'s evaluation orders.
+
+    ``sample_orders`` extends its list deterministically, so the orders after the
+    first ``cl_config.n_orders`` can never coincide with an evaluation order.
+    """
+    groups = [g for g in dp.BATTERY_GROUPS if g in set(df[dp.GROUP_COL].astype(str))]
+    return P.sample_orders(groups, cl_config.n_orders + n_orders, cl_config.order_seed)[cl_config.n_orders:]
+
+
+def tune_hyperparameters(df: pd.DataFrame, cl_config: CLConfig, tuning: TuningConfig) -> dict:
+    """Select each method's own hyperparameters on validation data only.
+
+    For every method with a grid and every grid point, run the stream over the
+    tuning orders and seeds with ``eval_split="val"`` and average
+    ``tuning.criterion`` (default: final average validation error, which
+    reflects both adaptation and retention). Ties go to the earlier grid value.
+    Returns the full grid table, the selected values per method, whether each
+    selected value lies at the edge of its grid (then the grid should be
+    extended and tuning repeated, so the optimum is not an artefact of the grid
+    range), and a ``CLConfig`` whose ``method_kwargs`` hold the selection.
+    """
+    orders = tuning_orders(df, cl_config, tuning.n_orders)
+    streams = [P.make_task_stream(df, o, cl_config.train_frac, cl_config.val_frac) for o in orders]
+    _warm_up(df)
+    rows, points = [], {}
+    for method in cl_config.methods:
+        grid = tuning.grids.get(method)
+        if not grid:
+            continue
+        points[method] = _grid_points(grid)
+        for point_id, point in enumerate(points[method]):
+            kwargs = {**cl_config.common_kwargs, **cl_config.method_kwargs.get(method, {}), **point}
+            for order_id, tasks in enumerate(streams):
+                for seed in tuning.seeds:
+                    out = run_stream(method, tasks, seed, cl_config.metric, eval_split="val", **kwargs)
+                    rows.append({"method": method, "point_id": point_id, **{f"param_{k}": v for k, v in point.items()},
+                                 "order_id": order_id, "seed": seed,
+                                 **{k: out["metrics"][k] for k in CL_METRIC_COLS if k in out["metrics"]}})
+    grid_runs = pd.DataFrame(rows)
+
+    selected, at_edge, table = {}, {}, []
+    if len(grid_runs):
+        param_cols = [c for c in grid_runs.columns if c.startswith("param_")]
+        agg = (grid_runs.groupby(["method", "point_id"], as_index=False)
+               .agg(**{c: (c, "first") for c in param_cols},
+                    **{f"val_{m}": (m, "mean") for m in ("final_avg_error", "plasticity", "forgetting")},
+                    n_runs=("seed", "size")))
+        for method, g in agg.groupby("method", sort=False):
+            best = g.sort_values([f"val_{tuning.criterion}", "point_id"], kind="mergesort").iloc[0]
+            # Take values from the grid itself so types (int buffer sizes) are exact.
+            selected[method] = dict(points[method][int(best["point_id"])])
+            grid = tuning.grids[method]
+            at_edge[method] = {k: len(grid[k]) > 1 and v in (min(grid[k]), max(grid[k])) for k, v in selected[method].items()}
+            table.append(g.assign(selected=g["point_id"] == best["point_id"]))
+    tuned = CLConfig(**{**asdict(cl_config), "method_kwargs": {**cl_config.method_kwargs,
+                        **{m: {**cl_config.method_kwargs.get(m, {}), **p} for m, p in selected.items()}}})
+    return {"grid_runs": grid_runs, "grid_summary": pd.concat(table, ignore_index=True) if table else pd.DataFrame(),
+            "selected": selected, "at_grid_edge": at_edge, "orders": orders, "config": asdict(tuning), "tuned_cl_config": tuned}
 
 
 def compare_methods(runs: pd.DataFrame, baseline: str = "finetune", metric_cols: Sequence[str] = CL_METRIC_COLS[:5]) -> pd.DataFrame:

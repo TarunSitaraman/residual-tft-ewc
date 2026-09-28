@@ -176,3 +176,21 @@ The earlier 80/60/40 % bands with application labels ("like-new", "moderate", "l
 - The evaluation protocol (RPT-interval and cycle units, accuracy, macro-F1 with the number of classes present, linear-weighted kappa, confusion matrix, boundary share, majority and persistence baselines, per-step category matrix) is specified in `docs/REUSE_CATEGORIES.md` §4.
 
 **Implemented in:** `src/evaluation.py` (`REUSE_CUTPOINTS`, `REUSE_CLASS_NAMES`, `reuse_class`). The E10 evaluation itself is planned (W7).
+
+## D11. Hyperparameter tuning uses validation data only
+
+**Status:** Adopted (fixed before any real-data run)
+
+Continual-learning results are sensitive to each method's own hyperparameter, so these are selected by a fixed protocol rather than set by hand or chosen on test data:
+
+- **Tuned:** only each method's own hyperparameter — replay buffer size per task {50, 100, 200, 400}, EWC λ {1, 10, 10², 10³, 10⁴, 10⁵}, LwF α {0.1, 0.5, 1, 2, 5}. Grids are fixed in `src/experiments.py` (`DEFAULT_GRIDS`) before any real-data run.
+- **Not tuned:** settings shared by all methods (backbone, learning rate, epochs, batch size, patience). Every method therefore receives the same tuning budget, and fine-tuning and joint training have nothing to tune.
+- **Data:** streams are evaluated on the tasks' validation periods only; test periods are never read during tuning (unit-tested).
+- **Orders:** tuning uses group orders guaranteed disjoint from the evaluation orders, so the selection is not fitted to the reported streams.
+- **Criterion:** final average validation error over all tasks after the last step, which reflects adaptation and retention together. Lowest wins; ties go to the earlier grid value.
+- **Grid edges:** if a selected value lies at the edge of its grid, the grid is extended and tuning repeated before results are reported, so the optimum is not an artefact of the range.
+- **Reporting:** the full tuning grid (every value, validation error, plasticity, forgetting) is saved with the results, so sensitivity to the hyperparameter is visible.
+
+The proposed TFT + EWC model (E9) uses the same protocol for its λ.
+
+**Implemented in:** `src/experiments.py` (`DEFAULT_GRIDS`, `TuningConfig`, `tuning_orders`, `tune_hyperparameters`, `run_stream(eval_split="val")`), `notebooks/06_continual_learning.ipynb` §3.
