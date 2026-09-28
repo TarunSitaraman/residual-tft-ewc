@@ -271,3 +271,31 @@ def summarise_runs(
             })
         rows.append(row)
     return pd.DataFrame(rows)
+
+
+# ---------------------------------------------------------------------------
+# Reuse categories (decision D10, docs/REUSE_CATEGORIES.md §4)
+# ---------------------------------------------------------------------------
+
+#: Fade cut-points in SOH percentage points since the first observed RPT.
+REUSE_CUTPOINTS: tuple[float, ...] = (5.0, 10.0, 20.0)
+REUSE_CLASS_NAMES: tuple[str, ...] = ("C0 stable", "C1 moderate fade", "C2 substantial fade", "C3 severe fade")
+
+
+def reuse_class(soh, cutpoints: Sequence[float] = REUSE_CUTPOINTS) -> np.ndarray:
+    """Ordinal reuse class from relative SOH (percent of first observed RPT capacity).
+
+    With fade ``F = 100 - SOH`` and the default cut-points: C0 if SOH > 95
+    (including apparent recovery above 100), C1 if 90 < SOH <= 95, C2 if
+    80 < SOH <= 90, C3 if SOH <= 80. The same rule is applied to measured and
+    predicted SOH. Classes describe capacity change since the first
+    observation, not suitability for an application. Pass other ``cutpoints``
+    only for the pre-registered sensitivity analyses (S-a1, S-a2). NaN SOH
+    raises, so missing labels are never silently classed.
+    """
+    soh = np.asarray(soh, dtype=float)
+    if np.isnan(soh).any():
+        raise ValueError("reuse_class received NaN SOH; classify labelled rows only")
+    if list(cutpoints) != sorted(cutpoints):
+        raise ValueError(f"cutpoints must be increasing, got {cutpoints}")
+    return np.digitize(100.0 - soh, np.asarray(cutpoints, dtype=float), right=False)

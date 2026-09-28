@@ -132,7 +132,7 @@ graph TD
     C --> D["Head 1: SOH_Percent regression"]
     C --> E["Head 2: reuse-suitability classification"]
     D --> F["SOH_Percent output (%)"]
-    E --> G["Suitability category: like-new, moderate, limited, recycle"]
+    E --> G["Reuse class: C0 stable, C1 moderate, C2 substantial, C3 severe fade"]
 
     style D fill:#d9f2d9,stroke:#333,stroke-width:2px
     style E fill:#d6e8f7,stroke:#333,stroke-width:2px
@@ -160,10 +160,12 @@ Two output heads:
   - Loss: L1/L2 loss on `SOH_Percent`
 - **Task 2**: Reuse suitability classification (application decision)
   - 4 categories based on SOH ranges:
-    - 80-100%: "like-new" → full EV repurposing, stationary storage
-    - 60-80%: "moderate" → grid support, peak shaving, commercial backup
-    - 40-60%: "limited" → low-demand applications, IoT, testing
-    - <40%: "recycle" → material recovery, recycling
+    - Categories follow decision D10 (`docs/DECISIONS.md`): four relative-fade classes on SOH since the first observed RPT
+      - C0 stable: SOH > 95
+      - C1 moderate fade: 90 < SOH ≤ 95
+      - C2 substantial fade: 80 < SOH ≤ 90
+      - C3 severe fade: SOH ≤ 80
+    - The earlier 80/60/40 % bands with application labels are withdrawn because SOH here is relative to the first second-life RPT, not nominal capacity
   - Loss: Cross-entropy
 - **Combined loss**: `L = L_soh + α * L_reuse` (α balances continuous vs. categorical)
 
@@ -230,7 +232,7 @@ The current baseline is within-battery chronological evaluation. It does not est
 | **Baseline SOH accuracy** | RMSE on held-out cycles | 0.8–1.5% (within literature: Braco 0.6-0.8, Rashid 1.1, Takahashi <1.48) |
 | **CL adaptation** | SOH RMSE on newly introduced battery group | Within 20% of baseline (demonstrates adaptation) |
 | **CL retention** | Forgetting metric (RMSE change on old groups after new learning) | <0.2% increase (EWC prevents forgetting) |
-| **Reuse suitability** | Category accuracy across all 6 groups | >75% correct mapping (SOH → {like-new, moderate, limited, recycle}) |
+| **Reuse suitability** | Category accuracy across all 6 groups | Agreement between classes from predicted and measured SOH (accuracy, macro-F1, weighted kappa; D10) — no target fixed in advance |
 | **Feature importance** | Top 3 features by attention frequency | Expected: `Voltage_Min`, `Capacity_Ratio_Mean`, `Energy_Efficiency_Mean` (aligns with literature indicator selection theme) |
 
 ### 4.2 Qualitative Outcomes

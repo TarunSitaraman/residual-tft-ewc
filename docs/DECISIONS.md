@@ -153,3 +153,26 @@ Literature error ranges (e.g. RMSE 0.6–1.5 %) come from other datasets and SOH
 Result files record the configuration, random seed, feature list, data fingerprint (rows per group, date range, split sizes), library versions and the Git commit, together with whether the working tree had uncommitted changes (`git_dirty`). Numbers used in the paper must come from a run with `git_dirty: false`. Datasets are fingerprinted, not stored.
 
 **Implemented in:** `src/data_pipeline.py` (`environment_info`), `notebooks/04_baseline_model.ipynb` §7 (`results/baseline_metrics.json`).
+
+## D10. Reuse categories: four relative-fade classes
+
+**Status:** Adopted (team decision, 28 Sep 2026; fixed before any real-data run)
+
+Reuse categories are defined on fade since the first observed RPT, `F = 100 − SOH_Percent`, with neutral names:
+
+| Class | Rule | Fade since first RPT |
+|---|---|---|
+| C0 stable | SOH > 95 (includes apparent recovery above 100) | < 5 pp |
+| C1 moderate fade | 90 < SOH ≤ 95 | 5–10 pp |
+| C2 substantial fade | 80 < SOH ≤ 90 | 10–20 pp |
+| C3 severe fade | SOH ≤ 80 | ≥ 20 pp |
+
+The earlier 80/60/40 % bands with application labels ("like-new", "moderate", "limited", "recycle") are withdrawn: they assume SOH relative to nominal capacity, whereas SOH here is relative to the first second-life measurement (see `docs/REUSE_CATEGORIES.md` §1).
+
+- Classes describe capacity change, not suitability for an application. Application labels are allowed only in sensitivity analysis S-b, and only if the data provenance (Stanford second-life dataset) is confirmed.
+- Cut-points are conventions, not tuned on the data. The 20 pp boundary is an analogy to the common "80 % of the starting value" convention, not an equivalence with first-life end of life.
+- The same rule is applied to measured and predicted SOH; the primary E10 result thresholds the regression output rather than training a separate classifier.
+- Pre-registered sensitivity analyses: cut-points shifted by ±2.5 pp (S-a1), a 3-class rule at 10/20 pp (S-a2), absolute-SOH classes if provenance is confirmed (S-b), fade rate per 100 days (S-c), and the `"end"` date-only convention (S-D3). None is used for selection.
+- The evaluation protocol (RPT-interval and cycle units, accuracy, macro-F1 with the number of classes present, linear-weighted kappa, confusion matrix, boundary share, majority and persistence baselines, per-step category matrix) is specified in `docs/REUSE_CATEGORIES.md` §4.
+
+**Implemented in:** `src/evaluation.py` (`REUSE_CUTPOINTS`, `REUSE_CLASS_NAMES`, `reuse_class`). The E10 evaluation itself is planned (W7).

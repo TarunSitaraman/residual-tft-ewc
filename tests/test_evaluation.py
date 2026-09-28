@@ -169,3 +169,25 @@ def test_summarise_runs():
     assert ewc["bwt_ci_low"] == ewc["bwt_ci_high"] == 0.5
     with pytest.raises(KeyError):
         ev.summarise_runs(runs, ["missing"], ["method"])
+
+
+# -- reuse classes (D10) -----------------------------------------------------
+
+def test_reuse_class_boundaries():
+    from src.evaluation import reuse_class
+
+    soh = [101.0, 100.0, 95.01, 95.0, 90.01, 90.0, 80.01, 80.0, 60.0]
+    assert reuse_class(soh).tolist() == [0, 0, 0, 1, 1, 2, 2, 3, 3]
+
+
+def test_reuse_class_sensitivity_and_errors():
+    import numpy as np
+    import pytest
+
+    from src.evaluation import reuse_class
+
+    assert reuse_class([95.0, 89.0, 79.0], cutpoints=(10.0, 20.0)).tolist() == [0, 1, 2]
+    with pytest.raises(ValueError):
+        reuse_class([np.nan])
+    with pytest.raises(ValueError):
+        reuse_class([90.0], cutpoints=(10.0, 5.0))

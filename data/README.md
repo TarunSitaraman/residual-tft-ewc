@@ -59,7 +59,9 @@ done
 | `02_eda_analysis.ipynb` | `ml_training`, `final_ml`, `final_battery_health`, `final_battery_cycling_features` |
 | `03_feature_engineering.ipynb` | all except `cleaned_battery_data.csv` |
 | `04_baseline_model.ipynb` | `ml_training_dataset.csv` |
+| `05_reference_baselines.ipynb` | `ml_training_dataset.csv`, `final_battery_health_dataset.csv` |
+| `06_continual_learning.ipynb` | `ml_training_dataset.csv` |
 
-Notebooks 03 and 04 write small JSON files to `results/` (`preprocessing_table.json`, `baseline_metrics.json`). Executing into `--output-dir` keeps outputs derived from the data out of the committed notebooks.
+Notebooks 03–06 write small JSON files to `results/` (`preprocessing_table.json`, `baseline_metrics.json`, `reference_baselines.json`, `cl_metrics.json`). Notebooks 05–06 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile produces reportable numbers. Executing into `--output-dir` keeps outputs derived from the data out of the committed notebooks.
 
 See the root README for the SOH definition and temporal-alignment rules.
