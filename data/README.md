@@ -30,6 +30,15 @@ Expected files:
 | `final_battery_health_dataset.csv` | RPT capacity and SOH progression per battery |
 | `final_battery_cycling_features.csv` | Cycle-level cycling features |
 
+## Revised handover package
+
+The revised external handover may provide `ml_ready_dataset.csv` instead of
+`ml_training_dataset.csv`. It contains extra `Test_Date` and temperature
+missingness-flag columns and pre-imputed temperature values. It is not a drop-in
+replacement for the canonical baseline input because its imputation scope must
+be audited for train/test leakage first. See
+`docs/REVISED_HANDOVER_COMPARISON.md`.
+
 If `DATA_ROOT` or a file a notebook needs is missing, the notebook stops with a `DataFilesMissingError` listing the missing files. No substitute data is generated.
 
 ## Running the notebooks
