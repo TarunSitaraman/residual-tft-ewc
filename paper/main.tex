@@ -1,0 +1,96 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% Visible placeholder for anything that depends on the real-data run or on a
+% team decision. The final version must compile with zero \todo occurrences.
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+
+\begin{document}
+
+\title{Continual Learning for State-of-Health Estimation and Reuse Assessment of Heterogeneous Second-Life EV Batteries}
+
+\author{
+\IEEEauthorblockN{Darshan D, Sohan Sandeep Krishnan, Tarun Sitaraman}
+\IEEEauthorblockA{\todo{affiliation, e-mail; author order}}
+}
+
+\maketitle
+
+\begin{abstract}
+\todo{Abstract, written after the results.}
+\end{abstract}
+
+\begin{IEEEkeywords}
+second-life batteries, state of health, continual learning, elastic weight consolidation, temporal fusion transformer, reuse assessment
+\end{IEEEkeywords}
+
+\section{Introduction}
+\label{sec:intro}
+\todo{Motivation, research questions RQ1--RQ4, contributions within the claim boundary of docs/RESEARCH\_PLAN.md \S1.}
+
+\section{Related Work}
+\label{sec:related}
+\todo{Second-life SOH estimation, continual learning for batteries, reuse assessment (README \S3).}
+
+\input{sections/methods}
+
+\section{Results}
+\label{sec:results}
+\todo{From results/*.json of the real-data run on a clean commit.}
+
+\section{Discussion}
+\label{sec:discussion}
+\todo{Including limitations: six groups, relative SOH, provenance, label resolution.}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\todo{Conclusion.}
+
+% ---------------------------------------------------------------------------
+% Floats referenced from the methods section (placeholders until results exist)
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox[c][3cm][c]{0.9\columnwidth}{\centering\todo{Pipeline figure}}}
+  \caption{Workflow: causal SOH labelling, battery-group task stream, continual-learning strategies, SOH estimation and reuse categories.}
+  \label{fig:pipeline}
+\end{figure}
+
+\begin{table*}[t]
+  \centering
+  \caption{Battery groups: cycles, labelled cycles, RPTs, missing temperature and train/validation/test sizes.}
+  \label{tab:data}
+  \begin{tabular}{lccccc}
+    \toprule
+    Group & Cycles & Labelled & RPTs & Temp.\ missing (\%) & Train/Val/Test \\
+    \midrule
+    g1--w10 & \multicolumn{5}{c}{\todo{from notebooks 01--02}} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table}[t]
+  \centering
+  \caption{Hyperparameters selected on validation data (D11).}
+  \label{tab:hyper}
+  \begin{tabular}{llc}
+    \toprule
+    Stage & Setting & Selected \\
+    \midrule
+    Backbone & MLP / TFT learning rate & \todo{} \\
+    Method & Replay $B$, EWC $\lambda$ (MLP, TFT), LwF $\alpha$ & \todo{} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

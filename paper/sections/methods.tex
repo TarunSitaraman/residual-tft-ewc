@@ -1,0 +1,192 @@
+% =============================================================================
+% Methodology
+%
+% Every design choice below is implemented in the repository and recorded in
+% docs/DECISIONS.md (D1--D13): data and labels D1--D3, persistence and RPT
+% overlap D4, metrics D8, reuse classes D10, tuning D11, TFT D12, missing
+% temperature D13. Decision numbers are internal and are not cited in the text. Values that depend on the real-data run are
+% marked \todo{...}; fill them only from committed results files produced on a
+% clean commit (results/*.json, git_dirty = false).
+% =============================================================================
+
+\section{Methodology}
+\label{sec:methods}
+
+Fig.~\ref{fig:pipeline} \todo{pipeline figure: data $\rightarrow$ alignment $\rightarrow$ task stream $\rightarrow$ strategies $\rightarrow$ SOH $\rightarrow$ reuse class} summarises the workflow. Cycling measurements from heterogeneous second-life cells are reduced to cycle-level features, labelled with a relative state of health (SOH) from reference performance tests (RPTs) using a strictly causal alignment, and presented to a model as a stream of battery groups. Each learning strategy is evaluated on how well it adapts to each new group and how much it retains of the earlier ones, and the predicted SOH is mapped to reuse categories.
+
+% -----------------------------------------------------------------------------
+\subsection{Dataset}
+\label{sec:data}
+
+The data comprise six second-life lithium-ion battery groups, denoted g1, v4, v5, w8, w9 and w10, with cycling measurements and periodic RPTs. \todo{Provenance: state the source and cite it. If the data are confirmed to be the public Stanford second-life dataset~\cite{moy2024secondlife,pozzato2022firstlife}, replace this paragraph with its description (cell model, first-life ageing, second-life duty cycles, C-rates, temperatures), cite it, and narrow ``heterogeneous'' to usage history, C-rate and temperature (see docs/REUSE\_CATEGORIES.md \S1.1).}
+The processed data contain \todo{N} cycles in total (\todo{per-group counts, Table~\ref{tab:data}}), of which \todo{N} carry an SOH label, with \todo{min--max} RPTs per battery.
+
+For each cycle, the cycling measurements are summarised by 18 features: the cycle index; mean, minimum and maximum of voltage, current and temperature; maximum charge and discharge capacity; maximum charge and discharge energy; mean power; mean discharge-to-charge capacity ratio; mean energy efficiency; and the number of raw data points. Identifiers (battery, cycling test, timestamp) are used only for grouping, ordering and splitting. Columns derived from the RPT labelling (RPT identifier and index, measured capacity, reference capacity, SOH and days since the RPT) are excluded from the inputs, because they encode the target.
+
+\subsubsection{State of health}
+For battery $b$ with RPT capacities $C_{b,1}, C_{b,2}, \dots$ in chronological order, the SOH at RPT $k$ is
+\begin{equation}
+  \mathrm{SOH}_{b,k} = 100\,\frac{C_{b,k}}{C_{b,1}} \;\%,
+  \label{eq:soh}
+\end{equation}
+i.e.\ relative to the first observed RPT capacity, not to a nominal rating. Because the cells are second-life, $C_{b,1}$ is already an aged capacity. All results are therefore statements about capacity fade since the first second-life measurement.
+
+\subsubsection{Causal label alignment}
+A cycle at time $t$ receives the SOH of the most recent RPT at or before $t$:
+\begin{equation}
+  y(t) = \mathrm{SOH}_{b,k^*}, \qquad k^* = \max\{k : \tau_{b,k} \le t\},
+  \label{eq:alignment}
+\end{equation}
+where $\tau_{b,k}$ is the time of RPT $k$. Cycles before a battery's first RPT have no label and are excluded from supervised training; no label is imputed or extrapolated. The resulting labels are piecewise constant between RPTs. We re-derived the alignment independently and verified it against the delivered data: SOH formula, first-RPT reference, backward alignment, absence of future labels, and the labelled subset \todo{report: all checks passed / list exceptions}.
+
+RPT timestamps recorded as a date only are read as 00:00, so a cycle later on the same day uses that RPT. Since the time of day of RPTs is not recorded, we repeat the main reference experiment with the alternative convention, in which same-day cycles use the previous RPT (\S\ref{sec:reference}, E5).
+
+\subsubsection{Missing temperature}
+Temperature is missing for \todo{x\%} of cycles, with \todo{describe pattern: joint across the three statistics, run lengths}. Missing values are never replaced in the stored data. Within a model, a missing value is replaced by the training-set median and flagged by a binary missing indicator (\S\ref{sec:backbones}). Alternatives are evaluated in \S\ref{sec:robustness}.
+
+% -----------------------------------------------------------------------------
+\subsection{Continual-learning problem formulation}
+\label{sec:problem}
+
+Each battery group $g$ defines a task $\mathcal{T}_g$. Its labelled cycles are ordered by timestamp (ties broken by cycle index) and split chronologically into the first 70\% for training ($\mathcal{D}^{\mathrm{tr}}_g$), the next 15\% for validation ($\mathcal{D}^{\mathrm{va}}_g$) and the last 15\% for testing ($\mathcal{D}^{\mathrm{te}}_g$). No sample is shuffled across these boundaries, so every test evaluates a battery's later life.
+
+A stream is an ordering $\pi = (\pi_1,\dots,\pi_T)$ of the $T=6$ tasks. At step $i$, a strategy receives $\mathcal{D}^{\mathrm{tr}}_{\pi_i}$ and $\mathcal{D}^{\mathrm{va}}_{\pi_i}$ only; data of earlier tasks are unavailable unless the strategy explicitly stores them (replay). Battery identity is not a model input, so all methods are task-agnostic at test time.
+
+% -----------------------------------------------------------------------------
+\subsection{Backbones}
+\label{sec:backbones}
+
+\subsubsection{Input preprocessing}
+Each feature is standardised with the mean and standard deviation of the \emph{first task's} training cycles; missing values are replaced by that task's median and flagged by one indicator per feature. The preprocessing, like the target standardisation below, is fitted once on the first task and then frozen, so no strategy uses statistics of future tasks. The input width is therefore fixed at $2 \times 18$ regardless of which later tasks contain missing values.
+
+\subsubsection{Multilayer perceptron}
+The reference backbone is a multilayer perceptron (MLP) with two hidden layers of 128 and 64 ReLU units and dropout 0.1, mapping the 36 inputs of a cycle to its SOH (13{,}057 parameters).
+
+\subsubsection{Temporal Fusion Transformer}
+The proposed backbone adapts the Temporal Fusion Transformer (TFT)~\cite{lim2021tft} to sequence-to-one \emph{estimation}. The input for a cycle is a window of the $W$ most recent cycles of the same battery, ending at that cycle. The window contains only features and missing indicators, never past SOH labels: those are the RPT step values of \eqref{eq:alignment} and would leak the target. Positions before the start of a battery's history are zero-padded and flagged. The architecture follows~\cite{lim2021tft}:
+\begin{itemize}
+  \item each variable $j$ is embedded from its standardised value and its missing indicator, $\mathbf{e}_{t,j} = \mathbf{W}_j [x_{t,j}, m_{t,j}]^\top + \mathbf{b}_j$, so an imputed value is always marked;
+  \item a variable selection network computes softmax weights over variables at each step from a gated residual network (GRN) and combines variable-wise GRN outputs;
+  \item an LSTM encoder~\cite{hochreiter1997lstm} with a gated skip connection and layer normalisation, and a static-enrichment GRN;
+  \item interpretable multi-head attention with a value projection shared across heads and head-averaged output, masked so that each step attends only to itself and to earlier, non-padded steps;
+  \item a position-wise GRN, a final gated skip connection to the LSTM stage, and a linear output head on the last step.
+\end{itemize}
+Here a GRN maps an input $\mathbf{a}$ to
+\begin{align}
+  \boldsymbol{\eta} &= \mathrm{ELU}(\mathbf{W}_2\mathbf{a}+\mathbf{b}_2), \\
+  \mathrm{GRN}(\mathbf{a}) &= \mathrm{LayerNorm}\big(\mathbf{a} + \mathrm{GLU}(\mathbf{W}_1\boldsymbol{\eta}+\mathbf{b}_1)\big)
+\end{align}
+\cite{lim2021tft}. No static covariates are used, so the static-enrichment GRN has no context input. With model width $d=8$, two attention heads and $W=8$, the TFT has 11{,}999 parameters, matched to the MLP so that differences between the backbones reflect the architecture rather than model size. The window length is fixed a priori; $W\in\{4,16\}$ is reported as a sensitivity analysis. The variable-selection weights and the attention of the estimated cycle over its window are reported as descriptive interpretations of the fitted model, not as causal explanations.
+
+\subsubsection{Target and training}
+The SOH target is standardised with the first task's training mean and standard deviation, the latter floored at 1 percentage point (pp) so that a first task spanning a single RPT does not inflate later targets. Models are trained with Adam~\cite{kingma2015adam} on the mean squared error, with mini-batches of 64 drawn from the current training set, for at most 200 epochs. Early stopping (patience 20) monitors the current task's validation RMSE in SOH pp and restores the best weights. Test data are never used for training, early stopping or selection. All random sources are seeded; the seed is reset per task, and deterministic algorithms and a single CPU thread are used.
+
+% -----------------------------------------------------------------------------
+\subsection{Continual-learning strategies}
+\label{sec:strategies}
+
+All strategies share the backbone, preprocessing and training procedure of \S\ref{sec:backbones} and differ only in how they limit forgetting. Let $\mathcal{L}_i(\theta)$ denote the mean squared error on the current task's training data.
+
+\textbf{Fine-tuning} minimises $\mathcal{L}_i$ at each step, with no protection against forgetting. It is the lower bound.
+
+\textbf{Experience replay}~\cite{rolnick2019replay} stores a seeded random sample of $B$ training cycles from each finished task and trains on the union of the current training set and the buffer. Only training cycles of past tasks are stored.
+
+\textbf{Elastic Weight Consolidation} (EWC)~\cite{kirkpatrick2017ewc} adds a quadratic penalty anchoring parameters that were important for earlier tasks:
+\begin{equation}
+  \mathcal{L}^{\mathrm{EWC}}_i(\theta) = \mathcal{L}_i(\theta) + \frac{\lambda}{2}\sum_{k<i}\sum_{p} F_{k,p}\,\big(\theta_p - \theta^{*}_{k,p}\big)^2,
+  \label{eq:ewc}
+\end{equation}
+where $\theta^*_k$ are the parameters after task $k$ and $F_k$ is the empirical diagonal Fisher information. $F_k$ is estimated as the mean squared per-sample gradient of the squared error over up to 500 seeded training cycles of task $k$, computed without dropout. One penalty is kept per finished task. The same formulation is applied to both backbones; \emph{TFT\,+\,EWC} is the proposed model.
+
+\textbf{Learning without Forgetting} (LwF)~\cite{li2018lwf}, adapted to regression, freezes a copy $f_{\theta^{\mathrm{old}}}$ of the model before each new task and adds $\alpha\,\mathbb{E}_{x}\big[(f_\theta(x)-f_{\theta^{\mathrm{old}}}(x))^2\big]$ over the current task's mini-batches, in standardised units. It stores no past data.
+
+\textbf{Joint training} fits one model on the union of all tasks' training data, with early stopping on the union of their validation data and preprocessing fitted on the union. It is the upper bound and is computed for both backbones.
+
+% -----------------------------------------------------------------------------
+\subsection{Hyperparameter selection}
+\label{sec:tuning}
+
+Hyperparameters are selected in two stages, using only validation data, on $3$ group orders that are guaranteed to differ from all evaluation orders (cf.\ the separation of tuning and evaluation streams in~\cite{chaudhry2019agem}). Test periods are not read during selection.
+\begin{enumerate}
+  \item \emph{Backbone learning rate.} For each backbone separately, fine-tuning streams are run over the same grid $\{3\!\cdot\!10^{-4}, 10^{-3}, 3\!\cdot\!10^{-3}, 10^{-2}\}$, and the rate with the lowest validation plasticity (\S\ref{sec:metrics}) is selected. Both backbones thus receive the same budget. Plasticity is used because the learning rate governs how well each new task is learned, whereas final error would reward under-training, which trivially minimises forgetting.
+  \item \emph{Method hyperparameter.} With the selected rate, each method's own hyperparameter is chosen by the lowest final average validation error: replay $B\in\{50,100,200,400\}$, EWC $\lambda\in\{10^0,\dots,10^5\}$ (both backbones), LwF $\alpha\in\{0.1,0.5,1,2,5\}$.
+\end{enumerate}
+Ties are resolved towards the smaller value. A selection at the edge of its grid triggers an extension of the grid before evaluation. All other settings are fixed a priori and shared. The selected values are \todo{report (Table~\ref{tab:hyper})}.
+
+% -----------------------------------------------------------------------------
+\subsection{Reference experiments}
+\label{sec:reference}
+
+Before continual learning, five reference experiments quantify the difficulty of the task. Each uses three models: ridge regression (median imputation with missing indicators, standardisation, $\ell_2$ penalty chosen from $\{0.01,\dots,100\}$ on validation), and jointly trained MLP and TFT with the learning rate chosen on validation from the grid above.
+\begin{itemize}
+  \item \textbf{E1, within group:} one model trained on all groups' training periods and evaluated on each group's test period.
+  \item \textbf{E2, RPT boundary:} as E1, but each battery's timeline is cut only at RPT changes, with at least one whole RPT interval per split. No SOH value in a test period then occurs in training, which removes interpolation within a known health state.
+  \item \textbf{E3, leave one group out:} for each group, a model is trained on the other five groups' training and validation periods and evaluated on the held-out group's E1 test period. This measures the error on an unseen group (RQ1).
+  \item \textbf{E4, joint training:} identical to E1 with the neural backbones; it is the upper bound of \S\ref{sec:strategies}.
+  \item \textbf{E5, date convention:} E1 after relabelling same-day cycles with the end-of-day convention.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Evaluation protocol and metrics}
+\label{sec:metrics}
+
+Each strategy is run on 10 group orders (the identity order and nine seeded permutations) with 5 seeds each, 50 runs in total, and all methods see identical orders and seeds. After each step $i$, every task's test period is evaluated, giving the error matrix
+\begin{equation}
+  R_{i,j} = \mathrm{RMSE}\big(\mathcal{D}^{\mathrm{te}}_{\pi_j} \mid \theta_i\big), \qquad i,j \in \{1,\dots,T\},
+\end{equation}
+in SOH pp, where $\theta_i$ are the parameters after step $i$. Following the standard continual-learning metrics~\cite{lopezpaz2017gem,chaudhry2018rwalk}, written here for errors (lower is better), we report:
+\begin{align}
+  \text{final average error} &= \tfrac{1}{T}\textstyle\sum_{j} R_{T,j}, \\
+  \text{plasticity} &= \tfrac{1}{T}\textstyle\sum_{j} R_{j,j}, \\
+  \text{BWT} &= \tfrac{1}{T-1}\textstyle\sum_{j<T} \big(R_{T,j} - R_{j,j}\big), \\
+  \text{forgetting} &= \tfrac{1}{T-1}\textstyle\sum_{j<T} \big(R_{T,j} - \min_{j\le i<T} R_{i,j}\big), \\
+  \text{FWT} &= \tfrac{1}{T-1}\textstyle\sum_{j>1} \big(R_{j-1,j} - \bar b_j\big),
+\end{align}
+where positive BWT and forgetting indicate forgetting, negative FWT indicates that earlier tasks help a new one, and $\bar b_j$ is the error of the untrained model (with first-task preprocessing) on task $j$. Training time per task is also reported. RMSE and mean absolute error (MAE) in SOH pp are the primary accuracy metrics. The mean absolute percentage error is given for comparability. The coefficient of determination is interpreted only for pooled results, because a test period spanning one or two RPT values makes per-group $R^2$ undefined or misleading. Persistence, which predicts each battery's last training SOH, is reported as a diagnostic but never selected as a model, since it scores trivially well when the validation period lies within the last training RPT interval. For each test period we also report the share of cycles whose RPT interval already occurs in training.
+
+\subsubsection{Statistics}
+Metrics are summarised by their mean and a 95\% percentile-bootstrap confidence interval~\cite{efron1993bootstrap} (10{,}000 resamples) over the 50 order--seed runs. Methods are compared with the two-sided Wilcoxon signed-rank test~\cite{wilcoxon1945} on matched order--seed runs, excluding zero differences, with the matched-pairs rank-biserial correlation~\cite{kerby2014rankbiserial} as effect size. Each family of comparisons (all methods against one reference method, for one metric) is corrected with the Holm procedure~\cite{holm1979}. The reference is fine-tuning for the MLP study and TFT\,+\,EWC for the proposed-model ablations: architecture (vs.\ MLP\,+\,EWC), EWC (vs.\ TFT fine-tuning), other continual-learning families (vs.\ replay and LwF), and the gap to joint training. The hypotheses were fixed before the experiments: H1, unseen-group error exceeds within-group error (E3 vs.\ E1, paired over the six groups); H2, fine-tuning forgets (forgetting CI above zero); H3, a strategy reduces forgetting relative to fine-tuning (Holm-adjusted $p<0.05$) without raising plasticity error by more than 0.25~pp. With six groups, the smallest attainable two-sided $p$-value of a group-paired test is $0.031$, so effect sizes and per-group results are reported alongside $p$-values.
+
+% -----------------------------------------------------------------------------
+\subsection{Reuse categories}
+\label{sec:reuse}
+
+Predicted SOH is mapped to four ordinal classes by capacity fade since the first observed RPT, $F = 100 - \mathrm{SOH}$:
+\begin{equation}
+  c(\mathrm{SOH}) =
+  \begin{cases}
+    \text{C0, stable}, & F < 5,\\
+    \text{C1, moderate fade}, & 5 \le F < 10,\\
+    \text{C2, substantial fade}, & 10 \le F < 20,\\
+    \text{C3, severe fade}, & F \ge 20.
+  \end{cases}
+\end{equation}
+Relative SOH stays close to 100\%, so absolute retirement bands (e.g.\ 80/60/40\% of nominal capacity) would place almost all samples in one class. The classes therefore describe capacity change since the first second-life measurement, not suitability for a particular application. The cut-points were fixed before any real-data run. The 20~pp boundary mirrors the common 80\% convention, applied to the second-life starting point, without implying equivalence with first-life end of life. The other boundaries are several times wider than the expected SOH error, so they can be resolved at the models' error level.
+
+The same rule is applied to measured and predicted SOH; no separate classifier is trained. The headline evaluation unit is one sample per battery and RPT interval in the test period, with the mean predicted SOH over the interval, which removes the weighting by repeated labels. Cycle-level results are also reported. We report:
+\begin{itemize}
+  \item accuracy, and macro-F1 over the classes present (with their number);
+  \item linear-weighted Cohen's $\kappa$~\cite{cohen1968weightedkappa};
+  \item the confusion matrix and the share of errors spanning more than one class;
+  \item the \emph{boundary share}, the fraction of samples whose measured SOH lies within one MAE of a cut-point.
+\end{itemize}
+These are compared with a majority-class and a persistence baseline (the class at the battery's last training RPT). In the continual-learning runs, a category-error matrix ($1-$macro-F1 after each step) is evaluated with the same backward-transfer and forgetting definitions as $R$. Pre-registered sensitivity analyses shift all cut-points by $\pm2.5$~pp, use a three-class rule (10/20~pp), report fade rates per 100 days, and apply the end-of-day convention; none is used for selection. Test sets containing a single measured class are flagged rather than merged with other classes. Because each test period spans few RPT intervals (\todo{N} interval samples in total), interval-level results are reported with their sample counts and treated as indicative.
+
+% -----------------------------------------------------------------------------
+\subsection{Robustness to missing temperature}
+\label{sec:robustness}
+
+Four ways of handling missing temperature are compared, each with the same validation-only selection:
+\begin{itemize}
+  \item median imputation with missing indicators (default);
+  \item median imputation with the indicators hidden (zeroed, keeping the input width and model size unchanged);
+  \item causal carry-forward of the battery's most recent earlier temperature;
+  \item removal of the temperature features.
+\end{itemize}
+Errors are compared on test cycles with and without missing temperature, and each variant is compared with the default, paired over groups with Holm correction per model. In a stress test, additional temperature values are \emph{removed} from the test periods of the trained models, without refitting, at rates of 10\%--100\% of each battery's test cycles. Removal is either scattered at random or as one contiguous outage per battery, with three seeds, and the three temperature statistics of a cycle are always removed together. For the TFT, removal is applied to the cycle history from which its windows are built, so it affects every step of the window. Values are only ever removed; carry-forward copies only a battery's own earlier observations and is applied identically to all splits.
+
+% -----------------------------------------------------------------------------
+\subsection{Implementation and reproducibility}
+\label{sec:repro}
+
+The pipeline is implemented in Python with pandas, scikit-learn and PyTorch \todo{versions from results/*.json}. Every result file records the configuration, seeds, group orders, library versions, a fingerprint of the data (rows per group, date range, split sizes) and the Git commit; reported numbers come from runs on a clean commit. The code is covered by unit tests that include the causality of the label alignment and of the TFT windows, the exclusion of labels from model inputs, and the separation of tuning from test data. \todo{Code and data availability statement.} Experiments were run on \todo{hardware}; the full grid takes \todo{hours}.
