@@ -30,7 +30,7 @@ Combined cycling data
        |
        v
 Cleaned cycling data
-       ├───► Cycling features (22 features: voltage, current, temperature, capacities, energy, power, efficiency, cycle count)
+       ├───► Cycling features (18 model inputs: voltage, current, temperature, capacities, energy, power, efficiency, cycle count, data points)*
        └───► RPT capacity measurements
                    |
                    v
@@ -49,6 +49,8 @@ Cleaned cycling data
                ML / DL stage
 ```
 
+\* Earlier handover wording said 22 cycling features; the dictionary yields 18 model inputs once identifiers and RPT/health columns are excluded. Pending confirmation with the data owner — see `docs/DECISIONS.md`.
+
 ---
 
 ## 2. Key Technical Components
@@ -61,6 +63,7 @@ Cleaned cycling data
 ### 2.2 Temporal Alignment
 - Each cycling observation associates with the most recent RPT measurement **on or before** that cycle
 - Prevents assigning future health information to earlier observations
+- RPTs stored as a date only are read as 00:00 by default, so a cycle later that day uses that RPT; this convention is configurable and pending confirmation (see `docs/DECISIONS.md`)
 - Critical for time-series integrity
 
 ### 2.3 Dataset Structure
@@ -69,10 +72,10 @@ Cleaned cycling data
 | `ml_training_dataset.csv` | Recommended starting dataset — cycle-level features with known SOH. Rows before first available RPT excluded. |
 | `final_ml_dataset.csv` | Complete cycle-level dataset with temporal health alignment. Includes observations before first RPT (SOH intentionally missing). |
 | `final_battery_health_dataset.csv` | RPT capacity and SOH progression per battery (Battery_ID, RPT, Capacity_Ah, SOH_Percent, Test_Date) |
-| `final_battery_cycling_features.csv` | 22 cycling features per cycle (voltage, current, temperature, charge/discharge capacity/energy, power, capacity ratio, energy efficiency, cycle count, data points) |
+| `final_battery_cycling_features.csv` | Cycle-level cycling features: identifiers plus the 18 model inputs (voltage, current, temperature, charge/discharge capacity/energy, power, capacity ratio, energy efficiency, cycle count, data points) |
 | `cleaned_battery_data.csv` | Cleaned point-level cycling data |
 | `rpt_capacity_data.csv` | Extracted RPT capacity measurements |
-| `DATA_DICTIONARY.csv` | Column definitions (28 columns with meanings/units) |
+| `DATA_DICTIONARY.csv` | Column definitions (27 columns with meanings/units) |
 
 **6 battery groups**: g1, v4, v5, w8, w9, w10
 
@@ -125,7 +128,7 @@ Literature progresses SOH estimation, fast screening, transfer learning, and deg
 
 ### 4.1 Immediate Tasks
 1. **Data ingestion & preprocessing** — load the 7 CSV files, verify feature/SOH alignment, handle missing temperatures
-2. **Baseline model establishment** — train initial SOH prediction model (regression on 22 cycling features → SOH_Percent)
+2. **Baseline model establishment** — train initial SOH prediction model (regression on 18 cycling features → SOH_Percent)
 3. **Continual learning implementation** — implement sequential battery-group learning (e.g., Elastic Weight Consolidation, Progressive Neural Networks, or similar)
 4. **Evaluation framework** — compute accuracy + retention metrics across battery groups:
    - Prediction accuracy (RMSE/MAE/MAPE on test batteries)
@@ -198,7 +201,7 @@ Literature progresses SOH estimation, fast screening, transfer learning, and deg
 ```
 
 ### 6.2 Model Input/Output
-- **Input**: 22 cycling features per cycle (voltage, current, temperature, capacities, energy, power, ratios, cycle count, data points)
+- **Input**: 18 cycling features per cycle (voltage, current, temperature, capacities, energy, power, ratios, cycle count, data points); identifiers and RPT/health columns are excluded. Earlier handover wording said 22; the 18-feature count is pending confirmation with the data owner (see `docs/DECISIONS.md`).
 - **Target**: `SOH_Percent` (regression) or binned suitability categories
 - **Battery ID**: Required for group-wise continual learning evaluation
 
