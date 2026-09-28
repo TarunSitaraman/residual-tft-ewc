@@ -70,7 +70,18 @@ All methods share one backbone for Stage C: a small MLP on the 18 inputs plus mi
 
 ### Stage D — proposed model
 
-E9: Temporal Fusion Transformer (or a lighter temporal encoder if the TFT is not justified by Stage C results) with EWC and explicit missingness masks from the `_Missing` flags (D7). Compared against the best Stage C method on the same protocol. The TFT is only adopted if it beats the MLP backbone under identical continual-learning conditions; otherwise the paper reports that.
+E9: **the proposed model — Temporal Fusion Transformer (TFT) with EWC**, using sequences of cycles per battery, explicit missingness masks from the `_Missing` flags (D7) and the battery group as static context. It runs on exactly the Stage B protocol (same orders, seeds, splits, metrics, validation-only tuning of λ under D11), so its numbers are directly comparable with Stage C.
+
+The Stage C MLP runs are the ablations that make the TFT + EWC result interpretable:
+
+| Comparison | What it isolates |
+|---|---|
+| TFT + EWC vs. MLP + EWC | Contribution of the temporal architecture |
+| TFT + EWC vs. TFT fine-tuning | Contribution of EWC on the TFT |
+| TFT + EWC vs. MLP replay / LwF | Position against other continual-learning families |
+| TFT + EWC vs. joint training | Remaining gap to the upper bound |
+
+All outcomes are reported as measured, including if the TFT does not improve on the MLP backbone on this six-group dataset.
 
 ### Stage E — reuse assessment
 
@@ -138,8 +149,8 @@ class FineTune, Replay, EWC, LwF(Strategy);  class Joint: fit_all(tasks) ; predi
 | W2 | Evaluation (`src/evaluation.py` + tests) | — | CL metrics and statistics | done |
 | W3 | Models and strategies (`baseline_dnn.py`, `continual_learning.py` + tests) | — | Stage C methods | done |
 | W4 | Reuse-category analysis (`docs/REUSE_CATEGORIES.md`) | — | Options and recommendation for E10 | done — team decisions pending (§6 of that document) |
-| W5 | Runner + notebooks 05/06 | W1–W3 | E2–E8 results on synthetic data, then real data | code done (`src/experiments.py`, notebooks 05–06); real-data run blocked on W0 |
-| W6 | Proposed temporal model (E9) | W5 results | TFT/temporal encoder + EWC | later |
+| W5 | Runner + notebooks 05/06, validation-only tuning (D11) | W1–W3 | E2–E8 results on synthetic data, then real data | code done (`src/experiments.py`, notebooks 05–06); real-data run blocked on W0 |
+| W6 | Proposed model: TFT + EWC (E9) | W5 | TFT strategy on the shared protocol, EWC reused from `src/continual_learning.py` | next |
 | W7 | Reuse head (E10), robustness (E11) | W4, W5 | Results and figures | later |
 | W8 | Paper: figures, tables, methods and results draft | W5–W7 | Manuscript draft | later |
 
@@ -157,6 +168,6 @@ class FineTune, Replay, EWC, LwF(Strategy);  class Joint: fit_all(tasks) ; predi
 | Six groups give low statistical power | Many orders × seeds, bootstrap CIs, effect sizes; state the limitation |
 | Step-function labels inflate within-group scores | E2 RPT-boundary split; report RPT-overlap share (D4) |
 | Groups differ in scale (capacity, protocol) | Relative SOH target; preprocessing fitted on first task only; report per-group results |
-| TFT adds cost without benefit on small data | Adopt only if it beats the MLP backbone under identical conditions (Stage D) |
+| TFT adds cost without benefit on small data (six groups, short sequences) | Report TFT + EWC against the MLP ablations under identical conditions, with training time; state the outcome as measured |
 | Reuse thresholds not grounded for relative SOH | Resolve in W4 before implementing E10 |
 | Real data never run | W0 is the first priority once data is mounted |
