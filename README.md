@@ -30,7 +30,7 @@ Combined cycling data
        |
        v
 Cleaned cycling data
-       ├───► Cycling features (22 features: voltage, current, temperature, capacities, energy, power, efficiency, cycle count)
+       ├───► Cycling features (18 modelling features: voltage, current, temperature, capacities, energy, power, efficiency, cycle count)
        └───► RPT capacity measurements
                    |
                    v
@@ -69,10 +69,10 @@ Cleaned cycling data
 | `ml_training_dataset.csv` | Recommended starting dataset — cycle-level features with known SOH. Rows before first available RPT excluded. |
 | `final_ml_dataset.csv` | Complete cycle-level dataset with temporal health alignment. Includes observations before first RPT (SOH intentionally missing). |
 | `final_battery_health_dataset.csv` | RPT capacity and SOH progression per battery (Battery_ID, RPT, Capacity_Ah, SOH_Percent, Test_Date) |
-| `final_battery_cycling_features.csv` | 22 cycling features per cycle (voltage, current, temperature, charge/discharge capacity/energy, power, capacity ratio, energy efficiency, cycle count, data points) |
+| `final_battery_cycling_features.csv` | Cycle-level cycling features: 18 modelling inputs plus identifiers and RPT/health columns |
 | `cleaned_battery_data.csv` | Cleaned point-level cycling data |
 | `rpt_capacity_data.csv` | Extracted RPT capacity measurements |
-| `DATA_DICTIONARY.csv` | Column definitions (28 columns with meanings/units) |
+| `DATA_DICTIONARY.csv` | Column definitions (27 columns with meanings/units) |
 
 **6 battery groups**: g1, v4, v5, w8, w9, w10
 
@@ -81,6 +81,18 @@ Cleaned cycling data
 - **Key challenge**: Catastrophic forgetting — when learning new degradation patterns, previous patterns are lost
 - **Approach**: Progressive learning across battery groups, evaluation on both new and previously learned batteries
 - **Baseline**: Initial SOH/degradation prediction model for comparison
+
+### 2.4.1 Current Baseline and Proposed Model
+
+The current baseline in `notebooks/04_baseline_model.ipynb` is deliberately simple and auditable:
+
+- 18 numeric cycling inputs are derived from the observed schema; identifiers and RPT-derived health columns are excluded.
+- A chronological 70/15/15 split is performed separately for each battery, with no shuffling.
+- Persistence is reported as a reference only because repeated RPT labels can make it look artificially perfect on validation.
+- Ridge regression uses train-fitted median imputation and missing-value indicators; histogram gradient boosting is also evaluated and handles missing values directly.
+- Test reporting includes the share of rows whose RPT interval was already present in training. This distinguishes interpolation within a known health state from later-life prediction.
+
+The proposed continual-learning model is a Temporal Fusion Transformer (TFT) with an Elastic Weight Consolidation (EWC) penalty and a multi-task reuse-suitability head. It is a planned research model, not yet an implemented result. The TFT will use explicit missing-value indicators/masking, temporal features, and battery-group context. EWC will protect parameters important to earlier battery groups while later groups are introduced sequentially.
 
 ### 2.5 Reuse Assessment
 - SOH alone does not give complete application decision
@@ -119,13 +131,15 @@ Literature progresses SOH estimation, fast screening, transfer learning, and deg
 - **Adaptive health estimation** across progressive battery groups
 - **Explicit reuse decision framework** with suitability categories
 
+The novelty claim is therefore an integrated, battery-focused evaluation framework rather than a claim that TFT, EWC, or reuse classification is individually novel. The work measures the adaptation-retention trade-off, temporal health-label integrity, and practical reuse decisions together on heterogeneous second-life battery groups.
+
 ---
 
 ## 4. Project Structure & Next Steps
 
 ### 4.1 Immediate Tasks
 1. **Data ingestion & preprocessing** — load the 7 CSV files, verify feature/SOH alignment, handle missing temperatures
-2. **Baseline model establishment** — train initial SOH prediction model (regression on 22 cycling features → SOH_Percent)
+2. **Baseline model establishment** — compare persistence, Ridge, and histogram gradient boosting using the 18 derived cycling inputs → `SOH_Percent`
 3. **Continual learning implementation** — implement sequential battery-group learning (e.g., Elastic Weight Consolidation, Progressive Neural Networks, or similar)
 4. **Evaluation framework** — compute accuracy + retention metrics across battery groups:
    - Prediction accuracy (RMSE/MAE/MAPE on test batteries)
@@ -135,7 +149,7 @@ Literature progresses SOH estimation, fast screening, transfer learning, and deg
 
 ### 4.2 Technical Deliverables
 - [ ] Python notebooks/scripts for data pipeline (raw → features → aligned datasets)
-- [ ] Baseline SOH model (architecture: DNN/TCN/GPR; evaluation on `ml_training_dataset.csv`)
+- [ ] Baseline SOH model report (persistence, Ridge, and histogram gradient boosting on `ml_training_dataset.csv`)
 - [ ] Continual learning framework with batched battery-group introduction
 - [ ] Quantitative comparison: baseline vs continual-learning across accuracy, retention, adaptation
 - [ ] Reuse-suitability classification model or rule set
@@ -193,27 +207,34 @@ Literature progresses SOH estimation, fast screening, transfer learning, and deg
 - Temporal alignment required: each cycle → most recent RPT on or before
 - ml_training_dataset.csv excludes rows before first RPT
 - final_ml_dataset.csv includes all rows (some SOH may be NaN/missing)
-- Missing temperatures are NOT fabricated — model must handle or mask
+- Missing temperatures are NOT fabricated — baseline models use train-fitted imputation plus missing indicators; the proposed sequence model will use explicit masks
 - 6 battery groups enable cross-group evaluation / domain adaptation
 ```
 
 ### 6.2 Model Input/Output
-- **Input**: 22 cycling features per cycle (voltage, current, temperature, capacities, energy, power, ratios, cycle count, data points)
+- **Input**: 18 derived cycling features per cycle (voltage, current, temperature, capacities, energy, power, ratios, cycle count, data points). The count is derived from `DATA_DICTIONARY.csv` and the observed files rather than assumed.
 - **Target**: `SOH_Percent` (regression) or binned suitability categories
 - **Battery ID**: Required for group-wise continual learning evaluation
 
 ### 6.3 Training Strategy
 - **Time-aware train/test split**: Must respect temporal ordering (not random shuffle)
+- **Current baseline limitation**: Every battery appears in the within-battery chronological split, so it does not measure unseen-group generalization
 - **Sequential battery-group introduction**: Group 1 → train, Group 2 → learn progressively, etc.
 - **Evaluation on both new and old groups**: After each new group introduction, test on all previously seen groups
+- **RPT interval reporting**: Record the fraction of test rows whose RPT interval was already seen in training because SOH remains constant between RPT events
 
-### 6.4 Continual Learning Approaches to Explore
+### 6.4 Alignment Assumptions
+- RPT alignment uses timestamps as stored with a backward join.
+- A date-only `Test_Date` is interpreted at midnight; a later cycle on that calendar day is treated as after that RPT.
+- This convention must be confirmed if the source system does not record the RPT time of day.
+
+### 6.5 Continual Learning Approaches to Explore
 1. **Elastic Weight Consolidation (EWC)** — penalty-based retention of important weights
 2. **Progressive Neural Networks** — add new columns of neurons per task/battery group
 3. **Learning without Forgetting** — distillation-based approach
 4. **Gradient projection** — project gradients to avoid updating important directions
 
-### 6.5 Evaluation Metrics
+### 6.6 Evaluation Metrics
 - **Prediction accuracy**: RMSE, MAE, MAPE on SOH_Percent
 - **Catastrophic forgetting**: Difference in performance on previous groups after new learning
 - **Adaptation**: Performance on newly introduced battery groups

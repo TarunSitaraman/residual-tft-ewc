@@ -26,22 +26,22 @@ ML handover/
 ├── notebooks/
 │   ├── 01_data_ingestion.ipynb       ← Load 7 CSVs, verify column alignment
 │   ├── 02_eda_analysis.ipynb         ← Battery group distributions, SOH ranges, missing data patterns
-│   ├── 03_feature_engineering.ipynb  ← Validate 22 features from DATA_DICTIONARY
-│   └── 04_baseline_model.ipynb       <<<<<<< HEAD (TFT baseline)
+│   ├── 03_feature_engineering.ipynb  ← Derive and validate observed modelling features
+│   └── 04_baseline_model.ipynb       ← Persistence, Ridge, and gradient-boosting baseline
 ├── src/
 │   ├── __init__.py
 │   ├── data_pipeline.py              ← Preprocessing: temporal alignment, SOH calculation
 │   ├── models/
-│   │   ├── baseline_dnn.py           <<<<<<< HEAD (Simple MLP baseline)
-│   │   ├── tft_continual.py          <<<<<<< HEAD (Temporal Fusion Transformer + EWC)
-│   │   └── reuse_head.py             <<<<<<< HEAD (Multi-task suitability classifier)
-│   └── continual_learning.py         <<<<<<< HEAD (EWC implementation)
+│   │   ├── baseline_dnn.py           ← Future neural baseline
+│   │   ├── tft_continual.py          ← Proposed Temporal Fusion Transformer + EWC
+│   │   └── reuse_head.py              ← Proposed multi-task suitability classifier
+│   └── continual_learning.py         ← Proposed EWC implementation
 ├── results/
 │   ├── baseline_metrics.json
 │   ├── cl_metrics.json               ← Accuracy + retention + adaptation across battery groups
 │   └── reuse_metrics.json
 ├── .gitignore                      ← Data CSVs excluded; notebooks, src, results tracked
-└── AGENTS.md                       <<<<<<< HEAD (deployment/configuration hints)
+└── AGENTS.md                       ← Deployment and reproducibility guidance
 ```
 
 ### 1.2 Environment Setup
@@ -50,7 +50,7 @@ ML handover/
 | **Python** | 3.10+ |
 | **PyTorch** | 2.0+ (for TFT/EWC) |
 | **Key Libraries** | `pytorch-forecasting` (TFT), `numpy`, `pandas`, `scikit-learn`, `torch`, `pytorch_lightning` |
-| **Hardware** | GPU recommended (TFT training), CPU acceptable for baseline MLP |
+| **Hardware** | CPU is sufficient for the current baseline; GPU is recommended for the proposed TFT |
 | **Data** | 7 CSV files — see Git analysis below |
 
 ### 1.3 Immediate Week 1 Tasks
@@ -68,13 +68,13 @@ ML handover/
 ### 2.1 Loading the 7 CSV Files
 | File | Role | Key Columns |
 |------|------|-------------|
-| `cleaned_battery_data.csv` | Point-level raw data (post-cleaning) | Battery_ID, Cycle_Date, Voltage, Current, Temperature |
+| `cleaned_battery_data.csv` | Point-level raw data (post-cleaning) | Profiled only; schema must be confirmed before modelling |
 | `rpt_capacity_data.csv` | RPT measurements extracted | Battery_ID, RPT, Capacity_Ah, Test_Date |
-| `DATA_DICTIONARY.csv` | Column definitions | All 28 columns with meanings/units |
-| `ml_training_dataset.csv` | SOH-labelled subset (recommended start) | All 28 cols; rows before first RPT excluded |
-| `final_ml_dataset.csv` | Complete time-series (all cycles) | All 28 cols; some SOH NaN (before first RPT) |
+| `DATA_DICTIONARY.csv` | Column definitions | 27 columns with meanings/units |
+| `ml_training_dataset.csv` | SOH-labelled subset (recommended start) | 27 columns; rows before first RPT excluded |
+| `final_ml_dataset.csv` | Complete time-series (all cycles) | 27 columns; some SOH NaN (before first RPT) |
 | `final_battery_health_dataset.csv` | RPT capacity + SOH progression | Battery_ID, RPT, Capacity_Ah, Test_Date, Reference_Capacity_Ah, SOH_Percent |
-| `final_battery_cycling_features.csv` | 22 derived features per cycle | Voltage_Mean/Min/Max, Current_Mean/Min/Max, Temperature_Mean/Min/Max, Charge_Capacity_Max, Discharge_Capacity_Max, Charge_Energy_Max, Discharge_Energy_Max, Power_Mean, Capacity_Ratio_Mean, Energy_Efficiency_Mean, Data_Points, RPT, RPT_Number, Capacity_Ah, Reference_Capacity_Ah, SOH_Percent, Days_Since_RPT |
+| `final_battery_cycling_features.csv` | Cycle-level features | 18 modelling inputs plus identifiers and RPT/health columns |
 
 ### 2.2 Preprocessing Steps
 1. **Load all 7 CSVs** → Verify `Battery_ID` values match across files (g1, v4, v5, w8, w9, w10)
@@ -87,7 +87,7 @@ ML handover/
    - `Reference_Capacity_Ah` = first observed RPT capacity per battery (from `rpt_capacity_data.csv` or `final_battery_health_dataset.csv`)
 4. **Missing temperature handling**:
    - Document how many cycles have NaN in `Temperature_Mean/Mini/Max`
-   - Strategy: TFT handles missing natively via masking; for baseline MLP, consider mean imputation or mask token
+   - Strategy: baseline models use train-fitted median imputation with missing indicators; the proposed TFT will use explicit masks and missingness features
 5. **Battery group stratification**:
    - 6 groups: g1, v4, v5, w8, w9, w10
    - Ensure train/test splits respect group identity (no leakage across groups)
@@ -99,27 +99,35 @@ ML handover/
   - `X_test.pt`, `y_test.pt`
   - `metadata.json` (battery group mapping, sequence lengths, missing value counts)
 
+### 2.4 Data Integrity Assumptions
+
+- The dictionary contains 27 columns. The modelling code derives 18 numeric inputs from the observed files rather than assuming the handover's older count of 22.
+- RPT alignment uses timestamps as stored with a backward join. A date-only `Test_Date` is interpreted at midnight, so a later cycle on the same calendar day is treated as after that RPT. This convention must be confirmed if the source system has an unknown RPT time of day.
+- SOH is a step function between RPT measurements. Validation and test reports include the fraction of rows whose RPT interval was already seen during training.
+- The current baseline contains every battery group in its chronological split. It does not measure unseen-group generalization; the continual-learning stage must introduce complete groups sequentially and report adaptation, retention, and forgetting separately.
+
 ---
 
 ## 3. Modelling Strategy
 
-### 3.1 Baseline Model (Weeks 2-3)
+### 3.1 Implemented Baseline (Weeks 2-3)
 | Model | Architecture | Input | Target | Notes |
 |-------|-------------|-------|--------|-------|
-| **MLP Baseline** | 3-layer MLP (512 → 256 → 128 → 1) | 22 features (last cycle in sequence) | `SOH_Percent` (regression) | Quick benchmark; compares to literature RMSE 0.6-1.48% |
-| **LSTM Baseline** | LSTM(128) → Linear(1) | Variable-length sequences of 22 features | `SOH_Percent` | Handles temporal sequence; compares to Yao 2025 PNN+TCN |
+| **Persistence reference** | Last SOH observed in each battery's training period | Battery identity only | `SOH_Percent` | Diagnostic only; can be perfect inside a repeated-label RPT interval |
+| **Ridge regression** | Median imputation + missing indicators + scaling + Ridge | 18 numeric cycling inputs | `SOH_Percent` | Linear, extrapolating baseline for later-life evaluation |
+| **Histogram gradient boosting** | `HistGradientBoostingRegressor` | 18 numeric cycling inputs | `SOH_Percent` | Nonlinear baseline with native NaN handling; cannot extrapolate below training target range |
 
-**Baseline Metrics Target** (literature range):
+**Baseline Metrics Target** (literature range, not a directly comparable guarantee):
 - RMSE: 0.8–1.5% (Braco 2022: 0.6-0.8%; Takahashi 2023: <1.48%)
 - MAE: proportionate to RMSE
 - Validation R²: >0.70
 
-### 3.2 Novel Continual Learning Model (Weeks 4-8)
+### 3.2 Proposed Continual Learning Model (Weeks 4-8)
 **Architecture: Temporal Fusion Transformer (TFT) + Elastic Weight Consolidation (EWC) + Multi-Task Reuse Head**
 
 ```mermaid
 graph TD
-    A[Input: Variable-length sequences of 22 features] --> B[TFT Encoder (time-aware attention)]
+A[Input: Variable-length sequences of 18 features plus explicit masks] --> B[TFT Encoder (time-aware attention)]
     B --> C[Latent representation]
     C --> D[Head 1: SOH_Percent Regression]
     C --> E[Head 2: Reuse Suitability Classification]
@@ -135,7 +143,7 @@ graph TD
   - **Value network**: Processes actual feature values
   - **Timing network**: Encodes relative time steps (irregular timestamps)
   - **Static network**: Encodes battery_id as static categorical (6 groups)
-- **Missing value masks** natively handled (addresses temperature NaNs)
+- **Explicit missing-value masks** for temperature and other incomplete signals; handling will be compared against the baseline imputation path
 - **Attention-based interpretability**: Which cycles/features drive SOH prediction?
 
 #### 3.2.2 Elastic Weight Consolidation (EWC)
@@ -200,6 +208,18 @@ Phase 3: Introduce g3, g4, g5, g6
 | **TFT + EWC (proposed)** | Adaptation + retention; interpretable attention; multi-task reuse | Heavier computation; more hyperparameters (λ, α, EWC fisher update freq) |
 | **Yao 2025 PNN+TCN** (literature baseline) | Explicit CL for SOC; proven across 3 public datasets | Focuses on SOC, not SOH; no reuse head; different data format |
 
+### 3.5 Novelty and Claim Boundary
+
+The project does not claim that TFT, EWC, or reuse classification is individually new. The intended contribution is their integration for heterogeneous second-life EV batteries, with explicit measurement of:
+
+1. Adaptation to a newly introduced battery group.
+2. Retention of previously learned groups and catastrophic forgetting.
+3. Temporal alignment and leakage controls for RPT-derived SOH labels.
+4. Missing-signal robustness under incomplete temperature measurements.
+5. Translation from SOH estimation to interpretable reuse categories.
+
+The current baseline is within-battery chronological evaluation. It does not establish unseen-group generalization; that must be reported separately in the continual-learning and domain-generalization experiments.
+
 ---
 
 ## 4. Expected Outcomes & Deliverables
@@ -216,7 +236,7 @@ Phase 3: Introduce g3, g4, g5, g6
 ### 4.2 Qualitative Outcomes
 1. **Interpretability report**: Which cycles/features does TFT attend to for SOH prediction? Do they align with known battery degradation signals (voltage hysteresis, capacity fade, efficiency drop)?
 2. **Per-battery-group analysis**: Does the model perform uniformly across g1-g6, or are some groups harder (addressing literature heterogeneity theme #1)?
-3. **Missing data robustness**: Does TFT's native missing-value handling outperform MLP/LSTM with imputation? Document temperature NaN impact.
+3. **Missing data robustness**: Does explicit masking in the proposed TFT outperform the baseline's train-fitted imputation plus missing indicators? Document temperature NaN impact.
 4. **Sequential learning curve**: Plot adaptation/retention trade-off as each new battery group is introduced — this is the core novelty contribution.
 
 ### 4.3 Deliverables Checklist
@@ -351,7 +371,7 @@ ML handover/
 
 ```bash
 # 1. Navigate to repo root
-cd /C/Users/Tarun/Downloads/ML\ handover/ML\ handover
+cd /C/Users/Tarun/Downloads/ML\ handover
 
 # 2. Create .gitignore first (before any commits)
 cat > .gitignore << 'EOF'
@@ -401,8 +421,8 @@ git commit -m "Initial: project structure — README, notebooks, source code"
 | Week | Milestone | Git Status |
 |------|-----------|------------|
 | **W1** | Repo init + `.gitignore` + data ingestion notebook | `git init` + `git commit` (README, .gitignore); CSVs gitignored |
-| **W2** | Baseline MLP/LSTM model + metrics | Commit model code + baseline metrics JSON |
-| **W3** | Baseline evaluation + comparison to literature | Commit results/plots |
+| **W2** | Ridge and gradient-boosting baseline + metrics | Commit baseline metrics JSON |
+| **W3** | Baseline evaluation, RPT-interval analysis, and literature comparison | Commit results/plots |
 | **W4** | TFT implementation (single-task) | Commit TFT code |
 | **W5** | EWC layer integration | Commit CL code; track fisher computation changes |
 | **W6** | Multi-task reuse head addition | Commit new head architecture |
@@ -437,7 +457,7 @@ git commit -m "Initial: project structure — README, notebooks, source code"
 | 4 | Verify `SOH_Percent = Capacity_Ah / Reference_Capacity_Ah * 100` calculation | Sohan | End of Week 1, Day 1 |
 | 5 | Audit missing temperature counts per battery group | Tarun | End of Week 1, Day 2 |
 | 6 | Establish `requirements.txt` with all dependencies | Darshan/Sohan | End of Week 1 |
-| 7 | Create `src/models/baseline_dnn.py` — simple MLP on 22 features → SOH_Percent | Tarun | End of Week 2 |
+| 7 | Extend the baseline comparison beyond Ridge and gradient boosting, if justified, using the derived feature list → SOH_Percent | Tarun | End of Week 2 |
 | 8 | Train baseline + record RMSE/MAE/MAPE | All | End of Week 3 |
 
 ---
