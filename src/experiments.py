@@ -22,7 +22,7 @@ from sklearn.preprocessing import StandardScaler
 from src import data_pipeline as dp
 from src import evaluation as ev
 from src import protocols as P
-from src.continual_learning import Joint, make_strategy
+from src.continual_learning import Joint, TFTJoint, is_tft, make_strategy
 
 TARGET = "SOH_Percent"
 RIDGE_ALPHAS: tuple[float, ...] = (0.01, 0.1, 1.0, 10.0, 100.0)
@@ -170,6 +170,19 @@ class CLConfig:
     val_frac: float = 0.15
     common_kwargs: dict = field(default_factory=dict)       # passed to every strategy (epochs, lr, ...)
     method_kwargs: dict = field(default_factory=dict)       # per-method extras, e.g. {"ewc": {"ewc_lambda": 100}}
+    backbone_kwargs: dict = field(default_factory=dict)     # per-backbone settings, e.g. {"tft": {"lr": 1e-2}}
+    joint_backbones: tuple[str, ...] = ("mlp",)              # upper bounds to compute: "mlp" and/or "tft"
+
+
+def backbone_of(method: str) -> str:
+    """"tft" for TFT strategies, "mlp" otherwise."""
+    return "tft" if is_tft(method) else "mlp"
+
+
+def method_settings(config: CLConfig, method: str) -> dict:
+    """Keyword arguments for ``method``: shared, then backbone-specific, then method-specific."""
+    return {**config.common_kwargs, **config.backbone_kwargs.get(backbone_of(method), {}),
+            **config.method_kwargs.get(method, {})}
 
 
 def _task_errors(strategy, tasks: Sequence[P.Task], metric: str, split: str = "test") -> dict[str, float]:
@@ -178,15 +191,25 @@ def _task_errors(strategy, tasks: Sequence[P.Task], metric: str, split: str = "t
     return {t.name: ev.task_error(getattr(t, split)[TARGET], strategy.predict(getattr(t, split)), metric) for t in tasks}
 
 
-def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "RMSE", eval_split: str = "test", **kwargs) -> dict:
+def _stream_history(tasks: Sequence[P.Task]) -> pd.DataFrame:
+    """Every cycle of the stream's tasks, for TFT windows (labels are dropped by the strategy)."""
+    return pd.concat([f for t in tasks for f in (t.train, t.val, t.test)], ignore_index=True)
+
+
+def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "RMSE", eval_split: str = "test",
+               return_strategy: bool = False, **kwargs) -> dict:
     """Train ``method`` through ``tasks`` in order, evaluating every task after every step.
 
     Returns the accuracy matrix (all entries, including tasks not yet seen, which
     feed forward transfer), the untrained reference errors ``b_j``, CL metrics
     and per-task training time. ``eval_split="val"`` evaluates on the validation
-    periods instead, for hyperparameter tuning; test periods are then never read.
+    periods instead, for hyperparameter tuning; test periods are then never read
+    for evaluation. TFT strategies draw causal feature windows from the stream's
+    cycles (label-free) unless ``history`` is given.
     """
     features = dp.model_feature_columns(tasks[0].train)
+    if is_tft(method) and "history" not in kwargs:
+        kwargs["history"] = _stream_history(tasks)
     reference = make_strategy(method, features, seed=seed, **kwargs).initialise(tasks[0])
     b = _task_errors(reference, tasks, metric, eval_split)
 
@@ -199,15 +222,21 @@ def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "R
     order = [t.name for t in tasks]
     R = ev.accuracy_matrix(errors, order)
     metrics = ev.cl_metrics(R, reference_errors=b)
-    return {"R": R, "metrics": metrics, "reference_errors": b,
-            "train_time_s": list(strategy.training_time_), "config": strategy.config()}
+    out = {"R": R, "metrics": metrics, "reference_errors": b,
+           "train_time_s": list(strategy.training_time_), "config": strategy.config()}
+    if return_strategy:
+        out["strategy"] = strategy
+    return out
 
 
-def _warm_up(df: pd.DataFrame) -> None:
-    """One tiny fit so one-off library initialisation is not charged to the first timed run."""
+def _warm_up(df: pd.DataFrame, methods: Sequence[str] = ("finetune",)) -> None:
+    """One tiny fit per backbone so one-off initialisation is not charged to the first timed run."""
     group = sorted(set(df[dp.GROUP_COL].astype(str)))[0]
     task = P.make_task(df, group)
-    make_strategy("finetune", dp.model_feature_columns(df), epochs=1).fit_task(task)
+    features = dp.model_feature_columns(df)
+    make_strategy("finetune", features, epochs=1).fit_task(task)
+    if any(is_tft(m) for m in methods):
+        make_strategy("tft_finetune", features, history=df, epochs=1).fit_task(task)
 
 
 def run_cl_experiment(df: pd.DataFrame, config: CLConfig) -> dict:
@@ -220,15 +249,14 @@ def run_cl_experiment(df: pd.DataFrame, config: CLConfig) -> dict:
     """
     groups = [g for g in dp.BATTERY_GROUPS if g in set(df[dp.GROUP_COL].astype(str))]
     orders = P.sample_orders(groups, config.n_orders, config.order_seed)
-    _warm_up(df)
+    _warm_up(df, config.methods)
 
     runs, matrices = [], {}
     for order_id, order in enumerate(orders):
         tasks = P.make_task_stream(df, order, config.train_frac, config.val_frac)
         for seed in config.seeds:
             for method in config.methods:
-                kwargs = {**config.common_kwargs, **config.method_kwargs.get(method, {})}
-                out = run_stream(method, tasks, seed, config.metric, **kwargs)
+                out = run_stream(method, tasks, seed, config.metric, **method_settings(config, method))
                 matrices[(method, order_id, seed)] = out["R"]
                 m = out["metrics"]
                 runs.append({
@@ -240,11 +268,19 @@ def run_cl_experiment(df: pd.DataFrame, config: CLConfig) -> dict:
     tasks = P.make_task_stream(df, groups, config.train_frac, config.val_frac)
     joint_rows = []
     features = dp.model_feature_columns(df)
-    for seed in config.seeds:
-        joint = Joint(features, seed=seed, **config.common_kwargs).fit_all(tasks)
-        for name, err in _task_errors(joint, tasks, config.metric).items():
-            joint_rows.append({"method": "joint", "seed": seed, dp.GROUP_COL: name, "error": err,
-                               "train_time_s": float(np.sum(joint.training_time_))})
+    for backbone in config.joint_backbones:
+        for seed in config.seeds:
+            kwargs = {**config.common_kwargs, **config.backbone_kwargs.get(backbone, {})}
+            if backbone == "mlp":
+                name, joint = "joint", Joint(features, seed=seed, **kwargs)
+            elif backbone == "tft":
+                name, joint = "tft_joint", TFTJoint(features, history=df, seed=seed, **kwargs)
+            else:
+                raise ValueError(f"unknown joint backbone {backbone!r}; expected 'mlp' or 'tft'")
+            joint.fit_all(tasks)
+            for task_name, err in _task_errors(joint, tasks, config.metric).items():
+                joint_rows.append({"method": name, "seed": seed, dp.GROUP_COL: task_name, "error": err,
+                                   "train_time_s": float(np.sum(joint.training_time_))})
 
     return {"runs": pd.DataFrame(runs), "matrices": matrices, "joint": pd.DataFrame(joint_rows),
             "orders": orders, "config": asdict(config)}
@@ -261,22 +297,36 @@ DEFAULT_GRIDS: dict[str, dict[str, list]] = {
     "replay": {"buffer_per_task": [50, 100, 200, 400]},
     "ewc": {"ewc_lambda": [1.0, 10.0, 100.0, 1_000.0, 10_000.0, 100_000.0]},
     "lwf": {"alpha": [0.1, 0.5, 1.0, 2.0, 5.0]},
+    "tft_ewc": {"ewc_lambda": [1.0, 10.0, 100.0, 1_000.0, 10_000.0, 100_000.0]},
 }
+
+
+#: Backbone optimisation grid, identical for the MLP and the TFT (equal budget).
+DEFAULT_BACKBONE_GRID: dict[str, list] = {"lr": [3e-4, 1e-3, 3e-3, 1e-2]}
+#: Strategy used to tune each backbone's optimisation settings.
+BACKBONE_TUNING_METHOD: dict[str, str] = {"mlp": "finetune", "tft": "tft_finetune"}
 
 
 @dataclass
 class TuningConfig:
-    """Validation-only tuning grid.
+    """Validation-only, two-stage tuning (decision D11).
 
-    Tuning streams use ``n_orders`` group orders that are guaranteed disjoint
-    from the evaluation orders of the matching ``CLConfig``, and are evaluated
-    on the tasks' validation periods only.
+    Stage 1 selects each backbone's optimisation settings (``backbone_grid``,
+    same grid for every backbone) with plain fine-tuning, by
+    ``backbone_criterion`` (default: validation plasticity, i.e. how well each
+    new task is learned). Stage 2 selects each method's own hyperparameter
+    (``grids``) with those settings, by ``criterion`` (default: final average
+    validation error, reflecting adaptation and retention). Tuning streams use
+    ``n_orders`` orders disjoint from the evaluation orders and read validation
+    periods only.
     """
 
     grids: dict = field(default_factory=lambda: {m: {k: list(v) for k, v in g.items()} for m, g in DEFAULT_GRIDS.items()})
+    backbone_grid: dict = field(default_factory=lambda: {k: list(v) for k, v in DEFAULT_BACKBONE_GRID.items()})
     n_orders: int = 3
     seeds: tuple[int, ...] = (0,)
     criterion: str = "final_avg_error"
+    backbone_criterion: str = "plasticity"
 
 
 def _grid_points(grid: Mapping[str, Sequence]) -> list[dict]:
@@ -296,55 +346,84 @@ def tuning_orders(df: pd.DataFrame, cl_config: CLConfig, n_orders: int) -> list[
     return P.sample_orders(groups, cl_config.n_orders + n_orders, cl_config.order_seed)[cl_config.n_orders:]
 
 
-def tune_hyperparameters(df: pd.DataFrame, cl_config: CLConfig, tuning: TuningConfig) -> dict:
-    """Select each method's own hyperparameters on validation data only.
+def _grid_search(streams, method: str, grid: Mapping[str, Sequence], base_kwargs: Mapping, seeds, metric: str,
+                 stage: str) -> tuple[list[dict], list[dict]]:
+    points = _grid_points(grid)
+    rows = []
+    for point_id, point in enumerate(points):
+        for order_id, tasks in enumerate(streams):
+            for seed in seeds:
+                out = run_stream(method, tasks, seed, metric, eval_split="val", **{**base_kwargs, **point})
+                rows.append({"stage": stage, "method": method, "point_id": point_id,
+                             **{f"param_{k}": v for k, v in point.items()}, "order_id": order_id, "seed": seed,
+                             **{k: out["metrics"][k] for k in CL_METRIC_COLS if k in out["metrics"]}})
+    return rows, points
 
-    For every method with a grid and every grid point, run the stream over the
-    tuning orders and seeds with ``eval_split="val"`` and average
-    ``tuning.criterion`` (default: final average validation error, which
-    reflects both adaptation and retention). Ties go to the earlier grid value.
-    Returns the full grid table, the selected values per method, whether each
-    selected value lies at the edge of its grid (then the grid should be
-    extended and tuning repeated, so the optimum is not an artefact of the grid
-    range), and a ``CLConfig`` whose ``method_kwargs`` hold the selection.
+
+def _select(runs: pd.DataFrame, points: list[dict], grid: Mapping[str, Sequence], criterion: str):
+    param_cols = [c for c in runs.columns if c.startswith("param_") and runs[c].notna().any()]
+    agg = (runs.groupby("point_id", as_index=False)
+           .agg(stage=("stage", "first"), method=("method", "first"), **{c: (c, "first") for c in param_cols},
+                **{f"val_{m}": (m, "mean") for m in ("final_avg_error", "plasticity", "forgetting")},
+                n_runs=("seed", "size")))
+    best = agg.sort_values([f"val_{criterion}", "point_id"], kind="mergesort").iloc[0]
+    # Take values from the grid itself so types (int buffer sizes) are exact.
+    chosen = dict(points[int(best["point_id"])])
+    edge = {k: len(grid[k]) > 1 and v in (min(grid[k]), max(grid[k])) for k, v in chosen.items()}
+    return chosen, edge, agg.assign(selected=agg["point_id"] == best["point_id"])
+
+
+def tune_hyperparameters(df: pd.DataFrame, cl_config: CLConfig, tuning: TuningConfig) -> dict:
+    """Two-stage, validation-only hyperparameter selection (D11).
+
+    Stage 1: for each backbone used by ``cl_config.methods``, fine-tuning streams
+    over the same ``backbone_grid`` select its optimisation settings by
+    ``backbone_criterion``. Stage 2: for every method with a grid, its own
+    hyperparameter is selected by ``criterion`` using the stage-1 settings.
+    Ties go to the earlier grid value. Returns the full grid tables, the
+    selections, grid-edge flags (a selection at an edge means the grid should
+    be extended and tuning repeated, so the optimum is not an artefact of the
+    grid range) and a ``CLConfig`` holding all selected values.
     """
     orders = tuning_orders(df, cl_config, tuning.n_orders)
     streams = [P.make_task_stream(df, o, cl_config.train_frac, cl_config.val_frac) for o in orders]
-    _warm_up(df)
-    rows, points = [], {}
+    _warm_up(df, cl_config.methods)
+    all_rows, summaries = [], []
+
+    backbone_selected, at_edge = {}, {}
+    backbones = list(dict.fromkeys(backbone_of(m) for m in cl_config.methods))
+    for backbone in backbones if tuning.backbone_grid else []:
+        method = BACKBONE_TUNING_METHOD[backbone]
+        base = {**cl_config.common_kwargs, **cl_config.backbone_kwargs.get(backbone, {})}
+        rows, points = _grid_search(streams, method, tuning.backbone_grid, base, tuning.seeds, cl_config.metric,
+                                    f"backbone:{backbone}")
+        chosen, edge, agg = _select(pd.DataFrame(rows), points, tuning.backbone_grid, tuning.backbone_criterion)
+        backbone_selected[backbone], at_edge[f"backbone:{backbone}"] = chosen, edge
+        all_rows += rows
+        summaries.append(agg)
+
+    tuned_backbone = {b: {**cl_config.backbone_kwargs.get(b, {}), **backbone_selected.get(b, {})} for b in
+                      set(cl_config.backbone_kwargs) | set(backbone_selected)}
+    stage1 = CLConfig(**{**asdict(cl_config), "backbone_kwargs": tuned_backbone})
+
+    selected = {}
     for method in cl_config.methods:
         grid = tuning.grids.get(method)
         if not grid:
             continue
-        points[method] = _grid_points(grid)
-        for point_id, point in enumerate(points[method]):
-            kwargs = {**cl_config.common_kwargs, **cl_config.method_kwargs.get(method, {}), **point}
-            for order_id, tasks in enumerate(streams):
-                for seed in tuning.seeds:
-                    out = run_stream(method, tasks, seed, cl_config.metric, eval_split="val", **kwargs)
-                    rows.append({"method": method, "point_id": point_id, **{f"param_{k}": v for k, v in point.items()},
-                                 "order_id": order_id, "seed": seed,
-                                 **{k: out["metrics"][k] for k in CL_METRIC_COLS if k in out["metrics"]}})
-    grid_runs = pd.DataFrame(rows)
+        rows, points = _grid_search(streams, method, grid, method_settings(stage1, method), tuning.seeds,
+                                    cl_config.metric, "method")
+        chosen, edge, agg = _select(pd.DataFrame(rows), points, grid, tuning.criterion)
+        selected[method], at_edge[method] = chosen, edge
+        all_rows += rows
+        summaries.append(agg)
 
-    selected, at_edge, table = {}, {}, []
-    if len(grid_runs):
-        param_cols = [c for c in grid_runs.columns if c.startswith("param_")]
-        agg = (grid_runs.groupby(["method", "point_id"], as_index=False)
-               .agg(**{c: (c, "first") for c in param_cols},
-                    **{f"val_{m}": (m, "mean") for m in ("final_avg_error", "plasticity", "forgetting")},
-                    n_runs=("seed", "size")))
-        for method, g in agg.groupby("method", sort=False):
-            best = g.sort_values([f"val_{tuning.criterion}", "point_id"], kind="mergesort").iloc[0]
-            # Take values from the grid itself so types (int buffer sizes) are exact.
-            selected[method] = dict(points[method][int(best["point_id"])])
-            grid = tuning.grids[method]
-            at_edge[method] = {k: len(grid[k]) > 1 and v in (min(grid[k]), max(grid[k])) for k, v in selected[method].items()}
-            table.append(g.assign(selected=g["point_id"] == best["point_id"]))
-    tuned = CLConfig(**{**asdict(cl_config), "method_kwargs": {**cl_config.method_kwargs,
-                        **{m: {**cl_config.method_kwargs.get(m, {}), **p} for m, p in selected.items()}}})
-    return {"grid_runs": grid_runs, "grid_summary": pd.concat(table, ignore_index=True) if table else pd.DataFrame(),
-            "selected": selected, "at_grid_edge": at_edge, "orders": orders, "config": asdict(tuning), "tuned_cl_config": tuned}
+    tuned = CLConfig(**{**asdict(stage1), "method_kwargs": {
+        **cl_config.method_kwargs, **{m: {**cl_config.method_kwargs.get(m, {}), **p} for m, p in selected.items()}}})
+    return {"grid_runs": pd.DataFrame(all_rows),
+            "grid_summary": pd.concat(summaries, ignore_index=True) if summaries else pd.DataFrame(),
+            "backbone_selected": backbone_selected, "selected": selected, "at_grid_edge": at_edge,
+            "orders": orders, "config": asdict(tuning), "tuned_cl_config": tuned}
 
 
 def compare_methods(runs: pd.DataFrame, baseline: str = "finetune", metric_cols: Sequence[str] = CL_METRIC_COLS[:5]) -> pd.DataFrame:

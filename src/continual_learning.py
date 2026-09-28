@@ -107,7 +107,15 @@ class Strategy:
             self.target_scale_ = float(max(np.std(y), MIN_TARGET_SCALE))
         else:
             self.target_mean_, self.target_scale_ = 0.0, 1.0
-        self.model = MLPRegressor(self.preprocessor.output_dim, self.hidden, self.dropout)
+        self.model = self._build_model()
+
+    def _build_model(self) -> nn.Module:
+        """Network for this strategy (the MLP backbone; TFT strategies override this)."""
+        return MLPRegressor(self.preprocessor.output_dim, self.hidden, self.dropout)
+
+    def _inputs(self, df: pd.DataFrame) -> torch.Tensor:
+        """Model inputs for the rows of ``df`` (TFT strategies return cycle windows instead)."""
+        return torch.from_numpy(self.preprocessor.transform(df))
 
     def initialise(self, task: Task) -> "Strategy":
         """Fit preprocessing on ``task.train`` and build the model without training it.
@@ -126,7 +134,7 @@ class Strategy:
         return y
 
     def _xy(self, df: pd.DataFrame) -> tuple[torch.Tensor, torch.Tensor]:
-        x = torch.from_numpy(self.preprocessor.transform(df))
+        x = self._inputs(df)
         y = torch.from_numpy(((self._target(df) - self.target_mean_) / self.target_scale_).astype(np.float32))
         return x, y
 
@@ -204,7 +212,7 @@ class Strategy:
         if self.model is None:
             raise RuntimeError(f"{type(self).__name__}.predict called before any task was fitted")
         self.model.eval()
-        x = torch.from_numpy(self.preprocessor.transform(df))
+        x = self._inputs(df)
         out = self.model(x).numpy().astype(np.float64)
         return out * self.target_scale_ + self.target_mean_
 
@@ -279,14 +287,27 @@ class EWC(Strategy):
                 "ewc_variant": "multi-penalty (one Fisher per task)"}
 
     def penalty(self) -> torch.Tensor:
-        """Current EWC penalty (zero before the first task ends)."""
+        """Current EWC penalty (zero before the first task ends).
+
+        Computed on flattened parameter vectors (one fused op per task instead of
+        one per parameter tensor); the value is identical to the per-tensor sum.
+        """
+        if self.model is None or not self.fishers_:
+            return torch.zeros(())
+        theta = torch.cat([p.reshape(-1) for p in self.model.parameters()])
         total = torch.zeros(())
-        if self.model is None:
-            return total
-        for fisher, optimum in zip(self.fishers_, self.optima_):
-            for n, p in self.model.named_parameters():
-                total = total + (fisher[n] * (p - optimum[n]) ** 2).sum()
+        for fisher, optimum in self._flat_penalty_terms():
+            total = total + (fisher * (theta - optimum) ** 2).sum()
         return 0.5 * self.ewc_lambda * total
+
+    def _flat_penalty_terms(self) -> list[tuple[torch.Tensor, torch.Tensor]]:
+        # Cached flat copies of (Fisher, optimum), rebuilt when a task is added.
+        if getattr(self, "_flat_cache", (None, 0))[1] != len(self.fishers_):
+            names = [n for n, _ in self.model.named_parameters()]
+            flat = [(torch.cat([f[n].reshape(-1) for n in names]), torch.cat([o[n].reshape(-1) for n in names]))
+                    for f, o in zip(self.fishers_, self.optima_)]
+            self._flat_cache = (flat, len(self.fishers_))
+        return self._flat_cache[0]
 
     def _penalty(self, xb: torch.Tensor) -> torch.Tensor:
         return self.penalty()
@@ -323,7 +344,7 @@ class LwF(Strategy):
     def __init__(self, features: Sequence[str], alpha: float = 1.0, **kwargs) -> None:
         super().__init__(features, **kwargs)
         self.alpha = float(alpha)
-        self.teacher_: MLPRegressor | None = None
+        self.teacher_: nn.Module | None = None
 
     def config(self) -> dict:
         return {**super().config(), "alpha": self.alpha}
@@ -388,8 +409,92 @@ STRATEGIES: dict[str, type[Strategy]] = {
 
 
 def make_strategy(name: str, features: Sequence[str], **kwargs) -> Strategy:
-    """Build a strategy by name ("finetune", "replay", "ewc", "lwf", "joint")."""
+    """Build a strategy by name: MLP ("finetune", "replay", "ewc", "lwf", "joint") or TFT
+    ("tft_finetune", "tft_ewc", "tft_joint"; these also need ``history=``)."""
     key = name.lower()
     if key not in STRATEGIES:
         raise ValueError(f"Unknown strategy {name!r}; choose from {sorted(STRATEGIES)}")
     return STRATEGIES[key](features, **kwargs)
+
+
+# ---------------------------------------------------------------------------
+# Proposed model: Temporal Fusion Transformer strategies (E9, decision D12)
+# ---------------------------------------------------------------------------
+
+from src.models.tft_continual import CycleWindows, TemporalFusionTransformer  # noqa: E402
+
+LABEL_COLUMNS = ("SOH_Percent", "Capacity_Ah", "Reference_Capacity_Ah", "RPT", "RPT_Number", "Days_Since_RPT")
+
+
+class TFTMixin:
+    """Swap the MLP for the TFT on causal windows of recent cycles.
+
+    ``history`` is the full cycle table the windows are drawn from; label and
+    RPT columns are dropped before it is stored, so a window can only contain
+    features of the same battery's current and earlier cycles. Preprocessing is
+    the same frozen first-task ``TabularPreprocessor`` as the MLP, applied per
+    cycle. Everything else (training loop, early stopping, EWC Fisher, target
+    scaling) is inherited unchanged, so TFT and MLP results differ only by the
+    network.
+
+    Defaults are capacity-matched to the MLP backbone: ``d_model=8, n_heads=2``
+    gives about 12.0k parameters against the MLP's 13.1k (18 inputs), so a
+    difference in results reflects the architecture rather than model size
+    (D12). ``window=8`` cycles is fixed a priori; windows of 4 and 16 are
+    reported as a sensitivity analysis.
+    """
+
+    def __init__(self, features: Sequence[str], history: pd.DataFrame, window: int = 8, d_model: int = 8,
+                 n_heads: int = 2, **kwargs) -> None:
+        super().__init__(features, **kwargs)
+        label_free = history.drop(columns=[c for c in LABEL_COLUMNS if c in history.columns])
+        self.windows = CycleWindows(label_free, self.features, window)
+        self.window, self.d_model, self.n_heads = int(window), int(d_model), int(n_heads)
+
+    def config(self) -> dict:
+        return {**super().config(), "backbone": "tft", "window": self.window, "d_model": self.d_model,
+                "n_heads": self.n_heads}
+
+    def _build_model(self) -> nn.Module:
+        return TemporalFusionTransformer(len(self.features), self.d_model, self.n_heads, self.dropout)
+
+    def _inputs(self, df: pd.DataFrame) -> torch.Tensor:
+        return torch.from_numpy(self.windows.build(df, self.preprocessor))
+
+    @torch.no_grad()
+    def interpret(self, df: pd.DataFrame) -> dict[str, pd.Series]:
+        """Mean variable-selection weights (at the estimated cycle) and attention over window lags."""
+        self.model.eval()
+        self.model(self._inputs(df))
+        info = self.model.last_interpretation_
+        variables = pd.Series(info["variable_weights"].mean(dim=0).numpy(), index=self.features, name="weight")
+        lags = pd.Series(info["attention"].mean(dim=0).numpy(),
+                         index=pd.Index(range(-self.window + 1, 1), name="lag"), name="attention")
+        return {"variable_weights": variables.sort_values(ascending=False), "attention_by_lag": lags}
+
+
+class TFTFineTune(TFTMixin, FineTune):
+    """TFT with plain sequential fine-tuning (ablation: isolates the effect of EWC on the TFT)."""
+
+    name = "tft_finetune"
+
+
+class TFTEWC(TFTMixin, EWC):
+    """Proposed model: TFT with Elastic Weight Consolidation (multi-penalty, as ``EWC``)."""
+
+    name = "tft_ewc"
+
+
+class TFTJoint(TFTMixin, Joint):
+    """TFT trained on all tasks together (upper bound for the TFT backbone)."""
+
+    name = "tft_joint"
+
+
+STRATEGIES.update({"tft_finetune": TFTFineTune, "tft_ewc": TFTEWC, "tft_joint": TFTJoint})
+__all__ += ["TFTFineTune", "TFTEWC", "TFTJoint", "is_tft"]
+
+
+def is_tft(name: str) -> bool:
+    """True for strategies that need a cycle ``history`` (TFT backbone)."""
+    return name.lower().startswith("tft")
