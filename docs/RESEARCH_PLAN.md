@@ -134,10 +134,10 @@ class FineTune, Replay, EWC, LwF(Strategy);  class Joint: fit_all(tasks) ; predi
 | # | Workstream | Depends on | Output | Status |
 |---|---|---|---|---|
 | W0 | Real-data run of notebooks 01–04 from a clean commit | Data mounted in a session | Committed `results/*.json`; data issues logged | **blocked on data access** |
-| W1 | Protocols (`src/protocols.py` + tests) | — | Stage A/B building blocks | started |
-| W2 | Evaluation (`src/evaluation.py` + tests) | — | CL metrics and statistics | started |
-| W3 | Models and strategies (`baseline_dnn.py`, `continual_learning.py` + tests) | — | Stage C methods | started |
-| W4 | Reuse-category analysis (`docs/REUSE_CATEGORIES.md`) | — | Options and recommendation for E10 | started |
+| W1 | Protocols (`src/protocols.py` + tests) | — | Stage A/B building blocks | done |
+| W2 | Evaluation (`src/evaluation.py` + tests) | — | CL metrics and statistics | done |
+| W3 | Models and strategies (`baseline_dnn.py`, `continual_learning.py` + tests) | — | Stage C methods | done |
+| W4 | Reuse-category analysis (`docs/REUSE_CATEGORIES.md`) | — | Options and recommendation for E10 | done — team decisions pending (§6 of that document) |
 | W5 | Runner + notebooks 05/06 | W1–W3 | E2–E8 results on synthetic data, then real data | next |
 | W6 | Proposed temporal model (E9) | W5 results | TFT/temporal encoder + EWC | later |
 | W7 | Reuse head (E10), robustness (E11) | W4, W5 | Results and figures | later |
