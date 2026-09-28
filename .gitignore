@@ -3,7 +3,9 @@
 /data/raw/*
 !/data/raw/.gitkeep
 /processed/
-/results/
+/results/*
+# Small metrics/config JSON (e.g. baseline_metrics.json) may be committed.
+!/results/*.json
 /logs/
 *.pt
 *.pickle
