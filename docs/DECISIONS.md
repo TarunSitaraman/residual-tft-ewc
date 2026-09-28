@@ -226,3 +226,23 @@ Evaluation follows `docs/RESEARCH_PLAN.md` Stage D: TFT + EWC against MLP + EWC 
 `pytorch-forecasting` and `pytorch-lightning` were removed from `requirements.txt` because nothing uses them.
 
 **Implemented in:** `src/models/tft_continual.py` (`TemporalFusionTransformer`, `CycleWindows`), `src/continual_learning.py` (`TFTMixin`, `TFTFineTune`, `TFTEWC`, `TFTJoint`), `src/experiments.py`, `notebooks/07_tft_ewc.ipynb`, `tests/test_tft.py`.
+
+## D13. Missing-temperature robustness is tested by removal, never by adding data
+
+**Status:** Adopted
+
+Temperature is missing for some cycles in the handover data (reported in notebook 02, never fabricated). E11 asks whether this matters and whether the handling matters:
+
+- **Natural missingness:** test errors on cycles whose temperature is missing vs. complete cycles, per model and group.
+- **Handling variants**, each fitted with the same validation-only selection (D11):
+  - `impute_indicator`: training median plus missing indicator (the default everywhere else);
+  - `impute_only`: training median with the indicators hidden (zeroed, so input width and model size stay identical);
+  - `carry_forward`: the battery's most recent *earlier* temperature (causal; leading gaps keep default handling);
+  - `drop_temperature`: temperature features removed.
+  
+  Differences to the default are paired over battery groups with Holm correction per model.
+- **Stress test:** additional temperature values are *removed* from the test periods at increasing rates, either at random or as one contiguous outage per battery, with fixed seeds; all three temperature columns are removed together, as in the observed data. Models are not refitted. For the TFT, removal is applied to the cycle history its windows are read from, so it reaches every step of the window (unit-tested).
+
+Values are only ever removed; carry-forward only copies a battery's own earlier observation and is applied identically to all splits, so no future or test information reaches training. Removal patterns are assumptions (random, block) and may differ from the real mechanism; notebook 02 reports the observed run lengths for comparison.
+
+**Implemented in:** `src/robustness.py` (`HANDLING_VARIANTS`, `prepare_variant`, `carry_forward_temperature`, `mask_temperature`, `rows_in`, `stratified_errors`), `src/models/baseline_dnn.py` (`TabularPreprocessor(indicators=...)`), `src/continual_learning.py` (`missing_indicators`, `TFTMixin.set_history`), `src/experiments.py` (`fit_model`), `notebooks/09_missing_temperature.ipynb`, `tests/test_robustness.py`.

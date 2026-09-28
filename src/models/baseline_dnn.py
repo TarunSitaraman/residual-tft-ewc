@@ -29,12 +29,15 @@ class TabularPreprocessor:
     task has missingness the first task did not.
     """
 
-    def __init__(self, features: Sequence[str]) -> None:
+    def __init__(self, features: Sequence[str], indicators: bool = True) -> None:
         if len(features) == 0:
             raise ValueError("TabularPreprocessor needs at least one feature")
         if len(set(features)) != len(features):
             raise ValueError("Duplicate feature names")
         self.features: list[str] = list(features)
+        # indicators=False zeroes the indicator block (width unchanged), so the model
+        # cannot see which values were imputed: the E11 "impute only" ablation.
+        self.indicators = bool(indicators)
         self.median_: np.ndarray | None = None
         self.mean_: np.ndarray | None = None
         self.std_: np.ndarray | None = None
@@ -83,7 +86,8 @@ class TabularPreprocessor:
         mask = np.isnan(x)
         x = np.where(mask, self.median_, x)
         z = (x - self.mean_) / self.std_
-        return np.concatenate([z, mask.astype(np.float64)], axis=1).astype(np.float32)
+        flags = mask.astype(np.float64) if self.indicators else np.zeros_like(z)
+        return np.concatenate([z, flags], axis=1).astype(np.float32)
 
     def fit_transform(self, df: pd.DataFrame) -> np.ndarray:
         return self.fit(df).transform(df)

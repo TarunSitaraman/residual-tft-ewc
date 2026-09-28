@@ -109,6 +109,7 @@ E10: map predicted SOH to reuse categories and measure agreement with categories
 | `notebooks/06_continual_learning.ipynb` | E4, E6–E8 | B, C |
 | `notebooks/07_tft_ewc.ipynb` | E9 with ablations, interpretation, window sensitivity | D |
 | `src/reuse.py`, `notebooks/08_reuse_assessment.ipynb` | E10 reuse categories: metrics, baselines, sensitivity | E |
+| `src/robustness.py`, `notebooks/09_missing_temperature.ipynb` | E11 missing-temperature robustness | F |
 | `tests/` | Unit tests on synthetic data generated at test time into a temporary directory | all |
 
 ### Interfaces
@@ -155,7 +156,7 @@ class FineTune, Replay, EWC, LwF(Strategy);  class Joint: fit_all(tasks) ; predi
 | W5 | Runner + notebooks 05/06, validation-only tuning (D11) | W1–W3 | E2–E8 results on synthetic data, then real data | code done (`src/experiments.py`, notebooks 05–06); real-data run blocked on W0 |
 | W6 | Proposed model: TFT + EWC (E9) | W5 | TFT strategy on the shared protocol, EWC reused from `src/continual_learning.py` | code done (D12, notebook 07); real-data run blocked on W0 |
 | W7 | Reuse-category evaluation (E10) | W4, W5 | `src/reuse.py`, notebook 08, per-step category metrics in notebooks 06–07 | code done (D10); real-data run blocked on W0 |
-| W7b | Robustness to missing temperature (E11) | W5 | Masking vs. imputation comparison | later |
+| W7b | Robustness to missing temperature (E11) | W5 | `src/robustness.py`, notebook 09: natural missingness, handling variants, removal stress test | code done (D13); real-data run blocked on W0 |
 | W8 | Paper: figures, tables, methods and results draft | W5–W7 | Manuscript draft | later |
 
 ## 6. Rules for all workstreams

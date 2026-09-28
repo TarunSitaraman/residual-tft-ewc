@@ -64,6 +64,7 @@ class Strategy:
         weight_decay: float = 0.0,
         dropout: float = 0.1,
         standardise_target: bool = True,
+        missing_indicators: bool = True,
     ) -> None:
         self.features = list(features)
         self.target = target
@@ -76,6 +77,7 @@ class Strategy:
         self.weight_decay = weight_decay
         self.dropout = dropout
         self.standardise_target = standardise_target
+        self.missing_indicators = bool(missing_indicators)
 
         self.preprocessor: TabularPreprocessor | None = None
         self.model: MLPRegressor | None = None
@@ -94,13 +96,14 @@ class Strategy:
             "lr": self.lr, "epochs": self.epochs, "batch_size": self.batch_size, "patience": self.patience,
             "weight_decay": self.weight_decay, "dropout": self.dropout,
             "standardise_target": self.standardise_target, "n_features": len(self.features),
+            "missing_indicators": self.missing_indicators,
         }
 
     # -- setup ------------------------------------------------------------
     def _initialise(self, train: pd.DataFrame) -> None:
         """Fit the frozen preprocessor and target scaling on ``train`` and build the model."""
         set_determinism(self.seed)
-        self.preprocessor = TabularPreprocessor(self.features).fit(train)
+        self.preprocessor = TabularPreprocessor(self.features, self.missing_indicators).fit(train)
         y = self._target(train)
         if self.standardise_target:
             self.target_mean_ = float(np.mean(y))
@@ -457,6 +460,15 @@ class TFTMixin:
 
     def _build_model(self) -> nn.Module:
         return TemporalFusionTransformer(len(self.features), self.d_model, self.n_heads, self.dropout)
+
+    def set_history(self, history: pd.DataFrame) -> None:
+        """Replace the cycle history windows are drawn from (e.g. with test inputs masked).
+
+        The TFT reads a row's features from this history, not from the frame
+        passed to ``predict``, so input perturbations must be applied here.
+        """
+        label_free = history.drop(columns=[c for c in LABEL_COLUMNS if c in history.columns])
+        self.windows = CycleWindows(label_free, self.features, self.window)
 
     def _inputs(self, df: pd.DataFrame) -> torch.Tensor:
         return torch.from_numpy(self.windows.build(df, self.preprocessor))

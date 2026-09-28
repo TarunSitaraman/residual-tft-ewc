@@ -43,8 +43,71 @@ REUSE_METRIC_COLS: tuple[str, ...] = (
 # ---------------------------------------------------------------------------
 
 
-def _ridge(alpha: float):
-    return make_pipeline(SimpleImputer(strategy="median", add_indicator=True), StandardScaler(), Ridge(alpha=alpha))
+def fit_model(
+    model: str,
+    train: pd.DataFrame,
+    val: pd.DataFrame,
+    features: Sequence[str],
+    seed: int = 0,
+    mlp_kwargs: Mapping | None = None,
+    history: pd.DataFrame | None = None,
+    lr_grid: Sequence[float] | None = None,
+    indicators: bool = True,
+):
+    """Fit ``model`` ("ridge", "mlp" or "tft") with validation-only selection; return ``(predict, config)``.
+
+    Ridge selects its alpha, the MLP and TFT their learning rate from the same
+    grid (``lr_grid``, default ``DEFAULT_BACKBONE_GRID["lr"]``; D11), each by
+    validation RMSE. ``indicators=False`` hides missing-value indicators from
+    the model (E11 ablation). ``predict(df, history=None)`` returns SOH
+    predictions for ``df``; for the TFT, ``history`` replaces the cycle history
+    its windows are read from (needed when inputs are perturbed).
+    """
+    features = list(features)
+    if model == "ridge":
+        def ridge(alpha):
+            return make_pipeline(SimpleImputer(strategy="median", add_indicator=indicators), StandardScaler(), Ridge(alpha=alpha))
+        scores = {}
+        for alpha in RIDGE_ALPHAS:
+            m = ridge(alpha).fit(train[features], train[TARGET])
+            scores[alpha] = ev.task_error(val[TARGET], m.predict(val[features])) if len(val) else np.nan
+        best = min(scores, key=lambda a: (np.nan_to_num(scores[a], nan=np.inf), a))
+        fitted = ridge(best).fit(train[features], train[TARGET])
+        return (lambda df, history=None: fitted.predict(df[features])), {"model": "ridge", "alpha": best,
+                                                                         "missing_indicators": indicators}
+    if model in ("mlp", "tft"):
+        task = P.Task("pooled", train.reset_index(drop=True), val.reset_index(drop=True), val.iloc[0:0])
+        extra = {}
+        if model == "tft":
+            if history is None:
+                raise ValueError("the TFT needs the cycle history its windows are drawn from")
+            extra["history"] = history
+        kwargs = dict(mlp_kwargs or {})
+        grid = list(lr_grid) if lr_grid is not None else ([kwargs["lr"]] if "lr" in kwargs else DEFAULT_BACKBONE_GRID["lr"])
+        kwargs.pop("lr", None)
+        fitted, scores = {}, {}
+        for lr in grid:
+            cls = Joint if model == "mlp" else TFTJoint
+            m = cls(features, seed=seed, lr=lr, missing_indicators=indicators, **extra, **kwargs)
+            m.fit_all([task])
+            fitted[lr] = m
+            scores[lr] = ev.task_error(val[TARGET], m.predict(val)) if len(val) else np.nan
+        best = min(grid, key=lambda v: (np.nan_to_num(scores[v], nan=np.inf), grid.index(v)))
+        chosen = fitted[best]
+
+        def predict(df, history=None):
+            if history is not None and model == "tft":
+                original = chosen.windows
+                chosen.set_history(history)
+                try:
+                    return chosen.predict(df)
+                finally:
+                    chosen.windows = original
+            return chosen.predict(df)
+
+        edge = len(grid) > 1 and best in (min(grid), max(grid))
+        return predict, {**chosen.config(), "lr_val_rmse": scores, "lr_at_grid_edge": edge}
+    raise ValueError(f"unknown model {model!r}; expected 'ridge', 'mlp' or 'tft'")
 
 
 def fit_predict(
@@ -57,47 +120,16 @@ def fit_predict(
     mlp_kwargs: Mapping | None = None,
     history: pd.DataFrame | None = None,
     lr_grid: Sequence[float] | None = None,
+    indicators: bool = True,
 ) -> tuple[dict[str, np.ndarray], dict]:
-    """Fit ``model`` ("ridge", "mlp" or "tft") on ``train``, select on ``val``, predict each test frame.
+    """``fit_model`` then predict every frame in ``tests``.
 
-    Every model selects its own setting by validation RMSE: Ridge its alpha (as
-    notebook 04); the MLP and TFT backbones their learning rate from the same
-    grid (``lr_grid``, default ``DEFAULT_BACKBONE_GRID["lr"]``; D11). Neural
-    models are trained jointly (``Joint`` / ``TFTJoint``), so Stage A and the
-    continual-learning stages share architectures. The TFT draws label-free
-    cycle windows from ``history`` (default: all rows passed in).
+    The TFT's history defaults to all rows passed in (train, val and tests).
     """
-    features = list(features)
-    if model == "ridge":
-        scores = {}
-        for alpha in RIDGE_ALPHAS:
-            m = _ridge(alpha).fit(train[features], train[TARGET])
-            scores[alpha] = ev.task_error(val[TARGET], m.predict(val[features])) if len(val) else np.nan
-        best = min(scores, key=lambda a: (np.nan_to_num(scores[a], nan=np.inf), a))
-        fitted = _ridge(best).fit(train[features], train[TARGET])
-        return {k: fitted.predict(t[features]) for k, t in tests.items()}, {"model": "ridge", "alpha": best}
-    if model in ("mlp", "tft"):
-        task = P.Task("pooled", train.reset_index(drop=True), val.reset_index(drop=True), val.iloc[0:0])
-        extra = {}
-        if model == "tft":
-            extra["history"] = history if history is not None else pd.concat(
-                [train, val, *tests.values()], ignore_index=True).drop_duplicates(subset=list(TFT_KEY))
-        kwargs = dict(mlp_kwargs or {})
-        grid = list(lr_grid) if lr_grid is not None else ([kwargs["lr"]] if "lr" in kwargs else DEFAULT_BACKBONE_GRID["lr"])
-        kwargs.pop("lr", None)
-        fitted, scores = {}, {}
-        for lr in grid:
-            cls = Joint if model == "mlp" else TFTJoint
-            m = cls(features, seed=seed, lr=lr, **extra, **kwargs)
-            m.fit_all([task])
-            fitted[lr] = m
-            scores[lr] = ev.task_error(val[TARGET], m.predict(val)) if len(val) else np.nan
-        best = min(grid, key=lambda v: (np.nan_to_num(scores[v], nan=np.inf), grid.index(v)))
-        chosen = fitted[best]
-        edge = len(grid) > 1 and best in (min(grid), max(grid))
-        return {k: chosen.predict(t) for k, t in tests.items()}, {**chosen.config(), "lr_val_rmse": scores,
-                                                                  "lr_at_grid_edge": edge}
-    raise ValueError(f"unknown model {model!r}; expected 'ridge', 'mlp' or 'tft'")
+    if model == "tft" and history is None:
+        history = pd.concat([train, val, *tests.values()], ignore_index=True).drop_duplicates(subset=list(TFT_KEY))
+    predict, cfg = fit_model(model, train, val, features, seed, mlp_kwargs, history, lr_grid, indicators)
+    return {k: predict(t) for k, t in tests.items()}, cfg
 
 
 def _score_rows(experiment: str, model: str, preds: Mapping[str, np.ndarray], tests: Mapping[str, pd.DataFrame]) -> list[dict]:
