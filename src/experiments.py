@@ -22,12 +22,19 @@ from sklearn.preprocessing import StandardScaler
 from src import data_pipeline as dp
 from src import evaluation as ev
 from src import protocols as P
+from src import reuse as RU
 from src.continual_learning import Joint, TFTJoint, is_tft, make_strategy
 
 TARGET = "SOH_Percent"
+TFT_KEY = ("Battery_ID", "Cycling_Test", "Cycle_Index")
 RIDGE_ALPHAS: tuple[float, ...] = (0.01, 0.1, 1.0, 10.0, 100.0)
 CL_METRIC_COLS: tuple[str, ...] = (
     "final_avg_error", "plasticity", "backward_transfer", "forgetting", "forward_transfer", "train_time_s",
+)
+#: Reuse-category metrics per run (E10, interval unit). Forgetting and backward
+#: transfer are on 1 − macro-F1, so positive values mean category forgetting.
+REUSE_METRIC_COLS: tuple[str, ...] = (
+    "reuse_final_macro_f1", "reuse_final_accuracy", "reuse_forgetting", "reuse_backward_transfer",
 )
 
 
@@ -48,12 +55,17 @@ def fit_predict(
     features: Sequence[str],
     seed: int = 0,
     mlp_kwargs: Mapping | None = None,
+    history: pd.DataFrame | None = None,
+    lr_grid: Sequence[float] | None = None,
 ) -> tuple[dict[str, np.ndarray], dict]:
-    """Fit ``model`` ("ridge" or "mlp") on ``train``, select on ``val``, predict each test frame.
+    """Fit ``model`` ("ridge", "mlp" or "tft") on ``train``, select on ``val``, predict each test frame.
 
-    Ridge chooses alpha by validation RMSE (as notebook 04). The MLP is the
-    continual-learning backbone trained jointly (``Joint``), so Stage A and
-    Stage C share one architecture.
+    Every model selects its own setting by validation RMSE: Ridge its alpha (as
+    notebook 04); the MLP and TFT backbones their learning rate from the same
+    grid (``lr_grid``, default ``DEFAULT_BACKBONE_GRID["lr"]``; D11). Neural
+    models are trained jointly (``Joint`` / ``TFTJoint``), so Stage A and the
+    continual-learning stages share architectures. The TFT draws label-free
+    cycle windows from ``history`` (default: all rows passed in).
     """
     features = list(features)
     if model == "ridge":
@@ -64,11 +76,28 @@ def fit_predict(
         best = min(scores, key=lambda a: (np.nan_to_num(scores[a], nan=np.inf), a))
         fitted = _ridge(best).fit(train[features], train[TARGET])
         return {k: fitted.predict(t[features]) for k, t in tests.items()}, {"model": "ridge", "alpha": best}
-    if model == "mlp":
-        joint = Joint(features, seed=seed, **(mlp_kwargs or {}))
-        joint.fit_all([P.Task("pooled", train.reset_index(drop=True), val.reset_index(drop=True), val.iloc[0:0])])
-        return {k: joint.predict(t) for k, t in tests.items()}, joint.config()
-    raise ValueError(f"unknown model {model!r}; expected 'ridge' or 'mlp'")
+    if model in ("mlp", "tft"):
+        task = P.Task("pooled", train.reset_index(drop=True), val.reset_index(drop=True), val.iloc[0:0])
+        extra = {}
+        if model == "tft":
+            extra["history"] = history if history is not None else pd.concat(
+                [train, val, *tests.values()], ignore_index=True).drop_duplicates(subset=list(TFT_KEY))
+        kwargs = dict(mlp_kwargs or {})
+        grid = list(lr_grid) if lr_grid is not None else ([kwargs["lr"]] if "lr" in kwargs else DEFAULT_BACKBONE_GRID["lr"])
+        kwargs.pop("lr", None)
+        fitted, scores = {}, {}
+        for lr in grid:
+            cls = Joint if model == "mlp" else TFTJoint
+            m = cls(features, seed=seed, lr=lr, **extra, **kwargs)
+            m.fit_all([task])
+            fitted[lr] = m
+            scores[lr] = ev.task_error(val[TARGET], m.predict(val)) if len(val) else np.nan
+        best = min(grid, key=lambda v: (np.nan_to_num(scores[v], nan=np.inf), grid.index(v)))
+        chosen = fitted[best]
+        edge = len(grid) > 1 and best in (min(grid), max(grid))
+        return {k: chosen.predict(t) for k, t in tests.items()}, {**chosen.config(), "lr_val_rmse": scores,
+                                                                  "lr_at_grid_edge": edge}
+    raise ValueError(f"unknown model {model!r}; expected 'ridge', 'mlp' or 'tft'")
 
 
 def _score_rows(experiment: str, model: str, preds: Mapping[str, np.ndarray], tests: Mapping[str, pd.DataFrame]) -> list[dict]:
@@ -84,7 +113,8 @@ def _score_rows(experiment: str, model: str, preds: Mapping[str, np.ndarray], te
 # ---------------------------------------------------------------------------
 
 
-def _pooled(df: pd.DataFrame, groups: Sequence[str], train_frac: float, val_frac: float):
+def pooled_split(df: pd.DataFrame, groups: Sequence[str], train_frac: float = 0.70, val_frac: float = 0.15):
+    """E1 split: every group's chronological train and val periods pooled, test periods kept per group."""
     tasks = [P.make_task(df, g, train_frac, val_frac) for g in groups]
     train = pd.concat([t.train for t in tasks], ignore_index=True)
     val = pd.concat([t.val for t in tasks], ignore_index=True)
@@ -104,6 +134,8 @@ def reference_baselines(
 
     * E1 within-group: one model on every group's chronological train period,
       evaluated on each group's test period (the MLP version is E4, joint training).
+      ``models`` may include "ridge", "mlp" and "tft"; neural models select their
+      learning rate on validation data (D11).
     * E2 RPT-boundary: as E1, but splits cut only at RPT changes, so test SOH
       states never appear in training.
     * E3 leave-one-group-out: train on the other groups, test on the held-out
@@ -118,8 +150,8 @@ def reference_baselines(
 
     for model in models:
         # E1 / E4
-        train, val, tests = _pooled(df, groups, train_frac, val_frac)
-        preds, cfg = fit_predict(model, train, val, tests, features, seed, mlp_kwargs)
+        train, val, tests = pooled_split(df, groups, train_frac, val_frac)
+        preds, cfg = fit_predict(model, train, val, tests, features, seed, mlp_kwargs, history=df)
         rows += _score_rows("E1_within_group", model, preds, tests)
         details["models"][f"E1_{model}"] = cfg
 
@@ -128,14 +160,14 @@ def reference_baselines(
         e2_train = split[split["split"] == "train"]
         e2_val = split[split["split"] == "val"]
         e2_tests = {g: split[(split["split"] == "test") & (split[dp.GROUP_COL].astype(str) == g)] for g in groups}
-        preds, cfg = fit_predict(model, e2_train, e2_val, e2_tests, features, seed, mlp_kwargs)
+        preds, cfg = fit_predict(model, e2_train, e2_val, e2_tests, features, seed, mlp_kwargs, history=df)
         rows += _score_rows("E2_rpt_boundary", model, preds, e2_tests)
         details["models"][f"E2_{model}"] = cfg
 
         # E3
         for g in groups:
             task = P.leave_one_group_out(df, g, train_frac, val_frac)
-            preds, cfg = fit_predict(model, task.train, task.val, {g: task.test}, features, seed, mlp_kwargs)
+            preds, cfg = fit_predict(model, task.train, task.val, {g: task.test}, features, seed, mlp_kwargs, history=df)
             rows += _score_rows("E3_leave_one_group_out", model, preds, {g: task.test})
             details["models"][f"E3_{model}_{g}"] = cfg
 
@@ -144,8 +176,8 @@ def reference_baselines(
             relabelled = P.relabel_date_only(df, health, "end")
             details["E5_rows_dropped"] = int(len(df) - len(relabelled))
             details["E5_labels_changed"] = int(relabelled["label_changed"].sum())
-            train, val, tests = _pooled(relabelled, groups, train_frac, val_frac)
-            preds, cfg = fit_predict(model, train, val, tests, features, seed, mlp_kwargs)
+            train, val, tests = pooled_split(relabelled, groups, train_frac, val_frac)
+            preds, cfg = fit_predict(model, train, val, tests, features, seed, mlp_kwargs, history=relabelled)
             rows += _score_rows("E5_date_only_end", model, preds, tests)
             details["models"][f"E5_{model}"] = cfg
 
@@ -172,6 +204,7 @@ class CLConfig:
     method_kwargs: dict = field(default_factory=dict)       # per-method extras, e.g. {"ewc": {"ewc_lambda": 100}}
     backbone_kwargs: dict = field(default_factory=dict)     # per-backbone settings, e.g. {"tft": {"lr": 1e-2}}
     joint_backbones: tuple[str, ...] = ("mlp",)              # upper bounds to compute: "mlp" and/or "tft"
+    reuse_metrics: bool = True                              # E10 category metrics per step (D10)
 
 
 def backbone_of(method: str) -> str:
@@ -197,7 +230,7 @@ def _stream_history(tasks: Sequence[P.Task]) -> pd.DataFrame:
 
 
 def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "RMSE", eval_split: str = "test",
-               return_strategy: bool = False, **kwargs) -> dict:
+               return_strategy: bool = False, collect_predictions: bool = False, **kwargs) -> dict:
     """Train ``method`` through ``tasks`` in order, evaluating every task after every step.
 
     Returns the accuracy matrix (all entries, including tasks not yet seen, which
@@ -215,10 +248,15 @@ def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "R
 
     strategy = make_strategy(method, features, seed=seed, **kwargs)
     errors: dict[tuple[int, str], float] = {}
+    predictions: dict[tuple[int, str], np.ndarray] = {}
     for i, task in enumerate(tasks):
         strategy.fit_task(task)
-        for name, err in _task_errors(strategy, tasks, metric, eval_split).items():
-            errors[(i, name)] = err
+        for t in tasks:
+            frame = getattr(t, eval_split)
+            pred = strategy.predict(frame)
+            errors[(i, t.name)] = ev.task_error(frame[TARGET], pred, metric)
+            if collect_predictions:
+                predictions[(i, t.name)] = pred
     order = [t.name for t in tasks]
     R = ev.accuracy_matrix(errors, order)
     metrics = ev.cl_metrics(R, reference_errors=b)
@@ -226,7 +264,21 @@ def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "R
            "train_time_s": list(strategy.training_time_), "config": strategy.config()}
     if return_strategy:
         out["strategy"] = strategy
+    if collect_predictions:
+        out["predictions"] = predictions
+        out["eval_frames"] = {t.name: getattr(t, eval_split) for t in tasks}
     return out
+
+
+def reuse_run_metrics(out: Mapping, order: Sequence[str]) -> tuple[dict, np.ndarray]:
+    """E10 metrics of one stream (interval unit) and the pooled confusion after the last step."""
+    preds, frames = out["predictions"], out["eval_frames"]
+    f1 = ev.cl_metrics(RU.category_matrix(preds, frames, order, "macro_f1"))
+    acc = ev.cl_metrics(RU.category_matrix(preds, frames, order, "accuracy"))
+    last = len(order) - 1
+    confusion = RU.pooled_confusion({t: preds[(last, t)] for t in order}, frames)
+    return {"reuse_final_macro_f1": 1.0 - f1["final_avg_error"], "reuse_final_accuracy": 1.0 - acc["final_avg_error"],
+            "reuse_forgetting": f1["forgetting"], "reuse_backward_transfer": f1["backward_transfer"]}, confusion
 
 
 def _warm_up(df: pd.DataFrame, methods: Sequence[str] = ("finetune",)) -> None:
@@ -251,19 +303,23 @@ def run_cl_experiment(df: pd.DataFrame, config: CLConfig) -> dict:
     orders = P.sample_orders(groups, config.n_orders, config.order_seed)
     _warm_up(df, config.methods)
 
-    runs, matrices = [], {}
+    runs, matrices, confusions = [], {}, {}
     for order_id, order in enumerate(orders):
         tasks = P.make_task_stream(df, order, config.train_frac, config.val_frac)
         for seed in config.seeds:
             for method in config.methods:
-                out = run_stream(method, tasks, seed, config.metric, **method_settings(config, method))
+                out = run_stream(method, tasks, seed, config.metric, collect_predictions=config.reuse_metrics,
+                                 **method_settings(config, method))
                 matrices[(method, order_id, seed)] = out["R"]
                 m = out["metrics"]
-                runs.append({
-                    "method": method, "order_id": order_id, "order": ">".join(order), "seed": seed,
-                    **{k: m[k] for k in CL_METRIC_COLS if k in m},
-                    "train_time_s": float(np.sum(out["train_time_s"])),
-                })
+                row = {"method": method, "order_id": order_id, "order": ">".join(order), "seed": seed,
+                       **{k: m[k] for k in CL_METRIC_COLS if k in m},
+                       "train_time_s": float(np.sum(out["train_time_s"]))}
+                if config.reuse_metrics:
+                    reuse_m, conf = reuse_run_metrics(out, order)
+                    row.update(reuse_m)
+                    confusions[method] = confusions.get(method, 0) + conf
+                runs.append(row)
 
     tasks = P.make_task_stream(df, groups, config.train_frac, config.val_frac)
     joint_rows = []
@@ -283,7 +339,7 @@ def run_cl_experiment(df: pd.DataFrame, config: CLConfig) -> dict:
                                    "train_time_s": float(np.sum(joint.training_time_))})
 
     return {"runs": pd.DataFrame(runs), "matrices": matrices, "joint": pd.DataFrame(joint_rows),
-            "orders": orders, "config": asdict(config)}
+            "reuse_confusion": confusions, "orders": orders, "config": asdict(config)}
 
 
 # ---------------------------------------------------------------------------
