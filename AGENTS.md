@@ -1,0 +1,17 @@
+# Project Agent Notes
+
+This repository contains the continual-learning workflow for SOH estimation and second-life suitability assessment of heterogeneous EV batteries.
+
+## Conventions
+
+- Keep datasets outside Git under `data/`.
+- Preserve battery-group identity and temporal ordering in evaluation.
+- Document missing-temperature handling; do not fabricate values silently.
+- Keep generated checkpoints and experiment outputs out of version control.
+- Use `ml_training_dataset.csv` as the supervised-learning starting point.
+
+## Invariants
+
+- `SOH_Percent = Capacity_Ah / Reference_Capacity_Ah * 100`
+- A cycle uses only the most recent RPT on or before its cycle date.
+- Continual-learning evaluation reports adaptation and retention.
