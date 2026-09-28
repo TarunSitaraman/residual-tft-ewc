@@ -109,6 +109,16 @@ class Strategy:
             self.target_mean_, self.target_scale_ = 0.0, 1.0
         self.model = MLPRegressor(self.preprocessor.output_dim, self.hidden, self.dropout)
 
+    def initialise(self, task: Task) -> "Strategy":
+        """Fit preprocessing on ``task.train`` and build the model without training it.
+
+        The untrained model is the reference ``b_j`` for forward transfer: its
+        predictions stay close to the first task's mean SOH.
+        """
+        self._initialise(task.train)
+        self.model.eval()
+        return self
+
     def _target(self, df: pd.DataFrame) -> np.ndarray:
         y = df[self.target].to_numpy(dtype=np.float64)
         if np.isnan(y).any():
