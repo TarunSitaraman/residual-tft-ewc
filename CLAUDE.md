@@ -16,3 +16,10 @@ This is not only a course project. The work is intended to become a **published 
 
 - **Never mention Claude, Anthropic or AI assistance** in commit messages, pull request titles or descriptions, code comments, or any other content pushed to the repository.
 - Do **not** add `Co-Authored-By` trailers, session links, "Generated with" footers or similar attribution lines.
+
+## Branches
+
+- Keep `main` as the single long-lived branch. Work branches (including those created by cloud sessions) are temporary.
+- **Once a branch's work is in `main`, delete the branch** on the remote (and locally).
+- **Delete stagnant branches** too: a cloud-session branch that is already contained in `main`, or whose work has been abandoned, should be removed. Before deleting a branch with commits not in `main`, confirm with the team that the work is not needed.
+- **Resolve conflicts when merging into `main`** rather than leaving a branch unmerged: merge `main` into the branch (or rebase an unshared branch), fix the conflicts, re-run the notebooks/checks affected, then merge. Never discard someone else's changes to get a clean merge.
