@@ -369,6 +369,47 @@ def validate_reference_capacity(health: pd.DataFrame, atol: float = 1e-9) -> pd.
     return pd.DataFrame(rows).set_index(GROUP_COL)
 
 
+DATE_ONLY_RPT_CONVENTIONS: tuple[str, ...] = ("start", "end", "unknown")
+
+
+def _check_convention(date_only_rpt: str) -> None:
+    if date_only_rpt not in DATE_ONLY_RPT_CONVENTIONS:
+        raise ValueError(f"date_only_rpt must be one of {DATE_ONLY_RPT_CONVENTIONS}, got {date_only_rpt!r}")
+
+
+def is_date_only(times: pd.Series) -> pd.Series:
+    """True where a timestamp is exactly midnight, i.e. the RPT was most likely recorded as a date only."""
+    return times.notna() & (times == times.dt.normalize())
+
+
+def effective_rpt_time(test_date: pd.Series, date_only_rpt: str = "start") -> pd.Series:
+    """Timestamp used to decide whether an RPT is "on or before" a cycle.
+
+    * ``"start"``   — as stored: a date-only RPT counts from 00:00, so later cycles that day use it.
+    * ``"end"``     — a date-only RPT counts from the end of its day, so same-day cycles use the previous RPT.
+    * ``"unknown"`` — matched as ``"start"``; same-day cycles are flagged as ambiguous instead of judged.
+
+    RPTs that carry a time of day are never shifted.
+    """
+    _check_convention(date_only_rpt)
+    if date_only_rpt != "end":
+        return test_date
+    shift = pd.Timedelta(days=1) - pd.Timedelta(microseconds=1)
+    return test_date.where(~is_date_only(test_date), test_date + shift)
+
+
+def same_day_as_date_only_rpt(cycles: pd.DataFrame, rpt: pd.DataFrame, cycle_time: str = "Cycle_Date", rpt_time: str = "Test_Date") -> pd.Series:
+    """Flag cycles that fall on the calendar day of a date-only RPT of the same battery.
+
+    These are the only cycles whose alignment depends on the date-only convention.
+    """
+    r = rpt.dropna(subset=[rpt_time])
+    r = r[is_date_only(r[rpt_time])]
+    days = pd.MultiIndex.from_arrays([r[GROUP_COL].astype(str), r[rpt_time].dt.normalize()])
+    key = pd.MultiIndex.from_arrays([cycles[GROUP_COL].astype(str), cycles[cycle_time].dt.normalize()])
+    return pd.Series(key.isin(days), index=cycles.index)
+
+
 def align_to_rpt(
     cycles: pd.DataFrame,
     rpt: pd.DataFrame,
@@ -376,21 +417,27 @@ def align_to_rpt(
     rpt_time: str = "Test_Date",
     rpt_cols: Sequence[str] = ("RPT", "RPT_Number", "Capacity_Ah", "Reference_Capacity_Ah", "SOH_Percent"),
     suffix: str = "_expected",
+    date_only_rpt: str = "start",
 ) -> pd.DataFrame:
     """Attach the most recent RPT **on or before** each cycle (backward as-of join per battery).
 
-    Cycles without a parseable date, or before the first RPT of their battery,
-    get NaN health columns. The original row order is restored.
+    ``date_only_rpt`` sets how RPTs recorded without a time of day are placed
+    (see :func:`effective_rpt_time`). Cycles without a parseable date, or before
+    the first RPT of their battery, get NaN health columns. Adds
+    ``same_day_as_date_only_rpt`` and ``Days_Since_RPT_expected`` (from the stored
+    ``Test_Date``). The original row order is restored.
     """
+    _check_convention(date_only_rpt)
     rpt_cols = [c for c in rpt_cols if c in rpt]
+    right_time = f"{rpt_time}{suffix}"
     right = (
         rpt.dropna(subset=[rpt_time])[[GROUP_COL, rpt_time, *rpt_cols]]
         .rename(columns={c: f"{c}{suffix}" for c in rpt_cols})
-        .rename(columns={rpt_time: f"{rpt_time}{suffix}"})
+        .rename(columns={rpt_time: right_time})
     )
     right[GROUP_COL] = right[GROUP_COL].astype(str)
-    right_time = f"{rpt_time}{suffix}"
-    right = right.sort_values([right_time, GROUP_COL], kind="mergesort")
+    right["_match_time"] = effective_rpt_time(right[right_time], date_only_rpt)
+    right = right.sort_values(["_match_time", GROUP_COL], kind="mergesort")
 
     left = cycles.copy()
     left["_row"] = np.arange(len(left))
@@ -400,7 +447,7 @@ def align_to_rpt(
         dated,
         right.rename(columns={GROUP_COL: "_group"}),
         left_on=cycle_time,
-        right_on=right_time,
+        right_on="_match_time",
         by="_group",
         direction="backward",
         allow_exact_matches=True,
@@ -408,7 +455,9 @@ def align_to_rpt(
     undated = left[left[cycle_time].isna()]
     out = pd.concat([merged, undated], ignore_index=True).sort_values("_row", kind="mergesort")
     out["Days_Since_RPT_expected"] = (out[cycle_time] - out[right_time]).dt.total_seconds() / 86400.0
-    return out.drop(columns=["_row", "_group"]).reset_index(drop=True)
+    out = out.drop(columns=["_row", "_group", "_match_time"]).reset_index(drop=True)
+    out["same_day_as_date_only_rpt"] = same_day_as_date_only_rpt(out, rpt, cycle_time, rpt_time).to_numpy()
+    return out
 
 
 def validate_rpt_alignment(
@@ -416,6 +465,7 @@ def validate_rpt_alignment(
     health: pd.DataFrame,
     soh_atol: float = 1e-6,
     days_atol: float = 1.0,
+    date_only_rpt: str = "start",
 ) -> tuple[dict, pd.DataFrame]:
     """Recompute the RPT alignment and compare with what the dataset carries.
 
@@ -425,8 +475,12 @@ def validate_rpt_alignment(
     * ``Days_Since_RPT`` is non-negative and within ``days_atol`` of the recomputed gap
       (tolerant to whole-day vs fractional-day conventions);
     * no row carries health information from an RPT dated after the cycle.
+
+    ``date_only_rpt`` is passed to :func:`align_to_rpt`. With ``"unknown"``, cycles on
+    the day of a date-only RPT are reported as ``ambiguous_same_day`` and excluded
+    from the failure counts rather than judged either way.
     """
-    aligned = align_to_rpt(cycles, health)
+    aligned = align_to_rpt(cycles, health, date_only_rpt=date_only_rpt)
 
     def same(a: pd.Series, b: pd.Series, numeric: bool) -> pd.Series:
         both_na = a.isna() & b.isna()
@@ -446,25 +500,33 @@ def validate_rpt_alignment(
         exp = aligned["Days_Since_RPT_expected"]
         checks["days_nonnegative"] = d.isna() | (d >= 0)
         checks["days_match"] = (d.isna() & exp.isna()) | ((d - exp).abs() <= days_atol)
-    # Future leakage: the dataset's RPT maps to a Test_Date later than the cycle.
+    # Future leakage: the dataset's RPT becomes effective after the cycle under this convention.
     if "RPT" in aligned:
         rpt_dates = health.dropna(subset=["Test_Date"]).assign(**{GROUP_COL: lambda x: x[GROUP_COL].astype(str)})
         rpt_dates = rpt_dates.drop_duplicates([GROUP_COL, "RPT"]).set_index([GROUP_COL, "RPT"])["Test_Date"]
+        rpt_dates = effective_rpt_time(rpt_dates, date_only_rpt)
         key = pd.MultiIndex.from_arrays([aligned[GROUP_COL].astype(str), aligned["RPT"]])
         assigned_date = pd.Series(rpt_dates.reindex(key).to_numpy(), index=aligned.index)
         checks["no_future_rpt"] = assigned_date.isna() | (assigned_date <= aligned["Cycle_Date"])
     checks["before_first_rpt"] = aligned["RPT_expected"].isna() if "RPT_expected" in aligned else False
+    checks["ambiguous_same_day"] = aligned["same_day_as_date_only_rpt"].to_numpy()
 
-    flag_cols = [c for c in checks if c not in (GROUP_COL, "before_first_rpt")]
+    flag_cols = [c for c in checks if c not in (GROUP_COL, "before_first_rpt", "ambiguous_same_day")]
+    if date_only_rpt == "unknown":
+        # Do not judge ambiguous rows either way.
+        checks.loc[checks["ambiguous_same_day"], flag_cols] = True
     per_battery = checks.groupby(GROUP_COL).agg(
         rows=(GROUP_COL, "size"),
         before_first_rpt=("before_first_rpt", "sum"),
+        same_day_as_date_only_rpt=("ambiguous_same_day", "sum"),
         **{f"{c}_failures": (c, lambda s: int((~s).sum())) for c in flag_cols},
     )
     summary = {
+        "date_only_rpt": date_only_rpt,
         "rows": int(len(checks)),
         "undated_rows": int(aligned["Cycle_Date"].isna().sum()),
         "rows_before_first_rpt": int(checks["before_first_rpt"].sum()),
+        "rows_same_day_as_date_only_rpt": int(checks["ambiguous_same_day"].sum()),
         **{f"{c}_failures": int((~checks[c]).sum()) for c in flag_cols},
     }
     summary["ok"] = all(summary[f"{c}_failures"] == 0 for c in flag_cols)
@@ -472,10 +534,15 @@ def validate_rpt_alignment(
 
 
 def validate_training_subset(
-    ml_train: pd.DataFrame, final_ml: pd.DataFrame, health: pd.DataFrame
+    ml_train: pd.DataFrame, final_ml: pd.DataFrame, health: pd.DataFrame, date_only_rpt: str = "start"
 ) -> pd.DataFrame:
-    """Check that ml_training excludes pre-RPT rows and matches final_ml's labelled rows."""
-    first_rpt = health.dropna(subset=["Test_Date"]).groupby(health[GROUP_COL].astype(str))["Test_Date"].min()
+    """Check that ml_training excludes pre-RPT rows and matches final_ml's labelled rows.
+
+    "Before the first RPT" uses the same date-only convention as :func:`align_to_rpt`
+    (``"unknown"`` is evaluated as ``"start"``).
+    """
+    h = health.dropna(subset=["Test_Date"])
+    first_rpt = effective_rpt_time(h["Test_Date"], date_only_rpt).groupby(h[GROUP_COL].astype(str)).min()
     rows = []
     for battery in sorted(set(final_ml[GROUP_COL].astype(str)) | set(ml_train[GROUP_COL].astype(str))):
         tr = ml_train[ml_train[GROUP_COL].astype(str) == battery]

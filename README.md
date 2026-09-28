@@ -30,7 +30,7 @@ Combined cycling data
        |
        v
 Cleaned cycling data
-       ├───► Cycling features (18 modelling features: voltage, current, temperature, capacities, energy, power, efficiency, cycle count)
+       ├───► Cycling features (18 modelling features: voltage, current, temperature, capacities, energy, power, efficiency, cycle count, data points)*
        └───► RPT capacity measurements
                    |
                    v
@@ -49,6 +49,8 @@ Cleaned cycling data
                ML / DL stage
 ```
 
+\* Earlier handover wording said 22 cycling features; the dictionary yields 18 model inputs once identifiers and RPT/health columns are excluded. This is recorded as a schema decision in `docs/DECISIONS.md`.
+
 ---
 
 ## 2. Key Technical Components
@@ -61,6 +63,7 @@ Cleaned cycling data
 ### 2.2 Temporal Alignment
 - Each cycling observation associates with the most recent RPT measurement **on or before** that cycle
 - Prevents assigning future health information to earlier observations
+- RPTs stored as a date only are read as 00:00 by default, so a cycle later that day uses that RPT; this convention is configurable and pending confirmation (see `docs/DECISIONS.md`)
 - Critical for time-series integrity
 
 ### 2.3 Dataset Structure
