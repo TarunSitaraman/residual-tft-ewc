@@ -307,6 +307,14 @@ def compare_dictionary(dictionary_columns: Iterable[str], observed: Mapping[str,
 # ---------------------------------------------------------------------------
 
 
+def groups_in(df: pd.DataFrame, group_col: str = GROUP_COL) -> list[str]:
+    """Task groups present in ``df``: in ``BATTERY_GROUPS`` order for the handover
+    batteries, otherwise sorted (e.g. the test cases of a second dataset)."""
+    present = set(df[group_col].astype(str))
+    known = [g for g in BATTERY_GROUPS if g in present]
+    return known if known else sorted(present)
+
+
 def check_battery_groups(values: Iterable, expected: Sequence[str] = BATTERY_GROUPS) -> dict:
     observed = sorted({str(v) for v in values if pd.notna(v)})
     return {
