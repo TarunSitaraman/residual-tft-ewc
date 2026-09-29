@@ -24,8 +24,10 @@ This file lists **every external data source** that this repository uses, or tha
 | [S2](#s2-project-handover-and-its-hugging-face-mirror) | Project handover CSVs, mirrored on Hugging Face | Processed form of S1 that the pipeline reads | **Used** | notebooks 01–10; `results/*.json`; `scripts/verify_external_data.py` |
 | [S3](#s3-first-life-dataset-pozzato-et-al-2022) | Stanford first-life dataset, OSF `qsabn` (Pozzato et al., 2022) | First-life history of the same cells | Cited for background; data **not used** | none (candidate for S-b) |
 | [S4](#s4-synthetic-duty-cycles-moy-and-onori-2023) | Synthetic grid-storage duty cycles (Moy and Onori, 2023) | Origin of the second-life cycling profiles | Cited; no data used | methods text only |
-| [S5](#s5-cui-et-al-2024) | Cui et al., 2024 | Related second-life study from the same laboratory | Candidate citation; relation to S1 **unverified** | none |
-| [C1–C4](#candidates-not-verified-nothing-downloaded) | NASA, Oxford, CALCE, MIT–Stanford ageing datasets | Suggested for more varied fade | **Not verified; nothing downloaded** | none |
+| [S5](#s5-cui-et-al-2024-and-the-stanfordrelyion-dataset) | Cui et al., 2024, and the Stanford–Relyion dataset, OSF `fns57` | A different second-life dataset (8 retired Nissan Leaf LMO cells) | Cited as related work; data **not used**, since no licence is declared (permission to be requested) | none |
+| [S6](#s6-lfp-first--and-second-life-dataset-wheeler-et-al-2025) | Wheeler et al., 2025, Recherche Data Gouv `10.57745/OLBXKT` | Second dataset (D19): 20 LFP cells, 7 ageing conditions, down to 30–50 % SOH | **Selected**; row complete, download planned (D19) | none yet |
+| [C1–C4](#candidates-screened-not-used) | NASA, Oxford, CALCE, MIT–Stanford ageing datasets | Suggested for more varied fade | **Not verified; nothing downloaded** | none |
+| [C5–C6](#candidates-screened-not-used) | Beatty et al. 2025 (Loughborough); Mowri et al. 2025 | Second-life datasets screened for D19 | Metadata verified; **rejected** (reasons below) | none |
 
 ---
 
@@ -211,27 +213,73 @@ Alternatively, make the mirror private and point users to OSF.
   - BibTeX key: `moy2023dutycycles`
 - **Use here:** cited when describing the residential and commercial profiles (reference [2] of the S1 article). No data used.
 
-## S5. Cui et al., 2024
+## S5. Cui et al., 2024, and the Stanford–Relyion dataset
 
-- **Citation:** X. Cui, M. A. Khan, G. Pozzato, S. Singh, R. Sharma and S. Onori, "Taking second-life batteries from exhausted to empowered using experiments, data analysis, and health estimation," *Cell Reports Physical Science*, vol. 5, no. 5, Art. no. 101941, May 2024.
+**Article.**
+- X. Cui, M. A. Khan, G. Pozzato, S. Singh, R. Sharma and S. Onori, "Taking second-life batteries from exhausted to empowered using experiments, data analysis, and health estimation," *Cell Reports Physical Science*, vol. 5, no. 5, Art. no. 101941, May 2024.
   - doi:[10.1016/j.xcrp.2024.101941](https://doi.org/10.1016/j.xcrp.2024.101941)
-  - Article licence CC BY-NC 4.0
+  - Article licence CC BY-NC 4.0; arXiv:2402.18859
   - BibTeX key: `cui2024secondlife`
-- **Status:**
-  - The metadata are verified.
-  - Whether it analyses the same six cells is **not** verified: the publisher's full text refused automated access, and Europe PMC has no record.
-  - Read the paper before citing it as prior work on this dataset. It is a likely direct competitor for any SOH-estimation claim on these cells.
 
-## Candidates (not verified, nothing downloaded)
+**What it is (verified 29 Sep 2026 from the arXiv full text).** A **different** dataset from S1:
+- eight retired LMO/graphite pouch cells (32.5 Ah nominal) from two Nissan Leaf packs, with unknown first-life history;
+- 15 months of grid peak-shaving cycling between 3 and 4 V;
+- RPTs including capacity tests and pulses.
 
-These were suggested as additional data with larger and more varied fade (`docs/DATA_REPORT.md` §5, option 2). None has been checked or downloaded. Each needs a full row (S-format) before any use.
+The earlier question (whether it analyses the S1 cells) is resolved: it does not. It is related prior work on second-life SOH estimation, from the same laboratory.
 
-| ID | Dataset | Known so far |
+**Dataset.**
+- "Stanford-Relyion Second-Life Li-ion Battery Dataset," OSF, 2024, doi:[10.17605/OSF.IO/FNS57](https://doi.org/10.17605/OSF.IO/FNS57).
+- DataCite creators: S. Singh, R. Sharma, G. Pozzato, X. Cui, S. Onori, M. A. Khan.
+- Created 2024-01-12, updated 2025-05-01.
+
+**Licence: none declared.**
+- The DataCite `rightsList` is empty and the OSF node has no licence. The project description only asks that use be "appropriately referenced".
+- Without a licence, reuse rights are not granted. **Do not download or use it** until the authors grant permission in writing (corresponding author: S. Onori). File that permission under `docs/external_data/`.
+- If permission is granted, S5 becomes the most direct complement to S1: real retired EV cells on a grid duty cycle, with a different chemistry and format.
+
+## S6. LFP first- and second-life dataset (Wheeler et al., 2025)
+
+**Citation (cite both the article and the dataset).**
+- **Data article:** W. Wheeler, Y. Bultel, P. Venet and A. Sari, "An ageing study of twenty 18650 lithium-ion Graphite/LFP cells in first and second life use," *Scientific Data*, vol. 12, Art. no. 392, 2025.
+  - Published 6 Mar 2025
+  - doi:[10.1038/s41597-025-04712-7](https://doi.org/10.1038/s41597-025-04712-7); PMCID PMC11885844
+  - Article licence CC BY 4.0
+- **Dataset:** W. Wheeler, P. Venet, Y. Bultel and A. Sari, "Aging study on twenty A123 18650 Graphite/LFP 1.1 Ah cells," Recherche Data Gouv, version 2.0 (released 11 Mar 2025).
+  - doi:[10.57745/OLBXKT](https://doi.org/10.57745/OLBXKT)
+  - Licence **CC BY 4.0** (dataset terms of use; DataCite `rightsList` is empty)
+- **Funding acknowledged:** ANRT, CIFRE grant 2018/1625.
+
+**What it contains (from the article).**
+- **Cells:** 20 A123 18650 Graphite/LFP cells, 1.1 Ah nominal, 3.2 V nominal, 2.0–3.65 V limits.
+- **Test cases:** seven, with three cells each (two for case 4). They vary the charge (CC-CV or CC; 3.65 or 3.55 V; C/3 or 2C), the discharge (WLTP at C/3 on average, or CC 2C) and the depth of discharge (70 % or 100 %).
+- **Ageing:** at 50 °C (accelerated) for 24 months, ending at 50–30 % SOH, including the "ageing knee".
+- **Characterisation every 100 cycles:** C/3 and C/25 (pseudo-OCV) charge and discharge. EIS at 0/50/100 % SOC before and after ageing. Initial and final characterisation at 25 °C.
+- **"Second life" here** means continued ageing below 80 % SOH under the same protocol, not a repurposed stationary duty cycle. The paper must say so.
+
+**Version and integrity.**
+- 24 files, 26,298,927,784 bytes in total: 20 per-cell zips of 0.93–1.65 GB, plus the MATLAB script, `extractedData.mat` (459,258 bytes) and the readme.
+- MD5 checksums of every file are in `docs/external_data/metadata/wheeler2025_lfp_dataverse.dataset.json`; downloads are checked against them.
+
+**Why it was selected (D19).** It has a clear CC BY 4.0 licence and adds several kinds of heterogeneity that S1 lacks:
+- another chemistry (LFP);
+- seven controlled usage conditions (groups for continual learning);
+- deep fade with knees, so the reuse classes C1–C3 occur.
+
+Its C/25 characterisation matches S1's C/20 capacity test, so the capacity labels (D17) and IC features (D16) carry over.
+
+**Planned use.** Download only the characterisation data and `extractedData.mat` (checksums first), then apply the D18 forecasting protocol with the checks as RPTs. Record the experiments in the table at the top when they exist.
+
+## Candidates screened, not used
+
+| ID | Dataset | Result |
 |---|---|---|
-| C1 | NASA Ames (PCoE) battery ageing data | Nothing verified |
-| C2 | Oxford battery degradation data | Nothing verified |
-| C3 | CALCE battery data (University of Maryland) | Nothing verified |
-| C4 | MIT–Stanford–Toyota fast-charging data (Severson et al., 2019) | Nothing verified |
+| C1 | NASA Ames (PCoE) battery ageing data | Not screened; first life only |
+| C2 | Oxford battery degradation data | Not screened; first life only |
+| C3 | CALCE battery data (University of Maryland) | Not screened; first life only |
+| C4 | MIT–Stanford–Toyota fast-charging data (Severson et al., 2019) | Not screened; first life only, no periodic RPT |
+| C5 | M. Beatty, D. Strickland, J. Warren, J. Chan, P. Ferreira, "Long-Term Sweat Testing Dataset for Second-Life Batteries," *Sci. Data* 12, 1068 (2025), doi:10.1038/s41597-025-05360-7; data doi:10.17028/rd.lboro.28732490.v2 (CC BY 4.0) | **Rejected:** capacity measured only at start and end of test (periodic checks failed), so there is no SOH series to forecast; about 34 GB |
+| C6 | S. T. Mowri, A. Barai, M. Sheikh, S. Moharana, J. Marco, "Dataset for assessing the impact of first-life lithium-ion battery degradation on second-life performance," *Data in Brief* 63, 112208 (2025), doi:10.1016/j.dib.2025.112208 (Mendeley Data) | **Rejected for now:** second life covers only 7 monthly cycles; data licence not yet verified |
 
 ---
 
@@ -247,7 +295,9 @@ These were suggested as additional data with larger and more varied fade (`docs/
 - [ ] **Hugging Face mirror:** fix the dataset card (S2), or remove the mirror, before submission.
 - [x] **Handover version:** version 2, settled by the folders and dates it contains (S1, "Evidence").
 - [x] **Capacity labels:** reproduce `Capacity_Ah` from the raw RPT files. Done: 112/112 exact. Define capacity in the paper as the total Ah discharged over the RPT (S1, "Evidence").
-- [ ] **Cui et al. 2024:** read it and decide whether it is prior work on the same cells (S5).
+- [x] **Cui et al. 2024:** a different dataset (8 retired Nissan Leaf LMO cells); cite it as related work (S5).
+- [ ] **Stanford–Relyion data (S5):** request permission to reuse; no licence is declared.
+- [ ] **Second dataset (S6):** cite both the article and the dataset DOI; state that "second life" there means ageing below 80 % SOH under the same protocol, at 50 °C.
 - [ ] **Comparisons with the literature:** do not compare with numbers from other datasets or SOH definitions without saying so (see `CLAUDE.md`).
 
 ## 5. Evidence saved in this repository
@@ -268,6 +318,14 @@ All records are in `docs/external_data/metadata/` and were retrieved on 29 Sep 2
 | `pozzato2022_first_life_dib.fulltext.xml` | Europe PMC full text, S3 article | `6dd38d6a8c5bf581164b7fe06f064f703cac49f6b69d6e9dec1381237c90a283` |
 | `moy2023_synthetic_duty_cycles_sae.crossref.json` | Crossref, S4 | `fca9170f6d3b734481623af611d68545f3dc7e7614d3a6a1b025e296a8d3e176` |
 | `cui2024_second_life_crps.crossref.json` | Crossref, S5 | `ba227bc78dcdca6a309c22de72e0645aa20d243787dee45bf46e089a62279ed5` |
+| `cui2024_arxiv.atom.xml` | arXiv API record, S5 article | `9ce11d248c80a4c46043d10ca76898492602ce3bf9584cae8787fde1daa95c77` |
+| `cui2024_relyion_osf.datacite.json` | DataCite, S5 dataset (no licence) | `960b92755252082af4278568d03eab11351cf36e236137d6b375085f0497a1c8` |
+| `cui2024_relyion_osf.osf_node.json` | OSF API, project `fns57` (no licence) | `1635a63226193c3fe4930b22c624ea48d95b33e006db5e07ef47ccb782140993` |
+| `cui2024_relyion_osf.files.json` | OSF API, top-level file list | `e694ca8bdf6741ca942c898ecc49002c5317b1ae2e2acefd87042d837f779bf2` |
+| `wheeler2025_first_second_life_sd.crossref.json` | Crossref, S6 article | `6b312d5b98833ef58e974a35e102a98de71f94bc421818d730421b529ec5fdc6` |
+| `wheeler2025_first_second_life_sd.fulltext.xml` | Europe PMC full text, S6 article (CC BY 4.0) | `f164ff7efce7fcf1fc63425d1c3ddb1f87068a7edf604f48153fe51d92c4cbbf` |
+| `wheeler2025_lfp_dataverse.datacite.json` | DataCite, S6 dataset | `84de95a91194555d907731a74330214ba35a806635e8526dcd1aed80a8a02ca0` |
+| `wheeler2025_lfp_dataverse.dataset.json` | Dataverse API, S6 dataset (version, licence, files, MD5) | `0ad5ef469fdc6301ea0283a613fc5ae0d62f47dd89d4cb79992008a695ad49c4` |
 
 The remaining references in `paper/references.bib` that have DOIs (TFT, EWC, LwF, LSTM, Wilcoxon, Cohen, Kerby) were also checked against Crossref on the same date. Entries without DOIs still need checking against the publisher.
 
