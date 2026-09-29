@@ -6,7 +6,11 @@ Reads only the central directory of the OSF archive (HTTP range requests, about
 1. every file referenced in ``rpt_capacity_data.csv`` exists in the archive,
    inside the same ``RPT_#`` folder;
 2. every (cell, ``Cycling_#``) block in ``cleaned_battery_data.csv`` has a
-   folder in the archive, and vice versa.
+   folder in the archive, and vice versa;
+3. with ``--raw-root`` (the diagnostic tests extracted by
+   ``fetch_osf_diagnostics.py``), every RPT capacity in ``rpt_capacity_data.csv``
+   is recomputed from its raw file as the maximum of the cumulative
+   ``Discharge_Capacity(Ah)`` counter in the referenced sheet.
 
 Usage (from the repository root, with the CSVs in ``DATA_ROOT``)::
 
@@ -101,20 +105,42 @@ def compare(listing: list[dict], data_root: Path) -> dict:
     }
 
 
+def check_capacities(data_root: Path, raw_root: Path, tol: float = 1e-6) -> dict:
+    """Recompute each handover RPT capacity from the raw Arbin file."""
+    rpt = pd.read_csv(data_root / "rpt_capacity_data.csv")
+    rpt = rpt[rpt["Battery"].str.contains("_RPT")]
+    index = {p.name: p for p in raw_root.rglob("*.xlsx")}
+    rows = []
+    for (file, sheet), g in rpt.groupby(["File", "Sheet"], sort=False):
+        raw = pd.read_excel(index[file], sheet_name=sheet, usecols=["Discharge_Capacity(Ah)"])
+        recomputed = float(raw["Discharge_Capacity(Ah)"].max())
+        for cap in g["Capacity_Ah"]:
+            rows.append({"file": file, "sheet": sheet, "handover": float(cap), "recomputed": recomputed})
+    res = pd.DataFrame(rows)
+    res["abs_diff"] = (res["handover"] - res["recomputed"]).abs()
+    bad = res[res["abs_diff"] > tol]
+    return {"rpt_rows": len(res), "matching_within_tol": int((res["abs_diff"] <= tol).sum()), "tolerance_ah": tol,
+            "max_abs_diff_ah": float(res["abs_diff"].max()), "mismatches": bad.to_dict(orient="records")}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--data-root", default=os.environ.get("DATA_ROOT", "data"))
     ap.add_argument("--out", help="write the archive listing and the comparison to this JSON file")
+    ap.add_argument("--raw-root", help="extracted diagnostic_tests folder; enables the capacity check")
     args = ap.parse_args()
     listing = archive_listing()
     result = compare(listing, Path(args.data_root))
+    if args.raw_root:
+        result["capacity_check"] = check_capacities(Path(args.data_root), Path(args.raw_root))
     print(json.dumps(result, indent=2))
     if args.out:
         Path(args.out).write_text(json.dumps({"source": OSF_FILE_URL, "archive_size": ARCHIVE_SIZE,
                                               "archive_sha256": ARCHIVE_SHA256, "comparison": result,
                                               "files": listing}, indent=1))
     ok = (result["rpt_file_refs_found"] == result["rpt_file_refs"] == result["rpt_file_refs_in_same_rpt_folder"]
-          and not result["blocks_missing_from_archive"] and not result["archive_blocks_missing_from_handover"])
+          and not result["blocks_missing_from_archive"] and not result["archive_blocks_missing_from_handover"]
+          and not result.get("capacity_check", {}).get("mismatches"))
     print("MATCH" if ok else "MISMATCH")
     return 0 if ok else 1
 

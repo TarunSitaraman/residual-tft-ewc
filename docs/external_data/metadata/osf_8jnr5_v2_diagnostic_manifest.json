@@ -1,0 +1,2118 @@
+{
+ "source": "S1 in docs/EXTERNAL_DATA.md: doi:10.17605/OSF.IO/8JNR5, file version 2 (CC BY 4.0)",
+ "url": "https://osf.io/download/j2ne9/?version=2",
+ "archive_size": 2153883052,
+ "archive_sha256": "201b21b8e2e9623887d03e9bd6620341e5c91cd28bce34294ccbad2d4e7c6fe3",
+ "extracted": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/",
+ "retrieved_utc": "2026-09-29T13:20:45Z",
+ "n_files": 351,
+ "total_bytes": 2153473812,
+ "files": [
+  {
+   "path": "diagnostic_tests/RPT_7/eis_7.mat",
+   "size": 11580,
+   "crc32": "664b1070",
+   "sha256": "4e7f2247132030c4554f3a319562dc2834a4e8a446c3c085194d68d54edef30f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_7/20230522_EIS_7_400V_ALL.xlsx",
+   "size": 12771,
+   "crc32": "419b2d31",
+   "sha256": "45ccfd62ff38c6bc2a217fabdba44dc2cb72f09205ca4bc696f2c271fe31ccf6"
+  },
+  {
+   "path": "diagnostic_tests/RPT_7/20230522_EIS_7_363V_ALL.xlsx",
+   "size": 12783,
+   "crc32": "8ca45d2b",
+   "sha256": "5c11a71d0a1db032563c740c23427df3c9fe7517e8b816a98be7e31c3fcee5c3"
+  },
+  {
+   "path": "diagnostic_tests/RPT_7/20230522_EIS_7_326V_ALL.xlsx",
+   "size": 12273,
+   "crc32": "ef42cb5d",
+   "sha256": "0e662b03e702aa3fb0131d0254c19e245a5295d6f9254c450684711768e54b24"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_EIS_6_400V_ALL.xlsx",
+   "size": 12741,
+   "crc32": "81988860",
+   "sha256": "687365ddc29a00458c6d34b9f335b3b7f515ef2b349e91da8cba85b9aad6d1f8"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_EIS_6_326V_ALL.xlsx",
+   "size": 12660,
+   "crc32": "c3822efe",
+   "sha256": "5bcb47090810e8a14b79d19f3eae1fae4c72c7c6df4eaf4b96dfef8aa051fe2a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_EIS_6_363V_ALL.xlsx",
+   "size": 12790,
+   "crc32": "ec77b4d8",
+   "sha256": "771f535c80e8a9b532bd2916e4b526e7d0469abd460536b5415be7d2f02e8a37"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_EIS_8_363V_ALL.xlsx",
+   "size": 12271,
+   "crc32": "710b8deb",
+   "sha256": "00cd99a987c084ce294d867d7a6b6944e50d4df72d73a5b9e1fcbc17724d8d8c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_EIS_8_326V_ALL.xlsx",
+   "size": 12123,
+   "crc32": "ac2d2f38",
+   "sha256": "aaf1137f9cae7c06188baf5c302594bb627d8b23b7f7209396140d7eb06424ef"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_EIS_8_400V_ALL.xlsx",
+   "size": 12248,
+   "crc32": "0de7177a",
+   "sha256": "462d06579256be39ca0d7bd9b8ea06f1117171a36e901fc7fd1368cca053c91a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_EIS_5_363V_ALL.xlsx",
+   "size": 12751,
+   "crc32": "9548b59b",
+   "sha256": "cd2643a8356be2e99efff83f5b4515994fc176a66896ca41526a1b090d6c9894"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_EIS_5_326V_ALL.xlsx",
+   "size": 12592,
+   "crc32": "f3a48e8f",
+   "sha256": "f73706444a7b5f5eabd89745bd164a8936b8da30c261f70a8fe32a4951f0f46d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_EIS_5_400V_ALL.xlsx",
+   "size": 12711,
+   "crc32": "b129cfe4",
+   "sha256": "ffbe3b966fbb702eb61a02e5000502b357be017cfaa3e57b8d45ec3c6947c2bf"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250129_g1_RPT/Channel_1/20250129_g1_RPT_Channel_1.xlsx",
+   "size": 41196974,
+   "crc32": "9872f470",
+   "sha256": "3e57970165dde5b1eff690919c8fbb85cc378d1e70a8ca50a9429d65c9eb9bd3"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250128_v4_RPT/Channel_1/20250128_v4_RPT_Channel_1.xlsx",
+   "size": 60010937,
+   "crc32": "39389dd2",
+   "sha256": "0a9a87df86496c104e0ab4db1fb498a0d1b7691e10e30f687fcabed573eaad36"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250128_w10_RPT/Channel_2/20250128_w10_RPT_Channel_2.xlsx",
+   "size": 62816961,
+   "crc32": "27a2d96f",
+   "sha256": "f329f80499e93b286188454806cbe0a7f564a8f4e1152efa5a1812245780cf5c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250129_w8_RPT/Channel_3/20250129_w8_RPT_Channel_3.xlsx",
+   "size": 34288459,
+   "crc32": "59cb7291",
+   "sha256": "cc694761df916114079c85ec76e5de9218a1884a7a2e7f25ed6c9627153dd02c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250129_v5_RPT/Channel_2/20250129_v5_RPT_Channel_2.xlsx",
+   "size": 34117392,
+   "crc32": "c53eb7ea",
+   "sha256": "8c0e5708332d76cb4739f9c8171b70213d1d212b145efba74882ffe74cb12412"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/EIS_19/20250201_v5_EIS326V/Channel_2/20250201_v5_EIS326V_Channel_2.xlsx",
+   "size": 110622,
+   "crc32": "d85a0e9f",
+   "sha256": "9fd8f0a2dfd5b3ea0caff34c57251d19bc21414733970b69d11a10c0d3e59572"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/EIS_19/20250202_w8_EIS326V/Channel_3/20250202_w8_EIS326V_Channel_3.xlsx",
+   "size": 111561,
+   "crc32": "0154530f",
+   "sha256": "b7e0e1cb7b4fdc67a421abbbc127efd19ed34e3734cd6a9fba9d9fd1fe10b98d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/EIS_19/20250201_g1_EIS326V/Channel_1/20250201_g1_EIS326V_Channel_1.xlsx",
+   "size": 136290,
+   "crc32": "cc3ac009",
+   "sha256": "d59841d6f8ef22c8261be977c7edfcdddf2df6c9ff8edefe16d95812e6e8249d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/EIS_19/20250131_v5_EIS400V/Channel_2/20250131_v5_EIS400V_Channel_2.xlsx",
+   "size": 110495,
+   "crc32": "92bfa76c",
+   "sha256": "6f6286d65e70a792a15e10025ebe1ff272d7cbaedad3240a478ef1036870bd7b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/EIS_19/20250131_g1_EIS400V/Channel_1/20250131_g1_EIS400V_Channel_1.xlsx",
+   "size": 134554,
+   "crc32": "60f52c6a",
+   "sha256": "19d8904394fc16c7a15eb3b9c0cb73ca950b3af08af4ec80feab4737ac170954"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/EIS_19/20250131_w8_EIS400V/Channel_3/20250131_w8_EIS400V_Channel_3.xlsx",
+   "size": 110521,
+   "crc32": "f250260b",
+   "sha256": "a1d755f2b780847a0a4615fdaf8b9664cfeeb9ff69245a1fb4874881a212afb2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/EIS_19/20250201_w8_EIS363V_gal/Channel_3/20250201_w8_EIS363V_gal_Channel_3.xlsx",
+   "size": 111651,
+   "crc32": "d8c5b5f3",
+   "sha256": "1c054e555c58641a09b1780e57f8f76153fb1aec19e5ce12558f11812c8c6647"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/EIS_19/20250201_v5_EIS363V/Channel_2/20250201_v5_EIS363V_Channel_2.xlsx",
+   "size": 111819,
+   "crc32": "3cfb7f46",
+   "sha256": "60d9030cb15670a69668445384bfc0a1ee9802c55992bdaf7e64219a7c24eac1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_19/EIS_19/20250201_g1_EIS363V/Channel_1/20250201_g1_EIS363V_Channel_1.xlsx",
+   "size": 135173,
+   "crc32": "3525ec3c",
+   "sha256": "a45558a678e73865f6f7a81a28d237dc363f1f730681359525a4240f9fa20766"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_v4_RPT/Channel_1/20230914_v4_RPT_Channel_1.xlsx",
+   "size": 13324375,
+   "crc32": "782e3937",
+   "sha256": "fea77e54cdeb8aee3266c5e07f01a0e399dea9d2b38a2e8765a33a729872be3a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_v5_RPT/Channel_4/20230914_v5_RPT_Channel_4.xlsx",
+   "size": 11180439,
+   "crc32": "eed031db",
+   "sha256": "a4e223d296845040815f06098de6b001ccc295a1f5a1e65621b218e1dcbbe81e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_w10_RPT/Channel_5/20230914_w10_RPT_Channel_5.xlsx",
+   "size": 11352095,
+   "crc32": "d755618b",
+   "sha256": "844843bfb78f4759daa6196cb61ae9bd6606ee0d6e033bf3f60694fda8578f2e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_g1_RPT/Channel_6/20230914_g1_RPT_Channel_6.xlsx",
+   "size": 11271170,
+   "crc32": "39585413",
+   "sha256": "a41ee5c9d1f060cf5c55c5a3b88152789f6e29077a15ec8a1cf49728783cbcf2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_w9_RPT/Channel_3/20230914_w9_RPT_Channel_3.xlsx",
+   "size": 11229190,
+   "crc32": "15dc61eb",
+   "sha256": "f943b0deaf89b8844361c4f14e9f742fd30ce994b96ba2fa06ec8f1e5d82a657"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_w8_RPT/Channel_2/20230914_w8_RPT_Channel_2.xlsx",
+   "size": 11207925,
+   "crc32": "750e2e39",
+   "sha256": "57ccc972eea53cffe88c1b8db27cb5f14879e109880ebc5dc27a5469ddc9a148"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_w8_EIS363V/Channel_2/20230918_w8_EIS363V_Channel_2.xlsx",
+   "size": 57297,
+   "crc32": "9d4afa42",
+   "sha256": "598047deac48e3fb02dd917659258e5cedf6bae075306c67cf17ff4a6f3b90b6"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_w10_EIS326V/Channel_5/20230918_w10_EIS326V_Channel_5.xlsx",
+   "size": 57273,
+   "crc32": "1fd825f8",
+   "sha256": "f8f341fbcc5aec2af17fc868eb84fcf39adb0d5abd1a6dd955983ed5d34e0971"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_w9_EIS363V/Channel_3/20230918_w9_EIS363V_Channel_3.xlsx",
+   "size": 57236,
+   "crc32": "cb816645",
+   "sha256": "281f138185c11d5575952e65aa25295f3a4d02e3839eb6ef5829340e04adb859"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_w9_EIS400V/Channel_3/20230918_w9_EIS400V_Channel_3.xlsx",
+   "size": 57495,
+   "crc32": "97588aa3",
+   "sha256": "669368db091312f349ccab4e292ca5ee90aafe73c9bb8a2c5e4043600f5288e1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_v5_EIS326V/Channel_4/20230918_v5_EIS326V_Channel_4.xlsx",
+   "size": 57208,
+   "crc32": "3a034b58",
+   "sha256": "e6038e90d9ddb5afffd97527b5b55511dd30fc012e263e710d3bcf738da7a6e5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_g1_EIS326V/Channel_6/20230918_g1_EIS326V_Channel_6.xlsx",
+   "size": 57170,
+   "crc32": "5bdf8cf0",
+   "sha256": "1f6627b170e50bbfcc424e5106174e71d05e0755c701e4b8b4e0e192a406b981"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_w8_EIS400V/Channel_2/20230918_w8_EIS400V_Channel_2.xlsx",
+   "size": 57691,
+   "crc32": "c017f1fb",
+   "sha256": "1614182699932503c6af772eb6dbe8e0de387a0044af128c606f9ab5140b5103"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_v4_EIS326V/Channel_1/20230918_v4_EIS326V_Channel_1.xlsx",
+   "size": 61262,
+   "crc32": "84d13aab",
+   "sha256": "0656c3f20ca13931a940b00e37b8491d6268a62fb1c88de1cfe92aa6d944fb2c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_w10_EIS363V/Channel_5/20230918_w10_EIS363V_Channel_5.xlsx",
+   "size": 57542,
+   "crc32": "3b20510e",
+   "sha256": "feaf597bdac06ffd1ebf8dd46168f848cf3c7f2a3c0787a0e860e2664e9055d2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_g1_EIS400V/Channel_6/20230918_g1_EIS400V_Channel_6.xlsx",
+   "size": 57426,
+   "crc32": "0212aaa7",
+   "sha256": "bc1a7ab32b4fb7d95c0438d0e7cc5938e352a7c033e253148c44ad4e9883efaa"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_w8_EIS326V/Channel_2/20230918_w8_EIS326V_Channel_2.xlsx",
+   "size": 57155,
+   "crc32": "941ea755",
+   "sha256": "f859857ce77c38188cbe11f865355da1dc78f8837d0bfa111a91e5c8918847f1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_v4_EIS400V/Channel_1/20230918_v4_EIS400V_2_Channel_1.xlsx",
+   "size": 61184,
+   "crc32": "0efe0a46",
+   "sha256": "fe20d5348902aadbe688f31e12cbeb2f052cac1099717521b7aeeab4c35c0708"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_w9_EIS326V/Channel_3/20230918_w9_EIS326V_Channel_3.xlsx",
+   "size": 57375,
+   "crc32": "9922cf5c",
+   "sha256": "85cd525b0153abf7b57b59ed51ddb0a70572eaddbfa497d582602bcdc3af1ff4"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_v5_EIS400V/Channel_4/20230918_v5_EIS400V_Channel_4.xlsx",
+   "size": 57091,
+   "crc32": "cf6af723",
+   "sha256": "32437760e3ef5abfe3bd6c52e835cc5d5457a338d4c593779444ccc782dbf1c2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_v5_EIS363V/Channel_4/20230918_v5_EIS363V_Channel_4.xlsx",
+   "size": 56928,
+   "crc32": "2d059664",
+   "sha256": "0bc5cde259eb3a6da5bb19bbf45054fbe2c5752a1dc8f862beac540449747a0a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_w10_EIS400V/Channel_5/20230918_w10_EIS400V_Channel_5.xlsx",
+   "size": 57421,
+   "crc32": "8f51e109",
+   "sha256": "21f5ba33ff36d3358888adde8e3db95588505fb8878d0627db381da38cf7529f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_g1_EIS363V/Channel_6/20230918_g1_EIS363V_Channel_6.xlsx",
+   "size": 57609,
+   "crc32": "80fc73f2",
+   "sha256": "4717a9f964481ec2556fdfd9bcd6d88a843230881e57883a8a8377fd90d95ba4"
+  },
+  {
+   "path": "diagnostic_tests/RPT_10/EIS_10/20230918_v4_EIS363V/Channel_1/20230918_v4_EIS363V_Channel_1.xlsx",
+   "size": 61613,
+   "crc32": "b2d762c6",
+   "sha256": "514f42c4550bb0b85687eea00adea5f3b63a4da5318d490bb2e3a49c6794d7af"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17-1/20241007_v5_EIS400V/Channel_2/20241007_v5_EIS400V_Channel_2.xlsx",
+   "size": 112079,
+   "crc32": "3c7fbea8",
+   "sha256": "0493ded5aedc78071c442c875441b2fd4e6cdcda55a9fd2d561aa9b6d3e05c3c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17-1/20241008_g1_EIS326/Channel_1/20241008_g1_EIS326_Channel_1.xlsx",
+   "size": 137924,
+   "crc32": "818353ab",
+   "sha256": "99b7775dc1b06ebb7959d5ecc1a76fe4ebee9c7469f498401f43f8afeed6c505"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17-1/20241008_g1_EIS363V/Channel_1/20241008_g1_EIS363V_Channel_1.xlsx",
+   "size": 138775,
+   "crc32": "26b848f8",
+   "sha256": "d44d2d61bd54efd24728e6ac3ca378df0c121bdc2cc6ce6676a641131858e945"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17-1/20241008_v5_EIS363V/Channel_2/20241008_v5_EIS363V_Channel_2.xlsx",
+   "size": 112225,
+   "crc32": "c777d8fb",
+   "sha256": "378a03fe392dd35a71e634cc08026d39eebb83b9bc8a5aad7ad8ec33531d5ac7"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17-1/20241007_g1_EIS400V/Channel_1/20241007_g1_EIS400V_Channel_1.xlsx",
+   "size": 136985,
+   "crc32": "9cadb810",
+   "sha256": "c47994276a0491a990fc1410744c8499f4db80f6fe0eb451c0025fecd2fd53ac"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17-1/20241008_w8_EIS400V/Channel_3/20241008_w8_EIS400V_Channel_3.xlsx",
+   "size": 111224,
+   "crc32": "bc16231b",
+   "sha256": "a6f44deec7eb3fe5240e076ce2655f92ddcaa78082f0957c582d3425f54c480b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17-1/20241009_w8_EIS326V/Channel_3/20241009_w8_EIS326V_Channel_3.xlsx",
+   "size": 111351,
+   "crc32": "5f929b0c",
+   "sha256": "7c020a323020cbf087a89ca8014eb2ac23051285a2c1a9dd4c4201c97ab9d95d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17-1/20241008_w8_EIS363V/Channel_3/20241008_w8_EIS363V_Channel_3.xlsx",
+   "size": 211605,
+   "crc32": "51984ead",
+   "sha256": "8c5c1f72b91c682b4d991d7b3e8e5f317614fcd2292484ad878253add54a3f83"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17-1/20241009_v5_EIS326/Channel_2/20241009_v5_EIS326_Channel_2.xlsx",
+   "size": 111987,
+   "crc32": "e033f1d8",
+   "sha256": "6210f065b81e9f856ef8d7a92febc1224e2c623fdcf619fbc0ad9b33555763ec"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241108_g1_RPT/Channel_1/20241108_g1_RPT_Channel_1.xlsx",
+   "size": 41162061,
+   "crc32": "f867b8da",
+   "sha256": "1dc9b771a755fc420e0bbe869e046da18d9a11589494502230fc7803908d706e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241130_w10_RPT/Channel_2/20241130_w10_RPT_Channel_2.xlsx",
+   "size": 24343508,
+   "crc32": "79fc8933",
+   "sha256": "419dee4ca507b4b8ae0cb7a5c98cf818612df7ce4dd1b4f0e5736e25a11b1c3a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241108_w8_RPT/Channel_3/20241108_w8_RPT_Channel_3.xlsx",
+   "size": 34308818,
+   "crc32": "4c81b3ce",
+   "sha256": "d384c297532142c3825e3ca5fcb9c2059a242f489a5855695e23f27551094eca"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241130_v4_RPT/Channel_1/20241130_v4_RPT_Channel_1.xlsx",
+   "size": 20652666,
+   "crc32": "280a76b9",
+   "sha256": "567cb7cffa76ac8443eb84de1e02326d9398648e93ecee13824652bad30d6a27"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241108_v5_RPT/Channel_2/20241108_v5_RPT_Channel_2.xlsx",
+   "size": 34054059,
+   "crc32": "89c0a3fa",
+   "sha256": "af8fde77c59c58bb2e3472bcae985dacd70b0bd504c3de404ba570cce7b08de2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17/20241111_g1_EIS363V/Channel_1/20241111_g1_EIS363V_Channel_1.xlsx",
+   "size": 135923,
+   "crc32": "4025f51e",
+   "sha256": "37bd5d331f288a548ab43e9857d87295422dc58e8b7a4cb78583a440c2db30f4"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17/20241111_v5_EIS400V/Channel_2/20241111_v5_EIS400V_Channel_2.xlsx",
+   "size": 111859,
+   "crc32": "97bedf34",
+   "sha256": "92d9cf6ac4a72153e6c3fc0312bbcb51e15734334f9f83543483db06f6222624"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17/20241112_v5_EIS326V/Channel_2/20241112_v5_EIS326V_Channel_2.xlsx",
+   "size": 111689,
+   "crc32": "50d33d3e",
+   "sha256": "225ea469ba19ab3c53c14b44a768c5837ce625b46be009fd364b60f831f88179"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17/20241112_g1_EIS326V/Channel_1/20241112_g1_EIS326V_Channel_1.xlsx",
+   "size": 136767,
+   "crc32": "5ab48382",
+   "sha256": "a8f4c5312b5882a4193f1367232e861a76c44a1122010c8ebe13d76fca563a02"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17/20241111_g1_EIS400V/Channel_1/20241111_g1_EIS400V_Channel_1.xlsx",
+   "size": 137501,
+   "crc32": "022dc2f2",
+   "sha256": "722401de9bb8e69f0c6f33c1e4201ee14c7511974608aff30d828ac6fa4186c1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17/20241112_w8_EIS326V/Channel_3/20241112_w8_EIS326V_Channel_3.xlsx",
+   "size": 111903,
+   "crc32": "2da073e7",
+   "sha256": "f5b55794748d4e56bcd5025163f9853d70a15c5c13312e731ff3a07b09c6fa8f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17/20241111_w8_EIS400V/Channel_3/20241111_w8_EIS400V_Channel_3.xlsx",
+   "size": 111591,
+   "crc32": "cddaea74",
+   "sha256": "cdcde403dac7e9ea525f74ff055f4f3eb2711cdc0a8e3eedb54b0272fd2f9e0a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17/20241112_w8_EIS363V_gal/Channel_3/20241112_w8_EIS363V_gal_Channel_3.xlsx",
+   "size": 111200,
+   "crc32": "9da58e6d",
+   "sha256": "47c41d7282a4e5500be1fef1af40ef68f571f7e17f5d57dd99f5b63720b7c06e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_17/EIS_17/20241112_v5_EIS363V/Channel_2/20241112_v5_EIS363V_Channel_2.xlsx",
+   "size": 111264,
+   "crc32": "c3053c4b",
+   "sha256": "0c9b2cea898801af4dcae9d076e20a30de36b38c6fef5d902de97926f89442c3"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_g1_RPT/Channel_1/20240801_g1_RPT_Channel_1.xlsx",
+   "size": 39323408,
+   "crc32": "467c3d56",
+   "sha256": "1fa358752886a2798c9b28bfadce837b86c656082cae23638c7324ee68434375"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_w8_RPT/Channel_3/20240801_w8_RPT_Channel_3.xlsx",
+   "size": 32753241,
+   "crc32": "9a160521",
+   "sha256": "afff2914310405db26c773500b4a4ca91e05feb6a946be3f7573814a2d734df9"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_w9_RPT/Channel_2/20240801_w9_RPT_Channel_2.xlsx",
+   "size": 35502547,
+   "crc32": "4786cea4",
+   "sha256": "1a1d841c21f3e559cdbed004a99e19e9d0314134abf80ebf0e6999c2cbe77204"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_v5_RPT/Channel_2/20240801_v5_RPT_Channel_2.xlsx",
+   "size": 32557707,
+   "crc32": "07da1cb3",
+   "sha256": "85297f8a56244b0a450b69ce5351937b81dc28abc91a3dd598e7f1cb7cfae3fe"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_v4_RPT/Channel_1/20240801_v4_RPT_Channel_1.xlsx",
+   "size": 42916430,
+   "crc32": "a421ba41",
+   "sha256": "4911c2f3a2908afdea453df51148beb25ac61e3a93660a328d4c2a8d4e874400"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_w10_RPT/Channel_3/20240801_w10_RPT_Channel_3.xlsx",
+   "size": 35604068,
+   "crc32": "1c30da0d",
+   "sha256": "9ee83f4765fe17fff1b133a88e36290968f9582b90f009babe3ba9d37a95b2f5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/EIS_16/20240806_w9_EIS_400V/Channel_2/20240806_w9_EIS_400V_Channel_2.xlsx",
+   "size": 110370,
+   "crc32": "20c6553d",
+   "sha256": "2038ec70b219814a407ab1004b38accd9a1ed2e2f51ce89f263933e92425ffd8"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/EIS_16/20240806_w10_EIS_400V/Channel_3/20240806_w10_EIS_400V_Channel_3.xlsx",
+   "size": 62120,
+   "crc32": "347eb106",
+   "sha256": "122605ee61679e30d219af20254f23633e1a036713ddd469853e6e2ca0f096db"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/EIS_16/20240806_v4_EIS_400V/Channel_1/20240806_v4_EIS_400V_Channel_1.xlsx",
+   "size": 133313,
+   "crc32": "74c5db5a",
+   "sha256": "ca37cd6d935b10bb696cec33ddbde7c464a8db07dee45e353e57df2d7d842ebf"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/EIS_16/20240807_w9_EIS_326V/Channel_2/20240807_w9_EIS_326V_Channel_2.xlsx",
+   "size": 109917,
+   "crc32": "dbeda969",
+   "sha256": "2181bd39f1aa5d8081b1f0994d87791cc6db8dc486819478f8d77b014aa85064"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/EIS_16/20240808_w10_EIS_326V/Channel_1/20240808_w10_EIS_326V_Channel_1.xlsx",
+   "size": 133585,
+   "crc32": "0d82e945",
+   "sha256": "88cc3ab70e4213c32da5c30043c1191ee8c96e82fa181947c8fe88d70748eb4b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/EIS_16/20240807_w10_EIS_363V/Channel_1/20240807_w10_EIS_363V_Channel_1.xlsx",
+   "size": 133393,
+   "crc32": "960f9cb8",
+   "sha256": "4ac2ee9443dd962d9d703a4fa8e57097972d53e66f6e267c45622b83851eb9fe"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/EIS_16/20240806_v4_EIS_363V/Channel_1/20240806_v4_EIS_363V_Channel_1.xlsx",
+   "size": 133460,
+   "crc32": "d03e4b65",
+   "sha256": "68ff27e5de6c7dea62d4944241022ad1ca9574a740390c8f93fd7c27a4709b89"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/EIS_16/20240806_w9_EIS_363V/Channel_2/20240806_w9_EIS_363V_Channel_2.xlsx",
+   "size": 110100,
+   "crc32": "56130233",
+   "sha256": "7f767ef78c1cd89ea1e7ea310640e578438dc3977f16a0044254c5aae8800a36"
+  },
+  {
+   "path": "diagnostic_tests/RPT_16/EIS_16/20240807_v4_EIS_326V/Channel_1/20240807_v4_EIS_326V_Channel_1.xlsx",
+   "size": 133425,
+   "crc32": "b2e4dbd5",
+   "sha256": "2ae0881e05ab5b050f570d75c5b6fbfdbbdeb8b04804c2820a640e3d5da87eef"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_w8_RPT/Channel_2/20231030_w8_RPT_Channel_2.xlsx",
+   "size": 11138044,
+   "crc32": "0d7fe164",
+   "sha256": "9ed8ef08bfd8b6db3d75f5d39fc240856168aa8e048aa2a623fb80ae58d51852"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_w9_RPT/Channel_3/20231030_w9_RPT_Channel_3.xlsx",
+   "size": 11256108,
+   "crc32": "f7679ab6",
+   "sha256": "1be9da1947dd552b4fcd124b3a49c108aab801befc37e8a96b0dc35ba34f62c8"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_g1_RPT/Channel_6/20231030_g1_RPT_Channel_6.xlsx",
+   "size": 10999838,
+   "crc32": "a41223a5",
+   "sha256": "7d974589d1fbead5c58f23f78c18861d2f065577ea0cb357761d576ff2d2a826"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_w10_RPT/Channel_5/20231030_w10_RPT_Channel_5.xlsx",
+   "size": 11068214,
+   "crc32": "7c6ec205",
+   "sha256": "1eaca5d692da83cdd015ca9f2badbd5807139deae9110d5e9b0a7b74770f9097"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_v5_RPT/Channel_4/20231030_v5_RPT_Channel_4.xlsx",
+   "size": 11181086,
+   "crc32": "ce1efe3c",
+   "sha256": "0ca361ffcc88333f8ec06d2db489f8c7ca064316c89dd8561a96e351132f222b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_v5_RPT/Channel_4/_Channel_4.xlsx",
+   "size": 7665,
+   "crc32": "9c65a1ac",
+   "sha256": "41c91849669a61eb0883fe45024b3c4ac3a2fa96e9de99af1a944b4fe41aef70"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_v4_RPT/Channel_1/20231030_v4_RPT_Channel_1.xlsx",
+   "size": 13250782,
+   "crc32": "b2cbd9ce",
+   "sha256": "26b855d8403b247d7985e8c4a93e3a8d94ecfa5421aa87fc156d64f8ce1d72e5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_v5_EIS326V/Channel_4/20231101_v5_EIS326V_Channel_4.xlsx",
+   "size": 57182,
+   "crc32": "de768e2a",
+   "sha256": "834ee8baec7b3252b8e128e5c8fc45010b85169f64c2c1a8d37cae1fb61db1f6"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_w9_EIS400V/Channel_3/20231101_w9_EIS400V_Channel_3.xlsx",
+   "size": 57127,
+   "crc32": "c09b0d00",
+   "sha256": "05319e670b04cf42ae186ff0451448469388726f445e00258799f104ca03aa5d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_w10_EIS363V/Channel_5/20231101_w10_EIS363V_Channel_5.xlsx",
+   "size": 57382,
+   "crc32": "6919dea3",
+   "sha256": "eb6668fc5b41ad9839e9398251256ce093ed664ae23fcbd7d82c8f62efd4ee62"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_v4_EIS326V/Channel_1/20231101_v4_EIS326V_Channel_1.xlsx",
+   "size": 60985,
+   "crc32": "665e4b07",
+   "sha256": "39f0a837916bb0b3e4623bd22f0ebc9a82b96986d7f78370b65546ed6ec39707"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_g1_EIS326V/Channel_6/20231101_g1_EIS326V_Channel_6.xlsx",
+   "size": 57571,
+   "crc32": "4446e6fe",
+   "sha256": "e16722fa684b839fc279cf2b6ccc1490b897c8c35648b7db0b89fae7b8a149f9"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_w8_EIS400V/Channel_2/20231101_w8_EIS400V_Channel_2.xlsx",
+   "size": 57337,
+   "crc32": "a9f94321",
+   "sha256": "127e2b73c108a7a9d239dc631c23357f364e5d2fafc30d335637e30ba413584a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_w10_EIS400V/Channel_5/20231101_w10_EIS400V_Channel_5.xlsx",
+   "size": 56873,
+   "crc32": "cb87f1f4",
+   "sha256": "d807207da69279c10f4c63dc27527e06c981a65aa3c08f8dde175ce6f02be98e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_w8_EIS363V/Channel_2/20231101_w8_EIS363V_Channel_2.xlsx",
+   "size": 57509,
+   "crc32": "198a8b93",
+   "sha256": "bc45e6d2b0165e4b441657c3b49ef896e963c09c014cf98718a62b88c1e0ecc5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_w9_EIS363V/Channel_3/20231101_w9_EIS363V_Channel_3.xlsx",
+   "size": 57485,
+   "crc32": "deb8e6a6",
+   "sha256": "4f74311042f14b589e9836a6c342f430efc9d8eca7d30a6e0d2aa707a6fce66e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_v5_EIS363V/Channel_4/20231101_v5_EIS363V_Channel_4.xlsx",
+   "size": 57110,
+   "crc32": "36acc050",
+   "sha256": "13fc369a3a2fc27accdf9db5ddd0f61fd116be7437d2152b91544c41454d1546"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_v4_EIS363V/Channel_1/20231101_v4_EIS363V_Channel_1.xlsx",
+   "size": 61114,
+   "crc32": "f5765fc4",
+   "sha256": "48bf92574676268a13d4e7756d2e0bb802391498d1b729a4734cc39e822acb5e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_g1_EIS363V/Channel_6/20231101_g1_EIS363V_Channel_6.xlsx",
+   "size": 56920,
+   "crc32": "e77d27cc",
+   "sha256": "4de72906634876dc56888bffc9c7b9567f692dc4d5cea085909f37ba44194fc3"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_w10_EIS326V/Channel_5/20231101_w10_EIS326V_Channel_5.xlsx",
+   "size": 57085,
+   "crc32": "633b5631",
+   "sha256": "0146d0e277af53c05736ebb366f17765507e9d08d44c39e7008ec6bec801253a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_v4_EIS400V/Channel_1/20231101_v4_EIS400V_Channel_1.xlsx",
+   "size": 61133,
+   "crc32": "60499102",
+   "sha256": "12a54666b58af3b6a1365340ee037ce27908080c8fcfbaed18394d073b658011"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_g1_EIS400V/Channel_6/20231101_g1_EIS400V_Channel_6.xlsx",
+   "size": 56976,
+   "crc32": "45fca673",
+   "sha256": "dc3178b503cdaa86e906eb0e0551d907e4f2261aad89c2464171c01818b332c8"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_w8_EIS326V/Channel_2/20231101_w8_EIS326V_Channel_2.xlsx",
+   "size": 57655,
+   "crc32": "be66e2c8",
+   "sha256": "523f111ebac2589efac2599a8dcbd6f4756086b121c1304bfa4d2e2087683468"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_v5_EIS400V/Channel_4/20231101_v5_EIS400V_Channel_4.xlsx",
+   "size": 57653,
+   "crc32": "f1407422",
+   "sha256": "1d3baeaef00c9ca020e667ebef4a6457696c7cd6fc1bee6cd5373ebafe7de513"
+  },
+  {
+   "path": "diagnostic_tests/RPT_11/EIS_11/20231101_w9_EIS326V/Channel_3/20231101_w9_EIS326V_Channel_3.xlsx",
+   "size": 57153,
+   "crc32": "55cb6a05",
+   "sha256": "530ecac9efcb7592bd34ae95917874f41bc38740b06cbe483e04dff332784dfe"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_g1_RPT/Channel_1/20241217_g1_RPT_Channel_1.xlsx",
+   "size": 41111859,
+   "crc32": "7aaedbfd",
+   "sha256": "db3f5309f1741c7d0745c183c09dd9dedbe773ac6d0c5511bab0a04781120785"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_w8_RPT/Channel_3/20241217_w8_RPT_Channel_3.xlsx",
+   "size": 34122213,
+   "crc32": "de1d036c",
+   "sha256": "2c3c60613b8dbd520113a2a53dd27bc0b5ab0a5bc54cf707a1c6a0fdb2e837db"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_w10_RPT/Channel_2/20241217_w10_RPT_Channel_2.xlsx",
+   "size": 62946368,
+   "crc32": "3c1ffef9",
+   "sha256": "b170a863103530030283a718bdaa1b9b7a29e22a0d02338fb40b785473d57deb"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_v4_RPT/Channel_1/20241217_v4_RPT_Channel_1.xlsx",
+   "size": 59370664,
+   "crc32": "2bdbdb27",
+   "sha256": "6d754506d0e11735038ab8b030111d4f859b1d3a36ee0c3da897d558e52595d1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_v5_RPT/Channel_2/20241217_v5_RPT_Channel_2.xlsx",
+   "size": 34012959,
+   "crc32": "72a07777",
+   "sha256": "76fca18f7391494cb240c0a4a7350716e8d2541f00fcb4bebe9b211e87ad38d9"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/EIS_18/20241229_g1_EIS326V/Channel_1/20241229_g1_EIS326V_Channel_1.xlsx",
+   "size": 136182,
+   "crc32": "b1589144",
+   "sha256": "63059889553d7ba324f9ce694d433337307ff6f765399e25141f9bf00c97bcc2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/EIS_18/20241222_v5_EIS400V/Channel_2/20241222_v5_EIS400V_Channel_2.xlsx",
+   "size": 111214,
+   "crc32": "39a39e30",
+   "sha256": "48cd7575b4fe5546e893e71abac0438e3ba2edfb1fcf5725b6b073b89d9dde33"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/EIS_18/20241229_v5_EIS326V/Channel_2/20241229_v5_EIS326V_Channel_2.xlsx",
+   "size": 110871,
+   "crc32": "bd32f822",
+   "sha256": "805ed86ee8e4ad185b45791371053f0d083c6a7ee34799cfccc42db501bda842"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/EIS_18/20241220_g1_EIS400V/Channel_1/20241220_g1_EIS400V_Channel_1.xlsx",
+   "size": 134802,
+   "crc32": "d8dbb1e2",
+   "sha256": "f9cc0ad585b64a245b2f65c2b6c6a78381a55369160f937fcf33e7077a31671b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/EIS_18/20241223_w8_EIS400V/Channel_3/20241223_w8_EIS400V_Channel_3.xlsx",
+   "size": 111138,
+   "crc32": "059d6213",
+   "sha256": "4b84ddcfc8fe3a335824c8c5de7987c1ca98dda38b83c1013ffe6f20c0893d52"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/EIS_18/20241229_w8_EIS363V/Channel_3/20241229_w8_EIS363V_Channel_3.xlsx",
+   "size": 111646,
+   "crc32": "5d6c5f11",
+   "sha256": "236231527ea5e23116b88a4cedf8bd05fa9e84467437cda06d46af05fa8b0061"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/EIS_18/20241223_v5_EIS363V/Channel_2/20241223_v5_EIS363V_Channel_2.xlsx",
+   "size": 111101,
+   "crc32": "7d949a98",
+   "sha256": "17c30fdf3600bc8091daee7c3158a7d371e77432395d5eb18a78927ccb34ad5d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/EIS_18/20241230_w8_EIS326V/Channel_3/20241230_w8_EIS326V_Channel_3.xlsx",
+   "size": 110571,
+   "crc32": "0340eee9",
+   "sha256": "e228d9d45e3e53a2674cca9a67bec9c15373562ca8c0a9a9537ad00664b4553c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_18/EIS_18/20241223_g1_EIS363V/Channel_1/20241223_g1_EIS363V_Channel_1.xlsx",
+   "size": 135849,
+   "crc32": "0bca436e",
+   "sha256": "9facc282f0f561fb0b4b784408ce8c2ba05e6c64d6fd23b12dda1f86fe4d1ee2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_V4_EIS363/Channel_1/20230425_V4_EIS363_Channel_1.xlsx",
+   "size": 61204,
+   "crc32": "4be04528",
+   "sha256": "92a446ced6783bb1dd1ff754674e71e8cabee94324e580033f92e19692141267"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_W10_EIS363/Channel_5/20230425_W10_EIS363_Channel_5.xlsx",
+   "size": 57034,
+   "crc32": "805f0bd8",
+   "sha256": "e9fbf027d919737f911364cd7504d7d88b86a47d5e208c4a38b4ae0044d66133"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_W8_EIS363/Channel_2/20230425_W8_EIS363_Channel_2.xlsx",
+   "size": 57371,
+   "crc32": "a9f41dd8",
+   "sha256": "295d07654df176a5f4afde949845e73cf0d8576854296493b37c9eb57961930d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_G1_EIS363/Channel_6/20230425_G1_EIS363_Channel_6.xlsx",
+   "size": 57159,
+   "crc32": "4368ccb0",
+   "sha256": "0b770c80f78e2aec72073ee6e1917be9256ea83433f9814ca5d31cc6c4a3a45e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_W9_EIS326/Channel_3/20230425_W9_EIS326_Channel_3.xlsx",
+   "size": 57179,
+   "crc32": "895d49c5",
+   "sha256": "4ce3b72cf3e1bda7b2e3423f346234f0ce843d16fdd87d1a495fb76b49785a17"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_V4_EIS400/Channel_1/20230425_V4_EIS400_Channel_1.xlsx",
+   "size": 61298,
+   "crc32": "fbfea8d2",
+   "sha256": "6c9f86071636bf81086ced0a8f0a69d249d31dff9f058f000528ccbed47dc021"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_W10_EIS400/Channel_5/20230425_W10_EIS400_Channel_5.xlsx",
+   "size": 57424,
+   "crc32": "a8bf977f",
+   "sha256": "8744fcab7b9f19ace1dfe4c2d102c6dad5263d9e1fa0ea3105fd87efbbdb0da9"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_G1_EIS400/Channel_6/20230425_G1_EIS400_Channel_6.xlsx",
+   "size": 57272,
+   "crc32": "c56ea73f",
+   "sha256": "c8fde08baf9eb1ac631ec116cbc22eb4dd77f5cc949683a6943e04eecbdcce97"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_V5_EIS326/Channel_4/20230425_V5_EIS326_Channel_4.xlsx",
+   "size": 57164,
+   "crc32": "df31024d",
+   "sha256": "ddb7403933248f9eecdad802800e99b3ffecfb7ac56b5b0ccdc1bad58e0cfa82"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_W8_EIS400/Channel_2/20230425_W8_EIS400_Channel_2.xlsx",
+   "size": 57186,
+   "crc32": "63e9fa3c",
+   "sha256": "f23a4819269b947e5a0754077399bee11e00b7378cac0484381f2f8d2ac287af"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_V5_EIS363/Channel_4/20230425_V5_EIS363_Channel_4.xlsx",
+   "size": 57138,
+   "crc32": "2f04580a",
+   "sha256": "c0735cd11684b723334455b02e7ae421a3a7d7eff55392dc63201715646e67b1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_W9_EIS363/Channel_3/20230425_W9_EIS363_Channel_3.xlsx",
+   "size": 57349,
+   "crc32": "a785a5eb",
+   "sha256": "f5aa166b856aa730f7f1e22424b20226f234e19fea2efa4b25e815ed758f4550"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_G1_EIS326/Channel_6/20230425_G1_EIS326_Channel_6.xlsx",
+   "size": 57422,
+   "crc32": "4ff0d6d9",
+   "sha256": "39e9f97cb92ac3390357dcc462468c9619e9b597cf35ccac052c74d20114d50c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_V5_EIS400/Channel_4/20230425_V5_EIS400_Channel_4.xlsx",
+   "size": 57485,
+   "crc32": "43f80d60",
+   "sha256": "fc1eac5a3080c7cee442fae9687cd5e5b6d93e23eb997cdbe753926e0d1a60b8"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_W8_EIS326/Channel_2/20230425_W8_EIS326_Channel_2.xlsx",
+   "size": 57400,
+   "crc32": "1bba47b2",
+   "sha256": "8d4442821401a101901e9ccae61a7e8488f6ccca6b148bfe5b593d3120d1c48e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_W9_EIS400/Channel_3/20230425_W9_EIS400_Channel_3.xlsx",
+   "size": 57475,
+   "crc32": "7506d812",
+   "sha256": "17268fb9bc46508ac325eeff2b95f900351feff0e8771a8635b85472663075bc"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_V4_EIS326/Channel_1/20230425_V4_EIS326_Channel_1.xlsx",
+   "size": 61395,
+   "crc32": "c2352c19",
+   "sha256": "d115bfc61f556d791b3207c8a455451ee61888ac7384c2767cb3e69da742025b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/EIS_6/20230425_W10_EIS326/Channel_5/20230425_W10_EIS326_Channel_5.xlsx",
+   "size": 57507,
+   "crc32": "7a170ef3",
+   "sha256": "05ab92dc31009c8eeb090ad71a5989d6c2a5e67388bc1287ed2996151209de34"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_w9_RPT/Channel_3/20230421_w9_RPT_Channel_3.xlsx",
+   "size": 11239805,
+   "crc32": "bc81efd4",
+   "sha256": "b9303e11f79a564e9ce5a11b9eb44ba0d5b02f401a07411d70c84ce4f1d1cca9"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_w8_RPT/Channel_2/20230421_w8_RPT_Channel_2.xlsx",
+   "size": 11141354,
+   "crc32": "768eed0d",
+   "sha256": "b2a52ffe380e4812a3ea7ab8050b4f403eca43c880c06149ca90f669cb0b2c80"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_g1_RPT/Channel_6/20230421_g1_RPT_Channel_6.xlsx",
+   "size": 11044416,
+   "crc32": "e975cbaf",
+   "sha256": "17c3796fd55f6080a08cea7b1099ee96de52044fef959da1e7177f2d959216df"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_v4_RPT/Channel_1/20230421_v4_RPT_Channel_1.xlsx",
+   "size": 13318936,
+   "crc32": "75ec4eb0",
+   "sha256": "b6a0c51d2711ceda935563e533916358938651322bc5e91fb92e5ec623242422"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_v5_RPT/Channel_4/20230421_v5_RPT_Channel_4.xlsx",
+   "size": 11201523,
+   "crc32": "189bbdc1",
+   "sha256": "1c4ee4df5e4a006c9718893198c08df46ed44850ab38c758a0159d2ad38fcace"
+  },
+  {
+   "path": "diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_w10_RPT/Channel_5/20230421_w10_RPT_Channel_5.xlsx",
+   "size": 11009509,
+   "crc32": "02ffecc5",
+   "sha256": "1e7c0fe1e401682185806464f048365a28fd3e60b4c56d4aa849a1a73c92521f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_v4_RPT/Channel_1/20221114_v4_RPT_Channel_1.xlsx",
+   "size": 30308247,
+   "crc32": "75b6a8bf",
+   "sha256": "866b1105dca4dc78bcb21b48b4a73fa4f2c4711a32b860a15ad603b4cfb04598"
+  },
+  {
+   "path": "diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_v5_RPT/Channel_4/20221114_v5_RPT_Channel_4.xlsx",
+   "size": 30568486,
+   "crc32": "42de0fdc",
+   "sha256": "d24fa1ec783f395a0ae4230ff88a6dfa6386bfac5efcd8c161e3734f4013e3d9"
+  },
+  {
+   "path": "diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_w10_RPT/Channel_5/20221114_w10_RPT_Channel_5.xlsx",
+   "size": 30229062,
+   "crc32": "b34551b9",
+   "sha256": "42e75b80e5c883a200fc4bcea6dcd64f98826b00e21e8e33d1b3b6453a135673"
+  },
+  {
+   "path": "diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_w9_RPT/Channel_3/20221114_w9_RPT_Channel_3.xlsx",
+   "size": 30514654,
+   "crc32": "418f61bf",
+   "sha256": "ff600ac3a2b851cdc1cfffa05649cd51e4fa8960fe5975282e125aeddd908ff1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_w8_RPT/Channel_2/20221114_w8_RPT_Channel_2.xlsx",
+   "size": 30084407,
+   "crc32": "689b7721",
+   "sha256": "29c54de851c0a007b98a6dd22350acf856c637f35636c440127870334f0bcd5e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_g1_RPT/Channel_6/20221114_g1_RPT_Channel_6_2.xlsx",
+   "size": 7356514,
+   "crc32": "54dfd4b4",
+   "sha256": "1ea8365aa71624ad11ff8579c0f4e0594da97f541b6fed0506cf95b59aa1cbb5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_g1_RPT/Channel_6/20221114_g1_RPT_Channel_6_1.xlsx",
+   "size": 30189313,
+   "crc32": "a5c0b781",
+   "sha256": "d0143cf5e2ba0b517d6d04924ac3597225ec6d8f60b1d96d02f6f334a0a9dedb"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_G1_EIS363/Channel_6/20230618_G1_EIS363_Channel_6.xlsx",
+   "size": 57290,
+   "crc32": "31db9e4b",
+   "sha256": "dd1a0ff226b8f0b46df88649dddccec873e5cf16137646d3b27dde9992cf8d0d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_W8_EIS363/Channel_2/20230618_W8_EIS363_Channel_2.xlsx",
+   "size": 57298,
+   "crc32": "ee95c5e2",
+   "sha256": "85eabf1d36f0f801c15cd4c75b265245c05b72e66a66a631e74cbdd30e93387d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_V4_EIS363/Channel_1/20230618_V4_EIS363_Channel_1.xlsx",
+   "size": 61365,
+   "crc32": "6f44e682",
+   "sha256": "f0757c2c99d06ab076170db7d99ed8c3dfbd924be27b0fb6add2efd6ade6c574"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_W8_EIS400/Channel_2/20230618_W8_EIS400_2_Channel_2.xlsx",
+   "size": 57279,
+   "crc32": "a597d99d",
+   "sha256": "c5cc4717ec9cbf8d694282dc37e0319e6d0b532f92c225153eddb5484457e10b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_G1_EIS400/Channel_6/20230618_G1_EIS400_Channel_6.xlsx",
+   "size": 57081,
+   "crc32": "0f89dc06",
+   "sha256": "b355f0f099fb4ff43ebb8300a2ad799999d1c4cd03a70c3b630cc3d5cff6f298"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_V5_EIS326/Channel_4/20230618_V5_EIS326_Channel_4.xlsx",
+   "size": 57411,
+   "crc32": "816f3afe",
+   "sha256": "2d5cb5f2e249848136adae3741605a24358af8da8c377a2b0988d8638d64f56a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_W10_EIS326/Channel_5/20230618_W10_EIS326_Channel_5.xlsx",
+   "size": 57087,
+   "crc32": "272bfb9f",
+   "sha256": "eaa4311bf50feb5a382ea5d570dae0d2803ec6ace533e5c69093d57cf33aee68"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_V4_EIS400/Channel_1/20230618_V4_EIS400_2_Channel_1.xlsx",
+   "size": 61256,
+   "crc32": "032dc82b",
+   "sha256": "e26c1b941dde137df96b4de2a58fc9b8e9e7cca4ff6ba69abcac64a45bc60a9d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_W9_EIS326/Channel_3/20230618_W9_EIS326_Channel_3.xlsx",
+   "size": 57202,
+   "crc32": "f377d1b0",
+   "sha256": "c13ddee2dceadd13095a6877320321a54a73176d30c28167d0e9c1aee30210f0"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_W10_EIS363/Channel_5/20230618_W10_EIS363_Channel_5.xlsx",
+   "size": 57066,
+   "crc32": "0ecdf7c1",
+   "sha256": "b5ab0f3f51b5ec8fc81a27b48f9129bc6c0a57c4b9925dbd2ea8e921c6ba20f7"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_W9_EIS363/Channel_3/20230618_W9_EIS363_Channel_3.xlsx",
+   "size": 57391,
+   "crc32": "eb98fe62",
+   "sha256": "f05aee3824cd2590b370e36bce5d7f5f8530761f50f53fc591b441f297d90be0"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_V5_EIS363/Channel_4/20230618_V5_EIS363_Channel_4.xlsx",
+   "size": 57274,
+   "crc32": "b402f67b",
+   "sha256": "93cf09b6033c70a86105fbcd8f2cd4f6de8530f4f3116b9fc9c50b0d432ef8d5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_W10_EIS400/Channel_5/20230618_W10_EIS400_Channel_5.xlsx",
+   "size": 182627,
+   "crc32": "547de0ce",
+   "sha256": "824ad7da4ef9fc6169f0d20e21611c2dece17353ad7d8f00b41c303554d1b87a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_V4_EIS326/Channel_1/20230618_V4_EIS326_Channel_1.xlsx",
+   "size": 61224,
+   "crc32": "c69733a2",
+   "sha256": "0a946a937b53c111444279cefc6f1ef092e77c854692bbfaf8ca7f142cf247f6"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_W9_EIS400/Channel_3/20230618_W9_EIS400_2_Channel_3.xlsx",
+   "size": 57183,
+   "crc32": "d335ef9d",
+   "sha256": "5cc0cd771edaa868726802e9e287ac5e62d5f116905ca762ee079447598241c1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_W8_EIS326/Channel_2/20230618_W8_EIS326_Channel_2.xlsx",
+   "size": 57013,
+   "crc32": "ceb030e6",
+   "sha256": "74479ce6a4e6fa2c73d3a477537ef300bc5fe6ef2dffcead930b887e7b9a8109"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_G1_EIS326/Channel_6/20230618_G1_EIS326_Channel_6.xlsx",
+   "size": 57216,
+   "crc32": "ad5ed5c9",
+   "sha256": "f929c3b38e4912280745a5214ca7ca5f0e6a5693b43a3a642085172529985f7c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/EIS_8/20230618_V5_EIS400/Channel_4/20230618_V5_EIS400_2_Channel_4.xlsx",
+   "size": 56899,
+   "crc32": "33963740",
+   "sha256": "3e9000ac9d2b28ec86cddeaaa8eb44b17f41f96b5f47a69ce1e306587db01d67"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_w9_RPT/Channel_3/20230616_w9_RPT_Channel_3.xlsx",
+   "size": 11203645,
+   "crc32": "9745f245",
+   "sha256": "609227a5fe5522e771ea85eaf3a18043ecfd0d2e44a7a8719102a78f80cc5788"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_w8_RPT/Channel_2/20230616_w8_RPT_Channel_2.xlsx",
+   "size": 11189969,
+   "crc32": "7c6aa443",
+   "sha256": "d4f5955a3aa10a58d6d7363cf874d1133c51cc2c683b93d6bbba42bf2e4a7fa0"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_g1_RPT/Channel_6/20230616_g1_RPT_Channel_6.xlsx",
+   "size": 11169423,
+   "crc32": "00d48131",
+   "sha256": "3311c1ef4f365c2cd53967987c0f6bda216fea03c227fcf1e6c0ef5f2896459f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_w10_RPT/Channel_5/20230616_w10_RPT_Channel_5.xlsx",
+   "size": 11251024,
+   "crc32": "6f693fb1",
+   "sha256": "400170e3e6f9ba7b0692c20a7229a6da95186e3b8c98ec1995ef7b6c659ef0bd"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_v4_RPT/Channel_1/20230616_v4_RPT_Channel_1.xlsx",
+   "size": 13330771,
+   "crc32": "8cd15dfe",
+   "sha256": "21ba008c4fca04a8b12ea7ea2e0f95e221f423013d81d7ddf861024614ff602a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_v5_RPT/Channel_4/20230616_v5_RPT_Channel_4.xlsx",
+   "size": 11155948,
+   "crc32": "a0631c07",
+   "sha256": "ea40c8a356a17006ebb4d2ddb978159511b133f069ecd731307cb330565d5c60"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_v4_EIS363/Channel_1/20230816_v4_EIS363_Channel_1.xlsx",
+   "size": 61142,
+   "crc32": "506b6773",
+   "sha256": "35c37ae916645d259ce3b033a0a964fc1ac8548ab8e4c9d4948dea7f5256ce99"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_w10_EIS326/Channel_5/20230816_w10_EIS326_Channel_5.xlsx",
+   "size": 57240,
+   "crc32": "a0c8ef5e",
+   "sha256": "f2396eb592466ee5a3c70e68e0d8c132d279d7b66a6447f4a00e39e8d2fdc47f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_w8_EIS363/Channel_2/20230816_w8_EIS363_Channel_2.xlsx",
+   "size": 57214,
+   "crc32": "e7a725b5",
+   "sha256": "a3e63e33d2169b59d6ee55827b1202678a453fc4da486b6ea88ef2627da43714"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_g1_EIS363/Channel_6/20230816_g1_EIS363_Channel_6.xlsx",
+   "size": 57482,
+   "crc32": "818dfa55",
+   "sha256": "8a198c36e002189be3401f9ae6daadcc251e1da39fba2ef85af05ea4689f0b65"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_w9_EIS326/Channel_3/20230816_w9_EIS326_Channel_3.xlsx",
+   "size": 57217,
+   "crc32": "1bab72a4",
+   "sha256": "bdc29fecb7049f73c0c01e037ac3331b5726dff53209720a5512fae96b4bc8b3"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_v4_EIS400/Channel_1/20230816_v4_EIS400V_EIS_Channel_1.xlsx",
+   "size": 61498,
+   "crc32": "0fd0cd05",
+   "sha256": "7a91f6c04cfdeb53fe4d04502ef08ca8b956015ed8280edcf646c74e32a234c1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_v5_EIS326/Channel_4/20230816_v4_EIS326_Channel_4.xlsx",
+   "size": 57484,
+   "crc32": "31755e44",
+   "sha256": "03518fc80cbebb1b5cf1eb265780d89a3c141a7eab18889df0d0d44a39adada9"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_g1_EIS400/Channel_6/20230816_g1_EIS400V_EIS_Channel_6.xlsx",
+   "size": 57230,
+   "crc32": "80103f7b",
+   "sha256": "5e65ba46a4b91df0652a3409c80ea29cf3de8b38a26e636e5032bec3f0224167"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_w8_EIS400/Channel_2/20230816_w9_EIS400V_EIS_Channel_2.xlsx",
+   "size": 57321,
+   "crc32": "2cdfbe43",
+   "sha256": "d1055298e4c3458916f8f1103262753109e04eb8dad7dc3ae203097e25391c82"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_w10_EIS400/Channel_5/20230816_w10_EIS400V_EIS_Channel_5.xlsx",
+   "size": 57390,
+   "crc32": "28294915",
+   "sha256": "3ec56d32b3c3a216611da32d33550ab2326d2f2da3e6acac2203f6baee228e24"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_v5_EIS363/Channel_4/20230816_v5_EIS363_Channel_4.xlsx",
+   "size": 57443,
+   "crc32": "e3865aa8",
+   "sha256": "006db3b46939704a1da6be88ca3c8f7c670f5e9075648ce57f2fbff9ea1903d1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_w9_EIS363/Channel_3/20230816_w9_EIS363_Channel_3.xlsx",
+   "size": 57311,
+   "crc32": "0b43c19f",
+   "sha256": "8bd1e7909e9132f94f361071208ce79921319f516d6ab14d801498645bee3d5e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_w10_EIS363/Channel_5/20230816_w10_EIS363_Channel_5.xlsx",
+   "size": 57282,
+   "crc32": "fd72b828",
+   "sha256": "30bc30d243ead42612cb61c4d493c0be20593868c9432b5f6c5dab2c0b5cf46e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_v5_EIS400/Channel_4/20230816_v5_EIS400V_EIS_Channel_4.xlsx",
+   "size": 57205,
+   "crc32": "80caee7f",
+   "sha256": "1c075a95b3a4cdbf11d9fed78fdbc41437022668bb87202995464ca12f041856"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_g1_EIS326/Channel_6/20230816_g1_EIS326_Channel_6.xlsx",
+   "size": 57555,
+   "crc32": "51ceea77",
+   "sha256": "4d2134f21c4f3de3f67af83774b43e52a805336a63492256c78839368b4b012e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_w8_EIS326/Channel_2/20230816_w8_EIS326_Channel_2.xlsx",
+   "size": 57546,
+   "crc32": "03d34a7c",
+   "sha256": "0bdfda023e6f75ff6ce905f203718e693c4021e82c1522fecf3c22bd67b6b61d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_w9_EIS400/Channel_3/20230816_w9_EIS400V_EIS2_Channel_3.xlsx",
+   "size": 57495,
+   "crc32": "ad77f7ea",
+   "sha256": "7ae400a358951aca81d2c864e6423356d0165d3e3c76de95f7fd9b38f2e75d0e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/EIS_9/20230816_v4_EIS326/Channel_1/20230816_v4_EIS326_Channel_1.xlsx",
+   "size": 60835,
+   "crc32": "050d7dec",
+   "sha256": "c428ced290e1239a65823d87ea4c7e492c9e29ccdd5af960d00368a10c8349ac"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_v4_RPT/Channel_1/20230814_v4_RPT_Channel_1.xlsx",
+   "size": 13117939,
+   "crc32": "08059ca9",
+   "sha256": "ca7291561e45731e355c5b479c0ab9c5a1536cff5dc9e2da41b530f186bbbd77"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_v5_RPT/Channel_4/20230814_v5_RPT_Channel_4.xlsx",
+   "size": 11122384,
+   "crc32": "199f7beb",
+   "sha256": "6fb1486443f8bab4a606bf6620eb808e032dcac83199b03144a1a8daf89e89a3"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_g1_RPT/Channel_6/20230814_g1_RPT_Channel_6.xlsx",
+   "size": 11206749,
+   "crc32": "e448bc40",
+   "sha256": "80678d83cb4df5d3e88d7bf0e321c18ccb7feaac0ce18e1b6366c8b6aaa592ed"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_w9_RPT/Channel_3/20230814_w9_RPT_Channel_3.xlsx",
+   "size": 11191261,
+   "crc32": "1fd811c5",
+   "sha256": "017dd43c6329cecf50cd43992c6b1bcf8298333923439cc4cb1941909a35fe94"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_w8_RPT/Channel_2/20230814_w8_RPT_Channel_2.xlsx",
+   "size": 11158974,
+   "crc32": "c32382f1",
+   "sha256": "283a65af4fe1db8ea52a90ee03f90a297cabc0811c26449526cb379b2a608f62"
+  },
+  {
+   "path": "diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_w10_RPT/Channel_5/20230814_w10_RPT_Channel_5.xlsx",
+   "size": 11243681,
+   "crc32": "5e9be5f6",
+   "sha256": "c9d7cab12861598a505fc915ffa20eae47dcace566c3413674400e7f625b47c1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_w10_RPT/Channel_5/20230518_w10_RPT_Channel_5.xlsx",
+   "size": 11152123,
+   "crc32": "0aef1129",
+   "sha256": "efcb349334aadfd49e01773d0da2698a910a8a3c6a8999915da6f7d6557bb83a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_v4_RPT/Channel_1/20230518_v4_RPT_Channel_1.xlsx",
+   "size": 13304432,
+   "crc32": "ff29b4bd",
+   "sha256": "40c2fb3d2db110cd22571d940b3c155740836ece6dd6e9c30603eecb1d0d6532"
+  },
+  {
+   "path": "diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_v5_RPT/Channel_4/20230518_v5_RPT_Channel_4.xlsx",
+   "size": 11146191,
+   "crc32": "86891a13",
+   "sha256": "0891da8b1fe20fd1d851d63fe06902e49bdba6fc61e485a27906fda00bed95d2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_w9_RPT/Channel_3/20230518_w9_RPT_Channel_3.xlsx",
+   "size": 11171837,
+   "crc32": "858d2cce",
+   "sha256": "7862ff1ee0268b72c9b090c3a4ceaef1591980fdcef2d529d89c3c520689c495"
+  },
+  {
+   "path": "diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_w8_RPT/Channel_2/20230518_w8_RPT_Channel_2.xlsx",
+   "size": 11159779,
+   "crc32": "b63aaefa",
+   "sha256": "0f968937da1cad9dd19d072a8b17732329f32c716c81769cdf073728463c3ece"
+  },
+  {
+   "path": "diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_g1_RPT/Channel_6/20230518_g1_RPT_Channel_6.xlsx",
+   "size": 11128802,
+   "crc32": "35f06d04",
+   "sha256": "aa629c5a039a2c16f02a89396c8f4f8661d07e53104634ebf0d38b046327f39f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_g1_RPT/Channel_6/20240203_g1_RPT_Channel_6.xlsx",
+   "size": 11118092,
+   "crc32": "37839ed7",
+   "sha256": "c6345533a2c4c066192528a88739e0e85620e0323e70130c2a939fc7e4968fd1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_w8_RPT/Channel_2/20240203_w8_RPT_Channel_2.xlsx",
+   "size": 11190638,
+   "crc32": "95140eae",
+   "sha256": "8957301bf4b4362619c0a938f99042914d6b196a12ca43af395aebeb4bd86c2b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_w9_RPT/Channel_3/20240203_w9_RPT_Channel_3.xlsx",
+   "size": 11258034,
+   "crc32": "3fc5f9ab",
+   "sha256": "816dde1035bdd64e96b17aa1ac6c8ddf198f52d6141ddb63cf17cb26e6da2a2f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_v5_RPT/Channel_4/20240203_v5_RPT_Channel_4.xlsx",
+   "size": 11195877,
+   "crc32": "b1c8f785",
+   "sha256": "7c76f415eaf6b91948a757bd3a8a478eb78921ecc4b7d2dd830498e892f77ec5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_v4_RPT/Channel_1/20240203_v4_RPT_Channel_1.xlsx",
+   "size": 13340470,
+   "crc32": "93cd25a8",
+   "sha256": "78244791eea8aab5f8efd359043d6c0be8126dd9214ca0ed29d57adb3b141b6c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_w10_RPT/Channel_5/20240203_w10_RPT_Channel_5.xlsx",
+   "size": 11076951,
+   "crc32": "29d86b98",
+   "sha256": "e064caa7f60cff4bcd700236313d2a1505dc3fceccbd232e89e4592c684b6466"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_v4_EIS363V/Channel_1/20240205_v4_EIS363V_Channel_1.xlsx",
+   "size": 61776,
+   "crc32": "4b12870b",
+   "sha256": "70888a2fae9d51987f8b4837b858748952325e432c1a4f92ca6424a610576a0b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_g1_EIS363V/Channel_6/20240205_g1_EIS363V_Channel_6.xlsx",
+   "size": 57033,
+   "crc32": "63b103b2",
+   "sha256": "93e8742737d2b6d39b5dce67dc3ababc4a71dade4d894b80776da07853eaa759"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_w10_EIS326V/Channel_5/20240205_w10_EIS326V_Channel_5.xlsx",
+   "size": 57232,
+   "crc32": "5648b165",
+   "sha256": "517ef00c266472d9572946a8931c563c93dae363beb3fba99970ae54eb7aa7d9"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_v5_EIS363V/Channel_4/20240205_v5_EIS363V_Channel_4.xlsx",
+   "size": 57324,
+   "crc32": "97c451a0",
+   "sha256": "b9f9f18d3297022ad6f991a93dcae81fe875d8dc70894c34af69d0003727c1f8"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_v5_EIS400V/Channel_4/20240205_v5_EIS400V_Channel_4.xlsx",
+   "size": 57088,
+   "crc32": "7801deeb",
+   "sha256": "4f41b7ef8cfe3defc60dd9ea8b6982aec2e9c841ffa659ccf7fa25705c687fb1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_w9_EIS326V/Channel_3/20240205_w9_EIS326V_Channel_3.xlsx",
+   "size": 57141,
+   "crc32": "e9314c57",
+   "sha256": "6d7dcbbfda99b156911b6db51c4c70bf7017518266de4354e5b1d943adbce746"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_v4_EIS400V/Channel_1/20240205_v4_EIS400V_Channel_1.xlsx",
+   "size": 61198,
+   "crc32": "08047df3",
+   "sha256": "37326e26dbc2aee4d80af60486ad8d5f7670fc1c72fb56dd5af305f8e7b9e374"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_g1_EIS400V/Channel_6/20240205_g1_EIS400V_Channel_6.xlsx",
+   "size": 57592,
+   "crc32": "a73880d0",
+   "sha256": "4e9caa98e409396516b6770cbb029eb294b2f2ecd807ad651ad9ffd5b0da2eb7"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_w8_EIS326V/Channel_2/20240205_w8_EIS326V_Channel_2.xlsx",
+   "size": 57352,
+   "crc32": "1717d729",
+   "sha256": "c594fac83cb27e546ef98603c73139f1434aef4a35465ea9c8a95b977ff6f256"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_w10_EIS363V/Channel_5/20240205_w10_EIS363V_Channel_5.xlsx",
+   "size": 57407,
+   "crc32": "95f20cce",
+   "sha256": "959a2d5d4e48935a918097bc1d404fa8e73487727a486b1608c9b9992a2c3915"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_v4_EIS326V/Channel_1/20240205_v4_EIS326V_Channel_1.xlsx",
+   "size": 61856,
+   "crc32": "09d3ac3b",
+   "sha256": "a763c363ef139d68332c610356b1f768a16077ee49538d8d8f4f9c6c2b4291e1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_g1_EIS326V/Channel_6/20240205_g1_EIS326V_Channel_6.xlsx",
+   "size": 57282,
+   "crc32": "82ab3d55",
+   "sha256": "1366b463b2fba8d48fa317e3d9d11cfee0227b3d0019cfdf1da644bb04a352b4"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_w8_EIS400V/Channel_2/20240205_w8_EIS400V_Channel_2.xlsx",
+   "size": 57103,
+   "crc32": "da22ca3b",
+   "sha256": "4a6f15c399939ce82864e02a4445a08cda98a417c12bfbc9d6d6653905234782"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_v5_EIS326V/Channel_4/20240205_v5_EIS326V_Channel_4.xlsx",
+   "size": 57483,
+   "crc32": "418bb055",
+   "sha256": "f6e6cffc00b2cc288cdad9f66d7541d5e25b0a81d7c419e8bc1a16bcbdd482a7"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_w9_EIS400V/Channel_3/20240205_w9_EIS400V_Channel_3.xlsx",
+   "size": 57474,
+   "crc32": "0960bc5d",
+   "sha256": "2203832d9997ea98050172c65050c196ecfe494b361b1969434758565ec432ea"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_w9_EIS363V/Channel_3/20240205_w9_EIS363V_Channel_3.xlsx",
+   "size": 57284,
+   "crc32": "08720cf3",
+   "sha256": "8a17e865375f17ef558a280824d177250f872ed258b68102bc24360cbf936e13"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_w8_EIS363V/Channel_2/20240205_w8_EIS363V_Channel_2.xlsx",
+   "size": 57469,
+   "crc32": "d34c9dbe",
+   "sha256": "2f442ab0d48760290fd609a1dc5f23a9a915996b01a07f7813e9da19d37b798e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_14/EIS_14/20240205_w10_EIS400V/Channel_5/20240205_w10_EIS400V_Channel_5.xlsx",
+   "size": 57013,
+   "crc32": "3d018c6b",
+   "sha256": "19d59f7d73d372cf322d822275a09e583dd99363c3098c0c5b710b4bad3dbb59"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_w8_RPT/Channel_2/20240108_w8_RPT_Channel_2.xlsx",
+   "size": 11160595,
+   "crc32": "348ea4e0",
+   "sha256": "a4cd3a168d67c02560e6c2c5fba4281d8d9d3d7b79e3d54ece972b903a0fa859"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_w9_RPT/Channel_3/20240108_w9_RPT_Channel_3.xlsx",
+   "size": 11265800,
+   "crc32": "dc7f35ec",
+   "sha256": "b1a553d918db56117f74968b2e7b264353575f5571e8cba91ba9ef8d67f9e30a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_w10_RPT/Channel_5/20240108_w10_RPT_Channel_5.xlsx",
+   "size": 11107137,
+   "crc32": "ff0faf47",
+   "sha256": "9478f47813cc99dcf87caa9a9bf4f370fb7a8d8734bf1ea1180ff51c3b2a13fc"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_g1_RPT/Channel_6/20240108_g1_RPT_Channel_6.xlsx",
+   "size": 11025141,
+   "crc32": "5c191ddf",
+   "sha256": "c3d0435bcc2f03f1ab05550e0451d20cc7375359a2cc83723ff8afc5b002c8e9"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_v5_RPT/Channel_4/20240108_v5_RPT_Channel_4.xlsx",
+   "size": 11228308,
+   "crc32": "f02c097a",
+   "sha256": "5c4401a69a6c62cf98189c7821d86f6ce52877ac76f694e14a95f430221ca8ab"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_v4_RPT/Channel_1/20240108_v4_RPT_Channel_1.xlsx",
+   "size": 13274482,
+   "crc32": "7e35b106",
+   "sha256": "470a8087ef1dd5f5364ae80dc86e87872cbe5d56fdfca45500b100815fa5002e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_w10_EIS326V/Channel_5/20240109_w10_EIS326V_Channel_5.xlsx",
+   "size": 56892,
+   "crc32": "7bdce0b7",
+   "sha256": "ae60b0600e0f8792bae02d6dbf05aae416289c829567fb11be03444d8cf25c5e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_g1_EIS400V/Channel_6/20240109_g1_EIS400V_Channel_6.xlsx",
+   "size": 57144,
+   "crc32": "18294aeb",
+   "sha256": "fb339f09f5e99c7986b952720342cfe3a3f03e4e82be59a491f28e4991bf3e8f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_w8_EIS326V/Channel_2/20240109_w8_EIS326V_Channel_2.xlsx",
+   "size": 57218,
+   "crc32": "f070af4c",
+   "sha256": "df8bbf34de2c3f85d06b18bc9a21bba2bfea056fb2d3bad448c5d0ad6d6e5059"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_v4_EIS400V/Channel_1/20240109_v4_EIS400V_Channel_1.xlsx",
+   "size": 61089,
+   "crc32": "36eaf50a",
+   "sha256": "ec4a95d3d8b95d792760bc8367485558a1dff527a6d096adfcc0ad198d7eb788"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_w9_EIS326V/Channel_3/20240109_w9_EIS326V_Channel_3.xlsx",
+   "size": 57358,
+   "crc32": "0ac6bb60",
+   "sha256": "1e1ed40f1c9917d4380b11830b5af86923c0d2b7e5afad3bec953b2bd056b709"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_v5_EIS400V/Channel_4/20240109_v5_EIS400V_Channel_4.xlsx",
+   "size": 57435,
+   "crc32": "61dd1c70",
+   "sha256": "679d5ce6eb209ca82dff5b49b073e9aae15b12dc0ee2c7dddff6262fc103fac2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_v5_EIS363V/Channel_4/20240109_v5_EIS363V_Channel_4.xlsx",
+   "size": 57743,
+   "crc32": "f8b41528",
+   "sha256": "41316fbc4fd0fda64ff5403beadebc0125f4ae86e29203d06cee6a12786ce368"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_g1_EIS363V/Channel_6/20240109_g1_EIS363V_Channel_6.xlsx",
+   "size": 57244,
+   "crc32": "e5faf063",
+   "sha256": "f7c5df44410f58f78155f2665ed3c4b43c075522d064ef4180b49712394b015b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_v4_EIS363V/Channel_1/20240109_v4_EIS363V_2_Channel_1.xlsx",
+   "size": 61117,
+   "crc32": "7fa0fbee",
+   "sha256": "97e0dc99d6230eb30af6e4ddc0b6e8a668d5b7e6b56ead2f79fd88c5aac4b76d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_w8_EIS363V/Channel_2/20240109_w8_EIS363V_Channel_2.xlsx",
+   "size": 56914,
+   "crc32": "83dd9a66",
+   "sha256": "f22c5cbaae906879fa35a65b3ff2c20b65adfb226d7187e3bada40a7b2d28fc7"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_w10_EIS363V/Channel_5/20240109_w10_EIS363V_Channel_5.xlsx",
+   "size": 57186,
+   "crc32": "4a94fb68",
+   "sha256": "d15f28c8b1fdc81fe2adafc7c738cb38ca6708d0c2c1808c7883202b309a994c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_w9_EIS363V/Channel_3/20240109_w9_EIS363V_2_Channel_3.xlsx",
+   "size": 57274,
+   "crc32": "e47466e5",
+   "sha256": "9daecf9bd712d1af102359caf6276fcae022f3047d89d9017ce303b7ea0517ac"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_w9_EIS400V/Channel_3/20240109_w9_EIS400V_Channel_3.xlsx",
+   "size": 57298,
+   "crc32": "1d7b93d2",
+   "sha256": "f5c13f94ed287f85e808417d9afe31a8d0798b27bde791b8fe847e5158eff307"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_v5_EIS326V/Channel_4/20240109_v5_EIS326V_Channel_4.xlsx",
+   "size": 57466,
+   "crc32": "78274cbd",
+   "sha256": "c2536767fbab30753eece29807fb1d812afe1db49b942ece644498bfe98d4b10"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_g1_EIS326V/Channel_6/20240109_g1_EIS326V_Channel_6.xlsx",
+   "size": 57345,
+   "crc32": "286556f9",
+   "sha256": "af21393f8a93328a6e0896aa81e7351da3bb7e957775ca22250a946c8951f8b5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_w8_EIS400V/Channel_2/20240109_w8_EIS400V_Channel_2.xlsx",
+   "size": 57095,
+   "crc32": "e37c6c61",
+   "sha256": "b12ea537d1c2265749a4c45ef1a9d1e311a9dc413ef4c8f70e5cda1a5825875b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_v4_EIS326V/Channel_1/20240109_v4_EIS326V_Channel_1.xlsx",
+   "size": 61469,
+   "crc32": "c3e75aad",
+   "sha256": "9425a3ff015089b74a554e285f5fa26ebffc8f2d4f477a9620da44aeae0e77a8"
+  },
+  {
+   "path": "diagnostic_tests/RPT_13/EIS_13/20240109_w10_EIS400V/Channel_5/20240109_w10_EIS400V_Channel_5.xlsx",
+   "size": 56954,
+   "crc32": "96732b72",
+   "sha256": "0efa4d65696e4112a1a6c4cba21d61d9777fd36b5e5c8b5a0fd30d9039ce9209"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_g1_RPT/Channel_6/20231128_g1_RPT_Channel_6.xlsx",
+   "size": 11071307,
+   "crc32": "e886b6b9",
+   "sha256": "979296c1dc9e4de47e464e5256fa109348e223eefa368abdfe2ba4abdecd6cdc"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_w9_RPT/Channel_3/20231128_w9_RPT_Channel_3.xlsx",
+   "size": 11292124,
+   "crc32": "1e0d95a5",
+   "sha256": "906052b86307c114f5c548c9ca074c6d3b3c8ca3852030bc18f0dca26fccdb2c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_w8_RPT/Channel_2/20231128_w8_RPT_Channel_2.xlsx",
+   "size": 11199350,
+   "crc32": "907cc207",
+   "sha256": "14ff0cae1b8f9335a868a9346f17afcf385e5dd7056fce64cbe1c444f84b7683"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_v4_RPT/Channel_1/20231128_v4_RPT_Channel_1.xlsx",
+   "size": 13334381,
+   "crc32": "7b2265bf",
+   "sha256": "d89b063a40855e79b560b300ce0847dbc82250cdb87dc4861799c684f101426c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_v5_RPT/Channel_4/20231128_v5_RPT_Channel_4.xlsx",
+   "size": 11226045,
+   "crc32": "1feaba51",
+   "sha256": "8b76e732aaf2b70e74de188a8bf026afaa8944af01fb5ef00bc9c8dfbbd19c3e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_w10_RPT/Channel_5/20231128_w10_RPT_Channel_5.xlsx",
+   "size": 11154643,
+   "crc32": "019b4cb1",
+   "sha256": "7a5e2698ffdb8a3850a5ffe207e5ae976ebe360ea3b3572a80162baf7e108cea"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_w10_EIS400V/Channel_5/20231202_w10_EIS400V_Channel_5.xlsx",
+   "size": 57088,
+   "crc32": "a7dc9f5a",
+   "sha256": "659c191a27f35b4aecd75853296c866c7f484590430c94b8c98a1b2fc08e784c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_v4_EIS326V/Channel_1/20231202_v4_EIS326V_Channel_1.xlsx",
+   "size": 61483,
+   "crc32": "ff3fa8e9",
+   "sha256": "39aa128555988a4fbabf9fdd42e30a777b130474ef9ab2aa24b3b134800c0d3f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_g1_EIS326V/Channel_6/20231202_g1_EIS326V_Channel_6.xlsx",
+   "size": 57197,
+   "crc32": "5e7328fc",
+   "sha256": "ce4f2f0aea31f615ffd5211707cd6007cb199b95579ed999b677d1b1bd6977fe"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_w8_EIS400V/Channel_2/20231202_w8_EIS400V_Channel_2.xlsx",
+   "size": 57315,
+   "crc32": "00e268db",
+   "sha256": "a6cebe8a623ec012301fa2055386036b7f26e2b89a11e619647f9c28bbf8ec2c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_v5_EIS326V/Channel_4/20231202_v5_EIS326V_Channel_4.xlsx",
+   "size": 57667,
+   "crc32": "8eeb3e36",
+   "sha256": "63075d1b9fc4cba74cd071dbcd2f3da70a6b9cd710c3e55380998c9a318e1666"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_w9_EIS400V/Channel_3/20231202_w9_EIS400V_Channel_3.xlsx",
+   "size": 56737,
+   "crc32": "7f8278b0",
+   "sha256": "5352469525497e7ff864160b2ada0f1914ca408abcf04b8b8f65fcc020bb4d13"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_w9_EIS363V/Channel_3/20231202_w9_EIS363V_Channel_3.xlsx",
+   "size": 57151,
+   "crc32": "ef27451f",
+   "sha256": "b22b29d9165fae16eaa96f0f529d76853459bc6981ba22673418fb79a0232d01"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_w8_EIS363V/Channel_2/20231202_w8_EIS363V_Channel_2.xlsx",
+   "size": 57247,
+   "crc32": "8fe0a5c0",
+   "sha256": "af3e49c68ca8df3b795b4100bd04fe27c1c45c3eddc5ac04f6b2b82d6d97ca16"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_w10_EIS363V/Channel_5/20231202_w10_EIS363V_Channel_5.xlsx",
+   "size": 57491,
+   "crc32": "f7cc9430",
+   "sha256": "55c03e737f9af94526e4c940ea568f3c2ded360d9e07888ca86279d1de07595f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_v4_EIS363V/Channel_1/20231202_v4_EIS363V_Channel_1.xlsx",
+   "size": 61852,
+   "crc32": "5857d59d",
+   "sha256": "60208c38f0e6eefd23add1be3bc584f787d70c6ae4df60f89aaabb163ac0a826"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_g1_EIS363V/Channel_6/20231202_g1_EIS363V_Channel_6.xlsx",
+   "size": 57350,
+   "crc32": "e4849c27",
+   "sha256": "c30f07b4f5fe55b7e84822b7eb0ca6e9b7085a47b40abaa411f3d93c33d39cb0"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_v5_EIS363V/Channel_4/20231202_v5_EIS363V_Channel_4.xlsx",
+   "size": 57563,
+   "crc32": "4d03c6ca",
+   "sha256": "14c2bb6d09005e2559c7ad4cdae0e9241a4cc50390d8223aeeda26eaaede8a14"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_v5_EIS400V/Channel_4/20231202_v5_EIS400V_Channel_4.xlsx",
+   "size": 57376,
+   "crc32": "0b8d6050",
+   "sha256": "ffa19ba6ef8a83c27795230254b49b0c8a621ab42de5d43b515d5b7c56f58d6d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_w9_EIS326V/Channel_3/20231202_w9_EIS326V_Channel_3.xlsx",
+   "size": 57479,
+   "crc32": "04d278f5",
+   "sha256": "1873b662c9cd8a2b0cd2b36a1e77abd3480014180ce148baf7aa38485a94a588"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_w10_EIS326V/Channel_5/20231202_w10_EIS326V_Channel_5.xlsx",
+   "size": 57482,
+   "crc32": "d724bc42",
+   "sha256": "d2e496b7b96aa65344159577256b5137247c119533c1f846bfdccfd1e1fee96f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_v4_EIS400V/Channel_1/20231202_v4_EIS400V_Channel_1.xlsx",
+   "size": 61466,
+   "crc32": "a2e014b4",
+   "sha256": "e493f88610ab94ce17bdbc265144cd652d1fd7708af0a0b366a7bb0f7ad963f3"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_g1_EIS400V/Channel_6/20231202_g1_EIS400V_Channel_6.xlsx",
+   "size": 56753,
+   "crc32": "abbb8df5",
+   "sha256": "98b954fb5c14471ed2ec9dbf6ce1d4855ba8af87a0f68e9b7e88244878474218"
+  },
+  {
+   "path": "diagnostic_tests/RPT_12/EIS_12/20231202_w8_EIS326V/Channel_2/20231202_w8_EIS326V_Channel_2.xlsx",
+   "size": 57269,
+   "crc32": "05574295",
+   "sha256": "a5c66ec56101eee7dac89ac05f4b38c6710a36a633cd87be6d773fbb3d76fcf4"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_g1_RPT/Channel_6/20240409_g1_RPT_Channel_6.xlsx",
+   "size": 34020883,
+   "crc32": "54f51bd4",
+   "sha256": "172f48210ac2313df2ce049b4a4df0908f0f17fe11f46490bd0fa3049bf3d83e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_w9_RPT/Channel_3/20240409_w9_RPT_Channel_3.xlsx",
+   "size": 34274321,
+   "crc32": "aa260c4b",
+   "sha256": "4a0183377ca24a31da53fe3e10a1686319256decc2081189825a2d9a5c768ad5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_w8_RPT/Channel_2/20240409_w8_RPT_Channel_2.xlsx",
+   "size": 34101411,
+   "crc32": "a0fc8588",
+   "sha256": "e0367ceec82e836dc66d3a529cb831878e2f39c76e8a102d6fb5f6901c737cff"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_w10_RPT/Channel_5/20240409_w10_RPT_Channel_5.xlsx",
+   "size": 34198434,
+   "crc32": "c84d266c",
+   "sha256": "c26f03907efe8039290c091b3bba7eba86013863c29e20c8fe257e0ed2931167"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_v4_RPT/Channel_1/20240409_v4_RPT_Channel_1.xlsx",
+   "size": 41426827,
+   "crc32": "52a3dc45",
+   "sha256": "26a88e573936555e096fec032acb72c9db1dc70112bcf907d6261a6c472ed36f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_v5_RPT/Channel_4/20240409_v5_RPT_Channel_4.xlsx",
+   "size": 34124003,
+   "crc32": "8bd226d8",
+   "sha256": "3090dc7e5cb36d79692f15d0dbb77238f52765533a9831036445fd9ed302706d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_v4_EIS363V/Channel_1/20240411_v4_EIS363V_Channel_1.xlsx",
+   "size": 61420,
+   "crc32": "0ba2eaef",
+   "sha256": "b946e5ad9b7c307dd4c17ee2dc1fd3727dbd4c7574c44db6265856e2d830c57d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_g1_EIS363V/Channel_6/20240411_g1_EIS363V_Channel_6.xlsx",
+   "size": 57351,
+   "crc32": "30a87b8b",
+   "sha256": "cbac5e841f8e656550940f20a832c414286264d64d5b31ee05f280ce1d4ad37f"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_v5_EIS363V/Channel_4/20240411_v5_EIS363V_Channel_4.xlsx",
+   "size": 57754,
+   "crc32": "9569dfa6",
+   "sha256": "0870118a938cdfb6424cf9e5bf7310a17f69ca0fd0ad3aab5ae256a4bcefab75"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_v5_EIS400V/Channel_4/20240411_v5_EIS400V_Channel_4.xlsx",
+   "size": 57223,
+   "crc32": "4a8fc3f9",
+   "sha256": "1ff78526ecf54a108b15f5cca9eb80b567c2857f4ee548065533f427d34957df"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_w9_EIS326V/Channel_3/20240411_w9_EIS326V_Channel_3.xlsx",
+   "size": 57366,
+   "crc32": "9657124c",
+   "sha256": "d896eff49139e5941d62d1a87ab55cf2398e4b6a15400f35d21fc3164a6123cd"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_w10_EIS326V/Channel_5/20240411_w10_EIS326V_Channel_5.xlsx",
+   "size": 57453,
+   "crc32": "c1f9943a",
+   "sha256": "6b7d2bf8cc8ca861a946837fb301d27ddbb088298133527041c94ded93c1b833"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_v4_EIS400V/Channel_1/20240411_v4_EIS400V_Channel_1.xlsx",
+   "size": 61274,
+   "crc32": "17fcf7aa",
+   "sha256": "e27b4cd0dfb66e6f8863a65faa99486a10546920c75135a1f698617bd9360a5b"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_w8_EIS326V/Channel_2/20240411_w8_EIS326V_Channel_2.xlsx",
+   "size": 57337,
+   "crc32": "29f5f1fe",
+   "sha256": "0c8e81afff7a39b6931086a019e16978ce1f1f1c81b2dd2631f112c5898ef1c6"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_g1_EIS400V/Channel_6/20240411_g1_EIS400V_Channel_6.xlsx",
+   "size": 57078,
+   "crc32": "ae8031d7",
+   "sha256": "2ee0506d9d3bb9079f1b130d3c8af8ed100334d77b0e056175985d585f2384e4"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_w10_EIS400V/Channel_5/20240411_w10_EIS400V_Channel_5.xlsx",
+   "size": 57153,
+   "crc32": "6d124171",
+   "sha256": "61e3f37b98dee226e8601d718e8c89448699b217b47e978a147d02fa5c8de810"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_v4_EIS326V/Channel_1/20240411_v4_EIS326V_Channel_1.xlsx",
+   "size": 61839,
+   "crc32": "ddb9b6c4",
+   "sha256": "dc7281f7c880ae1ffb6c889b96170b0ef0e4cd24fe074046ddd374de889ecfdc"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_w8_EIS400V/Channel_2/20240411_w8_EIS400V_Channel_2.xlsx",
+   "size": 57565,
+   "crc32": "7ffb9075",
+   "sha256": "94d607d54264bd679fb3198af11cd0555fa6739b044b3d15fff1ef56275e84e4"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_g1_EIS326V/Channel_6/20240411_g1_EIS326V_Channel_6.xlsx",
+   "size": 59833,
+   "crc32": "94553249",
+   "sha256": "5092522568e8bd028d1f37aa341d1ddd9147ae3a689a4c0f12dc33769c96e5ba"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_v5_EIS326V/Channel_4/20240411_v5_EIS326V_Channel_4.xlsx",
+   "size": 60008,
+   "crc32": "64c2c61c",
+   "sha256": "1c7716c697036883ca184cb40857f99706774ddc7e034b31fb2235e1a9a975c2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_w9_EIS400V/Channel_3/20240411_w9_EIS400V_Channel_3.xlsx",
+   "size": 57274,
+   "crc32": "2afcdb83",
+   "sha256": "01674ab5a99f76931d454c3b39e672c9f09d969efb4a1dbefc86fb7446b54328"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_w9_EIS363V/Channel_3/20240411_w9_EIS363V_Channel_3.xlsx",
+   "size": 57369,
+   "crc32": "bf8ed1d6",
+   "sha256": "ef4fe321564cbe7e722757d207f48801a50ffeb8161a05c0e240df4d126f8e1d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_w8_EIS363V/Channel_2/20240411_w8_EIS363V_Channel_2.xlsx",
+   "size": 56988,
+   "crc32": "b9eeb1ea",
+   "sha256": "034fd2cd2edf16147dea44eadf1ac83203f384b69bfe55a4e867b4d0e81ab499"
+  },
+  {
+   "path": "diagnostic_tests/RPT_15/EIS_15/20240411_w10_EIS363V/Channel_5/20240411_w10_EIS363V_Channel_5.xlsx",
+   "size": 57389,
+   "crc32": "7c1eba36",
+   "sha256": "2c61e9238bc2191b0f4098caee9f921adcd117f18375a0214f2125c13dc01b58"
+  },
+  {
+   "path": "diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_w9_RPT/Channel_3/20221216_w9_RPT_Channel_3.xlsx",
+   "size": 11353524,
+   "crc32": "bcb3c8ef",
+   "sha256": "449e28417c11292a25762ae24bec07b118758f039749d58e1d88a2b2e5328922"
+  },
+  {
+   "path": "diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_w8_RPT/Channel_2/20221216_w8_RPT_Channel_2.xlsx",
+   "size": 11174434,
+   "crc32": "9018e04d",
+   "sha256": "addf097e9bb7b14564596f49474fac8d6802b6ba9471d38a4890a79a9954204d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_g1_RPT/Channel_6/20221216_g1_RPT_Channel_6.xlsx",
+   "size": 11081801,
+   "crc32": "88453250",
+   "sha256": "d119b96463faa366b9cc4b88f057f5a05d3a4bb8d3cbae11eb79bdcaa206cef2"
+  },
+  {
+   "path": "diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_v4_RPT/Channel_1/20221216_v4_RPT_Channel_1.xlsx",
+   "size": 13317072,
+   "crc32": "aae44dc5",
+   "sha256": "235460251ad160488c0f5bc49ddc4e3f6ca7a2b5a4c7f1f616432f5426b98ab1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_v5_RPT/Channel_4/20221216_v5_RPT_Channel_4.xlsx",
+   "size": 11242472,
+   "crc32": "1b789e07",
+   "sha256": "cec5dacf3c5ac4f8dade3a53fabcb4d972ed308383d2c981c9f5a314daf9cccb"
+  },
+  {
+   "path": "diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_w10_RPT/Channel_5/20221216_w10_RPT_Channel_5.xlsx",
+   "size": 11152379,
+   "crc32": "7abde84a",
+   "sha256": "a4b8da2e11080ba4cc21649e70b4c20cf2d317352c7ad42fc92550aa6b85cd39"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_v5_RPT/Channel_4/20230322_v5_RPT_Channel_4.xlsx",
+   "size": 10732301,
+   "crc32": "6be5e8e8",
+   "sha256": "bc6b7d555bc44e1690193a0a0cc8d96b92f8a625ae10bd2e4157e77623b9521e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_v4_RPT/Channel_1/20230322_v4_RPT_Channel_1.xlsx",
+   "size": 13622137,
+   "crc32": "5422c096",
+   "sha256": "00ca567cf28e17f382d61afc10667e2a92e46d9d70b84f6cab67252c9e6559a0"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_g1_RPT/Channel_6/20230322_g1_RPT_Channel_6.xlsx",
+   "size": 10672282,
+   "crc32": "66328b3c",
+   "sha256": "d059257b48891fae9e8dbf167d73fde2c015e31bd07ce582433fa2649365eed6"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_w8_RPT/Channel_2/20230322_w8_RPT_Channel_2.xlsx",
+   "size": 10670189,
+   "crc32": "0341911b",
+   "sha256": "3f4e3705b0e5c06a962964265a37d058634d50d893048b72c184d836adc62d36"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_w9_RPT/Channel_3/20230322_w9_RPT_Channel_3.xlsx",
+   "size": 11496543,
+   "crc32": "a06cafd6",
+   "sha256": "cb40fca5983404973ad9c45ce5e8b0f373aae5bdbc20ea1367a42ff4441ce667"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_w10_RPT/Channel_5/20230322_w10_RPT_Channel_5.xlsx",
+   "size": 11431278,
+   "crc32": "9d4d19da",
+   "sha256": "393c2999c4372b3000212ecf45812b0aea33b5f5eb9885cbb372c209bdeeecbc"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_W10_EIS400/Channel_5/20230327_W10_EIS400_Channel_5.xlsx",
+   "size": 57153,
+   "crc32": "e1bcc7c6",
+   "sha256": "fcd3e51cfc60e41d6cb5a7e1f16d8969db5d96e0345c9525a805844694012c70"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_W8_EIS400/Channel_2/20230327_W8_EIS400_Channel_2.xlsx",
+   "size": 57222,
+   "crc32": "9a2b03ab",
+   "sha256": "825179e7acc19726e487a1492f02a94ae94f8436ad9807a6cbd82e71a7b6bf65"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_V5_EIS326/Channel_4/20230327_V5_EIS326_Channel_4.xlsx",
+   "size": 57277,
+   "crc32": "ce8832f0",
+   "sha256": "61c67adf58131e4fe9186044d1ed89f490c3305d8cd982b12eb1d4bb3a76dc5d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_G1_EIS400/Channel_6/20230327_G1_EIS400_Channel_6.xlsx",
+   "size": 57117,
+   "crc32": "fbc9cb95",
+   "sha256": "5ce495fd9e84bf608d24b2c24af17c582ff70a6578b75238da759a11975de69e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_V4_EIS400/Channel_1/20230327_V4_EIS400_Channel_1.xlsx",
+   "size": 61112,
+   "crc32": "2bbbffea",
+   "sha256": "f39c7b8e39c73859a49913ec3aa2f09cf5e3086fcb952049653f84ceb89872b4"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_W9_EIS326/Channel_3/20230327_W9_EIS326_Channel_3.xlsx",
+   "size": 57472,
+   "crc32": "32138336",
+   "sha256": "3bdc60d2f9f3c40ad33c8ccfca2db88d35534af6590827d91cb55d1c0cf32fef"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_G1_EIS363/Channel_6/20230327_G1_EIS363_Channel_6.xlsx",
+   "size": 57205,
+   "crc32": "2c756734",
+   "sha256": "0aa71946d5fdd00f96dad16970111d91bdd21d3fbda625a0b73dbf1b12a62c24"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_W8_EIS363/Channel_2/20230327_W8_EIS363_Channel_2.xlsx",
+   "size": 56934,
+   "crc32": "3800896d",
+   "sha256": "783d8ee4cd3d7d9dd4d315802cbdeebd7eb798226fee9db49886de7d87c071ed"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_W10_EIS363/Channel_5/20230327_W10_EIS363_Channel_5.xlsx",
+   "size": 57388,
+   "crc32": "faa7bd44",
+   "sha256": "de9ab61f4d607558be4f775be6d24d2bef85349f0a0f11948da9873e7be7dedf"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_V4_EIS363/Channel_1/20230327_V4_EIS363_Channel_1.xlsx",
+   "size": 60992,
+   "crc32": "60369712",
+   "sha256": "0d788595ec01018e5c864db129bce8cd67bafe09483f4379624103880abb85e5"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_V4_EIS326/Channel_1/20230327_V4_EIS326_Channel_1.xlsx",
+   "size": 60894,
+   "crc32": "a42765d7",
+   "sha256": "1ee22cdc2545ec1871c350808958731f91fba714603260a3a6d249f64430b314"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_W9_EIS400/Channel_3/20230327_W9_EIS400_Channel_3.xlsx",
+   "size": 57392,
+   "crc32": "c2c6a521",
+   "sha256": "d10869fb43d92662c7e8de61d553f0481fda6330578852b6fb55f0714f2ee934"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_W10_EIS326/Channel_5/20230327_W10_EIS326_Channel_5.xlsx",
+   "size": 57263,
+   "crc32": "a76c3881",
+   "sha256": "b572214e96b78fda2c87829fb1d9c88080e3710f313f5da46130c5ca7a7efbd0"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_W8_EIS326/Channel_2/20230327_W8_EIS326_Channel_2.xlsx",
+   "size": 57245,
+   "crc32": "09a9d82d",
+   "sha256": "cc0e49582a7073d5649c1890ffd4639df89f3a3687cac5ffce6957d02e2a772d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_V5_EIS400/Channel_4/20230327_V5_EIS400_Channel_4.xlsx",
+   "size": 57175,
+   "crc32": "dba9290a",
+   "sha256": "2af9626c5e291ee8701cdd5feaeeaa9815a8bada58e017575d5bd6994990e276"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_G1_EIS326/Channel_6/20230327_G1_EIS326_Channel_6.xlsx",
+   "size": 57345,
+   "crc32": "02d8c8da",
+   "sha256": "af11f161be5bdd1a3f1da1a7db62e356b61a3c1a13020301a78b7977d25421ac"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_W9_EIS363/Channel_3/20230327_W9_EIS363_Channel_3.xlsx",
+   "size": 56997,
+   "crc32": "c64c60ee",
+   "sha256": "a723e76b5daa12f8f688bf6dd3419199b6e8661ed9c7ddf2702a0d4471fc0401"
+  },
+  {
+   "path": "diagnostic_tests/RPT_5/EIS_5/20230327_V5_EIS363/Channel_4/20230327_V5_EIS363_Channel_4.xlsx",
+   "size": 57430,
+   "crc32": "a2cb5018",
+   "sha256": "e110c4a41042d87eacc1b94ffcfc09607e12b9e07c966256d94cd10df149fe45"
+  },
+  {
+   "path": "diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_v4_RPT/Channel_1/20230228_sd_v4_RPT_Channel_1.xlsx",
+   "size": 13330139,
+   "crc32": "aaa19457",
+   "sha256": "4f83eb3d28a67dbcb2e862a4540f4925dc626fddcd440ce745ad15de9b033bea"
+  },
+  {
+   "path": "diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_v5_RPT/Channel_4/20230228_sd_v5_RPT_Channel_4.xlsx",
+   "size": 11224318,
+   "crc32": "6bb56baf",
+   "sha256": "33ec704deb4a66bb62bc7f01880bf2026a69443783e997aecbfbabeb6e39e46e"
+  },
+  {
+   "path": "diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_w9_RPT/Channel_3/20230228_sd_w9_RPT_Channel_3.xlsx",
+   "size": 11275563,
+   "crc32": "42bfa0b6",
+   "sha256": "4cd873c13bb81132f25b096897d2f4863a9b680c28637bbe984fe2a5f3e2a9b1"
+  },
+  {
+   "path": "diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_w8_RPT/Channel_2/20230228_sd_w8_RPT_Channel_2.xlsx",
+   "size": 11145069,
+   "crc32": "e912236c",
+   "sha256": "fb66a319e62ae2fcf64ec136e4086f84c65c7d2feb78ba4960bf5a01853818cc"
+  },
+  {
+   "path": "diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_w10_RPT/Channel_5/20230228_sd_w10_RPT_Channel_5.xlsx",
+   "size": 11109115,
+   "crc32": "6e647106",
+   "sha256": "0a422ab426914947557dc2d1dfcb7ddbc10cdee837828a5fc6ba48522b0e9316"
+  },
+  {
+   "path": "diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_g1_RPT/Channel_6/20230228_sd_g1_RPT_Channel_6.xlsx",
+   "size": 11083135,
+   "crc32": "f2bba10f",
+   "sha256": "e15147313b26875f558de933c4a3f8f607e13b04cf83ccc0e23e5ff68ac7dc3d"
+  },
+  {
+   "path": "diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_g1_RPT/Channel_6/20230116_g1_RPT_Channel_6.xlsx",
+   "size": 11068775,
+   "crc32": "4f179dc4",
+   "sha256": "e0a1adcbea6b978adac8c7d6dd821e11bc3a41ad2f10017bfd10ab34653c432a"
+  },
+  {
+   "path": "diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_w10_RPT/Channel_5/20230116_w10_RPT_Channel_5.xlsx",
+   "size": 11162462,
+   "crc32": "6e715b9b",
+   "sha256": "672cb623fd6b2f6de6a2a75f1eed721b74b2f2f7b86aed791e73308a7fb0f1c6"
+  },
+  {
+   "path": "diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_w9_RPT/Channel_3/20230116_w9_RPT_Channel_3.xlsx",
+   "size": 11303484,
+   "crc32": "a0ce7098",
+   "sha256": "80b9281a65352bd58beb454e450568b0315fa707a5fd7d9cf8f435a3e5e64e7c"
+  },
+  {
+   "path": "diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_w8_RPT/Channel_2/20230116_w8_RPT_Channel_2.xlsx",
+   "size": 11165020,
+   "crc32": "49347d44",
+   "sha256": "f8ab273cee1213bbca0b086eb4b8eb5b01bb4465122237dfa3a21a1ccab23973"
+  },
+  {
+   "path": "diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_v4_RPT/Channel_1/20230116_v4_RPT_Channel_1.xlsx",
+   "size": 13291587,
+   "crc32": "53abebd2",
+   "sha256": "d7bd2e0da7f8aac75beab7b19b7c3bd799b0499c40fc508856c3a05721216775"
+  },
+  {
+   "path": "diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_v5_RPT/Channel_4/20230116_v5_RPT_Channel_4.xlsx",
+   "size": 11257861,
+   "crc32": "01e64995",
+   "sha256": "83177b61f4109c1e68480ffa88a9bfa1dcd501e59f17d7989ba9394313610b1b"
+  }
+ ]
+}
