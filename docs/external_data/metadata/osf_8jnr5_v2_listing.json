@@ -1,0 +1,3256 @@
+{
+ "source": "https://osf.io/download/j2ne9/?version=2",
+ "archive_size": 2153883052,
+ "archive_sha256": "201b21b8e2e9623887d03e9bd6620341e5c91cd28bce34294ccbad2d4e7c6fe3",
+ "comparison": {
+  "archive_files": 648,
+  "rpt_file_refs": 337,
+  "rpt_file_refs_found": 337,
+  "rpt_file_refs_in_same_rpt_folder": 337,
+  "handover_cycling_blocks": 103,
+  "blocks_missing_from_archive": [],
+  "archive_blocks_missing_from_handover": []
+ },
+ "files": [
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/eis_7.mat",
+   "size": 11580,
+   "crc32": "664b1070"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/20230522_EIS_7_400V_ALL.xlsx",
+   "size": 12771,
+   "crc32": "419b2d31"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/20230522_EIS_7_363V_ALL.xlsx",
+   "size": 12783,
+   "crc32": "8ca45d2b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/20230522_EIS_7_326V_ALL.xlsx",
+   "size": 12273,
+   "crc32": "ef42cb5d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_EIS_6_400V_ALL.xlsx",
+   "size": 12741,
+   "crc32": "81988860"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_EIS_6_326V_ALL.xlsx",
+   "size": 12660,
+   "crc32": "c3822efe"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_EIS_6_363V_ALL.xlsx",
+   "size": 12790,
+   "crc32": "ec77b4d8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_EIS_8_363V_ALL.xlsx",
+   "size": 12271,
+   "crc32": "710b8deb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_EIS_8_326V_ALL.xlsx",
+   "size": 12123,
+   "crc32": "ac2d2f38"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_EIS_8_400V_ALL.xlsx",
+   "size": 12248,
+   "crc32": "0de7177a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_EIS_5_363V_ALL.xlsx",
+   "size": 12751,
+   "crc32": "9548b59b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_EIS_5_326V_ALL.xlsx",
+   "size": 12592,
+   "crc32": "f3a48e8f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_EIS_5_400V_ALL.xlsx",
+   "size": 12711,
+   "crc32": "b129cfe4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/_processed_mat/W10.mat",
+   "size": 48702,
+   "crc32": "ad6794f9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/_processed_mat/G1.mat",
+   "size": 49105,
+   "crc32": "043f2c9b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/_processed_mat/W8.mat",
+   "size": 48978,
+   "crc32": "02007337"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/_processed_mat/W9.mat",
+   "size": 48224,
+   "crc32": "1fb15e5a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/_processed_mat/V5.mat",
+   "size": 48600,
+   "crc32": "84f46b55"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/_processed_mat/V4.mat",
+   "size": 60344,
+   "crc32": "cf116032"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/G1/20221206_sd_g1_Channel_6.xlsx",
+   "size": 189627,
+   "crc32": "8a03c8b2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/W10/20221206_sd_w10_Channel_5.xlsx",
+   "size": 185453,
+   "crc32": "90612a28"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/V5/20221206_sd_v5_Channel_4.xlsx",
+   "size": 190089,
+   "crc32": "83fb12be"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/V4/20221206_sd_v4_Channel_1.xlsx",
+   "size": 218351,
+   "crc32": "aa6cc655"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/W9/20221206_sd_w9_Channel_3.xlsx",
+   "size": 184811,
+   "crc32": "b059f024"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_2/W8/20221206_sd_w8_Channel_2.xlsx",
+   "size": 190119,
+   "crc32": "726fe159"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/_processed_mat/W10.mat",
+   "size": 85133,
+   "crc32": "67d05104"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/_processed_mat/G1.mat",
+   "size": 85766,
+   "crc32": "a55f43f2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/_processed_mat/W8.mat",
+   "size": 86158,
+   "crc32": "a6f8f695"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/_processed_mat/W9.mat",
+   "size": 84374,
+   "crc32": "3b35e834"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/_processed_mat/V5.mat",
+   "size": 85252,
+   "crc32": "1a1880b9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/_processed_mat/V4.mat",
+   "size": 107267,
+   "crc32": "69b7b02b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/G1/20230312_sd_g1_Channel_6.xlsx",
+   "size": 161826,
+   "crc32": "39075e09"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/G1/20230302_sd_g1_Channel_6.xlsx",
+   "size": 188097,
+   "crc32": "ca9dce77"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/W10/20230302_sd_w10_Channel_5.xlsx",
+   "size": 183504,
+   "crc32": "5aeac483"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/W10/20230312_sd_w10_Channel_5.xlsx",
+   "size": 158124,
+   "crc32": "6e5ccd7f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/V5/20230312_sd_v5_Channel_4.xlsx",
+   "size": 161560,
+   "crc32": "78c68132"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/V5/20230302_sd_v5_Channel_4.xlsx",
+   "size": 187977,
+   "crc32": "6edd18a7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/V4/20230302_sd_v4_Channel_1.xlsx",
+   "size": 216645,
+   "crc32": "4ece6832"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/V4/20230312_sd_v4_Channel_1.xlsx",
+   "size": 187504,
+   "crc32": "7f7d7db6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/W9/20230312_sd_w9_Channel_3.xlsx",
+   "size": 158038,
+   "crc32": "84b22553"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/W9/20230302_sd_w9_Channel_3.xlsx",
+   "size": 183343,
+   "crc32": "1004471a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/W8/20230312_sd_w8_Channel_2.xlsx",
+   "size": 161739,
+   "crc32": "476560a5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_5/W8/20230302_sd_w8_Channel_2.xlsx",
+   "size": 188361,
+   "crc32": "fa9bcc14"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/_processed_mat/W10.mat",
+   "size": 91878,
+   "crc32": "20f3b178"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/_processed_mat/G1.mat",
+   "size": 91778,
+   "crc32": "9b7f142b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/_processed_mat/W8.mat",
+   "size": 92931,
+   "crc32": "9ca27b7c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/_processed_mat/W9.mat",
+   "size": 90959,
+   "crc32": "334ed3c0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/_processed_mat/V5.mat",
+   "size": 91450,
+   "crc32": "7bc78d79"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/_processed_mat/V4.mat",
+   "size": 115656,
+   "crc32": "680ac28a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/G1/20230217_sd_g1_Channel_6.xlsx",
+   "size": 183529,
+   "crc32": "c3e09b5a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/G1/20230207_sd_g1_Channel_6.xlsx",
+   "size": 189236,
+   "crc32": "58bcaa56"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/W10/20230217_sd_w10_Channel_5.xlsx",
+   "size": 180679,
+   "crc32": "1f59786c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/W10/20230207_sd_w10_Channel_5.xlsx",
+   "size": 185816,
+   "crc32": "21966e13"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/V5/20230217_sd_v5_Channel_4.xlsx",
+   "size": 183864,
+   "crc32": "c3eea630"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/V5/20230207_sd_v5_Channel_4.xlsx",
+   "size": 189847,
+   "crc32": "3277356c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/V4/20230207_sd_v4_Channel_1.xlsx",
+   "size": 219105,
+   "crc32": "c8a39f00"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/V4/20230217_sd_v4_Channel_1.xlsx",
+   "size": 213757,
+   "crc32": "223fc414"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/W9/20230217_sd_w9_Channel_3.xlsx",
+   "size": 180656,
+   "crc32": "82aa2be4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/W9/20230207_sd_w9_Channel_3.xlsx",
+   "size": 185488,
+   "crc32": "283f7c7e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/W8/20230217_sd_w8_Channel_2.xlsx",
+   "size": 184803,
+   "crc32": "9b2c7656"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_4/W8/20230207_sd_w8_Channel_2.xlsx",
+   "size": 191023,
+   "crc32": "f4100d0b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/_processed_mat/W10.mat",
+   "size": 47989,
+   "crc32": "a549ca85"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/_processed_mat/G1.mat",
+   "size": 48519,
+   "crc32": "d1d4cad8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/_processed_mat/W8.mat",
+   "size": 48340,
+   "crc32": "33b6abed"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/_processed_mat/W9.mat",
+   "size": 47806,
+   "crc32": "5028fcd8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/_processed_mat/V5.mat",
+   "size": 48280,
+   "crc32": "e93ca0fe"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/_processed_mat/V4.mat",
+   "size": 58952,
+   "crc32": "19afc556"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/G1/20230103_sd_g1_Channel_6.xlsx",
+   "size": 188502,
+   "crc32": "3833c405"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/W10/20230103_sd_w10_Channel_5.xlsx",
+   "size": 184014,
+   "crc32": "bf3ec2e0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/V5/20230103_sd_v5_Channel_4.xlsx",
+   "size": 188634,
+   "crc32": "dfd21be8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/V4/20230103_sd_v4_Channel_1.xlsx",
+   "size": 217296,
+   "crc32": "817d58d2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/W9/20230103_sd_w9_Channel_3.xlsx",
+   "size": 183458,
+   "crc32": "4eb134d3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_3/W8/20230103_sd_w8_Channel_2.xlsx",
+   "size": 188668,
+   "crc32": "9471cdc0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/_processed_mat/W10.mat",
+   "size": 91319,
+   "crc32": "d04fafaa"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/_processed_mat/G1.mat",
+   "size": 92889,
+   "crc32": "93275323"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/_processed_mat/W8.mat",
+   "size": 93880,
+   "crc32": "5aee4572"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/_processed_mat/W9.mat",
+   "size": 90234,
+   "crc32": "90bf4dd7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/_processed_mat/V5.mat",
+   "size": 91300,
+   "crc32": "dcbcd7be"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/_processed_mat/V4.mat",
+   "size": 117550,
+   "crc32": "0dbaa36d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/G1/20231229_sd_g1_Channel_6.xlsx",
+   "size": 182796,
+   "crc32": "9db4417c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/G1/20231218_sd_g1_Channel_6.xlsx",
+   "size": 191964,
+   "crc32": "249fb32b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/W10/20231218_sd_w10_Channel_5.xlsx",
+   "size": 187265,
+   "crc32": "2b6bc017"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/W10/20231229_sd_w10_Channel_5.xlsx",
+   "size": 178737,
+   "crc32": "5c95219b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/V5/20231229_sd_v5_Channel_4.xlsx",
+   "size": 181647,
+   "crc32": "297d1b71"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/V5/20231218_sd_v5_Channel_4.xlsx",
+   "size": 189561,
+   "crc32": "1fdd4ec7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/V4/20231218_sd_v4_Channel_1.xlsx",
+   "size": 221374,
+   "crc32": "ba7fc6f9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/V4/20231229_sd_v4_Channel_1.xlsx",
+   "size": 212748,
+   "crc32": "8f31ae63"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/W9/20231229_sd_w9_Channel_3.xlsx",
+   "size": 177893,
+   "crc32": "e23771f6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/W9/20231218_sd_w9_Channel_3.xlsx",
+   "size": 184716,
+   "crc32": "45a6569f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/W8/20231229_sd_w8_Channel_2.xlsx",
+   "size": 183492,
+   "crc32": "409311e8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_13/W8/20231218_sd_w8_Channel_2.xlsx",
+   "size": 191518,
+   "crc32": "06f40a82"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/_processed_mat/W10.mat",
+   "size": 93245,
+   "crc32": "57ebd034"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/_processed_mat/G1.mat",
+   "size": 94454,
+   "crc32": "a118238b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/_processed_mat/W8.mat",
+   "size": 95757,
+   "crc32": "98d62d7c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/_processed_mat/W9.mat",
+   "size": 92732,
+   "crc32": "74245f13"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/_processed_mat/V5.mat",
+   "size": 93543,
+   "crc32": "2a8214ff"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/_processed_mat/V4.mat",
+   "size": 120651,
+   "crc32": "e4166ae2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/G1/20240123_sd_g1_Channel_6.xlsx",
+   "size": 184934,
+   "crc32": "58cad922"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/G1/20240113_sd_g1_Channel_6.xlsx",
+   "size": 193759,
+   "crc32": "289afb20"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/W10/20240113_sd_w10_Channel_5.xlsx",
+   "size": 189099,
+   "crc32": "88b6d187"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/W10/20240123_sd_w10_Channel_5.xlsx",
+   "size": 181576,
+   "crc32": "79a548f2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/V5/20240123_sd_v5_Channel_4.xlsx",
+   "size": 183858,
+   "crc32": "a1b3e10a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/V5/20240113_sd_v5_Channel_4.xlsx",
+   "size": 192725,
+   "crc32": "b8497140"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/V4/20240113_sd_v4_Channel_1.xlsx",
+   "size": 223939,
+   "crc32": "3b89116b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/V4/20240123_sd_v4_Channel_1.xlsx",
+   "size": 215337,
+   "crc32": "11c2f911"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/W9/20240123_sd_w9_Channel_3.xlsx",
+   "size": 180915,
+   "crc32": "15630598"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/W9/20240113_sd_w9_Channel_3.xlsx",
+   "size": 188661,
+   "crc32": "cc6b30d9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/W8/20240123_sd_w8_Channel_2.xlsx",
+   "size": 186099,
+   "crc32": "b623082c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_14/W8/20240113_sd_w8_Channel_2.xlsx",
+   "size": 194502,
+   "crc32": "452da7b0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/_processed_mat/W10.mat",
+   "size": 92037,
+   "crc32": "4a2438e4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/_processed_mat/G1.mat",
+   "size": 92613,
+   "crc32": "4394e600"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/_processed_mat/W8.mat",
+   "size": 93799,
+   "crc32": "445084e2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/_processed_mat/W9.mat",
+   "size": 90842,
+   "crc32": "239cf353"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/_processed_mat/V5.mat",
+   "size": 91758,
+   "crc32": "44395e92"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/_processed_mat/V4.mat",
+   "size": 115514,
+   "crc32": "e0279edc"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/G1/20240330_sd_g1_Channel_6.xlsx",
+   "size": 182336,
+   "crc32": "7bbe1aa9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/G1/20240318_sd_g1_Channel_6.xlsx",
+   "size": 191265,
+   "crc32": "81b008de"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/W10/20240330_sd_w10_Channel_5.xlsx",
+   "size": 179194,
+   "crc32": "d4c14389"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/W10/20240318_sd_w10_Channel_5.xlsx",
+   "size": 187308,
+   "crc32": "180adb06"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/V5/20240330_sd_v5_Channel_4.xlsx",
+   "size": 180715,
+   "crc32": "483c8501"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/V5/20240318_sd_v5_Channel_4.xlsx",
+   "size": 189933,
+   "crc32": "ab9c82ee"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/V4/20240318_sd_v4_Channel_1.xlsx",
+   "size": 217778,
+   "crc32": "fa266459"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/V4/20240330_sd_v4_Channel_1.xlsx",
+   "size": 206684,
+   "crc32": "a9c884ad"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/W9/20240330_sd_w9_Channel_3.xlsx",
+   "size": 177133,
+   "crc32": "ac46bf04"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/W9/20240318_sd_w9_Channel_3.xlsx",
+   "size": 185365,
+   "crc32": "cd1249be"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/W8/20240330_sd_w8_Channel_2.xlsx",
+   "size": 182927,
+   "crc32": "e3a19a24"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_15/W8/20240318_sd_w8_Channel_2.xlsx",
+   "size": 191434,
+   "crc32": "aacc7c6c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/_processed_mat/W10.mat",
+   "size": 93114,
+   "crc32": "adbc14cb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/_processed_mat/G1.mat",
+   "size": 93795,
+   "crc32": "a8dbcbdc"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/_processed_mat/W8.mat",
+   "size": 95388,
+   "crc32": "ef5d0ee0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/_processed_mat/W9.mat",
+   "size": 92468,
+   "crc32": "df88b552"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/_processed_mat/V5.mat",
+   "size": 92943,
+   "crc32": "780e77dd"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/_processed_mat/V4.mat",
+   "size": 120342,
+   "crc32": "57cc64b7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/G1/20231106_sd_g1_Channel_6.xlsx",
+   "size": 193576,
+   "crc32": "a653bef8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/G1/20231117_sd_g1_Channel_6.xlsx",
+   "size": 184765,
+   "crc32": "61de3f13"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/W10/20231106_sd_w10_Channel_5.xlsx",
+   "size": 189566,
+   "crc32": "1c8746cc"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/W10/20231117_sd_w10_Channel_5.xlsx",
+   "size": 181306,
+   "crc32": "88e1a5cb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/V5/20231106_sd_v5_Channel_4.xlsx",
+   "size": 191885,
+   "crc32": "c1465fef"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/V5/20231117_sd_v5_Channel_4.xlsx",
+   "size": 183368,
+   "crc32": "22cea27e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/V4/20231117_sd_v4_Channel_1.xlsx",
+   "size": 215131,
+   "crc32": "ddcd863d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/V4/20231106_sd_v4_Channel_1.xlsx",
+   "size": 224051,
+   "crc32": "e7928b50"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/W9/20231106_sd_w9_Channel_3.xlsx",
+   "size": 187461,
+   "crc32": "5a3b5773"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/W9/20231117_sd_w9_Channel_3.xlsx",
+   "size": 180489,
+   "crc32": "6bc76d40"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/W8/20231106_sd_w8_Channel_2.xlsx",
+   "size": 194608,
+   "crc32": "43703b12"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_12/W8/20231117_sd_w8_Channel_2.xlsx",
+   "size": 185425,
+   "crc32": "fdc54f6e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/_processed_mat/W10.mat",
+   "size": 93053,
+   "crc32": "ce8bbed8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/_processed_mat/G1.mat",
+   "size": 93598,
+   "crc32": "14def315"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/_processed_mat/W8.mat",
+   "size": 94891,
+   "crc32": "92719ac5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/_processed_mat/W9.mat",
+   "size": 91608,
+   "crc32": "ac14987c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/_processed_mat/V5.mat",
+   "size": 92854,
+   "crc32": "c9b1f9e1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/_processed_mat/V4.mat",
+   "size": 120443,
+   "crc32": "18b64747"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/G1/20230329_sd_g1_Channel_6.xlsx",
+   "size": 192627,
+   "crc32": "81990188"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/G1/20230409_sd_g1_Channel_6.xlsx",
+   "size": 183841,
+   "crc32": "0c3caa75"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/W10/20230409_sd_w10_Channel_5.xlsx",
+   "size": 181006,
+   "crc32": "f9f6bfbf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/W10/20230329_sd_w10_Channel_5.xlsx",
+   "size": 188831,
+   "crc32": "d18f2ab9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/V5/20230329_sd_v5_Channel_4.xlsx",
+   "size": 192167,
+   "crc32": "5eed5c62"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/V5/20230409_sd_v5_Channel_4.xlsx",
+   "size": 182903,
+   "crc32": "25ff5c57"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/V4/20230329_sd_v4_Channel_1.xlsx",
+   "size": 223162,
+   "crc32": "12fa042d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/V4/20230409_sd_v4_Channel_1.xlsx",
+   "size": 214701,
+   "crc32": "3a5942c4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/W9/20230329_sd_w9_Channel_3.xlsx",
+   "size": 187040,
+   "crc32": "044aad70"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/W9/20230409_sd_w9_Channel_3.xlsx",
+   "size": 179321,
+   "crc32": "2cfa7d6f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/W8/20230329_sd_w8_Channel_2.xlsx",
+   "size": 193622,
+   "crc32": "bb2b55bf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_6/W8/20230409_sd_w8_Channel_2.xlsx",
+   "size": 184859,
+   "crc32": "519e5e03"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/_processed_mat/W10.mat",
+   "size": 61695,
+   "crc32": "fe62f069"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/_processed_mat/G1.mat",
+   "size": 65741,
+   "crc32": "45d11ecb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/_processed_mat/W8.mat",
+   "size": 63242,
+   "crc32": "f59d351a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/_processed_mat/W9.mat",
+   "size": 61575,
+   "crc32": "94934b8a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/_processed_mat/V5.mat",
+   "size": 67653,
+   "crc32": "46e8daa8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/_processed_mat/V4.mat",
+   "size": 62660,
+   "crc32": "f6a55f84"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/G1/20221028_sd_g1_Channel_6.xlsx",
+   "size": 441417,
+   "crc32": "7f4cce52"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/G1/20221108_sd_g1_Channel_6.xlsx",
+   "size": 272977,
+   "crc32": "077739a0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/W10/20221028_sd_w10_Channel_5.xlsx",
+   "size": 376546,
+   "crc32": "62d706bb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/W10/20221108_sd_w10_Channel_5.xlsx",
+   "size": 284323,
+   "crc32": "01e69cf9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/V5/20221028_sd_v5_Channel_4.xlsx",
+   "size": 468252,
+   "crc32": "9d6aac61"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/V5/20221108_sd_v5_Channel_4.xlsx",
+   "size": 273781,
+   "crc32": "c045fa83"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/V4/20221028_sd_v4_Channel_1.xlsx",
+   "size": 377050,
+   "crc32": "2d5c725a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/V4/20221108_sd_v4_Channel_1.xlsx",
+   "size": 288128,
+   "crc32": "b7507249"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/W9/20221108_sd_w9_Channel_3.xlsx",
+   "size": 285526,
+   "crc32": "3db6ea93"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/W9/20221028_sd_w9_Channel_3.xlsx",
+   "size": 375276,
+   "crc32": "3d85273b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/W8/20221108_sd_w8_Channel_2.xlsx",
+   "size": 272390,
+   "crc32": "8b838b2b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_1/W8/20221028_sd_w8_Channel_2.xlsx",
+   "size": 407067,
+   "crc32": "f52752a9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/_processed_mat/W10.mat",
+   "size": 91855,
+   "crc32": "0be62bf1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/_processed_mat/G1.mat",
+   "size": 92584,
+   "crc32": "7c38c7b3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/_processed_mat/W8.mat",
+   "size": 93235,
+   "crc32": "126f029b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/_processed_mat/W9.mat",
+   "size": 89580,
+   "crc32": "d1e61c92"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/_processed_mat/V5.mat",
+   "size": 90480,
+   "crc32": "5c78120c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/_processed_mat/V4.mat",
+   "size": 117818,
+   "crc32": "c6f63d46"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/G1/20230606_sd_g1_Channel_6.xlsx",
+   "size": 184579,
+   "crc32": "b22cf7eb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/G1/20230526_sd_g1_Channel_6.xlsx",
+   "size": 185540,
+   "crc32": "ba91c9fb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/W10/20230606_sd_w10_Channel_5.xlsx",
+   "size": 181049,
+   "crc32": "e3128cf7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/W10/20230526_sd_w10_Channel_5.xlsx",
+   "size": 181377,
+   "crc32": "9f2811d7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/V5/20230606_sd_v5_Channel_4.xlsx",
+   "size": 183435,
+   "crc32": "5216c520"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/V5/20230526_sd_v5_Channel_4.xlsx",
+   "size": 184359,
+   "crc32": "f26bdedb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/V4/20230526_sd_v4_Channel_1.xlsx",
+   "size": 214412,
+   "crc32": "6a559307"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/V4/20230606_sd_v4_Channel_1.xlsx",
+   "size": 214487,
+   "crc32": "3dea3d98"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/W9/20230526_sd_w9_Channel_3.xlsx",
+   "size": 179953,
+   "crc32": "d14511a2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/W9/20230606_sd_w9_Channel_3.xlsx",
+   "size": 180446,
+   "crc32": "c9f382b9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/W8/20230526_sd_w8_Channel_2.xlsx",
+   "size": 186555,
+   "crc32": "d1cf5405"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_8/W8/20230606_sd_w8_Channel_2.xlsx",
+   "size": 185427,
+   "crc32": "252c9bef"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/_processed_mat/W10.mat",
+   "size": 91471,
+   "crc32": "b35b50e9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/_processed_mat/G1.mat",
+   "size": 92811,
+   "crc32": "f0b96b1b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/_processed_mat/W8.mat",
+   "size": 92485,
+   "crc32": "1e9a9248"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/_processed_mat/W9.mat",
+   "size": 88686,
+   "crc32": "00e6ceec"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/_processed_mat/V5.mat",
+   "size": 90310,
+   "crc32": "c034ef05"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/_processed_mat/V4.mat",
+   "size": 116630,
+   "crc32": "3305f0e2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/G1/20230802_sd_g1_Channel_6.xlsx",
+   "size": 183405,
+   "crc32": "d0c2b024"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/G1/20230722_sd_g1_Channel_6.xlsx",
+   "size": 189541,
+   "crc32": "c8a134a5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/W10/20230802_sd_w10_Channel_5.xlsx",
+   "size": 178779,
+   "crc32": "a99e3cfb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/W10/20230722_sd_w10_Channel_5.xlsx",
+   "size": 184794,
+   "crc32": "8cd1e79c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/V5/20230802_sd_v5_Channel_4.xlsx",
+   "size": 181046,
+   "crc32": "c44ff5fb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/V5/20230722_sd_v5_Channel_4.xlsx",
+   "size": 187508,
+   "crc32": "a6b1f8f5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/V4/20230802_sd_v4_Channel_1.xlsx",
+   "size": 212569,
+   "crc32": "97209df8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/V4/20230722_sd_v4_Channel_1.xlsx",
+   "size": 218629,
+   "crc32": "86fc8a10"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/W9/20230722_sd_w9_Channel_3.xlsx",
+   "size": 182132,
+   "crc32": "d84e5ddc"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/W9/20230802_sd_w9_Channel_3.xlsx",
+   "size": 177540,
+   "crc32": "3d461ea1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/W8/20230722_sd_w8_Channel_2.xlsx",
+   "size": 189341,
+   "crc32": "b09c12db"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_9/W8/20230802_sd_w8_Channel_2.xlsx",
+   "size": 182917,
+   "crc32": "3d883196"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/_processed_mat/W10.mat",
+   "size": 92174,
+   "crc32": "ca40d521"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/_processed_mat/G1.mat",
+   "size": 93055,
+   "crc32": "36379461"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/_processed_mat/W8.mat",
+   "size": 93180,
+   "crc32": "5d074b5b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/_processed_mat/W9.mat",
+   "size": 90081,
+   "crc32": "3230a418"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/_processed_mat/V5.mat",
+   "size": 90835,
+   "crc32": "215ce339"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/_processed_mat/V4.mat",
+   "size": 117561,
+   "crc32": "58be8ad1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/G1/20230508_sd_g1_Channel_6.xlsx",
+   "size": 182734,
+   "crc32": "cbd9d06b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/G1/20230427_sd_g1_Channel_6.xlsx",
+   "size": 191505,
+   "crc32": "c1a4d3e3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/W10/20230427_sd_w10_Channel_5.xlsx",
+   "size": 187034,
+   "crc32": "29a8e43e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/W10/20230508_sd_w10_Channel_5.xlsx",
+   "size": 178706,
+   "crc32": "ecddf2b8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/V5/20230508_sd_v5_Channel_4.xlsx",
+   "size": 180911,
+   "crc32": "464bf5ed"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/V5/20230427_sd_v5_Channel_4.xlsx",
+   "size": 190739,
+   "crc32": "3351c543"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/V4/20230508_sd_v4_Channel_1.xlsx",
+   "size": 212249,
+   "crc32": "f7962885"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/V4/20230427_sd_v4_Channel_1.xlsx",
+   "size": 222031,
+   "crc32": "78d76539"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/W9/20230427_sd_w9_Channel_3.xlsx",
+   "size": 186012,
+   "crc32": "92d7e882"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/W9/20230508_sd_w9_Channel_3.xlsx",
+   "size": 177775,
+   "crc32": "c4e9e57c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/W8/20230427_sd_w8_Channel_2.xlsx",
+   "size": 192182,
+   "crc32": "d97a9516"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_7/W8/20230508_sd_w8_Channel_2.xlsx",
+   "size": 182453,
+   "crc32": "0519795b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_17/G1/20241120_sd_g1_Channel_1.xlsx",
+   "size": 627923,
+   "crc32": "d254cdd4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_17/G1/20241203_sd_g1_Channel_1.xlsx",
+   "size": 597398,
+   "crc32": "37b00f39"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_17/W10/20241202_sd_w10_Channel_2.xlsx",
+   "size": 976411,
+   "crc32": "f13a1417"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_17/V5/20241120_sd_v5_Channel_2.xlsx",
+   "size": 512018,
+   "crc32": "9c189555"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_17/V5/20241203_sd_v5_Channel_2.xlsx",
+   "size": 486947,
+   "crc32": "f0730842"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_17/V4/20241202_sd_v4_Channel_1.xlsx",
+   "size": 850224,
+   "crc32": "eca99a15"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_17/W8/20241120_sd_w8_Channel_3.xlsx",
+   "size": 508860,
+   "crc32": "c2ea5206"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_17/W8/20241203_sd_w8_Channel_3.xlsx",
+   "size": 482845,
+   "crc32": "d41b80ca"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/_processed_mat/W10.mat",
+   "size": 93587,
+   "crc32": "f22ba350"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/_processed_mat/G1.mat",
+   "size": 94391,
+   "crc32": "687985d0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/_processed_mat/W8.mat",
+   "size": 95015,
+   "crc32": "abf92bc3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/_processed_mat/W9.mat",
+   "size": 91857,
+   "crc32": "ee7748e1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/_processed_mat/V5.mat",
+   "size": 93040,
+   "crc32": "6d5e6615"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/_processed_mat/V4.mat",
+   "size": 119867,
+   "crc32": "44a2dfd0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/G1/20230903_sd_g1_Channel_6.xlsx",
+   "size": 184961,
+   "crc32": "db9451b6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/G1/20230823_sd_g1_Channel_6.xlsx",
+   "size": 193904,
+   "crc32": "b7915736"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/W10/20230823_sd_w10_Channel_5.xlsx",
+   "size": 189585,
+   "crc32": "aeaabd1e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/W10/20230903_sd_w10_Channel_5.xlsx",
+   "size": 181497,
+   "crc32": "1e81912a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/V5/20230903_sd_v5_Channel_4.xlsx",
+   "size": 182087,
+   "crc32": "7301e611"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/V5/20230823_sd_v5_Channel_4.xlsx",
+   "size": 192034,
+   "crc32": "484078a1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/V4/20230903_sd_v4_Channel_1.xlsx",
+   "size": 214758,
+   "crc32": "9aa373c4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/V4/20230823_sd_v4_Channel_1.xlsx",
+   "size": 223565,
+   "crc32": "babdeb93"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/W9/20230823_sd_w9_Channel_3.xlsx",
+   "size": 187371,
+   "crc32": "1bc54392"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/W9/20230903_sd_w9_Channel_3.xlsx",
+   "size": 179721,
+   "crc32": "5fac1268"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/W8/20230823_sd_w8_Channel_2.xlsx",
+   "size": 194466,
+   "crc32": "8a6b792f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_10/W8/20230903_sd_w8_Channel_2.xlsx",
+   "size": 185142,
+   "crc32": "32e46576"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/_processed_mat/W10.mat",
+   "size": 92416,
+   "crc32": "c972dcda"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/_processed_mat/G1.mat",
+   "size": 93499,
+   "crc32": "30b7352e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/_processed_mat/data_analysis.m",
+   "size": 440,
+   "crc32": "5c5a8130"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/_processed_mat/W8.mat",
+   "size": 93801,
+   "crc32": "a40d290e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/_processed_mat/W9.mat",
+   "size": 90586,
+   "crc32": "ea27daaf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/_processed_mat/V5.mat",
+   "size": 91775,
+   "crc32": "660bbac2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/_processed_mat/V4.mat",
+   "size": 117549,
+   "crc32": "73fac3b0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/G1/20230920_sd_g1_Channel_6.xlsx",
+   "size": 192108,
+   "crc32": "596d7b90"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/G1/20231001_sd_g1_Channel_6.xlsx",
+   "size": 182759,
+   "crc32": "253ec15c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/W10/20231001_sd_w10_Channel_5.xlsx",
+   "size": 178630,
+   "crc32": "87e502a5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/W10/20230920_sd_w10_Channel_5.xlsx",
+   "size": 187241,
+   "crc32": "97fdf551"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/V5/20230920_sd_v5_Channel_4.xlsx",
+   "size": 190328,
+   "crc32": "8c15bddd"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/V5/20231001_sd_v5_Channel_4.xlsx",
+   "size": 180609,
+   "crc32": "6ca2c8b3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/V4/20231001_sd_v4_Channel_1.xlsx",
+   "size": 212346,
+   "crc32": "b1f2e5b5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/V4/20230920_sd_v4_Channel_1.xlsx",
+   "size": 222005,
+   "crc32": "41f994a9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/W9/20230920_sd_w9_Channel_3.xlsx",
+   "size": 185060,
+   "crc32": "7fd2f904"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/W9/20231001_sd_w9_Channel_3.xlsx",
+   "size": 177036,
+   "crc32": "e8c23af9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/W8/20230920_sd_w8_Channel_2.xlsx",
+   "size": 192193,
+   "crc32": "bdda43ef"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_11/W8/20231001_sd_w8_Channel_2.xlsx",
+   "size": 183164,
+   "crc32": "99a79842"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_16/G1/20241017_sd_g1_Channel_1.xlsx",
+   "size": 635409,
+   "crc32": "9acf2e8a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_16/G1/20241029_sd_g1_Channel_1.xlsx",
+   "size": 606049,
+   "crc32": "b52545ff"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_16/V5/20241017_sd_v5_Channel_2.xlsx",
+   "size": 517754,
+   "crc32": "155f6aee"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_16/V5/20241029_sd_v5_Channel_2.xlsx",
+   "size": 493915,
+   "crc32": "cd4de9a3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_16/W8/20241017_sd_w8_Channel_3.xlsx",
+   "size": 513690,
+   "crc32": "946c5061"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_16/W8/20241029_sd_w8_Channel_3.xlsx",
+   "size": 490961,
+   "crc32": "3acf2eb8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/G1/20250108_sd_g1_Channel_1.xlsx",
+   "size": 635167,
+   "crc32": "4feb28fd"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/G1/20250118_sd_g1_Channel_1.xlsx",
+   "size": 606495,
+   "crc32": "648e28da"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/W10/20250106_sd_w10_Channel_2.xlsx",
+   "size": 955178,
+   "crc32": "f649ad2f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/W10/20250116_sd_w10_Channel_2.xlsx",
+   "size": 1012470,
+   "crc32": "b865f2cf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/V5/20250108_sd_v5_Channel_2.xlsx",
+   "size": 518952,
+   "crc32": "e7051543"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/V5/20250118_sd_v5_Channel_2.xlsx",
+   "size": 492962,
+   "crc32": "e4933a97"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/V4/20250116_sd_v4_Channel_1.xlsx",
+   "size": 897755,
+   "crc32": "59675b99"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/V4/20250106_sd_v4_Channel_1.xlsx",
+   "size": 879805,
+   "crc32": "067dae7b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/W8/20250108_sd_w8_Channel_3.xlsx",
+   "size": 514920,
+   "crc32": "06579f88"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/cycling_tests/Cycling_18/W8/20250118_sd_w8_Channel_3.xlsx",
+   "size": 490695,
+   "crc32": "f6f8de46"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250129_g1_RPT/Channel_1/20250129_g1_RPT_Channel_1.xlsx",
+   "size": 41196974,
+   "crc32": "9872f470"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250128_v4_RPT/Channel_1/20250128_v4_RPT_Channel_1.xlsx",
+   "size": 60010937,
+   "crc32": "39389dd2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250128_w10_RPT/Channel_2/20250128_w10_RPT_Channel_2.xlsx",
+   "size": 62816961,
+   "crc32": "27a2d96f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250129_w8_RPT/Channel_3/20250129_w8_RPT_Channel_3.xlsx",
+   "size": 34288459,
+   "crc32": "59cb7291"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/Capacity_test_with_pulses/20250129_v5_RPT/Channel_2/20250129_v5_RPT_Channel_2.xlsx",
+   "size": 34117392,
+   "crc32": "c53eb7ea"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/EIS_19/20250201_v5_EIS326V/Channel_2/20250201_v5_EIS326V_Channel_2.xlsx",
+   "size": 110622,
+   "crc32": "d85a0e9f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/EIS_19/20250202_w8_EIS326V/Channel_3/20250202_w8_EIS326V_Channel_3.xlsx",
+   "size": 111561,
+   "crc32": "0154530f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/EIS_19/20250201_g1_EIS326V/Channel_1/20250201_g1_EIS326V_Channel_1.xlsx",
+   "size": 136290,
+   "crc32": "cc3ac009"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/EIS_19/20250131_v5_EIS400V/Channel_2/20250131_v5_EIS400V_Channel_2.xlsx",
+   "size": 110495,
+   "crc32": "92bfa76c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/EIS_19/20250131_g1_EIS400V/Channel_1/20250131_g1_EIS400V_Channel_1.xlsx",
+   "size": 134554,
+   "crc32": "60f52c6a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/EIS_19/20250131_w8_EIS400V/Channel_3/20250131_w8_EIS400V_Channel_3.xlsx",
+   "size": 110521,
+   "crc32": "f250260b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/EIS_19/20250201_w8_EIS363V_gal/Channel_3/20250201_w8_EIS363V_gal_Channel_3.xlsx",
+   "size": 111651,
+   "crc32": "d8c5b5f3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/EIS_19/20250201_v5_EIS363V/Channel_2/20250201_v5_EIS363V_Channel_2.xlsx",
+   "size": 111819,
+   "crc32": "3cfb7f46"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_19/EIS_19/20250201_g1_EIS363V/Channel_1/20250201_g1_EIS363V_Channel_1.xlsx",
+   "size": 135173,
+   "crc32": "3525ec3c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_v4_RPT/Channel_1/20230914_v4_RPT_Channel_1.xlsx",
+   "size": 13324375,
+   "crc32": "782e3937"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_v5_RPT/Channel_4/20230914_v5_RPT_Channel_4.xlsx",
+   "size": 11180439,
+   "crc32": "eed031db"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_w10_RPT/Channel_5/20230914_w10_RPT_Channel_5.xlsx",
+   "size": 11352095,
+   "crc32": "d755618b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_g1_RPT/Channel_6/20230914_g1_RPT_Channel_6.xlsx",
+   "size": 11271170,
+   "crc32": "39585413"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_w9_RPT/Channel_3/20230914_w9_RPT_Channel_3.xlsx",
+   "size": 11229190,
+   "crc32": "15dc61eb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/Capacity_test_with_pulses/20230914_w8_RPT/Channel_2/20230914_w8_RPT_Channel_2.xlsx",
+   "size": 11207925,
+   "crc32": "750e2e39"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_w8_EIS363V/Channel_2/20230918_w8_EIS363V_Channel_2.xlsx",
+   "size": 57297,
+   "crc32": "9d4afa42"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_w10_EIS326V/Channel_5/20230918_w10_EIS326V_Channel_5.xlsx",
+   "size": 57273,
+   "crc32": "1fd825f8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_w9_EIS363V/Channel_3/20230918_w9_EIS363V_Channel_3.xlsx",
+   "size": 57236,
+   "crc32": "cb816645"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_w9_EIS400V/Channel_3/20230918_w9_EIS400V_Channel_3.xlsx",
+   "size": 57495,
+   "crc32": "97588aa3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_v5_EIS326V/Channel_4/20230918_v5_EIS326V_Channel_4.xlsx",
+   "size": 57208,
+   "crc32": "3a034b58"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_g1_EIS326V/Channel_6/20230918_g1_EIS326V_Channel_6.xlsx",
+   "size": 57170,
+   "crc32": "5bdf8cf0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_w8_EIS400V/Channel_2/20230918_w8_EIS400V_Channel_2.xlsx",
+   "size": 57691,
+   "crc32": "c017f1fb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_v4_EIS326V/Channel_1/20230918_v4_EIS326V_Channel_1.xlsx",
+   "size": 61262,
+   "crc32": "84d13aab"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_w10_EIS363V/Channel_5/20230918_w10_EIS363V_Channel_5.xlsx",
+   "size": 57542,
+   "crc32": "3b20510e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_g1_EIS400V/Channel_6/20230918_g1_EIS400V_Channel_6.xlsx",
+   "size": 57426,
+   "crc32": "0212aaa7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_w8_EIS326V/Channel_2/20230918_w8_EIS326V_Channel_2.xlsx",
+   "size": 57155,
+   "crc32": "941ea755"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_v4_EIS400V/Channel_1/20230918_v4_EIS400V_2_Channel_1.xlsx",
+   "size": 61184,
+   "crc32": "0efe0a46"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_w9_EIS326V/Channel_3/20230918_w9_EIS326V_Channel_3.xlsx",
+   "size": 57375,
+   "crc32": "9922cf5c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_v5_EIS400V/Channel_4/20230918_v5_EIS400V_Channel_4.xlsx",
+   "size": 57091,
+   "crc32": "cf6af723"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_v5_EIS363V/Channel_4/20230918_v5_EIS363V_Channel_4.xlsx",
+   "size": 56928,
+   "crc32": "2d059664"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_w10_EIS400V/Channel_5/20230918_w10_EIS400V_Channel_5.xlsx",
+   "size": 57421,
+   "crc32": "8f51e109"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_g1_EIS363V/Channel_6/20230918_g1_EIS363V_Channel_6.xlsx",
+   "size": 57609,
+   "crc32": "80fc73f2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_10/EIS_10/20230918_v4_EIS363V/Channel_1/20230918_v4_EIS363V_Channel_1.xlsx",
+   "size": 61613,
+   "crc32": "b2d762c6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17-1/20241007_v5_EIS400V/Channel_2/20241007_v5_EIS400V_Channel_2.xlsx",
+   "size": 112079,
+   "crc32": "3c7fbea8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17-1/20241008_g1_EIS326/Channel_1/20241008_g1_EIS326_Channel_1.xlsx",
+   "size": 137924,
+   "crc32": "818353ab"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17-1/20241008_g1_EIS363V/Channel_1/20241008_g1_EIS363V_Channel_1.xlsx",
+   "size": 138775,
+   "crc32": "26b848f8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17-1/20241008_v5_EIS363V/Channel_2/20241008_v5_EIS363V_Channel_2.xlsx",
+   "size": 112225,
+   "crc32": "c777d8fb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17-1/20241007_g1_EIS400V/Channel_1/20241007_g1_EIS400V_Channel_1.xlsx",
+   "size": 136985,
+   "crc32": "9cadb810"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17-1/20241008_w8_EIS400V/Channel_3/20241008_w8_EIS400V_Channel_3.xlsx",
+   "size": 111224,
+   "crc32": "bc16231b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17-1/20241009_w8_EIS326V/Channel_3/20241009_w8_EIS326V_Channel_3.xlsx",
+   "size": 111351,
+   "crc32": "5f929b0c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17-1/20241008_w8_EIS363V/Channel_3/20241008_w8_EIS363V_Channel_3.xlsx",
+   "size": 211605,
+   "crc32": "51984ead"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17-1/20241009_v5_EIS326/Channel_2/20241009_v5_EIS326_Channel_2.xlsx",
+   "size": 111987,
+   "crc32": "e033f1d8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241108_g1_RPT/Channel_1/20241108_g1_RPT_Channel_1.xlsx",
+   "size": 41162061,
+   "crc32": "f867b8da"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241130_w10_RPT/Channel_2/20241130_w10_RPT_Channel_2.xlsx",
+   "size": 24343508,
+   "crc32": "79fc8933"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241108_w8_RPT/Channel_3/20241108_w8_RPT_Channel_3.xlsx",
+   "size": 34308818,
+   "crc32": "4c81b3ce"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241130_v4_RPT/Channel_1/20241130_v4_RPT_Channel_1.xlsx",
+   "size": 20652666,
+   "crc32": "280a76b9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/Capacity_test_with_pulses/20241108_v5_RPT/Channel_2/20241108_v5_RPT_Channel_2.xlsx",
+   "size": 34054059,
+   "crc32": "89c0a3fa"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17/20241111_g1_EIS363V/Channel_1/20241111_g1_EIS363V_Channel_1.xlsx",
+   "size": 135923,
+   "crc32": "4025f51e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17/20241111_v5_EIS400V/Channel_2/20241111_v5_EIS400V_Channel_2.xlsx",
+   "size": 111859,
+   "crc32": "97bedf34"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17/20241112_v5_EIS326V/Channel_2/20241112_v5_EIS326V_Channel_2.xlsx",
+   "size": 111689,
+   "crc32": "50d33d3e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17/20241112_g1_EIS326V/Channel_1/20241112_g1_EIS326V_Channel_1.xlsx",
+   "size": 136767,
+   "crc32": "5ab48382"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17/20241111_g1_EIS400V/Channel_1/20241111_g1_EIS400V_Channel_1.xlsx",
+   "size": 137501,
+   "crc32": "022dc2f2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17/20241112_w8_EIS326V/Channel_3/20241112_w8_EIS326V_Channel_3.xlsx",
+   "size": 111903,
+   "crc32": "2da073e7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17/20241111_w8_EIS400V/Channel_3/20241111_w8_EIS400V_Channel_3.xlsx",
+   "size": 111591,
+   "crc32": "cddaea74"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17/20241112_w8_EIS363V_gal/Channel_3/20241112_w8_EIS363V_gal_Channel_3.xlsx",
+   "size": 111200,
+   "crc32": "9da58e6d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_17/EIS_17/20241112_v5_EIS363V/Channel_2/20241112_v5_EIS363V_Channel_2.xlsx",
+   "size": 111264,
+   "crc32": "c3053c4b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_g1_RPT/Channel_1/20240801_g1_RPT_Channel_1.xlsx",
+   "size": 39323408,
+   "crc32": "467c3d56"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_w8_RPT/Channel_3/20240801_w8_RPT_Channel_3.xlsx",
+   "size": 32753241,
+   "crc32": "9a160521"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_w9_RPT/Channel_2/20240801_w9_RPT_Channel_2.xlsx",
+   "size": 35502547,
+   "crc32": "4786cea4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_v5_RPT/Channel_2/20240801_v5_RPT_Channel_2.xlsx",
+   "size": 32557707,
+   "crc32": "07da1cb3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_v4_RPT/Channel_1/20240801_v4_RPT_Channel_1.xlsx",
+   "size": 42916430,
+   "crc32": "a421ba41"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/Capacity_test_with_pulses/20240801_w10_RPT/Channel_3/20240801_w10_RPT_Channel_3.xlsx",
+   "size": 35604068,
+   "crc32": "1c30da0d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/EIS_16/20240806_w9_EIS_400V/Channel_2/20240806_w9_EIS_400V_Channel_2.xlsx",
+   "size": 110370,
+   "crc32": "20c6553d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/EIS_16/20240806_w10_EIS_400V/Channel_3/20240806_w10_EIS_400V_Channel_3.xlsx",
+   "size": 62120,
+   "crc32": "347eb106"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/EIS_16/20240806_v4_EIS_400V/Channel_1/20240806_v4_EIS_400V_Channel_1.xlsx",
+   "size": 133313,
+   "crc32": "74c5db5a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/EIS_16/20240807_w9_EIS_326V/Channel_2/20240807_w9_EIS_326V_Channel_2.xlsx",
+   "size": 109917,
+   "crc32": "dbeda969"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/EIS_16/20240808_w10_EIS_326V/Channel_1/20240808_w10_EIS_326V_Channel_1.xlsx",
+   "size": 133585,
+   "crc32": "0d82e945"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/EIS_16/20240807_w10_EIS_363V/Channel_1/20240807_w10_EIS_363V_Channel_1.xlsx",
+   "size": 133393,
+   "crc32": "960f9cb8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/EIS_16/20240806_v4_EIS_363V/Channel_1/20240806_v4_EIS_363V_Channel_1.xlsx",
+   "size": 133460,
+   "crc32": "d03e4b65"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/EIS_16/20240806_w9_EIS_363V/Channel_2/20240806_w9_EIS_363V_Channel_2.xlsx",
+   "size": 110100,
+   "crc32": "56130233"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_16/EIS_16/20240807_v4_EIS_326V/Channel_1/20240807_v4_EIS_326V_Channel_1.xlsx",
+   "size": 133425,
+   "crc32": "b2e4dbd5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_w8_RPT/Channel_2/20231030_w8_RPT_Channel_2.xlsx",
+   "size": 11138044,
+   "crc32": "0d7fe164"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_w9_RPT/Channel_3/20231030_w9_RPT_Channel_3.xlsx",
+   "size": 11256108,
+   "crc32": "f7679ab6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_g1_RPT/Channel_6/20231030_g1_RPT_Channel_6.xlsx",
+   "size": 10999838,
+   "crc32": "a41223a5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_w10_RPT/Channel_5/20231030_w10_RPT_Channel_5.xlsx",
+   "size": 11068214,
+   "crc32": "7c6ec205"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_v5_RPT/Channel_4/20231030_v5_RPT_Channel_4.xlsx",
+   "size": 11181086,
+   "crc32": "ce1efe3c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_v5_RPT/Channel_4/_Channel_4.xlsx",
+   "size": 7665,
+   "crc32": "9c65a1ac"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/Capacity_test_with_pulses/20231030_v4_RPT/Channel_1/20231030_v4_RPT_Channel_1.xlsx",
+   "size": 13250782,
+   "crc32": "b2cbd9ce"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_v5_EIS326V/Channel_4/20231101_v5_EIS326V_Channel_4.xlsx",
+   "size": 57182,
+   "crc32": "de768e2a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_w9_EIS400V/Channel_3/20231101_w9_EIS400V_Channel_3.xlsx",
+   "size": 57127,
+   "crc32": "c09b0d00"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_w10_EIS363V/Channel_5/20231101_w10_EIS363V_Channel_5.xlsx",
+   "size": 57382,
+   "crc32": "6919dea3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_v4_EIS326V/Channel_1/20231101_v4_EIS326V_Channel_1.xlsx",
+   "size": 60985,
+   "crc32": "665e4b07"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_g1_EIS326V/Channel_6/20231101_g1_EIS326V_Channel_6.xlsx",
+   "size": 57571,
+   "crc32": "4446e6fe"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_w8_EIS400V/Channel_2/20231101_w8_EIS400V_Channel_2.xlsx",
+   "size": 57337,
+   "crc32": "a9f94321"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_w10_EIS400V/Channel_5/20231101_w10_EIS400V_Channel_5.xlsx",
+   "size": 56873,
+   "crc32": "cb87f1f4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_w8_EIS363V/Channel_2/20231101_w8_EIS363V_Channel_2.xlsx",
+   "size": 57509,
+   "crc32": "198a8b93"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_w9_EIS363V/Channel_3/20231101_w9_EIS363V_Channel_3.xlsx",
+   "size": 57485,
+   "crc32": "deb8e6a6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_v5_EIS363V/Channel_4/20231101_v5_EIS363V_Channel_4.xlsx",
+   "size": 57110,
+   "crc32": "36acc050"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_v4_EIS363V/Channel_1/20231101_v4_EIS363V_Channel_1.xlsx",
+   "size": 61114,
+   "crc32": "f5765fc4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_g1_EIS363V/Channel_6/20231101_g1_EIS363V_Channel_6.xlsx",
+   "size": 56920,
+   "crc32": "e77d27cc"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_w10_EIS326V/Channel_5/20231101_w10_EIS326V_Channel_5.xlsx",
+   "size": 57085,
+   "crc32": "633b5631"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_v4_EIS400V/Channel_1/20231101_v4_EIS400V_Channel_1.xlsx",
+   "size": 61133,
+   "crc32": "60499102"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_g1_EIS400V/Channel_6/20231101_g1_EIS400V_Channel_6.xlsx",
+   "size": 56976,
+   "crc32": "45fca673"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_w8_EIS326V/Channel_2/20231101_w8_EIS326V_Channel_2.xlsx",
+   "size": 57655,
+   "crc32": "be66e2c8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_v5_EIS400V/Channel_4/20231101_v5_EIS400V_Channel_4.xlsx",
+   "size": 57653,
+   "crc32": "f1407422"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_11/EIS_11/20231101_w9_EIS326V/Channel_3/20231101_w9_EIS326V_Channel_3.xlsx",
+   "size": 57153,
+   "crc32": "55cb6a05"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_g1_RPT/Channel_1/20241217_g1_RPT_Channel_1.xlsx",
+   "size": 41111859,
+   "crc32": "7aaedbfd"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_w8_RPT/Channel_3/20241217_w8_RPT_Channel_3.xlsx",
+   "size": 34122213,
+   "crc32": "de1d036c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_w10_RPT/Channel_2/20241217_w10_RPT_Channel_2.xlsx",
+   "size": 62946368,
+   "crc32": "3c1ffef9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_v4_RPT/Channel_1/20241217_v4_RPT_Channel_1.xlsx",
+   "size": 59370664,
+   "crc32": "2bdbdb27"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/Capacity_test_with_pulses/20241217_v5_RPT/Channel_2/20241217_v5_RPT_Channel_2.xlsx",
+   "size": 34012959,
+   "crc32": "72a07777"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/EIS_18/20241229_g1_EIS326V/Channel_1/20241229_g1_EIS326V_Channel_1.xlsx",
+   "size": 136182,
+   "crc32": "b1589144"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/EIS_18/20241222_v5_EIS400V/Channel_2/20241222_v5_EIS400V_Channel_2.xlsx",
+   "size": 111214,
+   "crc32": "39a39e30"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/EIS_18/20241229_v5_EIS326V/Channel_2/20241229_v5_EIS326V_Channel_2.xlsx",
+   "size": 110871,
+   "crc32": "bd32f822"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/EIS_18/20241220_g1_EIS400V/Channel_1/20241220_g1_EIS400V_Channel_1.xlsx",
+   "size": 134802,
+   "crc32": "d8dbb1e2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/EIS_18/20241223_w8_EIS400V/Channel_3/20241223_w8_EIS400V_Channel_3.xlsx",
+   "size": 111138,
+   "crc32": "059d6213"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/EIS_18/20241229_w8_EIS363V/Channel_3/20241229_w8_EIS363V_Channel_3.xlsx",
+   "size": 111646,
+   "crc32": "5d6c5f11"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/EIS_18/20241223_v5_EIS363V/Channel_2/20241223_v5_EIS363V_Channel_2.xlsx",
+   "size": 111101,
+   "crc32": "7d949a98"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/EIS_18/20241230_w8_EIS326V/Channel_3/20241230_w8_EIS326V_Channel_3.xlsx",
+   "size": 110571,
+   "crc32": "0340eee9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_18/EIS_18/20241223_g1_EIS363V/Channel_1/20241223_g1_EIS363V_Channel_1.xlsx",
+   "size": 135849,
+   "crc32": "0bca436e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_V4_EIS363/Channel_1/20230425_V4_EIS363_Channel_1.xlsx",
+   "size": 61204,
+   "crc32": "4be04528"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_W10_EIS363/Channel_5/20230425_W10_EIS363_Channel_5.xlsx",
+   "size": 57034,
+   "crc32": "805f0bd8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_W8_EIS363/Channel_2/20230425_W8_EIS363_Channel_2.xlsx",
+   "size": 57371,
+   "crc32": "a9f41dd8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_G1_EIS363/Channel_6/20230425_G1_EIS363_Channel_6.xlsx",
+   "size": 57159,
+   "crc32": "4368ccb0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_W9_EIS326/Channel_3/20230425_W9_EIS326_Channel_3.xlsx",
+   "size": 57179,
+   "crc32": "895d49c5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_V4_EIS400/Channel_1/20230425_V4_EIS400_Channel_1.xlsx",
+   "size": 61298,
+   "crc32": "fbfea8d2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_W10_EIS400/Channel_5/20230425_W10_EIS400_Channel_5.xlsx",
+   "size": 57424,
+   "crc32": "a8bf977f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_G1_EIS400/Channel_6/20230425_G1_EIS400_Channel_6.xlsx",
+   "size": 57272,
+   "crc32": "c56ea73f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_V5_EIS326/Channel_4/20230425_V5_EIS326_Channel_4.xlsx",
+   "size": 57164,
+   "crc32": "df31024d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_W8_EIS400/Channel_2/20230425_W8_EIS400_Channel_2.xlsx",
+   "size": 57186,
+   "crc32": "63e9fa3c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_V5_EIS363/Channel_4/20230425_V5_EIS363_Channel_4.xlsx",
+   "size": 57138,
+   "crc32": "2f04580a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_W9_EIS363/Channel_3/20230425_W9_EIS363_Channel_3.xlsx",
+   "size": 57349,
+   "crc32": "a785a5eb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_G1_EIS326/Channel_6/20230425_G1_EIS326_Channel_6.xlsx",
+   "size": 57422,
+   "crc32": "4ff0d6d9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_V5_EIS400/Channel_4/20230425_V5_EIS400_Channel_4.xlsx",
+   "size": 57485,
+   "crc32": "43f80d60"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_W8_EIS326/Channel_2/20230425_W8_EIS326_Channel_2.xlsx",
+   "size": 57400,
+   "crc32": "1bba47b2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_W9_EIS400/Channel_3/20230425_W9_EIS400_Channel_3.xlsx",
+   "size": 57475,
+   "crc32": "7506d812"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_V4_EIS326/Channel_1/20230425_V4_EIS326_Channel_1.xlsx",
+   "size": 61395,
+   "crc32": "c2352c19"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/EIS_6/20230425_W10_EIS326/Channel_5/20230425_W10_EIS326_Channel_5.xlsx",
+   "size": 57507,
+   "crc32": "7a170ef3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_w9_RPT/Channel_3/20230421_w9_RPT_Channel_3.xlsx",
+   "size": 11239805,
+   "crc32": "bc81efd4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_w8_RPT/Channel_2/20230421_w8_RPT_Channel_2.xlsx",
+   "size": 11141354,
+   "crc32": "768eed0d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_g1_RPT/Channel_6/20230421_g1_RPT_Channel_6.xlsx",
+   "size": 11044416,
+   "crc32": "e975cbaf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_v4_RPT/Channel_1/20230421_v4_RPT_Channel_1.xlsx",
+   "size": 13318936,
+   "crc32": "75ec4eb0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_v5_RPT/Channel_4/20230421_v5_RPT_Channel_4.xlsx",
+   "size": 11201523,
+   "crc32": "189bbdc1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_6/Capacity_test_with_pulses/20230421_w10_RPT/Channel_5/20230421_w10_RPT_Channel_5.xlsx",
+   "size": 11009509,
+   "crc32": "02ffecc5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_v4_RPT/Channel_1/20221114_v4_RPT_Channel_1.xlsx",
+   "size": 30308247,
+   "crc32": "75b6a8bf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_v5_RPT/Channel_4/20221114_v5_RPT_Channel_4.xlsx",
+   "size": 30568486,
+   "crc32": "42de0fdc"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_w10_RPT/Channel_5/20221114_w10_RPT_Channel_5.xlsx",
+   "size": 30229062,
+   "crc32": "b34551b9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_w9_RPT/Channel_3/20221114_w9_RPT_Channel_3.xlsx",
+   "size": 30514654,
+   "crc32": "418f61bf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_w8_RPT/Channel_2/20221114_w8_RPT_Channel_2.xlsx",
+   "size": 30084407,
+   "crc32": "689b7721"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_g1_RPT/Channel_6/20221114_g1_RPT_Channel_6_2.xlsx",
+   "size": 7356514,
+   "crc32": "54dfd4b4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_1/Capacity_test_with_pulses/20221114_g1_RPT/Channel_6/20221114_g1_RPT_Channel_6_1.xlsx",
+   "size": 30189313,
+   "crc32": "a5c0b781"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_G1_EIS363/Channel_6/20230618_G1_EIS363_Channel_6.xlsx",
+   "size": 57290,
+   "crc32": "31db9e4b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_W8_EIS363/Channel_2/20230618_W8_EIS363_Channel_2.xlsx",
+   "size": 57298,
+   "crc32": "ee95c5e2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_V4_EIS363/Channel_1/20230618_V4_EIS363_Channel_1.xlsx",
+   "size": 61365,
+   "crc32": "6f44e682"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_W8_EIS400/Channel_2/20230618_W8_EIS400_2_Channel_2.xlsx",
+   "size": 57279,
+   "crc32": "a597d99d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_G1_EIS400/Channel_6/20230618_G1_EIS400_Channel_6.xlsx",
+   "size": 57081,
+   "crc32": "0f89dc06"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_V5_EIS326/Channel_4/20230618_V5_EIS326_Channel_4.xlsx",
+   "size": 57411,
+   "crc32": "816f3afe"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_W10_EIS326/Channel_5/20230618_W10_EIS326_Channel_5.xlsx",
+   "size": 57087,
+   "crc32": "272bfb9f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_V4_EIS400/Channel_1/20230618_V4_EIS400_2_Channel_1.xlsx",
+   "size": 61256,
+   "crc32": "032dc82b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_W9_EIS326/Channel_3/20230618_W9_EIS326_Channel_3.xlsx",
+   "size": 57202,
+   "crc32": "f377d1b0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_W10_EIS363/Channel_5/20230618_W10_EIS363_Channel_5.xlsx",
+   "size": 57066,
+   "crc32": "0ecdf7c1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_W9_EIS363/Channel_3/20230618_W9_EIS363_Channel_3.xlsx",
+   "size": 57391,
+   "crc32": "eb98fe62"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_V5_EIS363/Channel_4/20230618_V5_EIS363_Channel_4.xlsx",
+   "size": 57274,
+   "crc32": "b402f67b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_W10_EIS400/Channel_5/20230618_W10_EIS400_Channel_5.xlsx",
+   "size": 182627,
+   "crc32": "547de0ce"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_V4_EIS326/Channel_1/20230618_V4_EIS326_Channel_1.xlsx",
+   "size": 61224,
+   "crc32": "c69733a2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_W9_EIS400/Channel_3/20230618_W9_EIS400_2_Channel_3.xlsx",
+   "size": 57183,
+   "crc32": "d335ef9d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_W8_EIS326/Channel_2/20230618_W8_EIS326_Channel_2.xlsx",
+   "size": 57013,
+   "crc32": "ceb030e6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_G1_EIS326/Channel_6/20230618_G1_EIS326_Channel_6.xlsx",
+   "size": 57216,
+   "crc32": "ad5ed5c9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/EIS_8/20230618_V5_EIS400/Channel_4/20230618_V5_EIS400_2_Channel_4.xlsx",
+   "size": 56899,
+   "crc32": "33963740"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_w9_RPT/Channel_3/20230616_w9_RPT_Channel_3.xlsx",
+   "size": 11203645,
+   "crc32": "9745f245"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_w8_RPT/Channel_2/20230616_w8_RPT_Channel_2.xlsx",
+   "size": 11189969,
+   "crc32": "7c6aa443"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_g1_RPT/Channel_6/20230616_g1_RPT_Channel_6.xlsx",
+   "size": 11169423,
+   "crc32": "00d48131"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_w10_RPT/Channel_5/20230616_w10_RPT_Channel_5.xlsx",
+   "size": 11251024,
+   "crc32": "6f693fb1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_v4_RPT/Channel_1/20230616_v4_RPT_Channel_1.xlsx",
+   "size": 13330771,
+   "crc32": "8cd15dfe"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_8/Capacity_test_with_pulses/20230616_v5_RPT/Channel_4/20230616_v5_RPT_Channel_4.xlsx",
+   "size": 11155948,
+   "crc32": "a0631c07"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_v4_EIS363/Channel_1/20230816_v4_EIS363_Channel_1.xlsx",
+   "size": 61142,
+   "crc32": "506b6773"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_w10_EIS326/Channel_5/20230816_w10_EIS326_Channel_5.xlsx",
+   "size": 57240,
+   "crc32": "a0c8ef5e"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_w8_EIS363/Channel_2/20230816_w8_EIS363_Channel_2.xlsx",
+   "size": 57214,
+   "crc32": "e7a725b5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_g1_EIS363/Channel_6/20230816_g1_EIS363_Channel_6.xlsx",
+   "size": 57482,
+   "crc32": "818dfa55"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_w9_EIS326/Channel_3/20230816_w9_EIS326_Channel_3.xlsx",
+   "size": 57217,
+   "crc32": "1bab72a4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_v4_EIS400/Channel_1/20230816_v4_EIS400V_EIS_Channel_1.xlsx",
+   "size": 61498,
+   "crc32": "0fd0cd05"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_v5_EIS326/Channel_4/20230816_v4_EIS326_Channel_4.xlsx",
+   "size": 57484,
+   "crc32": "31755e44"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_g1_EIS400/Channel_6/20230816_g1_EIS400V_EIS_Channel_6.xlsx",
+   "size": 57230,
+   "crc32": "80103f7b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_w8_EIS400/Channel_2/20230816_w9_EIS400V_EIS_Channel_2.xlsx",
+   "size": 57321,
+   "crc32": "2cdfbe43"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_w10_EIS400/Channel_5/20230816_w10_EIS400V_EIS_Channel_5.xlsx",
+   "size": 57390,
+   "crc32": "28294915"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_v5_EIS363/Channel_4/20230816_v5_EIS363_Channel_4.xlsx",
+   "size": 57443,
+   "crc32": "e3865aa8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_w9_EIS363/Channel_3/20230816_w9_EIS363_Channel_3.xlsx",
+   "size": 57311,
+   "crc32": "0b43c19f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_w10_EIS363/Channel_5/20230816_w10_EIS363_Channel_5.xlsx",
+   "size": 57282,
+   "crc32": "fd72b828"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_v5_EIS400/Channel_4/20230816_v5_EIS400V_EIS_Channel_4.xlsx",
+   "size": 57205,
+   "crc32": "80caee7f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_g1_EIS326/Channel_6/20230816_g1_EIS326_Channel_6.xlsx",
+   "size": 57555,
+   "crc32": "51ceea77"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_w8_EIS326/Channel_2/20230816_w8_EIS326_Channel_2.xlsx",
+   "size": 57546,
+   "crc32": "03d34a7c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_w9_EIS400/Channel_3/20230816_w9_EIS400V_EIS2_Channel_3.xlsx",
+   "size": 57495,
+   "crc32": "ad77f7ea"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/EIS_9/20230816_v4_EIS326/Channel_1/20230816_v4_EIS326_Channel_1.xlsx",
+   "size": 60835,
+   "crc32": "050d7dec"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_v4_RPT/Channel_1/20230814_v4_RPT_Channel_1.xlsx",
+   "size": 13117939,
+   "crc32": "08059ca9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_v5_RPT/Channel_4/20230814_v5_RPT_Channel_4.xlsx",
+   "size": 11122384,
+   "crc32": "199f7beb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_g1_RPT/Channel_6/20230814_g1_RPT_Channel_6.xlsx",
+   "size": 11206749,
+   "crc32": "e448bc40"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_w9_RPT/Channel_3/20230814_w9_RPT_Channel_3.xlsx",
+   "size": 11191261,
+   "crc32": "1fd811c5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_w8_RPT/Channel_2/20230814_w8_RPT_Channel_2.xlsx",
+   "size": 11158974,
+   "crc32": "c32382f1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_9/Capacity_test_with_pulses/20230814_w10_RPT/Channel_5/20230814_w10_RPT_Channel_5.xlsx",
+   "size": 11243681,
+   "crc32": "5e9be5f6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_w10_RPT/Channel_5/20230518_w10_RPT_Channel_5.xlsx",
+   "size": 11152123,
+   "crc32": "0aef1129"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_v4_RPT/Channel_1/20230518_v4_RPT_Channel_1.xlsx",
+   "size": 13304432,
+   "crc32": "ff29b4bd"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_v5_RPT/Channel_4/20230518_v5_RPT_Channel_4.xlsx",
+   "size": 11146191,
+   "crc32": "86891a13"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_w9_RPT/Channel_3/20230518_w9_RPT_Channel_3.xlsx",
+   "size": 11171837,
+   "crc32": "858d2cce"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_w8_RPT/Channel_2/20230518_w8_RPT_Channel_2.xlsx",
+   "size": 11159779,
+   "crc32": "b63aaefa"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_7/Capacity_test_with_pulses/20230518_g1_RPT/Channel_6/20230518_g1_RPT_Channel_6.xlsx",
+   "size": 11128802,
+   "crc32": "35f06d04"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_g1_RPT/Channel_6/20240203_g1_RPT_Channel_6.xlsx",
+   "size": 11118092,
+   "crc32": "37839ed7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_w8_RPT/Channel_2/20240203_w8_RPT_Channel_2.xlsx",
+   "size": 11190638,
+   "crc32": "95140eae"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_w9_RPT/Channel_3/20240203_w9_RPT_Channel_3.xlsx",
+   "size": 11258034,
+   "crc32": "3fc5f9ab"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_v5_RPT/Channel_4/20240203_v5_RPT_Channel_4.xlsx",
+   "size": 11195877,
+   "crc32": "b1c8f785"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_v4_RPT/Channel_1/20240203_v4_RPT_Channel_1.xlsx",
+   "size": 13340470,
+   "crc32": "93cd25a8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/Capacity_test_with_pulses/20240203_w10_RPT/Channel_5/20240203_w10_RPT_Channel_5.xlsx",
+   "size": 11076951,
+   "crc32": "29d86b98"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_v4_EIS363V/Channel_1/20240205_v4_EIS363V_Channel_1.xlsx",
+   "size": 61776,
+   "crc32": "4b12870b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_g1_EIS363V/Channel_6/20240205_g1_EIS363V_Channel_6.xlsx",
+   "size": 57033,
+   "crc32": "63b103b2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_w10_EIS326V/Channel_5/20240205_w10_EIS326V_Channel_5.xlsx",
+   "size": 57232,
+   "crc32": "5648b165"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_v5_EIS363V/Channel_4/20240205_v5_EIS363V_Channel_4.xlsx",
+   "size": 57324,
+   "crc32": "97c451a0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_v5_EIS400V/Channel_4/20240205_v5_EIS400V_Channel_4.xlsx",
+   "size": 57088,
+   "crc32": "7801deeb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_w9_EIS326V/Channel_3/20240205_w9_EIS326V_Channel_3.xlsx",
+   "size": 57141,
+   "crc32": "e9314c57"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_v4_EIS400V/Channel_1/20240205_v4_EIS400V_Channel_1.xlsx",
+   "size": 61198,
+   "crc32": "08047df3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_g1_EIS400V/Channel_6/20240205_g1_EIS400V_Channel_6.xlsx",
+   "size": 57592,
+   "crc32": "a73880d0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_w8_EIS326V/Channel_2/20240205_w8_EIS326V_Channel_2.xlsx",
+   "size": 57352,
+   "crc32": "1717d729"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_w10_EIS363V/Channel_5/20240205_w10_EIS363V_Channel_5.xlsx",
+   "size": 57407,
+   "crc32": "95f20cce"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_v4_EIS326V/Channel_1/20240205_v4_EIS326V_Channel_1.xlsx",
+   "size": 61856,
+   "crc32": "09d3ac3b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_g1_EIS326V/Channel_6/20240205_g1_EIS326V_Channel_6.xlsx",
+   "size": 57282,
+   "crc32": "82ab3d55"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_w8_EIS400V/Channel_2/20240205_w8_EIS400V_Channel_2.xlsx",
+   "size": 57103,
+   "crc32": "da22ca3b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_v5_EIS326V/Channel_4/20240205_v5_EIS326V_Channel_4.xlsx",
+   "size": 57483,
+   "crc32": "418bb055"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_w9_EIS400V/Channel_3/20240205_w9_EIS400V_Channel_3.xlsx",
+   "size": 57474,
+   "crc32": "0960bc5d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_w9_EIS363V/Channel_3/20240205_w9_EIS363V_Channel_3.xlsx",
+   "size": 57284,
+   "crc32": "08720cf3"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_w8_EIS363V/Channel_2/20240205_w8_EIS363V_Channel_2.xlsx",
+   "size": 57469,
+   "crc32": "d34c9dbe"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_14/EIS_14/20240205_w10_EIS400V/Channel_5/20240205_w10_EIS400V_Channel_5.xlsx",
+   "size": 57013,
+   "crc32": "3d018c6b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_w8_RPT/Channel_2/20240108_w8_RPT_Channel_2.xlsx",
+   "size": 11160595,
+   "crc32": "348ea4e0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_w9_RPT/Channel_3/20240108_w9_RPT_Channel_3.xlsx",
+   "size": 11265800,
+   "crc32": "dc7f35ec"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_w10_RPT/Channel_5/20240108_w10_RPT_Channel_5.xlsx",
+   "size": 11107137,
+   "crc32": "ff0faf47"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_g1_RPT/Channel_6/20240108_g1_RPT_Channel_6.xlsx",
+   "size": 11025141,
+   "crc32": "5c191ddf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_v5_RPT/Channel_4/20240108_v5_RPT_Channel_4.xlsx",
+   "size": 11228308,
+   "crc32": "f02c097a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/Capacity_test_with_pulses/20240108_v4_RPT/Channel_1/20240108_v4_RPT_Channel_1.xlsx",
+   "size": 13274482,
+   "crc32": "7e35b106"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_w10_EIS326V/Channel_5/20240109_w10_EIS326V_Channel_5.xlsx",
+   "size": 56892,
+   "crc32": "7bdce0b7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_g1_EIS400V/Channel_6/20240109_g1_EIS400V_Channel_6.xlsx",
+   "size": 57144,
+   "crc32": "18294aeb"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_w8_EIS326V/Channel_2/20240109_w8_EIS326V_Channel_2.xlsx",
+   "size": 57218,
+   "crc32": "f070af4c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_v4_EIS400V/Channel_1/20240109_v4_EIS400V_Channel_1.xlsx",
+   "size": 61089,
+   "crc32": "36eaf50a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_w9_EIS326V/Channel_3/20240109_w9_EIS326V_Channel_3.xlsx",
+   "size": 57358,
+   "crc32": "0ac6bb60"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_v5_EIS400V/Channel_4/20240109_v5_EIS400V_Channel_4.xlsx",
+   "size": 57435,
+   "crc32": "61dd1c70"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_v5_EIS363V/Channel_4/20240109_v5_EIS363V_Channel_4.xlsx",
+   "size": 57743,
+   "crc32": "f8b41528"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_g1_EIS363V/Channel_6/20240109_g1_EIS363V_Channel_6.xlsx",
+   "size": 57244,
+   "crc32": "e5faf063"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_v4_EIS363V/Channel_1/20240109_v4_EIS363V_2_Channel_1.xlsx",
+   "size": 61117,
+   "crc32": "7fa0fbee"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_w8_EIS363V/Channel_2/20240109_w8_EIS363V_Channel_2.xlsx",
+   "size": 56914,
+   "crc32": "83dd9a66"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_w10_EIS363V/Channel_5/20240109_w10_EIS363V_Channel_5.xlsx",
+   "size": 57186,
+   "crc32": "4a94fb68"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_w9_EIS363V/Channel_3/20240109_w9_EIS363V_2_Channel_3.xlsx",
+   "size": 57274,
+   "crc32": "e47466e5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_w9_EIS400V/Channel_3/20240109_w9_EIS400V_Channel_3.xlsx",
+   "size": 57298,
+   "crc32": "1d7b93d2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_v5_EIS326V/Channel_4/20240109_v5_EIS326V_Channel_4.xlsx",
+   "size": 57466,
+   "crc32": "78274cbd"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_g1_EIS326V/Channel_6/20240109_g1_EIS326V_Channel_6.xlsx",
+   "size": 57345,
+   "crc32": "286556f9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_w8_EIS400V/Channel_2/20240109_w8_EIS400V_Channel_2.xlsx",
+   "size": 57095,
+   "crc32": "e37c6c61"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_v4_EIS326V/Channel_1/20240109_v4_EIS326V_Channel_1.xlsx",
+   "size": 61469,
+   "crc32": "c3e75aad"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_13/EIS_13/20240109_w10_EIS400V/Channel_5/20240109_w10_EIS400V_Channel_5.xlsx",
+   "size": 56954,
+   "crc32": "96732b72"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_g1_RPT/Channel_6/20231128_g1_RPT_Channel_6.xlsx",
+   "size": 11071307,
+   "crc32": "e886b6b9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_w9_RPT/Channel_3/20231128_w9_RPT_Channel_3.xlsx",
+   "size": 11292124,
+   "crc32": "1e0d95a5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_w8_RPT/Channel_2/20231128_w8_RPT_Channel_2.xlsx",
+   "size": 11199350,
+   "crc32": "907cc207"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_v4_RPT/Channel_1/20231128_v4_RPT_Channel_1.xlsx",
+   "size": 13334381,
+   "crc32": "7b2265bf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_v5_RPT/Channel_4/20231128_v5_RPT_Channel_4.xlsx",
+   "size": 11226045,
+   "crc32": "1feaba51"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/Capacity_test_with_pulses/20231128_w10_RPT/Channel_5/20231128_w10_RPT_Channel_5.xlsx",
+   "size": 11154643,
+   "crc32": "019b4cb1"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_w10_EIS400V/Channel_5/20231202_w10_EIS400V_Channel_5.xlsx",
+   "size": 57088,
+   "crc32": "a7dc9f5a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_v4_EIS326V/Channel_1/20231202_v4_EIS326V_Channel_1.xlsx",
+   "size": 61483,
+   "crc32": "ff3fa8e9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_g1_EIS326V/Channel_6/20231202_g1_EIS326V_Channel_6.xlsx",
+   "size": 57197,
+   "crc32": "5e7328fc"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_w8_EIS400V/Channel_2/20231202_w8_EIS400V_Channel_2.xlsx",
+   "size": 57315,
+   "crc32": "00e268db"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_v5_EIS326V/Channel_4/20231202_v5_EIS326V_Channel_4.xlsx",
+   "size": 57667,
+   "crc32": "8eeb3e36"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_w9_EIS400V/Channel_3/20231202_w9_EIS400V_Channel_3.xlsx",
+   "size": 56737,
+   "crc32": "7f8278b0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_w9_EIS363V/Channel_3/20231202_w9_EIS363V_Channel_3.xlsx",
+   "size": 57151,
+   "crc32": "ef27451f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_w8_EIS363V/Channel_2/20231202_w8_EIS363V_Channel_2.xlsx",
+   "size": 57247,
+   "crc32": "8fe0a5c0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_w10_EIS363V/Channel_5/20231202_w10_EIS363V_Channel_5.xlsx",
+   "size": 57491,
+   "crc32": "f7cc9430"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_v4_EIS363V/Channel_1/20231202_v4_EIS363V_Channel_1.xlsx",
+   "size": 61852,
+   "crc32": "5857d59d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_g1_EIS363V/Channel_6/20231202_g1_EIS363V_Channel_6.xlsx",
+   "size": 57350,
+   "crc32": "e4849c27"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_v5_EIS363V/Channel_4/20231202_v5_EIS363V_Channel_4.xlsx",
+   "size": 57563,
+   "crc32": "4d03c6ca"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_v5_EIS400V/Channel_4/20231202_v5_EIS400V_Channel_4.xlsx",
+   "size": 57376,
+   "crc32": "0b8d6050"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_w9_EIS326V/Channel_3/20231202_w9_EIS326V_Channel_3.xlsx",
+   "size": 57479,
+   "crc32": "04d278f5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_w10_EIS326V/Channel_5/20231202_w10_EIS326V_Channel_5.xlsx",
+   "size": 57482,
+   "crc32": "d724bc42"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_v4_EIS400V/Channel_1/20231202_v4_EIS400V_Channel_1.xlsx",
+   "size": 61466,
+   "crc32": "a2e014b4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_g1_EIS400V/Channel_6/20231202_g1_EIS400V_Channel_6.xlsx",
+   "size": 56753,
+   "crc32": "abbb8df5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_12/EIS_12/20231202_w8_EIS326V/Channel_2/20231202_w8_EIS326V_Channel_2.xlsx",
+   "size": 57269,
+   "crc32": "05574295"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_g1_RPT/Channel_6/20240409_g1_RPT_Channel_6.xlsx",
+   "size": 34020883,
+   "crc32": "54f51bd4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_w9_RPT/Channel_3/20240409_w9_RPT_Channel_3.xlsx",
+   "size": 34274321,
+   "crc32": "aa260c4b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_w8_RPT/Channel_2/20240409_w8_RPT_Channel_2.xlsx",
+   "size": 34101411,
+   "crc32": "a0fc8588"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_w10_RPT/Channel_5/20240409_w10_RPT_Channel_5.xlsx",
+   "size": 34198434,
+   "crc32": "c84d266c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_v4_RPT/Channel_1/20240409_v4_RPT_Channel_1.xlsx",
+   "size": 41426827,
+   "crc32": "52a3dc45"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/Capacity_test_with_pulses/20240409_v5_RPT/Channel_4/20240409_v5_RPT_Channel_4.xlsx",
+   "size": 34124003,
+   "crc32": "8bd226d8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_v4_EIS363V/Channel_1/20240411_v4_EIS363V_Channel_1.xlsx",
+   "size": 61420,
+   "crc32": "0ba2eaef"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_g1_EIS363V/Channel_6/20240411_g1_EIS363V_Channel_6.xlsx",
+   "size": 57351,
+   "crc32": "30a87b8b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_v5_EIS363V/Channel_4/20240411_v5_EIS363V_Channel_4.xlsx",
+   "size": 57754,
+   "crc32": "9569dfa6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_v5_EIS400V/Channel_4/20240411_v5_EIS400V_Channel_4.xlsx",
+   "size": 57223,
+   "crc32": "4a8fc3f9"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_w9_EIS326V/Channel_3/20240411_w9_EIS326V_Channel_3.xlsx",
+   "size": 57366,
+   "crc32": "9657124c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_w10_EIS326V/Channel_5/20240411_w10_EIS326V_Channel_5.xlsx",
+   "size": 57453,
+   "crc32": "c1f9943a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_v4_EIS400V/Channel_1/20240411_v4_EIS400V_Channel_1.xlsx",
+   "size": 61274,
+   "crc32": "17fcf7aa"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_w8_EIS326V/Channel_2/20240411_w8_EIS326V_Channel_2.xlsx",
+   "size": 57337,
+   "crc32": "29f5f1fe"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_g1_EIS400V/Channel_6/20240411_g1_EIS400V_Channel_6.xlsx",
+   "size": 57078,
+   "crc32": "ae8031d7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_w10_EIS400V/Channel_5/20240411_w10_EIS400V_Channel_5.xlsx",
+   "size": 57153,
+   "crc32": "6d124171"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_v4_EIS326V/Channel_1/20240411_v4_EIS326V_Channel_1.xlsx",
+   "size": 61839,
+   "crc32": "ddb9b6c4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_w8_EIS400V/Channel_2/20240411_w8_EIS400V_Channel_2.xlsx",
+   "size": 57565,
+   "crc32": "7ffb9075"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_g1_EIS326V/Channel_6/20240411_g1_EIS326V_Channel_6.xlsx",
+   "size": 59833,
+   "crc32": "94553249"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_v5_EIS326V/Channel_4/20240411_v5_EIS326V_Channel_4.xlsx",
+   "size": 60008,
+   "crc32": "64c2c61c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_w9_EIS400V/Channel_3/20240411_w9_EIS400V_Channel_3.xlsx",
+   "size": 57274,
+   "crc32": "2afcdb83"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_w9_EIS363V/Channel_3/20240411_w9_EIS363V_Channel_3.xlsx",
+   "size": 57369,
+   "crc32": "bf8ed1d6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_w8_EIS363V/Channel_2/20240411_w8_EIS363V_Channel_2.xlsx",
+   "size": 56988,
+   "crc32": "b9eeb1ea"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_15/EIS_15/20240411_w10_EIS363V/Channel_5/20240411_w10_EIS363V_Channel_5.xlsx",
+   "size": 57389,
+   "crc32": "7c1eba36"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_w9_RPT/Channel_3/20221216_w9_RPT_Channel_3.xlsx",
+   "size": 11353524,
+   "crc32": "bcb3c8ef"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_w8_RPT/Channel_2/20221216_w8_RPT_Channel_2.xlsx",
+   "size": 11174434,
+   "crc32": "9018e04d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_g1_RPT/Channel_6/20221216_g1_RPT_Channel_6.xlsx",
+   "size": 11081801,
+   "crc32": "88453250"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_v4_RPT/Channel_1/20221216_v4_RPT_Channel_1.xlsx",
+   "size": 13317072,
+   "crc32": "aae44dc5"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_v5_RPT/Channel_4/20221216_v5_RPT_Channel_4.xlsx",
+   "size": 11242472,
+   "crc32": "1b789e07"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_2/Capacity_test_with_pulses/20221216_w10_RPT/Channel_5/20221216_w10_RPT_Channel_5.xlsx",
+   "size": 11152379,
+   "crc32": "7abde84a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_v5_RPT/Channel_4/20230322_v5_RPT_Channel_4.xlsx",
+   "size": 10732301,
+   "crc32": "6be5e8e8"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_v4_RPT/Channel_1/20230322_v4_RPT_Channel_1.xlsx",
+   "size": 13622137,
+   "crc32": "5422c096"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_g1_RPT/Channel_6/20230322_g1_RPT_Channel_6.xlsx",
+   "size": 10672282,
+   "crc32": "66328b3c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_w8_RPT/Channel_2/20230322_w8_RPT_Channel_2.xlsx",
+   "size": 10670189,
+   "crc32": "0341911b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_w9_RPT/Channel_3/20230322_w9_RPT_Channel_3.xlsx",
+   "size": 11496543,
+   "crc32": "a06cafd6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/Capacity_test_with_pulses/20230322_w10_RPT/Channel_5/20230322_w10_RPT_Channel_5.xlsx",
+   "size": 11431278,
+   "crc32": "9d4d19da"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_W10_EIS400/Channel_5/20230327_W10_EIS400_Channel_5.xlsx",
+   "size": 57153,
+   "crc32": "e1bcc7c6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_W8_EIS400/Channel_2/20230327_W8_EIS400_Channel_2.xlsx",
+   "size": 57222,
+   "crc32": "9a2b03ab"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_V5_EIS326/Channel_4/20230327_V5_EIS326_Channel_4.xlsx",
+   "size": 57277,
+   "crc32": "ce8832f0"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_G1_EIS400/Channel_6/20230327_G1_EIS400_Channel_6.xlsx",
+   "size": 57117,
+   "crc32": "fbc9cb95"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_V4_EIS400/Channel_1/20230327_V4_EIS400_Channel_1.xlsx",
+   "size": 61112,
+   "crc32": "2bbbffea"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_W9_EIS326/Channel_3/20230327_W9_EIS326_Channel_3.xlsx",
+   "size": 57472,
+   "crc32": "32138336"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_G1_EIS363/Channel_6/20230327_G1_EIS363_Channel_6.xlsx",
+   "size": 57205,
+   "crc32": "2c756734"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_W8_EIS363/Channel_2/20230327_W8_EIS363_Channel_2.xlsx",
+   "size": 56934,
+   "crc32": "3800896d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_W10_EIS363/Channel_5/20230327_W10_EIS363_Channel_5.xlsx",
+   "size": 57388,
+   "crc32": "faa7bd44"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_V4_EIS363/Channel_1/20230327_V4_EIS363_Channel_1.xlsx",
+   "size": 60992,
+   "crc32": "60369712"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_V4_EIS326/Channel_1/20230327_V4_EIS326_Channel_1.xlsx",
+   "size": 60894,
+   "crc32": "a42765d7"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_W9_EIS400/Channel_3/20230327_W9_EIS400_Channel_3.xlsx",
+   "size": 57392,
+   "crc32": "c2c6a521"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_W10_EIS326/Channel_5/20230327_W10_EIS326_Channel_5.xlsx",
+   "size": 57263,
+   "crc32": "a76c3881"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_W8_EIS326/Channel_2/20230327_W8_EIS326_Channel_2.xlsx",
+   "size": 57245,
+   "crc32": "09a9d82d"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_V5_EIS400/Channel_4/20230327_V5_EIS400_Channel_4.xlsx",
+   "size": 57175,
+   "crc32": "dba9290a"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_G1_EIS326/Channel_6/20230327_G1_EIS326_Channel_6.xlsx",
+   "size": 57345,
+   "crc32": "02d8c8da"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_W9_EIS363/Channel_3/20230327_W9_EIS363_Channel_3.xlsx",
+   "size": 56997,
+   "crc32": "c64c60ee"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_5/EIS_5/20230327_V5_EIS363/Channel_4/20230327_V5_EIS363_Channel_4.xlsx",
+   "size": 57430,
+   "crc32": "a2cb5018"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_v4_RPT/Channel_1/20230228_sd_v4_RPT_Channel_1.xlsx",
+   "size": 13330139,
+   "crc32": "aaa19457"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_v5_RPT/Channel_4/20230228_sd_v5_RPT_Channel_4.xlsx",
+   "size": 11224318,
+   "crc32": "6bb56baf"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_w9_RPT/Channel_3/20230228_sd_w9_RPT_Channel_3.xlsx",
+   "size": 11275563,
+   "crc32": "42bfa0b6"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_w8_RPT/Channel_2/20230228_sd_w8_RPT_Channel_2.xlsx",
+   "size": 11145069,
+   "crc32": "e912236c"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_w10_RPT/Channel_5/20230228_sd_w10_RPT_Channel_5.xlsx",
+   "size": 11109115,
+   "crc32": "6e647106"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_4/Capacity_test_with_pulses/20230228_g1_RPT/Channel_6/20230228_sd_g1_RPT_Channel_6.xlsx",
+   "size": 11083135,
+   "crc32": "f2bba10f"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_g1_RPT/Channel_6/20230116_g1_RPT_Channel_6.xlsx",
+   "size": 11068775,
+   "crc32": "4f179dc4"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_w10_RPT/Channel_5/20230116_w10_RPT_Channel_5.xlsx",
+   "size": 11162462,
+   "crc32": "6e715b9b"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_w9_RPT/Channel_3/20230116_w9_RPT_Channel_3.xlsx",
+   "size": 11303484,
+   "crc32": "a0ce7098"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_w8_RPT/Channel_2/20230116_w8_RPT_Channel_2.xlsx",
+   "size": 11165020,
+   "crc32": "49347d44"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_v4_RPT/Channel_1/20230116_v4_RPT_Channel_1.xlsx",
+   "size": 13291587,
+   "crc32": "53abebd2"
+  },
+  {
+   "name": "SL_Dataset_SECL_INR21700-M50T/diagnostic_tests/RPT_3/Capacity_test_with_pulses/20230116_v5_RPT/Channel_4/20230116_v5_RPT_Channel_4.xlsx",
+   "size": 11257861,
+   "crc32": "01e64995"
+  }
+ ]
+}

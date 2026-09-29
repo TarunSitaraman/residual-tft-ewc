@@ -4,7 +4,7 @@ The handover CSV datasets are **not stored in Git**. CSV files are ignored by `.
 
 ## Providing the data
 
-The handover data are published at `https://huggingface.co/datasets/TarunSitaraman/second-life-ev-battery-datasets`. In a cloud session the environment's network access must allow `huggingface.co` (and its download hosts); then download the seven CSVs into `data/`. See `docs/DATA_REPORT.md` for how the delivered files differ from the handover description.
+The handover data are a processed subset of the Stanford second-life dataset (Moy et al., 2024; doi:10.17605/OSF.IO/8JNR5; CC BY 4.0). See `docs/EXTERNAL_DATA.md` for citation, licence, file hashes and attribution duties. A mirror is published at `https://huggingface.co/datasets/TarunSitaraman/second-life-ev-battery-datasets`. In a cloud session the environment's network access must allow `huggingface.co` (and its download hosts); then download the seven CSVs into `data/`. See `docs/DATA_REPORT.md` for how the delivered files differ from the handover description.
 
 The notebooks read every file from `DATA_ROOT`:
 

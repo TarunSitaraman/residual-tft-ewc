@@ -10,6 +10,17 @@
 
 ---
 
+## Data source and licence
+
+All data come from the public **Stanford second-life dataset** (six LG Chem INR21700-M50T cells), used under **CC BY 4.0**:
+
+- K. Moy, M. A. Khan, S. Fasolato, G. Pozzato, A. Allam and S. Onori, "Second-life lithium-ion battery aging dataset based on grid storage cycling," *Data in Brief*, vol. 57, 111046, 2024. doi:10.1016/j.dib.2024.111046
+- Dataset: Open Science Framework, doi:10.17605/OSF.IO/8JNR5 (file version 2, 27 Feb 2025).
+
+The CSVs this project reads are a processed subset of that dataset (merged cycling data, extracted RPT capacities, SOH labels, derived features); they are not endorsed by the original authors. `docs/EXTERNAL_DATA.md` records every external source with citation, licence, version, hashes and verification.
+
+The heterogeneity in this dataset is first-life ageing and second-life duty cycle among cells of one type. The broader heterogeneity described below (chemistries, manufacturers) motivates the work but is not present in these data.
+
 ## 1. Project Overview
 
 This project develops a **continual-learning framework** for adaptive health and reuse assessment of heterogeneous second-life EV batteries. The core challenge is enabling a model to learn from progressively arriving battery groups while retaining knowledge from earlier batteries (avoiding catastrophic forgetting), and ultimately supporting practical reuse decisions.
