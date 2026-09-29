@@ -90,9 +90,28 @@ The limiting factor is the data, not the method. Total fade is only 3–5 pp alo
 | Missing-temperature robustness (E11) | Low relevance: 0.5 % missing in labelled data |
 | TFT + EWC | Would mostly learn a time trend from uninformative inputs |
 
-## 5. Options (team decision)
+## 5. Raw diagnostic features (notebook 11, decision D16)
+
+The raw RPT and EIS files from the public archive give one row of 48 features per (battery, RPT). See `docs/DECISIONS.md` D16 for definitions and selection rules. Summary: `results/diagnostic_features.json`.
+
+- **Validation.** RPT 7 EIS was decoded from the aggregate files, and its R0 equals the authors' own high-frequency resistance for all 18 values. Pulse resistances (29–32 mΩ) and R0 (about 25–27 mΩ) match the ranges in the article.
+- **Health tracking.** Almost every feature tracks SOH within each battery, with the same sign in all six cells:
+  - the IC peak height near 4.07 V falls smoothly (median within-battery ρ = 0.97);
+  - pulse and EIS resistances rise (|ρ| ≈ 0.85–0.94).
+- **Forecasting relevance.** Against the next SOH change (the part a forecaster must predict beyond persistence), associations are weak: median |ρ| ≤ 0.3, with consistent signs in at most 5 of 6 cells.
+  - The features describe the current state well, but the data offer little evidence that they predict the next increment.
+  - With about 15 RPT pairs per cell, this test has low power.
+- **Common-mode shifts.** EIS R0 moves for all cells together at some RPTs (e.g. RPT 11 and 15). Arc resistance and the charge below 3.26 V alternate from RPT to RPT, most strongly in the residential cells (v4, w9, w10). The likely cause is measurement or storage conditions (the preceding cycling batch alternates 20/35 °C), not ageing. This is not yet tested.
+- **Data-quality findings:**
+  - RPT 2 was run at about 20 °C.
+  - Pulses were off protocol in RPT 1 (4.00 V) and for v4 and w10 in RPT 17–19.
+  - Galvanostatic EIS was excluded for w8 in RPT 17 and 19.
+  - EIS is missing for most cells at RPT 16 and for v4 and w10 at RPT 17–19.
+- **Label issue (open).** The handover capacity includes the pulse charge. The v4 and w10 labels at RPT 17–19 are therefore about 0.17 pp lower than they would be under the standard pulses. The recommended fix is to label with the C/20 capacity (D16).
+
+## 6. Options (team decision)
 
 1. **Reframe the task as SOH forecasting.** Predict SOH several RPTs ahead from the RPT history, health indicators and usage. Persistence and linear extrapolation are then the baselines to beat, and this is the TFT's native task.
 2. **Add public datasets with larger and more varied fade**, for example the first-life data of the same cells and other chemistries, so that continual learning, heterogeneity and reuse classes become meaningful. This is the strongest route to a novel, defensible paper.
-3. **Use the EIS spectra and raw RPT curves from the public archive.** They are not in the handover, but OSF version 2 contains 237 EIS files and 112 raw RPT files under the same licence (`docs/EXTERNAL_DATA.md` S1). Impedance and capacity-test curves are the strongest known health indicators.
+3. **Use the EIS spectra and raw RPT curves from the public archive** (done: §5, notebook 11). They are not in the handover, but OSF version 2 contains 237 EIS files and 112 raw RPT files under the same licence (`docs/EXTERNAL_DATA.md` S1). Impedance and capacity-test curves are the strongest known health indicators.
 4. **Any change to pre-registered choices** (reuse cut-points, task definition) must be reported as made after seeing the data.
