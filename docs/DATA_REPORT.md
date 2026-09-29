@@ -9,7 +9,7 @@ Regenerate every number and figure by running the notebooks; figures are written
 | Item | Value |
 |---|---|
 | Batteries | 6: g1, v4, v5, w8, w9, w10 |
-| Period | Oct 2022 – Jan 2025 (~27 months); w9 ends Mar 2024 |
+| Period | Oct 2022 – Jan 2025 (~27 months); w9 cycling ends Mar 2024, but it has one more RPT on 1 Aug 2024 (RPT_16, after ~4 months without cycling) |
 | RPTs | 19 per battery (w9: 16), roughly monthly; 111 in total |
 | RPT gap | no RPTs between days ~510 and ~625; SOH rises at the next RPT for every battery (likely recovery after the long rest) |
 | SOH range | 100 % → 95.1–97.5 % (total fade 2.5–4.9 pp) |

@@ -32,6 +32,17 @@ Expected files:
 | `final_battery_health_dataset.csv` | RPT capacity and SOH progression per battery |
 | `final_battery_cycling_features.csv` | Cycle-level cycling features |
 
+## Raw diagnostic tests (RPT curves and EIS spectra)
+
+The handover lacks the raw RPT capacity tests and the EIS spectra. They come from the public archive (S1 in `docs/EXTERNAL_DATA.md`, CC BY 4.0). To fetch them:
+
+```bash
+python scripts/fetch_osf_diagnostics.py      # about 2.15 GB download; checks the archive SHA-256
+```
+
+- The files go to `data/raw/osf_8jnr5_v2/diagnostic_tests/RPT_#/`, which is git-ignored.
+- Each file is CRC-32-checked on extraction, and its SHA-256 is recorded in the manifest in `docs/external_data/metadata/`.
+
 ## Revised handover package
 
 The revised external handover may provide `ml_ready_dataset.csv` instead of
