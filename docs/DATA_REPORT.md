@@ -19,9 +19,13 @@ Regenerate every number and figure by running the notebooks; figures are written
 | Missing temperature | 0.5 % of labelled rows; 4.9 % of point-level rows |
 | EIS | measured at 3.26 / 3.63 / 4.00 V on 12–20 dates per battery, but **the spectra are not in the handover** (only file references with capacity 0) |
 
-Provenance: battery IDs, dates, protocol and duration are consistent with the public Stanford second-life dataset (Moy et al., *Data in Brief*, 2024). This still needs explicit confirmation before it is stated in the paper.
+**Provenance (confirmed 29 Sep 2026).** The handover is a processed subset of the public Stanford second-life dataset, file version 2 (Moy et al., *Data in Brief* 57, 111046, 2024; data doi:10.17605/OSF.IO/8JNR5, CC BY 4.0).
 
-**Heterogeneity is limited.** All six are the same cell type, at the same ~27 °C, with the same 1C discharge. They differ in the CC charge current in the duty cycle (1.46 vs 1.74 A) and in the depth of discharge (minimum voltage 2.6 V for v4 and w10 vs 3.1–3.3 V for the others). Their SOH trajectories are nearly identical, except v5, which fades faster.
+- All 337 file references in `rpt_capacity_data.csv` and all 103 cell × cycling-test blocks match the OSF archive.
+- Full citations, licence, version, hashes and attribution duties: `docs/EXTERNAL_DATA.md`.
+- Check script: `scripts/verify_external_data.py`.
+
+**Heterogeneity is limited.** According to the source, the cells differ in first-life charge rate (C/4 to 3C) and second-life duty cycle (residential: v4, w9, w10; commercial: w8, v5, g1); see `docs/EXTERNAL_DATA.md` S1. All six are the same cell type, under the same temperature schedule (alternating 20 and 35 °C), with the same 1C discharge. They differ in the CC charge current in the duty cycle (1.46 vs 1.74 A) and in the depth of discharge (minimum voltage 2.6 V for v4 and w10 vs 3.1–3.3 V for the others). Their SOH trajectories are nearly identical, except v5, which fades faster.
 
 ## 2. Mismatches with the handover description (fixed in the pipeline)
 
@@ -90,5 +94,5 @@ The limiting factor is the data, not the method. Total fade is only 3–5 pp alo
 
 1. **Reframe the task as SOH forecasting.** Predict SOH several RPTs ahead from the RPT history, health indicators and usage. Persistence and linear extrapolation are then the baselines to beat, and this is the TFT's native task.
 2. **Add public datasets with larger and more varied fade**, for example the first-life data of the same cells and other chemistries, so that continual learning, heterogeneity and reuse classes become meaningful. This is the strongest route to a novel, defensible paper.
-3. **Request the EIS spectra and raw RPT curves** from the data owner, if still possible. Impedance and capacity-test curves are the strongest known health indicators, and the files evidently exist.
+3. **Use the EIS spectra and raw RPT curves from the public archive.** They are not in the handover, but OSF version 2 contains 237 EIS files and 112 raw RPT files under the same licence (`docs/EXTERNAL_DATA.md` S1). Impedance and capacity-test curves are the strongest known health indicators.
 4. **Any change to pre-registered choices** (reuse cut-points, task definition) must be reported as made after seeing the data.

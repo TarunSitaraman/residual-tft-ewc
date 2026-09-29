@@ -27,7 +27,7 @@ The 80/60/40 bands in `PLAN_OF_ACTION.md` §3.2.3 applied to `SOH_Percent` shoul
 
 ### 1.1 Provenance finding that changes the options
 
-The six battery IDs in the handover (g1, v4, v5, w8, w9, w10) exactly match the six cells of the public Stanford second-life dataset [D2]. In that dataset, cells V4 and W8 were cycled at low C-rates, W9 and V5 at 1C, and W10 and G1 at 3C. Its six cells are INR21700-M50T cells (NMC cathode, graphite/silicon anode), previously aged for 23 months on UDDS driving profiles in the first-life dataset [D1], then cycled for 24 months on synthetic grid-storage duty cycles, alternating between 20 °C and 35 °C [D2, D3]. The nominal capacity reported for the cell is 4.85 Ah [D2]; this value comes from a search-index summary and must be confirmed against the paper or the manufacturer datasheet.
+The six battery IDs in the handover (g1, v4, v5, w8, w9, w10) exactly match the six cells of the public Stanford second-life dataset [D2]. In that dataset, cells V4 and W8 were cycled at low C-rates, W9 and V5 at 1C, and W10 and G1 at 3C. Its six cells are INR21700-M50T cells (NMC cathode, graphite/silicon anode), previously aged for 23 months on UDDS driving profiles in the first-life dataset [D1], then cycled for 24 months on synthetic grid-storage duty cycles, alternating between 20 °C and 35 °C [D2]. The nominal capacity is 4.85 Ah (Table 1 of [D2], citing the manufacturer's specification). *Update 29 Sep 2026:* the provenance, the cell-to-C-rate assignment and the nominal capacity are now confirmed against the full text of [D2] and the OSF archive; see `docs/EXTERNAL_DATA.md`.
 
 **This match is a hypothesis, not a confirmed fact:** the handover does not name its source. If it is confirmed (checks in §3, option b):
 
@@ -71,11 +71,11 @@ Notation: `F = 100 − SOH_Percent` is the fade in percentage points (pp) since 
 
 - **Data:** `Capacity_Ah` and `Reference_Capacity_Ah`, plus an external anchor `C_anchor`:
   - preferred: each cell's beginning-of-life RPT capacity from the first-life dataset [D1], measured with the lab's own protocol;
-  - fallback: rated capacity from the datasheet (4.85 Ah as reported [D2], to be confirmed).
+  - fallback: rated capacity from the datasheet (4.85 Ah, Table 1 of [D2]).
 - **Formula:** `SOH_abs = Capacity_Ah / C_anchor * 100`, to which capacity-based literature conventions can be applied.
 - **Required checks before use:**
   1. Cycle date range starts around 28 Oct 2022, as reported for [D2].
-  2. `Voltage_Min`/`Voltage_Max` are consistent with the 3–4 V window reported for the second-life protocol [D3].
+  2. `Voltage_Min`/`Voltage_Max` are consistent with the second-life protocol described in [D2] (the 3–4 V window was previously attributed to [D3], whose full text has not been checked).
   3. Temperature alternates between about 20 °C and 35 °C [D2].
   4. `Reference_Capacity_Ah` matches the first second-life capacity in [D2] to within rounding.
   5. The capacity test C-rate matches between the anchor and the handover RPTs. A datasheet rating at a different rate biases `SOH_abs`.
@@ -180,7 +180,7 @@ Implementation: `np.digitize(100 - soh, [5, 10, 20], right=False)` gives 0–3 w
 
 - [ ] Adopt option (a) with cut-points 95 / 90 / 80 and neutral class names as the primary rule (or amend it) **before** the real-data run.
 - [ ] Commit this document before W0 so that the pre-registration is timestamped.
-- [ ] Run the provenance checks in §3(b) as soon as the data is mounted, and record the result.
+- [x] Run the provenance checks in §3(b) as soon as the data is mounted, and record the result. Done 29 Sep 2026: file-level match with OSF version 2 (`docs/EXTERNAL_DATA.md`, `scripts/verify_external_data.py`).
 - [ ] If the provenance is confirmed: cite [D1–D3], revise the "heterogeneous" wording, check the licence, and decide whether to download beginning-of-life capacities from [D1] for S-b.
 - [ ] Choose the E10 headline unit: RPT interval (recommended) or row.
 - [ ] Decide whether the multi-task reuse head stays in the paper or becomes a secondary comparison against thresholded regression.
@@ -196,8 +196,8 @@ Bibliographic data verified against publisher or index records (title, authors, 
 **Data origin (candidate; see §1.1)**
 
 - [D1] G. Pozzato, A. Allam, S. Onori, "Lithium-ion battery aging dataset based on electric vehicle real-driving profiles," *Data in Brief*, vol. 41, 107995, 2022. doi:10.1016/j.dib.2022.107995. Data: https://osf.io/qsabn/
-- [D2] K. Moy, M. A. Khan, S. Fasolato, G. Pozzato, A. Allam, S. Onori, "Second-life lithium-ion battery aging dataset based on grid storage cycling," *Data in Brief*, vol. 57, 111046, 2024. doi:10.1016/j.dib.2024.111046. Data: https://osf.io/8jnr5/ (the nominal-capacity figure and the cell-to-C-rate assignment come from search-index summaries†)
-- [D3] X. Cui, M. A. Khan, G. Pozzato, S. Singh, R. Sharma, S. Onori, "Taking second-life batteries from exhausted to empowered using experiments, data analysis, and health estimation," *Cell Reports Physical Science*, vol. 5, 101941, 2024. doi:10.1016/j.xcrp.2024.101941 (README ref. [5])
+- [D2] K. Moy, M. A. Khan, S. Fasolato, G. Pozzato, A. Allam, S. Onori, "Second-life lithium-ion battery aging dataset based on grid storage cycling," *Data in Brief*, vol. 57, 111046, 2024. doi:10.1016/j.dib.2024.111046. Data: doi:10.17605/OSF.IO/8JNR5 (CC BY 4.0). Checked against the full text (PMC11639452) on 29 Sep 2026; see `docs/EXTERNAL_DATA.md`.
+- [D3] X. Cui, M. A. Khan, G. Pozzato, S. Singh, R. Sharma, S. Onori, "Taking second-life batteries from exhausted to empowered using experiments, data analysis, and health estimation," *Cell Reports Physical Science*, vol. 5, 101941, 2024. doi:10.1016/j.xcrp.2024.101941 (README ref. [5]). Metadata verified; whether it uses the same cells is not verified.
 
 **Literature**
 

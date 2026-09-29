@@ -1,0 +1,298 @@
+{
+ "data": {
+  "id": "10.17605/osf.io/8jnr5",
+  "type": "dois",
+  "attributes": {
+   "doi": "10.17605/osf.io/8jnr5",
+   "prefix": "10.17605",
+   "suffix": "osf.io/8jnr5",
+   "identifiers": [
+    {
+     "identifier": "https://osf.io/8jnr5",
+     "identifierType": "URL"
+    }
+   ],
+   "alternateIdentifiers": [
+    {
+     "alternateIdentifierType": "URL",
+     "alternateIdentifier": "https://osf.io/8jnr5"
+    }
+   ],
+   "creators": [
+    {
+     "name": "simona onori, ",
+     "nameType": "Personal",
+     "familyName": "simona onori",
+     "affiliation": [],
+     "nameIdentifiers": [
+      {
+       "schemeUri": "https://orcid.org",
+       "nameIdentifier": "https://orcid.org/0000-0002-6556-2608",
+       "nameIdentifierScheme": "ORCID"
+      },
+      {
+       "nameIdentifier": "https://osf.io/pjqb2",
+       "nameIdentifierScheme": "URL"
+      }
+     ]
+    },
+    {
+     "name": "Khan, Muhammad Aadil",
+     "nameType": "Personal",
+     "givenName": "Muhammad Aadil",
+     "familyName": "Khan",
+     "affiliation": [],
+     "nameIdentifiers": [
+      {
+       "nameIdentifier": "https://osf.io/gd59b",
+       "nameIdentifierScheme": "URL"
+      }
+     ]
+    }
+   ],
+   "titles": [
+    {
+     "title": "Second-life lithium-ion battery aging dataset based on grid storage cycling"
+    }
+   ],
+   "publisher": "OSF",
+   "container": {},
+   "publicationYear": 2024,
+   "subjects": [
+    {
+     "subject": "Mechanical Engineering",
+     "subjectScheme": "bepress Digital Commons Three-Tiered Taxonomy"
+    },
+    {
+     "subject": "FOS: Mechanical engineering",
+     "schemeUri": "http://www.oecd.org/science/inno/38235147.pdf",
+     "subjectScheme": "Fields of Science and Technology (FOS)"
+    },
+    {
+     "subject": "Power and Energy",
+     "subjectScheme": "bepress Digital Commons Three-Tiered Taxonomy"
+    },
+    {
+     "subject": "Energy Systems",
+     "subjectScheme": "bepress Digital Commons Three-Tiered Taxonomy"
+    },
+    {
+     "subject": "Electrical and Computer Engineering",
+     "subjectScheme": "bepress Digital Commons Three-Tiered Taxonomy"
+    },
+    {
+     "subject": "Engineering",
+     "subjectScheme": "bepress Digital Commons Three-Tiered Taxonomy"
+    }
+   ],
+   "contributors": [
+    {
+     "name": "Center for Open Science",
+     "nameType": "Organizational",
+     "affiliation": [],
+     "contributorType": "HostingInstitution",
+     "nameIdentifiers": [
+      {
+       "nameIdentifier": "https://cos.io/",
+       "nameIdentifierScheme": "URL"
+      },
+      {
+       "schemeUri": "https://ror.org",
+       "nameIdentifier": "https://ror.org/05d5mza29",
+       "nameIdentifierScheme": "ROR"
+      }
+     ]
+    }
+   ],
+   "dates": [
+    {
+     "date": "2024-07-11",
+     "dateType": "Created"
+    },
+    {
+     "date": "2025-06-18",
+     "dateType": "Updated"
+    },
+    {
+     "date": "2024",
+     "dateType": "Issued"
+    }
+   ],
+   "language": null,
+   "types": {
+    "ris": "RPRT",
+    "bibtex": "article",
+    "citeproc": "article-journal",
+    "schemaOrg": "ScholarlyArticle",
+    "resourceType": "Project",
+    "resourceTypeGeneral": "Text"
+   },
+   "relatedIdentifiers": [],
+   "relatedItems": [],
+   "sizes": [],
+   "formats": [],
+   "version": null,
+   "rightsList": [
+    {
+     "rights": "Creative Commons Attribution 4.0 International",
+     "rightsUri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+     "schemeUri": "https://spdx.org/licenses/",
+     "rightsIdentifier": "cc-by-4.0",
+     "rightsIdentifierScheme": "SPDX"
+    }
+   ],
+   "descriptions": [
+    {
+     "description": "This dataset accompanies the data article \"Second-life lithium-ion battery aging dataset based on grid storage cycling\" and contains second-life experimental data collected at Stanford Energy Control Lab for six NMC cells cycled using residential and commercial synthetic duty cycles. The data is shared in a .zip format. Please refer to the publication accompanying the dataset to get further details.\n\nNote: The dataset files are available in the 'Files' tab located in the bar on the top.",
+     "descriptionType": "Abstract"
+    }
+   ],
+   "geoLocations": [],
+   "fundingReferences": [],
+   "xml": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHJlc291cmNlIHhtbG5zPSJodHRwOi8vZGF0YWNpdGUub3JnL3NjaGVtYS9rZXJuZWwtNCIgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeHNpOnNjaGVtYUxvY2F0aW9uPSJodHRwOi8vZGF0YWNpdGUub3JnL3NjaGVtYS9rZXJuZWwtNCBodHRwOi8vc2NoZW1hLmRhdGFjaXRlLm9yZy9tZXRhL2tlcm5lbC00LjUvbWV0YWRhdGEueHNkIj4KICA8aWRlbnRpZmllciBpZGVudGlmaWVyVHlwZT0iRE9JIj4xMC4xNzYwNS9PU0YuSU8vOEpOUjU8L2lkZW50aWZpZXI+CiAgPGNyZWF0b3JzPgogICAgPGNyZWF0b3I+CiAgICAgIDxjcmVhdG9yTmFtZSBuYW1lVHlwZT0iUGVyc29uYWwiPnNpbW9uYSBvbm9yaTwvY3JlYXRvck5hbWU+CiAgICAgIDxuYW1lSWRlbnRpZmllciBuYW1lSWRlbnRpZmllclNjaGVtZT0iT1JDSUQiPjAwMDAtMDAwMi02NTU2LTI2MDg8L25hbWVJZGVudGlmaWVyPgogICAgICA8bmFtZUlkZW50aWZpZXIgbmFtZUlkZW50aWZpZXJTY2hlbWU9IlVSTCI+aHR0cHM6Ly9vc2YuaW8vcGpxYjI8L25hbWVJZGVudGlmaWVyPgogICAgPC9jcmVhdG9yPgogICAgPGNyZWF0b3I+CiAgICAgIDxjcmVhdG9yTmFtZSBuYW1lVHlwZT0iUGVyc29uYWwiPk11aGFtbWFkIEFhZGlsIEtoYW48L2NyZWF0b3JOYW1lPgogICAgICA8bmFtZUlkZW50aWZpZXIgbmFtZUlkZW50aWZpZXJTY2hlbWU9IlVSTCI+aHR0cHM6Ly9vc2YuaW8vZ2Q1OWI8L25hbWVJZGVudGlmaWVyPgogICAgPC9jcmVhdG9yPgogIDwvY3JlYXRvcnM+CiAgPHRpdGxlcz4KICAgIDx0aXRsZT5TZWNvbmQtbGlmZSBsaXRoaXVtLWlvbiBiYXR0ZXJ5IGFnaW5nIGRhdGFzZXQgYmFzZWQgb24gZ3JpZCBzdG9yYWdlIGN5Y2xpbmc8L3RpdGxlPgogIDwvdGl0bGVzPgogIDxwdWJsaXNoZXI+T1NGPC9wdWJsaXNoZXI+CiAgPHB1YmxpY2F0aW9uWWVhcj4yMDI0PC9wdWJsaWNhdGlvblllYXI+CiAgPHN1YmplY3RzPgogICAgPHN1YmplY3Qgc3ViamVjdFNjaGVtZT0iYmVwcmVzcyBEaWdpdGFsIENvbW1vbnMgVGhyZWUtVGllcmVkIFRheG9ub215Ij5NZWNoYW5pY2FsIEVuZ2luZWVyaW5nPC9zdWJqZWN0PgogICAgPHN1YmplY3Qgc3ViamVjdFNjaGVtZT0iYmVwcmVzcyBEaWdpdGFsIENvbW1vbnMgVGhyZWUtVGllcmVkIFRheG9ub215Ij5Qb3dlciBhbmQgRW5lcmd5PC9zdWJqZWN0PgogICAgPHN1YmplY3Qgc3ViamVjdFNjaGVtZT0iYmVwcmVzcyBEaWdpdGFsIENvbW1vbnMgVGhyZWUtVGllcmVkIFRheG9ub215Ij5FbmVyZ3kgU3lzdGVtczwvc3ViamVjdD4KICAgIDxzdWJqZWN0IHN1YmplY3RTY2hlbWU9ImJlcHJlc3MgRGlnaXRhbCBDb21tb25zIFRocmVlLVRpZXJlZCBUYXhvbm9teSI+RWxlY3RyaWNhbCBhbmQgQ29tcHV0ZXIgRW5naW5lZXJpbmc8L3N1YmplY3Q+CiAgICA8c3ViamVjdCBzdWJqZWN0U2NoZW1lPSJiZXByZXNzIERpZ2l0YWwgQ29tbW9ucyBUaHJlZS1UaWVyZWQgVGF4b25vbXkiPkVuZ2luZWVyaW5nPC9zdWJqZWN0PgogIDwvc3ViamVjdHM+CiAgPGNvbnRyaWJ1dG9ycz4KICAgIDxjb250cmlidXRvciBjb250cmlidXRvclR5cGU9Ikhvc3RpbmdJbnN0aXR1dGlvbiI+CiAgICAgIDxjb250cmlidXRvck5hbWUgbmFtZVR5cGU9Ik9yZ2FuaXphdGlvbmFsIj5DZW50ZXIgZm9yIE9wZW4gU2NpZW5jZTwvY29udHJpYnV0b3JOYW1lPgogICAgICA8bmFtZUlkZW50aWZpZXIgbmFtZUlkZW50aWZpZXJTY2hlbWU9IlVSTCI+aHR0cHM6Ly9jb3MuaW8vPC9uYW1lSWRlbnRpZmllcj4KICAgICAgPG5hbWVJZGVudGlmaWVyIG5hbWVJZGVudGlmaWVyU2NoZW1lPSJST1IiPmh0dHBzOi8vcm9yLm9yZy8wNWQ1bXphMjk8L25hbWVJZGVudGlmaWVyPgogICAgPC9jb250cmlidXRvcj4KICA8L2NvbnRyaWJ1dG9ycz4KICA8ZGF0ZXM+CiAgICA8ZGF0ZSBkYXRlVHlwZT0iQ3JlYXRlZCI+MjAyNC0wNy0xMTwvZGF0ZT4KICAgIDxkYXRlIGRhdGVUeXBlPSJVcGRhdGVkIj4yMDI1LTA2LTE4PC9kYXRlPgogIDwvZGF0ZXM+CiAgPHJlc291cmNlVHlwZSByZXNvdXJjZVR5cGVHZW5lcmFsPSJUZXh0Ij5Qcm9qZWN0PC9yZXNvdXJjZVR5cGU+CiAgPGFsdGVybmF0ZUlkZW50aWZpZXJzPgogICAgPGFsdGVybmF0ZUlkZW50aWZpZXIgYWx0ZXJuYXRlSWRlbnRpZmllclR5cGU9IlVSTCI+aHR0cHM6Ly9vc2YuaW8vOGpucjU8L2FsdGVybmF0ZUlkZW50aWZpZXI+CiAgPC9hbHRlcm5hdGVJZGVudGlmaWVycz4KICA8cmlnaHRzTGlzdD4KICAgIDxyaWdodHMgcmlnaHRzVVJJPSJodHRwczovL2NyZWF0aXZlY29tbW9ucy5vcmcvbGljZW5zZXMvYnkvNC4wL2xlZ2FsY29kZSI+Q0MtQnkgQXR0cmlidXRpb24gNC4wIEludGVybmF0aW9uYWw8L3JpZ2h0cz4KICA8L3JpZ2h0c0xpc3Q+CiAgPGRlc2NyaXB0aW9ucz4KICAgIDxkZXNjcmlwdGlvbiBkZXNjcmlwdGlvblR5cGU9IkFic3RyYWN0Ij5UaGlzIGRhdGFzZXQgYWNjb21wYW5pZXMgdGhlIGRhdGEgYXJ0aWNsZSAiU2Vjb25kLWxpZmUgbGl0aGl1bS1pb24gYmF0dGVyeSBhZ2luZyBkYXRhc2V0IGJhc2VkIG9uIGdyaWQgc3RvcmFnZSBjeWNsaW5nIiBhbmQgY29udGFpbnMgc2Vjb25kLWxpZmUgZXhwZXJpbWVudGFsIGRhdGEgY29sbGVjdGVkIGF0IFN0YW5mb3JkIEVuZXJneSBDb250cm9sIExhYiBmb3Igc2l4IE5NQyBjZWxscyBjeWNsZWQgdXNpbmcgcmVzaWRlbnRpYWwgYW5kIGNvbW1lcmNpYWwgc3ludGhldGljIGR1dHkgY3ljbGVzLiBUaGUgZGF0YSBpcyBzaGFyZWQgaW4gYSAuemlwIGZvcm1hdC4gUGxlYXNlIHJlZmVyIHRvIHRoZSBwdWJsaWNhdGlvbiBhY2NvbXBhbnlpbmcgdGhlIGRhdGFzZXQgdG8gZ2V0IGZ1cnRoZXIgZGV0YWlscy4KCk5vdGU6IFRoZSBkYXRhc2V0IGZpbGVzIGFyZSBhdmFpbGFibGUgaW4gdGhlICdGaWxlcycgdGFiIGxvY2F0ZWQgaW4gdGhlIGJhciBvbiB0aGUgdG9wLjwvZGVzY3JpcHRpb24+CiAgPC9kZXNjcmlwdGlvbnM+CiAgPGZ1bmRpbmdSZWZlcmVuY2VzLz4KICA8cmVsYXRlZElkZW50aWZpZXJzLz4KICA8cmVsYXRlZEl0ZW1zLz4KPC9yZXNvdXJjZT4=",
+   "url": "https://osf.io/8jnr5/",
+   "contentUrl": null,
+   "metadataVersion": 3,
+   "schemaVersion": "http://datacite.org/schema/kernel-4",
+   "source": "mds",
+   "isActive": true,
+   "state": "findable",
+   "reason": null,
+   "viewCount": 1059,
+   "viewsOverTime": [
+    {
+     "yearMonth": "2025-06",
+     "total": 74
+    },
+    {
+     "yearMonth": "2025-08",
+     "total": 127
+    },
+    {
+     "yearMonth": "2025-09",
+     "total": 196
+    },
+    {
+     "yearMonth": "2025-10",
+     "total": 98
+    },
+    {
+     "yearMonth": "2025-11",
+     "total": 52
+    },
+    {
+     "yearMonth": "2025-12",
+     "total": 92
+    },
+    {
+     "yearMonth": "2026-01",
+     "total": 94
+    },
+    {
+     "yearMonth": "2026-03",
+     "total": 94
+    },
+    {
+     "yearMonth": "2026-07",
+     "total": 80
+    },
+    {
+     "yearMonth": "2026-08",
+     "total": 152
+    }
+   ],
+   "downloadCount": 296,
+   "downloadsOverTime": [
+    {
+     "yearMonth": "2025-06",
+     "total": 16
+    },
+    {
+     "yearMonth": "2025-08",
+     "total": 19
+    },
+    {
+     "yearMonth": "2025-09",
+     "total": 15
+    },
+    {
+     "yearMonth": "2025-10",
+     "total": 30
+    },
+    {
+     "yearMonth": "2025-11",
+     "total": 14
+    },
+    {
+     "yearMonth": "2025-12",
+     "total": 29
+    },
+    {
+     "yearMonth": "2026-01",
+     "total": 34
+    },
+    {
+     "yearMonth": "2026-03",
+     "total": 41
+    },
+    {
+     "yearMonth": "2026-07",
+     "total": 25
+    },
+    {
+     "yearMonth": "2026-08",
+     "total": 73
+    }
+   ],
+   "referenceCount": 0,
+   "citationCount": 0,
+   "citationsOverTime": [],
+   "partCount": 0,
+   "partOfCount": 0,
+   "versionCount": 0,
+   "versionOfCount": 0,
+   "created": "2024-07-14T20:34:40.000Z",
+   "registered": "2024-07-14T20:34:41.000Z",
+   "published": "2024",
+   "updated": "2025-06-18T17:54:49.000Z"
+  },
+  "relationships": {
+   "client": {
+    "data": {
+     "id": "cos.osf",
+     "type": "clients"
+    }
+   },
+   "provider": {
+    "data": {
+     "id": "cos",
+     "type": "providers"
+    }
+   },
+   "media": {
+    "data": {
+     "id": "10.17605/osf.io/8jnr5",
+     "type": "media"
+    }
+   },
+   "references": {
+    "data": []
+   },
+   "citations": {
+    "data": []
+   },
+   "parts": {
+    "data": []
+   },
+   "partOf": {
+    "data": []
+   },
+   "versions": {
+    "data": []
+   },
+   "versionOf": {
+    "data": []
+   }
+  }
+ }
+}

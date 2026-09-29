@@ -1,0 +1,691 @@
+{
+ "indexed": {
+  "date-parts": [
+   [
+    2026,
+    8,
+    17
+   ]
+  ],
+  "date-time": "2026-08-17T20:26:21Z",
+  "timestamp": 1786998381410,
+  "version": "build-2736575974"
+ },
+ "reference-count": 39,
+ "publisher": "Elsevier BV",
+ "issue": "5",
+ "license": [
+  {
+   "start": {
+    "date-parts": [
+     [
+      2024,
+      5,
+      1
+     ]
+    ],
+    "date-time": "2024-05-01T00:00:00Z",
+    "timestamp": 1714521600000
+   },
+   "content-version": "tdm",
+   "delay-in-days": 0,
+   "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+  },
+  {
+   "start": {
+    "date-parts": [
+     [
+      2024,
+      5,
+      1
+     ]
+    ],
+    "date-time": "2024-05-01T00:00:00Z",
+    "timestamp": 1714521600000
+   },
+   "content-version": "tdm",
+   "delay-in-days": 0,
+   "URL": "https://www.elsevier.com/legal/tdmrep-license"
+  },
+  {
+   "start": {
+    "date-parts": [
+     [
+      2024,
+      4,
+      9
+     ]
+    ],
+    "date-time": "2024-04-09T00:00:00Z",
+    "timestamp": 1712620800000
+   },
+   "content-version": "vor",
+   "delay-in-days": 0,
+   "URL": "http://creativecommons.org/licenses/by-nc/4.0/"
+  }
+ ],
+ "content-domain": {
+  "domain": [
+   "cell.com",
+   "elsevier.com",
+   "sciencedirect.com"
+  ],
+  "crossmark-restriction": true
+ },
+ "short-container-title": [
+  "Cell Reports Physical Science"
+ ],
+ "published-print": {
+  "date-parts": [
+   [
+    2024,
+    5
+   ]
+  ]
+ },
+ "DOI": "10.1016/j.xcrp.2024.101941",
+ "type": "journal-article",
+ "created": {
+  "date-parts": [
+   [
+    2024,
+    5,
+    7
+   ]
+  ],
+  "date-time": "2024-05-07T11:08:13Z",
+  "timestamp": 1715080093000
+ },
+ "page": "101941",
+ "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+ "source": "Crossref",
+ "is-referenced-by-count": 21,
+ "title": [
+  "Taking second-life batteries from exhausted to empowered using experiments, data analysis, and health estimation"
+ ],
+ "prefix": "10.1016",
+ "volume": "5",
+ "author": [
+  {
+   "ORCID": "https://orcid.org/0000-0002-8575-8990",
+   "authenticated-orcid": false,
+   "given": "Xiaofan",
+   "family": "Cui",
+   "sequence": "first",
+   "affiliation": [],
+   "role": [
+    {
+     "vocabulary": "crossref",
+     "role": "author"
+    }
+   ]
+  },
+  {
+   "given": "Muhammad Aadil",
+   "family": "Khan",
+   "sequence": "additional",
+   "affiliation": [],
+   "role": [
+    {
+     "vocabulary": "crossref",
+     "role": "author"
+    }
+   ]
+  },
+  {
+   "given": "Gabriele",
+   "family": "Pozzato",
+   "sequence": "additional",
+   "affiliation": [],
+   "role": [
+    {
+     "vocabulary": "crossref",
+     "role": "author"
+    }
+   ]
+  },
+  {
+   "given": "Surinder",
+   "family": "Singh",
+   "sequence": "additional",
+   "affiliation": [],
+   "role": [
+    {
+     "vocabulary": "crossref",
+     "role": "author"
+    }
+   ]
+  },
+  {
+   "given": "Ratnesh",
+   "family": "Sharma",
+   "sequence": "additional",
+   "affiliation": [],
+   "role": [
+    {
+     "vocabulary": "crossref",
+     "role": "author"
+    }
+   ]
+  },
+  {
+   "ORCID": "https://orcid.org/0000-0002-6556-2608",
+   "authenticated-orcid": false,
+   "given": "Simona",
+   "family": "Onori",
+   "sequence": "additional",
+   "affiliation": [],
+   "role": [
+    {
+     "vocabulary": "crossref",
+     "role": "author"
+    }
+   ]
+  }
+ ],
+ "member": "78",
+ "reference": [
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib1",
+   "article-title": "Battery 2030: Resilient, sustainable, and circular",
+   "year": "2023",
+   "journal-title": "McKinsey Company, Tech. Rep."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib2",
+   "article-title": "Second-life EV batteries: The newest value pool in energy storage",
+   "author": "Engel",
+   "year": "2019",
+   "journal-title": "McKinsey Center for Future Mobility, Global Editorial Services, New York City, Tech. Rep."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib3",
+   "series-title": "Impact Report. 2020",
+   "year": "2020"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib4",
+   "doi-asserted-by": "crossref",
+   "DOI": "10.1016/j.xcrp.2021.100537",
+   "article-title": "End-of-life or second-life options for retired electric vehicle batteries",
+   "volume": "2",
+   "author": "Zhu",
+   "year": "2021",
+   "journal-title": "Cell Reports Physical Science"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib5",
+   "doi-asserted-by": "crossref",
+   "first-page": "1938",
+   "DOI": "10.1039/C4EE04041D",
+   "article-title": "Hydrogen or batteries for grid storage? A net energy analysis",
+   "volume": "8",
+   "author": "Pellow",
+   "year": "2015",
+   "journal-title": "Energy Environ. Sci."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib6",
+   "doi-asserted-by": "crossref",
+   "first-page": "701",
+   "DOI": "10.1016/j.rser.2018.04.035",
+   "article-title": "Battery second life: Hype, hope or reality? A critical review of the state of the art",
+   "volume": "93",
+   "author": "Martinez-Laserna",
+   "year": "2018",
+   "journal-title": "Renew. Sustain. Energy Rev."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib7",
+   "doi-asserted-by": "crossref",
+   "DOI": "10.1088/1748-9326/9/9/094004",
+   "article-title": "Driving rural energy access: a second-life application for electric-vehicle batteries",
+   "volume": "9",
+   "author": "Ambrose",
+   "year": "2014",
+   "journal-title": "Environ. Res. Lett."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib8",
+   "series-title": "Battery Management Systems, Volume 1: Battery Modeling",
+   "author": "Plett",
+   "year": "2015"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib13",
+   "doi-asserted-by": "crossref",
+   "first-page": "90761",
+   "DOI": "10.1109/ACCESS.2022.3201132",
+   "article-title": "Lite-Sparse Hierarchical Partial Power Processing for Second-Use Battery Energy Storage Systems",
+   "volume": "10",
+   "author": "Cui",
+   "year": "2022",
+   "journal-title": "IEEE Access"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib14",
+   "doi-asserted-by": "crossref",
+   "first-page": "735",
+   "DOI": "10.1109/JPROC.2022.3175614",
+   "article-title": "A Review of Second-Life Lithium-Ion Batteries for Stationary Energy Storage Applications",
+   "volume": "110",
+   "author": "Hu",
+   "year": "2022",
+   "journal-title": "Proc. IEEE"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib15",
+   "series-title": "2021 IEEE Conference on Control Technology and Applications (CCTA)",
+   "article-title": "Modeling Degradation for Second-life Battery: Preliminary Results",
+   "author": "Pozzato",
+   "year": "2021"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib16",
+   "doi-asserted-by": "crossref",
+   "first-page": "1636",
+   "DOI": "10.1109/TCST.2020.3017566",
+   "article-title": "Online Capacity Estimation for Lithium-Ion Battery Cells via an Electrochemical Model-Based Adaptive Interconnected Observer",
+   "volume": "29",
+   "author": "Allam",
+   "year": "2021",
+   "journal-title": "IEEE Trans. Control Syst. Technol."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib17",
+   "doi-asserted-by": "crossref",
+   "first-page": "2703",
+   "DOI": "10.1016/j.joule.2019.07.026",
+   "article-title": "Data-Driven Safety Envelope of Lithium-Ion Batteries for Electric Vehicles",
+   "volume": "3",
+   "author": "Li",
+   "year": "2019",
+   "journal-title": "Joule"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib18",
+   "doi-asserted-by": "crossref",
+   "first-page": "2599",
+   "DOI": "10.1016/j.joule.2019.10.013",
+   "article-title": "Battery Safety: Data-Driven Prediction of Failure",
+   "volume": "3",
+   "author": "Finegan",
+   "year": "2019",
+   "journal-title": "Joule"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib19",
+   "doi-asserted-by": "crossref",
+   "first-page": "21023",
+   "DOI": "10.1002/er.7160",
+   "article-title": "Machine learning-based approach for useful capacity prediction of second-life batteries employing appropriate input selection",
+   "volume": "45",
+   "author": "Bhatt",
+   "year": "2021",
+   "journal-title": "Int. J. Energy Res."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib20",
+   "doi-asserted-by": "crossref",
+   "first-page": "754",
+   "DOI": "10.1016/j.jclepro.2018.09.149",
+   "article-title": "State of health estimation of second-life LiFePO4 batteries for energy storage applications",
+   "volume": "205",
+   "author": "Jiang",
+   "year": "2018",
+   "journal-title": "J.\u00a0Clean. Prod."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib21",
+   "doi-asserted-by": "crossref",
+   "first-page": "8076",
+   "DOI": "10.3390/en7128076",
+   "article-title": "A novel data-driven fast capacity estimation of spent electric vehicle lithium-ion batteries",
+   "volume": "7",
+   "author": "Zhang",
+   "year": "2014",
+   "journal-title": "Energies"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib22",
+   "doi-asserted-by": "crossref",
+   "first-page": "5634",
+   "DOI": "10.1109/TIE.2017.2782224",
+   "article-title": "Remaining useful life prediction and state of health diagnosis for lithium-ion batteries using particle filter and support vector regression",
+   "volume": "65",
+   "author": "Wei",
+   "year": "2018",
+   "journal-title": "IEEE Trans. Ind. Electron."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib23",
+   "doi-asserted-by": "crossref",
+   "DOI": "10.1016/j.isci.2023.106547",
+   "article-title": "Evaluating the feasibility of batteries for second-life applications using machine learning",
+   "volume": "26",
+   "author": "Takahashi",
+   "year": "2023",
+   "journal-title": "iScience"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib24",
+   "doi-asserted-by": "crossref",
+   "first-page": "1",
+   "DOI": "10.1109/TIM.2021.3055791",
+   "article-title": "Remaining Useful Life Estimation for LFP Cells in Second-Life Applications",
+   "volume": "70",
+   "author": "Sanz-Gorrachategui",
+   "year": "2021",
+   "journal-title": "IEEE Trans. Instrum. Meas."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib25",
+   "doi-asserted-by": "crossref",
+   "first-page": "2703",
+   "DOI": "10.1109/TIA.2018.2801262",
+   "article-title": "Technical Viability of Battery Second Life: A Study from the Ageing Perspective",
+   "volume": "54",
+   "author": "Martinez-Laserna",
+   "year": "2018",
+   "journal-title": "IEEE Trans. Ind. Appl."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib26",
+   "doi-asserted-by": "crossref",
+   "first-page": "4107",
+   "DOI": "10.1109/TIA.2021.3075180",
+   "article-title": "Experimental Assessment of First- And Second-Life Electric Vehicle Batteries: Performance, Capacity Dispersion, and Aging",
+   "volume": "57",
+   "author": "Braco",
+   "year": "2021",
+   "journal-title": "IEEE Trans. Ind. Appl."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib27",
+   "doi-asserted-by": "crossref",
+   "DOI": "10.1016/j.ijheatmasstransfer.2020.120834",
+   "article-title": "A review on recent progress, challenges and perspective of battery thermal management system",
+   "volume": "167",
+   "author": "Lin",
+   "year": "2021",
+   "journal-title": "Int. J. Heat Mass Tran."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib28",
+   "article-title": "What drives capacity degradation in utility-scale battery energy storage systems? The impact of operating strategy and temperature in different grid applications",
+   "volume": "47",
+   "author": "Gr\u00e4f",
+   "year": "2022",
+   "journal-title": "J.\u00a0Energy Storage"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib29",
+   "doi-asserted-by": "crossref",
+   "first-page": "387",
+   "DOI": "10.1016/j.jpowsour.2018.03.015",
+   "article-title": "A novel Gaussian process regression model for state-of-health estimation of lithium-ion battery using charging curve",
+   "volume": "384",
+   "author": "Yang",
+   "year": "2018",
+   "journal-title": "J.\u00a0Power Sources"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib30",
+   "doi-asserted-by": "crossref",
+   "first-page": "2776",
+   "DOI": "10.1016/j.joule.2022.10.016",
+   "article-title": "Battery aging mode identification across NMC compositions and designs using machine learning",
+   "volume": "6",
+   "author": "Chen",
+   "year": "2022",
+   "journal-title": "Joule"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib31",
+   "doi-asserted-by": "crossref",
+   "first-page": "1",
+   "DOI": "10.1016/j.jpowsour.2016.04.119",
+   "article-title": "A novel health indicator for on-line lithium-ion batteries remaining useful life prediction",
+   "volume": "321",
+   "author": "Zhou",
+   "year": "2016",
+   "journal-title": "J. Power Sources"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib32",
+   "doi-asserted-by": "crossref",
+   "DOI": "10.1016/j.jpowsour.2022.231110",
+   "article-title": "A machine learning-based framework for online prediction of battery ageing trajectory and lifetime using histogram data",
+   "volume": "526",
+   "author": "Zhang",
+   "year": "2022",
+   "journal-title": "J.\u00a0Power Sources"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib33",
+   "doi-asserted-by": "crossref",
+   "first-page": "1604",
+   "DOI": "10.1109/TTE.2021.3129479",
+   "article-title": "Offline and online blended machine learning for lithium-ion battery health state estimation",
+   "volume": "8",
+   "author": "She",
+   "year": "2022",
+   "journal-title": "IEEE Trans. Transp. Electrific."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib34",
+   "doi-asserted-by": "crossref",
+   "first-page": "811",
+   "DOI": "10.1016/j.microrel.2012.12.003",
+   "article-title": "An ensemble model for predicting the remaining useful performance of lithium-ion batteries",
+   "volume": "53",
+   "author": "Xing",
+   "year": "2013",
+   "journal-title": "Microelectron. Reliab."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib35",
+   "doi-asserted-by": "crossref",
+   "DOI": "10.1016/j.adapen.2021.100065",
+   "article-title": "Design and validation of synthetic duty cycles for grid energy storage dispatch using lithium-ion batteries",
+   "volume": "4",
+   "author": "Moy",
+   "year": "2021",
+   "journal-title": "Advances in Applied Energy"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib36",
+   "doi-asserted-by": "crossref",
+   "DOI": "10.1149/1945-7111/ac67b5",
+   "article-title": "Li[Ni0.5Mn0.3Co0.2]O2 as a superior alternative to LiFePO4 for long-lived low voltage li-ion cells",
+   "volume": "169",
+   "author": "Aiken",
+   "year": "2022",
+   "journal-title": "J.\u00a0Electrochem. Soc."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib37",
+   "doi-asserted-by": "crossref",
+   "first-page": "3295",
+   "DOI": "10.3390/en11123295",
+   "article-title": "Derating guidelines for lithium-ion batteries",
+   "volume": "11",
+   "author": "Sun",
+   "year": "2018",
+   "journal-title": "Energies"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib38",
+   "doi-asserted-by": "crossref",
+   "first-page": "50",
+   "DOI": "10.1016/j.jpowsour.2014.02.103",
+   "article-title": "Capacity fading of LiAlyNi1-x-yCoxO2 cathode for lithium-ion batteries during accelerated calendar and cycle life tests (effect of depth of discharge in charge-discharge cycling on the suppression of the micro-crack generation of LiAlyNi1-x-yCoxO2 particle",
+   "volume": "260",
+   "author": "Watanabe",
+   "year": "2014",
+   "journal-title": "J. Power Sources"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib39",
+   "first-page": "1",
+   "article-title": "Synthetic Grid Storage Duty Cycles for Second-Life Lithium-Ion Battery Experiments",
+   "author": "Moy",
+   "year": "2023",
+   "journal-title": "SAE Technical Papers"
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib43",
+   "doi-asserted-by": "crossref",
+   "first-page": "653",
+   "DOI": "10.1016/j.pnsc.2018.11.002",
+   "article-title": "Temperature effect and thermal impact in lithium-ion batteries: A review",
+   "volume": "28",
+   "author": "Ma",
+   "year": "2018",
+   "journal-title": "Progress in Natural Science: Materials International."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib40",
+   "doi-asserted-by": "crossref",
+   "first-page": "5363",
+   "DOI": "10.1109/TIA.2020.3005382",
+   "article-title": "Battery Internal Resistance Estimation Using a Battery Balancing System Based on Switched Capacitors",
+   "volume": "56",
+   "author": "Moral",
+   "year": "2020",
+   "journal-title": "IEEE Trans. Ind. Appl."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib42",
+   "article-title": "Online Adaptive Data-driven State-of-health Estimation for Second-life Batteries with BIBO Stability Guarantees",
+   "author": "Cui",
+   "year": "2024",
+   "journal-title": "arXiv."
+  },
+  {
+   "key": "10.1016/j.xcrp.2024.101941_bib41",
+   "doi-asserted-by": "crossref",
+   "first-page": "1226",
+   "DOI": "10.1109/TPAMI.2005.159",
+   "article-title": "Feature selection based on mutual information: criteria of max-dependency, max-relevance, and min-redundancy",
+   "volume": "27",
+   "author": "Peng",
+   "year": "2005",
+   "journal-title": "IEEE Trans. Pattern Anal. Mach. Intell."
+  }
+ ],
+ "container-title": [
+  "Cell Reports Physical Science"
+ ],
+ "original-title": [],
+ "language": "en",
+ "link": [
+  {
+   "URL": "https://api.elsevier.com/content/article/PII:S2666386424001905?httpAccept=text/xml",
+   "content-type": "text/xml",
+   "content-version": "vor",
+   "intended-application": "text-mining"
+  },
+  {
+   "URL": "https://api.elsevier.com/content/article/PII:S2666386424001905?httpAccept=text/plain",
+   "content-type": "text/plain",
+   "content-version": "vor",
+   "intended-application": "text-mining"
+  }
+ ],
+ "deposited": {
+  "date-parts": [
+   [
+    2025,
+    11,
+    8
+   ]
+  ],
+  "date-time": "2025-11-08T21:40:24Z",
+  "timestamp": 1762638024000
+ },
+ "score": 1,
+ "resource": {
+  "primary": {
+   "URL": "https://linkinghub.elsevier.com/retrieve/pii/S2666386424001905"
+  }
+ },
+ "subtitle": [],
+ "short-title": [],
+ "issued": {
+  "date-parts": [
+   [
+    2024,
+    5
+   ]
+  ]
+ },
+ "references-count": 39,
+ "journal-issue": {
+  "issue": "5",
+  "published-print": {
+   "date-parts": [
+    [
+     2024,
+     5
+    ]
+   ]
+  }
+ },
+ "alternative-id": [
+  "S2666386424001905"
+ ],
+ "URL": "https://doi.org/10.1016/j.xcrp.2024.101941",
+ "relation": {},
+ "ISSN": [
+  "2666-3864"
+ ],
+ "issn-type": [
+  {
+   "value": "2666-3864",
+   "type": "print"
+  }
+ ],
+ "subject": [],
+ "published": {
+  "date-parts": [
+   [
+    2024,
+    5
+   ]
+  ]
+ },
+ "assertion": [
+  {
+   "value": "Elsevier",
+   "name": "publisher",
+   "label": "This article is maintained by"
+  },
+  {
+   "value": "Taking second-life batteries from exhausted to empowered using experiments, data analysis, and health estimation",
+   "name": "articletitle",
+   "label": "Article Title"
+  },
+  {
+   "value": "Cell Reports Physical Science",
+   "name": "journaltitle",
+   "label": "Journal Title"
+  },
+  {
+   "value": "https://doi.org/10.1016/j.xcrp.2024.101941",
+   "name": "articlelink",
+   "label": "CrossRef DOI link to publisher maintained version"
+  },
+  {
+   "value": "article",
+   "name": "content_type",
+   "label": "Content Type"
+  },
+  {
+   "value": "\u00a9 2024 The Author(s). Published by Elsevier Inc.",
+   "name": "copyright",
+   "label": "Copyright"
+  }
+ ],
+ "article-number": "101941"
+}

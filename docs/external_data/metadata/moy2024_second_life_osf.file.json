@@ -1,0 +1,103 @@
+{
+ "id": "668f6f4344dc2401708ca7c6",
+ "type": "files",
+ "attributes": {
+  "guid": "j2ne9",
+  "checkout": null,
+  "name": "SL_Dataset_SECL_INR21700-M50T.zip",
+  "kind": "file",
+  "path": "/668f6f4344dc2401708ca7c6",
+  "size": 2153883052,
+  "provider": "osfstorage",
+  "materialized_path": "/SL_Dataset_SECL_INR21700-M50T.zip",
+  "last_touched": null,
+  "date_modified": "2025-02-27T19:18:35.608439",
+  "date_created": "2024-07-11T05:36:03.124239Z",
+  "extra": {
+   "hashes": {
+    "md5": "9f8aab95c3e9bded5b823af179dbe5a1",
+    "sha256": "201b21b8e2e9623887d03e9bd6620341e5c91cd28bce34294ccbad2d4e7c6fe3"
+   },
+   "downloads": 3357
+  },
+  "tags": [],
+  "current_user_can_comment": false,
+  "current_version": 2,
+  "show_as_unviewed": false
+ },
+ "relationships": {
+  "parent_folder": {
+   "links": {
+    "related": {
+     "href": "https://api.osf.io/v2/files/668f6d6e990f0f0107c1cbeb/",
+     "meta": {}
+    }
+   },
+   "data": {
+    "id": "668f6d6e990f0f0107c1cbeb",
+    "type": "files"
+   }
+  },
+  "versions": {
+   "links": {
+    "related": {
+     "href": "https://api.osf.io/v2/files/668f6f4344dc2401708ca7c6/versions/",
+     "meta": {}
+    }
+   }
+  },
+  "comments": {
+   "links": {
+    "related": {
+     "href": "https://api.osf.io/v2/nodes/8jnr5/comments/?filter%5Btarget%5D=j2ne9",
+     "meta": {}
+    }
+   }
+  },
+  "node": {
+   "links": {
+    "related": {
+     "href": "https://api.osf.io/v2/nodes/8jnr5/",
+     "meta": {}
+    }
+   },
+   "data": {
+    "id": "8jnr5",
+    "type": "nodes"
+   }
+  },
+  "target": {
+   "links": {
+    "related": {
+     "href": "https://api.osf.io/v2/nodes/8jnr5/",
+     "meta": {
+      "type": "nodes"
+     }
+    }
+   },
+   "data": {
+    "type": "nodes",
+    "id": "8jnr5"
+   }
+  },
+  "cedar_metadata_records": {
+   "links": {
+    "related": {
+     "href": "https://api.osf.io/v2/files/668f6f4344dc2401708ca7c6/cedar_metadata_records/",
+     "meta": {}
+    }
+   }
+  }
+ },
+ "links": {
+  "info": "https://api.osf.io/v2/files/668f6f4344dc2401708ca7c6/",
+  "move": "https://files.osf.io/v1/resources/8jnr5/providers/osfstorage/668f6f4344dc2401708ca7c6",
+  "upload": "https://files.osf.io/v1/resources/8jnr5/providers/osfstorage/668f6f4344dc2401708ca7c6",
+  "delete": "https://files.osf.io/v1/resources/8jnr5/providers/osfstorage/668f6f4344dc2401708ca7c6",
+  "download": "https://osf.io/download/j2ne9/",
+  "render": "https://mfr.osf.io/render?url=https%3A%2F%2Fosf.io%2Fdownload%2Fj2ne9%2F%3Fdirect%26mode%3Drender",
+  "html": "https://osf.io/8jnr5/files/osfstorage/668f6f4344dc2401708ca7c6",
+  "self": "https://api.osf.io/v2/files/668f6f4344dc2401708ca7c6/",
+  "iri": "https://osf.io/j2ne9"
+ }
+}
