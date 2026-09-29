@@ -254,7 +254,7 @@ Values are only ever removed; carry-forward only copies a battery's own earlier 
 The first real-data run showed:
 
 - **The handover's cycle-level rows are segments of monthly cycling blocks.** Their capacity and energy columns are running totals within a block, and their 18 inputs barely track SOH within a battery: median |ρ| ≈ 0.09, against −0.99 for elapsed time. The notebook 04 baseline is worse than persistence.
-- **The protocol scaled the discharge current to the last measured capacity.** Every monthly block starts with a standardised segment (CC charge at 1.46 A, CV charge, rest, 30-minute discharge, rest). Its discharge current equals 0.9966 × the capacity at the previous RPT for every battery (coefficient of variation 0.14 %), i.e. 1C of the last measured capacity.
+- **The protocol scaled the discharge current to the last measured capacity.** Every monthly block starts with a standardised segment (CC charge at 1.46 A, CV charge, rest, 30-minute discharge, rest). Its discharge current equals 0.9966 × the capacity at the previous RPT for every battery (coefficient of variation 0.14 %), i.e. 1C of the last measured capacity. On the C/20 capacity basis (D17) the factor is 0.9998.
 
 Rules:
 

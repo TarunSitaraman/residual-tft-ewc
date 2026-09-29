@@ -60,21 +60,21 @@ Every monthly block starts with a standardised segment:
 4. 30-minute discharge;
 5. rest.
 
-The discharge current equals **0.9966 × the capacity measured at the previous RPT** for every battery, with a coefficient of variation of 0.14 %. The protocol set it to 1C of the last measured capacity, so the discharge current, discharged Ah and discharge energy encode the label. They must not be used as inputs (decision D14). The handover's `Current_Min` and discharge-capacity columns partly carry the same scaling.
+The discharge current equals **0.9998 × the C/20 capacity measured at the previous RPT** for every battery, with a coefficient of variation of 0.14 %. On the handover's capacity, which includes the pulse charge, the factor is 0.9966. The lab therefore set 1C from the C/20 capacity, which supports decision D17. The protocol set it to 1C of the last measured capacity, so the discharge current, discharged Ah and discharge energy encode the label. They must not be used as inputs (decision D14). The handover's `Current_Min` and discharge-capacity columns partly carry the same scaling.
 
 ### 4.3 Legitimate health indicators track SOH, but not better than time
 Indicators from the same segment (CC-charge duration and Ah, resistance proxy, duty-cycle voltage envelope, and partial-charge ΔQ in a fixed voltage window) move in the physically expected direction. The best, ΔQ between 3.7 and 3.9 V during the CC charge, has a median within-battery ρ ≈ 0.76.
 
-In leave-one-battery-out estimation of the SOH at the RPT closing each block (notebook 10; 93 standard blocks with a previous RPT; `results/health_indicators.json`):
+In leave-one-battery-out estimation of the SOH at the RPT closing each block (notebook 10; 93 standard blocks with a previous RPT; C/20 labels, D17; `results/health_indicators.json`):
 
 | Predictor | Mean held-out RMSE (SOH pp) |
 |---|---|
-| Previous RPT's SOH (persistence) | 0.288 |
-| Elapsed time | 0.505 |
-| ΔQ(3.7–3.9 V) + time | 0.519 |
-| All indicators + time | 0.559 |
-| All indicators | 0.815 |
-| ΔQ(3.7–3.9 V) | 1.218 |
+| Previous RPT's SOH (persistence) | 0.292 |
+| Elapsed time | 0.521 |
+| ΔQ(3.7–3.9 V) + time | 0.531 |
+| All indicators + time | 0.581 |
+| All indicators | 0.817 |
+| ΔQ(3.7–3.9 V) | 1.227 |
 
 ΔQ(3.7–3.9 V) exists only for blocks whose CC charge starts below 3.7 V (about half). In the other blocks it is imputed with the training median, which weakens it; restricted to blocks where it exists, it reached about 0.88 alone and about 0.50 with time in an exploratory run. Four blocks (v4 and w10, tests 17–18) used a non-standard 1.05 A charge and are flagged and excluded.
 
@@ -92,15 +92,19 @@ The limiting factor is the data, not the method. Total fade is only 3–5 pp alo
 
 ## 5. Raw diagnostic features (notebook 11, decision D16)
 
-The raw RPT and EIS files from the public archive give one row of 48 features per (battery, RPT). See `docs/DECISIONS.md` D16 for definitions and selection rules. Summary: `results/diagnostic_features.json`.
+The raw RPT and EIS files from the public archive give one row of 47 features per (battery, RPT). See `docs/DECISIONS.md` D16 for definitions and selection rules. Summary: `results/diagnostic_features.json`.
 
 - **Validation.** RPT 7 EIS was decoded from the aggregate files, and its R0 equals the authors' own high-frequency resistance for all 18 values. Pulse resistances (29–32 mΩ) and R0 (about 25–27 mΩ) match the ranges in the article.
 - **Health tracking.** Almost every feature tracks SOH within each battery, with the same sign in all six cells:
   - the IC peak height near 4.07 V falls smoothly (median within-battery ρ = 0.97);
   - pulse and EIS resistances rise (|ρ| ≈ 0.85–0.94).
-- **Forecasting relevance.** Against the next SOH change (the part a forecaster must predict beyond persistence), associations are weak: median |ρ| ≤ 0.3, with consistent signs in at most 5 of 6 cells.
-  - The features describe the current state well, but the data offer little evidence that they predict the next increment.
-  - With about 15 RPT pairs per cell, this test has low power.
+- **Forecasting relevance.** Against the next SOH change (the part a forecaster must predict beyond persistence), most features are weak (median |ρ| ≤ 0.3). The exceptions are at the low-voltage end:
+  - low-frequency Z′ at 3.26 V (0.1 and 0.01 Hz): ρ ≈ 0.42–0.44, same sign in all six cells;
+  - the charge between 3.63 and 3.26 V: ρ ≈ −0.52, same sign in five cells.
+
+  These are also the features that alternate from RPT to RPT with the 20/35 °C cycling batches, so the association may reflect the temperature schedule, not predictive ageing information. The forecasting study must test this, for example by adding the next batch's temperature as a known input.
+
+  With about 15 RPT pairs per cell, this test has low power.
 - **Common-mode shifts.** EIS R0 moves for all cells together at some RPTs (e.g. RPT 11 and 15). Arc resistance and the charge below 3.26 V alternate from RPT to RPT, most strongly in the residential cells (v4, w9, w10). The likely cause is measurement or storage conditions (the preceding cycling batch alternates 20/35 °C), not ageing. This is not yet tested.
 - **Data-quality findings:**
   - RPT 2 was run at about 20 °C.
