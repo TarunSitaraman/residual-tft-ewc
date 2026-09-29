@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/vv5cdAt3Be3QtjPo/plBvr3fZk4</id>
+  <title>arXiv Query: search_query=&amp;id_list=2402.18859&amp;start=0&amp;max_results=10</title>
+  <updated>2026-09-29T15:50:18Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2402.18859" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2402.18859v2</id>
+    <title>Taking Second-life Batteries from Exhausted to Empowered using Experiments, Data Analysis, and Health Estimation</title>
+    <updated>2024-06-08T16:46:51Z</updated>
+    <link href="https://arxiv.org/abs/2402.18859v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.18859v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The reuse of retired electric vehicle batteries in grid energy storage offers environmental and economic benefits. This study concentrates on health monitoring algorithms for retired batteries deployed in grid storage. Over 15 months of testing, we collect, analyze, and publicize a dataset of second-life batteries, implementing a cycling protocol simulating grid energy storage load profiles within a 3-4 V voltage window. Four machine-learning-based health estimation models, relying on online-accessible features and initial capacity, are compared, with the selected model achieving a mean absolute percentage error below 2.3% on test data. Additionally, an adaptive online health estimation algorithm is proposed by integrating a clustering-based method, thus limiting estimation errors during online deployment. These results showcase the feasibility of repurposing retired batteries for second-life applications. Based on obtained data and power demand, these second-life batteries exhibit potential for over a decade of grid energy storage use.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-29T05:17:36Z</published>
+    <arxiv:comment>16 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xiaofan Cui</name>
+    </author>
+    <author>
+      <name>Muhammad Aadil Khan</name>
+    </author>
+    <author>
+      <name>Gabriele Pozzato</name>
+    </author>
+    <author>
+      <name>Surinder Singh</name>
+    </author>
+    <author>
+      <name>Ratnesh Sharma</name>
+    </author>
+    <author>
+      <name>Simona Onori</name>
+    </author>
+    <arxiv:doi>10.1016/j.xcrp.2024.101941</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.xcrp.2024.101941" title="doi"/>
+  </entry>
+</feed>

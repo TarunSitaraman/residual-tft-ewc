@@ -424,3 +424,33 @@ F1 − F0 answers whether the diagnostics help forecasting.
 - **29 Sep 2026, code smoke tests.** While the runners were being written, each method, baseline and protocol was run once on one order with seed 0 and untuned defaults (learning rate 1e-3), and the test-split errors were printed. This checked that the code ran end to end and how long a run takes. No protocol element, grid, feature set or setting was changed afterwards. The reported results come only from the full tuned run in notebook 12.
 - **Replay grid.** The D11 replay grid (50–400 samples per task) is larger than a forecasting task's training set (21–27 samples). Every grid value therefore stores the whole task, and replay becomes full rehearsal. This follows from reusing the D11 grids unchanged and is reported, not re-tuned.
 - **P2 neural training.** "Train on all samples of the other five" is implemented as fitting on their train and test splits and early-stopping on their validation splits. Baselines, which have no early stopping, fit on all of them.
+
+---
+
+## D19. Second dataset: Wheeler et al. 2025 (LFP, first and second life)
+
+**Status:** Adopted (29 Sep 2026). The dataset is registered as S6 in `docs/EXTERNAL_DATA.md`.
+
+**Why a second dataset.** S1 alone has six cells of one type, 2.5–4.9 pp of fade and every sample in reuse class C0. So it can test neither heterogeneity across chemistries and usage nor the reuse classes.
+
+**Selection criteria**, fixed before screening:
+1. It is a public dataset with a licence that allows reuse and redistribution with attribution.
+2. It has a series of capacity checks (RPT-like), so the D18 forecasting protocol applies.
+3. It involves second-life use or ageing past first-life end of life.
+4. It adds heterogeneity S1 lacks: chemistry, usage conditions, depth of fade.
+5. Its metadata can be verified against primary records.
+
+**Screened** (details and evidence in `docs/EXTERNAL_DATA.md`):
+
+| Dataset | Outcome |
+|---|---|
+| Wheeler et al. 2025, 20 A123 LFP cells, 7 conditions, CC BY 4.0 | **Selected.** Meets all five criteria. |
+| Stanford–Relyion (Cui et al. 2024), 8 retired Nissan Leaf LMO cells | **Deferred.** Best match on criterion 3, but no licence is declared, so it fails criterion 1. Permission will be requested. |
+| Beatty et al. 2025 (Loughborough) | **Rejected** on criterion 2: capacity only at the start and end. |
+| Mowri et al. 2025 | **Rejected** on criterion 2: only 7 monthly second-life cycles. Its data licence is also unverified. |
+| NASA, Oxford, CALCE, Severson 2019 | **Not screened:** first life only (criterion 3). |
+
+**Consequences for the paper.**
+- **Reporting:** results on S6 are reported separately per dataset. There is no pooling across datasets and no claim of transfer between them unless tested.
+- **What "second life" means in S6:** ageing below 80 % SOH under the same EV-like protocol at 50 °C, not a repurposed duty. State this explicitly.
+- **Protocol:** the D18 protocol is applied to S6 with the characterisations every 100 cycles as RPTs, and the test cases (or cells) as tasks. Deviations forced by S6's structure (no calendar schedule, cycle-based spacing) are recorded before any model is run on S6.
