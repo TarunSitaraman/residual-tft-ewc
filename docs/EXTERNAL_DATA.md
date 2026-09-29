@@ -130,7 +130,7 @@ The article describes version 1. Version 2 extends the same campaign, and this w
 - **Capacity labels reproduced (29 Sep 2026):** all 112 RPT capacity rows in `rpt_capacity_data.csv` (111 RPTs; g1's RPT_1 spans two files) were recomputed exactly from the raw files (maximum absolute difference 0.0 Ah; `scripts/verify_external_data.py --raw-root`).
   - Definition: `Capacity_Ah` is the maximum of the Arbin cumulative `Discharge_Capacity(Ah)` counter over the whole RPT. It therefore includes the small pulse discharges, not only the constant-current capacity step.
   - The paper must define capacity this way.
-- The handover author (Darshan D) should confirm which archive version was processed.
+- **Archive version settled by evidence:** the handover contains `Cycling_16`–`18`, `RPT_16`–`19` and RPTs dated up to 29 Jan 2025. Version 1 ends at `Cycling_15` and 6 Oct 2024, so the handover was produced from version 2 (or a later one with identical file names). No confirmation from the handover author is needed.
 
 ### Parts of S1 not in the handover
 The archive also holds everything below. All of it is covered by the same licence and can be used with the same citation.
@@ -154,7 +154,11 @@ The archive also holds everything below. All of it is covered by the same licenc
 - SOH labels;
 - cycle-level features.
 
-The processing script is **not** in this repository; see `README.md` §1.2 for the described workflow and `docs/DATA_REPORT.md` §2 for where the delivered files differ from their description.
+The processing script is **not** in this repository. See `README.md` §1.2 for the described workflow and `docs/DATA_REPORT.md` §2 for where the delivered files differ from their description.
+
+**Status (29 Sep 2026): frozen.** The handover is complete, and the team now owns all data processing (decision D15).
+- These CSVs remain valid inputs: their RPT capacities are reproduced exactly from the raw files, and their blocks match the archive.
+- Any new processed data (EIS features, raw-curve indicators, re-extracted cycling data) is produced by code in this repository from S1 directly, never by hand.
 
 **Where it is.**
 - https://huggingface.co/datasets/TarunSitaraman/second-life-ev-battery-datasets (public).
@@ -241,7 +245,7 @@ These were suggested as additional data with larger and more varied fade (`docs/
 - [ ] **Acknowledgements:** thank the Stanford Energy Control Laboratory for making the data public.
 - [ ] **Data availability statement:** the raw data are at doi:10.17605/OSF.IO/8JNR5 under CC BY 4.0. Give the processing code and the commit hash.
 - [ ] **Hugging Face mirror:** fix the dataset card (S2), or remove the mirror, before submission.
-- [ ] **Handover version:** confirm with the handover author that version 2 of the archive was processed.
+- [x] **Handover version:** version 2, settled by the folders and dates it contains (S1, "Evidence").
 - [x] **Capacity labels:** reproduce `Capacity_Ah` from the raw RPT files. Done: 112/112 exact. Define capacity in the paper as the total Ah discharged over the RPT (S1, "Evidence").
 - [ ] **Cui et al. 2024:** read it and decide whether it is prior work on the same cells (S5).
 - [ ] **Comparisons with the literature:** do not compare with numbers from other datasets or SOH definitions without saying so (see `CLAUDE.md`).
