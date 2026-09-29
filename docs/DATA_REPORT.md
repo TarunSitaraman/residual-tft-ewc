@@ -155,6 +155,6 @@ All numbers are from `results/forecasting.json` (commit `d710cad`, clean). Error
 - With six pairs, no difference survives Holm correction; the smallest attainable p is 0.031 before correction.
 
 **Implications.**
-1. **For the paper**, the honest S1 result is that learned forecasters beat persistence and linear extrapolation by 25–29 % in RMSE, driven mainly by the known temperature and rest schedule. TFT + EWC is competitive (level with gradient boosting and TFT fine-tuning) but does not beat a schedule-aware linear model. S1 is too homogeneous and too small to show continual-learning benefits.
+1. **For the paper**, the honest S1 result is that learned forecasters beat persistence by 21–29 % in RMSE (and linear extrapolation by more), driven mainly by the known temperature and rest schedule. TFT + EWC is competitive (level with gradient boosting and TFT fine-tuning) but does not beat a schedule-aware linear model. S1 is too homogeneous and too small to show continual-learning benefits.
 2. **This is why the second dataset is needed** (S6, D19). It has 20 cells in seven usage conditions, fade to 30–50 % SOH with knees, and about 2,400 forecasting samples. Continual learning, EWC and reuse classes can be tested meaningfully there.
 
