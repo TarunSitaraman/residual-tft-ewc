@@ -250,10 +250,10 @@ def method_settings(config: CLConfig, method: str) -> dict:
             **config.method_kwargs.get(method, {})}
 
 
-def _task_errors(strategy, tasks: Sequence[P.Task], metric: str, split: str = "test") -> dict[str, float]:
+def _task_errors(strategy, tasks: Sequence[P.Task], metric: str, split: str = "test", target: str = TARGET) -> dict[str, float]:
     if split not in ("test", "val"):
         raise ValueError(f"split must be 'test' or 'val', got {split!r}")
-    return {t.name: ev.task_error(getattr(t, split)[TARGET], strategy.predict(getattr(t, split)), metric) for t in tasks}
+    return {t.name: ev.task_error(getattr(t, split)[target], strategy.predict(getattr(t, split)), metric) for t in tasks}
 
 
 def _stream_history(tasks: Sequence[P.Task]) -> pd.DataFrame:
@@ -262,7 +262,8 @@ def _stream_history(tasks: Sequence[P.Task]) -> pd.DataFrame:
 
 
 def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "RMSE", eval_split: str = "test",
-               return_strategy: bool = False, collect_predictions: bool = False, **kwargs) -> dict:
+               return_strategy: bool = False, collect_predictions: bool = False, target: str = TARGET,
+               features: Sequence[str] | None = None, **kwargs) -> dict:
     """Train ``method`` through ``tasks`` in order, evaluating every task after every step.
 
     Returns the accuracy matrix (all entries, including tasks not yet seen, which
@@ -270,15 +271,17 @@ def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "R
     and per-task training time. ``eval_split="val"`` evaluates on the validation
     periods instead, for hyperparameter tuning; test periods are then never read
     for evaluation. TFT strategies draw causal feature windows from the stream's
-    cycles (label-free) unless ``history`` is given.
+    cycles (label-free) unless ``history`` is given. ``target`` and ``features``
+    default to cycle-level SOH estimation (``SOH_Percent``, all model feature
+    columns); forecasting passes its own (D18).
     """
-    features = dp.model_feature_columns(tasks[0].train)
+    features = list(features) if features is not None else dp.model_feature_columns(tasks[0].train)
     if is_tft(method) and "history" not in kwargs:
         kwargs["history"] = _stream_history(tasks)
-    reference = make_strategy(method, features, seed=seed, **kwargs).initialise(tasks[0])
-    b = _task_errors(reference, tasks, metric, eval_split)
+    reference = make_strategy(method, features, seed=seed, target=target, **kwargs).initialise(tasks[0])
+    b = _task_errors(reference, tasks, metric, eval_split, target)
 
-    strategy = make_strategy(method, features, seed=seed, **kwargs)
+    strategy = make_strategy(method, features, seed=seed, target=target, **kwargs)
     errors: dict[tuple[int, str], float] = {}
     predictions: dict[tuple[int, str], np.ndarray] = {}
     for i, task in enumerate(tasks):
@@ -286,7 +289,7 @@ def run_stream(method: str, tasks: Sequence[P.Task], seed: int, metric: str = "R
         for t in tasks:
             frame = getattr(t, eval_split)
             pred = strategy.predict(frame)
-            errors[(i, t.name)] = ev.task_error(frame[TARGET], pred, metric)
+            errors[(i, t.name)] = ev.task_error(frame[target], pred, metric)
             if collect_predictions:
                 predictions[(i, t.name)] = pred
     order = [t.name for t in tasks]
@@ -313,31 +316,43 @@ def reuse_run_metrics(out: Mapping, order: Sequence[str]) -> tuple[dict, np.ndar
             "reuse_forgetting": f1["forgetting"], "reuse_backward_transfer": f1["backward_transfer"]}, confusion
 
 
-def _warm_up(df: pd.DataFrame, methods: Sequence[str] = ("finetune",)) -> None:
+def _warm_up(df: pd.DataFrame, methods: Sequence[str] = ("finetune",), stream_builder=None, kwargs: Mapping | None = None,
+             tft_kwargs: Mapping | None = None) -> None:
     """One tiny fit per backbone so one-off initialisation is not charged to the first timed run."""
+    kwargs = dict(kwargs or {})
+    features = kwargs.pop("features", None)
+    features = list(features) if features is not None else dp.model_feature_columns(df)
+    target = kwargs.pop("target", TARGET)
     group = sorted(set(df[dp.GROUP_COL].astype(str)))[0]
-    task = P.make_task(df, group)
-    features = dp.model_feature_columns(df)
-    make_strategy("finetune", features, epochs=1).fit_task(task)
+    task = stream_builder(df, [group])[0] if stream_builder else P.make_task(df, group)
+    make_strategy("finetune", features, epochs=1, target=target).fit_task(task)
     if any(is_tft(m) for m in methods):
-        make_strategy("tft_finetune", features, history=df, epochs=1).fit_task(task)
+        extra = {k: v for k, v in (tft_kwargs or {}).items() if k in ("window", "window_group", "d_model", "n_heads")}
+        make_strategy("tft_finetune", features, history=df, epochs=1, target=target, **extra).fit_task(task)
 
 
-def run_cl_experiment(df: pd.DataFrame, config: CLConfig) -> dict:
+def _default_stream(config: "CLConfig"):
+    return lambda df, order: P.make_task_stream(df, order, config.train_frac, config.val_frac)
+
+
+def run_cl_experiment(df: pd.DataFrame, config: CLConfig, stream_builder=None) -> dict:
     """Run every method over every (order, seed) pair and the joint upper bound per seed.
 
     Returns ``runs`` (one row per method × order × seed with scalar CL metrics),
     ``matrices`` (accuracy matrices keyed by (method, order_id, seed)),
     ``joint`` (per-task test error of joint training per seed), ``orders`` and
-    the config.
+    the config. ``stream_builder(df, order)`` builds the task stream (default:
+    chronological cycle splits; forecasting uses purged origin splits, D18).
+    Target and feature columns come from ``config.common_kwargs`` when given.
     """
+    build = stream_builder or _default_stream(config)
     groups = [g for g in dp.BATTERY_GROUPS if g in set(df[dp.GROUP_COL].astype(str))]
     orders = P.sample_orders(groups, config.n_orders, config.order_seed)
-    _warm_up(df, config.methods)
+    _warm_up(df, config.methods, stream_builder, config.common_kwargs, config.backbone_kwargs.get("tft"))
 
     runs, matrices, confusions = [], {}, {}
     for order_id, order in enumerate(orders):
-        tasks = P.make_task_stream(df, order, config.train_frac, config.val_frac)
+        tasks = build(df, order)
         for seed in config.seeds:
             for method in config.methods:
                 out = run_stream(method, tasks, seed, config.metric, collect_predictions=config.reuse_metrics,
@@ -353,12 +368,14 @@ def run_cl_experiment(df: pd.DataFrame, config: CLConfig) -> dict:
                     confusions[method] = confusions.get(method, 0) + conf
                 runs.append(row)
 
-    tasks = P.make_task_stream(df, groups, config.train_frac, config.val_frac)
+    tasks = build(df, groups)
     joint_rows = []
-    features = dp.model_feature_columns(df)
     for backbone in config.joint_backbones:
         for seed in config.seeds:
             kwargs = {**config.common_kwargs, **config.backbone_kwargs.get(backbone, {})}
+            features = kwargs.pop("features", None)
+            features = list(features) if features is not None else dp.model_feature_columns(df)
+            target = kwargs.get("target", TARGET)
             if backbone == "mlp":
                 name, joint = "joint", Joint(features, seed=seed, **kwargs)
             elif backbone == "tft":
@@ -366,7 +383,7 @@ def run_cl_experiment(df: pd.DataFrame, config: CLConfig) -> dict:
             else:
                 raise ValueError(f"unknown joint backbone {backbone!r}; expected 'mlp' or 'tft'")
             joint.fit_all(tasks)
-            for task_name, err in _task_errors(joint, tasks, config.metric).items():
+            for task_name, err in _task_errors(joint, tasks, config.metric, target=target).items():
                 joint_rows.append({"method": name, "seed": seed, dp.GROUP_COL: task_name, "error": err,
                                    "train_time_s": float(np.sum(joint.training_time_))})
 
@@ -461,7 +478,7 @@ def _select(runs: pd.DataFrame, points: list[dict], grid: Mapping[str, Sequence]
     return chosen, edge, agg.assign(selected=agg["point_id"] == best["point_id"])
 
 
-def tune_hyperparameters(df: pd.DataFrame, cl_config: CLConfig, tuning: TuningConfig) -> dict:
+def tune_hyperparameters(df: pd.DataFrame, cl_config: CLConfig, tuning: TuningConfig, stream_builder=None) -> dict:
     """Two-stage, validation-only hyperparameter selection (D11).
 
     Stage 1: for each backbone used by ``cl_config.methods``, fine-tuning streams
@@ -474,8 +491,9 @@ def tune_hyperparameters(df: pd.DataFrame, cl_config: CLConfig, tuning: TuningCo
     grid range) and a ``CLConfig`` holding all selected values.
     """
     orders = tuning_orders(df, cl_config, tuning.n_orders)
-    streams = [P.make_task_stream(df, o, cl_config.train_frac, cl_config.val_frac) for o in orders]
-    _warm_up(df, cl_config.methods)
+    build = stream_builder or _default_stream(cl_config)
+    streams = [build(df, o) for o in orders]
+    _warm_up(df, cl_config.methods, stream_builder, cl_config.common_kwargs, cl_config.backbone_kwargs.get("tft"))
     all_rows, summaries = [], []
 
     backbone_selected, at_edge = {}, {}
