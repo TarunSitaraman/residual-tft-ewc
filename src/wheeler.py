@@ -226,4 +226,7 @@ BASELINE_COLUMNS: dict = {"rate": "fade_rate_pp_per_cycle", "span": "cycles_to_t
 def feature_sets(samples: pd.DataFrame) -> dict[str, list[str]]:
     """F0 (history, static test conditions, cycles to target) and F1 (F0 + diagnostics), as in D18."""
     f0 = ["soh_origin", "cycles_since_first", "fade_rate_pp_per_cycle", "horizon", *SCHEDULE_FEATURES]
-    return {"F0": f0, "F1": f0 + [c for c in feature_columns(samples) if c in samples.columns]}
+    # Features never observed (e.g. an IC window that never holds an interior peak) are dropped;
+    # the rule uses no label information (D20 disclosures).
+    diag = [c for c in feature_columns(samples) if c in samples.columns and samples[c].notna().any()]
+    return {"F0": f0, "F1": f0 + diag}

@@ -512,3 +512,7 @@ F1 − F0 answers whether the diagnostics help forecasting.
 - **29 Sep 2026, row order of the S6 exports (implementation fix, before any model run).** The exported characterisation rows are not in time order: rows of different steps are interleaved. So the first and last rows of a step were not its start and end, and the step-validity rule rejected 188 checks.
   - `read_check` now sorts by `Test_Time`. After the fix, exactly four checks lack a label: cells 1a, 2a, 2c and 3a at cycle 100, which are the acquisition faults documented by the authors.
   - The authors' capacity (maximum C/3 charge counter) does not depend on row order and matched ours on all 843 comparable checks both before and after the fix.
+- **29 Sep 2026, never-observed features dropped (implementation fix, before any S6 result was seen).** The IC window near 3.22 V never contains an interior peak in the S6 data, so `ic_pos_p2` and `ic_height_p2` are always missing. Gradient boosting fails on an all-missing column, and the first full run of notebook 13 stopped at the baselines, after the continual-learning runs but before any result was printed or saved.
+  - F1 now excludes features with no observed value in the samples. The rule uses no label information.
+  - The notebook was re-run in full.
+- **Smoke profile.** Notebook 13 has an `EXPERIMENT_PROFILE=smoke` setting (one order, one seed, two epochs) that checks the code end to end. Its output is not reportable, was not kept, and changed no setting.
