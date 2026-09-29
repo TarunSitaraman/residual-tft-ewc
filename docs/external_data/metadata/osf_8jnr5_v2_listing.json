@@ -9,7 +9,14 @@
   "rpt_file_refs_in_same_rpt_folder": 337,
   "handover_cycling_blocks": 103,
   "blocks_missing_from_archive": [],
-  "archive_blocks_missing_from_handover": []
+  "archive_blocks_missing_from_handover": [],
+  "capacity_check": {
+   "rpt_rows": 112,
+   "matching_within_tol": 112,
+   "tolerance_ah": 1e-06,
+   "max_abs_diff_ah": 0.0,
+   "mismatches": []
+  }
  },
  "files": [
   {
