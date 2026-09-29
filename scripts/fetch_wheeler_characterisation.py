@@ -40,7 +40,7 @@ RECORD = Path("docs/external_data/metadata/wheeler2025_lfp_dataverse.dataset.jso
 ACCESS = "https://entrepot.recherche.data.gouv.fr/api/access/datafile/{id}"
 
 
-def _range(url: str, start: int, end: int, size: int, attempts: int = 6) -> bytes:
+def _range(url: str, start: int, end: int, size: int, attempts: int = 15) -> bytes:
     for k in range(attempts):
         try:
             req = urllib.request.Request(url, headers={"Range": f"bytes={start}-{end}"})

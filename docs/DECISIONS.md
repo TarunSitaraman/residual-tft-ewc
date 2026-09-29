@@ -509,3 +509,6 @@ F1 − F0 answers whether the diagnostics help forecasting.
 - Results are reported per dataset; nothing is pooled with S1.
 
 ### D20 deviations and disclosures
+- **29 Sep 2026, row order of the S6 exports (implementation fix, before any model run).** The exported characterisation rows are not in time order: rows of different steps are interleaved. So the first and last rows of a step were not its start and end, and the step-validity rule rejected 188 checks.
+  - `read_check` now sorts by `Test_Time`. After the fix, exactly four checks lack a label: cells 1a, 2a, 2c and 3a at cycle 100, which are the acquisition faults documented by the authors.
+  - The authors' capacity (maximum C/3 charge counter) does not depend on row order and matched ours on all 843 comparable checks both before and after the fix.

@@ -20,7 +20,7 @@ def _check(q=1.0, start_v=3.50, c3_start_v=3.50, drop_c25=False):
         nonlocal t
         for k in range(n):
             t += 1
-            rows.append({"DateTime": 44000 + t / 86400, "Step_Index": step, "Step_Time": k + 1.0, "Current": current,
+            rows.append({"Test_Time": t, "DateTime": 44000 + t / 86400, "Step_Index": step, "Step_Time": k + 1.0, "Current": current,
                          "Voltage": v[k], "Charge_Capacity": qvals[k] if qcol == "c" else 0.0,
                          "Discharge_Capacity": qvals[k] if qcol == "d" else 0.0})
     n = 400
@@ -94,3 +94,13 @@ def test_tasks_are_test_cases_and_windows_are_per_cell():
     assert set(tasks[1].train["cell"]) == {"cell1a", "cell1b"}
     assert s.groupby(["Battery_ID", "Cycling_Test", "Cycle_Index"]).size().max() == 1   # unique TFT window keys
     assert W.cell_case("Cell4b") == "case4"
+
+
+def test_read_check_sorts_by_test_time(tmp_path):
+    ts = _check().sample(frac=1.0, random_state=0)            # shuffled rows, as in some exports
+    path = tmp_path / "c.csv"
+    ts.to_csv(path, sep=";", index=False)
+    back = W.read_check(path)
+    assert back["Test_Time"].is_monotonic_increasing
+    assert W.check_features(back)["q_c25_dis"] == pytest.approx(1.0)
+
