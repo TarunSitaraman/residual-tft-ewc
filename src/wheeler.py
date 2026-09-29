@@ -65,9 +65,15 @@ def cell_case(cell: str) -> str:
 
 
 def read_check(path: Path | str) -> pd.DataFrame:
-    """One characterisation file (semicolon-separated Arbin export, optionally gzip-compressed)."""
-    return pd.read_csv(path, sep=";", usecols=["DateTime", "Step_Index", "Step_Time", "Current", "Voltage",
-                                                "Charge_Capacity", "Discharge_Capacity"])
+    """One characterisation file (semicolon-separated Arbin export, optionally gzip-compressed), in time order.
+
+    The exported rows are not in time order (rows of different steps are
+    interleaved), so they are sorted by ``Test_Time``; otherwise the first and
+    last rows of a step are not its start and end.
+    """
+    ts = pd.read_csv(path, sep=";", usecols=["Test_Time", "DateTime", "Step_Index", "Step_Time", "Current", "Voltage",
+                                              "Charge_Capacity", "Discharge_Capacity"])
+    return ts.sort_values("Test_Time", kind="mergesort").reset_index(drop=True)
 
 
 def _step(ts: pd.DataFrame, k: int, discharge: bool) -> pd.DataFrame:
@@ -113,6 +119,10 @@ def check_features(ts: pd.DataFrame) -> dict:
     r["q_c25_dis"] = float(d25["Discharge_Capacity"].max()) if len(d25) else np.nan
     r["q_c25_ch"] = float(c25["Charge_Capacity"].max()) if len(c25) else np.nan
     r["q_c3_dis"] = float(d3["Discharge_Capacity"].max()) if len(d3) else np.nan
+    # Authors' capacity definition (max charge counter of step 13, no validity rule), kept only
+    # to check our parsing against their extractedData.mat; not a feature.
+    s13 = ts[ts["Step_Index"] == 13]
+    r["authors_c3_charge_ah"] = float(s13["Charge_Capacity"].max()) if len(s13) else np.nan
     r["complete"] = bool(len(d3) and len(c3) and len(d25) and len(c25))
     if len(d25):
         v, q = d25["Voltage"].to_numpy(float), d25["Discharge_Capacity"].to_numpy(float)

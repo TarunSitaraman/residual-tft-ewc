@@ -51,6 +51,17 @@ python scripts/build_diagnostic_features.py   # first run ~20 min (converts .xls
 
 This writes `data/diagnostic_features.csv` and `data/diagnostic_selection_log.csv`, both git-ignored.
 
+## Second dataset (S6, Wheeler et al. 2025)
+
+The LFP first- and second-life dataset (CC BY 4.0; see `docs/EXTERNAL_DATA.md` S6 and decisions D19–D20):
+
+```bash
+python scripts/fetch_wheeler_characterisation.py   # about 3.6 GB stored; the zips are read selectively
+python scripts/build_wheeler_features.py           # writes data/wheeler_checks.csv; checks against the authors' values
+```
+
+`readme.txt`, `extractedData.mat` and `Matlab_BasicImportAndDisplay.m` from the dataset must also be in `data/raw/wheeler2025/`. Download them from the repository and check them against the MD5 values in `docs/external_data/metadata/wheeler2025_lfp_dataverse.dataset.json`.
+
 ## Revised handover package
 
 The revised external handover may provide `ml_ready_dataset.csv` instead of
@@ -88,6 +99,7 @@ done
 | `10_health_indicators.ipynb` | `cleaned_battery_data.csv`, `final_battery_health_dataset.csv` |
 | `11_diagnostic_features.ipynb` | `diagnostic_features.csv` and `diagnostic_selection_log.csv` (from `scripts/build_diagnostic_features.py`), `final_battery_health_dataset.csv`, the raw files and their cache |
 | `12_forecasting.ipynb` | `diagnostic_features.csv` (C/20 labels, D17), `cleaned_battery_data.csv` (cycling schedule); about 15 min on one CPU thread |
+| `13_wheeler_forecasting.ipynb` | `wheeler_checks.csv` and the S6 raw files (second dataset); about 1 h on one CPU thread |
 
 Notebooks 03–09 write small JSON files to `results/` (`preprocessing_table.json`, `baseline_metrics.json`, `reference_baselines.json`, `cl_metrics.json`, `tft_ewc_metrics.json`, `reuse_assessment.json`, `missing_temperature.json`). Notebooks 05–09 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile produces reportable numbers. Executing into `--output-dir` keeps outputs derived from the data out of the committed notebooks.
 
