@@ -265,3 +265,20 @@ Rules:
 On this dataset the indicators track SOH in the physically expected direction but do not beat elapsed time or persistence on held-out batteries (`docs/DATA_REPORT.md` §4.3). Estimating the current SOH is therefore not a meaningful benchmark here, and the task definition is reopened (report §5).
 
 **Implemented in:** `src/health_indicators.py`, `notebooks/10_health_indicators.ipynb`, `tests/test_health_indicators.py`; schema handling in `src/data_pipeline.py` (`normalise_rpt_capacity`, `Date_Time`) and notebooks 01–03.
+
+---
+
+## D15. The team owns the data pipeline from the raw archive
+
+**Status:** Adopted (29 Sep 2026)
+
+- **Decision.** The handover is complete, and no further processing will come from outside the team. From now on, all processed data are produced by code in this repository from the public raw archive (S1 in `docs/EXTERNAL_DATA.md`).
+- **Existing CSVs.** The handover CSVs are kept as frozen, verified inputs:
+  - all 112 RPT capacities are reproduced exactly from the raw files;
+  - every RPT file and cycling block matches the archive.
+- **New inputs.** Anything the CSVs lack is extracted by committed scripts with checksums recorded: EIS spectra, raw RPT curves, and re-derived cycling features if needed.
+- **Why.** Every number in the paper must trace to code in this repository and to a public, citable source. Undocumented processing outside the repository cannot be reviewed.
+- **Implemented in:**
+  - `scripts/fetch_osf_diagnostics.py` (raw RPT and EIS files);
+  - `scripts/verify_external_data.py` (handover checked against the archive);
+  - extraction code for new inputs, to follow.
