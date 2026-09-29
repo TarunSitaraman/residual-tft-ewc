@@ -4,6 +4,8 @@ The handover CSV datasets are **not stored in Git**. CSV files are ignored by `.
 
 ## Providing the data
 
+The handover data are published at `https://huggingface.co/datasets/TarunSitaraman/second-life-ev-battery-datasets`. In a cloud session the environment's network access must allow `huggingface.co` (and its download hosts); then download the seven CSVs into `data/`. See `docs/DATA_REPORT.md` for how the delivered files differ from the handover description.
+
 The notebooks read every file from `DATA_ROOT`:
 
 ```python
@@ -64,6 +66,7 @@ done
 | `07_tft_ewc.ipynb` | `ml_training_dataset.csv` |
 | `08_reuse_assessment.ipynb` | `ml_training_dataset.csv`, `final_battery_health_dataset.csv` |
 | `09_missing_temperature.ipynb` | `ml_training_dataset.csv` |
+| `10_health_indicators.ipynb` | `cleaned_battery_data.csv`, `final_battery_health_dataset.csv` |
 
 Notebooks 03–09 write small JSON files to `results/` (`preprocessing_table.json`, `baseline_metrics.json`, `reference_baselines.json`, `cl_metrics.json`, `tft_ewc_metrics.json`, `reuse_assessment.json`, `missing_temperature.json`). Notebooks 05–09 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile produces reportable numbers. Executing into `--output-dir` keeps outputs derived from the data out of the committed notebooks.
 
