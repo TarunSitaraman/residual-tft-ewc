@@ -4,11 +4,11 @@
     "numpy": "2.4.6",
     "pandas": "3.0.6",
     "scikit-learn": "1.9.1",
-    "git_commit": "36be28359c1eb8f447cef30b9f055dcbb0c605b1",
-    "git_dirty": false
+    "git_commit": "a4f39d2615632994b4b2d95efb741e8c1dfaaab7",
+    "git_dirty": true
   },
   "n_rows": 111,
-  "n_features": 48,
+  "n_features": 47,
   "non_missing": {
     "q_4.20_4.00": 111,
     "q_4.00_3.63": 111,
@@ -56,8 +56,7 @@
     "eis_zre_10hz_4.00": 76,
     "eis_zre_1hz_4.00": 76,
     "eis_zre_0.1hz_4.00": 76,
-    "eis_zre_0.01hz_4.00": 76,
-    "q_c20_ah": 111
+    "eis_zre_0.01hz_4.00": 76
   },
   "selection_rules": {
     "complete test, then longest": 1,
@@ -66,52 +65,50 @@
     "no per-cell file; aggregate file": 18,
     "non-empty, same channel as capacity test, closest in time": 10
   },
-  "capacity_minus_c20_mah": {
+  "label_basis": "C/20 capacity (D17)",
+  "handover_pulse_charge_mah": {
     "median": 15.026833614690815,
     "min": 7.244123655268275,
     "max": 15.916425429166381
   },
+  "soh_c20_minus_handover_pp": {
+    "min": -0.08707739206673182,
+    "max": 0.08874174637377052
+  },
   "within_battery_spearman_summary": [
-    {
-      "feature": "q_c20_ah",
-      "median rho vs SOH": 1.0,
-      "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.0014705882352941176,
-      "same sign (of 6), dSOH": 3
-    },
     {
       "feature": "days",
       "median rho vs SOH": -0.9845201238390093,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": -0.09852941176470588,
+      "median rho vs next dSOH": -0.08152876535229477,
       "same sign (of 6), dSOH": 4
     },
     {
       "feature": "ic_height_p5",
       "median rho vs SOH": 0.9690402476780186,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.058823529411764705,
-      "same sign (of 6), dSOH": 4
+      "median rho vs next dSOH": 0.03970588235294118,
+      "same sign (of 6), dSOH": 3
     },
     {
       "feature": "q_4.00_3.63",
       "median rho vs SOH": 0.9618163054695563,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": -0.05294117647058823,
+      "median rho vs next dSOH": -0.06176470588235294,
       "same sign (of 6), dSOH": 3
     },
     {
       "feature": "q_4.20_4.00",
       "median rho vs SOH": 0.9514963880288958,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": -0.018341952165481578,
-      "same sign (of 6), dSOH": 6
+      "median rho vs next dSOH": -0.037459599224305105,
+      "same sign (of 6), dSOH": 5
     },
     {
       "feature": "eis_arc_peak_4.00",
       "median rho vs SOH": -0.9412087912087912,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.1621212121212121,
+      "median rho vs next dSOH": 0.15303030303030302,
       "same sign (of 6), dSOH": 4
     },
     {
@@ -139,28 +136,28 @@
       "feature": "r_pulse_3.63_8s",
       "median rho vs SOH": -0.9103088603862598,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.14292178409825468,
+      "median rho vs next dSOH": 0.17811893988364574,
       "same sign (of 6), dSOH": 4
     },
     {
       "feature": "eis_zre_1hz_4.00",
       "median rho vs SOH": -0.9082417582417582,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.2772727272727273,
+      "median rho vs next dSOH": 0.2681818181818182,
       "same sign (of 6), dSOH": 5
     },
     {
       "feature": "eis_zre_0.01hz_4.00",
       "median rho vs SOH": -0.9080919080919081,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.23636363636363636,
+      "median rho vs next dSOH": 0.22727272727272727,
       "same sign (of 6), dSOH": 5
     },
     {
       "feature": "r_pulse_3.63_1s",
       "median rho vs SOH": -0.908047692761315,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.19861021331609569,
+      "median rho vs next dSOH": 0.22498383968972205,
       "same sign (of 6), dSOH": 5
     },
     {
@@ -181,7 +178,7 @@
       "feature": "q_3.26_2.50",
       "median rho vs SOH": 0.8988648090815274,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.30000000000000004,
+      "median rho vs next dSOH": 0.2823529411764706,
       "same sign (of 6), dSOH": 5
     },
     {
@@ -202,21 +199,21 @@
       "feature": "eis_zre_0.1hz_4.00",
       "median rho vs SOH": -0.8881618381618381,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.2545454545454545,
+      "median rho vs next dSOH": 0.24545454545454545,
       "same sign (of 6), dSOH": 5
     },
     {
       "feature": "r_pulse_3.63_0.1s",
       "median rho vs SOH": -0.8834420610349403,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.2286037491919845,
+      "median rho vs next dSOH": 0.2617647058823529,
       "same sign (of 6), dSOH": 5
     },
     {
       "feature": "ic_pos_p3",
       "median rho vs SOH": -0.877359045514791,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": -0.08948822461934297,
+      "median rho vs next dSOH": -0.06877780287985513,
       "same sign (of 6), dSOH": 3
     },
     {
@@ -230,15 +227,15 @@
       "feature": "r_pulse_3.26_0.1s",
       "median rho vs SOH": -0.8637770897832817,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": -0.07727860374919199,
+      "median rho vs next dSOH": -0.020765998707175173,
       "same sign (of 6), dSOH": 3
     },
     {
       "feature": "r_pulse_3.26_8s",
       "median rho vs SOH": -0.8630804953560371,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": -0.12422430510665804,
-      "same sign (of 6), dSOH": 4
+      "median rho vs next dSOH": -0.07212346477052359,
+      "same sign (of 6), dSOH": 3
     },
     {
       "feature": "eis_zre_10hz_3.63",
@@ -251,14 +248,14 @@
       "feature": "eis_rarc_4.00",
       "median rho vs SOH": -0.8572427572427572,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": -0.01818181818181818,
-      "same sign (of 6), dSOH": 3
+      "median rho vs next dSOH": -0.03636363636363636,
+      "same sign (of 6), dSOH": 4
     },
     {
       "feature": "r_pulse_3.26_1s",
       "median rho vs SOH": -0.8562159074155978,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": -0.07798965740142211,
+      "median rho vs next dSOH": -0.04722042663219134,
       "same sign (of 6), dSOH": 3
     },
     {
@@ -300,7 +297,7 @@
       "feature": "ic_height_p3",
       "median rho vs SOH": -0.7894257703081233,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": -0.13665966386554623,
+      "median rho vs next dSOH": -0.11460084033613445,
       "same sign (of 6), dSOH": 3
     },
     {
@@ -328,7 +325,7 @@
       "feature": "ic_height_p2",
       "median rho vs SOH": 0.7463954002653693,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.17647058823529413,
+      "median rho vs next dSOH": 0.1808823529411765,
       "same sign (of 6), dSOH": 4
     },
     {
@@ -349,7 +346,7 @@
       "feature": "ic_pos_p2",
       "median rho vs SOH": -0.6713753666705637,
       "same sign (of 6), SOH": 5,
-      "median rho vs next dSOH": -0.2161029220944793,
+      "median rho vs next dSOH": -0.20810921383784742,
       "same sign (of 6), dSOH": 5
     },
     {
@@ -363,21 +360,21 @@
       "feature": "ic_pos_p4",
       "median rho vs SOH": -0.6119092689872759,
       "same sign (of 6), SOH": 5,
-      "median rho vs next dSOH": -0.5702595271407118,
+      "median rho vs next dSOH": -0.5252390381559188,
       "same sign (of 6), dSOH": 3
     },
     {
       "feature": "eis_zre_1hz_3.26",
       "median rho vs SOH": -0.5223776223776224,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.33356643356643356,
+      "median rho vs next dSOH": 0.31608391608391606,
       "same sign (of 6), dSOH": 6
     },
     {
       "feature": "eis_zre_0.1hz_3.26",
       "median rho vs SOH": -0.506993006993007,
       "same sign (of 6), SOH": 6,
-      "median rho vs next dSOH": 0.42937062937062936,
+      "median rho vs next dSOH": 0.4188811188811189,
       "same sign (of 6), dSOH": 6
     },
     {
@@ -391,14 +388,14 @@
       "feature": "ic_pos_p1",
       "median rho vs SOH": -0.39967250765362583,
       "same sign (of 6), SOH": 5,
-      "median rho vs next dSOH": -0.18187010827437836,
+      "median rho vs next dSOH": -0.1916633676086729,
       "same sign (of 6), dSOH": 3
     },
     {
       "feature": "ic_height_p1",
       "median rho vs SOH": -0.37331195636149195,
       "same sign (of 6), SOH": 5,
-      "median rho vs next dSOH": -0.14149159663865546,
+      "median rho vs next dSOH": -0.1209033613445378,
       "same sign (of 6), dSOH": 4
     },
     {
