@@ -127,7 +127,9 @@ The article describes version 1. Version 2 extends the same campaign, and this w
 | Standard CC charge current | 1.455 A (article) vs 1.46 A (handover step 2) |
 
 **Conclusion:** the handover data are a processed subset of S1, version 2. Remaining limits:
-- Measured values were not compared number by number, because the raw `.xlsx` files were not downloaded. The derivation of `Capacity_Ah` from the raw RPT files is therefore not independently reproduced yet.
+- **Capacity labels reproduced (29 Sep 2026):** all 112 RPT capacity rows in `rpt_capacity_data.csv` (111 RPTs; g1's RPT_1 spans two files) were recomputed exactly from the raw files (maximum absolute difference 0.0 Ah; `scripts/verify_external_data.py --raw-root`).
+  - Definition: `Capacity_Ah` is the maximum of the Arbin cumulative `Discharge_Capacity(Ah)` counter over the whole RPT. It therefore includes the small pulse discharges, not only the constant-current capacity step.
+  - The paper must define capacity this way.
 - The handover author (Darshan D) should confirm which archive version was processed.
 
 ### Parts of S1 not in the handover
@@ -240,7 +242,7 @@ These were suggested as additional data with larger and more varied fade (`docs/
 - [ ] **Data availability statement:** the raw data are at doi:10.17605/OSF.IO/8JNR5 under CC BY 4.0. Give the processing code and the commit hash.
 - [ ] **Hugging Face mirror:** fix the dataset card (S2), or remove the mirror, before submission.
 - [ ] **Handover version:** confirm with the handover author that version 2 of the archive was processed.
-- [ ] **Capacity labels:** reproduce `Capacity_Ah` from the raw RPT files, or state the handover's extraction as a limitation.
+- [x] **Capacity labels:** reproduce `Capacity_Ah` from the raw RPT files. Done: 112/112 exact. Define capacity in the paper as the total Ah discharged over the RPT (S1, "Evidence").
 - [ ] **Cui et al. 2024:** read it and decide whether it is prior work on the same cells (S5).
 - [ ] **Comparisons with the literature:** do not compare with numbers from other datasets or SOH definitions without saying so (see `CLAUDE.md`).
 
