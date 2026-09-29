@@ -119,3 +119,42 @@ The raw RPT and EIS files from the public archive give one row of 47 features pe
 2. **Add public datasets with larger and more varied fade**, for example the first-life data of the same cells and other chemistries, so that continual learning, heterogeneity and reuse classes become meaningful. This is the strongest route to a novel, defensible paper.
 3. **Use the EIS spectra and raw RPT curves from the public archive** (done: §5, notebook 11). They are not in the handover, but OSF version 2 contains 237 EIS files and 112 raw RPT files under the same licence (`docs/EXTERNAL_DATA.md` S1). Impedance and capacity-test curves are the strongest known health indicators.
 4. **Any change to pre-registered choices** (reuse cut-points, task definition) must be reported as made after seeing the data.
+
+## 7. SOH forecasting benchmark (notebook 12, protocol D18)
+
+All numbers are from `results/forecasting.json` (commit `d710cad`, clean). Errors are the RMSE of SOH(*k*+*h*) in pp, on the test splits, pooled over *h* = 1–3 and averaged over batteries.
+
+**Tuning (validation only).**
+- Learning rates: MLP 1e-3; TFT 3e-2, inside the grid after it was extended (D18 deviation).
+- EWC λ: 10 for the MLP, 1000 for the TFT.
+- Replay: full rehearsal (the task size is below every buffer value).
+
+**P1, continual stream** (10 orders × 5 seeds; TFT + EWC vs each alternative, Holm-corrected):
+
+| Method | Final avg. RMSE | Skill vs persistence | vs TFT + EWC |
+|---|---|---|---|
+| Ridge, schedule only | 0.450 | 0.29 | better by 0.012 (CI 0.007–0.018) |
+| TFT, joint (upper bound) | 0.455 | 0.28 | not tested (upper bound) |
+| **TFT + EWC (proposed)** | **0.462** | **0.27** | — |
+| Gradient boosting, F1 | 0.466 | 0.26 | n.s. (p_Holm 0.18) |
+| TFT fine-tuning | 0.467 | 0.26 | n.s. (p_Holm 0.28) |
+| TFT + EWC, F0 (no diagnostics) | 0.472 | 0.25 | n.s. (p_Holm 0.08) |
+| MLP replay / fine-tune / EWC | 0.475 / 0.492 / 0.497 | 0.25 / 0.22 / 0.21 | replay n.s.; fine-tune and EWC worse (p < 0.001) |
+| Persistence | 0.632 | 0 | worse (p < 0.001) |
+| Linear extrapolation | 0.726 | −0.15 | worse (p < 0.001) |
+
+- **Forgetting is small for every method** (0.016–0.040 pp). TFT + EWC has the least (0.016) against TFT fine-tuning (0.026), but the difference is not significant after correction.
+- **Why so little forgetting:** the six cells are nearly homogeneous, so there is little to forget. This protocol cannot show a benefit of EWC on S1.
+- **Diagnostics:** F1 vs F0 improves TFT + EWC by 0.009 pp (CI 0.001–0.017), which is not significant after Holm correction. Diagnostic features add at most a small improvement over SOH history, static descriptors and schedule.
+- **By horizon:** the schedule-only ridge is best at *h* = 1 (0.40). The joint TFT is best at *h* = 3 (0.42). Persistence and linear extrapolation degrade quickly with horizon (0.83 and 0.90 at *h* = 3).
+- **Main message on S1:** fade over the next 1–3 RPTs is explained mostly by the known schedule (days at 35 °C, days at 20 °C, rest days). A three-feature ridge on the schedule is the strongest single model. The TFT is competitive but not better.
+
+**P2, unseen battery** (leave one battery out; six held-out batteries):
+- Gradient boosting on F1 is best: 0.219.
+- MLP 0.285, TFT 0.292 and schedule-only ridge 0.301 are close; persistence is 0.545.
+- With six pairs, no difference survives Holm correction; the smallest attainable p is 0.031 before correction.
+
+**Implications.**
+1. **For the paper**, the honest S1 result is that learned forecasters beat persistence and linear extrapolation by 25–29 % in RMSE, driven mainly by the known temperature and rest schedule. TFT + EWC is competitive (level with gradient boosting and TFT fine-tuning) but does not beat a schedule-aware linear model. S1 is too homogeneous and too small to show continual-learning benefits.
+2. **This is why the second dataset is needed** (S6, D19). It has 20 cells in seven usage conditions, fade to 30–50 % SOH with knees, and about 2,400 forecasting samples. Continual learning, EWC and reuse classes can be tested meaningfully there.
+
