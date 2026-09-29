@@ -1,0 +1,419 @@
+{
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "git_commit": "36be28359c1eb8f447cef30b9f055dcbb0c605b1",
+    "git_dirty": false
+  },
+  "n_rows": 111,
+  "n_features": 48,
+  "non_missing": {
+    "q_4.20_4.00": 111,
+    "q_4.00_3.63": 111,
+    "q_3.63_3.26": 111,
+    "q_3.26_2.50": 111,
+    "r_pulse_4.00_0.1s": 101,
+    "r_pulse_4.00_1s": 101,
+    "r_pulse_4.00_8s": 101,
+    "r_pulse_3.63_0.1s": 105,
+    "r_pulse_3.63_1s": 105,
+    "r_pulse_3.63_8s": 105,
+    "r_pulse_3.26_0.1s": 105,
+    "r_pulse_3.26_1s": 105,
+    "r_pulse_3.26_8s": 105,
+    "ic_pos_p1": 110,
+    "ic_height_p1": 110,
+    "ic_pos_p2": 111,
+    "ic_height_p2": 111,
+    "ic_pos_p3": 109,
+    "ic_height_p3": 109,
+    "ic_pos_p4": 92,
+    "ic_height_p4": 92,
+    "ic_pos_p5": 111,
+    "ic_height_p5": 111,
+    "eis_r0_3.26": 77,
+    "eis_rarc_3.26": 77,
+    "eis_arc_peak_3.26": 77,
+    "eis_zre_1000hz_3.26": 77,
+    "eis_zre_10hz_3.26": 77,
+    "eis_zre_1hz_3.26": 77,
+    "eis_zre_0.1hz_3.26": 77,
+    "eis_zre_0.01hz_3.26": 77,
+    "eis_r0_3.63": 76,
+    "eis_rarc_3.63": 76,
+    "eis_arc_peak_3.63": 76,
+    "eis_zre_1000hz_3.63": 76,
+    "eis_zre_10hz_3.63": 76,
+    "eis_zre_1hz_3.63": 76,
+    "eis_zre_0.1hz_3.63": 76,
+    "eis_zre_0.01hz_3.63": 76,
+    "eis_r0_4.00": 76,
+    "eis_rarc_4.00": 76,
+    "eis_arc_peak_4.00": 76,
+    "eis_zre_1000hz_4.00": 76,
+    "eis_zre_10hz_4.00": 76,
+    "eis_zre_1hz_4.00": 76,
+    "eis_zre_0.1hz_4.00": 76,
+    "eis_zre_0.01hz_4.00": 76,
+    "q_c20_ah": 111
+  },
+  "selection_rules": {
+    "complete test, then longest": 1,
+    "galvanostatic mode excluded": 2,
+    "no non-empty spectrum": 3,
+    "no per-cell file; aggregate file": 18,
+    "non-empty, same channel as capacity test, closest in time": 10
+  },
+  "capacity_minus_c20_mah": {
+    "median": 15.026833614690815,
+    "min": 7.244123655268275,
+    "max": 15.916425429166381
+  },
+  "within_battery_spearman_summary": [
+    {
+      "feature": "q_c20_ah",
+      "median rho vs SOH": 1.0,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.0014705882352941176,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "days",
+      "median rho vs SOH": -0.9845201238390093,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.09852941176470588,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "ic_height_p5",
+      "median rho vs SOH": 0.9690402476780186,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.058823529411764705,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "q_4.00_3.63",
+      "median rho vs SOH": 0.9618163054695563,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.05294117647058823,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "q_4.20_4.00",
+      "median rho vs SOH": 0.9514963880288958,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.018341952165481578,
+      "same sign (of 6), dSOH": 6
+    },
+    {
+      "feature": "eis_arc_peak_4.00",
+      "median rho vs SOH": -0.9412087912087912,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.1621212121212121,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_zre_0.01hz_3.63",
+      "median rho vs SOH": -0.9338661338661338,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.272027972027972,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_rarc_3.63",
+      "median rho vs SOH": -0.9335664335664335,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.1125874125874126,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "eis_zre_0.1hz_3.63",
+      "median rho vs SOH": -0.9167832167832168,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.26153846153846155,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "r_pulse_3.63_8s",
+      "median rho vs SOH": -0.9103088603862598,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.14292178409825468,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_zre_1hz_4.00",
+      "median rho vs SOH": -0.9082417582417582,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.2772727272727273,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "eis_zre_0.01hz_4.00",
+      "median rho vs SOH": -0.9080919080919081,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.23636363636363636,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "r_pulse_3.63_1s",
+      "median rho vs SOH": -0.908047692761315,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.19861021331609569,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "eis_zre_1hz_3.63",
+      "median rho vs SOH": -0.907992007992008,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.2477855477855478,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "eis_arc_peak_3.63",
+      "median rho vs SOH": -0.9055944055944056,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.24428904428904427,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "q_3.26_2.50",
+      "median rho vs SOH": 0.8988648090815274,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.30000000000000004,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "r_pulse_4.00_8s",
+      "median rho vs SOH": -0.8916397328162033,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.12445054945054945,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "r_pulse_4.00_1s",
+      "median rho vs SOH": -0.8909205990088342,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.10837912087912088,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_zre_0.1hz_4.00",
+      "median rho vs SOH": -0.8881618381618381,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.2545454545454545,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "r_pulse_3.63_0.1s",
+      "median rho vs SOH": -0.8834420610349403,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.2286037491919845,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "ic_pos_p3",
+      "median rho vs SOH": -0.877359045514791,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.08948822461934297,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "r_pulse_4.00_0.1s",
+      "median rho vs SOH": -0.8764678948502478,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.13681318681318683,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "r_pulse_3.26_0.1s",
+      "median rho vs SOH": -0.8637770897832817,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.07727860374919199,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "r_pulse_3.26_8s",
+      "median rho vs SOH": -0.8630804953560371,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.12422430510665804,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_zre_10hz_3.63",
+      "median rho vs SOH": -0.8597402597402597,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.22307692307692306,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "eis_rarc_4.00",
+      "median rho vs SOH": -0.8572427572427572,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.01818181818181818,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "r_pulse_3.26_1s",
+      "median rho vs SOH": -0.8562159074155978,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.07798965740142211,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "eis_zre_1000hz_3.63",
+      "median rho vs SOH": -0.8408591408591408,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.18764568764568765,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_r0_3.63",
+      "median rho vs SOH": -0.8320679320679321,
+      "same sign (of 6), SOH": 5,
+      "median rho vs next dSOH": 0.18135198135198133,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_zre_10hz_4.00",
+      "median rho vs SOH": -0.8277722277722278,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.24615384615384614,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "ic_pos_p5",
+      "median rho vs SOH": -0.8187627586878279,
+      "same sign (of 6), SOH": 4,
+      "median rho vs next dSOH": 0.10215254123258151,
+      "same sign (of 6), dSOH": 2
+    },
+    {
+      "feature": "ic_height_p4",
+      "median rho vs SOH": 0.810989010989011,
+      "same sign (of 6), SOH": 4,
+      "median rho vs next dSOH": 0.47058823529411764,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "ic_height_p3",
+      "median rho vs SOH": -0.7894257703081233,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.13665966386554623,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "eis_r0_3.26",
+      "median rho vs SOH": -0.7692307692307692,
+      "same sign (of 6), SOH": 5,
+      "median rho vs next dSOH": 0.1825174825174825,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_zre_1000hz_3.26",
+      "median rho vs SOH": -0.7626373626373626,
+      "same sign (of 6), SOH": 5,
+      "median rho vs next dSOH": 0.16853146853146853,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_r0_4.00",
+      "median rho vs SOH": -0.7554945054945055,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.14522144522144523,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "ic_height_p2",
+      "median rho vs SOH": 0.7463954002653693,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.17647058823529413,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_zre_1000hz_4.00",
+      "median rho vs SOH": -0.7421578421578421,
+      "same sign (of 6), SOH": 5,
+      "median rho vs next dSOH": 0.15804195804195803,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "eis_zre_10hz_3.26",
+      "median rho vs SOH": -0.7373626373626374,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.3305361305361305,
+      "same sign (of 6), dSOH": 6
+    },
+    {
+      "feature": "ic_pos_p2",
+      "median rho vs SOH": -0.6713753666705637,
+      "same sign (of 6), SOH": 5,
+      "median rho vs next dSOH": -0.2161029220944793,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "q_3.63_3.26",
+      "median rho vs SOH": 0.6159903435058234,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": -0.5220588235294118,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "ic_pos_p4",
+      "median rho vs SOH": -0.6119092689872759,
+      "same sign (of 6), SOH": 5,
+      "median rho vs next dSOH": -0.5702595271407118,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "eis_zre_1hz_3.26",
+      "median rho vs SOH": -0.5223776223776224,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.33356643356643356,
+      "same sign (of 6), dSOH": 6
+    },
+    {
+      "feature": "eis_zre_0.1hz_3.26",
+      "median rho vs SOH": -0.506993006993007,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.42937062937062936,
+      "same sign (of 6), dSOH": 6
+    },
+    {
+      "feature": "eis_zre_0.01hz_3.26",
+      "median rho vs SOH": -0.48351648351648346,
+      "same sign (of 6), SOH": 6,
+      "median rho vs next dSOH": 0.44393939393939397,
+      "same sign (of 6), dSOH": 6
+    },
+    {
+      "feature": "ic_pos_p1",
+      "median rho vs SOH": -0.39967250765362583,
+      "same sign (of 6), SOH": 5,
+      "median rho vs next dSOH": -0.18187010827437836,
+      "same sign (of 6), dSOH": 3
+    },
+    {
+      "feature": "ic_height_p1",
+      "median rho vs SOH": -0.37331195636149195,
+      "same sign (of 6), SOH": 5,
+      "median rho vs next dSOH": -0.14149159663865546,
+      "same sign (of 6), dSOH": 4
+    },
+    {
+      "feature": "eis_arc_peak_3.26",
+      "median rho vs SOH": -0.06743256743256744,
+      "same sign (of 6), SOH": 4,
+      "median rho vs next dSOH": 0.3287878787878788,
+      "same sign (of 6), dSOH": 5
+    },
+    {
+      "feature": "eis_rarc_3.26",
+      "median rho vs SOH": -0.008991008991008992,
+      "same sign (of 6), SOH": 4,
+      "median rho vs next dSOH": 0.2833333333333333,
+      "same sign (of 6), dSOH": 6
+    }
+  ]
+}
