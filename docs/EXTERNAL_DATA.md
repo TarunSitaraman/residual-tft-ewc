@@ -4,7 +4,13 @@ This file lists **every external data source** that this repository uses, or tha
 
 **Rules**
 - A source may feed reported results only if it is listed here with status **Used**.
-- Before any new source is used, add it here with the same level of detail and save its metadata records in `docs/external_data/metadata/`.
+- **Nothing is downloaded until its row is complete.** A complete row gives:
+  - name, authors, publication DOI, and data DOI or URL;
+  - version or access date, licence and any required citation text;
+  - file checksums;
+  - the experiments that use it.
+- Save each new source's metadata records in `docs/external_data/metadata/`.
+- Raw external files stay outside Git, under `data/`, like the handover CSVs.
 - Every field below was checked on **29 Sep 2026** against primary records, never against summaries or memory:
   - the Crossref record for each article;
   - the article's full text in PubMed Central;
@@ -12,13 +18,14 @@ This file lists **every external data source** that this repository uses, or tha
   - the OSF API records for the project, file and licence.
 - The saved records and their SHA-256 values are listed in [§5](#5-evidence-saved-in-this-repository).
 
-| ID | Source | Role | Status |
-|---|---|---|---|
-| [S1](#s1-stanford-second-life-dataset-moy-et-al-2024) | Stanford second-life dataset, OSF `8jnr5` (Moy et al., 2024) | Origin of all data used in this work | **Used** (via S2) |
-| [S2](#s2-project-handover-and-its-hugging-face-mirror) | Project handover CSVs, mirrored on Hugging Face | Processed form of S1 that the pipeline reads | **Used** |
-| [S3](#s3-first-life-dataset-pozzato-et-al-2022) | Stanford first-life dataset, OSF `qsabn` (Pozzato et al., 2022) | First-life history of the same cells | Cited for background; data **not used** |
-| [S4](#s4-synthetic-duty-cycles-moy-and-onori-2023) | Synthetic grid-storage duty cycles (Moy and Onori, 2023) | Origin of the second-life cycling profiles | Cited; no data used |
-| [S5](#s5-cui-et-al-2024) | Cui et al., 2024 | Related second-life study from the same laboratory | Candidate citation; relation to S1 **unverified** |
+| ID | Source | Role | Status | Used by |
+|---|---|---|---|---|
+| [S1](#s1-stanford-second-life-dataset-moy-et-al-2024) | Stanford second-life dataset, OSF `8jnr5` (Moy et al., 2024) | Origin of all data used in this work | **Used** (via S2) | everything below |
+| [S2](#s2-project-handover-and-its-hugging-face-mirror) | Project handover CSVs, mirrored on Hugging Face | Processed form of S1 that the pipeline reads | **Used** | notebooks 01–10; `results/*.json`; `scripts/verify_external_data.py` |
+| [S3](#s3-first-life-dataset-pozzato-et-al-2022) | Stanford first-life dataset, OSF `qsabn` (Pozzato et al., 2022) | First-life history of the same cells | Cited for background; data **not used** | none (candidate for S-b) |
+| [S4](#s4-synthetic-duty-cycles-moy-and-onori-2023) | Synthetic grid-storage duty cycles (Moy and Onori, 2023) | Origin of the second-life cycling profiles | Cited; no data used | methods text only |
+| [S5](#s5-cui-et-al-2024) | Cui et al., 2024 | Related second-life study from the same laboratory | Candidate citation; relation to S1 **unverified** | none |
+| [C1–C4](#candidates-not-verified-nothing-downloaded) | NASA, Oxford, CALCE, MIT–Stanford ageing datasets | Suggested for more varied fade | **Not verified; nothing downloaded** | none |
 
 ---
 
@@ -42,6 +49,7 @@ This file lists **every external data source** that this repository uses, or tha
 - K. Moy *et al.*, "Second-life lithium-ion battery aging dataset based on grid storage cycling," Open Science Framework, 2024, file version 2 (27 Feb 2025).
   - doi:[10.17605/OSF.IO/8JNR5](https://doi.org/10.17605/OSF.IO/8JNR5), https://osf.io/8jnr5/
 - BibTeX key: `moy2024secondlifedata`.
+- **Required citation text:** the OSF project sets no custom citation (`custom_citation: null`). Its description asks users to refer to the accompanying data article. So the primary citation is the Moy et al. 2024 article (not Cui et al. 2024), together with the dataset DOI.
 - The DataCite record lists only S. Onori and M. A. Khan as creators. The OSF project description refers users to the data article, so the dataset citation uses the article's author list.
 
 ### Licences
@@ -201,6 +209,17 @@ Alternatively, make the mirror private and point users to OSF.
   - The metadata are verified.
   - Whether it analyses the same six cells is **not** verified: the publisher's full text refused automated access, and Europe PMC has no record.
   - Read the paper before citing it as prior work on this dataset. It is a likely direct competitor for any SOH-estimation claim on these cells.
+
+## Candidates (not verified, nothing downloaded)
+
+These were suggested as additional data with larger and more varied fade (`docs/DATA_REPORT.md` §5, option 2). None has been checked or downloaded. Each needs a full row (S-format) before any use.
+
+| ID | Dataset | Known so far |
+|---|---|---|
+| C1 | NASA Ames (PCoE) battery ageing data | Nothing verified |
+| C2 | Oxford battery degradation data | Nothing verified |
+| C3 | CALCE battery data (University of Maryland) | Nothing verified |
+| C4 | MIT–Stanford–Toyota fast-charging data (Severson et al., 2019) | Nothing verified |
 
 ---
 
