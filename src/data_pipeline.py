@@ -34,7 +34,9 @@ EXPECTED_FILES: dict[str, str] = {
 # Point-level file: profile in chunks instead of loading into memory.
 LARGE_FILES: frozenset[str] = frozenset({"cleaned_battery_data.csv"})
 
-DATE_COLUMNS: tuple[str, ...] = ("Cycle_Date", "Test_Date")
+# ``Date_Time`` is the per-measurement timestamp of the point-level files
+# (cleaned_battery_data.csv and, in the delivered data, final_battery_cycling_features.csv).
+DATE_COLUMNS: tuple[str, ...] = ("Cycle_Date", "Test_Date", "Date_Time")
 GROUP_COL = "Battery_ID"
 
 ID_COLUMNS: tuple[str, ...] = ("Battery_ID", "Cycling_Test", "Cycle_Index", "Cycle_Date")
@@ -869,3 +871,28 @@ def audit_ml_ready(
 
     return {"schema": {"only_revised": extra, "only_canonical": missing}, "rows": rows,
             "shared_columns": shared_columns, "temperature": temperature}
+
+
+# ---------------------------------------------------------------------------
+# RPT capacity file
+# ---------------------------------------------------------------------------
+
+_RPT_SOURCE = r"^(?P<date>\d{8})_(?P<battery>[A-Za-z]+\d+)_(?P<kind>RPT|EIS_?\d+V?)"
+
+
+def normalise_rpt_capacity(rpt: pd.DataFrame) -> pd.DataFrame:
+    """Parse ``rpt_capacity_data.csv`` into Battery_ID, Test_Date and measurement kind.
+
+    The delivered file identifies batteries only inside a source name such as
+    ``20221114_g1_RPT`` or ``20230918_g1_EIS326V``. Capacity-test rows
+    (``kind == "RPT"``) carry the RPT capacity; EIS rows reference impedance
+    measurements whose spectra are not part of the handover and carry no
+    capacity (0.0). Unparseable names are kept with ``kind`` NaN, never dropped.
+    """
+    out = rpt.copy()
+    parts = out["Battery"].astype(str).str.extract(_RPT_SOURCE)
+    out[GROUP_COL] = parts["battery"].str.lower()
+    out["Test_Date"] = pd.to_datetime(parts["date"], format="%Y%m%d", errors="coerce")
+    out["kind"] = parts["kind"].where(parts["kind"].isna() | (parts["kind"] == "RPT"), "EIS")
+    out["eis_voltage"] = parts["kind"].str.extract(r"EIS_?(\d+)")[0].astype(float) / 100.0
+    return out

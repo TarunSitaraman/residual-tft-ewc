@@ -246,3 +246,22 @@ Temperature is missing for some cycles in the handover data (reported in noteboo
 Values are only ever removed; carry-forward only copies a battery's own earlier observation and is applied identically to all splits, so no future or test information reaches training. Removal patterns are assumptions (random, block) and may differ from the real mechanism; notebook 02 reports the observed run lengths for comparison.
 
 **Implemented in:** `src/robustness.py` (`HANDLING_VARIANTS`, `prepare_variant`, `carry_forward_temperature`, `mask_temperature`, `rows_in`, `stratified_errors`), `src/models/baseline_dnn.py` (`TabularPreprocessor(indicators=...)`), `src/continual_learning.py` (`missing_indicators`, `TFTMixin.set_history`), `src/experiments.py` (`fit_model`), `notebooks/09_missing_temperature.ipynb`, `tests/test_robustness.py`.
+
+## D14. Protocol-scaled quantities are excluded; health indicators come from the monthly standardised segment
+
+**Status:** Adopted (after the first real-data run)
+
+The first real-data run showed:
+
+- **The handover's cycle-level rows are segments of monthly cycling blocks.** Their capacity and energy columns are running totals within a block, and their 18 inputs barely track SOH within a battery: median |ρ| ≈ 0.09, against −0.99 for elapsed time. The notebook 04 baseline is worse than persistence.
+- **The protocol scaled the discharge current to the last measured capacity.** Every monthly block starts with a standardised segment (CC charge at 1.46 A, CV charge, rest, 30-minute discharge, rest). Its discharge current equals 0.9966 × the capacity at the previous RPT for every battery (coefficient of variation 0.14 %), i.e. 1C of the last measured capacity.
+
+Rules:
+
+- The segment's discharge current, discharged Ah and discharge energy (`health_indicators.PROTOCOL_SCALED`) encode the label and are never used as inputs. The handover's `Current_Min` and discharge-capacity columns partly carry the same scaling and must be treated the same way in any new model.
+- Health indicators are extracted once per block from that segment and the duty cycle (`health_indicators.INDICATORS`, plus partial-charge ΔQ in fixed voltage windows). They are aligned to the RPTs bracketing the block: the previous RPT is known at block start; the closing RPT is the target.
+- Blocks with a non-standard protocol (4 blocks charged at 1.05 A) are flagged and excluded from indicator models, never silently dropped.
+
+On this dataset the indicators track SOH in the physically expected direction but do not beat elapsed time or persistence on held-out batteries (`docs/DATA_REPORT.md` §4.3). Estimating the current SOH is therefore not a meaningful benchmark here, and the task definition is reopened (report §5).
+
+**Implemented in:** `src/health_indicators.py`, `notebooks/10_health_indicators.ipynb`, `tests/test_health_indicators.py`; schema handling in `src/data_pipeline.py` (`normalise_rpt_capacity`, `Date_Time`) and notebooks 01–03.
