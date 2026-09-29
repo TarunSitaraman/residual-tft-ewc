@@ -351,3 +351,71 @@ These offsets are comparable to one RPT's fade (0.1–0.5 pp). On the C/20 basis
 
 **Implemented in:** `src/diagnostic_features.py` (`add_c20_soh`, `health_table`), `scripts/build_diagnostic_features.py`, `tests/test_diagnostic_features.py`.
 
+
+---
+
+## D18. Forecasting protocol (fixed before any forecasting model is trained)
+
+**Status:** Adopted (29 Sep 2026). It was committed before any forecasting model was fitted or evaluated. Any later change must be recorded here as a deviation, with its date and reason.
+
+### Samples
+- **Unit.** One sample per (battery, origin RPT *k*, horizon *h*), for *h* ∈ {1, 2, 3} RPTs ahead. RPTs are counted after the exclusions below.
+- **Target.** The SOH change ΔSOH = SOH(*k*+*h*) − SOH(*k*) in pp, on the C/20 basis (D17). An error on ΔSOH equals the error on SOH(*k*+*h*), because SOH(*k*) is known at the origin. All errors are reported in SOH pp.
+- **Horizons pooled.** One model serves all three horizons, with *h* as an input. Results are reported per horizon and pooled.
+- **Excluded RPTs.** RPT 2 (run at about 20 °C, D16) is excluded as origin, as target and from the SOH history. It stays in the data with a flag.
+
+### Inputs (known at the forecast origin)
+- **SOH history:** SOH(*k*); days since the first RPT; the fade rate (least-squares slope of SOH against days) over the last three valid RPTs up to *k*, missing when fewer than three exist.
+- **Diagnostics at *k*:** the 47 features of D16. EIS features are missing before RPT 5; missing values are imputed from training data with missing-value indicators.
+- **Static:** second-life duty cycle (residential or commercial), and from Moy et al. 2024, Table 2:
+  - first-life charge C-rate;
+  - first-life cycle count;
+  - capacity at end of first life.
+- **Known-future schedule** for the interval from RPT *k* to RPT *k*+*h*:
+  - days until the target RPT;
+  - days of cycling at the 35 °C setpoint;
+  - days of cycling at the 20 °C setpoint;
+  - days without cycling.
+
+  Setpoints are the nearest of 20/35 °C to the median cell temperature of each cycling block. `Cycling_1` has no temperature log and is 35 °C per the article's Table 3. These are planned test conditions, so the forecasts are conditional on the planned usage; the paper must say so.
+- **Never used:** protocol currents (D14, D16), throughput (it is scaled from later capacities), and any label of an RPT after *k*.
+
+### Two feature sets (pre-registered comparison)
+- **F0:** SOH history + static + schedule.
+- **F1:** F0 + diagnostics.
+
+F1 − F0 answers whether the diagnostics help forecasting.
+
+### Splits (per battery, purged; nothing shuffled)
+- Each battery's valid RPTs are ordered in time. Cut A is at 60 % of them and cut B at 80 % (rounded down, at least one RPT apart).
+- **Train:** targets ≤ A.
+- **Validation:** origins ≥ A and targets ≤ B.
+- **Test:** origins ≥ B.
+- No training label lies after a validation origin, and no validation label lies after a test origin. The inputs at a test origin may use every RPT up to that origin, as a real forecaster would.
+
+### Protocols
+- **P1, continual stream (headline).** Batteries arrive one at a time as tasks.
+  - 10 orders × 5 seeds (orders from `sample_orders`, seed 0).
+  - After each task, every task's test set is evaluated. This gives the accuracy matrix, final average error, plasticity, BWT, forgetting and FWT, as in the existing framework.
+- **P2, unseen battery.** Leave one battery out: train on all samples of the other five, test on all samples of the held-out battery. This is the "new battery arrives with its own history" case.
+
+### Methods
+- **Baselines**, fitted per protocol on the same training data:
+  - persistence (ΔSOH = 0);
+  - linear extrapolation (fade rate × days to target; 0 when the rate is missing);
+  - schedule-only ridge (fade explained by days at 35 °C, 20 °C and rest);
+  - ridge on F0 and F1;
+  - gradient boosting on F1.
+- **Continual:** MLP backbone with fine-tuning, replay and EWC; TFT backbone with fine-tuning and **TFT + EWC** (proposed); joint training for both backbones as upper bounds.
+- **TFT window:** the four previous origins of the same battery and horizon, feature vectors only (never labels).
+- **Tuning:** the existing two-stage, validation-only tuning (D11), same grids, on tuning orders disjoint from the evaluation orders. Stage 1 sets the learning rate per backbone; stage 2 sets the method hyperparameters.
+
+### Metrics and tests
+- **Primary:** RMSE of SOH(*k*+*h*) in pp; MAE secondary. Reported per horizon, per battery and pooled, always alongside persistence and linear extrapolation.
+- **Skill** relative to persistence: 1 − RMSE_model / RMSE_persistence.
+- **Paired comparisons** (P1: matched order × seed; P2: matched battery): Wilcoxon signed-rank with Holm correction over the fixed family (each method vs. TFT + EWC, and F1 vs. F0), rank-biserial effect sizes, and bootstrap 95 % CIs.
+
+### Limitations stated in advance
+- **Sample size:** about 6 test samples per battery per protocol step (P1), so confidence intervals will be wide.
+- **Scope:** results are for one cell type and one laboratory.
+- **Forecast type:** forecasts are conditional on the planned schedule.
