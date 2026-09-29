@@ -319,13 +319,35 @@ On this dataset the indicators track SOH in the physically expected direction bu
 **Data-quality findings recorded, not repaired.**
 - **RPT 2 was run at about 20 °C instead of 25 °C.** The article's Table 3 notes an incorrect chamber setpoint. Capacity and resistance at RPT 2 are not comparable with the other RPTs.
 - **RPT 1 has no temperature logging.**
-- **Open, needs a team decision: the SOH labels depend on the pulse protocol.**
-  - The handover's `Capacity_Ah` counts all charge discharged during the RPT, including the pulses (about 15 mAh).
-  - For v4 and w10 in RPT 17–19 the smaller pulses contribute only about 7 mAh, which lowers their SOH labels by about 0.17 pp relative to the other RPTs (other cells: under 0.01 pp).
-  - Recommendation: define capacity as the C/20 charge (`q_c20_ah`), the definition of Moy et al. 2024, Eq. (1). The SOH formula is unchanged.
+- **The handover's SOH labels depend on the pulse protocol.** Resolved by D17.
 
 **Implemented in:**
 - `src/raw_diagnostics.py`, `src/diagnostic_features.py`;
 - `scripts/fetch_osf_diagnostics.py`, `scripts/build_diagnostic_features.py`;
 - `notebooks/11_diagnostic_features.ipynb`;
 - `tests/test_diagnostic_features.py`.
+
+---
+
+## D17. SOH labels use the C/20 capacity
+
+**Status:** Adopted (29 Sep 2026), after seeing the data. Report it as such.
+
+**Decision.** For every RPT, `Capacity_Ah` is the charge discharged in the C/20 steps of the capacity test (`q_c20_ah`), excluding the C/2 pulses. This is the definition of Moy et al. 2024, Eq. (1). The SOH formula is unchanged:
+- `SOH_Percent = Capacity_Ah / Reference_Capacity_Ah * 100`;
+- the reference is the battery's first RPT on the same basis.
+
+**Why.** The handover's `Capacity_Ah` is the total charge discharged during the RPT, including the pulses, and the pulse contribution changed with the protocol:
+- **RPT 1:** the 4.00 V pulse ran at 0.525 A for g1, v4, v5 and w10. Their reference therefore contains about 4 mAh less pulse charge, and every later label of those four cells is 0.08 pp too high.
+- **v4 and w10 in RPT 17–19:** the 1.05 A pulses contribute about 7 mAh instead of 15, which moves those labels by another 0.17 pp.
+
+These offsets are comparable to one RPT's fade (0.1–0.5 pp). On the C/20 basis they vanish. The largest difference between the two label sets is 0.089 pp.
+
+**Scope.**
+- **Uses the new labels:** notebooks 10 and 11, and all forecasting work (D16). They read `data/rpt_health_c20.csv`, written by `scripts/build_diagnostic_features.py`, which checks the SOH formula.
+- **Superseded:** notebooks 01–09 (the current-SOH estimation task) keep the handover labels in `ml_training_dataset.csv`. Their results are not updated and are not reported as main results.
+
+**Still recorded, not repaired:** RPT 2 was run at about 20 °C (D16). Its C/20 capacity is therefore not comparable with the 25 °C RPTs, and the forecasting protocol must state how RPT 2 is treated.
+
+**Implemented in:** `src/diagnostic_features.py` (`add_c20_soh`, `health_table`), `scripts/build_diagnostic_features.py`, `tests/test_diagnostic_features.py`.
+

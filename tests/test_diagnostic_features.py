@@ -103,3 +103,17 @@ def test_eis_features_on_randles_spectrum():
 def test_eis_features_empty_spectrum():
     out = F.eis_features(pd.DataFrame(columns=["freq_hz", "z_real", "z_imag"]), 3.26)
     assert all(np.isnan(v) for v in out.values())
+
+
+def test_c20_soh_labels():
+    from src import data_pipeline as dp
+
+    t = pd.DataFrame({dp.GROUP_COL: ["a", "a", "a", "b", "b"], "rpt_number": [2, 1, 3, 1, 2],
+                      "q_c20_ah": [4.4, 4.5, 4.3, 4.0, 3.9], "Test_Date": pd.to_datetime(["2023-02-01", "2023-01-01",
+                      "2023-03-01", "2023-01-01", "2023-02-01"]), "SOH_handover": np.nan, "rpt_temp_mean": 25.0})
+    out = F.add_c20_soh(t)
+    assert out["Reference_Capacity_Ah"].tolist() == [4.5, 4.5, 4.5, 4.0, 4.0]          # first RPT, not first row
+    assert out["SOH_Percent"].tolist() == pytest.approx([100, 4.4 / 4.5 * 100, 4.3 / 4.5 * 100, 100, 97.5])
+    h = F.health_table(out)
+    assert dp.validate_soh_formula(h)["ok"] and h["RPT"].iloc[0] == "RPT_1"
+    assert "q_c20_ah" not in F.feature_columns(out)

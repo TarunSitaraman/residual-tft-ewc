@@ -338,13 +338,50 @@ def build_feature_table(raw_root, cache_root, health: pd.DataFrame | None = None
 
     table = pd.DataFrame(rows.values()).sort_values([dp.GROUP_COL, "rpt_number"]).reset_index(drop=True)
     if health is not None:
+        # Handover labels are kept for comparison only; SOH_Percent is recomputed on the C/20 basis (D17).
         h = health[[dp.GROUP_COL, "RPT_Number", "Test_Date", "Capacity_Ah", "SOH_Percent"]].rename(
-            columns={"RPT_Number": "rpt_number"})
+            columns={"RPT_Number": "rpt_number", "Capacity_Ah": "Capacity_Ah_handover", "SOH_Percent": "SOH_handover"})
         table = table.merge(h, on=[dp.GROUP_COL, "rpt_number"], how="left", validate="one_to_one")
+        table = add_c20_soh(table)
     return table, pd.DataFrame(log)
 
 
+def add_c20_soh(table: pd.DataFrame) -> pd.DataFrame:
+    """SOH on the C/20 capacity basis (decision D17).
+
+    ``Capacity_Ah`` is the charge discharged in the C/20 steps of the capacity
+    test (``q_c20_ah``; Moy et al., 2024, Eq. (1)), excluding the pulses, whose
+    size changed with the protocol. ``Reference_Capacity_Ah`` is the battery's
+    first RPT on that basis, and ``SOH_Percent = Capacity_Ah /
+    Reference_Capacity_Ah * 100``.
+    """
+    from src import data_pipeline as dp
+
+    out = table.sort_values([dp.GROUP_COL, "rpt_number"]).copy()
+    out["Capacity_Ah"] = out["q_c20_ah"]
+    out["Reference_Capacity_Ah"] = out.groupby(dp.GROUP_COL)["Capacity_Ah"].transform("first")
+    out["SOH_Percent"] = out["Capacity_Ah"] / out["Reference_Capacity_Ah"] * 100
+    return out.reset_index(drop=True)
+
+
+def health_table(table: pd.DataFrame) -> pd.DataFrame:
+    """RPT health table on the C/20 basis, in the layout of ``final_battery_health_dataset.csv``."""
+    from src import data_pipeline as dp
+
+    t = table.sort_values([dp.GROUP_COL, "rpt_number"])
+    return pd.DataFrame({dp.GROUP_COL: t[dp.GROUP_COL], "RPT": "RPT_" + t["rpt_number"].astype(str),
+                         "RPT_Number": t["rpt_number"], "Test_Date": t["Test_Date"],
+                         "Capacity_Ah": t["Capacity_Ah"], "Reference_Capacity_Ah": t["Reference_Capacity_Ah"],
+                         "SOH_Percent": t["SOH_Percent"], "SOH_handover": t["SOH_handover"],
+                         "rpt_temp_mean": t["rpt_temp_mean"]}).reset_index(drop=True)
+
+
 def feature_columns(table: pd.DataFrame) -> list[str]:
-    """Numeric health-feature columns (no identifiers, labels, files or protocol currents)."""
+    """Numeric health-feature columns (no identifiers, labels, files or protocol currents).
+
+    ``q_c20_ah`` is excluded: it is the capacity the SOH label is built from (D17).
+    The window charges ``q_<hi>_<lo>`` sum to it, so at the same RPT they carry
+    the label; they are legitimate inputs only for forecasting later RPTs.
+    """
     prefixes = ("q_", "r_pulse_", "ic_pos_", "ic_height_", "eis_r0_", "eis_rarc_", "eis_arc_peak_", "eis_zre_")
-    return [c for c in table.columns if c.startswith(prefixes) and c != "q_c20_ah"] + ["q_c20_ah"]
+    return [c for c in table.columns if c.startswith(prefixes) and c != "q_c20_ah"]
