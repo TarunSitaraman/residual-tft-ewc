@@ -263,6 +263,52 @@ def forecast_errors(frame: pd.DataFrame, pred: np.ndarray) -> dict:
 # Experiment runners (protocols P1 and P2 of D18)
 # ---------------------------------------------------------------------------
 
+class Checkpoint:
+    """Resumable results for long runs: each unit of work is stored once computed.
+
+    Units live under ``root/<key>/`` where ``key`` hashes the source code of
+    ``src/`` and the given ``parts`` (e.g. the samples and the profile), so a
+    relaunch after an interruption resumes, while any code or data change
+    starts afresh. Each unit name also carries a hash of its own settings.
+    """
+
+    def __init__(self, root, parts: Sequence = ()) -> None:
+        import hashlib
+        from pathlib import Path
+
+        h = hashlib.sha256()
+        src = Path(__file__).resolve().parent
+        for f in sorted(src.rglob("*.py")):
+            h.update(f.relative_to(src).as_posix().encode())
+            h.update(f.read_bytes())
+        for part in parts:
+            h.update(part if isinstance(part, bytes) else repr(part).encode())
+        self.dir = Path(root) / h.hexdigest()[:16]
+
+    @staticmethod
+    def frame_hash(df: pd.DataFrame) -> str:
+        return str(int(pd.util.hash_pandas_object(df, index=False).sum()))
+
+    def __call__(self, name: str, fn, settings=None):
+        import hashlib
+        import pickle
+
+        tag = hashlib.sha256(repr(settings).encode()).hexdigest()[:10] if settings is not None else "none"
+        path = self.dir / f"{name}__{tag}.pickle"
+        if path.exists():
+            return pickle.loads(path.read_bytes())
+        out = fn()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_suffix(".tmp")
+        tmp.write_bytes(pickle.dumps(out))
+        tmp.replace(path)
+        return out
+
+
+def _run(checkpoint, name, fn, settings):
+    return checkpoint(name, fn, settings) if checkpoint is not None else fn()
+
+
 CL_METHODS: tuple[str, ...] = ("finetune", "replay", "ewc", "tft_finetune", "tft_ewc")
 TFT_SETTINGS: dict = {"window": 4, "window_group": ("Battery_ID", "Cycling_Test")}
 
@@ -281,7 +327,7 @@ def _group_order(samples: pd.DataFrame) -> list[str]:
     return dp.groups_in(samples)
 
 
-def run_p1(samples: pd.DataFrame, config, label: str | None = None) -> dict:
+def run_p1(samples: pd.DataFrame, config, label: str | None = None, checkpoint: "Checkpoint | None" = None) -> dict:
     """Protocol P1: every method over every (order, seed); per-run CL metrics and final-step errors per horizon."""
     from src import experiments as X
 
@@ -291,21 +337,27 @@ def run_p1(samples: pd.DataFrame, config, label: str | None = None) -> dict:
         tasks = forecast_stream(samples, order)
         for seed in config.seeds:
             for method in config.methods:
-                out = X.run_stream(method, tasks, seed, config.metric, collect_predictions=True,
-                                   **X.method_settings(config, method))
                 name = f"{method}{label or ''}"
-                matrices[(name, order_id, seed)] = out["R"]
-                runs.append({"method": name, "order_id": order_id, "order": ">".join(order), "seed": seed,
-                             **{k: out["metrics"][k] for k in X.CL_METRIC_COLS if k in out["metrics"]},
-                             "train_time_s": float(np.sum(out["train_time_s"]))})
-                last = len(tasks) - 1
-                for t in tasks:
-                    per_task.append({"method": name, "order_id": order_id, "seed": seed, dp.GROUP_COL: t.name,
-                                     **forecast_errors(out["eval_frames"][t.name], out["predictions"][(last, t.name)])})
+                settings = X.method_settings(config, method)
+
+                def unit(method=method, name=name, settings=settings, order=order, order_id=order_id, seed=seed, tasks=tasks):
+                    out = X.run_stream(method, tasks, seed, config.metric, collect_predictions=True, **settings)
+                    row = {"method": name, "order_id": order_id, "order": ">".join(order), "seed": seed,
+                           **{k: out["metrics"][k] for k in X.CL_METRIC_COLS if k in out["metrics"]},
+                           "train_time_s": float(np.sum(out["train_time_s"]))}
+                    last = len(tasks) - 1
+                    pt = [{"method": name, "order_id": order_id, "seed": seed, dp.GROUP_COL: t.name,
+                           **forecast_errors(out["eval_frames"][t.name], out["predictions"][(last, t.name)])} for t in tasks]
+                    return row, pt, out["R"]
+
+                row, pt, R = _run(checkpoint, f"p1_{name}_o{order_id}_s{seed}", unit, (order, settings))
+                matrices[(name, order_id, seed)] = R
+                runs.append(row)
+                per_task += pt
     return {"runs": pd.DataFrame(runs), "final_per_task": pd.DataFrame(per_task), "matrices": matrices, "orders": orders}
 
 
-def run_joint(samples: pd.DataFrame, config, label: str | None = None) -> pd.DataFrame:
+def run_joint(samples: pd.DataFrame, config, label: str | None = None, checkpoint: "Checkpoint | None" = None) -> pd.DataFrame:
     """Joint-training upper bounds (MLP and TFT) on the P1 splits, per seed and battery."""
     from src.continual_learning import Joint, TFTJoint
     from src.experiments import method_settings
@@ -317,10 +369,11 @@ def run_joint(samples: pd.DataFrame, config, label: str | None = None) -> pd.Dat
         features = list(kwargs.pop("features"))
         extra = {"history": samples} if backbone == "tft" else {}
         for seed in config.seeds:
-            m = cls(features, seed=seed, **extra, **kwargs).fit_all(tasks)
-            for t in tasks:
-                rows.append({"method": f"{name}{label or ''}", "seed": seed, dp.GROUP_COL: t.name,
-                             **forecast_errors(t.test, m.predict(t.test))})
+            def unit(cls=cls, features=features, seed=seed, extra=extra, kwargs=kwargs, name=name):
+                m = cls(features, seed=seed, **extra, **kwargs).fit_all(tasks)
+                return [{"method": f"{name}{label or ''}", "seed": seed, dp.GROUP_COL: t.name,
+                         **forecast_errors(t.test, m.predict(t.test))} for t in tasks]
+            rows += _run(checkpoint, f"joint_{name}{label or ''}_s{seed}", unit, (features, kwargs))
     return pd.DataFrame(rows)
 
 
@@ -333,7 +386,8 @@ def run_baselines_p1(samples: pd.DataFrame, sets: Mapping[str, Sequence[str]], c
                          for name, p in preds.items() for t in tasks])
 
 
-def run_p2(samples: pd.DataFrame, config, sets: Mapping[str, Sequence[str]], columns: Mapping | None = None) -> pd.DataFrame:
+def run_p2(samples: pd.DataFrame, config, sets: Mapping[str, Sequence[str]], columns: Mapping | None = None,
+           checkpoint: "Checkpoint | None" = None) -> pd.DataFrame:
     """Protocol P2 (leave one battery out): baselines and joint-trained MLP / TFT per held-out battery.
 
     With a single training task, TFT + EWC reduces to the TFT, so the neural
@@ -353,6 +407,8 @@ def run_p2(samples: pd.DataFrame, config, sets: Mapping[str, Sequence[str]], col
             features = list(kwargs.pop("features"))
             extra = {"history": samples} if backbone == "tft" else {}
             for seed in config.seeds:
-                m = cls(features, seed=seed, **extra, **kwargs).fit_all([task])
-                rows.append({"method": name, "seed": seed, dp.GROUP_COL: held, **forecast_errors(task.test, m.predict(task.test))})
+                def unit(cls=cls, features=features, seed=seed, extra=extra, kwargs=kwargs, name=name, task=task, held=held):
+                    m = cls(features, seed=seed, **extra, **kwargs).fit_all([task])
+                    return {"method": name, "seed": seed, dp.GROUP_COL: held, **forecast_errors(task.test, m.predict(task.test))}
+                rows.append(_run(checkpoint, f"p2_{name}_{held}_s{seed}", unit, (features, kwargs)))
     return pd.DataFrame(rows)
