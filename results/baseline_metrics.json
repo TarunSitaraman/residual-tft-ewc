@@ -1,0 +1,711 @@
+{
+  "generated_utc": "2026-09-29T08:03:48+00:00",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "git_commit": "222552871a935d3073a792db1d7d759bbf447483",
+    "git_dirty": false
+  },
+  "config": {
+    "dataset": "ml_training_dataset.csv",
+    "target": "SOH_Percent",
+    "split": {
+      "method": "chronological per battery",
+      "train_frac": 0.7,
+      "val_frac": 0.15,
+      "order_by": [
+        "Cycle_Date",
+        "Cycle_Index"
+      ]
+    },
+    "ridge_alphas": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "hgb_params": {
+      "max_iter": 300,
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 20,
+      "random_state": 0
+    },
+    "random_state": 0,
+    "ridge_selected_alpha": 0.01
+  },
+  "features": [
+    "Cycle_Index",
+    "Voltage_Mean",
+    "Voltage_Min",
+    "Voltage_Max",
+    "Current_Mean",
+    "Current_Min",
+    "Current_Max",
+    "Temperature_Mean",
+    "Temperature_Min",
+    "Temperature_Max",
+    "Charge_Capacity_Max",
+    "Discharge_Capacity_Max",
+    "Charge_Energy_Max",
+    "Discharge_Energy_Max",
+    "Power_Mean",
+    "Capacity_Ratio_Mean",
+    "Energy_Efficiency_Mean",
+    "Data_Points"
+  ],
+  "selected_learned_model_on_val_rmse": "hist_gradient_boosting",
+  "data_fingerprint": {
+    "rows": 582,
+    "rows_per_group": {
+      "g1": 103,
+      "v4": 95,
+      "v5": 103,
+      "w10": 94,
+      "w8": 103,
+      "w9": 84
+    },
+    "cycle_date_min": "2022-11-14 13:25:26.010000",
+    "cycle_date_max": "2025-01-18 19:17:02.760000",
+    "split_rows": {
+      "train": 411,
+      "val": 86,
+      "test": 85
+    }
+  },
+  "metrics": [
+    {
+      "Battery_ID": "g1",
+      "n": 73,
+      "RMSE": 1.5305027424699629,
+      "MAE": 1.2831103755155768,
+      "MAPE": 1.2918096752070802,
+      "R2": -2.3652516693538965,
+      "model": "persistence",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "v4",
+      "n": 67,
+      "RMSE": 1.3821514562472779,
+      "MAE": 1.2067671823653328,
+      "MAPE": 1.2128138695429944,
+      "R2": -3.18989352578558,
+      "model": "persistence",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "v5",
+      "n": 73,
+      "RMSE": 1.9678014228231102,
+      "MAE": 1.629559842836539,
+      "MAPE": 1.6478428116162822,
+      "R2": -2.182376011348581,
+      "model": "persistence",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "w10",
+      "n": 66,
+      "RMSE": 1.3998765998951508,
+      "MAE": 1.2322291033154058,
+      "MAPE": 1.2383301439572845,
+      "R2": -3.440982984116671,
+      "model": "persistence",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "w8",
+      "n": 73,
+      "RMSE": 1.4252064932676927,
+      "MAE": 1.2081982455160283,
+      "MAPE": 1.214110375904357,
+      "R2": -2.554362609965852,
+      "model": "persistence",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "w9",
+      "n": 59,
+      "RMSE": 1.0153164368271241,
+      "MAE": 0.8634948121504652,
+      "MAPE": 0.8662529772358106,
+      "R2": -2.6139825195848623,
+      "model": "persistence",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "ALL",
+      "n": 411,
+      "RMSE": 1.4962252933725386,
+      "MAE": 1.250486894930769,
+      "MAPE": 1.2586908355148365,
+      "R2": -1.8681372277702923,
+      "model": "persistence",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "g1",
+      "n": 15,
+      "RMSE": 0.2722699786837669,
+      "MAE": 0.24078265586717293,
+      "MAPE": 0.24771741078168738,
+      "R2": -1.959883267040564,
+      "model": "persistence",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "v4",
+      "n": 14,
+      "RMSE": 0.22974868668366163,
+      "MAE": 0.1815729309083817,
+      "MAPE": 0.18598080768935876,
+      "R2": -1.6637655832538418,
+      "model": "persistence",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "v5",
+      "n": 15,
+      "RMSE": 0.300247238017078,
+      "MAE": 0.25434728462114153,
+      "MAPE": 0.2644847177291438,
+      "R2": -2.4666829826978836,
+      "model": "persistence",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "w10",
+      "n": 14,
+      "RMSE": 0.26697426502418664,
+      "MAE": 0.1956345647749162,
+      "MAPE": 0.20053798088507335,
+      "R2": -1.1070768695914173,
+      "model": "persistence",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "w8",
+      "n": 15,
+      "RMSE": 0.31401053160413334,
+      "MAE": 0.2931032512133129,
+      "MAPE": 0.3000722973067528,
+      "R2": -0.284275870883163,
+      "model": "persistence",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "w9",
+      "n": 13,
+      "RMSE": 0.4525477438006303,
+      "MAE": 0.43471624905760986,
+      "MAPE": 0.4435074411280811,
+      "R2": -11.944587066595997,
+      "model": "persistence",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "ALL",
+      "n": 86,
+      "RMSE": 0.3114567873702796,
+      "MAE": 0.26460132619580823,
+      "MAPE": 0.27163925769733566,
+      "R2": 0.73969456669041,
+      "model": "persistence",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "g1",
+      "n": 15,
+      "RMSE": 0.8386168383331872,
+      "MAE": 0.7369178040908537,
+      "MAPE": 0.7632422396591871,
+      "R2": -2.736826943047273,
+      "model": "persistence",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "v4",
+      "n": 14,
+      "RMSE": 1.2359652026612682,
+      "MAE": 1.1578267759464376,
+      "MAPE": 1.1985769421510004,
+      "R2": -7.166978600225596,
+      "model": "persistence",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "v5",
+      "n": 15,
+      "RMSE": 0.9504621255819329,
+      "MAE": 0.8272753102933308,
+      "MAPE": 0.8669010880303171,
+      "R2": -3.091757401507925,
+      "model": "persistence",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "w10",
+      "n": 14,
+      "RMSE": 1.247409859403977,
+      "MAE": 1.1646722708180093,
+      "MAPE": 1.205890133111682,
+      "R2": -6.796925676618455,
+      "model": "persistence",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "w8",
+      "n": 15,
+      "RMSE": 0.7658339460521849,
+      "MAE": 0.7146065758348925,
+      "MAPE": 0.7360551878528256,
+      "R2": -1.2345581955967702,
+      "model": "persistence",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "w9",
+      "n": 12,
+      "RMSE": 0.7825687874404518,
+      "MAE": 0.780547336095303,
+      "MAPE": 0.7988875033287747,
+      "R2": -192.81639387044967,
+      "model": "persistence",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "ALL",
+      "n": 85,
+      "RMSE": 0.9906463542895733,
+      "MAE": 0.8948652946015535,
+      "MAPE": 0.9263784332559739,
+      "R2": -0.7738778271215603,
+      "model": "persistence",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "g1",
+      "n": 73,
+      "RMSE": 0.6496417696339023,
+      "MAE": 0.5736153225327774,
+      "MAPE": 0.5800677281003871,
+      "R2": 0.39368654567274575,
+      "model": "ridge",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "v4",
+      "n": 67,
+      "RMSE": 0.5578683550712527,
+      "MAE": 0.47931383391521787,
+      "MAPE": 0.48405687947589054,
+      "R2": 0.3174174693602507,
+      "model": "ridge",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "v5",
+      "n": 73,
+      "RMSE": 0.9605982601282156,
+      "MAE": 0.7684952598468763,
+      "MAPE": 0.7881206218608298,
+      "R2": 0.2416450201396585,
+      "model": "ridge",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "w10",
+      "n": 66,
+      "RMSE": 0.5036224667793521,
+      "MAE": 0.4405465796873963,
+      "MAPE": 0.44484740630454844,
+      "R2": 0.42520922028511543,
+      "model": "ridge",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "w8",
+      "n": 73,
+      "RMSE": 0.6780550221342454,
+      "MAE": 0.552200820024027,
+      "MAPE": 0.5560298790112491,
+      "R2": 0.19548152627800042,
+      "model": "ridge",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "w9",
+      "n": 59,
+      "RMSE": 0.4427514054279767,
+      "MAE": 0.39504683081941305,
+      "MAPE": 0.39740290413286217,
+      "R2": 0.31276841629313834,
+      "model": "ridge",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "ALL",
+      "n": 411,
+      "RMSE": 0.6634143868781802,
+      "MAE": 0.5420501132007344,
+      "MAPE": 0.5491640919703497,
+      "R2": 0.43613425326925315,
+      "model": "ridge",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "g1",
+      "n": 15,
+      "RMSE": 1.1004097134562516,
+      "MAE": 1.0840686113212474,
+      "MAPE": 1.1144405067415268,
+      "R2": -47.34859960360982,
+      "model": "ridge",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "v4",
+      "n": 14,
+      "RMSE": 1.0468303479111596,
+      "MAE": 0.998096017748326,
+      "MAPE": 1.0210996133210015,
+      "R2": -54.30221640527944,
+      "model": "ridge",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "v5",
+      "n": 15,
+      "RMSE": 2.084704691053514,
+      "MAE": 2.0759630427962104,
+      "MAPE": 2.156613533772498,
+      "R2": -166.12644448042485,
+      "model": "ridge",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "w10",
+      "n": 14,
+      "RMSE": 1.163892777643916,
+      "MAE": 1.1257776041658585,
+      "MAPE": 1.1523610231320802,
+      "R2": -39.04677308880087,
+      "model": "ridge",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "w8",
+      "n": 15,
+      "RMSE": 0.8046372657211652,
+      "MAE": 0.7717414390800258,
+      "MAPE": 0.7903808153490933,
+      "R2": -7.432768533306085,
+      "model": "ridge",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "w9",
+      "n": 13,
+      "RMSE": 0.8047962636543627,
+      "MAE": 0.7733425844178634,
+      "MAPE": 0.7888574065831445,
+      "R2": -39.938440602207386,
+      "model": "ridge",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "ALL",
+      "n": 86,
+      "RMSE": 1.2565739159006288,
+      "MAE": 1.148421868630152,
+      "MAPE": 1.1814548608589626,
+      "R2": -3.2370512257337714,
+      "model": "ridge",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "g1",
+      "n": 15,
+      "RMSE": 1.6980712822362916,
+      "MAE": 1.6382271447333978,
+      "MAPE": 1.6945852988712757,
+      "R2": -14.321019442057315,
+      "model": "ridge",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "v4",
+      "n": 14,
+      "RMSE": 3.276479055865626,
+      "MAE": 2.8901322657196644,
+      "MAPE": 2.9911375924628194,
+      "R2": -56.39363379572485,
+      "model": "ridge",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "v5",
+      "n": 15,
+      "RMSE": 2.7344115650536844,
+      "MAE": 2.6936260120262943,
+      "MAPE": 2.817134719701063,
+      "R2": -32.866320173611896,
+      "model": "ridge",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "w10",
+      "n": 14,
+      "RMSE": 3.077474712941793,
+      "MAE": 2.668007331431986,
+      "MAPE": 2.7628642264264487,
+      "R2": -46.4563176011165,
+      "model": "ridge",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "w8",
+      "n": 15,
+      "RMSE": 1.1656083460364886,
+      "MAE": 1.0801416916089057,
+      "MAPE": 1.1123536263311835,
+      "R2": -4.176398955648197,
+      "model": "ridge",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "w9",
+      "n": 12,
+      "RMSE": 1.2054563913295415,
+      "MAE": 1.2036339104616605,
+      "MAPE": 1.231882473565126,
+      "R2": -458.88418237969375,
+      "model": "ridge",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "ALL",
+      "n": 85,
+      "RMSE": 2.3667059571687936,
+      "MAE": 2.040440988366965,
+      "MAPE": 2.114114350832754,
+      "R2": -9.124533503332891,
+      "model": "ridge",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "g1",
+      "n": 73,
+      "RMSE": 0.14236871763034536,
+      "MAE": 0.11056760034866768,
+      "MAPE": 0.1120694984152373,
+      "R2": 0.9708808649591127,
+      "model": "hist_gradient_boosting",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "v4",
+      "n": 67,
+      "RMSE": 0.153821010612309,
+      "MAE": 0.11003565551522906,
+      "MAPE": 0.11135839570083199,
+      "R2": 0.9481052963568445,
+      "model": "hist_gradient_boosting",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "v5",
+      "n": 73,
+      "RMSE": 0.13451712102114038,
+      "MAE": 0.10141874873714837,
+      "MAPE": 0.10374890732730328,
+      "R2": 0.9851288662638883,
+      "model": "hist_gradient_boosting",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "w10",
+      "n": 66,
+      "RMSE": 0.09723743605559426,
+      "MAE": 0.06752702838999022,
+      "MAPE": 0.06817810227932139,
+      "R2": 0.9785727419960631,
+      "model": "hist_gradient_boosting",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "w8",
+      "n": 73,
+      "RMSE": 0.17453314881779097,
+      "MAE": 0.1286471507552066,
+      "MAPE": 0.12997768271886084,
+      "R2": 0.9466957306134252,
+      "model": "hist_gradient_boosting",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "w9",
+      "n": 59,
+      "RMSE": 0.10358062103979428,
+      "MAE": 0.07912130292695069,
+      "MAPE": 0.07963844753678659,
+      "R2": 0.9623868041939033,
+      "model": "hist_gradient_boosting",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "ALL",
+      "n": 411,
+      "RMSE": 0.1383478254343527,
+      "MAE": 0.10064130207869695,
+      "MAPE": 0.10195267670253935,
+      "R2": 0.9754782976358024,
+      "model": "hist_gradient_boosting",
+      "split": "train"
+    },
+    {
+      "Battery_ID": "g1",
+      "n": 15,
+      "RMSE": 0.6779926117857449,
+      "MAE": 0.6166291755761193,
+      "MAPE": 0.6339897911512562,
+      "R2": -17.353757591863747,
+      "model": "hist_gradient_boosting",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "v4",
+      "n": 14,
+      "RMSE": 1.2196780934810854,
+      "MAE": 1.162346651849262,
+      "MAPE": 1.1892942990960496,
+      "R2": -74.07241303585612,
+      "model": "hist_gradient_boosting",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "v5",
+      "n": 15,
+      "RMSE": 1.449908540147271,
+      "MAE": 1.3949632651404633,
+      "MAPE": 1.449176659972026,
+      "R2": -79.84204712608721,
+      "model": "hist_gradient_boosting",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "w10",
+      "n": 14,
+      "RMSE": 1.0853399038863973,
+      "MAE": 0.9139553786513263,
+      "MAPE": 0.9361553612581942,
+      "R2": -33.82355639658805,
+      "model": "hist_gradient_boosting",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "w8",
+      "n": 15,
+      "RMSE": 0.8043456613110403,
+      "MAE": 0.7607444667641658,
+      "MAPE": 0.7786371037944023,
+      "R2": -7.426657489197092,
+      "model": "hist_gradient_boosting",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "w9",
+      "n": 13,
+      "RMSE": 0.7299377991296652,
+      "MAE": 0.6781670993700485,
+      "MAPE": 0.6916630189142078,
+      "R2": -32.676821918718666,
+      "model": "hist_gradient_boosting",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "ALL",
+      "n": 86,
+      "RMSE": 1.0364172017818838,
+      "MAE": 0.9240634224538383,
+      "MAPE": 0.9497089280768531,
+      "R2": -1.8824173216124707,
+      "model": "hist_gradient_boosting",
+      "split": "val"
+    },
+    {
+      "Battery_ID": "g1",
+      "n": 15,
+      "RMSE": 1.162814210532473,
+      "MAE": 1.0139771496949266,
+      "MAPE": 1.0495490581094347,
+      "R2": -6.1844990268994176,
+      "model": "hist_gradient_boosting",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "v4",
+      "n": 14,
+      "RMSE": 2.344277610003733,
+      "MAE": 2.1105438154035068,
+      "MAPE": 2.1839131207206446,
+      "R2": -28.381029506639656,
+      "model": "hist_gradient_boosting",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "v5",
+      "n": 15,
+      "RMSE": 2.115823671239465,
+      "MAE": 1.9513453805259928,
+      "MAPE": 2.0419233953645097,
+      "R2": -19.27678931440037,
+      "model": "hist_gradient_boosting",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "w10",
+      "n": 14,
+      "RMSE": 2.350284254839668,
+      "MAE": 2.0866093328824067,
+      "MAPE": 2.158957421505944,
+      "R2": -26.678709141138565,
+      "model": "hist_gradient_boosting",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "w8",
+      "n": 15,
+      "RMSE": 0.9372623646976674,
+      "MAE": 0.7764491900932626,
+      "MAPE": 0.7990727920413965,
+      "R2": -2.3469159103736548,
+      "model": "hist_gradient_boosting",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "w9",
+      "n": 12,
+      "RMSE": 1.0777866450630547,
+      "MAE": 1.0261468683400494,
+      "MAPE": 1.0502705567954336,
+      "R2": -366.6300982783193,
+      "model": "hist_gradient_boosting",
+      "split": "test"
+    },
+    {
+      "Battery_ID": "ALL",
+      "n": 85,
+      "RMSE": 1.7783724563562795,
+      "MAE": 1.4964762623623071,
+      "MAPE": 1.5501366230052656,
+      "R2": -4.716521755900513,
+      "model": "hist_gradient_boosting",
+      "split": "test"
+    }
+  ]
+}
