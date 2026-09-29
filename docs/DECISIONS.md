@@ -419,3 +419,8 @@ F1 − F0 answers whether the diagnostics help forecasting.
 - **Sample size:** about 6 test samples per battery per protocol step (P1), so confidence intervals will be wide.
 - **Scope:** results are for one cell type and one laboratory.
 - **Forecast type:** forecasts are conditional on the planned schedule.
+
+### D18 deviations and disclosures
+- **29 Sep 2026, code smoke tests.** While the runners were being written, each method, baseline and protocol was run once on one order with seed 0 and untuned defaults (learning rate 1e-3), and the test-split errors were printed. This checked that the code ran end to end and how long a run takes. No protocol element, grid, feature set or setting was changed afterwards. The reported results come only from the full tuned run in notebook 12.
+- **Replay grid.** The D11 replay grid (50–400 samples per task) is larger than a forecasting task's training set (21–27 samples). Every grid value therefore stores the whole task, and replay becomes full rehearsal. This follows from reusing the D11 grids unchanged and is reported, not re-tuned.
+- **P2 neural training.** "Train on all samples of the other five" is implemented as fitting on their train and test splits and early-stopping on their validation splits. Baselines, which have no early stopping, fit on all of them.

@@ -448,15 +448,16 @@ class TFTMixin:
     """
 
     def __init__(self, features: Sequence[str], history: pd.DataFrame, window: int = 8, d_model: int = 8,
-                 n_heads: int = 2, **kwargs) -> None:
+                 n_heads: int = 2, window_group: Sequence[str] = ("Battery_ID",), **kwargs) -> None:
         super().__init__(features, **kwargs)
-        label_free = history.drop(columns=[c for c in LABEL_COLUMNS if c in history.columns])
-        self.windows = CycleWindows(label_free, self.features, window)
+        self.window_group = tuple(window_group)
+        label_free = history.drop(columns=[c for c in (*LABEL_COLUMNS, self.target) if c in history.columns])
+        self.windows = CycleWindows(label_free, self.features, window, self.window_group)
         self.window, self.d_model, self.n_heads = int(window), int(d_model), int(n_heads)
 
     def config(self) -> dict:
         return {**super().config(), "backbone": "tft", "window": self.window, "d_model": self.d_model,
-                "n_heads": self.n_heads}
+                "n_heads": self.n_heads, "window_group": list(self.window_group)}
 
     def _build_model(self) -> nn.Module:
         return TemporalFusionTransformer(len(self.features), self.d_model, self.n_heads, self.dropout)
@@ -467,8 +468,8 @@ class TFTMixin:
         The TFT reads a row's features from this history, not from the frame
         passed to ``predict``, so input perturbations must be applied here.
         """
-        label_free = history.drop(columns=[c for c in LABEL_COLUMNS if c in history.columns])
-        self.windows = CycleWindows(label_free, self.features, self.window)
+        label_free = history.drop(columns=[c for c in (*LABEL_COLUMNS, self.target) if c in history.columns])
+        self.windows = CycleWindows(label_free, self.features, self.window, self.window_group)
 
     def _inputs(self, df: pd.DataFrame) -> torch.Tensor:
         return torch.from_numpy(self.windows.build(df, self.preprocessor))

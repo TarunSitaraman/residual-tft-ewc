@@ -227,16 +227,24 @@ class CycleWindows:
     For a row, the window is the ``window`` most recent cycles of the same
     battery up to and including that cycle, ordered by ``Cycle_Date`` then
     ``Cycle_Index``; earlier positions are zero-padded and flagged.
+
+    ``group_cols`` sets what "the same battery" means. The default is
+    ``("Battery_ID",)``; forecasting samples use ``("Battery_ID",
+    "Cycling_Test")`` so that a window holds earlier origins of the same
+    battery *and* horizon (D18).
     """
 
     KEY = ("Battery_ID", "Cycling_Test", "Cycle_Index")
     ORDER = ("Cycle_Date", "Cycle_Index")
 
-    def __init__(self, history: pd.DataFrame, features, window: int = 16) -> None:
+    def __init__(self, history: pd.DataFrame, features, window: int = 16, group_cols=("Battery_ID",)) -> None:
         if window < 1:
             raise ValueError("window must be >= 1")
         self.features = list(features)
         self.window = int(window)
+        self.group_cols = list(group_cols)
+        if not set(self.group_cols) <= set(self.KEY):
+            raise ValueError(f"group_cols must be key columns {self.KEY}")
         cols = list(dict.fromkeys([*self.KEY, *self.ORDER, *self.features]))
         missing = [c for c in cols if c not in history.columns]
         if missing:
@@ -245,9 +253,9 @@ class CycleWindows:
         h["Battery_ID"] = h["Battery_ID"].astype(str)
         if h.duplicated(subset=list(self.KEY)).any():
             raise ValueError("history has duplicate (Battery_ID, Cycling_Test, Cycle_Index) keys")
-        self.history = h.sort_values(["Battery_ID", *self.ORDER], kind="mergesort").reset_index(drop=True)
+        self.history = h.sort_values([*self.group_cols, *self.ORDER], kind="mergesort").reset_index(drop=True)
         self._pos = pd.Series(
-            self.history.groupby("Battery_ID").cumcount().to_numpy(),
+            self.history.groupby(self.group_cols).cumcount().to_numpy(),
             index=pd.MultiIndex.from_frame(self.history[list(self.KEY)].astype({"Cycle_Index": "int64"})),
         )
         self._cache: tuple[int, dict[str, np.ndarray]] | None = None
@@ -256,8 +264,8 @@ class CycleWindows:
         # Transform the history once per (frozen) preprocessor.
         if self._cache is None or self._cache[0] != id(preprocessor):
             enc = {}
-            for battery, g in self.history.groupby("Battery_ID", sort=False):
-                enc[battery] = preprocessor.transform(g)
+            for group, g in self.history.groupby(self.group_cols, sort=False):
+                enc[group if isinstance(group, tuple) else (group,)] = preprocessor.transform(g)
             self._cache = (id(preprocessor), enc)
         return self._cache[1]
 
@@ -273,9 +281,10 @@ class CycleWindows:
         pos = self._pos.reindex(keys).to_numpy()
         if np.isnan(pos.astype(float)).any():
             raise KeyError("some rows are not in the window history; pass the full cycle history")
-        for i, (battery, p) in enumerate(zip(df["Battery_ID"].astype(str), pos.astype(int))):
+        groups = df[self.group_cols].astype({"Battery_ID": str}) if "Battery_ID" in self.group_cols else df[self.group_cols]
+        for i, (group, p) in enumerate(zip(groups.itertuples(index=False, name=None), pos.astype(int))):
             start = max(0, p - self.window + 1)
-            seq = enc[battery][start:p + 1]
+            seq = enc[tuple(group)][start:p + 1]
             out[i, self.window - len(seq):, :f2] = seq
             out[i, self.window - len(seq):, f2] = 0.0
         return out
