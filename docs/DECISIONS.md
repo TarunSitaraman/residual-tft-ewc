@@ -454,3 +454,7 @@ F1 − F0 answers whether the diagnostics help forecasting.
 - **Reporting:** results on S6 are reported separately per dataset. There is no pooling across datasets and no claim of transfer between them unless tested.
 - **What "second life" means in S6:** ageing below 80 % SOH under the same EV-like protocol at 50 °C, not a repurposed duty. State this explicitly.
 - **Protocol:** the D18 protocol is applied to S6 with the characterisations every 100 cycles as RPTs, and the test cases (or cells) as tasks. Deviations forced by S6's structure (no calendar schedule, cycle-based spacing) are recorded before any model is run on S6.
+- **29 Sep 2026, learning-rate grid extended (D11 edge rule).** In the first full run (commit `8848b08`), stage 1 selected the TFT learning rate at the upper edge of the D11 grid (1e-2). D11 requires the grid to be extended and tuning repeated when this happens.
+  - The backbone grid was extended to {3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 1e-1} for **both** backbones (equal budget), and notebook 12 was re-run. The re-run is the reported result.
+  - First-run values, for the record: P1 final average RMSE was 0.464 pp for TFT + EWC, 0.465 for TFT fine-tuning, 0.450 for the schedule-only ridge and 0.632 for persistence. These are superseded.
+  - The replay buffer was also selected at a grid edge (50). Every grid value exceeds the task size (see above), so extending that grid cannot change the result, and it was left as is.
