@@ -458,3 +458,54 @@ F1 − F0 answers whether the diagnostics help forecasting.
   - The backbone grid was extended to {3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 1e-1} for **both** backbones (equal budget), and notebook 12 was re-run. The re-run is the reported result.
   - First-run values, for the record: P1 final average RMSE was 0.464 pp for TFT + EWC, 0.465 for TFT fine-tuning, 0.450 for the schedule-only ridge and 0.632 for persistence. These are superseded.
   - The replay buffer was also selected at a grid edge (50). Every grid value exceeds the task size (see above), so extending that grid cannot change the result, and it was left as is.
+
+---
+
+## D20. Forecasting protocol on the second dataset (S6), fixed before any model is run on it
+
+**Status:** Adopted (29 Sep 2026). It was committed before any forecasting model was fitted on S6. It is D18, with the changes that S6's structure forces. Deviations are logged at the end of this entry.
+
+**Checks as RPTs.**
+- Every 50 °C characterisation (every 100 cycles) is an RPT.
+- The initial and final characterisations are excluded: they ran at 25 °C, a different temperature (same reasoning as RPT 2 in D16).
+- **Labels (D17 analogue):**
+  - capacity = the C/25 discharge capacity of the check;
+  - reference = the cell's first valid 50 °C check;
+  - `SOH_Percent = Capacity_Ah / Reference_Capacity_Ah * 100`.
+- **Step validity** (`src/wheeler.py`). A discharge step counts only if it starts from full charge (≥ 3.40 V) and reaches the 2.5 V cut-off; a charge step only if it reaches 3.65 V. A check without a valid C/25 discharge has no label and is excluded as origin and target. This includes the documented acquisition fault at cycle 100 in cells 1a, 2a, 2c and 3a.
+
+**Samples.**
+- Origin check *k*, target check *k*+*h*, *h* ∈ {1, 2, 3} valid checks ahead (100–300 cycles).
+- Target: ΔSOH (pp).
+- Errors are reported in SOH pp, as in D18.
+
+**Inputs.**
+- **F0:** SOH at the origin; cycles since the first check; fade rate (least-squares slope over the last three valid checks, pp per cycle); horizon; the five static test-case conditions from Wheeler et al. 2025, Table 2 (CC-CV or CC charge, charge voltage, charge C-rate, WLTP or 2C discharge, DoD); cycles to the target check (planned).
+- **F1:** F0 plus diagnostics at the origin check:
+  - C/25 discharge charge in three voltage windows;
+  - IC peak positions and heights in five windows fixed from the fresh-cell curves;
+  - C/25 charge–discharge hysteresis at half capacity;
+  - a C/3 vs C/25 overpotential resistance proxy;
+  - C/3/C/25 capacity ratio, C/3 discharge capacity, C/25 charge capacity and C/25 mid-discharge voltage.
+- No current values are used.
+
+**Tasks and splits.**
+- A task is a **test case** (seven usage conditions; the cells of a case are pooled).
+- Splits are per cell with the D18 purged 60/80 rule. A task's split is the union of its cells' splits.
+
+**Protocols.**
+- **P1:** a continual stream over the seven test cases, 10 orders × 5 seeds.
+- **P2:** leave one test case out, i.e. an unseen usage condition (seven folds).
+
+**Methods, tuning, metrics and tests.**
+- As in D18. The backbone learning-rate grid is the extended D18 grid {3e-4, …, 1e-1} from the start.
+- Linear extrapolation is fade rate × cycles to target. The "schedule" ridge uses the known usage: static conditions plus cycles to target.
+- **Added secondary metric:** agreement of the forecast reuse class (D10 cut-points: C0 > 95, C1 90–95, C2 80–90, C3 ≤ 80 % SOH) with the measured class at the target, as accuracy and macro-F1. S6 spans 100 % down to about 30 % SOH, so all four classes occur.
+
+**Limitations stated in advance.**
+- Ageing is accelerated at 50 °C.
+- "Second life" in S6 means ageing below 80 % SOH under the same EV-like protocol, not a repurposed duty.
+- There are two or three cells per task.
+- Results are reported per dataset; nothing is pooled with S1.
+
+### D20 deviations and disclosures

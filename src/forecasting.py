@@ -211,20 +211,27 @@ def _gbm(seed: int = 0):
                                          l2_regularization=1.0, random_state=seed)
 
 
+#: Columns the baselines read (S1 defaults). ``rate`` x ``span`` is the linear
+#: extrapolation; ``schedule`` feeds the known-usage ridge.
+BASELINE_COLUMNS: dict = {"rate": "fade_rate_pp_per_day", "span": "days_to_target", "schedule": SCHEDULE_FEATURES}
+
+
 def baseline_predictions(train: pd.DataFrame, tests: Mapping[str, pd.DataFrame], sets: Mapping[str, Sequence[str]],
-                         seed: int = 0) -> dict[str, dict[str, np.ndarray]]:
+                         seed: int = 0, columns: Mapping | None = None) -> dict[str, dict[str, np.ndarray]]:
     """Predictions of every D18 baseline for each frame in ``tests`` (keys: baseline name, then test name).
 
     Learned baselines are fitted on ``train`` only (training plus validation
-    rows are both acceptable: they have no early stopping).
+    rows are both acceptable: they have no early stopping). ``columns``
+    overrides ``BASELINE_COLUMNS`` for another dataset (e.g. cycles instead of days).
     """
+    cols_ = {**BASELINE_COLUMNS, **(columns or {})}
     y = train[TARGET].to_numpy(float)
     out: dict[str, dict[str, np.ndarray]] = {
         "persistence": {k: np.zeros(len(v)) for k, v in tests.items()},
-        "linear_extrapolation": {k: np.nan_to_num(v["fade_rate_pp_per_day"].to_numpy(float) * v["days_to_target"].to_numpy(float))
+        "linear_extrapolation": {k: np.nan_to_num(v[cols_["rate"]].to_numpy(float) * v[cols_["span"]].to_numpy(float))
                                  for k, v in tests.items()},
     }
-    learned = {"ridge_schedule": (list(SCHEDULE_FEATURES), _ridge), "ridge_F0": (list(sets["F0"]), _ridge),
+    learned = {"ridge_schedule": (list(cols_["schedule"]), _ridge), "ridge_F0": (list(sets["F0"]), _ridge),
                "ridge_F1": (list(sets["F1"]), _ridge), "gbm_F1": (list(sets["F1"]), lambda f: _gbm(seed))}
     for name, (cols, factory) in learned.items():
         model = factory(cols).fit(train[cols], y)
@@ -239,6 +246,16 @@ def forecast_errors(frame: pd.DataFrame, pred: np.ndarray) -> dict:
     for h in sorted(frame["horizon"].unique()):
         m = frame["horizon"].to_numpy() == h
         out[f"RMSE_h{h}"] = float(np.sqrt(np.mean(err[m] ** 2)))
+    if {"soh_origin", "soh_target"} <= set(frame.columns):
+        # Reuse class (D10 cut-points) of the forecast vs the measured SOH at the target (D20, secondary).
+        from sklearn.metrics import f1_score
+
+        from src import evaluation as ev
+
+        true_c = ev.reuse_class(frame["soh_target"].to_numpy(float))
+        pred_c = ev.reuse_class(frame["soh_origin"].to_numpy(float) + np.asarray(pred, float))
+        out["class_accuracy"] = float(np.mean(true_c == pred_c))
+        out["class_macro_f1"] = float(f1_score(true_c, pred_c, average="macro", labels=np.unique(true_c)))
     return out
 
 
@@ -261,7 +278,7 @@ def cl_config(features: Sequence[str], methods: Sequence[str] = CL_METHODS, n_or
 
 
 def _group_order(samples: pd.DataFrame) -> list[str]:
-    return [g for g in dp.BATTERY_GROUPS if g in set(samples[dp.GROUP_COL].astype(str))]
+    return dp.groups_in(samples)
 
 
 def run_p1(samples: pd.DataFrame, config, label: str | None = None) -> dict:
@@ -307,16 +324,16 @@ def run_joint(samples: pd.DataFrame, config, label: str | None = None) -> pd.Dat
     return pd.DataFrame(rows)
 
 
-def run_baselines_p1(samples: pd.DataFrame, sets: Mapping[str, Sequence[str]]) -> pd.DataFrame:
+def run_baselines_p1(samples: pd.DataFrame, sets: Mapping[str, Sequence[str]], columns: Mapping | None = None) -> pd.DataFrame:
     """Baselines on the P1 test splits, fitted on all batteries' training and validation splits."""
     tasks = forecast_stream(samples, _group_order(samples))
     train = pd.concat([f for t in tasks for f in (t.train, t.val)], ignore_index=True)
-    preds = baseline_predictions(train, {t.name: t.test for t in tasks}, sets)
+    preds = baseline_predictions(train, {t.name: t.test for t in tasks}, sets, columns=columns)
     return pd.DataFrame([{"method": name, dp.GROUP_COL: t.name, **forecast_errors(t.test, p[t.name])}
                          for name, p in preds.items() for t in tasks])
 
 
-def run_p2(samples: pd.DataFrame, config, sets: Mapping[str, Sequence[str]]) -> pd.DataFrame:
+def run_p2(samples: pd.DataFrame, config, sets: Mapping[str, Sequence[str]], columns: Mapping | None = None) -> pd.DataFrame:
     """Protocol P2 (leave one battery out): baselines and joint-trained MLP / TFT per held-out battery.
 
     With a single training task, TFT + EWC reduces to the TFT, so the neural
@@ -329,7 +346,7 @@ def run_p2(samples: pd.DataFrame, config, sets: Mapping[str, Sequence[str]]) -> 
     for held in _group_order(samples):
         task = leave_one_out_task(samples, held)
         fit = pd.concat([task.train, task.val], ignore_index=True)
-        for name, p in baseline_predictions(fit, {"t": task.test}, sets).items():
+        for name, p in baseline_predictions(fit, {"t": task.test}, sets, columns=columns).items():
             rows.append({"method": name, "seed": 0, dp.GROUP_COL: held, **forecast_errors(task.test, p["t"])})
         for backbone, cls, name in (("mlp", Joint, "mlp"), ("tft", TFTJoint, "tft")):
             kwargs = method_settings(config, "tft_joint" if backbone == "tft" else "joint")

@@ -176,7 +176,7 @@ def reference_baselines(
       ``"end"`` convention (needs ``health``); labels differ from E1 by design.
     """
     features = dp.model_feature_columns(df)
-    groups = [g for g in dp.BATTERY_GROUPS if g in set(df[dp.GROUP_COL].astype(str))]
+    groups = dp.groups_in(df)
     rows: list[dict] = []
     details: dict = {"features": features, "groups": groups, "models": {}}
 
@@ -346,7 +346,7 @@ def run_cl_experiment(df: pd.DataFrame, config: CLConfig, stream_builder=None) -
     Target and feature columns come from ``config.common_kwargs`` when given.
     """
     build = stream_builder or _default_stream(config)
-    groups = [g for g in dp.BATTERY_GROUPS if g in set(df[dp.GROUP_COL].astype(str))]
+    groups = dp.groups_in(df)
     orders = P.sample_orders(groups, config.n_orders, config.order_seed)
     _warm_up(df, config.methods, stream_builder, config.common_kwargs, config.backbone_kwargs.get("tft"))
 
@@ -447,7 +447,7 @@ def tuning_orders(df: pd.DataFrame, cl_config: CLConfig, n_orders: int) -> list[
     ``sample_orders`` extends its list deterministically, so the orders after the
     first ``cl_config.n_orders`` can never coincide with an evaluation order.
     """
-    groups = [g for g in dp.BATTERY_GROUPS if g in set(df[dp.GROUP_COL].astype(str))]
+    groups = dp.groups_in(df)
     return P.sample_orders(groups, cl_config.n_orders + n_orders, cl_config.order_seed)[cl_config.n_orders:]
 
 
