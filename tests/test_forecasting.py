@@ -92,3 +92,14 @@ def test_baselines_shapes(samples):
     assert np.allclose(preds["persistence"]["t"], 0.0)
     errs = FC.forecast_errors(test, preds["linear_extrapolation"]["t"])
     assert errs["RMSE"] == pytest.approx(0.0, abs=1e-9)                     # exact linear fade
+
+
+def test_checkpoint_resumes_and_keys_on_settings(tmp_path, samples):
+    cp = FC.Checkpoint(tmp_path, [FC.Checkpoint.frame_hash(samples), "profile"])
+    calls = []
+    f = lambda: calls.append(1) or {"x": 1}
+    assert cp("unit", f, settings=("a",)) == {"x": 1}
+    assert cp("unit", f, settings=("a",)) == {"x": 1} and len(calls) == 1      # resumed from disk
+    cp("unit", f, settings=("b",))
+    assert len(calls) == 2                                                      # other settings: recomputed
+    assert FC.Checkpoint(tmp_path, ["other data"]).dir != cp.dir
