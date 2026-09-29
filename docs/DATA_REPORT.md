@@ -107,7 +107,7 @@ The raw RPT and EIS files from the public archive give one row of 48 features pe
   - Pulses were off protocol in RPT 1 (4.00 V) and for v4 and w10 in RPT 17–19.
   - Galvanostatic EIS was excluded for w8 in RPT 17 and 19.
   - EIS is missing for most cells at RPT 16 and for v4 and w10 at RPT 17–19.
-- **Label issue (open).** The handover capacity includes the pulse charge. The v4 and w10 labels at RPT 17–19 are therefore about 0.17 pp lower than they would be under the standard pulses. The recommended fix is to label with the C/20 capacity (D16).
+- **Label issue (resolved, D17).** The handover capacity includes the pulse charge, whose size changed with the protocol (RPT 1 for four cells; v4 and w10 in RPT 17–19). SOH labels now use the C/20 capacity (`data/rpt_health_c20.csv`). They differ from the handover labels by at most 0.089 pp.
 
 ## 6. Options (team decision)
 

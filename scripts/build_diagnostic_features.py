@@ -7,6 +7,7 @@ cache (about 20 minutes on 4 cores); later runs take about a minute.
 Outputs (derived data, git-ignored):
     data/diagnostic_features.csv       one row per (battery, RPT)
     data/diagnostic_selection_log.csv  every file choice and exclusion
+    data/rpt_health_c20.csv            RPT health table on the C/20 capacity basis (D17)
 
 Also checks the RPT 7 decoding against the authors' own high-frequency
 resistance (``RPT_7/eis_7.mat``, ``EIS_7_R_HF``) and stops on a mismatch.
@@ -64,6 +65,12 @@ def main() -> int:
     table = table.drop(columns=["_currents"]).assign(nonstandard_pulses=table["nonstandard_pulses"].map(
         lambda x: ";".join(f"{v:.2f}" for v in x)))
     table.to_csv(data_root / "diagnostic_features.csv", index=False)
+    health_c20 = F.health_table(table)
+    if not dp.validate_soh_formula(health_c20)["ok"]:
+        raise RuntimeError("C/20 health table violates SOH = Capacity / Reference * 100")
+    health_c20.to_csv(data_root / "rpt_health_c20.csv", index=False)
+    shift = (health_c20["SOH_Percent"] - health_c20["SOH_handover"]).abs()
+    print(f"C/20 labels vs handover labels: max |SOH difference| {shift.max():.3f} pp")
     log.assign(rejected=log["rejected"].map(lambda x: ";".join(x) if isinstance(x, list) else x)).to_csv(
         data_root / "diagnostic_selection_log.csv", index=False)
     feats = F.feature_columns(table)

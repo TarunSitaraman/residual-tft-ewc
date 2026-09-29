@@ -30,7 +30,7 @@ For battery $b$ with RPT capacities $C_{b,1}, C_{b,2}, \dots$ in chronological o
   \mathrm{SOH}_{b,k} = 100\,\frac{C_{b,k}}{C_{b,1}} \;\%,
   \label{eq:soh}
 \end{equation}
-i.e.\ relative to the first observed RPT capacity, not to a nominal rating. Because the cells are second-life, $C_{b,1}$ is already an aged capacity. All results are therefore statements about capacity fade since the first second-life measurement.
+i.e.\ relative to the first observed RPT capacity, not to a nominal rating. The capacity $C_{b,k}$ is the charge discharged in the C/20 steps of the RPT capacity test, excluding the C/2 pulses, following~\cite[Eq.~(1)]{moy2024secondlife}. The pulse protocol changed during the campaign, so including the pulse charge would shift the labels of some cells by up to 0.09~pp. Because the cells are second-life, $C_{b,1}$ is already an aged capacity. All results are therefore statements about capacity fade since the first second-life measurement.
 
 \subsubsection{Causal label alignment}
 A cycle at time $t$ receives the SOH of the most recent RPT at or before $t$:

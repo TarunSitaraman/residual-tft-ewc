@@ -12,6 +12,6 @@ This repository contains the continual-learning workflow for SOH estimation and 
 
 ## Invariants
 
-- `SOH_Percent = Capacity_Ah / Reference_Capacity_Ah * 100`
+- `SOH_Percent = Capacity_Ah / Reference_Capacity_Ah * 100`, where `Capacity_Ah` is the C/20 discharge capacity of the RPT, pulses excluded (`data/rpt_health_c20.csv`, decision D17)
 - A cycle uses only the most recent RPT on or before its cycle date.
 - Continual-learning evaluation reports adaptation and retention.
