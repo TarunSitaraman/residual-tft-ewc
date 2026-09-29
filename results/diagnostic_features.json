@@ -4,8 +4,8 @@
     "numpy": "2.4.6",
     "pandas": "3.0.6",
     "scikit-learn": "1.9.1",
-    "git_commit": "a4f39d2615632994b4b2d95efb741e8c1dfaaab7",
-    "git_dirty": true
+    "git_commit": "c643f1e61a06db72de6061a0e9963cb0bbd8a751",
+    "git_dirty": false
   },
   "n_rows": 111,
   "n_features": 47,
