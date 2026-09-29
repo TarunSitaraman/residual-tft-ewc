@@ -1,0 +1,282 @@
+[
+  {
+    "column":"Battery_ID",
+    "role":"identifier\/time",
+    "in_dictionary":true,
+    "dtype":"str",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"Grouping key \u2014 split and evaluate per battery; not an input"
+  },
+  {
+    "column":"Cycling_Test",
+    "role":"identifier\/time",
+    "in_dictionary":true,
+    "dtype":"str",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"Segment identifier \u2014 ordering only; not an input"
+  },
+  {
+    "column":"Cycle_Index",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"int64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Cycle_Date",
+    "role":"identifier\/time",
+    "in_dictionary":true,
+    "dtype":"datetime64[us]",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"Ordering key \u2014 chronological split; not an input"
+  },
+  {
+    "column":"Voltage_Mean",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Voltage_Min",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Voltage_Max",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Current_Mean",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Current_Min",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Current_Max",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Temperature_Mean",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":3,
+    "missing_pct":0.515,
+    "model_input":true,
+    "handling":"INPUT \u2014 missing kept as NaN; median (train-only) + missing indicator for linear model; native NaN for tree model"
+  },
+  {
+    "column":"Temperature_Min",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":3,
+    "missing_pct":0.515,
+    "model_input":true,
+    "handling":"INPUT \u2014 missing kept as NaN; median (train-only) + missing indicator for linear model; native NaN for tree model"
+  },
+  {
+    "column":"Temperature_Max",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":3,
+    "missing_pct":0.515,
+    "model_input":true,
+    "handling":"INPUT \u2014 missing kept as NaN; median (train-only) + missing indicator for linear model; native NaN for tree model"
+  },
+  {
+    "column":"Charge_Capacity_Max",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Discharge_Capacity_Max",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Charge_Energy_Max",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Discharge_Energy_Max",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Power_Mean",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Capacity_Ratio_Mean",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Energy_Efficiency_Mean",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Data_Points",
+    "role":"cycling feature",
+    "in_dictionary":true,
+    "dtype":"int64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":true,
+    "handling":"INPUT \u2014 numeric, standardised (train-only) for linear model"
+  },
+  {
+    "column":"Test_Date",
+    "role":"undocumented",
+    "in_dictionary":false,
+    "dtype":"datetime64[us]",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"Not used (non-numeric)"
+  },
+  {
+    "column":"RPT",
+    "role":"health\/label (RPT join)",
+    "in_dictionary":true,
+    "dtype":"str",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"EXCLUDED \u2014 label\/RPT-derived, would leak the target"
+  },
+  {
+    "column":"RPT_Number",
+    "role":"health\/label (RPT join)",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"EXCLUDED \u2014 label\/RPT-derived, would leak the target"
+  },
+  {
+    "column":"Capacity_Ah",
+    "role":"health\/label (RPT join)",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"EXCLUDED \u2014 label\/RPT-derived, would leak the target"
+  },
+  {
+    "column":"Reference_Capacity_Ah",
+    "role":"health\/label (RPT join)",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"EXCLUDED \u2014 label\/RPT-derived, would leak the target"
+  },
+  {
+    "column":"SOH_Percent",
+    "role":"health\/label (RPT join)",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"TARGET (regression)"
+  },
+  {
+    "column":"Days_Since_RPT",
+    "role":"health\/label (RPT join)",
+    "in_dictionary":true,
+    "dtype":"float64",
+    "missing":0,
+    "missing_pct":0.0,
+    "model_input":false,
+    "handling":"EXCLUDED \u2014 label\/RPT-derived, would leak the target"
+  }
+]
