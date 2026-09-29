@@ -20,7 +20,7 @@ This file lists **every external data source** that this repository uses, or tha
 
 | ID | Source | Role | Status | Used by |
 |---|---|---|---|---|
-| [S1](#s1-stanford-second-life-dataset-moy-et-al-2024) | Stanford second-life dataset, OSF `8jnr5` (Moy et al., 2024) | Origin of all data used in this work | **Used** (via S2; diagnostic tests downloaded directly) | everything below; raw RPT/EIS files in `data/raw/osf_8jnr5_v2/` (not yet used by any experiment) |
+| [S1](#s1-stanford-second-life-dataset-moy-et-al-2024) | Stanford second-life dataset, OSF `8jnr5` (Moy et al., 2024) | Origin of all data used in this work | **Used** (via S2; diagnostic tests downloaded directly) | everything below; raw RPT/EIS files in `data/raw/osf_8jnr5_v2/` feed `scripts/build_diagnostic_features.py`, notebook 11 and `results/diagnostic_features.json` |
 | [S2](#s2-project-handover-and-its-hugging-face-mirror) | Project handover CSVs, mirrored on Hugging Face | Processed form of S1 that the pipeline reads | **Used** | notebooks 01–10; `results/*.json`; `scripts/verify_external_data.py` |
 | [S3](#s3-first-life-dataset-pozzato-et-al-2022) | Stanford first-life dataset, OSF `qsabn` (Pozzato et al., 2022) | First-life history of the same cells | Cited for background; data **not used** | none (candidate for S-b) |
 | [S4](#s4-synthetic-duty-cycles-moy-and-onori-2023) | Synthetic grid-storage duty cycles (Moy and Onori, 2023) | Origin of the second-life cycling profiles | Cited; no data used | methods text only |
@@ -142,7 +142,7 @@ The archive also holds everything below. All of it is covered by the same licenc
 - **Script:** `scripts/fetch_osf_diagnostics.py`. It downloads the whole version-2 archive, checks its size and SHA-256 against the OSF file record above, and stops on any mismatch. It then extracts only `diagnostic_tests/`, which holds all RPT capacity tests with pulses and all EIS spectra.
 - **Local copy:** the files go to `data/raw/osf_8jnr5_v2/diagnostic_tests/`, which is git-ignored.
 - **Manifest (versioned):** `docs/external_data/metadata/osf_8jnr5_v2_diagnostic_manifest.json` gives the path, size, CRC-32 and SHA-256 of every file, plus the retrieval time.
-- **Use:** no experiment uses these files yet. Before any result depends on them, record which experiments use them in the table at the top.
+- **Use:** diagnostic features (decision D16): `scripts/build_diagnostic_features.py`, notebook 11, `results/diagnostic_features.json`.
 
 ---
 

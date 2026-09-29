@@ -282,3 +282,50 @@ On this dataset the indicators track SOH in the physically expected direction bu
   - `scripts/fetch_osf_diagnostics.py` (raw RPT and EIS files);
   - `scripts/verify_external_data.py` (handover checked against the archive);
   - extraction code for new inputs, to follow.
+
+---
+
+## D16. Task reframed as SOH forecasting; health features come from the raw RPT and EIS files
+
+**Status:** Adopted (29 Sep 2026). This decision was taken **after seeing the data** and must be reported as such in the paper.
+
+**Decision: the task.** The primary task becomes **forecasting** the SOH at later RPTs, instead of estimating the current SOH from cycle-level features.
+- Why: on this data, current-SOH estimation is beaten by persistence (`docs/DATA_REPORT.md` §4).
+- Forecast inputs: the SOH history, the diagnostic features below, and usage (duty cycle, temperature).
+- Baselines to beat: persistence and linear extrapolation.
+- The horizon and the evaluation protocol are fixed before any model is tuned, in a follow-up entry.
+
+**Decision: the features.** One row per (battery, RPT), every value measured at that RPT (`src/diagnostic_features.py`; build with `scripts/build_diagnostic_features.py`; analysis in notebook 11).
+- Capacity test (C/20 discharge with C/2 pulses at 4.00, 3.63 and 3.26 V):
+  - charge in each window between the pulse voltages;
+  - total C/20 charge (`q_c20_ah`);
+  - pulse resistance after 0.1, 1 and 8 s;
+  - positions and heights of the incremental-capacity (dQ/dV) peaks in five fixed windows.
+- EIS (RPT 5 on, same three voltages):
+  - R0 (Z′ where Z″ crosses zero);
+  - arc resistance;
+  - arc peak;
+  - Z′ at 1 kHz, 10 Hz, 1 Hz, 0.1 Hz and 0.01 Hz.
+- No protocol current is used as a feature, because the currents are set from the previous capacity (see D14).
+
+**Fixed selection rules.** These are applied by code and every application is logged (`data/diagnostic_selection_log.csv`):
+- **Capacity test:** use the complete test (four C/20 segments), then the longest file. This resolves g1 RPT 1's partial second export.
+- **EIS:** use non-empty, potentiostatic spectra only. Prefer the file on the same channel as the cell's capacity test in that RPT, then the one closest in time. This resolves RPT 9's files on another cell's channel and RPT 17's two EIS sessions.
+- **Galvanostatic EIS** (`_gal`, w8 RPT 17 and 19) is excluded.
+- **RPT 7 EIS** comes from the aggregate `_ALL` files. Their format was checked against RPT 5, 6 and 8 (identical to 5 µΩ, the files' rounding). Every sweep uses the same 43-point frequency grid. The resulting R0 equals the authors' own `R_HF` in `eis_7.mat` for all 18 values.
+- **Off-protocol pulses** have their resistance set to missing: RPT 1 at 4.00 V (0.525 A), and v4 and w10 in RPT 17–19 (1.05 A instead of C/2).
+- **IC curve:** built from the C/20 segments only. After each pulse, the samples until the voltage returns below its pre-pulse level (5–9 mAh) are dropped, so the pulses do not create peaks at the pulse voltages.
+
+**Data-quality findings recorded, not repaired.**
+- **RPT 2 was run at about 20 °C instead of 25 °C.** The article's Table 3 notes an incorrect chamber setpoint. Capacity and resistance at RPT 2 are not comparable with the other RPTs.
+- **RPT 1 has no temperature logging.**
+- **Open, needs a team decision: the SOH labels depend on the pulse protocol.**
+  - The handover's `Capacity_Ah` counts all charge discharged during the RPT, including the pulses (about 15 mAh).
+  - For v4 and w10 in RPT 17–19 the smaller pulses contribute only about 7 mAh, which lowers their SOH labels by about 0.17 pp relative to the other RPTs (other cells: under 0.01 pp).
+  - Recommendation: define capacity as the C/20 charge (`q_c20_ah`), the definition of Moy et al. 2024, Eq. (1). The SOH formula is unchanged.
+
+**Implemented in:**
+- `src/raw_diagnostics.py`, `src/diagnostic_features.py`;
+- `scripts/fetch_osf_diagnostics.py`, `scripts/build_diagnostic_features.py`;
+- `notebooks/11_diagnostic_features.ipynb`;
+- `tests/test_diagnostic_features.py`.

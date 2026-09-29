@@ -43,6 +43,14 @@ python scripts/fetch_osf_diagnostics.py      # about 2.15 GB download; checks th
 - The files go to `data/raw/osf_8jnr5_v2/diagnostic_tests/RPT_#/`, which is git-ignored.
 - Each file is CRC-32-checked on extraction, and its SHA-256 is recorded in the manifest in `docs/external_data/metadata/`.
 
+Then build the per-(battery, RPT) diagnostic features (decision D16):
+
+```bash
+python scripts/build_diagnostic_features.py   # first run ~20 min (converts .xlsx to data/cache/), later ~10 s
+```
+
+This writes `data/diagnostic_features.csv` and `data/diagnostic_selection_log.csv`, both git-ignored.
+
 ## Revised handover package
 
 The revised external handover may provide `ml_ready_dataset.csv` instead of
@@ -78,6 +86,7 @@ done
 | `08_reuse_assessment.ipynb` | `ml_training_dataset.csv`, `final_battery_health_dataset.csv` |
 | `09_missing_temperature.ipynb` | `ml_training_dataset.csv` |
 | `10_health_indicators.ipynb` | `cleaned_battery_data.csv`, `final_battery_health_dataset.csv` |
+| `11_diagnostic_features.ipynb` | `diagnostic_features.csv` and `diagnostic_selection_log.csv` (from `scripts/build_diagnostic_features.py`), `final_battery_health_dataset.csv`, the raw files and their cache |
 
 Notebooks 03–09 write small JSON files to `results/` (`preprocessing_table.json`, `baseline_metrics.json`, `reference_baselines.json`, `cl_metrics.json`, `tft_ewc_metrics.json`, `reuse_assessment.json`, `missing_temperature.json`). Notebooks 05–09 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile produces reportable numbers. Executing into `--output-dir` keeps outputs derived from the data out of the committed notebooks.
 
