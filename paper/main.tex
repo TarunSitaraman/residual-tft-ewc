@@ -25,22 +25,16 @@
 \maketitle
 
 \begin{abstract}
-Forecasting the state of health (SOH) of second-life batteries requires models that adapt to new cells and usage conditions without forgetting earlier ones. We study continual SOH forecasting, one to three reference performance tests ahead, on two public datasets: six second-life NMC cells on grid duty cycles and 20 LFP cells aged into second life under seven usage conditions. From the raw tests we derive capacity labels and diagnostic features (incremental capacity, pulse resistance, impedance), correcting two label artefacts and checking the results exactly against the data authors' own values. A protocol fixed before any model was trained compares a Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) with fine-tuning, replay and joint training on two backbones, and with reference forecasters, using purged chronological splits and paired tests. Learned forecasters clearly beat persistence. Forgetting is negligible across homogeneous cells (at most 0.04~percentage points) but substantial across usage conditions (0.18--0.46~pp); there, EWC reduces the TFT's error by 0.21~pp and its forgetting by 0.19~pp. However, TFT\,+\,EWC is not the most accurate forecaster on either dataset: a usage-only linear model and fade-rate extrapolation or gradient boosting are as good or better. Continual-learning methods for second-life assessment should therefore be evaluated on demonstrably heterogeneous streams and against simple references.
+\todo{abstract, written by the team}
 \end{abstract}
 
 \begin{IEEEkeywords}
 second-life batteries, state-of-health forecasting, continual learning, elastic weight consolidation, temporal fusion transformer, lithium-ion batteries
 \end{IEEEkeywords}
 
-\input{sections/intro}
-\input{sections/related}
-
 \input{sections/methods}
 
 \input{sections/results}
-
-\input{sections/discussion}
-\input{sections/conclusion}
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

@@ -6,6 +6,8 @@
 /results/*
 # Small metrics/config JSON (e.g. baseline_metrics.json) may be committed.
 !/results/*.json
+# Result tables generated from those JSON files by scripts/make_results_tables.py.
+!/results/tables/
 /logs/
 *.pt
 *.pickle
