@@ -1,0 +1,965 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T01:48:33Z",
+   "timestamp": 1790732913191,
+   "version": "4.1.0"
+  },
+  "reference-count": 99,
+  "publisher": "Elsevier BV",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2018,
+       10,
+       1
+      ]
+     ],
+     "date-time": "2018-10-01T00:00:00Z",
+     "timestamp": 1538352000000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2018,
+       10,
+       1
+      ]
+     ],
+     "date-time": "2018-10-01T00:00:00Z",
+     "timestamp": 1538352000000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/legal/tdmrep-license"
+   }
+  ],
+  "funder": [
+   {
+    "name": "ETORTEK",
+    "award": [
+     "IE14-388"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "IE14-388"
+      ]
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "elsevier.com",
+    "sciencedirect.com"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Renewable and Sustainable Energy Reviews"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2018,
+     10
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.rser.2018.04.035",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2018,
+     6,
+     21
+    ]
+   ],
+   "date-time": "2018-06-21T02:49:18Z",
+   "timestamp": 1529549358000
+  },
+  "page": "701-718",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 404,
+  "special_numbering": "C",
+  "title": [
+   "Battery second life: Hype, hope or reality? A critical review of the state of the art"
+  ],
+  "prefix": "10.1016",
+  "volume": "93",
+  "author": [
+   {
+    "given": "E.",
+    "family": "Martinez-Laserna",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "I.",
+    "family": "Gandiaga",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "E.",
+    "family": "Sarasketa-Zabala",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "J.",
+    "family": "Badeda",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "D.-I.",
+    "family": "Stroe",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "M.",
+    "family": "Swierczynski",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "A.",
+    "family": "Goikoetxea",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "issue": "April",
+    "key": "10.1016/j.rser.2018.04.035_bib1",
+    "doi-asserted-by": "crossref",
+    "first-page": "318",
+    "DOI": "10.1016/j.rser.2017.04.076",
+    "article-title": "A review of factors influencing consumer intentions to adopt battery electric vehicles",
+    "volume": "78",
+    "author": "Li",
+    "year": "2017",
+    "journal-title": "Renew Sustain Energy Rev"
+   },
+   {
+    "issue": "March",
+    "key": "10.1016/j.rser.2018.04.035_bib2",
+    "doi-asserted-by": "crossref",
+    "first-page": "414",
+    "DOI": "10.1016/j.rser.2017.03.138",
+    "article-title": "A review of Battery Electric Vehicle technology and readiness levels",
+    "volume": "78",
+    "author": "Mahmoudzadeh Andwari",
+    "year": "2017",
+    "journal-title": "Renew Sustain Energy Rev"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib3",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Pinsky N, Gaillac L, Mendoza A, Argueta J, Knipe T. Performance of advanced electric vehicle batteries in stationary applications. In: Proceedings of the 24th annual international telecommunications energy conference;\u00a02002. p. 366\u201372 doi:10.1109/INTLEC.2002.1048682. URL \u3008http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?Arnumber=1048682\u3009.",
+    "DOI": "10.1109/INTLEC.2002.1048682"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib4",
+    "unstructured": "Pinsky N. Electric Vehicle Battery 2nd Use Study. Tech. rep., Argonne National Laboratory, Electrochemical Technology Program; 1998."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib5",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Cready E, Lippert J, Pihl J, Weinstock I, Symons P, Jungst RG. Technical and economic feasibility of applying used EV batteries in stationary applications. Tech. rep., Sandia National Laboratory; 2003.",
+    "DOI": "10.2172/809607"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib6",
+    "unstructured": "Tesla Motors. NYISO EAC Presentation; 2016."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib7",
+    "unstructured": "Kim S, Lu J, Kim K, Choi A. More Hype than Opportunity. Tech. rep., Morgan Stanley; 2016."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib8",
+    "unstructured": "Williams B, Lipman T. Analysis of the Combined Vehicle - Use Value of Lithium-Ion Plug-In-Vehicle Propulsion Batteries. Task 3, Second Life Applications and Value of \u2019Traction\u2019 Lithium Batteries., Tech. rep., California Energy Commission Prepared: Public Interest Energy Research (PIER) Program (2011)."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib9",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Neubauer J, Pesaran A. The ability of battery second use strategies to impact plug-in electric vehicle prices and serve utility energy storage applications. Journal of Power Sources 196 (23). doi:10.1016/j.jpowsour.2011.06.053.",
+    "DOI": "10.1016/j.jpowsour.2011.06.053"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib10",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Neubauer J, Pesaran A, Williams B, Ferry M. A Techno-Economic Analysis of PEV Battery Second Use: Repurposed-Battery Selling Price and Commercial and Industrial End-User Value. in: SAE 2012 World Congress & Exhibition, 2012. doi:10.4271/2012-01-0349.",
+    "DOI": "10.4271/2012-01-0349"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib11",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Neubauer, J., Smith, K., Wood, E., & Pesaran, A. Identifying and Overcoming Critical Barriers to Widespread Second Use of PEV Batteries. United States. doi:10.2172/1171780.",
+    "DOI": "10.2172/1171780"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib12",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Eyer J, Corey G. Energy storage for the electricity grid: Benefits and market potential assessment guide. Tech. Rep. February, Sandia National Laboratories (2010).",
+    "DOI": "10.2172/1031895"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib13",
+    "doi-asserted-by": "crossref",
+    "first-page": "800",
+    "DOI": "10.1016/j.rser.2016.07.028",
+    "article-title": "Energy storage in the energy transition context: a technology review",
+    "volume": "65",
+    "author": "Gallo",
+    "year": "2016",
+    "journal-title": "Renew Sustain Energy Rev"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib14",
+    "unstructured": "EPRI, Electricity energy storage technology options: a white paper primer on applications. Tech. rep., EPRI (2010)."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib15",
+    "doi-asserted-by": "crossref",
+    "first-page": "120",
+    "DOI": "10.1016/j.apenergy.2016.08.056",
+    "article-title": "Technical and economic assessment of the secondary use of repurposed electric vehicle batteries in the residential sector to support solar energy",
+    "volume": "181",
+    "author": "Assun\u00e7\u00e3o",
+    "year": "2016",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib16",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Saez-De-Ibarra A, Martinez-Laserna E, Koch-Ciobotaru C, Rodriguez P, Stroe D-I, Swierczynski M. Second life battery energy storage system for residential demand response service. In: Proceedings of the IEEE international conference on industrial technology, vol. 2015-June 2015. doi:10.1109/ICIT.2015.7125532.",
+    "DOI": "10.1109/ICIT.2015.7125532"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib17",
+    "doi-asserted-by": "crossref",
+    "first-page": "22",
+    "DOI": "10.1016/j.enpol.2014.04.016",
+    "article-title": "Economic analysis of second use electric vehicle batteries for residential energy storage and load-levelling",
+    "volume": "71",
+    "author": "Heymans",
+    "year": "2014",
+    "journal-title": "Energy Policy"
+   },
+   {
+    "issue": "9",
+    "key": "10.1016/j.rser.2018.04.035_bib18",
+    "doi-asserted-by": "crossref",
+    "first-page": "094004",
+    "DOI": "10.1088/1748-9326/9/9/094004",
+    "article-title": "Driving rural energy access: a second-life application for electric-vehicle batteries",
+    "volume": "9",
+    "author": "Ambrose",
+    "year": "2014",
+    "journal-title": "Environ Res Lett"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib19",
+    "doi-asserted-by": "crossref",
+    "first-page": "577",
+    "DOI": "10.1016/j.ijepes.2014.05.077",
+    "article-title": "Quantifying economic benefits of second life batteries of gridable vehicles in the smart grid",
+    "volume": "63",
+    "author": "Debnath",
+    "year": "2014",
+    "journal-title": "Int J Electr Power Energy Syst"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib20",
+    "doi-asserted-by": "crossref",
+    "first-page": "114",
+    "DOI": "10.1016/j.ijepes.2016.03.006",
+    "article-title": "Gridable vehicles and second life batteries for generation side asset management in the smart grid",
+    "volume": "82",
+    "author": "Debnath",
+    "year": "2016",
+    "journal-title": "Int J Electr Power Energy Syst"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib21",
+    "doi-asserted-by": "crossref",
+    "first-page": "705",
+    "DOI": "10.1016/j.rser.2015.11.085",
+    "article-title": "Use cases for stationary battery technologies: a review of the literature and existing projects",
+    "volume": "56",
+    "author": "Malhotra",
+    "year": "2016",
+    "journal-title": "Renew Sustain Energy Rev"
+   },
+   {
+    "issue": "February (2016)",
+    "key": "10.1016/j.rser.2018.04.035_bib22",
+    "doi-asserted-by": "crossref",
+    "first-page": "380",
+    "DOI": "10.1016/j.rser.2016.11.003",
+    "article-title": "Stationary battery technologies in the U.S.: development trends and prospects",
+    "volume": "75",
+    "author": "Telaretti",
+    "year": "2017",
+    "journal-title": "Renew Sustain Energy Rev"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib23",
+    "doi-asserted-by": "crossref",
+    "first-page": "1212",
+    "DOI": "10.1016/j.rser.2015.07.145",
+    "article-title": "An overview of large-scale stationary electricity storage plants in Europe: current status and new developments",
+    "volume": "52",
+    "author": "Geth",
+    "year": "2015",
+    "journal-title": "Renew Sustain Energy Rev"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib24",
+    "unstructured": "Rastler D. Electric Energy Storage Technology Options: A White Paper Primer on Applications, Costs and Benefits. Tech. rep., EPRI (2010). doi:EPRI 1020676. URL \u3008http://large.stanford.edu/courses/2012/ph240/doshay1/docs/EPRI.pdf\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib25",
+    "unstructured": "U.S. Energy Information Administration, Electricity generating capacity. Tech. rep. (2012).URL \u3008http://www.eia.gov/forecasts/aeo/pdf/tbla9.pdf\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib26",
+    "unstructured": "International Energy Agency (IEA), Global EV Outlook 2016 Electric Vehicles Initiative. Tech. rep., IEA (2016)."
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.rser.2018.04.035_bib27",
+    "doi-asserted-by": "crossref",
+    "first-page": "329",
+    "DOI": "10.1038/nclimate2564",
+    "article-title": "Rapidly falling costs of battery packs for electric vehicles",
+    "volume": "5",
+    "author": "Nykvist",
+    "year": "2015",
+    "journal-title": "Nat Clim Change"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib28",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Idjis H, da Costa P. Is Electric Vehicles Battery Recovery a Source of Cost or\u00a0Profit? Springer International Publishing, Cham, 2017, Ch. Chapter 8, pp. 117\u201334. doi:10.1007/978-3-319-45838-0_8. URL \u3008http://dx.doi.org/10.1007/978-3-319-45838-0_8\u3009.",
+    "DOI": "10.1007/978-3-319-45838-0_8"
+   },
+   {
+    "issue": "7",
+    "key": "10.1016/j.rser.2018.04.035_bib29",
+    "doi-asserted-by": "crossref",
+    "first-page": "2963",
+    "DOI": "10.1109/TVT.2011.2160378",
+    "article-title": "Second use of transportation batteries: maximizing the value of batteries for transportation and grid services",
+    "volume": "60",
+    "author": "Viswanathan",
+    "year": "2011",
+    "journal-title": "IEEE Trans Veh Technol"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib30",
+    "unstructured": "Akhil AA, Huff G, Currier AB, Kaun BC, Rastler DM, Chen SB, Cotter AL, Bradshaw DT, Gauntlett WD. DOE / EPRI 2013 Electricity Storage Handbook in Collaboration with NRECA. Tech. Rep. July (2013)."
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.rser.2018.04.035_bib31",
+    "doi-asserted-by": "crossref",
+    "first-page": "517",
+    "DOI": "10.1109/TSG.2011.2163091",
+    "article-title": "An economic analysis of used electric vehicle batteries integrated into commercial building microgrids",
+    "volume": "3",
+    "author": "Beer",
+    "year": "2012",
+    "journal-title": "IEEE Trans Smart Grid"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib32",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Lacey G, Putrus G, Salim A. The use of second life electric vehicle batteries for grid support EUROCON, 2013 IEEE July 2013 1255 1261 doi:\u00a010.1109/EUROCON.2013.6625141. [URL \u3008http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6625141\u3009].",
+    "DOI": "10.1109/EUROCON.2013.6625141"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib33",
+    "unstructured": "Wolfs P. An economic assessment of second use lithium-ion batteries for grid support. In: Proceedings of the 20th Australasian Universities Power Engineering Conference (AUPEC); 2010. URL \u3008http://ieeexplore.ieee.org/xpls/abs_all.jsp?Arnumber=5710689\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib34",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Shokrzadeh S, Bibeau E. Repurposing batteries of plug-in electric vehicles to support renewable energy penetration in the electric grid. In: Proceedings of SAE 2012 World Congress and Exhibition doi:10.4271/2012-01-0348. URL \u3008http://www.sae.org/technical/papers/2012-01-0348\u3009.",
+    "DOI": "10.4271/2012-01-0348"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib35",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Gladwin D, Gould C, Stone D, Foster M. Viability of second-life use of electric and hybridelectric vehicle battery packs IECON Proceedings (Industrial Electronics Conference); 2013. p. 1922\u20137 doi:\u00a010.1109/IECON.2013.6699425. [URL \u3008http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6699425\u3009].",
+    "DOI": "10.1109/IECON.2013.6699425"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib36",
+    "doi-asserted-by": "crossref",
+    "first-page": "740",
+    "DOI": "10.1016/j.apenergy.2012.11.046",
+    "article-title": "Off-grid photovoltaic vehicle charge using second life lithium batteries: an experimental and numerical investigation",
+    "volume": "104",
+    "author": "Tong",
+    "year": "2013",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib37",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1002/er.3310",
+    "article-title": "Photovoltaic grid stabilization system using second life lithium battery",
+    "author": "Kootstra",
+    "year": "2015",
+    "journal-title": "Int J Energy Res"
+   },
+   {
+    "issue": "6",
+    "key": "10.1016/j.rser.2018.04.035_bib38",
+    "doi-asserted-by": "crossref",
+    "first-page": "4999",
+    "DOI": "10.1109/TIA.2016.2593425",
+    "article-title": "Sizing study of second life Li-ion batteries for enhancing renewable energy grid integration",
+    "volume": "52",
+    "author": "Saez-De-Ibarra",
+    "year": "2016",
+    "journal-title": "IEEE Trans Ind Appl"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib39",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Hart P, Kollmeyer P. Modeling of second-life batteries for use in a CERTS microgrid. In: Proceedings of IEEE power energy conference Ill, PECI; 2014 p. 1\u20138 doi:\u00a010.1109/PECI.2014.6804554.[URL \u3008http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=6804554\u3009\u3008http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6804554\u3009].",
+    "DOI": "10.1109/PECI.2014.6804554"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib40",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Einhorn M, Permann R, Kral C, Conte FV, Guertlschmid W, Blochberger T, Kumpusch R, Fleig J. Current Equalization of Serially Connected Battery Cells for a Possible Second Life Application. In: Proceedings of vehicle power and propulsion conference (VPPC), 2011 IEEE; 2011, p. 1\u20135. doi:10.1109/VPPC.2011.6043059.",
+    "DOI": "10.1109/VPPC.2011.6043059"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib41",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Mukherjee N, Strickland D. Second life battery energy storage systems: converter topology and redundancy selection. In: Proceedings of the 7th IET international conference on power electronics, machines and drives (PEMD 2014); 2014. 1.2.02\u20131.2.02 doi:10.1049/cp.2014.0256. URL \u3008http://digital-library.theiet.org/content/conferences/10.1049/cp.2014.0256\u3009.",
+    "DOI": "10.1049/cp.2014.0256"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib42",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Mukherjee N, Strickland D. Modular ESS with Second Life Batteries Operating in Grid Independent Mode.\u00a0In: Proceedings of the 3rd IEEE international symposium on power electronics for distributed generation systems (PEDG); 2012, p. 653\u201360. doi:10.1109/PEDG.2012.6254072.",
+    "DOI": "10.1109/PEDG.2012.6254072"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib43",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Mukherjee N, Strickland D, Cross A, Hung W. Reliability estimation of second life battery system power electronic topologies for grid frequency response applications (2012). doi:10.1049/cp.2012.0353.",
+    "DOI": "10.1049/cp.2012.0353"
+   },
+   {
+    "issue": "c",
+    "key": "10.1016/j.rser.2018.04.035_bib44",
+    "article-title": "Control of second life hybrid battery energy storage system based on modular boost-multilevel buck converter",
+    "volume": "0046",
+    "author": "Mukherjee",
+    "year": "2014",
+    "journal-title": "IEEE Trans Ind Electron"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib45",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Tong S, Fung T, Park JW. Reusing electric vehicle battery for demand side management integrating dynamic pricing (2015). doi:10.1109/SmartGridComm.2015.7436321.",
+    "DOI": "10.1109/SmartGridComm.2015.7436321"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib46",
+    "doi-asserted-by": "crossref",
+    "first-page": "200",
+    "DOI": "10.1016/j.est.2017.03.003",
+    "article-title": "Demonstration of reusing electric vehicle battery for solar energy storage and demand side management",
+    "volume": "11",
+    "author": "Tong",
+    "year": "2017",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib47",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Gohla-Neudecker B, Bowler M, Mohr S. Battery 2nd life: leveraging the sustainability potential of EVs and renewable energy grid integratio. In: Proceedings of International Conference on Clean Electrical Power (ICCEP) 2015 311 318 doi:\u00a010.1109/ICCEP.2015.7177641. [URL \u3008http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=7177641\u3009].",
+    "DOI": "10.1109/ICCEP.2015.7177641"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib48",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Gohla-Neudecker B, Maiyappan VS, Juraschek S, Mohr S. Battery 2nd Life: Presenting a Benchmark Stationary Storage System as Enabler for the Global Energy Transition.\u00a0In: Proceedings of the 6th international conference on clean electrical power (ICCEP); 2017, p. 103\u20139.",
+    "DOI": "10.1109/ICCEP.2017.8004799"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib49",
+    "doi-asserted-by": "crossref",
+    "first-page": "332",
+    "DOI": "10.1016/j.jpowsour.2013.08.108",
+    "article-title": "Production caused variation in capacity aging trend and correlation to initial cell performance",
+    "volume": "247",
+    "author": "Baumh\u00f6fer",
+    "year": "2014",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib50",
+    "doi-asserted-by": "crossref",
+    "first-page": "242",
+    "DOI": "10.1016/j.jpowsour.2015.08.001",
+    "article-title": "Lithium-ion cell-to-cell variation during battery electric vehicle operation",
+    "volume": "297",
+    "author": "Schuster",
+    "year": "2015",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib51",
+    "unstructured": "Lih W, Yen J. Second-use Applications of Lithium-ion Batteries Retired from Electric Vehicles: Challenges, Repurposing Process, Cost Analysis and Optimal Business. International Journal of Advancements in Computing Technology doi:10.4156/ijact.vol4.issue22.58. URL \u3008http://scholar.google.com/scholar?Hl=en&btnG=Search&q=intitle:Second-use+Applications+of+Lithium-ion+Batteries+Retired+from+Electric+Vehicles+:+Challenges+,+Repurposing+Process+,+Cost+Analysis+and+Optimal+Business+Model#0\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib52",
+    "unstructured": "Omar N, Daowd M, Hegazy O, Geukens B, Timmermans JM, Coosemans T, Van den Bossche, P., Van Mierlo J. Assessment of second life of lithium iron phosphate based batteries. International Review of Electrical Engineering 7 (April). URL \u3008http://event11.ise-online.org/online/meeting/infiles/pdf/ise110492.pdf\u3009."
+   },
+   {
+    "issue": "October (2016)",
+    "key": "10.1016/j.rser.2018.04.035_bib53",
+    "doi-asserted-by": "crossref",
+    "first-page": "603",
+    "DOI": "10.1016/j.promfg.2017.02.077",
+    "article-title": "Quantifying uncertainties in reusing lithium-ion batteries from electric vehicles",
+    "volume": "8",
+    "author": "Rohr",
+    "year": "2017",
+    "journal-title": "Procedia Manuf"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.rser.2018.04.035_bib54",
+    "doi-asserted-by": "crossref",
+    "first-page": "55",
+    "DOI": "10.1149/07401.0055ecst",
+    "article-title": "The Second life ageing of the NMC/C electric vehicle retired Li-ion batteries in the stationary applications",
+    "volume": "74",
+    "author": "Swierczynski",
+    "year": "2016",
+    "journal-title": "ECS Trans"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib55",
+    "unstructured": "Martinez-Laserna E, Sarasketa-Zabala E, Stroe D, Swierczynski M, Warnecke A., Timmermans JM, Goutam S, Rodriguez P. Evaluation of Lithium-ion Battery Second Life Performance and Degradation. In: Proceedings of IEEE Energy Conversion Congress and Expo."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib56",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Liao Q, Mu M, Zhao S, Zhang L, Jiang T, Ye J, Shen X, Zhou G. Performance assessment and classification of retired lithium ion battery from electric vehicles for energy storage. International Journal of Hydrogen Energy doi:10.1016/j.ijhydene.2017.06.043.",
+    "DOI": "10.1016/j.ijhydene.2017.06.043"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib57",
+    "unstructured": "USABC, USABC Electric Vehicle Battery Test Procedures Manual, Revision 2. Tech. rep., USABC (1996)."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib58",
+    "doi-asserted-by": "crossref",
+    "first-page": "265",
+    "DOI": "10.1016/j.jpowsour.2015.01.072",
+    "article-title": "Quantifying EV battery end-of-life through analysis of travel needs with vehicle powertrain models",
+    "volume": "282",
+    "author": "Saxena",
+    "year": "2015",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib59",
+    "unstructured": "International Energy Agency (IEA), Clean Energy Ministerial, Electric Vehicles Initiative, Global EV Outlook: Understanding the Electric Vehicle Landscape to 2020. Technical Report April; 2013."
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.rser.2018.04.035_bib60",
+    "first-page": "266",
+    "article-title": "Electric vehicle battery reuse: preparing for a second life",
+    "volume": "10",
+    "author": "Canals Casals",
+    "year": "2017",
+    "journal-title": "J Ind Eng Manag"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib61",
+    "doi-asserted-by": "crossref",
+    "first-page": "183",
+    "DOI": "10.1016/j.enpol.2014.01.043",
+    "article-title": "The influence of financial incentives and other socio-economic factors on electric vehicle adoption",
+    "volume": "68",
+    "author": "Sierzchula",
+    "year": "2014",
+    "journal-title": "Energy Policy"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib62",
+    "doi-asserted-by": "crossref",
+    "first-page": "511",
+    "DOI": "10.1016/j.enpol.2012.04.017",
+    "article-title": "Influence of plug-in hybrid electric vehicle charging strategies on charging and battery degradation costs",
+    "volume": "46",
+    "author": "Lunz",
+    "year": "2012",
+    "journal-title": "Energy Policy"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib63",
+    "doi-asserted-by": "crossref",
+    "first-page": "82",
+    "DOI": "10.1016/j.jpowsour.2015.04.097",
+    "article-title": "Energy and climate effects of second-life use of electric vehicle batteries in California through 2050",
+    "volume": "288",
+    "author": "Sathre",
+    "year": "2015",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib64",
+    "first-page": "9",
+    "article-title": "Energy efficiency of Li-ion battery packs re-used in stationary power applications",
+    "volume": "8",
+    "author": "Ahmadi",
+    "year": "2014",
+    "journal-title": "Sustain Energy Technol Assess"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib65",
+    "unstructured": "Wieland M, Gerhard S, Schmidt A. Model-based Lifetime Analysis of 2nd-life Lithium-Ion Battery Storage Systems for Stationary Applications. In: Proceedings of conference on sustainable energy supply and energy storage systems (NEIS); 2016, p. 1\u20136."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib66",
+    "unstructured": "Casals LC, Garc\u00eda BA, Aguesse FA. Iturrondobeitia, Second life of electric vehicle batteries: relation between materials degradation and environmental impact. The International Journal of Life Cycle Assessment (Cic). doi:10.1007/s11367-015-0918-3. URL \u3008http://link.springer.com/10.1007/s11367-015-0918-3\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib67",
+    "first-page": "64",
+    "article-title": "Environmental feasibility of re-use of electric vehicle batteries",
+    "volume": "6",
+    "author": "Ahmadi",
+    "year": "2014",
+    "journal-title": "Sustain Energy Technol Assess"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib68",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Cicconi P, Landi D, Morbidoni A, Germani M. Feasibility analysis of second life applications for Li-ion cells used in electric powertrain using environmental indicators.\u00a0In: Proceedings of the 2nd IEEE ENERGYCON conference & exhibition; 2012, p. 985\u201390. doi:10.1109/EnergyCon.2012.6348293.",
+    "DOI": "10.1109/EnergyCon.2012.6348293"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/j.rser.2018.04.035_bib69",
+    "doi-asserted-by": "crossref",
+    "first-page": "186",
+    "DOI": "10.1108/WJSTSD-04-2013-0018",
+    "article-title": "An electric taxi fleet charged by second use batteries: not just economic profit",
+    "volume": "10",
+    "author": "Canals Casals",
+    "year": "2013",
+    "journal-title": "World J Sci, Technol Sustain Dev"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib70",
+    "unstructured": "ERTRAC, European Roadmap: European Bus System of the Future. Tech. rep., ERTRAC (2011)."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib71",
+    "unstructured": "Ferdinand M. The MSR: Impact on balance and prices. Tech. Rep. April, Thomson Reuters (2014)."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib72",
+    "first-page": "1",
+    "article-title": "A cascaded life cycle: reuse of electric vehicle lithium-ion battery packs in energy storage systems",
+    "author": "Ahmadi",
+    "year": "2015",
+    "journal-title": "Int J Life Cycle Assess"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib73",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Center for Sustainable Energy, Final Long-Term Duty Cycle Report: Demand Charge Management Duty Cycle. Tech. rep., Center for Sustainable Energy (2015). http://arXiv:1011.1669v3arXiv:1011.1669v3, doi:10.1002/ejoc.201200111.",
+    "DOI": "10.1002/ejoc.201200111"
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib74",
+    "unstructured": "Center for Sustainable Energy, Final Long-Term Duty Cycle Report: Primary Frequency Response Duty Cycle. Tech. Rep. July, Center for Sustainable Energy (2015)."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib75",
+    "unstructured": "Center for Sustainable Energy, Final Long-Term Duty Cycle Report: Regulation Energy Management Duty Cycle. Tech. Rep. January, Center for Sustainable Energy (2015)."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib76",
+    "unstructured": "Center for Sustainable Energy, Final Long-Term Duty Cycle Report: PV Firming Duty Cycle. Tech. Rep. March, Center for Sustainable Energy (2015)."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib77",
+    "unstructured": "EATON, Nissan and Eaton make home energy storage reliable and affordable to everyone with xStorage. URL \u3008http://www.eaton.com/Eaton/OurCompany/NewsEvents/NewsReleases/PCT_2004519\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib78",
+    "unstructured": "EATON, xStorage HOME (2016). URL \u3008https://uk.eaton.com/content/gb/en/products/electrical/xstorage.html?Wtredirect=www.eaton.com/xstorage\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib79",
+    "unstructured": "Pyper J. Automakers on Second-Life Batteries for the Grid We Want a Foot in the Door of This Market' (2015). URL \u3008http://www.greentechmedia.com/articles/read/Automakers-on-Second-Life-Batteries-For-the-Grid-We-Want-a-Foot-in-the-Do\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib80",
+    "unstructured": "Sandia National Laboratories, DOE Global Energy Storage Database: UCSD BMW 2nd Life EV Energy Storage System (2016). URL \u3008http://www.energystorageexchange.org/projects/285\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib81",
+    "unstructured": "UC San Diego, UCSD Strategic energy initiatives: Energy Storage. URL \u3008http://rmp.ucsd.edu/strategic-energy/storage/index.html\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib82",
+    "unstructured": "UC San Diego, 2nd Life Electric Vehicle Battery Project. URL \u3008https://rmp.ucsd.edu/strategic-energy/storage/2-life.html\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib83",
+    "unstructured": "Green Car Reports, Chevy, Nissan Reveal Second-Life Uses For Electric-Car Batteries."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib84",
+    "unstructured": "Canals Casals L. Sunbatt: Use of a Second Life Battery System from PHEV in Stationary Applications Use of a Second Life Battery System from PHEV in Stationary Applications. in: Smart City Expo World Congress, no. November 2015, 2015."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib85",
+    "unstructured": "CleanTechnica, 2nd-Life Battery Project Launched By Mitsubishi, PSA Peugeot Citro\u00ebn, & Others (2015). URL \u3008http://cleantechnica.com/2015/07/14/2nd-life-battery-project-launched-by-mitsubishi-psa-peugeot-citroen-others/\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib86",
+    "unstructured": "Vernacchia J. A Brief History of Utility- Scale Energy Storage, Renewable Energy World."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib87",
+    "unstructured": "Amsterdam ArenA, Amsterdam ArenA more energy efficient with battery storage. URL \u3008http://www.amsterdamarena.nl/default-showon-page/amsterdam-arena-more-energy-efficient-with-battery-storage-.htm\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib88",
+    "unstructured": "Ik4-Ikerlan, Batteries2020 (2016). URL \u3008http://www.batteries2020.eu/\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib89",
+    "unstructured": "ARN, ARN - 2BCycled: Combined investigation into second life for batteries from electrical cars. URL \u3008http://www.arn.nl/en/news/2bcycled-gezamenlijk-onderzoek-naar-een-tweede-leven-voor-accus-uit-elektrische-autos/\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib90",
+    "unstructured": "Van de Vegte H. The Pampus Project. Tech. rep., DNV GL (2015)."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib91",
+    "unstructured": "ABattRelife Consortium, ABattRelife: a project to improve EV battery technology (2015). URL \u3008http://www.abattrelife.eu/\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib92",
+    "unstructured": "UPC, ReViBe: Energy and Batteries Life and Re-use. URL \u3008http://revibe.upc.edu/en/project\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib93",
+    "unstructured": "EU Commission Joint Research Centre (JRC), JRC 2016\u20132017 WORK PROGRAMME (2017). URL \u3008https://ec.europa.eu/jrc/sites/jrcsh/files/mawp-2016-2017.pdf\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib94",
+    "unstructured": "The ELSA consortium, ELSA - Energy Local Storage Advanced system (2016). URL \u3008http://www.elsa-h2020.eu/Home.html\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib95",
+    "unstructured": "Rogge T. SunBESSy Battery Energy Storage System: The Advanced Home Storage (2016). URL \u3008http://ecosummit.net/uploads/20160427-1255-Timo-Rogge-SunBESSy.pdf\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib96",
+    "unstructured": "Smith A, Brockman B. Nissan and 4R Energy Partner with Green Charge Networks for Commercial Energy Storage Featuring Second-Life Electric Vehicle Batteries (2015). URL \u3008http://nissannews.com/en-US/nissan/usa/releases/nissan-and-4r-energy-partner-with-green-charge-networks-for-commercial-energy-storage-featuring-second-life-electric-vehicle-batteries\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib97",
+    "unstructured": "Freewire Technologies, Mobi charger series. URL \u3008http://www.freewiretech.com/ev-charging/\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib98",
+    "unstructured": "Renault Press, Connected Energy and Renault to Collaborate on Energy Storage and EV Charging Technology (2016). URL \u3008http://media.renault.com/global/en-gb/renault/Media/PressRelease.aspx?Mediaid=75381\u3009."
+   },
+   {
+    "key": "10.1016/j.rser.2018.04.035_bib99",
+    "unstructured": "E. Martinez-Laserna\u00a0et al., Technical Viability of Battery Second Life: A Study from the Ageing Perspective, in\u00a0IEEE Transactions on Industry Applications. doi: 10.1109/TIA.2018.2801262. URL:\u00a0http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8279474&isnumber=4957013."
+   }
+  ],
+  "container-title": [
+   "Renewable and Sustainable Energy Reviews"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S1364032118302491?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S1364032118302491?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2025,
+     10,
+     23
+    ]
+   ],
+   "date-time": "2025-10-23T19:53:24Z",
+   "timestamp": 1761249204000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S1364032118302491"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2018,
+     10
+    ]
+   ]
+  },
+  "references-count": 99,
+  "alternative-id": [
+   "S1364032118302491"
+  ],
+  "URL": "https://doi.org/10.1016/j.rser.2018.04.035",
+  "relation": {},
+  "ISSN": [
+   "1364-0321"
+  ],
+  "issn-type": [
+   {
+    "value": "1364-0321",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2018,
+     10
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "Elsevier",
+    "name": "publisher",
+    "label": "This article is maintained by"
+   },
+   {
+    "value": "Battery second life: Hype, hope or reality? A critical review of the state of the art",
+    "name": "articletitle",
+    "label": "Article Title"
+   },
+   {
+    "value": "Renewable and Sustainable Energy Reviews",
+    "name": "journaltitle",
+    "label": "Journal Title"
+   },
+   {
+    "value": "https://doi.org/10.1016/j.rser.2018.04.035",
+    "name": "articlelink",
+    "label": "CrossRef DOI link to publisher maintained version"
+   },
+   {
+    "value": "article",
+    "name": "content_type",
+    "label": "Content Type"
+   },
+   {
+    "value": "\u00a9 2018 Elsevier Ltd. All rights reserved.",
+    "name": "copyright",
+    "label": "Copyright"
+   }
+  ]
+ }
+}

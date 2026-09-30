@@ -1,0 +1,1008 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T15:21:59Z",
+   "timestamp": 1790781719644,
+   "version": "4.1.0"
+  },
+  "reference-count": 150,
+  "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2019,
+       1,
+       1
+      ]
+     ],
+     "date-time": "2019-01-01T00:00:00Z",
+     "timestamp": 1546300800000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/OAPA.html"
+   }
+  ],
+  "funder": [
+   {
+    "name": "Portland General Electric (PGE), USA",
+    "award": [
+     "ELT425"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "ELT425"
+      ]
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [],
+   "crossmark-restriction": false
+  },
+  "short-container-title": [
+   "IEEE Access"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1109/access.2019.2917859",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2019,
+     5,
+     25
+    ]
+   ],
+   "date-time": "2019-05-25T00:07:45Z",
+   "timestamp": 1558742865000
+  },
+  "page": "73215-73252",
+  "source": "Crossref",
+  "is-referenced-by-count": 386,
+  "title": [
+   "A Comprehensive Review on Second-Life Batteries: Current State, Manufacturing Considerations, Applications, Impacts, Barriers &amp; Potential Solutions, Business Strategies, and Policies"
+  ],
+  "prefix": "10.1109",
+  "volume": "7",
+  "author": [
+   {
+    "ORCID": "https://orcid.org/0000-0003-2332-8095",
+    "authenticated-orcid": false,
+    "given": "Eklas",
+    "family": "Hossain",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Darren",
+    "family": "Murtaugh",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Jaisen",
+    "family": "Mody",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Hossain Mansur Resalat",
+    "family": "Faruque",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Md. Samiul",
+    "family": "Haque Sunny",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Naeem",
+    "family": "Mohammad",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "263",
+  "reference": [
+   {
+    "key": "ref39",
+    "year": "2018",
+    "journal-title": "Tech spec"
+   },
+   {
+    "key": "ref38",
+    "author": "leary",
+    "year": "2018",
+    "journal-title": "People Are Using Old Laptop Batteries to Build Their Own Versions of Tesla&#x2019;s Powerwall"
+   },
+   {
+    "key": "ref33",
+    "author": "john",
+    "year": "2018",
+    "journal-title": "Nissan Green Charge Networks Turn Second-Life EV Batteries Into Grid Storage Business"
+   },
+   {
+    "key": "ref32",
+    "author": "reid",
+    "year": "2016",
+    "journal-title": "Second Life-Batteries as Flexible Storage for Renewable Energies"
+   },
+   {
+    "key": "ref31",
+    "author": "howard",
+    "year": "2018",
+    "journal-title": "GM Turns Your Old Chevy Volt Battery into a Whole-House UPS"
+   },
+   {
+    "key": "ref30",
+    "year": "2016",
+    "journal-title": "A Second Life for Used Batteries"
+   },
+   {
+    "key": "ref37",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/EEM.2017.7982031"
+   },
+   {
+    "key": "ref36",
+    "author": "gordon-bloomfield",
+    "year": "2018",
+    "journal-title": "Toyota Repurposes Hybrid Batteries for Off-Grid Battery Storage System"
+   },
+   {
+    "key": "ref35",
+    "year": "2018",
+    "journal-title": "The Reborn Light"
+   },
+   {
+    "key": "ref34",
+    "author": "martin",
+    "year": "2018",
+    "journal-title": "Nissan GM Give EV Batteries a Second Life"
+   },
+   {
+    "key": "ref28",
+    "author": "margoni",
+    "year": "2018",
+    "journal-title": "UC San Diego Selected as Energy Storage North America 2016 Innovation Award Winner"
+   },
+   {
+    "key": "ref27",
+    "article-title": "Sustainable management of lithium-ion batteries after use in electric vehicles",
+    "author": "richa",
+    "year": "2016"
+   },
+   {
+    "key": "ref29",
+    "author": "colthorpe",
+    "year": "2018",
+    "journal-title": "Bosch BMW Vattenfall Resurrect EV Batteries for &#x2018;second life&#x2019; as Large-Scale Energy Storage"
+   },
+   {
+    "key": "ref20",
+    "year": "2018",
+    "journal-title": "Global Plug-in Sales for Q1-2018"
+   },
+   {
+    "key": "ref22",
+    "article-title": "Battery second use: A framework for evaluating the combination of two value chains",
+    "author": "bowler",
+    "year": "2014"
+   },
+   {
+    "key": "ref21",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/VPPC.2015.7352885"
+   },
+   {
+    "key": "ref24",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/B978-0-12-801456-1.00014-2"
+   },
+   {
+    "key": "ref23",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/ICCEP.2015.7177641"
+   },
+   {
+    "key": "ref101",
+    "year": "2018",
+    "journal-title": "NFPA 1994 vs OSHA"
+   },
+   {
+    "key": "ref26",
+    "year": "2018",
+    "journal-title": "The Second-Life Advantage"
+   },
+   {
+    "key": "ref100",
+    "year": "2018",
+    "journal-title": "Civilian PPE"
+   },
+   {
+    "key": "ref25",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1088/1748-9326/9/9/094004"
+   },
+   {
+    "key": "ref50",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2013.05.040"
+   },
+   {
+    "key": "ref51",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1149/1.1414946"
+   },
+   {
+    "key": "ref150",
+    "first-page": "1",
+    "author": "burke",
+    "year": "2013",
+    "journal-title": "Proc World Electric Vehicle Symp Exhib"
+   },
+   {
+    "key": "ref146",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/ITEC-AP.2017.8080810"
+   },
+   {
+    "key": "ref147",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2012.12.024"
+   },
+   {
+    "key": "ref148",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.4271/2015-01-1306"
+   },
+   {
+    "key": "ref149",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/TIE.2014.2341598"
+   },
+   {
+    "key": "ref59",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/S0378-7753(01)00783-2"
+   },
+   {
+    "key": "ref58",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2014.07.003"
+   },
+   {
+    "key": "ref57",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.tej.2014.01.009"
+   },
+   {
+    "key": "ref56",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2005.01.006"
+   },
+   {
+    "key": "ref55",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.2172/861953"
+   },
+   {
+    "key": "ref54",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1002/er.3575"
+   },
+   {
+    "key": "ref53",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2013.12.099"
+   },
+   {
+    "key": "ref52",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2012.05.004"
+   },
+   {
+    "key": "ref40",
+    "year": "2017"
+   },
+   {
+    "key": "ref4",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2011.02.025"
+   },
+   {
+    "key": "ref3",
+    "year": "1996",
+    "journal-title": "USABC Electric Vehicle Battery Test Procedures Manual Revision 2"
+   },
+   {
+    "key": "ref6",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2011.06.053"
+   },
+   {
+    "key": "ref5",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.enpol.2012.04.017"
+   },
+   {
+    "key": "ref8",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/TVT.2011.2160378"
+   },
+   {
+    "key": "ref49",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2016.12.011"
+   },
+   {
+    "key": "ref7",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2012.07.055"
+   },
+   {
+    "key": "ref9",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2015.01.072"
+   },
+   {
+    "key": "ref46",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/TIE.2009.2030765"
+   },
+   {
+    "key": "ref45",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1007/978-3-540-24822-4_6"
+   },
+   {
+    "key": "ref48",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2014.09.146"
+   },
+   {
+    "key": "ref47",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.3390/ma11020176"
+   },
+   {
+    "key": "ref42",
+    "year": "2010"
+   },
+   {
+    "key": "ref41",
+    "year": "2012"
+   },
+   {
+    "key": "ref44",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.3390/en4040582"
+   },
+   {
+    "key": "ref43",
+    "year": "2018",
+    "journal-title": "Battery Modeling"
+   },
+   {
+    "key": "ref127",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.seta.2014.01.006"
+   },
+   {
+    "key": "ref126",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.egypro.2016.10.113"
+   },
+   {
+    "key": "ref125",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1007/s11367-015-0942-3"
+   },
+   {
+    "key": "ref124",
+    "article-title": "Analysis of the combined vehicle- and post-vehicle-use value of lithium-ion plug-in vehicle propulsion batteries",
+    "author": "williams",
+    "year": "2012"
+   },
+   {
+    "key": "ref73",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/IECON.2013.6699425"
+   },
+   {
+    "key": "ref72",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.apenergy.2015.12.063"
+   },
+   {
+    "key": "ref129",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.procir.2016.01.114"
+   },
+   {
+    "key": "ref71",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2014.08.051"
+   },
+   {
+    "key": "ref128",
+    "year": "2019",
+    "journal-title": "Joint Venture to Promote Second-Life Use for Batteries"
+   },
+   {
+    "key": "ref70",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.rser.2017.06.067"
+   },
+   {
+    "key": "ref76",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1038/natrevmats.2016.13"
+   },
+   {
+    "key": "ref130",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/TSG.2011.2163091"
+   },
+   {
+    "key": "ref77",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.ijhydene.2017.06.043"
+   },
+   {
+    "key": "ref74",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.23919/EPE17ECCEEurope.2017.8099385"
+   },
+   {
+    "key": "ref75",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.13052/jge1904-4720.614"
+   },
+   {
+    "key": "ref133",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/CBI.2016.24"
+   },
+   {
+    "key": "ref134",
+    "author": "burke",
+    "year": "2009",
+    "journal-title": "Performance Charging and Second-use Considerations for Lithium Batteries for Plug-in Electric Vehicles"
+   },
+   {
+    "key": "ref131",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/IS3C.2012.103"
+   },
+   {
+    "key": "ref78",
+    "first-page": "644",
+    "article-title": "ENEA&#x2019;s energy storage activities in the Italian electric system research project",
+    "author": "conte",
+    "year": "2015",
+    "journal-title": "Proc IEEE 15th Int Conf Environ Elect Eng (EEEIC)"
+   },
+   {
+    "key": "ref132",
+    "first-page": "1",
+    "article-title": "A market for trading used electric vehicle batteries-theoretical foundations and information systems",
+    "author": "kl\u00f6r",
+    "year": "2015",
+    "journal-title": "Proc ECIS"
+   },
+   {
+    "key": "ref79",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/ECCE.2016.7855090"
+   },
+   {
+    "key": "ref136",
+    "article-title": "Reuse and Repower: How to save money and clean the grid with second-life electric vehicle batteries",
+    "author": "elkind",
+    "year": "2014"
+   },
+   {
+    "key": "ref135",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.3141/2287-08"
+   },
+   {
+    "key": "ref138",
+    "year": "2019",
+    "journal-title": "The Waste Batteries and Accumulators (Amendment) Regulations 2015"
+   },
+   {
+    "key": "ref137",
+    "first-page": "5",
+    "article-title": "Directive 2013/56/EU of the European parliament and of the council",
+    "volume": "329",
+    "year": "2013",
+    "journal-title": "Off J Eur Union"
+   },
+   {
+    "key": "ref60",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2012.02.068"
+   },
+   {
+    "key": "ref139",
+    "first-page": "22",
+    "article-title": "Directive 2000/53/EC of the European parliament and of the council of 18 September 2000 on end-of life vehicles",
+    "volume": "269",
+    "year": "2000",
+    "journal-title": "Off J Eur Union"
+   },
+   {
+    "key": "ref62",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2017.03.002"
+   },
+   {
+    "key": "ref61",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2013.09.143"
+   },
+   {
+    "key": "ref63",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2010.08.070"
+   },
+   {
+    "key": "ref64",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/S0378-7753(02)00305-1"
+   },
+   {
+    "key": "ref140",
+    "year": "2019",
+    "journal-title": "Mercury-Containing and Rechargeable Battery Management Act"
+   },
+   {
+    "key": "ref65",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2017.03.090"
+   },
+   {
+    "key": "ref141",
+    "year": "2019",
+    "journal-title": "California Rechargeable Battery Recycling Act of 2006 (AB 1125)"
+   },
+   {
+    "key": "ref66",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/S0378-7753(03)00029-6"
+   },
+   {
+    "key": "ref142",
+    "year": "2019",
+    "journal-title": "New York State Rechargeable Battery Law"
+   },
+   {
+    "key": "ref67",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1149/2.0401707jes"
+   },
+   {
+    "key": "ref143",
+    "year": "2019",
+    "journal-title": "Minnesota Session Laws&#x2014;1994 Regular Session"
+   },
+   {
+    "key": "ref68",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2010.11.134"
+   },
+   {
+    "key": "ref144",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/TSTE.2014.2303572"
+   },
+   {
+    "key": "ref2",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.apenergy.2012.11.046"
+   },
+   {
+    "key": "ref69",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/EPE.2016.7695698"
+   },
+   {
+    "key": "ref145",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1002/er.3310"
+   },
+   {
+    "key": "ref1",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1007/s10098-013-0588-4"
+   },
+   {
+    "key": "ref109",
+    "article-title": "Secondary re-use of batteries from electric vehicles for building integrated photo-voltaic (BIPV) applications",
+    "author": "mcloughlin",
+    "year": "2015"
+   },
+   {
+    "key": "ref95",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/EPE.2015.7309434"
+   },
+   {
+    "key": "ref108",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.4271/2012-01-0349"
+   },
+   {
+    "key": "ref94",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/ECCE.2015.7309672"
+   },
+   {
+    "key": "ref107",
+    "article-title": "Technical and economic feasibility of applying used EV batteries in stationary applications",
+    "author": "cready",
+    "year": "2002"
+   },
+   {
+    "key": "ref93",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/ICIT.2015.7125532"
+   },
+   {
+    "key": "ref106",
+    "year": "2019",
+    "journal-title": "U S to Research Recycling Of Lithium-Ion Batteries"
+   },
+   {
+    "key": "ref92",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/TIA.2016.2593425"
+   },
+   {
+    "key": "ref105",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1007/s11367-015-0959-7"
+   },
+   {
+    "key": "ref91",
+    "first-page": "1107",
+    "article-title": "Influence of selective harmonic elimination technique of multi-level DC/DC converter on second-life battery performances",
+    "author": "monem",
+    "year": "2013",
+    "journal-title": "Proc Int Conf Renew Energy Res Appl (ICRERA)"
+   },
+   {
+    "key": "ref104",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1111/jiec.12607"
+   },
+   {
+    "key": "ref90",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/EPE.2015.7311727"
+   },
+   {
+    "key": "ref103",
+    "year": "2018",
+    "journal-title": "1926 441&#x2014;Batteries and Battery Charging"
+   },
+   {
+    "key": "ref102",
+    "year": "2018",
+    "journal-title": "Battery Manufacturing"
+   },
+   {
+    "key": "ref111",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.ijepes.2016.03.006"
+   },
+   {
+    "key": "ref112",
+    "article-title": "Innovative business cases for energy storage in a restructured electricity marketplace, a study for the doe energy storage systems program",
+    "author": "iannucci",
+    "year": "2005"
+   },
+   {
+    "key": "ref110",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.enpol.2014.04.016"
+   },
+   {
+    "key": "ref98",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/EnergyTech.2013.6645307"
+   },
+   {
+    "key": "ref99",
+    "year": "2018",
+    "journal-title": "Levels of PPE"
+   },
+   {
+    "key": "ref96",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.electacta.2011.02.037"
+   },
+   {
+    "key": "ref97",
+    "year": "2018",
+    "journal-title": "About NFPA"
+   },
+   {
+    "key": "ref10",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.3390/en10081217"
+   },
+   {
+    "key": "ref11",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.resconrec.2013.11.008"
+   },
+   {
+    "key": "ref12",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1049/ic.2013.0139"
+   },
+   {
+    "key": "ref13",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.2172/1171780"
+   },
+   {
+    "key": "ref14",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jpowsour.2015.04.097"
+   },
+   {
+    "key": "ref15",
+    "year": "2018",
+    "journal-title": "Long Live the Battery"
+   },
+   {
+    "key": "ref118",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/TSTE.2018.2800689"
+   },
+   {
+    "key": "ref16",
+    "year": "2018",
+    "journal-title": "Your Battery Goes Further"
+   },
+   {
+    "key": "ref82",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.est.2016.11.002"
+   },
+   {
+    "key": "ref117",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.3390/batteries3010010"
+   },
+   {
+    "key": "ref17",
+    "year": "2018",
+    "journal-title": "LEAF Warranty Information Booklet"
+   },
+   {
+    "key": "ref81",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/INNOCIT.2017.8319153"
+   },
+   {
+    "key": "ref18",
+    "year": "2018",
+    "journal-title": "Vehicle Warranty |Model 3"
+   },
+   {
+    "key": "ref84",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/JESTPE.2015.2460334"
+   },
+   {
+    "key": "ref119",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/TPEL.2013.2256469"
+   },
+   {
+    "key": "ref19",
+    "year": "2019",
+    "journal-title": "BU-1003 Electric Vehicle (EV)"
+   },
+   {
+    "key": "ref83",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/SmartGridComm.2015.7436321"
+   },
+   {
+    "key": "ref114",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1049/ip-gtd:20020277"
+   },
+   {
+    "key": "ref113",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/IEVC.2012.6183276"
+   },
+   {
+    "key": "ref116",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.egypro.2015.07.226"
+   },
+   {
+    "key": "ref80",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jclepro.2016.09.046"
+   },
+   {
+    "key": "ref115",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/EUROCON.2013.6625141"
+   },
+   {
+    "key": "ref120",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.3390/en11071651"
+   },
+   {
+    "key": "ref89",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/PEDG.2012.6254072"
+   },
+   {
+    "key": "ref121",
+    "author": "shokrzadeh",
+    "year": "2012",
+    "journal-title": "Repurposing batteries of plug-in electric vehicles to support renewable energy penetration in the electric grid"
+   },
+   {
+    "key": "ref122",
+    "author": "gear",
+    "year": "2019",
+    "journal-title": "NISSAN LEAF"
+   },
+   {
+    "key": "ref123",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1007/s11367-015-0918-3"
+   },
+   {
+    "key": "ref85",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/VPPC.2011.6043059"
+   },
+   {
+    "key": "ref86",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/MCOM.2016.7565258"
+   },
+   {
+    "key": "ref87",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1049/cp.2014.0256"
+   },
+   {
+    "key": "ref88",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1049/cp.2012.0353"
+   }
+  ],
+  "container-title": [
+   "IEEE Access"
+  ],
+  "original-title": [],
+  "link": [
+   {
+    "URL": "http://xplorestaging.ieee.org/ielx7/6287639/8600701/08718282.pdf?arnumber=8718282",
+    "content-type": "unspecified",
+    "content-version": "vor",
+    "intended-application": "similarity-checking"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2022,
+     1,
+     12
+    ]
+   ],
+   "date-time": "2022-01-12T11:54:29Z",
+   "timestamp": 1641988469000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://ieeexplore.ieee.org/document/8718282/"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "references-count": 150,
+  "URL": "https://doi.org/10.1109/access.2019.2917859",
+  "relation": {},
+  "ISSN": [
+   "2169-3536"
+  ],
+  "issn-type": [
+   {
+    "value": "2169-3536",
+    "type": "electronic"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  }
+ }
+}

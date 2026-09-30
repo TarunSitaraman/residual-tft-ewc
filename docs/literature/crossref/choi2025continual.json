@@ -1,0 +1,290 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     2,
+     11
+    ]
+   ],
+   "date-time": "2026-02-11T01:19:39Z",
+   "timestamp": 1770772779132,
+   "version": "3.50.0"
+  },
+  "reference-count": 11,
+  "publisher": "IEEE",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       11,
+       4
+      ]
+     ],
+     "date-time": "2025-11-04T00:00:00Z",
+     "timestamp": 1762214400000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-029"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       11,
+       4
+      ]
+     ],
+     "date-time": "2025-11-04T00:00:00Z",
+     "timestamp": 1762214400000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-037"
+   }
+  ],
+  "funder": [
+   {
+    "DOI": "10.13039/501100017026",
+    "name": "National Fire Agency",
+    "doi-asserted-by": "publisher",
+    "award": [
+     "20026197"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "20026197"
+      ]
+     }
+    ],
+    "id": [
+     {
+      "id": "10.13039/501100017026",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [],
+   "crossmark-restriction": false
+  },
+  "short-container-title": [],
+  "published-print": {
+   "date-parts": [
+    [
+     2025,
+     11,
+     4
+    ]
+   ]
+  },
+  "DOI": "10.23919/iccas66577.2025.11301258",
+  "type": "proceedings-article",
+  "created": {
+   "date-parts": [
+    [
+     2025,
+     12,
+     29
+    ]
+   ],
+   "date-time": "2025-12-29T18:36:03Z",
+   "timestamp": 1767033363000
+  },
+  "page": "1-6",
+  "source": "Crossref",
+  "is-referenced-by-count": 0,
+  "title": [
+   "Robust State-of-Health Estimation for Lithium-Ion Batteries Using Continual Learning Under Variable Temperature Conditions"
+  ],
+  "prefix": "10.23919",
+  "author": [
+   {
+    "given": "Jimin",
+    "family": "Choi",
+    "sequence": "first",
+    "affiliation": [
+     {
+      "name": "Graduate School of Artificial Intelligence, Pohang University of Science and Technology,Pohang,Republic of Korea,37673"
+     }
+    ],
+    "role": [
+     {
+      "role": "author",
+      "vocabulary": "crossref"
+     }
+    ]
+   },
+   {
+    "given": "Soohee",
+    "family": "Han",
+    "sequence": "additional",
+    "affiliation": [
+     {
+      "name": "Pohang University of Science and Technology,Department of Electrical Engineering and Convergence IT Engineering,Pohang,Republic of Korea,37673"
+     }
+    ],
+    "role": [
+     {
+      "role": "author",
+      "vocabulary": "crossref"
+     }
+    ]
+   }
+  ],
+  "member": "263",
+  "reference": [
+   {
+    "key": "ref1",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.3390/su13095166"
+   },
+   {
+    "key": "ref2",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1109/ACCESS.2019.2932719"
+   },
+   {
+    "key": "ref3",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.jclepro.2021.128015"
+   },
+   {
+    "key": "ref4",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.est.2021.103077"
+   },
+   {
+    "key": "ref5",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1039/d2ee01676a"
+   },
+   {
+    "key": "ref6",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.xcrp.2023.101743"
+   },
+   {
+    "key": "ref7",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.47760/ijcsmc.2023.v12i05.001",
+    "article-title": "Battery Management System for Analysing Accurate Real Time Battery Condition using Machine Learning",
+    "volume": "12",
+    "author": "Arunadevi",
+    "year": "2023",
+    "journal-title": "Int. J. Comput. Sci. Mob. Comput"
+   },
+   {
+    "key": "ref8",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1016/j.procir.2022.09.091"
+   },
+   {
+    "key": "ref9",
+    "article-title": "Convolutional LSTM network: A machine learning approach for precipitation nowcasting",
+    "volume": "28",
+    "author": "Xingjian",
+    "year": "2015",
+    "journal-title": "Advances in neural information processing systems"
+   },
+   {
+    "key": "ref10",
+    "volume-title": "Battery Data Set, NASA ames prognostics data repository",
+    "author": "Sahaand",
+    "year": "2007"
+   },
+   {
+    "key": "ref11",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1007/s43236-024-00851-z"
+   }
+  ],
+  "event": {
+   "name": "2025 25th International Conference on Control, Automation and Systems (ICCAS)",
+   "location": "Incheon, Korea, Republic of",
+   "start": {
+    "date-parts": [
+     [
+      2025,
+      11,
+      4
+     ]
+    ]
+   },
+   "end": {
+    "date-parts": [
+     [
+      2025,
+      11,
+      7
+     ]
+    ]
+   }
+  },
+  "container-title": [
+   "2025 25th International Conference on Control, Automation and Systems (ICCAS)"
+  ],
+  "original-title": [],
+  "link": [
+   {
+    "URL": "http://xplorestaging.ieee.org/ielx8/11301089/11301081/11301258.pdf?arnumber=11301258",
+    "content-type": "unspecified",
+    "content-version": "vor",
+    "intended-application": "similarity-checking"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2026,
+     2,
+     10
+    ]
+   ],
+   "date-time": "2026-02-10T21:01:46Z",
+   "timestamp": 1770757306000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://ieeexplore.ieee.org/document/11301258/"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2025,
+     11,
+     4
+    ]
+   ]
+  },
+  "references-count": 11,
+  "URL": "https://doi.org/10.23919/iccas66577.2025.11301258",
+  "relation": {},
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2025,
+     11,
+     4
+    ]
+   ]
+  }
+ }
+}

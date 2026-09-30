@@ -1,0 +1,421 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T14:13:47Z",
+   "timestamp": 1790777627175,
+   "version": "4.1.0"
+  },
+  "reference-count": 25,
+  "publisher": "Elsevier BV",
+  "issue": "4",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2006,
+       10,
+       1
+      ]
+     ],
+     "date-time": "2006-10-01T00:00:00Z",
+     "timestamp": 1159660800000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   }
+  ],
+  "content-domain": {
+   "domain": [],
+   "crossmark-restriction": false
+  },
+  "short-container-title": [
+   "International Journal of Forecasting"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2006,
+     10
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.ijforecast.2006.03.001",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2006,
+     5,
+     25
+    ]
+   ],
+   "date-time": "2006-05-25T20:04:53Z",
+   "timestamp": 1148587493000
+  },
+  "page": "679-688",
+  "source": "Crossref",
+  "is-referenced-by-count": 4762,
+  "title": [
+   "Another look at measures of forecast accuracy"
+  ],
+  "prefix": "10.1016",
+  "volume": "22",
+  "author": [
+   {
+    "given": "Rob J.",
+    "family": "Hyndman",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Anne B.",
+    "family": "Koehler",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib1",
+    "doi-asserted-by": "crossref",
+    "first-page": "99",
+    "DOI": "10.1016/0169-2070(92)90010-7",
+    "article-title": "A commentary on error measures",
+    "volume": "8",
+    "author": "Ahlburg",
+    "year": "1992",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib2",
+    "series-title": "Principles of forecasting: A handbook for researchers and practitioners",
+    "article-title": "Evaluating forecasting methods, Chapter 14",
+    "author": "Armstrong",
+    "year": "2001"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib3",
+    "doi-asserted-by": "crossref",
+    "first-page": "69",
+    "DOI": "10.1016/0169-2070(92)90008-W",
+    "article-title": "Error measures for generalizing about forecasting methods: Empirical comparisons",
+    "volume": "8",
+    "author": "Armstrong",
+    "year": "1992",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib4",
+    "doi-asserted-by": "crossref",
+    "first-page": "521",
+    "DOI": "10.1016/S0169-2070(00)00066-2",
+    "article-title": "The theta model: A decomposition approach to forecasting",
+    "volume": "16",
+    "author": "Assimakopoulos",
+    "year": "2000",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib5",
+    "doi-asserted-by": "crossref",
+    "first-page": "239",
+    "DOI": "10.1016/j.ijforecast.2005.08.002",
+    "article-title": "Exponential smoothing model selection for forecasting",
+    "volume": "22",
+    "author": "Billah",
+    "year": "2006",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib6",
+    "series-title": "Forecasting, time series and regression: An applied approach",
+    "author": "Bowerman",
+    "year": "2004"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib7",
+    "doi-asserted-by": "crossref",
+    "first-page": "515",
+    "DOI": "10.1016/0169-2070(88)90127-6",
+    "article-title": "Apples, oranges and mean square error",
+    "volume": "4",
+    "author": "Chatfield",
+    "year": "1988",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib9",
+    "unstructured": "Coleman, C. D., & Swanson, D. A. (2004). On MAPE-R as a measure of estimation and forecast accuracy. Working paper. Center for Population Studies, University of Mississippi. Accessed 18 May 2005. http://www.olemiss.edu/depts/population_studies/WorkingPapers.html."
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib11",
+    "series-title": "Elements of forecasting",
+    "author": "Diebold",
+    "year": "2001"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib12",
+    "doi-asserted-by": "crossref",
+    "first-page": "81",
+    "DOI": "10.1016/0169-2070(92)90009-X",
+    "article-title": "The evaluation of extrapolative forecasting methods",
+    "volume": "8",
+    "author": "Fildes",
+    "year": "1992",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib13",
+    "doi-asserted-by": "crossref",
+    "first-page": "490",
+    "DOI": "10.1287/mnsc.36.4.490",
+    "article-title": "Evaluating forecast performance in an inventory control system",
+    "volume": "36",
+    "author": "Gardner",
+    "year": "1990",
+    "journal-title": "Management Science"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib14",
+    "doi-asserted-by": "crossref",
+    "first-page": "405",
+    "DOI": "10.1016/S0169-2070(99)00007-2",
+    "article-title": "On the asymmetry of the symmetric MAPE",
+    "volume": "14",
+    "author": "Goodwin",
+    "year": "1999",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib16",
+    "series-title": "Business forecasting",
+    "author": "Hanke",
+    "year": "1995"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib28",
+    "doi-asserted-by": "crossref",
+    "first-page": "287",
+    "DOI": "10.1016/S0169-2070(01)00143-1",
+    "article-title": "Unmasking the Theta Method",
+    "volume": "19",
+    "author": "Hyndman",
+    "year": "2003",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/j.ijforecast.2006.03.001_bib17",
+    "doi-asserted-by": "crossref",
+    "first-page": "439",
+    "DOI": "10.1016/S0169-2070(01)00110-8",
+    "article-title": "A state space framework for automatic forecasting using exponential smoothing methods",
+    "volume": "18",
+    "author": "Hyndman",
+    "year": "2002",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib18",
+    "doi-asserted-by": "crossref",
+    "first-page": "537",
+    "DOI": "10.1016/S0169-2070(01)00119-4",
+    "article-title": "The asymmetry of the sAPE measure and other comments on the M3-competition",
+    "volume": "17",
+    "author": "Koehler",
+    "year": "2001",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib19",
+    "doi-asserted-by": "crossref",
+    "first-page": "3",
+    "DOI": "10.1016/j.ijforecast.2004.02.003",
+    "article-title": "Judgmental forecasting in the presence of loss functions",
+    "volume": "21",
+    "author": "Lawrence",
+    "year": "2005",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib20",
+    "doi-asserted-by": "crossref",
+    "first-page": "527",
+    "DOI": "10.1016/0169-2070(93)90079-3",
+    "article-title": "Accuracy measures: Theoretical and practical concerns",
+    "volume": "9",
+    "author": "Makridakis",
+    "year": "1993",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib21",
+    "doi-asserted-by": "crossref",
+    "first-page": "111",
+    "DOI": "10.1002/for.3980010202",
+    "article-title": "The accuracy of extrapolation (time series) methods: Results of a forecasting competition",
+    "volume": "1",
+    "author": "Makridakis",
+    "year": "1982",
+    "journal-title": "Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib22",
+    "doi-asserted-by": "crossref",
+    "first-page": "451",
+    "DOI": "10.1016/S0169-2070(00)00057-1",
+    "article-title": "The M3-competition: Results, conclusions and implications",
+    "volume": "16",
+    "author": "Makridakis",
+    "year": "2000",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib23",
+    "series-title": "Forecasting: Methods and applications",
+    "author": "Makridakis",
+    "year": "1998"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib27",
+    "doi-asserted-by": "crossref",
+    "first-page": "193",
+    "DOI": "10.2307/2648121",
+    "article-title": "A note on the measurement of accuracy for subnational demographic estimates",
+    "volume": "2",
+    "author": "Swanson",
+    "year": "2000",
+    "journal-title": "Demography"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib24",
+    "series-title": "Applied economic forecasting",
+    "author": "Theil",
+    "year": "1966"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib25",
+    "doi-asserted-by": "crossref",
+    "first-page": "219",
+    "DOI": "10.1016/0169-2070(90)90007-X",
+    "article-title": "An MSE statistic for comparing forecast accuracy across series",
+    "volume": "6",
+    "author": "Thompson",
+    "year": "1990",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "10.1016/j.ijforecast.2006.03.001_bib26",
+    "series-title": "Analysis of financial time series",
+    "author": "Tsay",
+    "year": "2002"
+   }
+  ],
+  "container-title": [
+   "International Journal of Forecasting"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0169207006000239?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0169207006000239?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2019,
+     1,
+     16
+    ]
+   ],
+   "date-time": "2019-01-16T04:21:15Z",
+   "timestamp": 1547612475000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0169207006000239"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2006,
+     10
+    ]
+   ]
+  },
+  "references-count": 25,
+  "journal-issue": {
+   "issue": "4",
+   "published-print": {
+    "date-parts": [
+     [
+      2006,
+      10
+     ]
+    ]
+   }
+  },
+  "alternative-id": [
+   "S0169207006000239"
+  ],
+  "URL": "https://doi.org/10.1016/j.ijforecast.2006.03.001",
+  "relation": {},
+  "ISSN": [
+   "0169-2070"
+  ],
+  "issn-type": [
+   {
+    "value": "0169-2070",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2006,
+     10
+    ]
+   ]
+  }
+ }
+}

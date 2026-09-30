@@ -1,0 +1,1803 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     24
+    ]
+   ],
+   "date-time": "2026-09-24T16:56:34Z",
+   "timestamp": 1790268994568,
+   "version": "4.1.0"
+  },
+  "reference-count": 187,
+  "publisher": "Elsevier",
+  "isbn-type": [
+   {
+    "value": "9780443157554",
+    "type": "print"
+   }
+  ],
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       1,
+       1
+      ]
+     ],
+     "date-time": "2025-01-01T00:00:00Z",
+     "timestamp": 1735689600000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       1,
+       1
+      ]
+     ],
+     "date-time": "2025-01-01T00:00:00Z",
+     "timestamp": 1735689600000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/legal/tdmrep-license"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       1,
+       1
+      ]
+     ],
+     "date-time": "2025-01-01T00:00:00Z",
+     "timestamp": 1735689600000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-017"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       1,
+       1
+      ]
+     ],
+     "date-time": "2025-01-01T00:00:00Z",
+     "timestamp": 1735689600000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-037"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       1,
+       1
+      ]
+     ],
+     "date-time": "2025-01-01T00:00:00Z",
+     "timestamp": 1735689600000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-012"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       1,
+       1
+      ]
+     ],
+     "date-time": "2025-01-01T00:00:00Z",
+     "timestamp": 1735689600000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-029"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       1,
+       1
+      ]
+     ],
+     "date-time": "2025-01-01T00:00:00Z",
+     "timestamp": 1735689600000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-004"
+   }
+  ],
+  "content-domain": {
+   "domain": [],
+   "crossmark-restriction": false
+  },
+  "short-container-title": [],
+  "published-print": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1016/b978-0-443-15754-7.00073-0",
+  "type": "book-chapter",
+  "created": {
+   "date-parts": [
+    [
+     2024,
+     12,
+     28
+    ]
+   ],
+   "date-time": "2024-12-28T22:34:23Z",
+   "timestamp": 1735425263000
+  },
+  "page": "153-168",
+  "source": "Crossref",
+  "is-referenced-by-count": 50,
+  "title": [
+   "Continual learning and catastrophic forgetting"
+  ],
+  "prefix": "10.1016",
+  "author": [
+   {
+    "ORCID": "https://orcid.org/0000-0002-5239-5660",
+    "authenticated-orcid": false,
+    "given": "Gido M.",
+    "family": "van de Ven",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-4462-5224",
+    "authenticated-orcid": false,
+    "given": "Nicholas",
+    "family": "Soures",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Dhireesha",
+    "family": "Kudithipudi",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "issue": "5",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0010",
+    "doi-asserted-by": "crossref",
+    "first-page": "387",
+    "DOI": "10.1038/nrn2356",
+    "article-title": "Metaplasticity: Tuning synapses and networks for plasticity",
+    "volume": "9",
+    "author": "Abraham",
+    "year": "2008",
+    "journal-title": "Nature Reviews Neuroscience"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0015",
+    "article-title": "Uncertainty-based continual learning with adaptive regularization",
+    "volume": "vol. 32",
+    "author": "Ahn",
+    "year": "2019"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0020",
+    "doi-asserted-by": "crossref",
+    "first-page": "991",
+    "DOI": "10.1152/physrev.00004.2014",
+    "article-title": "Regulation and function of adult neurogenesis: From genes to cognition",
+    "volume": "94",
+    "author": "Aimone",
+    "year": "2014",
+    "journal-title": "Physiological Reviews"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0025",
+    "first-page": "3366",
+    "article-title": "Expert gate: Lifelong learning with a network of experts",
+    "author": "Aljundi",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0030",
+    "first-page": "139",
+    "article-title": "Memory aware synapses: Learning what (not) to forget",
+    "author": "Aljundi",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0035",
+    "article-title": "Online continual learning with maximally interfered retrieval",
+    "volume": "vol. 32",
+    "author": "Aljundi",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0040",
+    "first-page": "11254",
+    "article-title": "Task-free continual learning",
+    "author": "Aljundi",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0045",
+    "article-title": "Gradient based sample selection for online continual learning",
+    "volume": "vol. 32",
+    "author": "Aljundi",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0050",
+    "first-page": "1043",
+    "article-title": "Retroactive interference: Forgetting as an interruption of memory consolidation",
+    "volume": "25",
+    "author": "Alves",
+    "year": "2017",
+    "journal-title": "Trends in Psychology"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0055",
+    "article-title": "Learning fast, learning slow: A general continual learning method based on complementary learning system",
+    "author": "Arani",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0060",
+    "first-page": "21592",
+    "article-title": "Generative vs. discriminative: Rethinking the meta-continual learning",
+    "volume": "vol. 34",
+    "author": "Banayeeanzade",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0065",
+    "author": "Banerjee"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0070",
+    "doi-asserted-by": "crossref",
+    "first-page": "38",
+    "DOI": "10.1016/j.neunet.2020.12.003",
+    "article-title": "A comprehensive study of class incremental learning algorithms for visual tasks",
+    "volume": "135",
+    "author": "Belouadah",
+    "year": "2021",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0075",
+    "article-title": "Measuring and regularizing networks in function space",
+    "author": "Benjamin",
+    "year": "2019"
+   },
+   {
+    "issue": "12",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0080",
+    "doi-asserted-by": "crossref",
+    "first-page": "1697",
+    "DOI": "10.1038/nn.4401",
+    "article-title": "Computational principles of synaptic memory consolidation",
+    "volume": "19",
+    "author": "Benna",
+    "year": "2016",
+    "journal-title": "Nature Neuroscience"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0085",
+    "doi-asserted-by": "crossref",
+    "first-page": "31",
+    "DOI": "10.1016/j.conb.2013.11.006",
+    "article-title": "Molecular computation in neurons: A modeling perspective",
+    "volume": "25",
+    "author": "Bhalla",
+    "year": "2014",
+    "journal-title": "Current Opinion in Neurobiology"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0090",
+    "doi-asserted-by": "crossref",
+    "first-page": "164",
+    "DOI": "10.1152/advan.00001.2019",
+    "article-title": "Forgetting as the friend of learning: Implications for teaching and self-regulated learning",
+    "volume": "43",
+    "author": "Bjork",
+    "year": "2019",
+    "journal-title": "Advances in Physiology Education"
+   },
+   {
+    "issue": "5",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0095",
+    "doi-asserted-by": "crossref",
+    "first-page": "5497",
+    "DOI": "10.1109/TPAMI.2022.3206549",
+    "article-title": "Class-incremental continual learning into the eXtended DER-Verse",
+    "volume": "45",
+    "author": "Boschini",
+    "year": "2023",
+    "journal-title": "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0100",
+    "author": "Bubeck"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0105",
+    "first-page": "15920",
+    "article-title": "Dark experience for general continual learning: A strong, simple baseline",
+    "volume": "vol. 33",
+    "author": "Buzzega",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0110",
+    "article-title": "Efficient lifelong learning with A-GEM",
+    "author": "Chaudhry",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0115",
+    "author": "Chaudhry"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0120",
+    "first-page": "17466",
+    "article-title": "Mitigating forgetting in online continual learning via instance-aware parameterization",
+    "volume": "vol. 33",
+    "author": "Chen",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0125",
+    "first-page": "16481",
+    "article-title": "GAN memory with no forgetting",
+    "volume": "vol. 33",
+    "author": "Cong",
+    "year": "2020"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0130",
+    "doi-asserted-by": "crossref",
+    "first-page": "490",
+    "DOI": "10.1016/j.neuron.2017.05.039",
+    "article-title": "The biology of forgetting\u2014A perspective",
+    "volume": "95",
+    "author": "Davis",
+    "year": "2017",
+    "journal-title": "Neuron"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0135",
+    "first-page": "8250",
+    "article-title": "Continual prototype evolution: Learning online from non-stationary data streams",
+    "author": "De Lange",
+    "year": "2021"
+   },
+   {
+    "issue": "7",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0140",
+    "first-page": "3366",
+    "article-title": "A continual learning survey: Defying forgetting in classification tasks",
+    "volume": "44",
+    "author": "De Lange",
+    "year": "2022",
+    "journal-title": "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0145",
+    "first-page": "248",
+    "article-title": "ImageNet: A large-scale hierarchical image database",
+    "author": "Deng",
+    "year": "2009"
+   },
+   {
+    "issue": "8",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0150",
+    "doi-asserted-by": "crossref",
+    "first-page": "7457",
+    "DOI": "10.1109/JIOT.2020.2984887",
+    "article-title": "Edge intelligence: The confluence of edge computing and artificial intelligence",
+    "volume": "7",
+    "author": "Deng",
+    "year": "2020",
+    "journal-title": "IEEE Internet of Things Journal"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0155",
+    "first-page": "18710",
+    "article-title": "Flattening sharpness for dynamic gradient projection memory benefits continual learning",
+    "volume": "vol. 34",
+    "author": "Deng",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0160",
+    "author": "D\u00edaz-Rodr\u00edguez"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0165",
+    "doi-asserted-by": "crossref",
+    "first-page": "431",
+    "DOI": "10.1038/s41583-023-00705-w",
+    "article-title": "The neuroconnectionist research programme",
+    "volume": "24",
+    "author": "Doerig",
+    "year": "2023",
+    "journal-title": "Nature Reviews Neuroscience"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0170",
+    "doi-asserted-by": "crossref",
+    "first-page": "768",
+    "DOI": "10.1038/s41586-024-07711-7",
+    "article-title": "Loss of plasticity in deep continual learning",
+    "volume": "632",
+    "author": "Dohare",
+    "year": "2024",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0175",
+    "first-page": "86",
+    "article-title": "PODNet: Pooled outputs distillation for small-tasks incremental learning",
+    "author": "Douillard",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0180",
+    "first-page": "526",
+    "article-title": "Neurogenesis deep learning: Extending deep networks to accommodate new classes",
+    "author": "Draelos",
+    "year": "2017"
+   },
+   {
+    "issue": "7",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0185",
+    "first-page": "2121",
+    "article-title": "Adaptive subgradient methods for online learning and stochastic optimization",
+    "volume": "12",
+    "author": "Duchi",
+    "year": "2011",
+    "journal-title": "Journal of Machine Learning Research"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0190",
+    "doi-asserted-by": "crossref",
+    "first-page": "e1004128",
+    "DOI": "10.1371/journal.pcbi.1004128",
+    "article-title": "Neural modularity helps organisms evolve to learn new skills without forgetting old skills",
+    "volume": "11",
+    "author": "Ellefsen",
+    "year": "2015",
+    "journal-title": "PLoS Computational Biology"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0195",
+    "first-page": "3762",
+    "article-title": "Orthogonal gradient descent for continual learning",
+    "author": "Farajtabar",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0200",
+    "author": "Farquhar"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0205",
+    "author": "Fernando"
+   },
+   {
+    "issue": "44",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0210",
+    "doi-asserted-by": "crossref",
+    "first-page": "E10313",
+    "DOI": "10.1073/pnas.1800755115",
+    "article-title": "Comparing continual task learning in minds and machines",
+    "volume": "115",
+    "author": "Flesch",
+    "year": "2018",
+    "journal-title": "Proceedings of the National Academy of Sciences"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0215",
+    "doi-asserted-by": "crossref",
+    "first-page": "e1010808",
+    "DOI": "10.1371/journal.pcbi.1010808",
+    "article-title": "Modelling continual learning in humans with Hebbian context gating and exponentially decaying task signals",
+    "volume": "19",
+    "author": "Flesch",
+    "year": "2023",
+    "journal-title": "PLoS Computational Biology"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0220",
+    "doi-asserted-by": "crossref",
+    "first-page": "128",
+    "DOI": "10.1016/S1364-6613(99)01294-2",
+    "article-title": "Catastrophic forgetting in connectionist networks",
+    "volume": "3",
+    "author": "French",
+    "year": "1999",
+    "journal-title": "Trends in Cognitive Sciences"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0225",
+    "doi-asserted-by": "crossref",
+    "first-page": "599",
+    "DOI": "10.1016/j.neuron.2005.02.001",
+    "article-title": "Cascade models of synaptically stored memories",
+    "volume": "45",
+    "author": "Fusi",
+    "year": "2005",
+    "journal-title": "Neuron"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0230",
+    "first-page": "11483",
+    "article-title": "A unified continual learning framework with general parameter-efficient tuning",
+    "author": "Gao",
+    "year": "2023"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0235",
+    "series-title": "Continual learning via neural pruning",
+    "author": "Golkar",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0240",
+    "first-page": "3867",
+    "article-title": "Continually learning self-supervised representations with projected functional regularization",
+    "author": "Gomez-Villa",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0245",
+    "author": "Goodfellow"
+   },
+   {
+    "issue": "5",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0250",
+    "doi-asserted-by": "crossref",
+    "first-page": "529",
+    "DOI": "10.1037/0033-295X.89.5.529",
+    "article-title": "Processing of expected and unexpected events during conditioning and attention: A psychophysiological theory",
+    "volume": "89",
+    "author": "Grossberg",
+    "year": "1982",
+    "journal-title": "Psychological Review"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0255",
+    "first-page": "11878",
+    "article-title": "Dealing with cross-task class discrimination in online continual learning",
+    "author": "Guo",
+    "year": "2023"
+   },
+   {
+    "issue": "12",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0260",
+    "doi-asserted-by": "crossref",
+    "first-page": "1028",
+    "DOI": "10.1016/j.tics.2020.09.004",
+    "article-title": "Embracing change: Continual learning in deep neural networks",
+    "volume": "24",
+    "author": "Hadsell",
+    "year": "2020",
+    "journal-title": "Trends in Cognitive Sciences"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0265",
+    "doi-asserted-by": "crossref",
+    "first-page": "111",
+    "DOI": "10.1016/j.tics.2013.01.001",
+    "article-title": "Decay happens: The role of active forgetting in memory",
+    "volume": "17",
+    "author": "Hardt",
+    "year": "2013",
+    "journal-title": "Trends in Cognitive Sciences"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0270",
+    "first-page": "220",
+    "article-title": "Lifelong machine learning with deep streaming linear discriminant analysis",
+    "author": "Hayes",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0275",
+    "first-page": "466",
+    "article-title": "REMIND your neural network to prevent catastrophic forgetting",
+    "author": "Hayes",
+    "year": "2020"
+   },
+   {
+    "issue": "7889",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0280",
+    "doi-asserted-by": "crossref",
+    "first-page": "489",
+    "DOI": "10.1038/s41586-021-04129-3",
+    "article-title": "Contextual inference underlies the learning of sensorimotor repertoires",
+    "volume": "600",
+    "author": "Heald",
+    "year": "2021",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0285",
+    "first-page": "437",
+    "article-title": "Class-incremental learning with repetition",
+    "volume": "vol. 232",
+    "author": "Hemati",
+    "year": "2023"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb941",
+    "doi-asserted-by": "crossref",
+    "first-page": "106920",
+    "DOI": "10.1016/j.neunet.2024.106920",
+    "article-title": "Continual learning in the presence of repetition",
+    "volume": "183",
+    "author": "Hemati",
+    "year": "2025",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0295",
+    "first-page": "14135",
+    "article-title": "Posterior meta-replay for continual learning",
+    "volume": "vol. 34",
+    "author": "Henning",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0300",
+    "first-page": "1921",
+    "article-title": "A comprehensive overhaul of feature distillation",
+    "author": "Heo",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0305",
+    "first-page": "37",
+    "article-title": "Two complementary perspectives to continual learning: Ask not only what to optimize, but also how",
+    "volume": "vol. 249",
+    "author": "Hess",
+    "year": "2023"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0310",
+    "first-page": "77",
+    "article-title": "Distributed representations",
+    "author": "Hinton",
+    "year": "1986"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0315",
+    "author": "Hinton"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0320",
+    "author": "Hsu"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0325",
+    "article-title": "Compacting, picking and growing for unforgetting continual learning",
+    "volume": "vol. 32",
+    "author": "Hung",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0330",
+    "author": "Huyen"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0335",
+    "article-title": "BiRT: Bio-inspired replay in vision transformers for continual learning",
+    "author": "Jeeveswaran",
+    "year": "2023"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0340",
+    "first-page": "29193",
+    "article-title": "Gradient-based editing of memory examples for online task-free continual learning",
+    "volume": "vol. 34",
+    "author": "Jin",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0345",
+    "first-page": "7452",
+    "article-title": "Energy-based latent aligner for incremental learning",
+    "author": "Joseph",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0350",
+    "first-page": "3647",
+    "article-title": "Continual learning with node-importance based adaptive group sparse regularization",
+    "volume": "vol. 33",
+    "author": "Jung",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0355",
+    "first-page": "28067",
+    "article-title": "Natural continual learning: Success is a journey, not (just) a destination",
+    "volume": "vol. 34",
+    "author": "Kao",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0360",
+    "first-page": "2497",
+    "article-title": "Continual reinforcement learning with complex synapses",
+    "author": "Kaplanis",
+    "year": "2018"
+   },
+   {
+    "issue": "6",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0365",
+    "doi-asserted-by": "crossref",
+    "first-page": "884",
+    "DOI": "10.3390/e25060884",
+    "article-title": "On sequential Bayesian inference for continual learning",
+    "volume": "25",
+    "author": "Kessler",
+    "year": "2023",
+    "journal-title": "Entropy"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0370",
+    "article-title": "Approximate inference turns deep networks into Gaussian processes",
+    "volume": "vol. 32",
+    "author": "Khan",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0375",
+    "first-page": "3496",
+    "article-title": "Looking through the past: Better knowledge retention for generative replay in continual learning",
+    "author": "Khan",
+    "year": "2023"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0380",
+    "first-page": "5065",
+    "article-title": "A theoretical study on solving continual learning",
+    "volume": "vol. 35",
+    "author": "Kim",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0385",
+    "author": "Kingma"
+   },
+   {
+    "issue": "13",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0390",
+    "doi-asserted-by": "crossref",
+    "first-page": "3521",
+    "DOI": "10.1073/pnas.1611835114",
+    "article-title": "Overcoming catastrophic forgetting in neural networks",
+    "volume": "114",
+    "author": "Kirkpatrick",
+    "year": "2017",
+    "journal-title": "Proceedings of the National Academy of Sciences"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0395",
+    "article-title": "Learn the time to learn: Replay scheduling in continual learning",
+    "author": "Klasson",
+    "year": "2023",
+    "journal-title": "Transactions on Machine Learning Research"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0400",
+    "author": "Krawczyk"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0405",
+    "series-title": "MSc Thesis",
+    "article-title": "Learning Multiple Layers of Features From Tiny Images",
+    "author": "Krizhevsky",
+    "year": "2009"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0410",
+    "doi-asserted-by": "crossref",
+    "first-page": "196",
+    "DOI": "10.1038/s42256-022-00452-0",
+    "article-title": "Biological underpinnings for lifelong learning machines",
+    "volume": "4",
+    "author": "Kudithipudi",
+    "year": "2022",
+    "journal-title": "Nature Machine Intelligence"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0415",
+    "doi-asserted-by": "crossref",
+    "first-page": "807",
+    "DOI": "10.1038/s41928-023-01054-3",
+    "article-title": "Design principles for lifelong learning AI accelerators",
+    "volume": "6",
+    "author": "Kudithipudi",
+    "year": "2023",
+    "journal-title": "Nature Electronics"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0420",
+    "doi-asserted-by": "crossref",
+    "first-page": "2549",
+    "DOI": "10.1038/s41467-021-22768-y",
+    "article-title": "Synaptic metaplasticity in binarized neural networks",
+    "volume": "12",
+    "author": "Laborieux",
+    "year": "2021",
+    "journal-title": "Nature Communications"
+   },
+   {
+    "issue": "11",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0425",
+    "doi-asserted-by": "crossref",
+    "first-page": "2278",
+    "DOI": "10.1109/5.726791",
+    "article-title": "Gradient-based learning applied to document recognition",
+    "volume": "86",
+    "author": "LeCun",
+    "year": "1998",
+    "journal-title": "Proceedings of the IEEE"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0430",
+    "article-title": "A neural Dirichlet process mixture model for task-free continual learning",
+    "author": "Lee",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0435",
+    "first-page": "613265",
+    "article-title": "Synaptic weight decay with selective consolidation enables fast learning without catastrophic forgetting",
+    "author": "Leimer",
+    "year": "2019",
+    "journal-title": "BioRxiv"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0440",
+    "first-page": "1",
+    "article-title": "Generative models from the perspective of continual learning",
+    "author": "Lesort",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0445",
+    "author": "Lesort"
+   },
+   {
+    "issue": "12",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0450",
+    "doi-asserted-by": "crossref",
+    "first-page": "2935",
+    "DOI": "10.1109/TPAMI.2017.2773081",
+    "article-title": "Learning without forgetting",
+    "volume": "40",
+    "author": "Li",
+    "year": "2017",
+    "journal-title": "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0455",
+    "first-page": "1",
+    "article-title": "Energy-based models for continual learning",
+    "volume": "vol. 199",
+    "author": "Li",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0460",
+    "doi-asserted-by": "crossref",
+    "first-page": "293",
+    "DOI": "10.1007/BF00992699",
+    "article-title": "Self-improving reactive agents based on reinforcement learning, planning and teaching",
+    "volume": "8",
+    "author": "Lin",
+    "year": "1992",
+    "journal-title": "Machine Learning"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0465",
+    "first-page": "226",
+    "article-title": "Generative feature replay for class-incremental learning",
+    "author": "Liu",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0470",
+    "first-page": "6470",
+    "article-title": "Gradient episodic memory for continual learning",
+    "volume": "vol. 30",
+    "author": "Lopez-Paz",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0475",
+    "first-page": "366",
+    "article-title": "TAG: Task-based accumulated gradients for lifelong learning",
+    "volume": "vol. 199",
+    "author": "Malviya",
+    "year": "2022"
+   },
+   {
+    "issue": "4\u20136",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0480",
+    "doi-asserted-by": "crossref",
+    "first-page": "479",
+    "DOI": "10.1016/S0893-6080(02)00043-6",
+    "article-title": "Cellular, synaptic and network effects of neuromodulation",
+    "volume": "15",
+    "author": "Marder",
+    "year": "2002",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0485",
+    "first-page": "2408",
+    "article-title": "Optimizing neural networks with Kronecker-factored approximate curvature",
+    "author": "Martens",
+    "year": "2015"
+   },
+   {
+    "issue": "5",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0490",
+    "doi-asserted-by": "crossref",
+    "first-page": "5513",
+    "DOI": "10.1109/TPAMI.2022.3213473",
+    "article-title": "Class-incremental learning: Survey and performance evaluation",
+    "volume": "45",
+    "author": "Masana",
+    "year": "2023",
+    "journal-title": "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0495",
+    "doi-asserted-by": "crossref",
+    "first-page": "E10467",
+    "DOI": "10.1073/pnas.1803839115",
+    "article-title": "Alleviating catastrophic forgetting using context-dependent gating and synaptic stabilization",
+    "volume": "115",
+    "author": "Masse",
+    "year": "2018",
+    "journal-title": "Proceedings of the National Academy of Sciences"
+   },
+   {
+    "issue": "1799",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0500",
+    "doi-asserted-by": "crossref",
+    "first-page": "20190637",
+    "DOI": "10.1098/rstb.2019.0637",
+    "article-title": "Integration of new information in memory: New insights from a complementary learning systems perspective",
+    "volume": "375",
+    "author": "McClelland",
+    "year": "2020",
+    "journal-title": "Philosophical Transactions of the Royal Society B"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0505",
+    "first-page": "109",
+    "article-title": "Catastrophic interference in connectionist networks: The sequential learning problem",
+    "volume": "vol. 24",
+    "author": "McCloskey",
+    "year": "1989"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0510",
+    "article-title": "How to reuse and compose knowledge for a lifetime of tasks: A survey on continual learning and functional composition",
+    "author": "Mendez",
+    "year": "2023",
+    "journal-title": "Transactions on Machine Learning Research"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0515",
+    "first-page": "7308",
+    "article-title": "Understanding the role of training regimes in continual learning",
+    "volume": "vol. 33",
+    "author": "Mirzadeh",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0520",
+    "article-title": "Fast model editing at scale",
+    "author": "Mitchell",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0525",
+    "author": "Mitchell"
+   },
+   {
+    "issue": "7540",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0530",
+    "doi-asserted-by": "crossref",
+    "first-page": "529",
+    "DOI": "10.1038/nature14236",
+    "article-title": "Human-level control through deep reinforcement learning",
+    "volume": "518",
+    "author": "Mnih",
+    "year": "2015",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0535",
+    "author": "Mocanu"
+   },
+   {
+    "issue": "1432",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0540",
+    "first-page": "643",
+    "article-title": "Long-term potentiation and memory",
+    "volume": "358",
+    "author": "Morris",
+    "year": "2003",
+    "journal-title": "Philosophical Transactions of the Royal Society of London Series B\u2014Biological Sciences"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0545",
+    "article-title": "CLEVA-compass: A continual learning evaluation assessment compass to promote research transparency and comparability",
+    "author": "Mundt",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0550",
+    "doi-asserted-by": "crossref",
+    "first-page": "306",
+    "DOI": "10.1016/j.neunet.2023.01.014",
+    "article-title": "A wholistic view of continual learning with deep neural networks: Forgotten lessons and the bridge to active and open world learning",
+    "volume": "160",
+    "author": "Mundt",
+    "year": "2023",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0555",
+    "article-title": "Reading digits in natural images with unsupervised feature learning",
+    "author": "Netzer",
+    "year": "2011"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0560",
+    "author": "New"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0565",
+    "article-title": "Variational continual learning",
+    "author": "Nguyen",
+    "year": "2018"
+   },
+   {
+    "issue": "5",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0570",
+    "doi-asserted-by": "crossref",
+    "first-page": "551",
+    "DOI": "10.1177/1745691615596787",
+    "article-title": "Why forget? On the adaptive value of memory loss",
+    "volume": "10",
+    "author": "N\u00f8rby",
+    "year": "2015",
+    "journal-title": "Perspectives on Psychological Science"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0575",
+    "first-page": "60",
+    "article-title": "Continual learning with foundation models: An empirical study of latent replay",
+    "volume": "vol. 199",
+    "author": "Ostapenko",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0580",
+    "first-page": "423",
+    "article-title": "Importance driven continual learning for segmentation across domains",
+    "author": "\u00d6zg\u00fcn",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0585",
+    "first-page": "5339",
+    "article-title": "Overcoming catastrophic forgetting by neuron-level plasticity control",
+    "volume": "vol. 34",
+    "author": "Paik",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0590",
+    "first-page": "4453",
+    "article-title": "Continual deep learning by functional regularisation of memorable past",
+    "volume": "vol. 33",
+    "author": "Pan",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0595",
+    "first-page": "1",
+    "article-title": "Relational neurogenesis for lifelong learning agents",
+    "author": "Pandit",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0600",
+    "first-page": "10203",
+    "article-title": "Latent replay for real-time continual learning",
+    "author": "Pellegrini",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0605",
+    "doi-asserted-by": "crossref",
+    "first-page": "104365",
+    "DOI": "10.1016/j.cognition.2020.104365",
+    "article-title": "Deep learning and cognitive science",
+    "volume": "203",
+    "author": "Perconti",
+    "year": "2020",
+    "journal-title": "Cognition"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0610",
+    "first-page": "3698",
+    "article-title": "Computationally budgeted continual learning: What does matter?",
+    "author": "Prabhu",
+    "year": "2023"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0615",
+    "first-page": "8748",
+    "article-title": "Learning transferable visual models from natural language supervision",
+    "author": "Radford",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0620",
+    "first-page": "7647",
+    "article-title": "Continual unsupervised representation learning",
+    "volume": "vol. 32",
+    "author": "Rao",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0625",
+    "doi-asserted-by": "crossref",
+    "first-page": "698",
+    "DOI": "10.1016/j.conb.2007.11.007",
+    "article-title": "Maintaining memories by reactivation",
+    "volume": "17",
+    "author": "Rasch",
+    "year": "2007",
+    "journal-title": "Current Opinion in Neurobiology"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0630",
+    "doi-asserted-by": "crossref",
+    "first-page": "285",
+    "DOI": "10.1037/0033-295X.97.2.285",
+    "article-title": "Connectionist models of recognition memory: Constraints imposed by learning and forgetting functions",
+    "volume": "97",
+    "author": "Ratcliff",
+    "year": "1990",
+    "journal-title": "Psychological Review"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0635",
+    "first-page": "2001",
+    "article-title": "iCaRL: Incremental classifier and representation learning",
+    "author": "Rebuffi",
+    "year": "2017"
+   },
+   {
+    "issue": "6",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0640",
+    "doi-asserted-by": "crossref",
+    "first-page": "1071",
+    "DOI": "10.1016/j.neuron.2017.04.037",
+    "article-title": "The persistence and transience of memory",
+    "volume": "94",
+    "author": "Richards",
+    "year": "2017",
+    "journal-title": "Neuron"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0645",
+    "article-title": "Learning to learn without forgetting by maximizing transfer and minimizing interference",
+    "author": "Riemer",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0650",
+    "article-title": "Online structured Laplace approximations for overcoming catastrophic forgetting",
+    "volume": "vol. 31",
+    "author": "Ritter",
+    "year": "2018"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0655",
+    "doi-asserted-by": "crossref",
+    "first-page": "123",
+    "DOI": "10.1080/09540099550039318",
+    "article-title": "Catastrophic forgetting, rehearsal and pseudorehearsal",
+    "volume": "7",
+    "author": "Robins",
+    "year": "1995",
+    "journal-title": "Connection Science"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0660",
+    "article-title": "Experience replay for continual learning",
+    "volume": "vol. 32",
+    "author": "Rolnick",
+    "year": "2019"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0665",
+    "doi-asserted-by": "crossref",
+    "first-page": "328",
+    "DOI": "10.1016/0010-0285(73)90017-0",
+    "article-title": "Natural categories",
+    "volume": "4",
+    "author": "Rosch",
+    "year": "1973",
+    "journal-title": "Cognitive Psychology"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0670",
+    "series-title": "Readings in Cognitive Science",
+    "first-page": "312",
+    "article-title": "Principles of categorization",
+    "author": "Rosch",
+    "year": "1988"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0675",
+    "doi-asserted-by": "crossref",
+    "first-page": "65",
+    "DOI": "10.1016/j.neunet.2023.07.047",
+    "article-title": "Subspace distillation for continual learning",
+    "volume": "167",
+    "author": "Roy",
+    "year": "2023",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0680",
+    "first-page": "18871",
+    "article-title": "Continual learning via sequential function-space variational inference",
+    "volume": "vol. 162",
+    "author": "Rudner",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0685",
+    "author": "Rusu"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0690",
+    "author": "Saha"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0695",
+    "doi-asserted-by": "crossref",
+    "first-page": "e69884",
+    "DOI": "10.7554/eLife.69884",
+    "article-title": "Presynaptic stochasticity improves energy efficiency and helps alleviate the stability-plasticity dilemma",
+    "volume": "10",
+    "author": "Schug",
+    "year": "2021",
+    "journal-title": "Elife"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0700",
+    "first-page": "4528",
+    "article-title": "Progress & compress: A scalable framework for continual learning",
+    "author": "Schwarz",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0705",
+    "first-page": "4548",
+    "article-title": "Overcoming catastrophic forgetting with hard attention to the task",
+    "author": "Serra",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0710",
+    "author": "Shanahan"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0715",
+    "first-page": "2994",
+    "article-title": "Continual learning with deep generative replay",
+    "volume": "vol. 30",
+    "author": "Shin",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0720",
+    "first-page": "4080",
+    "article-title": "Prototypical networks for few-shot learning",
+    "volume": "vol. 30",
+    "author": "Snell",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0725",
+    "series-title": "Essence of Memory",
+    "first-page": "3",
+    "article-title": "Molecular memory traces",
+    "volume": "vol. 169",
+    "author": "Sossin",
+    "year": "2008"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0730",
+    "article-title": "TACOS: Task agnostic continual learning in spiking neural networks",
+    "author": "Soures",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0735",
+    "author": "Soutif-Cormerais"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0740",
+    "article-title": "Compete to compute",
+    "volume": "vol. 26",
+    "author": "Srivastava",
+    "year": "2013"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0745",
+    "first-page": "8777",
+    "article-title": "Incremental object learning from contiguous views",
+    "author": "Stojanov",
+    "year": "2019"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0750",
+    "doi-asserted-by": "crossref",
+    "first-page": "7742",
+    "DOI": "10.1038/s41467-022-34938-7",
+    "article-title": "Sleep-like unsupervised replay reduces catastrophic forgetting in artificial neural networks",
+    "volume": "13",
+    "author": "Tadros",
+    "year": "2022",
+    "journal-title": "Nature Communications"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0755",
+    "first-page": "268",
+    "article-title": "Knowledge transfer in deep block-modular neural networks",
+    "author": "Terekhov",
+    "year": "2015"
+   },
+   {
+    "issue": "1\u20132",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0760",
+    "doi-asserted-by": "crossref",
+    "first-page": "25",
+    "DOI": "10.1016/0921-8890(95)00004-Y",
+    "article-title": "Lifelong robot learning",
+    "volume": "15",
+    "author": "Thrun",
+    "year": "1995",
+    "journal-title": "Robotics and Autonomous Systems"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0765",
+    "first-page": "10063",
+    "article-title": "Divide and contrast: Self-supervised learning from uncurated data",
+    "author": "Tian",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0770",
+    "article-title": "Functional regularisation for continual learning with Gaussian processes",
+    "author": "Titsias",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0775",
+    "first-page": "189",
+    "article-title": "Sharpness and gradient aware minimization for memory-based continual learning",
+    "author": "Tran Tung",
+    "year": "2023"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0780",
+    "author": "Trinci"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0785",
+    "article-title": "Three continual learning scenarios",
+    "author": "van de Ven",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0790",
+    "doi-asserted-by": "crossref",
+    "first-page": "4069",
+    "DOI": "10.1038/s41467-020-17866-2",
+    "article-title": "Brain-inspired replay for continual learning with artificial neural networks",
+    "volume": "11",
+    "author": "van de Ven",
+    "year": "2020",
+    "journal-title": "Nature Communications"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0795",
+    "first-page": "3611",
+    "article-title": "Class-incremental learning with generative classifiers",
+    "author": "van de Ven",
+    "year": "2021"
+   },
+   {
+    "issue": "12",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0800",
+    "doi-asserted-by": "crossref",
+    "first-page": "1185",
+    "DOI": "10.1038/s42256-022-00568-3",
+    "article-title": "Three types of incremental learning",
+    "volume": "4",
+    "author": "van de Ven",
+    "year": "2022",
+    "journal-title": "Nature Machine Intelligence"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0805",
+    "doi-asserted-by": "crossref",
+    "first-page": "114",
+    "DOI": "10.3389/fncom.2017.00114",
+    "article-title": "Editorial: Artificial neural networks as models of neural information processing",
+    "volume": "11",
+    "author": "van Gerven",
+    "year": "2017",
+    "journal-title": "Frontiers in Computational Neuroscience"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0810",
+    "first-page": "13865",
+    "article-title": "Efficient feature transformations for discriminative and generative continual learning",
+    "author": "Verma",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0815",
+    "article-title": "Continual learning: Applications and the road forward",
+    "author": "Verwimp",
+    "year": "2024",
+    "journal-title": "Transactions on Machine Learning Research"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0820",
+    "article-title": "Matching networks for one shot learning",
+    "volume": "vol. 29",
+    "author": "Vinyals",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0825",
+    "article-title": "Continual learning with hypernetworks",
+    "author": "von Oswald",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0830",
+    "author": "Wang"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0835",
+    "first-page": "139",
+    "article-title": "Learning to prompt for continual learning",
+    "author": "Wang",
+    "year": "2022"
+   },
+   {
+    "issue": "12",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0840",
+    "doi-asserted-by": "crossref",
+    "first-page": "1356",
+    "DOI": "10.1038/s42256-023-00747-w",
+    "article-title": "Incorporating neuro-inspired adaptability for continual learning in artificial intelligence",
+    "volume": "5",
+    "author": "Wang",
+    "year": "2023",
+    "journal-title": "Nature Machine Intelligence"
+   },
+   {
+    "issue": "8",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0845",
+    "doi-asserted-by": "crossref",
+    "first-page": "5362",
+    "DOI": "10.1109/TPAMI.2024.3367329",
+    "article-title": "A comprehensive survey of continual learning: Theory, method and application",
+    "volume": "46",
+    "author": "Wang",
+    "year": "2024",
+    "journal-title": "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0850",
+    "first-page": "10254",
+    "article-title": "Incremental embedding learning via zero-shot translation",
+    "volume": "vol. 35",
+    "author": "Wei",
+    "year": "2021"
+   },
+   {
+    "issue": "5172",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0855",
+    "doi-asserted-by": "crossref",
+    "first-page": "676",
+    "DOI": "10.1126/science.8036517",
+    "article-title": "Reactivation of hippocampal ensemble memories during sleep",
+    "volume": "265",
+    "author": "Wilson",
+    "year": "1994",
+    "journal-title": "Science"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0860",
+    "doi-asserted-by": "crossref",
+    "first-page": "329",
+    "DOI": "10.1002/hipo.20167",
+    "article-title": "A functional hypothesis for adult hippocampal neurogenesis: Avoidance of catastrophic interference in the dentate gyrus",
+    "volume": "16",
+    "author": "Wiskott",
+    "year": "2006",
+    "journal-title": "Hippocampus"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0865",
+    "doi-asserted-by": "crossref",
+    "first-page": "235",
+    "DOI": "10.1146/annurev.psych.55.090902.141555",
+    "article-title": "The psychology and neuroscience of forgetting",
+    "volume": "55",
+    "author": "Wixted",
+    "year": "2004",
+    "journal-title": "Annual Review of Psychology"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0870",
+    "first-page": "15173",
+    "article-title": "Supermasks in superposition",
+    "volume": "vol. 33",
+    "author": "Wortsman",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0875",
+    "first-page": "5966",
+    "article-title": "Memory replay GANs: Learning to generate images from new categories without forgetting",
+    "volume": "vol. 31",
+    "author": "Wu",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0880",
+    "first-page": "3014",
+    "article-title": "DER: Dynamically expandable representation for class incremental learning",
+    "author": "Yan",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0885",
+    "first-page": "3474",
+    "article-title": "Robust classification with convolutional prototype learning",
+    "author": "Yang",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0890",
+    "first-page": "5630",
+    "article-title": "Data augmented flatness-aware gradient projection for continual learning",
+    "author": "Yang",
+    "year": "2023"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0895",
+    "article-title": "Lifelong learning with dynamically expandable networks",
+    "author": "Yoon",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0900",
+    "first-page": "6982",
+    "article-title": "Semantic drift compensation for class-incremental learning",
+    "author": "Yu",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0905",
+    "article-title": "Prediction error-based classification for class-incremental learning",
+    "author": "Zaj\u0105c",
+    "year": "2024"
+   },
+   {
+    "issue": "8",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0910",
+    "doi-asserted-by": "crossref",
+    "first-page": "364",
+    "DOI": "10.1038/s42256-019-0080-x",
+    "article-title": "Continual learning of context-dependent processing in neural networks",
+    "volume": "1",
+    "author": "Zeng",
+    "year": "2019",
+    "journal-title": "Nature Machine Intelligence"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0915",
+    "author": "Zenke"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0920",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1038/ncomms7922",
+    "article-title": "Diverse synaptic plasticity mechanisms orchestrated to form and retrieve memories in spiking neural networks",
+    "volume": "6",
+    "author": "Zenke",
+    "year": "2015",
+    "journal-title": "Nature Communications"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0925",
+    "first-page": "3987",
+    "article-title": "Continual learning through synaptic intelligence",
+    "author": "Zenke",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0930",
+    "author": "Zeno"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0935",
+    "first-page": "1453",
+    "article-title": "Online incremental feature learning with denoising autoencoders",
+    "volume": "vol. 22",
+    "author": "Zhou",
+    "year": "2012"
+   },
+   {
+    "key": "10.1016/B978-0-443-15754-7.00073-0_bb0940",
+    "first-page": "1",
+    "article-title": "Metaplasticity in multistate memristor synaptic networks",
+    "author": "Zohora",
+    "year": "2020"
+   }
+  ],
+  "container-title": [
+   "Learning and Memory: A Comprehensive Reference"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:B9780443157547000730?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:B9780443157547000730?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2025,
+     6,
+     26
+    ]
+   ],
+   "date-time": "2025-06-26T09:16:29Z",
+   "timestamp": 1750929389000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/B9780443157547000730"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "ISBN": [
+   "9780443157554"
+  ],
+  "references-count": 187,
+  "URL": "https://doi.org/10.1016/b978-0-443-15754-7.00073-0",
+  "relation": {},
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  }
+ }
+}

@@ -1,0 +1,36 @@
+% Introduction. Numbers from results/forecasting.json (S1) and
+% results/forecasting_wheeler.json (S6); see sections/results.tex.
+\section{Introduction}
+\label{sec:intro}
+
+Batteries retired from electric vehicles often keep enough capacity for stationary applications. Whether such reuse is technically and economically sound, however, depends on how the cells will age in their second life~\cite{martinezlaserna2018,hossain2019,borner2022,canalscasals2019}. Second-life cells differ in first-life history, chemistry and intended duty, and new cells or new operating conditions keep arriving. A model that forecasts their state of health (SOH) must therefore adapt to each new group of cells without losing what it learned from earlier ones. This is the setting of continual learning, where sequential training on new tasks is known to degrade performance on earlier ones (catastrophic forgetting)~\cite{parisi2019,vandeven2025continual}.
+
+Elastic Weight Consolidation (EWC)~\cite{kirkpatrick2017ewc} is a standard remedy, and the Temporal Fusion Transformer (TFT)~\cite{lim2021tft} is a forecasting architecture that has been applied to lithium-ion capacity prediction~\cite{gomez2024tft}. We set out to test their combination on second-life SOH forecasting. We ask:
+\begin{itemize}
+  \item \textbf{RQ1:} Can learned models forecast the SOH of second-life cells one to three reference performance tests (RPTs) ahead better than simple references, and which information drives the forecasts?
+  \item \textbf{RQ2:} Does forgetting occur when cells or usage conditions arrive sequentially, and does EWC reduce it for the TFT?
+  \item \textbf{RQ3:} How does TFT\,+\,EWC compare with simpler forecasters within the stream and on cells or conditions not seen in training?
+\end{itemize}
+
+We answer them on two public datasets that differ in the kind of heterogeneity they contain:
+\begin{itemize}
+  \item six second-life NMC cells on grid duty cycles, which differ in first-life history~\cite{moy2024secondlife};
+  \item 20 LFP cells aged into second life under seven usage conditions~\cite{wheeler2025lfp}.
+\end{itemize}
+
+Our contributions are:
+\begin{enumerate}
+  \item \emph{A verified, leakage-checked pipeline from public raw data.}
+  \begin{itemize}
+    \item We derive capacity labels and diagnostic features directly from the raw tests: incremental capacity, pulse resistance and impedance.
+    \item We identify and correct two label artefacts: the handling of pulse charge, and test currents set from the previous capacity, which leak the label into inputs.
+    \item We reproduce the data authors' own capacity and resistance values exactly.
+  \end{itemize}
+  \item \emph{A continual SOH-forecasting benchmark} with purged chronological splits, two protocols (a task stream and unseen groups), strong reference forecasters and a statistical plan. All were fixed before any model was trained.
+  \item \emph{Evidence on when EWC helps, and a negative result.}
+  \begin{itemize}
+    \item Forgetting is negligible across homogeneous cells but substantial across usage conditions. There, EWC reduces the TFT's error by 0.21~percentage points (pp) and its forgetting by 0.19~pp.
+    \item Yet the proposed TFT\,+\,EWC is not the most accurate forecaster on either dataset. Simple references, such as a usage-only ridge regression or extrapolation of the recent fade rate, are as good or better.
+  \end{itemize}
+\end{enumerate}
+All code, decisions and results are version-controlled, and every number reported comes from a committed result file.

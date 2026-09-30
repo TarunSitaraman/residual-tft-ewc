@@ -1,0 +1,58 @@
+% Numbers from results/forecasting.json (S1), results/forecasting_wheeler.json
+% (S6) and results/diagnostic_features.json.
+\section{Discussion}
+\label{sec:discussion}
+
+\emph{When does continual learning matter?} Forgetting is a property of the task stream, not only of the method.
+\begin{itemize}
+  \item \emph{S1:} the six cells share one cell type and one test schedule, so a model trained on the next cell hardly forgets the previous ones (0.016--0.040~pp). No strategy can show an advantage there.
+  \item \emph{S6:} the usage conditions differ in charge regime, voltage window and depth of discharge, and forgetting reaches 0.18--0.46~pp. There, EWC reduces the TFT's final error by 0.21~pp and its forgetting by 0.19~pp relative to fine-tuning.
+\end{itemize}
+
+This is the continual-learning result of the study. Benefits of forgetting-mitigation methods should be claimed only on streams whose tasks demonstrably differ.
+
+\emph{Why do simple forecasters win?} Three factors are consistent with our results.
+\begin{enumerate}
+  \item \emph{Small tasks:} there are few samples per task, 21--27 training samples per cell in S1 and about 135--340 per condition in S6. Each continual step fits a network to one small task, whereas the reference forecasters see all tasks' training data at once. The joint upper bounds narrow most of the gap (TFT: 0.427 against 0.677~pp on S6).
+  \item \emph{Smooth fade:} over the forecast horizons, fade is smooth and nearly linear. In S6 the recent fade rate alone gives 0.343~pp. In S1 the fade over one to three RPTs is dominated by the planned test schedule (days at 35~$^\circ$C, at 20~$^\circ$C and at rest), which a three-variable linear model captures.
+  \item \emph{Order sensitivity:} the TFT is sensitive to the task order. Its run-to-run standard deviation on S6 is 1.5 to 3.6 times that of the MLP methods.
+\end{enumerate}
+
+These observations agree with findings in general forecasting that sophisticated models often do not beat simple ones~\cite{makridakis2018}. They argue for always reporting skill against naive and linear references~\cite{hyndman2006}.
+
+\emph{State versus rate.} On S1, diagnostic features describe the \emph{current} SOH very well:
+\begin{itemize}
+  \item incremental-capacity peak height, $\rho=0.97$ with SOH;
+  \item resistances, $|\rho|$ between 0.83 and 0.94.
+\end{itemize}
+
+They say little about the \emph{next} change, and they did not improve TFT\,+\,EWC significantly on either dataset. Impedance has been reported to forecast SOH well on larger datasets~\cite{zhang2020eis}. With six to 20 cells, the rate of fade appears to be governed more by usage and recent trend than by state indicators. The low-voltage impedance features whose association with the next change is consistent across cells may partly reflect the alternating test temperature.
+
+\emph{Lessons for data handling.} Two artefacts would have biased any model trained on the processed tables we started from.
+\begin{enumerate}
+  \item \emph{Pulse charge in the capacity label:} because the pulse protocol changed, this shifted some labels by up to 0.09~pp.
+  \item \emph{Test currents set from the previous capacity:} these encode the label in the inputs.
+\end{enumerate}
+
+Both were found only by returning to the raw tests. Together with the row-order and step-validity issues in S6, they illustrate how leakage and label errors arise in battery data~\cite{kapoor2023leakage}. They also show why the published raw data, not derived tables, should be the reference.
+
+\emph{Reuse classes.} On S1 all samples stay in the top class, so class-based reuse assessment cannot be evaluated there. On S6, forecast classes agree with the measured ones for 95--97\% of held-out samples. We did not quantify how many samples lie close to a class boundary, where a small SOH error changes the class, so class metrics should be read together with the SOH error.
+
+\emph{Limitations.}
+\begin{itemize}
+  \item \emph{Task change:} the task was changed from current-SOH estimation to forecasting after inspecting S1. The forecasting protocol was fixed before any model was trained, and its deviations (a grid extension and implementation fixes) are reported.
+  \item \emph{Small datasets:} the datasets are small (six cells; 20 cells in seven groups), so the P2 comparisons have little statistical power.
+  \item \emph{S6 conditions:} S6 was aged at 50~$^\circ$C, and its ``second life'' is continued ageing below 80\% SOH under the same protocol, not a repurposed duty.
+  \item \emph{Conditional forecasts:} forecasts are conditional on the planned usage.
+  \item \emph{Relative SOH:} SOH is relative to the first measurement, which in S1 is already an aged state.
+  \item \emph{Model capacity:} on S1 the TFT has more parameters than the MLP.
+  \item \emph{No pooling:} the two datasets were not pooled, so no claim of transfer between chemistries is made.
+  \item \emph{Excluded data:} a directly comparable second-life dataset of retired LMO cells~\cite{cui2024relyiondata} could not be used because it carries no licence.
+\end{itemize}
+
+\emph{Future work.}
+\begin{itemize}
+  \item Continual versions of the strong references, such as rehearsal-based gradient boosting.
+  \item Targets expressed as fade rates.
+  \item Evaluation on larger and more diverse second-life fleets, including real retired cells under grid duty.
+\end{itemize}

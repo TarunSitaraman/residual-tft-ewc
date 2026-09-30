@@ -1,0 +1,1143 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T14:43:33Z",
+   "timestamp": 1790779413485,
+   "version": "4.1.0"
+  },
+  "reference-count": 66,
+  "publisher": "Springer Science and Business Media LLC",
+  "issue": "5",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2019,
+       3,
+       25
+      ]
+     ],
+     "date-time": "2019-03-25T00:00:00Z",
+     "timestamp": 1553472000000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.springernature.com/gp/researchers/text-and-data-mining"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2019,
+       3,
+       25
+      ]
+     ],
+     "date-time": "2019-03-25T00:00:00Z",
+     "timestamp": 1553472000000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "https://www.springernature.com/gp/researchers/text-and-data-mining"
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "link.springer.com"
+   ],
+   "crossmark-restriction": false
+  },
+  "short-container-title": [
+   "Nat Energy"
+  ],
+  "DOI": "10.1038/s41560-019-0356-8",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2019,
+     3,
+     25
+    ]
+   ],
+   "date-time": "2019-03-25T13:04:01Z",
+   "timestamp": 1553519041000
+  },
+  "page": "383-391",
+  "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 3107,
+  "title": [
+   "Data-driven prediction of battery cycle life before capacity degradation"
+  ],
+  "prefix": "10.1038",
+  "volume": "4",
+  "author": [
+   {
+    "ORCID": "https://orcid.org/0000-0002-0412-4217",
+    "authenticated-orcid": false,
+    "given": "Kristen A.",
+    "family": "Severson",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-4745-5726",
+    "authenticated-orcid": false,
+    "given": "Peter M.",
+    "family": "Attia",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-0624-1924",
+    "authenticated-orcid": false,
+    "given": "Norman",
+    "family": "Jin",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-0445-8436",
+    "authenticated-orcid": false,
+    "given": "Nicholas",
+    "family": "Perkins",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-1288-3798",
+    "authenticated-orcid": false,
+    "given": "Benben",
+    "family": "Jiang",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-3741-5720",
+    "authenticated-orcid": false,
+    "given": "Zi",
+    "family": "Yang",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-4273-5817",
+    "authenticated-orcid": false,
+    "given": "Michael H.",
+    "family": "Chen",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0001-6433-7217",
+    "authenticated-orcid": false,
+    "given": "Muratahan",
+    "family": "Aykol",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0001-9922-1169",
+    "authenticated-orcid": false,
+    "given": "Patrick K.",
+    "family": "Herring",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-3301-6255",
+    "authenticated-orcid": false,
+    "given": "Dimitrios",
+    "family": "Fraggedakis",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-8200-4501",
+    "authenticated-orcid": false,
+    "given": "Martin Z.",
+    "family": "Bazant",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-5211-3934",
+    "authenticated-orcid": false,
+    "given": "Stephen J.",
+    "family": "Harris",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-7066-3470",
+    "authenticated-orcid": false,
+    "given": "William C.",
+    "family": "Chueh",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-4304-3484",
+    "authenticated-orcid": false,
+    "given": "Richard D.",
+    "family": "Braatz",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "297",
+  "published-online": {
+   "date-parts": [
+    [
+     2019,
+     3,
+     25
+    ]
+   ]
+  },
+  "reference": [
+   {
+    "key": "356_CR1",
+    "doi-asserted-by": "publisher",
+    "first-page": "928",
+    "DOI": "10.1126/science.1212741",
+    "volume": "334",
+    "author": "B Dunn",
+    "year": "2011",
+    "unstructured": "Dunn, B., Kamath, H. & Tarascon, J.-M. Electrical energy storage for the grid: a battery of choices. Science 334, 928\u2013935 (2011).",
+    "journal-title": "Science"
+   },
+   {
+    "key": "356_CR2",
+    "doi-asserted-by": "publisher",
+    "first-page": "329",
+    "DOI": "10.1038/nclimate2564",
+    "volume": "5",
+    "author": "B Nykvist",
+    "year": "2015",
+    "unstructured": "Nykvist, B. & Nilsson, M. Rapidly falling costs of battery packs for electric vehicles. Nat. Clim. Change 5, 329\u2013332 (2015).",
+    "journal-title": "Nat. Clim. Change"
+   },
+   {
+    "key": "356_CR3",
+    "doi-asserted-by": "publisher",
+    "first-page": "267",
+    "DOI": "10.1038/s41560-018-0107-2",
+    "volume": "3",
+    "author": "R Schmuch",
+    "year": "2018",
+    "unstructured": "Schmuch, R., Wagner, R., H\u00f6rpel, G., Placke, T. & Winter, M. Performance and cost of materials for lithium-based rechargeable automotive batteries. Nat. Energy 3, 267\u2013278 (2018).",
+    "journal-title": "Nat. Energy"
+   },
+   {
+    "key": "356_CR4",
+    "doi-asserted-by": "publisher",
+    "first-page": "2385",
+    "DOI": "10.1016/j.jpowsour.2009.10.010",
+    "volume": "195",
+    "author": "SB Peterson",
+    "year": "2010",
+    "unstructured": "Peterson, S. B., Apt, J. & Whitacre, J. F. Lithium-ion battery cell degradation resulting from realistic vehicle and vehicle-to-grid utilization. J. Power Sources 195, 2385\u20132392 (2010).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR5",
+    "doi-asserted-by": "publisher",
+    "first-page": "R31",
+    "DOI": "10.1149/2.018203jes",
+    "volume": "159",
+    "author": "V Ramadesigan",
+    "year": "2012",
+    "unstructured": "Ramadesigan, V. et al. Modeling and simulation of lithium-ion batteries from a systems engineering perspective. J. Electrochem. Soc. 159, R31\u2013R45 (2012).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR6",
+    "doi-asserted-by": "publisher",
+    "first-page": "321",
+    "DOI": "10.1016/j.jpowsour.2014.02.064",
+    "volume": "258",
+    "author": "W Waag",
+    "year": "2014",
+    "unstructured": "Waag, W., Fleischer, C. & Sauer, D. U. Critical review of the methods for monitoring of lithium-ion batteries in electric and hybrid vehicles. J. Power Sources 258, 321\u2013339 (2014).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR7",
+    "doi-asserted-by": "publisher",
+    "first-page": "642",
+    "DOI": "10.1016/j.jpowsour.2013.01.068",
+    "volume": "239",
+    "author": "S Paul",
+    "year": "2013",
+    "unstructured": "Paul, S., Diegelmann, C., Kabza, H. & Tillmetz, W. Analysis of ageing inhomogeneities in lithium-ion battery systems. J. Power Sources 239, 642\u2013650 (2013).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR8",
+    "doi-asserted-by": "publisher",
+    "first-page": "44",
+    "DOI": "10.1016/j.est.2015.05.003",
+    "volume": "1",
+    "author": "SF Schuster",
+    "year": "2015",
+    "unstructured": "Schuster, S. F. et al. Nonlinear aging characteristics of lithium-ion cells under different operational conditions. J. Energy Storage 1, 44\u201353 (2015).",
+    "journal-title": "J. Energy Storage"
+   },
+   {
+    "key": "356_CR9",
+    "doi-asserted-by": "publisher",
+    "first-page": "242",
+    "DOI": "10.1016/j.jpowsour.2015.08.001",
+    "volume": "297",
+    "author": "SF Schuster",
+    "year": "2015",
+    "unstructured": "Schuster, S. F., Brand, M. J., Berg, P., Gleissenberger, M. & Jossen, A. Lithium-ion cell-to-cell variation during battery electric vehicle operation. J. Power Sources 297, 242\u2013251 (2015).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR10",
+    "doi-asserted-by": "publisher",
+    "first-page": "589",
+    "DOI": "10.1016/j.jpowsour.2016.12.083",
+    "volume": "342",
+    "author": "SJ Harris",
+    "year": "2017",
+    "unstructured": "Harris, S. J., Harris, D. J. & Li, C. Failure statistics for commercial lithium ion batteries: a study of 24 pouch cells. J. Power Sources 342, 589\u2013597 (2017).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR11",
+    "doi-asserted-by": "publisher",
+    "first-page": "332",
+    "DOI": "10.1016/j.jpowsour.2013.08.108",
+    "volume": "247",
+    "author": "T Baumh\u00f6fer",
+    "year": "2014",
+    "unstructured": "Baumh\u00f6fer, T., Br\u00fchl, M., Rothgang, S. & Sauer, D. U. Production caused variation in capacity aging trend and correlation to initial cell performance. J. Power Sources 247, 332\u2013338 (2014).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR12",
+    "doi-asserted-by": "publisher",
+    "first-page": "238",
+    "DOI": "10.1016/S0378-7753(01)00783-2",
+    "volume": "101",
+    "author": "I Bloom",
+    "year": "2001",
+    "unstructured": "Bloom, I. et al. An accelerated calendar and cycle life study of Li-ion cells. J. Power Sources 101, 238\u2013247 (2001).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR13",
+    "doi-asserted-by": "publisher",
+    "first-page": "13",
+    "DOI": "10.1016/S0378-7753(01)00722-4",
+    "volume": "97\u201398",
+    "author": "M Broussely",
+    "year": "2001",
+    "unstructured": "Broussely, M. et al. Aging mechanism in Li ion cells and calendar life predictions. J. Power Sources 97\u201398, 13\u201321 (2001).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR14",
+    "doi-asserted-by": "publisher",
+    "first-page": "A1977",
+    "DOI": "10.1149/1.1804812",
+    "volume": "151",
+    "author": "J Christensen",
+    "year": "2004",
+    "unstructured": "Christensen, J. & Newman, J. A mathematical model for the lithium-ion negative electrode solid electrolyte interphase. J. Electrochem. Soc. 151, A1977 (2004).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR15",
+    "doi-asserted-by": "publisher",
+    "first-page": "A243",
+    "DOI": "10.1149/2.044302jes",
+    "volume": "160",
+    "author": "MB Pinson",
+    "year": "2012",
+    "unstructured": "Pinson, M. B. & Bazant, M. Z. Theory of SEI formation in rechargeable batteries: capacity fade, accelerated aging and lifetime prediction. J. Electrochem. Soc. 160, A243\u2013A250 (2012).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR16",
+    "doi-asserted-by": "publisher",
+    "first-page": "3543",
+    "DOI": "10.1149/1.1392512",
+    "volume": "146",
+    "author": "P Arora",
+    "year": "1999",
+    "unstructured": "Arora, P. Mathematical modeling of the lithium deposition overcharge reaction in lithium-ion batteries using carbon-based negative electrodes. J. Electrochem. Soc. 146, 3543 (1999).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR17",
+    "doi-asserted-by": "publisher",
+    "first-page": "28",
+    "DOI": "10.1016/j.jpowsour.2017.05.110",
+    "volume": "360",
+    "author": "XG Yang",
+    "year": "2017",
+    "unstructured": "Yang, X.-G., Leng, Y., Zhang, G., Ge, S. & Wang, C.-Y. Modeling of lithium plating induced aging of lithium-ion batteries: transition from linear to nonlinear aging. J. Power Sources 360, 28\u201340 (2017).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR18",
+    "doi-asserted-by": "publisher",
+    "first-page": "A818",
+    "DOI": "10.1149/1.1870752",
+    "volume": "152",
+    "author": "J Christensen",
+    "year": "2005",
+    "unstructured": "Christensen, J. & Newman, J. Cyclable lithium and capacity loss in Li-ion cells. J. Electrochem. Soc. 152, A818\u2013A829 (2005).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR19",
+    "doi-asserted-by": "publisher",
+    "first-page": "793",
+    "DOI": "10.1016/j.jpowsour.2008.01.028",
+    "volume": "179",
+    "author": "Q Zhang",
+    "year": "2008",
+    "unstructured": "Zhang, Q. & White, R. E. Capacity fade analysis of a lithium ion cell. J. Power Sources 179, 793\u2013798 (2008).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR20",
+    "doi-asserted-by": "publisher",
+    "first-page": "865",
+    "DOI": "10.1016/S0378-7753(03)00190-3",
+    "volume": "119\u2013121",
+    "author": "RB Wright",
+    "year": "2003",
+    "unstructured": "Wright, R. B. et al. Power fade and capacity fade resulting from cycle-life testing of advanced technology development program lithium-ion batteries. J. Power Sources 119\u2013121, 865\u2013869 (2003).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR21",
+    "doi-asserted-by": "publisher",
+    "first-page": "A1048",
+    "DOI": "10.1149/1.3609926",
+    "volume": "158",
+    "author": "V Ramadesigan",
+    "year": "2011",
+    "unstructured": "Ramadesigan, V. et al. Parameter estimation and capacity fade analysis of lithium-ion batteries using reformulated models. J. Electrochem. Soc. 158, A1048\u2013A1054 (2011).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR22",
+    "doi-asserted-by": "publisher",
+    "first-page": "473",
+    "DOI": "10.1016/j.jpowsour.2014.12.047",
+    "volume": "278",
+    "author": "A Cordoba-Arenas",
+    "year": "2015",
+    "unstructured": "Cordoba-Arenas, A., Onori, S., Guezennec, Y. & Rizzoni, G. Capacity and power fade cycle-life model for plug-in hybrid electric vehicle lithium-ion battery cells containing blended spinel and layered-oxide positive electrodes. J. Power Sources 278, 473\u2013483 (2015).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR23",
+    "doi-asserted-by": "publisher",
+    "first-page": "A255",
+    "DOI": "10.1149/1.3531997",
+    "volume": "158",
+    "author": "JC Burns",
+    "year": "2011",
+    "unstructured": "Burns, J. C. et al. Evaluation of effects of additives in wound Li-ion cells through high precision coulometry. J. Electrochem. Soc. 158, A255\u2013A261 (2011).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR24",
+    "doi-asserted-by": "publisher",
+    "first-page": "A1451",
+    "DOI": "10.1149/2.060309jes",
+    "volume": "160",
+    "author": "JC Burns",
+    "year": "2013",
+    "unstructured": "Burns, J. C. et al. Predicting and extending the lifetime of Li-ion batteries. J. Electrochem. Soc. 160, A1451\u2013A1456 (2013).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR25",
+    "doi-asserted-by": "publisher",
+    "first-page": "321",
+    "DOI": "10.1016/S0378-7753(00)00666-2",
+    "volume": "96",
+    "author": "CH Chen",
+    "year": "2001",
+    "unstructured": "Chen, C. H., Liu, J. & Amine, K. Symmetric cell approach and impedance spectroscopy of high power lithium-ion batteries. J. Power Sources 96, 321\u2013328 (2001).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR26",
+    "doi-asserted-by": "publisher",
+    "first-page": "1664",
+    "DOI": "10.1016/j.electacta.2005.02.148",
+    "volume": "51",
+    "author": "U Tr\u00f6ltzsch",
+    "year": "2006",
+    "unstructured": "Tr\u00f6ltzsch, U., Kanoun, O. & Tr\u00e4nkler, H.-R. Characterizing aging effects of lithium-ion batteries by impedance spectroscopy. Electrochim. Acta 51, 1664\u20131672 (2006).",
+    "journal-title": "Electrochim. Acta"
+   },
+   {
+    "key": "356_CR27",
+    "doi-asserted-by": "publisher",
+    "first-page": "512",
+    "DOI": "10.1016/j.jpowsour.2014.05.033",
+    "volume": "266",
+    "author": "CT Love",
+    "year": "2014",
+    "unstructured": "Love, C. T., Virji, M. B. V., Rocheleau, R. E. & Swider-Lyons, K. E. State-of-health monitoring of 18650 4S packs with a single-point impedance diagnostic. J. Power Sources 266, 512\u2013519 (2014).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR28",
+    "doi-asserted-by": "publisher",
+    "first-page": "A1742",
+    "DOI": "10.1149/2.1001410jes",
+    "volume": "161",
+    "author": "T Waldmann",
+    "year": "2014",
+    "unstructured": "Waldmann, T. et al. A mechanical aging mechanism in lithium-ion batteries. J. Electrochem. Soc. 161, A1742\u2013A1747 (2014).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR29",
+    "doi-asserted-by": "publisher",
+    "first-page": "A921",
+    "DOI": "10.1149/2.0561506jes",
+    "volume": "162",
+    "author": "T Waldmann",
+    "year": "2015",
+    "unstructured": "Waldmann, T. et al. Influence of cell design on temperatures and temperature gradients in lithium-ion cells: an in operando study. J. Electrochem. Soc. 162, A921\u2013A927 (2015).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR30",
+    "doi-asserted-by": "publisher",
+    "first-page": "212",
+    "DOI": "10.1016/j.est.2016.01.003",
+    "volume": "5",
+    "author": "TC Bach",
+    "year": "2016",
+    "unstructured": "Bach, T. C. et al. Nonlinear aging of cylindrical lithium-ion cells linked to heterogeneous compression. J. Energy Storage 5, 212\u2013223 (2016).",
+    "journal-title": "J. Energy Storage"
+   },
+   {
+    "key": "356_CR31",
+    "doi-asserted-by": "publisher",
+    "first-page": "6481",
+    "DOI": "10.1021/jp311431z",
+    "volume": "117",
+    "author": "SJ Harris",
+    "year": "2013",
+    "unstructured": "Harris, S. J. & Lu, P. Effects of inhomogeneities\u2014nanoscale to mesoscale\u2014on the durability of Li-ion batteries. J. Phys. Chem. C 117, 6481\u20136492 (2013).",
+    "journal-title": "J. Phys. Chem. C"
+   },
+   {
+    "key": "356_CR32",
+    "doi-asserted-by": "publisher",
+    "first-page": "57",
+    "DOI": "10.1016/j.jpowsour.2017.09.059",
+    "volume": "368",
+    "author": "M Lewerenz",
+    "year": "2017",
+    "unstructured": "Lewerenz, M., Marongiu, A., Warnecke, A. & Sauer, D. U. Differential voltage analysis as a tool for analyzing inhomogeneous aging: a case study for LiFePO4|graphite cylindrical cells. J. Power Sources 368, 57\u201367 (2017).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR33",
+    "doi-asserted-by": "publisher",
+    "first-page": "73",
+    "DOI": "10.1038/nature17439",
+    "volume": "573",
+    "author": "P Raccuglia",
+    "year": "2016",
+    "unstructured": "Raccuglia, P. et al. Machine-learning-assisted materials discovery using failed experiments. Nature 573, 73\u201377 (2016).",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "356_CR34",
+    "doi-asserted-by": "publisher",
+    "first-page": "16028",
+    "DOI": "10.1038/npjcompumats.2016.28",
+    "volume": "2",
+    "author": "L Ward",
+    "year": "2016",
+    "unstructured": "Ward, L., Agrawal, A., Choudhary, A. & Wolverton, C. A general-purpose machine learning framework for predicting properties of inorganic materials. NPJ Comput. Mater. 2, 16028 (2016).",
+    "journal-title": "NPJ Comput. Mater."
+   },
+   {
+    "key": "356_CR35",
+    "doi-asserted-by": "publisher",
+    "first-page": "604",
+    "DOI": "10.1038/nature25978",
+    "volume": "555",
+    "author": "MHS Segler",
+    "year": "2018",
+    "unstructured": "Segler, M. H. S., Preuss, M. & Waller, M. P. Planning chemical syntheses with deep neural networks and symbolic AI. Nature 555, 604\u2013610 (2018).",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "356_CR36",
+    "doi-asserted-by": "publisher",
+    "first-page": "011002",
+    "DOI": "10.1063/1.4812323",
+    "volume": "1",
+    "author": "A Jain",
+    "year": "2013",
+    "unstructured": "Jain, A. et al. Commentary: The Materials Project: a materials genome approach to accelerating materials innovation. APL Mater. 1, 011002 (2013).",
+    "journal-title": "APL Mater."
+   },
+   {
+    "key": "356_CR37",
+    "doi-asserted-by": "publisher",
+    "DOI": "10.1038/ncomms13779",
+    "volume": "7",
+    "author": "M Aykol",
+    "year": "2016",
+    "unstructured": "Aykol, M. et al. High-throughput computational design of cathode coatings for Li-ion batteries. Nat. Commun. 7, 13779 (2016).",
+    "journal-title": "Nat. Commun."
+   },
+   {
+    "key": "356_CR38",
+    "doi-asserted-by": "publisher",
+    "first-page": "306",
+    "DOI": "10.1039/C6EE02697D",
+    "volume": "10",
+    "author": "AD Sendek",
+    "year": "2017",
+    "unstructured": "Sendek, A. D. et al. Holistic computational structure screening of more than 12000 candidates for solid lithium-ion conductor materials. Energy Environ. Sci. 10, 306\u2013320 (2017).",
+    "journal-title": "Energy Environ. Sci."
+   },
+   {
+    "key": "356_CR39",
+    "doi-asserted-by": "publisher",
+    "first-page": "6600",
+    "DOI": "10.1021/acscatal.7b01648",
+    "volume": "7",
+    "author": "ZW Ulissi",
+    "year": "2017",
+    "unstructured": "Ulissi, Z. W. et al. Machine-learning methods enable exhaustive searches for active bimetallic facets and reveal active site motifs for CO2 reduction. ACS Catal. 7, 6600\u20136608 (2017).",
+    "journal-title": "ACS Catal."
+   },
+   {
+    "key": "356_CR40",
+    "doi-asserted-by": "publisher",
+    "first-page": "1",
+    "DOI": "10.1016/j.ejor.2010.11.018",
+    "volume": "213",
+    "author": "XS Si",
+    "year": "2011",
+    "unstructured": "Si, X.-S., Wang, W., Hu, C.-H. & Zhou, D.-H. Remaining useful life estimation\u2014a review on the statistical data driven approaches. Eur. J. Oper. Res. 213, 1\u201314 (2011).",
+    "journal-title": "Eur. J. Oper. Res."
+   },
+   {
+    "key": "356_CR41",
+    "doi-asserted-by": "publisher",
+    "first-page": "166",
+    "DOI": "10.3390/app6060166",
+    "volume": "6",
+    "author": "L Wu",
+    "year": "2016",
+    "unstructured": "Wu, L., Fu, X. & Guan, Y. Review of the remaining useful life prognostics of vehicle lithium-ion batteries using data-driven methodologies. Appl. Sci. 6, 166 (2016).",
+    "journal-title": "Appl. Sci."
+   },
+   {
+    "key": "356_CR42",
+    "doi-asserted-by": "publisher",
+    "first-page": "293",
+    "DOI": "10.1177/0142331208092030",
+    "volume": "31",
+    "author": "B Saha",
+    "year": "2009",
+    "unstructured": "Saha, B., Goebel, K. & Christophersen, J. Comparison of prognostic algorithms for estimating remaining useful life of batteries. Trans. Inst. Meas. Control 31, 293\u2013308 (2009).",
+    "journal-title": "Trans. Inst. Meas. Control"
+   },
+   {
+    "key": "356_CR43",
+    "doi-asserted-by": "publisher",
+    "first-page": "680",
+    "DOI": "10.1016/j.jpowsour.2012.11.146",
+    "volume": "239",
+    "author": "A Nuhic",
+    "year": "2013",
+    "unstructured": "Nuhic, A., Terzimehic, T., Soczka-Guth, T., Buchholz, M. & Dietmayer, K. Health diagnosis and remaining useful life prognostics of lithium-ion batteries using data-driven methods. J. Power Sources 239, 680\u2013688 (2013).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR44",
+    "doi-asserted-by": "publisher",
+    "first-page": "182",
+    "DOI": "10.1016/j.apenergy.2014.03.086",
+    "volume": "126",
+    "author": "C Hu",
+    "year": "2014",
+    "unstructured": "Hu, C., Jain, G., Tamirisa, P. & Gorka, T. Method for estimating the capacity and predicting remaining useful life of lithium-ion battery. Appl. Energy 126, 182\u2013189 (2014).",
+    "journal-title": "Appl. Energy"
+   },
+   {
+    "key": "356_CR45",
+    "doi-asserted-by": "publisher",
+    "first-page": "805",
+    "DOI": "10.1016/j.microrel.2012.12.004",
+    "volume": "53",
+    "author": "Q Miao",
+    "year": "2013",
+    "unstructured": "Miao, Q., Xie, L., Cui, H., Liang, W. & Pecht, M. Remaining useful life prediction of lithium-ion battery with unscented particle filter technique. Microelectron. Reliab. 53, 805\u2013810 (2013).",
+    "journal-title": "Microelectron. Reliab."
+   },
+   {
+    "key": "356_CR46",
+    "first-page": "2645",
+    "volume": "63",
+    "author": "X Hu",
+    "year": "2016",
+    "unstructured": "Hu, X., . & Jiang, J. & Cao, D. & Egardt, B. Battery health prognosis for electric vehicles using sample entropy and sparse Bayesian predictive modeling. IEEE Trans. Ind. Electron. 63, 2645\u20132656 (2016).",
+    "journal-title": "IEEE Trans. Ind. Electron."
+   },
+   {
+    "key": "356_CR47",
+    "doi-asserted-by": "publisher",
+    "first-page": "1585",
+    "DOI": "10.1109/TIE.2018.2808918",
+    "volume": "66",
+    "author": "Y Zhang",
+    "year": "2019",
+    "unstructured": "Zhang, Y., . & Xiong, R. & He, H. & Pecht, M. Lithium-ion battery remaining useful life prediction with Box\u2013Cox transformation and Monte Carlo simulation. IEEE Trans. Ind. Electron. 66, 1585\u20131597 (2019).",
+    "journal-title": "IEEE Trans. Ind. Electron."
+   },
+   {
+    "key": "356_CR48",
+    "doi-asserted-by": "publisher",
+    "first-page": "5695",
+    "DOI": "10.1109/TVT.2018.2805189",
+    "volume": "67",
+    "author": "Y Zhang",
+    "year": "2018",
+    "unstructured": "Zhang, Y., & Xiong, R. & He, H. & Pecht, M. Long short-term memory recurrent neural network for remaining useful life prediction of lithium-ion batteries. IEEE Trans. Veh. Technol. 67, 5695\u20135705 (2018).",
+    "journal-title": "IEEE Trans. Veh. Technol."
+   },
+   {
+    "key": "356_CR49",
+    "unstructured": "Saha, B. & Goebel, K. Battery data set. NASA Ames Progn. Data Repos. (2007)."
+   },
+   {
+    "key": "356_CR50",
+    "doi-asserted-by": "publisher",
+    "first-page": "201",
+    "DOI": "10.1016/j.jpowsour.2016.04.140",
+    "volume": "321",
+    "author": "D Anse\u00e1n",
+    "year": "2016",
+    "unstructured": "Anse\u00e1n, D. et al. Fast charging technique for high power LiFePO4 batteries: a mechanistic analysis of aging. J. Power Sources 321, 201\u2013209 (2016).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR51",
+    "doi-asserted-by": "publisher",
+    "first-page": "36",
+    "DOI": "10.1016/j.jpowsour.2017.04.072",
+    "volume": "356",
+    "author": "D Anse\u00e1n",
+    "year": "2017",
+    "unstructured": "Anse\u00e1n, D. et al. Operando lithium plating quantification and early detection of a commercial LiFePO4 cell cycles under dynamic driving schedule. J. Power Sources 356, 36\u201346 (2017).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR52",
+    "doi-asserted-by": "publisher",
+    "first-page": "A499",
+    "DOI": "10.1149/1.3294790",
+    "volume": "157",
+    "author": "P Liu",
+    "year": "2010",
+    "unstructured": "Liu, P. et al. Aging mechanisms of LiFePO4 batteries deduced by electrochemical and structural analyses. J. Electrochem. Soc. 157, A499\u2013A507 (2010).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR53",
+    "doi-asserted-by": "publisher",
+    "first-page": "A1123",
+    "DOI": "10.1149/1.3614529",
+    "volume": "158",
+    "author": "M Safari",
+    "year": "2011",
+    "unstructured": "Safari, M. & Delacourt, C. Aging of a commercial graphite/LiFePO4 cell. J. Electrochem. Soc. 158, A1123\u2013A1135 (2011).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR54",
+    "doi-asserted-by": "publisher",
+    "first-page": "896",
+    "DOI": "10.1021/jp510071d",
+    "volume": "119",
+    "author": "E Sarasketa-Zabala",
+    "year": "2015",
+    "unstructured": "Sarasketa-Zabala, E. et al. Understanding lithium inventory loss and sudden performance fade in cylindrical cells during cycling with deep-discharge steps. J. Phys. Chem. C 119, 896\u2013906 (2015).",
+    "journal-title": "J. Phys. Chem. C"
+   },
+   {
+    "key": "356_CR55",
+    "doi-asserted-by": "publisher",
+    "first-page": "250",
+    "DOI": "10.1016/j.jpowsour.2017.06.055",
+    "volume": "367",
+    "author": "S Ahmed",
+    "year": "2017",
+    "unstructured": "Ahmed, S. et al. Enabling fast charging\u2014a battery technology gap assessment. J. Power Sources 367, 250\u2013262 (2017).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR56",
+    "doi-asserted-by": "publisher",
+    "first-page": "A278",
+    "DOI": "10.1149/2.0191503jes",
+    "volume": "162",
+    "author": "B Gyenes",
+    "year": "2015",
+    "unstructured": "Gyenes, B., Stevens, D. A., Chevrier, V. L. & Dahn, J. R. Understanding anomalous behavior in Coulombic efficiency measurements on Li-ion batteries. J. Electrochem. Soc. 162, A278\u2013A283 (2015).",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "356_CR57",
+    "doi-asserted-by": "publisher",
+    "first-page": "254",
+    "DOI": "10.1016/j.jpowsour.2017.01.133",
+    "volume": "345",
+    "author": "M Lewerenz",
+    "year": "2017",
+    "unstructured": "Lewerenz, M. et al. Systematic aging of commercial LiFePO4|graphite cylindrical cells including a theory explaining rise of capacity during aging. J. Power Sources 345, 254\u2013263 (2017).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR58",
+    "doi-asserted-by": "publisher",
+    "first-page": "301",
+    "DOI": "10.1111/j.1467-9868.2005.00503.x",
+    "volume": "67",
+    "author": "H Zou",
+    "year": "2005",
+    "unstructured": "Zou, H. & Hastie, T. Regularization and variable selection via the elastic net. J. R. Stat. Soc. B 67, 301\u2013320 (2005).",
+    "journal-title": "J. R. Stat. Soc. B"
+   },
+   {
+    "key": "356_CR59",
+    "doi-asserted-by": "publisher",
+    "first-page": "295",
+    "DOI": "10.1016/j.jpowsour.2004.07.021",
+    "volume": "139",
+    "author": "I Bloom",
+    "year": "2005",
+    "unstructured": "Bloom, I. et al. Differential voltage analyses of high-power, lithium-ion cells: 1. Technique and application. J. Power Sources 139, 295\u2013303 (2005).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR60",
+    "doi-asserted-by": "publisher",
+    "first-page": "A39",
+    "DOI": "10.1149/1.3543569",
+    "volume": "14",
+    "author": "AJ Smith",
+    "year": "2011",
+    "unstructured": "Smith, A. J., Burns, J. C. & Dahn, J. R. High-precision differential capacity analysis of LiMn2O4/graphite cells. Electrochem. Solid-State Lett. 14, A39\u2013A41 (2011).",
+    "journal-title": "Electrochem. Solid-State Lett."
+   },
+   {
+    "key": "356_CR61",
+    "doi-asserted-by": "publisher",
+    "first-page": "204",
+    "DOI": "10.1016/j.jpowsour.2012.07.016",
+    "volume": "219",
+    "author": "M Dubarry",
+    "year": "2012",
+    "unstructured": "Dubarry, M., Truchot, C. & Liaw, B. Y. Synthesize battery degradation modes via a diagnostic and prognostic model. J. Power Sources 219, 204\u2013216 (2012).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR62",
+    "doi-asserted-by": "publisher",
+    "first-page": "239",
+    "DOI": "10.1016/j.jpowsour.2016.04.109",
+    "volume": "320",
+    "author": "M Berecibar",
+    "year": "2016",
+    "unstructured": "Berecibar, M. et al. Online state of health estimation on NMC cells based on predictive analytics. J. Power Sources 320, 239\u2013250 (2016).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR63",
+    "doi-asserted-by": "publisher",
+    "first-page": "784",
+    "DOI": "10.1016/j.energy.2016.02.163",
+    "volume": "103",
+    "author": "M Berecibar",
+    "year": "2016",
+    "unstructured": "Berecibar, M., Garmendia, M., Gandiaga, I., Crego, J. & Villarreal, I. State of health estimation algorithm of LiFePO4 battery packs based on differential voltage curves for battery management system application. Energy 103, 784\u2013796 (2016).",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "356_CR64",
+    "doi-asserted-by": "publisher",
+    "first-page": "373",
+    "DOI": "10.1016/j.jpowsour.2016.12.011",
+    "volume": "341",
+    "author": "CR Birkl",
+    "year": "2017",
+    "unstructured": "Birkl, C. R., Roberts, M. R., McTurk, E., Bruce, P. G. & Howey, D. A. Degradation diagnostics for lithium ion cells. J. Power Sources 341, 373\u2013386 (2017).",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "356_CR65",
+    "doi-asserted-by": "publisher",
+    "first-page": "127",
+    "DOI": "10.1109/TII.2018.2794997",
+    "volume": "15",
+    "author": "RR Richardson",
+    "year": "2019",
+    "unstructured": "Richardson, R. R., Birkl, C. R., Osborne, M. A. & Howey, D. A. Gaussian process regression for in-situ capacity estimation of lithium-ion batteries. IEEE Trans. Ind. Inform. 15, 127\u2013138 (2019).",
+    "journal-title": "IEEE Trans. Ind. Inform."
+   },
+   {
+    "key": "356_CR66",
+    "doi-asserted-by": "crossref",
+    "first-page": "267",
+    "DOI": "10.1111/j.2517-6161.1996.tb02080.x",
+    "volume": "58",
+    "author": "R Tibshirani",
+    "year": "1996",
+    "unstructured": "Tibshirani, R. Regression shrinkage and selection via the lasso. J. R. Stat. Soc. B 58, 267\u2013288 (1996).",
+    "journal-title": "J. R. Stat. Soc. B"
+   }
+  ],
+  "container-title": [
+   "Nature Energy"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://www.nature.com/articles/s41560-019-0356-8.pdf",
+    "content-type": "application/pdf",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://www.nature.com/articles/s41560-019-0356-8",
+    "content-type": "text/html",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://www.nature.com/articles/s41560-019-0356-8.pdf",
+    "content-type": "application/pdf",
+    "content-version": "vor",
+    "intended-application": "similarity-checking"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2024,
+     11,
+     27
+    ]
+   ],
+   "date-time": "2024-11-27T22:17:59Z",
+   "timestamp": 1732745879000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://www.nature.com/articles/s41560-019-0356-8"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2019,
+     3,
+     25
+    ]
+   ]
+  },
+  "references-count": 66,
+  "journal-issue": {
+   "issue": "5",
+   "published-online": {
+    "date-parts": [
+     [
+      2019,
+      5
+     ]
+    ]
+   }
+  },
+  "alternative-id": [
+   "356"
+  ],
+  "URL": "https://doi.org/10.1038/s41560-019-0356-8",
+  "relation": {},
+  "ISSN": [
+   "2058-7546"
+  ],
+  "issn-type": [
+   {
+    "value": "2058-7546",
+    "type": "electronic"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2019,
+     3,
+     25
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "2 October 2018",
+    "order": 1,
+    "name": "received",
+    "label": "Received",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "18 February 2019",
+    "order": 2,
+    "name": "accepted",
+    "label": "Accepted",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "25 March 2019",
+    "order": 3,
+    "name": "first_online",
+    "label": "First Online",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "K.A.S., R.D.B., W.C.C., P.M.A., N.J., S.J.H. and N.P. have filed a patent related to this work: US Application No. 62/575,565, dated 16 October 2018.",
+    "order": 1,
+    "name": "Ethics",
+    "group": {
+     "name": "EthicsHeading",
+     "label": "Competing interests"
+    }
+   }
+  ]
+ }
+}

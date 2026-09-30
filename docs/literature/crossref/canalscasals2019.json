@@ -1,0 +1,686 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T09:02:37Z",
+   "timestamp": 1790758957954,
+   "version": "4.1.0"
+  },
+  "reference-count": 41,
+  "publisher": "Elsevier BV",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2019,
+       2,
+       1
+      ]
+     ],
+     "date-time": "2019-02-01T00:00:00Z",
+     "timestamp": 1548979200000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2019,
+       2,
+       1
+      ]
+     ],
+     "date-time": "2019-02-01T00:00:00Z",
+     "timestamp": 1548979200000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/legal/tdmrep-license"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2018,
+       11,
+       23
+      ]
+     ],
+     "date-time": "2018-11-23T00:00:00Z",
+     "timestamp": 1542931200000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+   }
+  ],
+  "funder": [
+   {
+    "DOI": "10.13039/501100014374",
+    "name": "Universitat Polit\u00e8cnica de Catalunya",
+    "doi-asserted-by": "crossref",
+    "id": [
+     {
+      "id": "10.13039/501100014374",
+      "id-type": "DOI",
+      "asserted-by": "crossref"
+     }
+    ]
+   },
+   {
+    "name": "Sunbatt Project",
+    "award": [
+     "RD14-1-0036"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "RD14-1-0036"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "MINECO",
+    "award": [
+     "TEC2015-63899-C3-1-R"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "TEC2015-63899-C3-1-R"
+      ]
+     }
+    ]
+   },
+   {
+    "DOI": "10.13039/501100008530",
+    "name": "FEDER",
+    "doi-asserted-by": "crossref",
+    "id": [
+     {
+      "id": "10.13039/501100008530",
+      "id-type": "DOI",
+      "asserted-by": "crossref"
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "elsevier.com",
+    "sciencedirect.com"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Journal of Environmental Management"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2019,
+     2
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jenvman.2018.11.046",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2018,
+     11,
+     26
+    ]
+   ],
+   "date-time": "2018-11-26T22:21:10Z",
+   "timestamp": 1543270870000
+  },
+  "page": "354-363",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 360,
+  "special_numbering": "C",
+  "title": [
+   "Second life batteries lifespan: Rest of useful life and environmental analysis"
+  ],
+  "prefix": "10.1016",
+  "volume": "232",
+  "author": [
+   {
+    "ORCID": "https://orcid.org/0000-0002-4791-9917",
+    "authenticated-orcid": false,
+    "given": "Lluc Canals",
+    "family": "Casals",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0001-5231-1706",
+    "authenticated-orcid": false,
+    "given": "B.",
+    "family": "Amante Garc\u00eda",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Camille",
+    "family": "Canal",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib1",
+    "doi-asserted-by": "crossref",
+    "first-page": "111",
+    "DOI": "10.1007/s11367-015-0959-7",
+    "article-title": "A cascaded life cycle: reuse of electric vehicle lithium-ion battery packs in energy storage systems",
+    "volume": "22",
+    "author": "Ahmadi",
+    "year": "2017",
+    "journal-title": "Int. J. Life Cycle Assess."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib2",
+    "series-title": "Electricity Storage Handbook, Report SAND2013-5131",
+    "author": "Akhil",
+    "year": "2013"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib3",
+    "series-title": "Assessing the Future of Hybrid and Electric Vehicles: the XEV Industry Insider Report",
+    "author": "Anderman",
+    "year": "2014"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib4",
+    "series-title": "The Electricity Storage Association Meeting, Session on Transportation and Grid",
+    "article-title": "Performance, charging and second use considerations for lithium batteries for plug-in electric vehicles",
+    "author": "Andrew",
+    "year": "2009"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib5",
+    "doi-asserted-by": "crossref",
+    "first-page": "680",
+    "DOI": "10.1016/j.jpowsour.2013.05.040",
+    "article-title": "A review on lithium-ion battery ageing mechanisms and estimations for automotive applications",
+    "volume": "241",
+    "author": "Barr\u00e9",
+    "year": "2013",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib6",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1016/j.jenvman.2018.08.008",
+    "article-title": "Comparison of the state of Lithium-Sulphur and lithium-ion batteries applied to electromobility",
+    "volume": "226",
+    "author": "Benveniste",
+    "year": "2018",
+    "journal-title": "J. Environ. Manag."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib51",
+    "series-title": "IEEE International Symposium on Industrial Electronics",
+    "first-page": "1604",
+    "article-title": "Lithium ion batteries ageing analysis when used in a PV power plant",
+    "author": "Beltran",
+    "year": "2012"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib7",
+    "doi-asserted-by": "crossref",
+    "first-page": "90",
+    "DOI": "10.1016/j.jpowsour.2005.03.172",
+    "article-title": "Main aging mechanisms in Li ion batteries",
+    "volume": "146",
+    "author": "Broussely",
+    "year": "2005",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "issue": "10",
+    "key": "10.1016/j.jenvman.2018.11.046_bib8",
+    "article-title": "Second-life batteries on a gas turbine power plant to provide area regulation services",
+    "volume": "3",
+    "author": "Canals Casals",
+    "year": "2017",
+    "journal-title": "Batteries"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib9",
+    "doi-asserted-by": "crossref",
+    "first-page": "77",
+    "DOI": "10.13052/jge1904-4720.614",
+    "article-title": "Assessing electric vehicles battery second life remanufacture and management",
+    "volume": "6",
+    "author": "Canals Casals",
+    "year": "2016",
+    "journal-title": "J. Green Eng."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib10",
+    "doi-asserted-by": "crossref",
+    "first-page": "82",
+    "DOI": "10.1007/s11367-015-0918-3",
+    "article-title": "Second life of electric vehicle batteries: relation between materials degradation and environmental impact",
+    "volume": "22",
+    "author": "Canals Casals",
+    "year": "2017",
+    "journal-title": "Int. J. Life Cycle Assess."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib11",
+    "doi-asserted-by": "crossref",
+    "first-page": "188",
+    "DOI": "10.6036/7599",
+    "article-title": "The electric vehicle battery ageing and how it is perceived by its driver | El envejecimiento de las bater\u00edas de un veh\u00edculo el\u00e9ctrico y c\u00f3mo lo percibe el conductor",
+    "volume": "91",
+    "author": "Canals Casals",
+    "year": "2016",
+    "journal-title": "Dyna"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib12",
+    "series-title": "Lecture Notes in Management and Industrial Engineering",
+    "doi-asserted-by": "crossref",
+    "first-page": "139",
+    "DOI": "10.1007/978-3-319-51859-6_10",
+    "article-title": "Aging model for Re-used electric vehicle batteries in second life stationary applications",
+    "author": "Canals Casals",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib13",
+    "series-title": "20th International Congress on Project Management and Engineering. Cartagena",
+    "first-page": "1303",
+    "article-title": "Environmental impact of second life batteries in stationary applications",
+    "author": "Canals Casals",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib14",
+    "first-page": "60",
+    "article-title": "Etude de la seconde vie des batteries des vehicules electriques et hybrides rechargeables",
+    "author": "Coroller",
+    "year": "2011",
+    "journal-title": "Patrick Coroller"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib15",
+    "series-title": "Technical and Economic Feasibility of Applying Used EV Batteries in Stationary Applications a Study for the DOE Energy Storage Systems Program. Albuquerque",
+    "author": "Cready",
+    "year": "2003"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib16",
+    "series-title": "Smart City Expo World Congress. Barcelona",
+    "article-title": "Sunbatt: use of a second life battery system from PHEV in stationary applications",
+    "author": "Cruz Gibert",
+    "year": "2015"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib17",
+    "doi-asserted-by": "crossref",
+    "first-page": "928",
+    "DOI": "10.1126/science.1212741",
+    "article-title": "Electrical energy storage for the grid: a battery of choices",
+    "volume": "334",
+    "author": "Dunn",
+    "year": "2011",
+    "journal-title": "Science (80-. )"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib18",
+    "doi-asserted-by": "crossref",
+    "first-page": "53",
+    "DOI": "10.1111/j.1530-9290.2012.00532.x",
+    "article-title": "Comparative environmental life cycle assessment of conventional and electric vehicles",
+    "volume": "17",
+    "author": "Hawkins",
+    "year": "2013",
+    "journal-title": "J. Ind. Ecol."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib19",
+    "doi-asserted-by": "crossref",
+    "first-page": "22",
+    "DOI": "10.1016/j.enpol.2014.04.016",
+    "article-title": "Economic analysis of second use electric vehicle batteries for residential energy storage and load-levelling",
+    "volume": "71",
+    "author": "Heymans",
+    "year": "2014",
+    "journal-title": "Energy Pol."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib20",
+    "doi-asserted-by": "crossref",
+    "first-page": "550",
+    "DOI": "10.1162/rest.90.3.550",
+    "article-title": "Is real-time pricing green? The environmental impacts of electricity demand variance",
+    "volume": "90",
+    "author": "Holland",
+    "year": "2008",
+    "journal-title": "Rev. Econ. Stat."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib21",
+    "article-title": "The use of smart technologies in enabling construction components reuse: a viable method or a problem creating solution?",
+    "author": "Iacovidou",
+    "year": "2017",
+    "journal-title": "J. Environ. Manag."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib22",
+    "doi-asserted-by": "crossref",
+    "first-page": "618",
+    "DOI": "10.1016/j.energy.2014.04.038",
+    "article-title": "Comparison of comprehensive properties of Ni-MH (nickel-metal hydride) and Li-ion (lithium-ion) batteries in terms of energy efficiency",
+    "volume": "70",
+    "author": "Kang",
+    "year": "2014",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib23",
+    "first-page": "31",
+    "article-title": "Global distribution of grid-connected electrical energy storage",
+    "volume": "09",
+    "author": "KuB",
+    "year": "2016",
+    "journal-title": "Int. J. Sustain. Energy Plan. Manag."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib24",
+    "doi-asserted-by": "crossref",
+    "first-page": "3432",
+    "DOI": "10.1002/anie.201410376",
+    "article-title": "The emerging chemistry of sodium ion batteries for electrochemical energy storage",
+    "volume": "54",
+    "author": "Kundu",
+    "year": "2015",
+    "journal-title": "Angew. Chem. Int. Ed."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib25",
+    "doi-asserted-by": "crossref",
+    "first-page": "3806",
+    "DOI": "10.1016/j.egypro.2017.03.890",
+    "article-title": "Economic viability of second use electric vehicle batteries for energy storage in residential applications",
+    "volume": "105",
+    "author": "Madlener",
+    "year": "2017",
+    "journal-title": "Energy Procedia"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib26",
+    "series-title": "Electric Vehicle Symposium EVS 27. Barcelona",
+    "first-page": "1",
+    "article-title": "Impact of higher power PEV charge levels on three U . S . Radial system and field trial findings on ESB \u2019 s low voltage residential network",
+    "author": "Maitra",
+    "year": "2013"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib27",
+    "series-title": "IEEE Energy Conversion Congress and Expo. Milwakee",
+    "article-title": "Evaluation of lithium-ion battery second life performance and degradation",
+    "author": "Martinez-Laserna",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib28",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1109/TIA.2018.2801262",
+    "article-title": "Technical viability of battery second life: a study from the ageing perspective",
+    "author": "Martinez-Laserna",
+    "year": "2018",
+    "journal-title": "IEEE Trans. Ind. Appl."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib29",
+    "first-page": "413",
+    "article-title": "Evaluation and efficiency comparison of front end AC-DC plug-in hybrid charger topologies. Smart grid",
+    "volume": "3",
+    "author": "Musavi",
+    "year": "2012",
+    "journal-title": "IEEE Trans."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib30",
+    "series-title": "SAE World Congress and Exhibition. Detroit",
+    "article-title": "A Techno-economic analysis of PEV battery second use_ repurposed battery selling price and commercial and industrial end_user value",
+    "author": "Neubauer",
+    "year": "2012"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib31",
+    "doi-asserted-by": "crossref",
+    "first-page": "1866",
+    "DOI": "10.1007/s11367-014-0788-0",
+    "article-title": "Environmental impacts of hybrid, plug-in hybrid, and battery electric vehicles\u2014what can we learn from life cycle assessment?",
+    "volume": "19",
+    "author": "Nordel\u00f6f",
+    "year": "2014",
+    "journal-title": "Int. J. Life Cycle Assess."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib32",
+    "doi-asserted-by": "crossref",
+    "first-page": "6550",
+    "DOI": "10.1021/es903729a",
+    "article-title": "Contribution of Li-ion batteries to the environmental impact of electric vehicles",
+    "volume": "44",
+    "author": "Notter",
+    "year": "2010",
+    "journal-title": "Environ. Sci. Technol."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib33",
+    "doi-asserted-by": "crossref",
+    "first-page": "229",
+    "DOI": "10.1016/j.joule.2017.08.019",
+    "article-title": "Lithium-ion battery supply chain considerations: analysis of potential bottlenecks in critical metals",
+    "volume": "1",
+    "author": "Olivetti",
+    "year": "2017",
+    "journal-title": "Joule"
+   },
+   {
+    "issue": "24",
+    "key": "10.1016/j.jenvman.2018.11.046_bib34",
+    "article-title": "Sustainability assessment of second use applications of automotive batteries: ageing of Li-ion battery cells in automotive and grid-scale Applications",
+    "volume": "9",
+    "author": "Podias",
+    "year": "2018",
+    "journal-title": "World Electr. Veh. J."
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib35",
+    "series-title": "Electricity Energy Storage Technology Options",
+    "author": "Rastler",
+    "year": "2010"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib36",
+    "series-title": "El Sistema El\u00e9ctrico Espa\u00f1ol",
+    "author": "Red Electrica de Espa\u00f1a",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib37",
+    "series-title": "13th International Conference on the European Energy Market, EEM",
+    "article-title": "Critical evaluation of European Union legislation on the second use of degraded traction batteries",
+    "author": "Reinhardt",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib38",
+    "series-title": "Power Electronics and Applications (EPE), 2013 15th European Conference on",
+    "article-title": "Selection and impedance based model of a lithium ion battery technology for integration with Virtual Power Plant",
+    "author": "Swierczynski",
+    "year": "2013"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib39",
+    "doi-asserted-by": "crossref",
+    "first-page": "269",
+    "DOI": "10.1016/j.jpowsour.2005.01.006",
+    "article-title": "Ageing mechanisms in lithium-ion batteries",
+    "volume": "147",
+    "author": "Vetter",
+    "year": "2005",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "10.1016/j.jenvman.2018.11.046_bib40",
+    "doi-asserted-by": "crossref",
+    "first-page": "5147",
+    "DOI": "10.1016/j.jpowsour.2011.02.025",
+    "article-title": "Investigation of battery end-of-life conditions for plug-in hybrid electric vehicles",
+    "volume": "196",
+    "author": "Wood",
+    "year": "2011",
+    "journal-title": "J. Power Sources"
+   }
+  ],
+  "container-title": [
+   "Journal of Environmental Management"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0301479718313124?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0301479718313124?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2025,
+     10,
+     4
+    ]
+   ],
+   "date-time": "2025-10-04T08:55:05Z",
+   "timestamp": 1759568105000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0301479718313124"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2019,
+     2
+    ]
+   ]
+  },
+  "references-count": 41,
+  "alternative-id": [
+   "S0301479718313124"
+  ],
+  "URL": "https://doi.org/10.1016/j.jenvman.2018.11.046",
+  "relation": {},
+  "ISSN": [
+   "0301-4797"
+  ],
+  "issn-type": [
+   {
+    "value": "0301-4797",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2019,
+     2
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "Elsevier",
+    "name": "publisher",
+    "label": "This article is maintained by"
+   },
+   {
+    "value": "Second life batteries lifespan: Rest of useful life and environmental analysis",
+    "name": "articletitle",
+    "label": "Article Title"
+   },
+   {
+    "value": "Journal of Environmental Management",
+    "name": "journaltitle",
+    "label": "Journal Title"
+   },
+   {
+    "value": "https://doi.org/10.1016/j.jenvman.2018.11.046",
+    "name": "articlelink",
+    "label": "CrossRef DOI link to publisher maintained version"
+   },
+   {
+    "value": "article",
+    "name": "content_type",
+    "label": "Content Type"
+   },
+   {
+    "value": "\u00a9 2018 The Authors. Published by Elsevier Ltd.",
+    "name": "copyright",
+    "label": "Copyright"
+   }
+  ]
+ }
+}

@@ -1,0 +1,267 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T15:28:45Z",
+   "timestamp": 1790782125090,
+   "version": "4.1.0"
+  },
+  "reference-count": 22,
+  "publisher": "Institute of Mathematical Statistics",
+  "issue": "5",
+  "content-domain": {
+   "domain": [],
+   "crossmark-restriction": false
+  },
+  "short-container-title": [
+   "Ann. Statist."
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2001,
+     10,
+     1
+    ]
+   ]
+  },
+  "DOI": "10.1214/aos/1013203451",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2002,
+     10,
+     11
+    ]
+   ],
+   "date-time": "2002-10-11T16:16:32Z",
+   "timestamp": 1034352992000
+  },
+  "source": "Crossref",
+  "is-referenced-by-count": 23100,
+  "title": [
+   "Greedy function approximation: A gradient boosting machine."
+  ],
+  "prefix": "10.1214",
+  "volume": "29",
+  "author": [
+   {
+    "given": "Jerome H.",
+    "family": "Friedman",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "108",
+  "reference": [
+   {
+    "key": "1",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Becker, R. A. and Cleveland, W. S (1996). The design and control ofTrellis display. J. Comput. Statist. Graphics 5 123-155.",
+    "DOI": "10.1080/10618600.1996.10474701"
+   },
+   {
+    "key": "2",
+    "unstructured": "Breiman, L. (1997). Pasting bites together for prediction in large data sets and on-line. Technical report, Dept. Statistics, Univ. California, Berkeley."
+   },
+   {
+    "key": "3",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Breiman, L. (1999). Prediction games and arcing algorithms. Neural Comp. 11 1493-1517.",
+    "DOI": "10.1162/089976699300016106"
+   },
+   {
+    "key": "4",
+    "unstructured": "Breiman, L., Friedman, J. H., Olshen, R. and Stone, C. (1983). Classification and Regression Trees. Wadsworth, Belmont, CA."
+   },
+   {
+    "key": "6",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Donoho, D. L. (1993). Nonlinear wavelete methods for recovery of signals, densities, and spectra from indirect and noisy data. In Different Perspectives on Wavelets. Proceedings of Symposium in Applied Mathematics (I. Daubechies, ed.) 47 173-205. Amer. Math. Soc., Providence RI.",
+    "DOI": "10.1090/psapm/047/1268002"
+   },
+   {
+    "key": "7",
+    "unstructured": "Drucker, H. (1997). Improving regressors using boosting techniques. Proceedings of Fourteenth International Conference on Machine Learning (D. Fisher, Jr., ed.) 107-115. MorganKaufmann, San Francisco."
+   },
+   {
+    "key": "8",
+    "doi-asserted-by": "publisher",
+    "unstructured": "Duffy, N. and Helmbold, D. (1999). A geometric approach to leveraging weak learners. In Computational Learning Theory. Proceedings of 4th European Conference EuroCOLT99 (P. Fischer and H. U. Simon, eds.) 18-33. Springer, New York.",
+    "DOI": "10.1007/3-540-49097-3_3"
+   },
+   {
+    "key": "9",
+    "unstructured": "Freund, Y. and Schapire, R. (1996). Experiments with a new boosting algorithm. In Machine Learning: Proceedings of the Thirteenth International Conference 148-156. Morgan Kaufman, San Francisco."
+   },
+   {
+    "key": "11",
+    "doi-asserted-by": "publisher",
+    "unstructured": "Friedman J. H., Hastie, T. and Tibshirani, R. (2000). Additive logistic regression: a statistical view ofboosting (with discussion). Ann. Statist. 28 337-407.",
+    "DOI": "10.1214/aos/1016218223"
+   },
+   {
+    "key": "12",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Griffin, W. L., Fisher, N. I., Friedman J. H., Ryan, C. G. and O'Reilly, S. (1999). Cr-Pyrope garnets in lithospheric mantle. J. Petrology. 40 679-704.",
+    "DOI": "10.1093/petroj/40.5.679"
+   },
+   {
+    "key": "14",
+    "doi-asserted-by": "publisher",
+    "unstructured": "Huber, P. (1964). Robust estimation ofa location parameter. Ann. Math. Statist. 35 73-101.",
+    "DOI": "10.1214/aoms/1177703732"
+   },
+   {
+    "key": "15",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Mallat, S. and Zhang, Z. (1993). Matching pursuits with time frequency dictionaries. IEEE Trans. Signal Processing 41 3397-3415.",
+    "DOI": "10.1109/78.258082"
+   },
+   {
+    "key": "16",
+    "unstructured": "Powell, M. J. D. (1987). Radial basis functions for multivariate interpolation: a review. In Algorithms for Approximation (J. C. Mason and M. G. Cox, eds.) 143-167. Clarendon Press, Oxford."
+   },
+   {
+    "key": "19",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Rumelhart, D. E., Hinton, G. E. and Williams, R. J. (1986). Learning representations by backpropagating errors. Nature 323 533-536.",
+    "DOI": "10.1038/323533a0"
+   },
+   {
+    "key": "20",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Schapire, R. and Singer, Y. (1998). Improved boosting algorithms using confidence-rated predictions. In Proceedings of the Eleventh Annual Conference on Computational Learning Theory. ACM, New York.",
+    "DOI": "10.1145/279943.279960"
+   },
+   {
+    "key": "21",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Vapnik, V. N. (1995). The Nature of Statistical Learning Theory. Springer, New York.",
+    "DOI": "10.1007/978-1-4757-2440-0"
+   },
+   {
+    "key": "13",
+    "unstructured": "Hastie, T. and Tibshirani, R. (1990). Generalized Additive Models. Chapman and Hall, London."
+   },
+   {
+    "key": "5",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Copas, J. B. (1983). Regression, prediction, and shrinkage (with discussion). J. Roy. Statist. Soc. Ser. B 45 311-354.",
+    "DOI": "10.1111/j.2517-6161.1983.tb01258.x"
+   },
+   {
+    "key": "10",
+    "doi-asserted-by": "publisher",
+    "unstructured": "Friedman, J. H. (1991). Multivariate adaptive regression splines (with discussion). Ann. Statist. 19 1-141.",
+    "DOI": "10.1214/aos/1176347963"
+   },
+   {
+    "key": "17",
+    "unstructured": "Ratsch, G., Onoda, T. and Muller, K. R. (1998). Soft margins for AdaBoost. NeuroCOLT Technical Report NC-TR-98-021."
+   },
+   {
+    "key": "18",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Ripley, B. D. (1996). Pattern Recognition and Neural Networks. Cambridge Univ. Press.",
+    "DOI": "10.1017/CBO9780511812651"
+   },
+   {
+    "key": "22",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Warner, J. R., Toronto, A. E., Veasey, L. R. and Stephenson, R. (1961). A mathematical model for medical diagnosis-application to congenital heart disease. J. Amer. Med. Assoc. 177 177-184.",
+    "DOI": "10.1001/jama.1961.03040290005002"
+   }
+  ],
+  "container-title": [
+   "The Annals of Statistics"
+  ],
+  "original-title": [],
+  "link": [
+   {
+    "URL": "http://projecteuclid.org/download/pdf_1/euclid.aos/1013203451",
+    "content-type": "unspecified",
+    "content-version": "vor",
+    "intended-application": "similarity-checking"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2021,
+     5,
+     9
+    ]
+   ],
+   "date-time": "2021-05-09T00:53:31Z",
+   "timestamp": 1620521611000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://projecteuclid.org/journals/annals-of-statistics/volume-29/issue-5/Greedy-function-approximation-A-gradient-boosting-machine/10.1214/aos/1013203451.full"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2001,
+     10,
+     1
+    ]
+   ]
+  },
+  "references-count": 22,
+  "journal-issue": {
+   "issue": "5",
+   "published-online": {
+    "date-parts": [
+     [
+      2001,
+      10,
+      1
+     ]
+    ]
+   }
+  },
+  "URL": "https://doi.org/10.1214/aos/1013203451",
+  "relation": {},
+  "ISSN": [
+   "0090-5364"
+  ],
+  "issn-type": [
+   {
+    "value": "0090-5364",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2001,
+     10,
+     1
+    ]
+   ]
+  }
+ }
+}

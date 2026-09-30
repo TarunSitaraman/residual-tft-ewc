@@ -1,0 +1,719 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     8,
+     20
+    ]
+   ],
+   "date-time": "2026-08-20T16:08:19Z",
+   "timestamp": 1787242099813,
+   "version": "build-2736575974"
+  },
+  "reference-count": 40,
+  "publisher": "Elsevier BV",
+  "issue": "1",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2023,
+       3,
+       1
+      ]
+     ],
+     "date-time": "2023-03-01T00:00:00Z",
+     "timestamp": 1677628800000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2023,
+       3,
+       1
+      ]
+     ],
+     "date-time": "2023-03-01T00:00:00Z",
+     "timestamp": 1677628800000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/legal/tdmrep-license"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2023,
+       2,
+       23
+      ]
+     ],
+     "date-time": "2023-02-23T00:00:00Z",
+     "timestamp": 1677110400000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "http://creativecommons.org/licenses/by/4.0/"
+   }
+  ],
+  "funder": [
+   {
+    "DOI": "10.13039/501100019125",
+    "name": "Sorbonne University",
+    "doi-asserted-by": "publisher",
+    "id": [
+     {
+      "id": "10.13039/501100019125",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "elsevier.com",
+    "sciencedirect.com"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Next Energy"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2023,
+     3
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.nxener.2023.100013",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2023,
+     3,
+     8
+    ]
+   ],
+   "date-time": "2023-03-08T08:11:58Z",
+   "timestamp": 1678263118000
+  },
+  "page": "100013",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 7,
+  "title": [
+   "Transferring state of health estimation neural networks for different battery chemistries and charging protocols using renormalization and transfer learning"
+  ],
+  "prefix": "10.1016",
+  "volume": "1",
+  "author": [
+   {
+    "given": "Antonio",
+    "family": "Rocha Azevedo",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "David",
+    "family": "Benhaiem",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "J\u00e9r\u00e9mie-Luc",
+    "family": "Sanchez",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Kyle",
+    "family": "Reeves",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-1753-491X",
+    "authenticated-orcid": false,
+    "given": "Mathieu",
+    "family": "Salanne",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib1",
+    "doi-asserted-by": "crossref",
+    "first-page": "1167",
+    "DOI": "10.1021/ja3091438",
+    "article-title": "The Li-Ion rechargeable battery: a perspective",
+    "volume": "135",
+    "author": "Goodenough",
+    "year": "2013",
+    "journal-title": "J. Am. Chem. Soc."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib2",
+    "doi-asserted-by": "crossref",
+    "first-page": "652",
+    "DOI": "10.1038/451652a",
+    "article-title": "Building better batteries",
+    "volume": "451",
+    "author": "Armand",
+    "year": "2008",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib3",
+    "doi-asserted-by": "crossref",
+    "first-page": "45",
+    "DOI": "10.1038/nmat4777",
+    "article-title": "Sustainability and in situ monitoring in battery development",
+    "volume": "16",
+    "author": "Grey",
+    "year": "2017",
+    "journal-title": "Nat. Mater."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib4",
+    "doi-asserted-by": "crossref",
+    "first-page": "194",
+    "DOI": "10.1038/s41893-022-00859-y",
+    "article-title": "Sensing as the key to battery lifetime and sustainability",
+    "volume": "5",
+    "author": "Huang",
+    "year": "2022",
+    "journal-title": "Nat. Sustain."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib5",
+    "doi-asserted-by": "crossref",
+    "first-page": "1243",
+    "DOI": "10.1021/acsnano.9b04365",
+    "article-title": "Electrode degradation in lithium-ion batteries",
+    "volume": "14",
+    "author": "Pender",
+    "year": "2020",
+    "journal-title": "ACS Nano"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib6",
+    "doi-asserted-by": "crossref",
+    "first-page": "8200",
+    "DOI": "10.1039/D1CP00359C",
+    "article-title": "Lithium ion battery degradation: what you need to know",
+    "volume": "23",
+    "author": "Edge",
+    "year": "2021",
+    "journal-title": "Phys. Chem. Chem. Phys."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib7",
+    "doi-asserted-by": "crossref",
+    "first-page": "459",
+    "DOI": "10.1002/tcr.201700057",
+    "article-title": "Towards K-Ion and Na-Ion batteries as \u201cbeyond Li-Ion",
+    "volume": "18",
+    "author": "Kubota",
+    "year": "2018",
+    "journal-title": "Chem. Rec."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib8",
+    "doi-asserted-by": "crossref",
+    "first-page": "18931",
+    "DOI": "10.1021/acsnano.1c08428",
+    "article-title": "Recent advances and perspectives of battery-type anode materials for potassium Ion Storage",
+    "volume": "15",
+    "author": "Liu",
+    "year": "2021",
+    "journal-title": "ACS Nano"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib9",
+    "doi-asserted-by": "crossref",
+    "first-page": "16321",
+    "DOI": "10.1021/acsnano.0c07041",
+    "article-title": "Anode materials for aqueous zinc ion batteries: mechanisms, properties, and perspectives",
+    "volume": "14",
+    "author": "Wang",
+    "year": "2020",
+    "journal-title": "ACS Nano"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib10",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.jpowsour.2020.228872",
+    "article-title": "Challenges of today for na-based batteries of the future: from materials to cell metrics",
+    "volume": "482",
+    "author": "Hasa",
+    "year": "2021",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib11",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.rser.2019.109334",
+    "article-title": "State estimation for advanced battery management: key challenges and future trends",
+    "volume": "114",
+    "author": "Hu",
+    "year": "2019",
+    "journal-title": "Renew. Sustain. Energy Rev."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib12",
+    "doi-asserted-by": "crossref",
+    "first-page": "572",
+    "DOI": "10.1016/j.rser.2015.11.042",
+    "article-title": "Critical review of state of health estimation methods of Li-ion batteries for real applications",
+    "volume": "56",
+    "author": "Berecibar",
+    "year": "2016",
+    "journal-title": "Renew. Sustain. Energy Rev."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib13",
+    "doi-asserted-by": "crossref",
+    "first-page": "379",
+    "DOI": "10.1016/j.jclepro.2018.05.074",
+    "article-title": "A mechanism identification model based state-of-health diagnosis of lithium-ion batteries for energy storage applications",
+    "volume": "193",
+    "author": "Ma",
+    "year": "2018",
+    "journal-title": "J. Clean. Prod."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib14",
+    "doi-asserted-by": "crossref",
+    "first-page": "52796",
+    "DOI": "10.1109/ACCESS.2020.2980961",
+    "article-title": "Machine learning applied to electrified vehicle battery state of charge and state of health estimation: state-of-the-art",
+    "volume": "8",
+    "author": "Vidal",
+    "year": "2020",
+    "journal-title": "IEEE Access"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib15",
+    "doi-asserted-by": "crossref",
+    "first-page": "6464",
+    "DOI": "10.1039/D1EE02186A",
+    "article-title": "Monitoring battery electrolyte chemistry via in-operando tilted fiber bragg grating sensors",
+    "volume": "14",
+    "author": "Huang",
+    "year": "2021",
+    "journal-title": "Energy Env. Sci."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib16",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1002/aenm.202101490",
+    "article-title": "Deciphering interfacial reactions via optical sensing to tune the interphase chemistry for optimized Na-ion electrolyte formulation",
+    "volume": "11",
+    "author": "Desai",
+    "year": "2021",
+    "journal-title": "Adv. Energy Mater."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib17",
+    "doi-asserted-by": "crossref",
+    "first-page": "547",
+    "DOI": "10.1038/s41467-022-28267-y",
+    "article-title": "Operando monitoring of ion activities in aqueous batteries with plasmonic fiber-optic sensors",
+    "volume": "13",
+    "author": "Wang",
+    "year": "2022",
+    "journal-title": "Nat. Commun."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib18",
+    "doi-asserted-by": "crossref",
+    "first-page": "1153",
+    "DOI": "10.1038/s41467-022-28792-w",
+    "article-title": "Optical sensors for operando stress monitoring in lithium-based batteries containing solid-state or liquid electrolytes",
+    "volume": "13",
+    "author": "AlberoBlanquer",
+    "year": "2022",
+    "journal-title": "Nat. Commun."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib19",
+    "doi-asserted-by": "crossref",
+    "first-page": "1422",
+    "DOI": "10.1021/acsenergylett.1c00194",
+    "article-title": "How machine learning will revolutionize electrochemical sciences",
+    "volume": "6",
+    "author": "Mistry",
+    "year": "2021",
+    "journal-title": "ACS Energy Lett."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib20",
+    "doi-asserted-by": "crossref",
+    "first-page": "383",
+    "DOI": "10.1038/s41560-019-0356-8",
+    "article-title": "Data-driven prediction of battery cycle life before capacity degradation",
+    "volume": "4",
+    "author": "Severson",
+    "year": "2019",
+    "journal-title": "Nat. Energy"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib21",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1149/1945-7111/abec55",
+    "article-title": "Perspective \u2013 combining physics and machine learning to predict battery lifetime",
+    "volume": "168",
+    "author": "Aykol",
+    "year": "2021",
+    "journal-title": "J. Electrochem. Soc."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib22",
+    "doi-asserted-by": "crossref",
+    "first-page": "3187",
+    "DOI": "10.1016/j.joule.2021.10.010",
+    "article-title": "Bayesian learning for rapid prediction of lithium-ion battery-cycling protocols",
+    "volume": "5",
+    "author": "Jiang",
+    "year": "2021",
+    "journal-title": "Joule"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib23",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1002/adma.202101474",
+    "article-title": "Machine learning: an advanced platform for materials development and state prediction in lithium-ion batteries",
+    "volume": "34",
+    "author": "Lv",
+    "year": "2022",
+    "journal-title": "Adv. Mater."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib24",
+    "doi-asserted-by": "crossref",
+    "first-page": "1328",
+    "DOI": "10.1016/j.renene.2022.08.123",
+    "article-title": "A hybrid neural network model with improved input for state of charge estimation of lithium-ion battery at low temperatures",
+    "volume": "198",
+    "author": "Cui",
+    "year": "2022",
+    "journal-title": "Renew. Energy"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib25",
+    "doi-asserted-by": "crossref",
+    "first-page": "40",
+    "DOI": "10.1186/s41601-022-00261-y",
+    "article-title": "Online estimation of SOH for lithium-ion battery based on SSA-Elman neural network. Prot. Control",
+    "volume": "7",
+    "author": "Guo",
+    "year": "2022",
+    "journal-title": "Mod. Power Syst."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib26",
+    "doi-asserted-by": "crossref",
+    "first-page": "6665",
+    "DOI": "10.3390/en15186665",
+    "article-title": "Electrochemical impedance spectroscopy based on the state of health estimation for lithium-ion batteries",
+    "volume": "15",
+    "author": "Li",
+    "year": "2022",
+    "journal-title": "Energies"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib27",
+    "doi-asserted-by": "crossref",
+    "first-page": "92",
+    "DOI": "10.1016/j.apenergy.2016.05.051",
+    "article-title": "Real-time state-of-health estimation for electric vehicle batteries: a data-driven approach",
+    "volume": "176",
+    "author": "You",
+    "year": "2016",
+    "journal-title": "Appl. Energy"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib28",
+    "doi-asserted-by": "crossref",
+    "first-page": "4885",
+    "DOI": "10.1109/TIE.2017.2674593",
+    "article-title": "Diagnosis of electric vehicle batteries using recurrent neural networks",
+    "volume": "64",
+    "author": "You",
+    "year": "2017",
+    "journal-title": "IEEE Trans. Ind. Electron."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib29",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.jpowsour.2022.231027",
+    "article-title": "Battery health estimation with degradation pattern recognition and transfer learning",
+    "volume": "525",
+    "author": "Deng",
+    "year": "2022",
+    "journal-title": "J. Power Sources"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib30",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Li, Y., Tao, J. CNN and transfer learning based online SOH estimation for lithium-ion battery.2020 Chinese Control And Decision Conference (CCDC) 2020, 5489\u20135494.",
+    "DOI": "10.1109/CCDC49329.2020.9164208"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib31",
+    "article-title": "Battery data set",
+    "author": "Saha",
+    "year": "2007",
+    "journal-title": "NASA Ames Progn. Data Repos."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib32",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1002/aenm.201901431",
+    "article-title": "A new electrolyte formulation for securing high temperature cycling and storage performances of na-ion batteries",
+    "volume": "9",
+    "author": "Yan",
+    "year": "2019",
+    "journal-title": "Adv. Energy Mater."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib33",
+    "doi-asserted-by": "crossref",
+    "first-page": "447",
+    "DOI": "10.1038/s42256-021-00312-3",
+    "article-title": "Machine learning pipeline for battery state-of-health estimation",
+    "volume": "3",
+    "author": "Roman",
+    "year": "2021",
+    "journal-title": "Nat. Mach. Intell."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib34",
+    "doi-asserted-by": "crossref",
+    "first-page": "1185",
+    "DOI": "10.3390/en15031185",
+    "article-title": "A convolutional neural network approach for estimation of Li-ion battery state of health from charge profiles",
+    "volume": "15",
+    "author": "Chemali",
+    "year": "2022",
+    "journal-title": "Energies"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib35",
+    "doi-asserted-by": "crossref",
+    "first-page": "1735",
+    "DOI": "10.1162/neco.1997.9.8.1735",
+    "article-title": "Long short-term memory",
+    "volume": "9",
+    "author": "Hochreiter",
+    "year": "1997",
+    "journal-title": "Neural Comput."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib36",
+    "unstructured": "Yosinski, J., Clune, J., Bengio, Y., Lipson, H. How Transferable Are Features in Deep Neural Networks? Proceedings of the 27th International Conference on Neural Information Processing Systems - Volume 2. Cambridge, MA, USA, 2014; pp 3320\u20133328."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib37",
+    "doi-asserted-by": "crossref",
+    "first-page": "4560",
+    "DOI": "10.1109/TVT.2019.2906487",
+    "article-title": "xEV Li-Ion battery low-temperature effects\u2014review",
+    "volume": "68",
+    "author": "Vidal",
+    "year": "2019",
+    "journal-title": "IEEE Trans. Veh. Technol."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib38",
+    "article-title": "A Roadmap for transforming research to invent the batteries of the future designed within the european large scale research initiative BATTERY 2030+",
+    "author": "Amici",
+    "year": "2021",
+    "journal-title": "Adv. Energy Mater."
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib39",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1002/admi.202101734",
+    "article-title": "Modeling the solid electrolyte interphase: machine learning as a game changer?",
+    "volume": "9",
+    "author": "Diddens",
+    "year": "2022",
+    "journal-title": "Adv. Mater. Interfaces"
+   },
+   {
+    "key": "10.1016/j.nxener.2023.100013_bib40",
+    "doi-asserted-by": "crossref",
+    "first-page": "718",
+    "DOI": "10.1016/j.ensm.2022.06.007",
+    "article-title": "Battery state-of-charge estimation amid dynamic usage with physics-informed deep learning",
+    "volume": "50",
+    "author": "Tian",
+    "year": "2022",
+    "journal-title": "Energy Storage Mater."
+   }
+  ],
+  "container-title": [
+   "Next Energy"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S2949821X23000121?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S2949821X23000121?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2024,
+     9,
+     24
+    ]
+   ],
+   "date-time": "2024-09-24T10:14:28Z",
+   "timestamp": 1727172868000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S2949821X23000121"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2023,
+     3
+    ]
+   ]
+  },
+  "references-count": 40,
+  "journal-issue": {
+   "issue": "1",
+   "published-print": {
+    "date-parts": [
+     [
+      2023,
+      3
+     ]
+    ]
+   }
+  },
+  "alternative-id": [
+   "S2949821X23000121"
+  ],
+  "URL": "https://doi.org/10.1016/j.nxener.2023.100013",
+  "relation": {},
+  "ISSN": [
+   "2949-821X"
+  ],
+  "issn-type": [
+   {
+    "value": "2949-821X",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2023,
+     3
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "Elsevier",
+    "name": "publisher",
+    "label": "This article is maintained by"
+   },
+   {
+    "value": "Transferring state of health estimation neural networks for different battery chemistries and charging protocols using renormalization and transfer learning",
+    "name": "articletitle",
+    "label": "Article Title"
+   },
+   {
+    "value": "Next Energy",
+    "name": "journaltitle",
+    "label": "Journal Title"
+   },
+   {
+    "value": "https://doi.org/10.1016/j.nxener.2023.100013",
+    "name": "articlelink",
+    "label": "CrossRef DOI link to publisher maintained version"
+   },
+   {
+    "value": "article",
+    "name": "content_type",
+    "label": "Content Type"
+   },
+   {
+    "value": "\u00a9 2023 The Author(s). Published by Elsevier Ltd.",
+    "name": "copyright",
+    "label": "Copyright"
+   }
+  ],
+  "article-number": "100013"
+ }
+}
