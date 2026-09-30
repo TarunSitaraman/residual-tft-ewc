@@ -1,193 +1,242 @@
 % =============================================================================
 % Methodology
 %
-% Every design choice below is implemented in the repository and recorded in
-% docs/DECISIONS.md (D1--D13): data and labels D1--D3, persistence and RPT
-% overlap D4, metrics D8, reuse classes D10, tuning D11, TFT D12, missing
-% temperature D13. Decision numbers are internal and are not cited in the text. Values that depend on the real-data run are
-% marked \todo{...}; fill them only from committed results files produced on a
-% clean commit (results/*.json, git_dirty = false).
+% Written from the implementation and docs/DECISIONS.md. Main sources:
+%   D11 tuning, D12 TFT, D14 protocol leakage, D16 reframing and diagnostic
+%   features, D17 capacity labels, D18 forecasting protocol (S1), D19 second
+%   dataset, D20 protocol on S6. Data sources: docs/EXTERNAL_DATA.md (S1, S6).
+% Decision numbers are internal and are not cited in the text. Every number in
+% this section is traceable to results/*.json on a clean commit or to the
+% data report (docs/DATA_REPORT.md).
 % =============================================================================
 
 \section{Methodology}
 \label{sec:methods}
 
-Fig.~\ref{fig:pipeline} \todo{pipeline figure: data $\rightarrow$ alignment $\rightarrow$ task stream $\rightarrow$ strategies $\rightarrow$ SOH $\rightarrow$ reuse class} summarises the workflow. Cycling measurements from heterogeneous second-life cells are reduced to cycle-level features, labelled with a relative state of health (SOH) from reference performance tests (RPTs) using a strictly causal alignment, and presented to a model as a stream of battery groups. Each learning strategy is evaluated on how well it adapts to each new group and how much it retains of the earlier ones, and the predicted SOH is mapped to reuse categories.
+We study \emph{forecasting} of the state of health (SOH) of second-life cells: given everything measured up to a reference performance test (RPT), predict the SOH one to three RPTs ahead. Cells or usage conditions arrive as a stream of tasks, and a model must adapt to each new task without forgetting the earlier ones. Two public datasets are used (\S\ref{sec:data}); SOH is defined from a slow-rate discharge capacity (\S\ref{sec:soh}); inputs combine the SOH history, planned usage and diagnostic features measured at the RPT (\S\ref{sec:features}); and the protocols, models and statistics were fixed before any model was trained (\S\ref{sec:task}--\S\ref{sec:metrics}).
+
+\emph{Change of task after inspecting the data.} The study was first designed to estimate the \emph{current} SOH from cycle-level features of the cycling data. On the first dataset, those features carried almost no health information: the median within-battery Spearman correlation with SOH was 0.09, against $-0.99$ for elapsed time. Test errors of learned estimators were also larger than those of a persistence baseline (0.99~pp for persistence, against 1.78 and 2.37~pp for gradient boosting and ridge regression, on the labels of the processed tables). We therefore reframed the task as forecasting, which is the Temporal Fusion Transformer's native setting. This decision was taken after seeing the data. The forecasting protocol, including feature sets, splits, methods, hyperparameter grids and statistical tests, was then committed to the project repository before any forecasting model was fitted. Deviations from it are reported below.
 
 % -----------------------------------------------------------------------------
-\subsection{Dataset}
+\subsection{Datasets}
 \label{sec:data}
 
-% Source, version, licence and verification: docs/EXTERNAL_DATA.md (S1, S2).
-We use the public Stanford second-life dataset~\cite{moy2024secondlife,moy2024secondlifedata} (Open Science Framework, file version~2 of 27~February~2025, licensed under CC~BY~4.0). It contains six LG Chem INR21700-M50T cylindrical cells (NMC cathode, graphite--silicon anode, nominal capacity 4.85~Ah), denoted G1, V4, V5, W8, W9 and W10. The cells were first aged for 23~months under an electric-vehicle driving profile (UDDS discharge) with constant-current charging at C/4 (V4), C/2 (W8), 1C (W9, V5) or 3C (W10, G1)~\cite{pozzato2022firstlife}. From 28~October~2022 they were cycled with synthetic residential (V4, W9, W10) or commercial (W8, V5, G1) peak-shaving duty cycles~\cite{moy2023dutycycles}, alternating between 20 and 35~$^\circ$C, with RPTs at 25~$^\circ$C~\cite{moy2024secondlife}. Heterogeneity in this work therefore means differences in first-life ageing and in second-life duty cycle among cells of a single type, not differences in chemistry or manufacturer. Version~2 of the dataset extends the campaign beyond the period described in~\cite{moy2024secondlife}; we use all of it. The cycle-level tables analysed here were derived by the authors from the raw files; we verified that every RPT file and every cycling block they reference is present in the archive (docs/EXTERNAL\_DATA.md).
-The processed data contain \todo{N} cycles in total (\todo{per-group counts, Table~\ref{tab:data}}), of which \todo{N} carry an SOH label, with \todo{min--max} RPTs per battery.
+\subsubsection{S1: second-life NMC cells on grid duty cycles}
+% docs/EXTERNAL_DATA.md S1; DATA_REPORT §1, §5.
+We use the Stanford second-life dataset~\cite{moy2024secondlife,moy2024secondlifedata} (Open Science Framework, file version~2 of 27~February~2025, CC~BY~4.0).
+\begin{itemize}
+  \item \emph{Cells:} six LG Chem INR21700-M50T cylindrical cells (NMC cathode, graphite--silicon anode, 4.85~Ah nominal), denoted G1, V4, V5, W8, W9 and W10.
+  \item \emph{First life:} 23~months under an electric-vehicle driving profile, with constant-current charging at C/4 (V4), C/2 (W8), 1C (W9, V5) or 3C (W10, G1)~\cite{pozzato2022firstlife}.
+  \item \emph{Second life:} from 28~October~2022, synthetic residential (V4, W9, W10) or commercial (W8, V5, G1) peak-shaving duty cycles~\cite{moy2023dutycycles}, in blocks alternating between 20 and 35~$^\circ$C, with RPTs at 25~$^\circ$C~\cite{moy2024secondlife}.
+  \item \emph{RPTs:} each RPT is a C/20 discharge from 4.2 to 2.5~V, interrupted at 4.00, 3.63 and 3.26~V by an 8~s C/2 discharge pulse, a 10~s rest and an 8~s C/2 charge pulse. From the fifth RPT on, electrochemical impedance spectroscopy (EIS) is recorded from 10~kHz to 0.01~Hz at the same three voltages~\cite{moy2024secondlife}.
+  \item \emph{Coverage:} there are 111 RPTs (19 per cell; 16 for W9) over about 27~months, with SOH falling to between 95.1 and 97.4\% (C/20 basis, \S\ref{sec:soh}).
+\end{itemize}
 
-For each cycle, the cycling measurements are summarised by 18 features: the cycle index; mean, minimum and maximum of voltage, current and temperature; maximum charge and discharge capacity; maximum charge and discharge energy; mean power; mean discharge-to-charge capacity ratio; mean energy efficiency; and the number of raw data points. Identifiers (battery, cycling test, timestamp) are used only for grouping, ordering and splitting. Columns derived from the RPT labelling (RPT identifier and index, measured capacity, reference capacity, SOH and days since the RPT) are excluded from the inputs, because they encode the target.
+In S1, heterogeneity means differences in first-life ageing and second-life duty cycle among cells of one type, not differences in chemistry or manufacturer.
 
-\subsubsection{State of health}
-For battery $b$ with RPT capacities $C_{b,1}, C_{b,2}, \dots$ in chronological order, the SOH at RPT $k$ is
+We read the raw RPT and EIS files of the archive directly. We verified that every file and cycling block of the processed tables we started from is present in the archive, and that their RPT capacities are reproduced exactly from the raw files.
+
+Data-quality findings are handled by fixed rules:
+\begin{itemize}
+  \item RPT~2 was run at about 20~$^\circ$C instead of 25~$^\circ$C, as the article's Table~3 notes. It is excluded as origin, as target and from the SOH history.
+  \item Pulses that deviate from the C/2 protocol have their resistance set to missing. This affects the 4.00~V pulse of the first RPT (0.525~A), and V4 and W10 in RPTs 17--19 (1.05~A).
+  \item Galvanostatic EIS files (two spectra of W8) are excluded, because every other spectrum is potentiostatic.
+  \item The EIS of RPT~7 exists only in aggregate files. We decoded them after checking their format against three RPTs where both forms exist. The resulting high-frequency resistance equals the authors' own values for all 18 spectra.
+\end{itemize}
+
+\subsubsection{S6: LFP cells into second life under seven usage conditions}
+% docs/EXTERNAL_DATA.md S6; D19, D20.
+The second dataset~\cite{wheeler2025lfp,wheeler2025lfpdata} (Recherche Data Gouv, version~2.0, CC~BY~4.0) was selected by criteria fixed before screening:
+\begin{itemize}
+  \item a reuse licence;
+  \item a series of capacity checks;
+  \item ageing past first-life end of life;
+  \item heterogeneity that S1 lacks;
+  \item metadata that can be verified.
+\end{itemize}
+
+It contains 20 A123 18650 graphite/LFP cells (1.1~Ah) in seven test cases of two or three cells each. The cases differ in charge mode (CC--CV or CC), charge voltage (3.65 or 3.55~V), charge rate (C/3 or 2C), discharge (WLTP profile at C/3 on average, or constant 2C) and depth of discharge (70 or 100\%). Cells were aged at 50~$^\circ$C and characterised every 100 cycles (C/3 and C/25 charge and discharge), ending at 32--64\% SOH (Fig.~\ref{fig:s6soh}). ``Second life'' in S6 means ageing below 80\% SOH under the same protocol, not a repurposed duty cycle.
+
+We read only the characterisation files from the published archives (1{,}007 files, each checked against the archive's CRC). Our parsing reproduces the authors' own capacity values exactly on all 843 checks present in both. The exported rows are not in time order and are sorted before use.
+
+A check is used only if its C/25 discharge starts from full charge ($\ge 3.40$~V) and reaches the 2.5~V cut-off. This leaves 843 of 847 checks at 50~$^\circ$C. The four exceptions are the acquisition faults the authors report. The initial and final characterisations were run at 25~$^\circ$C and are not used.
+
+% -----------------------------------------------------------------------------
+\subsection{State of health}
+\label{sec:soh}
+
+For cell $b$ with RPT (or check) capacities $C_{b,1}, C_{b,2},\dots$ in chronological order, the SOH at RPT $k$ is
 \begin{equation}
   \mathrm{SOH}_{b,k} = 100\,\frac{C_{b,k}}{C_{b,1}} \;\%,
   \label{eq:soh}
 \end{equation}
-i.e.\ relative to the first observed RPT capacity, not to a nominal rating. The capacity $C_{b,k}$ is the charge discharged in the C/20 steps of the RPT capacity test, excluding the C/2 pulses, following~\cite[Eq.~(1)]{moy2024secondlife}. The pulse protocol changed during the campaign, so including the pulse charge would shift the labels of some cells by up to 0.09~pp. Because the cells are second-life, $C_{b,1}$ is already an aged capacity. All results are therefore statements about capacity fade since the first second-life measurement.
+i.e.\ relative to the first valid measurement, not to a nominal rating.
 
-\subsubsection{Causal label alignment}
-A cycle at time $t$ receives the SOH of the most recent RPT at or before $t$:
-\begin{equation}
-  y(t) = \mathrm{SOH}_{b,k^*}, \qquad k^* = \max\{k : \tau_{b,k} \le t\},
-  \label{eq:alignment}
-\end{equation}
-where $\tau_{b,k}$ is the time of RPT $k$. Cycles before a battery's first RPT have no label and are excluded from supervised training; no label is imputed or extrapolated. The resulting labels are piecewise constant between RPTs. We re-derived the alignment independently and verified it against the delivered data: SOH formula, first-RPT reference, backward alignment, absence of future labels, and the labelled subset \todo{report: all checks passed / list exceptions}.
+\emph{S1.} The capacity $C_{b,k}$ is the charge discharged in the C/20 steps of the RPT, excluding the C/2 pulses, following~\cite[Eq.~(1)]{moy2024secondlife}. The processed tables we started from counted the pulse charge as well. Because the pulse protocol changed during the campaign, that choice shifts the labels of some cells by up to 0.09~pp, which is comparable to one RPT's fade. The C/20 basis is also the one the laboratory used: the monthly 1C discharge current equals $0.9998\times$ the previous C/20 capacity.
 
-RPT timestamps recorded as a date only are read as 00:00, so a cycle later on the same day uses that RPT. Since the time of day of RPTs is not recorded, we repeat the main reference experiment with the alternative convention, in which same-day cycles use the previous RPT (\S\ref{sec:reference}, E5).
+\emph{S6.} The capacity is the C/25 discharge capacity of the check, and the reference is the cell's first valid check at 50~$^\circ$C.
 
-\subsubsection{Missing temperature}
-Temperature is missing for \todo{x\%} of cycles, with \todo{describe pattern: joint across the three statistics, run lengths}. Missing values are never replaced in the stored data. Within a model, a missing value is replaced by the training-set median and flagged by a binary missing indicator (\S\ref{sec:backbones}). Alternatives are evaluated in \S\ref{sec:robustness}.
+Because the S1 cells are second-life, $C_{b,1}$ is already an aged capacity, and S1 results describe fade since the first second-life measurement.
 
 % -----------------------------------------------------------------------------
-\subsection{Continual-learning problem formulation}
-\label{sec:problem}
+\subsection{Forecasting task and inputs}
+\label{sec:task}
+\label{sec:features}
 
-Each battery group $g$ defines a task $\mathcal{T}_g$. Its labelled cycles are ordered by timestamp (ties broken by cycle index) and split chronologically into the first 70\% for training ($\mathcal{D}^{\mathrm{tr}}_g$), the next 15\% for validation ($\mathcal{D}^{\mathrm{va}}_g$) and the last 15\% for testing ($\mathcal{D}^{\mathrm{te}}_g$). No sample is shuffled across these boundaries, so every test evaluates a battery's later life.
+A sample is a triple (cell $b$, origin RPT $k$, horizon $h$), with $h\in\{1,2,3\}$ valid RPTs ahead: about one to three months in S1 and 100--300 cycles in S6. The target is the SOH change $\Delta_{b,k,h} = \mathrm{SOH}_{b,k+h} - \mathrm{SOH}_{b,k}$. Since $\mathrm{SOH}_{b,k}$ is known at the origin, an error in $\Delta$ equals the error in $\mathrm{SOH}_{b,k+h}$, and all errors are reported in SOH percentage points (pp). One model serves all horizons, with $h$ as an input. S1 yields 279 samples and S6 yields 2{,}409.
 
-A stream is an ordering $\pi = (\pi_1,\dots,\pi_T)$ of the $T=6$ tasks. At step $i$, a strategy receives $\mathcal{D}^{\mathrm{tr}}_{\pi_i}$ and $\mathcal{D}^{\mathrm{va}}_{\pi_i}$ only; data of earlier tasks are unavailable unless the strategy explicitly stores them (replay). Battery identity is not a model input, so all methods are task-agnostic at test time.
+Inputs are restricted to information available at the origin. Two feature sets were fixed in advance.
+\begin{itemize}
+  \item \textbf{F0} contains:
+  \begin{itemize}
+    \item the SOH history: $\mathrm{SOH}_{b,k}$, time or cycles since the first RPT, and the fade rate (least-squares slope over the last three valid RPTs; missing with fewer);
+    \item static descriptors: in S1, duty-cycle type and the first-life charge rate, cycle count and end-of-first-life capacity from~\cite[Table~2]{moy2024secondlife}; in S6, the five test-case conditions;
+    \item the \emph{planned} usage until the target: in S1, days to the target RPT and the days of cycling at the 35~$^\circ$C and 20~$^\circ$C set points and without cycling, from the recorded block schedule; in S6, cycles to the target check.
+  \end{itemize}
+  Forecasts are therefore conditional on the planned usage.
+  \item \textbf{F1} adds diagnostic features measured at the origin RPT.
+  \begin{itemize}
+    \item \emph{S1} (47 features):
+    \begin{itemize}
+      \item the charge discharged between the pulse voltages;
+      \item pulse resistance after 0.1, 1 and 8~s at each pulse voltage, computed as $(V_{\mathrm{ref}}-V(t))/(I_{\mathrm{ref}}-I_{\mathrm{pulse}})$ with the C/20 operating point just before the pulse as reference;
+      \item position and height of the maximum of the incremental-capacity curve $-\mathrm{d}Q/\mathrm{d}V$ of the C/20 discharge in five fixed voltage windows (Fig.~\ref{fig:ic});
+      \item from EIS at each voltage: the ohmic resistance $R_0$ (real part where the imaginary part crosses zero), the width of the mid-frequency arc, its peak, and the real part at 1~kHz, 10~Hz, 1~Hz, 0.1~Hz and 0.01~Hz.
+    \end{itemize}
+    The incremental-capacity curve is built from the C/20 segments only. After each pulse, the samples until the voltage returns below its pre-pulse value are dropped (5--9~mAh), so the pulses create no spurious peaks.
+    \item \emph{S6} (17 features):
+    \begin{itemize}
+      \item the C/25 discharge charge above, on and below the main voltage plateau;
+      \item incremental-capacity peak positions and heights in windows fixed from the fresh-cell curves;
+      \item the C/25 charge--discharge voltage hysteresis at half capacity;
+      \item a C/3-versus-C/25 overpotential resistance proxy;
+      \item the C/3/C/25 capacity ratio, the C/3 discharge capacity, the C/25 charge capacity and the mid-discharge voltage.
+    \end{itemize}
+    Two incremental-capacity features that are never observed in S6 are dropped.
+  \end{itemize}
+\end{itemize}
+
+No test current is used as an input. In S1 the currents of the RPT and of the monthly discharge were set from the previous capacity, so they encode the label. Missing values are imputed from training data and flagged by indicators.
 
 % -----------------------------------------------------------------------------
-\subsection{Backbones}
+\subsection{Splits and protocols}
+\label{sec:protocols}
+
+\emph{Purged chronological splits.} For each cell, its valid RPTs are ordered in time, with cut~A at 60\% and cut~B at 80\% of them.
+\begin{itemize}
+  \item Training samples have their target at or before~A.
+  \item Validation samples have their origin at or after~A and their target at or before~B.
+  \item Test samples have their origin at or after~B.
+\end{itemize}
+Samples straddling a cut are not used. Thus no training label lies after a validation origin, and no validation label lies after a test origin. The inputs at a test origin may use every earlier RPT, as a deployed forecaster would.
+
+Across the datasets this gives:
+\begin{itemize}
+  \item S1: 156 training, 36 validation and 51 test samples;
+  \item S6: 1{,}395 training, 432 validation and 462 test samples.
+\end{itemize}
+
+\emph{P1, continual stream (headline).} A task is a cell in S1 (six tasks) and a test case in S6 (seven tasks; its cells' splits are pooled). A stream is an ordering $\pi$ of the $T$ tasks. At step $i$, a strategy receives the training and validation data of task $\pi_i$ only, and past data are available only if the strategy stores them. Each method is run on 10 orders (the identity and nine seeded permutations) with 5 seeds, and all methods see identical orders and seeds.
+
+\emph{P2, unseen group.} We leave one task out: an unseen cell in S1, an unseen usage condition in S6. Models are trained on the remaining groups (train and test splits for fitting, validation splits for early stopping) and tested on every sample of the held-out group.
+
+% -----------------------------------------------------------------------------
+\subsection{Models}
 \label{sec:backbones}
 
-\subsubsection{Input preprocessing}
-Each feature is standardised with the mean and standard deviation of the \emph{first task's} training cycles; missing values are replaced by that task's median and flagged by one indicator per feature. The preprocessing, like the target standardisation below, is fitted once on the first task and then frozen, so no strategy uses statistics of future tasks. The input width is therefore fixed at $2 \times 18$ regardless of which later tasks contain missing values.
+\subsubsection{Backbones}
+Inputs are standardised with the statistics of the first task's training data, missing values are replaced by that task's median, and one missing indicator per feature is appended. This preprocessing and the target standardisation (standard deviation floored at 1~pp) are fitted once and then frozen, so no strategy uses statistics of future tasks.
 
-\subsubsection{Multilayer perceptron}
-The reference backbone is a multilayer perceptron (MLP) with two hidden layers of 128 and 64 ReLU units and dropout 0.1, mapping the 36 inputs of a cycle to its SOH (13{,}057 parameters).
+The \emph{MLP} has two hidden layers of 128 and 64 ReLU units with dropout 0.1.
 
-\subsubsection{Temporal Fusion Transformer}
-The proposed backbone adapts the Temporal Fusion Transformer (TFT)~\cite{lim2021tft} to sequence-to-one \emph{estimation}. The input for a cycle is a window of the $W$ most recent cycles of the same battery, ending at that cycle. The window contains only features and missing indicators, never past SOH labels: those are the RPT step values of \eqref{eq:alignment} and would leak the target. Positions before the start of a battery's history are zero-padded and flagged. The architecture follows~\cite{lim2021tft}:
+The proposed backbone adapts the Temporal Fusion Transformer (TFT)~\cite{lim2021tft}. The input is a window of the $W{=}4$ most recent samples of the same cell and horizon, ending at the current origin. The window contains only input features and missing indicators, never labels, and earlier positions are zero-padded and flagged. The architecture follows~\cite{lim2021tft}:
 \begin{itemize}
-  \item each variable $j$ is embedded from its standardised value and its missing indicator, $\mathbf{e}_{t,j} = \mathbf{W}_j [x_{t,j}, m_{t,j}]^\top + \mathbf{b}_j$, so an imputed value is always marked;
-  \item a variable selection network computes softmax weights over variables at each step from a gated residual network (GRN) and combines variable-wise GRN outputs;
-  \item an LSTM encoder~\cite{hochreiter1997lstm} with a gated skip connection and layer normalisation, and a static-enrichment GRN;
-  \item interpretable multi-head attention with a value projection shared across heads and head-averaged output, masked so that each step attends only to itself and to earlier, non-padded steps;
-  \item a position-wise GRN, a final gated skip connection to the LSTM stage, and a linear output head on the last step.
+  \item per-variable embeddings of value and missing indicator;
+  \item variable selection by gated residual networks (GRN);
+  \item an LSTM encoder~\cite{hochreiter1997lstm} with gated skip connections;
+  \item interpretable multi-head attention (two heads, width $d{=}8$) masked to past, non-padded steps;
+  \item a position-wise GRN and a linear head on the last step.
 \end{itemize}
-Here a GRN maps an input $\mathbf{a}$ to
-\begin{align}
-  \boldsymbol{\eta} &= \mathrm{ELU}(\mathbf{W}_2\mathbf{a}+\mathbf{b}_2), \\
-  \mathrm{GRN}(\mathbf{a}) &= \mathrm{LayerNorm}\big(\mathbf{a} + \mathrm{GLU}(\mathbf{W}_1\boldsymbol{\eta}+\mathbf{b}_1)\big)
-\end{align}
-\cite{lim2021tft}. No static covariates are used, so the static-enrichment GRN has no context input. With model width $d=8$, two attention heads and $W=8$, the TFT has 11{,}999 parameters, matched to the MLP so that differences between the backbones reflect the architecture rather than model size. The window length is fixed a priori; $W\in\{4,16\}$ is reported as a sensitivity analysis. The variable-selection weights and the attention of the estimated cycle over its window are reported as descriptive interpretations of the fitted model, not as causal explanations.
+Static descriptors enter as ordinary inputs; no static context vector is used.
 
-\subsubsection{Target and training}
-The SOH target is standardised with the first task's training mean and standard deviation, the latter floored at 1 percentage point (pp) so that a first task spanning a single RPT does not inflate later targets. Models are trained with Adam~\cite{kingma2015adam} on the mean squared error, with mini-batches of 64 drawn from the current training set, for at most 200 epochs. Early stopping (patience 20) monitors the current task's validation RMSE in SOH pp and restores the best weights. Test data are never used for training, early stopping or selection. All random sources are seeded; the seed is reset per task, and deterministic algorithms and a single CPU thread are used.
+Parameter counts depend on the input width. With F1 they are about 24k (MLP) and 54k (TFT) on S1, and 15k and 19k on S6. The backbones are therefore not capacity-matched on S1.
 
-% -----------------------------------------------------------------------------
-\subsection{Continual-learning strategies}
-\label{sec:strategies}
-
-All strategies share the backbone, preprocessing and training procedure of \S\ref{sec:backbones} and differ only in how they limit forgetting. Let $\mathcal{L}_i(\theta)$ denote the mean squared error on the current task's training data.
-
-\textbf{Fine-tuning} minimises $\mathcal{L}_i$ at each step, with no protection against forgetting. It is the lower bound.
-
-\textbf{Experience replay}~\cite{rolnick2019replay} stores a seeded random sample of $B$ training cycles from each finished task and trains on the union of the current training set and the buffer. Only training cycles of past tasks are stored.
-
-\textbf{Elastic Weight Consolidation} (EWC)~\cite{kirkpatrick2017ewc} adds a quadratic penalty anchoring parameters that were important for earlier tasks:
+\subsubsection{Continual-learning strategies}
+All strategies share backbone, preprocessing and training and differ only in how they limit forgetting.
+\begin{itemize}
+  \item \textbf{Fine-tuning} trains on the current task only; it is the lower bound.
+  \item \textbf{Experience replay}~\cite{rolnick2019replay} stores a seeded random sample of $B$ training samples per finished task and trains on the union with the current task.
+  \item \textbf{Elastic Weight Consolidation} (EWC)~\cite{kirkpatrick2017ewc} adds, for each finished task $j$, a quadratic penalty
 \begin{equation}
-  \mathcal{L}^{\mathrm{EWC}}_i(\theta) = \mathcal{L}_i(\theta) + \frac{\lambda}{2}\sum_{k<i}\sum_{p} F_{k,p}\,\big(\theta_p - \theta^{*}_{k,p}\big)^2,
+  \frac{\lambda}{2}\sum_{p} F_{j,p}\,\big(\theta_p - \theta^{*}_{j,p}\big)^2,
   \label{eq:ewc}
 \end{equation}
-where $\theta^*_k$ are the parameters after task $k$ and $F_k$ is the empirical diagonal Fisher information. $F_k$ is estimated as the mean squared per-sample gradient of the squared error over up to 500 seeded training cycles of task $k$, computed without dropout. One penalty is kept per finished task. The same formulation is applied to both backbones; \emph{TFT\,+\,EWC} is the proposed model.
+  where $\theta^*_j$ are the parameters after task $j$ and $F_j$ is the empirical diagonal Fisher information (mean squared per-sample gradient over up to 500 training samples, without dropout). The same formulation is applied to both backbones; \emph{TFT\,+\,EWC} is the proposed model.
+  \item \textbf{Joint training} fits one model on all tasks' training data at once; it is the upper bound.
+\end{itemize}
 
-\textbf{Learning without Forgetting} (LwF)~\cite{li2018lwf}, adapted to regression, freezes a copy $f_{\theta^{\mathrm{old}}}$ of the model before each new task and adds $\alpha\,\mathbb{E}_{x}\big[(f_\theta(x)-f_{\theta^{\mathrm{old}}}(x))^2\big]$ over the current task's mini-batches, in standardised units. It stores no past data.
+Models are trained with Adam~\cite{kingma2015adam} on the mean squared error, with mini-batches of 64, for at most 200 epochs. Early stopping (patience 20) is on the current task's validation RMSE. All random sources are seeded, and deterministic algorithms and one CPU thread are used.
 
-\textbf{Joint training} fits one model on the union of all tasks' training data, with early stopping on the union of their validation data and preprocessing fitted on the union. It is the upper bound and is computed for both backbones.
+\subsubsection{Reference forecasters}
+These are fitted on all tasks' training and validation data (they need no early stopping) and evaluated on the same test samples:
+\begin{itemize}
+  \item persistence ($\Delta=0$);
+  \item linear extrapolation of the fade rate over the planned time or cycles to the target;
+  \item ridge regression on the planned usage and static descriptors only, on F0 and on F1 (median imputation with indicators, penalty by internal cross-validation);
+  \item histogram gradient boosting on F1 (200 iterations, learning rate 0.05, eight leaves, at least five samples per leaf).
+\end{itemize}
 
 % -----------------------------------------------------------------------------
 \subsection{Hyperparameter selection}
 \label{sec:tuning}
 
-Hyperparameters are selected in two stages, using only validation data, on $3$ group orders that are guaranteed to differ from all evaluation orders (cf.\ the separation of tuning and evaluation streams in~\cite{chaudhry2019agem}). Test periods are not read during selection.
+Hyperparameters are selected on validation data only, on three orders disjoint from the evaluation orders, in two stages.
 \begin{enumerate}
-  \item \emph{Backbone learning rate.} For each backbone separately, fine-tuning streams are run over the same grid $\{3\!\cdot\!10^{-4}, 10^{-3}, 3\!\cdot\!10^{-3}, 10^{-2}\}$, and the rate with the lowest validation plasticity (\S\ref{sec:metrics}) is selected. Both backbones thus receive the same budget. Plasticity is used because the learning rate governs how well each new task is learned, whereas final error would reward under-training, which trivially minimises forgetting.
-  \item \emph{Method hyperparameter.} With the selected rate, each method's own hyperparameter is chosen by the lowest final average validation error: replay $B\in\{50,100,200,400\}$, EWC $\lambda\in\{10^0,\dots,10^5\}$ (both backbones), LwF $\alpha\in\{0.1,0.5,1,2,5\}$.
+  \item \emph{Learning rate per backbone.} Chosen by fine-tuning streams by the lowest validation plasticity (\S\ref{sec:metrics}), from the same grid for both backbones.
+  \item \emph{Method hyperparameters.} Chosen with that learning rate by the lowest final average validation error: replay $B\in\{50,100,200,400\}$ and EWC $\lambda\in\{10^0,\dots,10^5\}$.
 \end{enumerate}
-Ties are resolved towards the smaller value. A selection at the edge of its grid triggers an extension of the grid before evaluation. All other settings are fixed a priori and shared. The selected values are \todo{report (Table~\ref{tab:hyper})}.
+
+A selection at a grid edge triggers extension of the grid. On S1, the first run selected the upper edge ($10^{-2}$) for the TFT, so the grid was extended to $\{3\!\cdot\!10^{-4},\dots,10^{-1}\}$ for both backbones and the experiment was repeated. The extended grid was used on S6 from the start. The selected values are in Table~\ref{tab:hyper}. On S1, every replay buffer size exceeds a task's training set, so replay reduces to full rehearsal.
 
 % -----------------------------------------------------------------------------
-\subsection{Reference experiments}
-\label{sec:reference}
-
-Before continual learning, five reference experiments quantify the difficulty of the task. Each uses three models: ridge regression (median imputation with missing indicators, standardisation, $\ell_2$ penalty chosen from $\{0.01,\dots,100\}$ on validation), and jointly trained MLP and TFT with the learning rate chosen on validation from the grid above.
-\begin{itemize}
-  \item \textbf{E1, within group:} one model trained on all groups' training periods and evaluated on each group's test period.
-  \item \textbf{E2, RPT boundary:} as E1, but each battery's timeline is cut only at RPT changes, with at least one whole RPT interval per split. No SOH value in a test period then occurs in training, which removes interpolation within a known health state.
-  \item \textbf{E3, leave one group out:} for each group, a model is trained on the other five groups' training and validation periods and evaluated on the held-out group's E1 test period. This measures the error on an unseen group (RQ1).
-  \item \textbf{E4, joint training:} identical to E1 with the neural backbones; it is the upper bound of \S\ref{sec:strategies}.
-  \item \textbf{E5, date convention:} E1 after relabelling same-day cycles with the end-of-day convention.
-\end{itemize}
-
-% -----------------------------------------------------------------------------
-\subsection{Evaluation protocol and metrics}
+\subsection{Metrics and statistics}
 \label{sec:metrics}
 
-Each strategy is run on 10 group orders (the identity order and nine seeded permutations) with 5 seeds each, 50 runs in total, and all methods see identical orders and seeds. After each step $i$, every task's test period is evaluated, giving the error matrix
-\begin{equation}
-  R_{i,j} = \mathrm{RMSE}\big(\mathcal{D}^{\mathrm{te}}_{\pi_j} \mid \theta_i\big), \qquad i,j \in \{1,\dots,T\},
-\end{equation}
-in SOH pp, where $\theta_i$ are the parameters after step $i$. Following the standard continual-learning metrics~\cite{lopezpaz2017gem,chaudhry2018rwalk}, written here for errors (lower is better), we report:
+After each step $i$ of a stream, every task's test set is evaluated, giving the error matrix $R_{i,j} = \mathrm{RMSE}(\mathcal{D}^{\mathrm{te}}_{\pi_j}\mid\theta_i)$ in pp. Following~\cite{lopezpaz2017gem,chaudhry2018rwalk}, written for errors, we report:
 \begin{align}
   \text{final average error} &= \tfrac{1}{T}\textstyle\sum_{j} R_{T,j}, \\
   \text{plasticity} &= \tfrac{1}{T}\textstyle\sum_{j} R_{j,j}, \\
   \text{BWT} &= \tfrac{1}{T-1}\textstyle\sum_{j<T} \big(R_{T,j} - R_{j,j}\big), \\
-  \text{forgetting} &= \tfrac{1}{T-1}\textstyle\sum_{j<T} \big(R_{T,j} - \min_{j\le i<T} R_{i,j}\big), \\
-  \text{FWT} &= \tfrac{1}{T-1}\textstyle\sum_{j>1} \big(R_{j-1,j} - \bar b_j\big),
+  \text{forgetting} &= \tfrac{1}{T-1}\textstyle\sum_{j<T} \big(R_{T,j} - \min_{j\le i<T} R_{i,j}\big).
 \end{align}
-where positive BWT and forgetting indicate forgetting, negative FWT indicates that earlier tasks help a new one, and $\bar b_j$ is the error of the untrained model (with first-task preprocessing) on task $j$. Training time per task is also reported. RMSE and mean absolute error (MAE) in SOH pp are the primary accuracy metrics. The mean absolute percentage error is given for comparability. The coefficient of determination is interpreted only for pooled results, because a test period spanning one or two RPT values makes per-group $R^2$ undefined or misleading. Persistence, which predicts each battery's last training SOH, is reported as a diagnostic but never selected as a model, since it scores trivially well when the validation period lies within the last training RPT interval. For each test period we also report the share of cycles whose RPT interval already occurs in training.
+Positive BWT and forgetting indicate forgetting.
 
-\subsubsection{Statistics}
-Metrics are summarised by their mean and a 95\% percentile-bootstrap confidence interval~\cite{efron1993bootstrap} (10{,}000 resamples) over the 50 order--seed runs. Methods are compared with the two-sided Wilcoxon signed-rank test~\cite{wilcoxon1945} on matched order--seed runs, excluding zero differences, with the matched-pairs rank-biserial correlation~\cite{kerby2014rankbiserial} as effect size. Each family of comparisons (all methods against one reference method, for one metric) is corrected with the Holm procedure~\cite{holm1979}. The reference is fine-tuning for the MLP study and TFT\,+\,EWC for the proposed-model ablations: architecture (vs.\ MLP\,+\,EWC), EWC (vs.\ TFT fine-tuning), other continual-learning families (vs.\ replay and LwF), and the gap to joint training. The hypotheses were fixed before the experiments: H1, unseen-group error exceeds within-group error (E3 vs.\ E1, paired over the six groups); H2, fine-tuning forgets (forgetting CI above zero); H3, a strategy reduces forgetting relative to fine-tuning (Holm-adjusted $p<0.05$) without raising plasticity error by more than 0.25~pp. With six groups, the smallest attainable two-sided $p$-value of a group-paired test is $0.031$, so effect sizes and per-group results are reported alongside $p$-values.
-
-% -----------------------------------------------------------------------------
-\subsection{Reuse categories}
-\label{sec:reuse}
-
-Predicted SOH is mapped to four ordinal classes by capacity fade since the first observed RPT, $F = 100 - \mathrm{SOH}$:
-\begin{equation}
-  c(\mathrm{SOH}) =
-  \begin{cases}
-    \text{C0, stable}, & F < 5,\\
-    \text{C1, moderate fade}, & 5 \le F < 10,\\
-    \text{C2, substantial fade}, & 10 \le F < 20,\\
-    \text{C3, severe fade}, & F \ge 20.
-  \end{cases}
-\end{equation}
-Relative SOH stays close to 100\%, so absolute retirement bands (e.g.\ 80/60/40\% of nominal capacity) would place almost all samples in one class. The classes therefore describe capacity change since the first second-life measurement, not suitability for a particular application. The cut-points were fixed before any real-data run. The 20~pp boundary mirrors the common 80\% convention, applied to the second-life starting point, without implying equivalence with first-life end of life. The other boundaries are several times wider than the expected SOH error, so they can be resolved at the models' error level.
-
-The same rule is applied to measured and predicted SOH; no separate classifier is trained. The headline evaluation unit is one sample per battery and RPT interval in the test period, with the mean predicted SOH over the interval, which removes the weighting by repeated labels. Cycle-level results are also reported. We report:
+We also report:
 \begin{itemize}
-  \item accuracy, and macro-F1 over the classes present (with their number);
-  \item linear-weighted Cohen's $\kappa$~\cite{cohen1968weightedkappa};
-  \item the confusion matrix and the share of errors spanning more than one class;
-  \item the \emph{boundary share}, the fraction of samples whose measured SOH lies within one MAE of a cut-point.
+  \item RMSE per horizon;
+  \item the skill relative to persistence, $1-\mathrm{RMSE}/\mathrm{RMSE}_{\mathrm{persistence}}$;
+  \item as a secondary metric, agreement between the reuse class of the forecast SOH and the measured class at the target. Classes are C0 above 95\%, C1 90--95\%, C2 80--90\% and C3 at or below 80\%, fixed before any real-data run; we report accuracy and macro-F1 over the classes present.
 \end{itemize}
-These are compared with a majority-class and a persistence baseline (the class at the battery's last training RPT). In the continual-learning runs, a category-error matrix ($1-$macro-F1 after each step) is evaluated with the same backward-transfer and forgetting definitions as $R$. Pre-registered sensitivity analyses shift all cut-points by $\pm2.5$~pp, use a three-class rule (10/20~pp), report fade rates per 100 days, and apply the end-of-day convention; none is used for selection. Test sets containing a single measured class are flagged rather than merged with other classes. Because each test period spans few RPT intervals (\todo{N} interval samples in total), interval-level results are reported with their sample counts and treated as indicative.
 
-% -----------------------------------------------------------------------------
-\subsection{Robustness to missing temperature}
-\label{sec:robustness}
+Metrics are summarised by their mean and a 95\% percentile-bootstrap confidence interval~\cite{efron1993bootstrap} over runs. Methods are compared with TFT\,+\,EWC by the two-sided Wilcoxon signed-rank test~\cite{wilcoxon1945} on matched order--seed runs (P1) or matched held-out groups (P2), with the rank-biserial effect size~\cite{kerby2014rankbiserial}. Each family (all comparisons with TFT\,+\,EWC for one metric) is corrected with the Holm procedure~\cite{holm1979}. Comparisons with a deterministic reference forecaster use its single value. The comparison of F1 with F0 for TFT\,+\,EWC answers whether the diagnostic features help.
 
-Four ways of handling missing temperature are compared, each with the same validation-only selection:
-\begin{itemize}
-  \item median imputation with missing indicators (default);
-  \item median imputation with the indicators hidden (zeroed, keeping the input width and model size unchanged);
-  \item causal carry-forward of the battery's most recent earlier temperature;
-  \item removal of the temperature features.
-\end{itemize}
-Errors are compared on test cycles with and without missing temperature, and each variant is compared with the default, paired over groups with Holm correction per model. In a stress test, additional temperature values are \emph{removed} from the test periods of the trained models, without refitting, at rates of 10\%--100\% of each battery's test cycles. Removal is either scattered at random or as one contiguous outage per battery, with three seeds, and the three temperature statistics of a cycle are always removed together. For the TFT, removal is applied to the cycle history from which its windows are built, so it affects every step of the window. Values are only ever removed; carry-forward copies only a battery's own earlier observations and is applied identically to all splits.
+In P2, the smallest attainable two-sided $p$-value is 0.031 with six groups and 0.016 with seven, so effect sizes and per-group errors are reported alongside $p$-values.
 
 % -----------------------------------------------------------------------------
 \subsection{Implementation and reproducibility}
 \label{sec:repro}
 
-The pipeline is implemented in Python with pandas, scikit-learn and PyTorch \todo{versions from results/*.json}. Every result file records the configuration, seeds, group orders, library versions, a fingerprint of the data (rows per group, date range, split sizes) and the Git commit; reported numbers come from runs on a clean commit. The code is covered by unit tests that include the causality of the label alignment and of the TFT windows, the exclusion of labels from model inputs, and the separation of tuning from test data. \todo{Code and data availability statement.} Experiments were run on \todo{hardware}; the full grid takes \todo{hours}.
+The pipeline is implemented in Python~3.11 with NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTorch~2.14, on four cores of an Intel Xeon processor at 2.1~GHz; the full S6 grid takes about one hour of single-thread computing.
+
+Every result file records the configuration, orders, seeds, library versions and the Git commit, and reported numbers come from runs on a clean commit. The tables of \S\ref{sec:results} are generated from these files by a script.
+
+Unit tests cover:
+\begin{itemize}
+  \item the causality of inputs (changing labels after an origin leaves that origin's inputs unchanged);
+  \item the purging of splits;
+  \item the exclusion of labels and protocol currents from inputs;
+  \item the step-validity rules;
+  \item the separation of tuning from test data.
+\end{itemize}
+
+Raw data are obtained from the public archives by checksummed download scripts. \todo{Code and data availability statement (repository URL, licence).}

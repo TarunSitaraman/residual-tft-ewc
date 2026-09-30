@@ -5,6 +5,7 @@
 \usepackage[table]{xcolor}
 \usepackage{booktabs}
 \usepackage{cite}
+\usepackage{array}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 
@@ -41,54 +42,15 @@ second-life batteries, state of health, continual learning, elastic weight conso
 
 \input{sections/methods}
 
-\section{Results}
-\label{sec:results}
-\todo{From results/*.json of the real-data run on a clean commit.}
+\input{sections/results}
 
 \section{Discussion}
 \label{sec:discussion}
-\todo{Including limitations: six groups, relative SOH, provenance, label resolution.}
+\todo{Including limitations: few cells per task, relative SOH, accelerated 50~$^\circ$C ageing and the meaning of ``second life'' in S6, forecasts conditional on planned usage, the task change after inspecting the data.}
 
 \section{Conclusion}
 \label{sec:conclusion}
 \todo{Conclusion.}
-
-% ---------------------------------------------------------------------------
-% Floats referenced from the methods section (placeholders until results exist)
-% ---------------------------------------------------------------------------
-\begin{figure}[t]
-  \centering
-  \fbox{\parbox[c][3cm][c]{0.9\columnwidth}{\centering\todo{Pipeline figure}}}
-  \caption{Workflow: causal SOH labelling, battery-group task stream, continual-learning strategies, SOH estimation and reuse categories.}
-  \label{fig:pipeline}
-\end{figure}
-
-\begin{table*}[t]
-  \centering
-  \caption{Battery groups: cycles, labelled cycles, RPTs, missing temperature and train/validation/test sizes.}
-  \label{tab:data}
-  \begin{tabular}{lccccc}
-    \toprule
-    Group & Cycles & Labelled & RPTs & Temp.\ missing (\%) & Train/Val/Test \\
-    \midrule
-    g1--w10 & \multicolumn{5}{c}{\todo{from notebooks 01--02}} \\
-    \bottomrule
-  \end{tabular}
-\end{table*}
-
-\begin{table}[t]
-  \centering
-  \caption{Hyperparameters selected on validation data (D11).}
-  \label{tab:hyper}
-  \begin{tabular}{llc}
-    \toprule
-    Stage & Setting & Selected \\
-    \midrule
-    Backbone & MLP / TFT learning rate & \todo{} \\
-    Method & Replay $B$, EWC $\lambda$ (MLP, TFT), LwF $\alpha$ & \todo{} \\
-    \bottomrule
-  \end{tabular}
-\end{table}
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
