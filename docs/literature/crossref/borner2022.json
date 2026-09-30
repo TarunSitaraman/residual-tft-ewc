@@ -1,0 +1,1032 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T16:50:43Z",
+   "timestamp": 1790787043363,
+   "version": "4.1.0"
+  },
+  "reference-count": 73,
+  "publisher": "Elsevier BV",
+  "issue": "10",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2022,
+       10,
+       1
+      ]
+     ],
+     "date-time": "2022-10-01T00:00:00Z",
+     "timestamp": 1664582400000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2022,
+       10,
+       1
+      ]
+     ],
+     "date-time": "2022-10-01T00:00:00Z",
+     "timestamp": 1664582400000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/legal/tdmrep-license"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2022,
+       9,
+       17
+      ]
+     ],
+     "date-time": "2022-09-17T00:00:00Z",
+     "timestamp": 1663372800000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+   }
+  ],
+  "funder": [
+   {
+    "DOI": "10.13039/501100002347",
+    "name": "Bundesministerium f\u00fcr Bildung und Forschung",
+    "doi-asserted-by": "publisher",
+    "award": [
+     "03XP0334"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "03XP0334"
+      ]
+     }
+    ],
+    "id": [
+     {
+      "id": "10.13039/501100002347",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "cell.com",
+    "elsevier.com",
+    "sciencedirect.com"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Cell Reports Physical Science"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2022,
+     10
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.xcrp.2022.101095",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2022,
+     10,
+     6
+    ]
+   ],
+   "date-time": "2022-10-06T13:54:39Z",
+   "timestamp": 1665064479000
+  },
+  "page": "101095",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 82,
+  "title": [
+   "Challenges of second-life concepts for retired electric vehicle batteries"
+  ],
+  "prefix": "10.1016",
+  "volume": "3",
+  "author": [
+   {
+    "given": "Martin F.",
+    "family": "B\u00f6rner",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0001-7794-8674",
+    "authenticated-orcid": false,
+    "given": "Moritz H.",
+    "family": "Frieges",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Benedikt",
+    "family": "Sp\u00e4th",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Kathrin",
+    "family": "Sp\u00fctz",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Heiner H.",
+    "family": "Heimes",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Dirk Uwe",
+    "family": "Sauer",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-2916-3968",
+    "authenticated-orcid": false,
+    "given": "Weihan",
+    "family": "Li",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib3",
+    "doi-asserted-by": "crossref",
+    "first-page": "208",
+    "DOI": "10.1016/j.resconrec.2019.01.021",
+    "article-title": "U.S. end-of-life electric vehicle batteries: dynamic inventory modeling and spatial analysis for regional solutions",
+    "volume": "145",
+    "author": "Ai",
+    "year": "2019",
+    "journal-title": "Resour. Conserv. Recycl."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib4",
+    "doi-asserted-by": "crossref",
+    "first-page": "105753",
+    "DOI": "10.1016/j.resconrec.2021.105753",
+    "article-title": "End-of-Life electric vehicle battery stock estimation in Ireland through integrated energy and circular economy modelling",
+    "volume": "174",
+    "author": "Fallah",
+    "year": "2021",
+    "journal-title": "Resour. Conserv. Recycl."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib5",
+    "doi-asserted-by": "crossref",
+    "first-page": "735",
+    "DOI": "10.1109/JPROC.2022.3175614",
+    "article-title": "A review of second-life lithium-ion batteries for stationary energy storage applications",
+    "volume": "110",
+    "author": "Hu",
+    "year": "2022",
+    "journal-title": "Proc. IEEE"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib7",
+    "author": "Gielen"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib8",
+    "doi-asserted-by": "crossref",
+    "first-page": "7020",
+    "DOI": "10.1021/acs.chemrev.9b00535",
+    "article-title": "Sustainable recycling technology for Li-ion batteries and beyond: challenges and future prospects",
+    "volume": "120",
+    "author": "Fan",
+    "year": "2020",
+    "journal-title": "Chem. Rev."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib9",
+    "doi-asserted-by": "crossref",
+    "first-page": "105219",
+    "DOI": "10.1016/j.resconrec.2020.105219",
+    "article-title": "A qualitative assessment of lithium ion battery recycling processes",
+    "volume": "165",
+    "author": "Sommerville",
+    "year": "2021",
+    "journal-title": "Resour. Conserv. Recycl."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib10",
+    "doi-asserted-by": "crossref",
+    "first-page": "255",
+    "DOI": "10.1016/j.jpowsour.2014.03.126",
+    "article-title": "A closed loop process for recycling spent lithium ion batteries",
+    "volume": "262",
+    "author": "Gratz",
+    "year": "2014",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib11",
+    "doi-asserted-by": "crossref",
+    "first-page": "2622",
+    "DOI": "10.1016/j.joule.2019.09.014",
+    "article-title": "Recycling end-of-life electric vehicle lithium-ion batteries",
+    "volume": "3",
+    "author": "Chen",
+    "year": "2019",
+    "journal-title": "Joule"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib12",
+    "doi-asserted-by": "crossref",
+    "first-page": "227575",
+    "DOI": "10.1016/j.jpowsour.2019.227575",
+    "article-title": "Investigation of lithium-ion battery degradation mechanisms by combining differential voltage analysis and alternating current impedance",
+    "volume": "448",
+    "author": "Zhu",
+    "year": "2020",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib13",
+    "doi-asserted-by": "crossref",
+    "first-page": "2992",
+    "DOI": "10.1109/TIA.2019.2891213",
+    "article-title": "Lithium-ion battery degradation indicators via incremental capacity analysis",
+    "volume": "55",
+    "author": "Ansean",
+    "year": "2019",
+    "journal-title": "IEEE Trans. Ind. Appl."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib14",
+    "doi-asserted-by": "crossref",
+    "first-page": "116737",
+    "DOI": "10.1016/j.apenergy.2021.116737",
+    "article-title": "Cost and carbon footprint reduction of electric vehicle lithium-ion batteries through efficient thermal management",
+    "volume": "289",
+    "author": "Lander",
+    "year": "2021",
+    "journal-title": "Appl. Energy"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib15",
+    "doi-asserted-by": "crossref",
+    "first-page": "100537",
+    "DOI": "10.1016/j.xcrp.2021.100537",
+    "article-title": "End-of-life or second-life options for retired electric vehicle batteries",
+    "volume": "2",
+    "author": "Zhu",
+    "year": "2021",
+    "journal-title": "Cell Rep. Phys. Sci."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib16",
+    "doi-asserted-by": "crossref",
+    "first-page": "497",
+    "DOI": "10.1016/j.wasman.2020.05.034",
+    "article-title": "Evaluating the cost and carbon footprint of second-life electric vehicle batteries in residential and utility-level applications",
+    "volume": "113",
+    "author": "Kamath",
+    "year": "2020",
+    "journal-title": "Waste Manag."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib17",
+    "doi-asserted-by": "crossref",
+    "first-page": "701",
+    "DOI": "10.1016/j.energy.2016.03.016",
+    "article-title": "Sustainable integration of intermittent renewable energy and electrified light-duty transportation through repurposing batteries of plug-in electric vehicles",
+    "volume": "106",
+    "author": "Shokrzadeh",
+    "year": "2016",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib18",
+    "doi-asserted-by": "crossref",
+    "first-page": "1938",
+    "DOI": "10.1016/j.egypro.2015.07.226",
+    "article-title": "Extended utilization of electric vehicles and their Re-used batteries to support the building energy management system",
+    "volume": "75",
+    "author": "Aziz",
+    "year": "2015",
+    "journal-title": "Energy Proc."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib19",
+    "doi-asserted-by": "crossref",
+    "first-page": "64",
+    "DOI": "10.1016/j.seta.2014.01.006",
+    "article-title": "Environmental feasibility of re-use of electric vehicle batteries",
+    "volume": "6",
+    "author": "Ahmadi",
+    "year": "2014",
+    "journal-title": "Sustain. Energy Technol. Assessments"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib25",
+    "series-title": "The development of battery storage systems in Germany: a market review (status 2022)",
+    "author": "Figgener",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib28",
+    "series-title": "Product-lifecycle-Management. Ein Leitfaden f\u00fcr product development und Life-cycle-Management",
+    "author": "Eigner",
+    "year": "2009"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib29",
+    "series-title": "Pahl/Beitz Konstruktionslehre. Methoden und Anwendung erfolgreicher Produktentwicklung",
+    "first-page": "97",
+    "article-title": "Produktplanung",
+    "author": "Kreimeyer",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib30",
+    "series-title": "Recycling von Lithium-Ionen-Batterien (Frankfurt am Main)",
+    "author": "Kampker",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib31",
+    "doi-asserted-by": "crossref",
+    "first-page": "144",
+    "DOI": "10.1007/s00501-021-01087-1",
+    "article-title": "Lithium-Ionen-Batterien \u2013 kreislaufwirtschaftliche Herausforderungen am Ende des Lebenszyklus und im Recycling",
+    "volume": "166",
+    "author": "Nigl",
+    "year": "2021",
+    "journal-title": "Berg. Huettenmaenn. Monatsh."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib32",
+    "doi-asserted-by": "crossref",
+    "first-page": "100005",
+    "DOI": "10.1016/j.etran.2019.100005",
+    "article-title": "A review on the key issues of the lithium ion battery degradation among the whole life cycle",
+    "volume": "1",
+    "author": "Han",
+    "year": "2019",
+    "journal-title": "eTransportation"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib33",
+    "doi-asserted-by": "crossref",
+    "first-page": "382",
+    "DOI": "10.1016/j.jpowsour.2016.12.041",
+    "article-title": "Correlation of aging and thermal stability of commercial 18650-type lithium ion batteries",
+    "volume": "342",
+    "author": "B\u00f6rner",
+    "year": "2017",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib34",
+    "doi-asserted-by": "crossref",
+    "first-page": "110048",
+    "DOI": "10.1016/j.rser.2020.110048",
+    "article-title": "Lithium-ion battery aging mechanisms and diagnosis method for automotive applications: recent advances and perspectives",
+    "volume": "131",
+    "author": "Xiong",
+    "year": "2020",
+    "journal-title": "Renew. Sustain. Energy Rev."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib35",
+    "first-page": "1929",
+    "article-title": "Evaluation of a remanufacturing for lithium ion batteries from electric cars",
+    "volume": "10",
+    "author": "Kampker",
+    "year": "2016",
+    "journal-title": "Int. J. Mech. Mechatron. Eng."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib36",
+    "series-title": "Umwidmung und Weiterverwendung von Traktionsbatterien. Szenarien, Dienstleistungen und Entscheidungsunterst\u00fctzung",
+    "author": "Becker",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib37",
+    "first-page": "9",
+    "article-title": "Product recovery decisions within the context of extended producer responsibility",
+    "volume": "34",
+    "author": "Johnson",
+    "year": "2014",
+    "journal-title": "J.\u00a0Eng. Technol. Manag."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib38",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1007/s13243-020-00088-6",
+    "article-title": "Battery pack remanufacturing process up to cell level with sorting and repurposing of battery cells",
+    "volume": "11",
+    "author": "Kampker",
+    "year": "2021",
+    "journal-title": "Jnl. Remanufactur."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib39",
+    "doi-asserted-by": "crossref",
+    "first-page": "02012",
+    "DOI": "10.1051/matecconf/202031202012",
+    "article-title": "Remanufacturing of electric vehicles: challenges in production management",
+    "volume": "312",
+    "author": "Kampker",
+    "year": "2020",
+    "journal-title": "MATEC Web Conf."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib40",
+    "doi-asserted-by": "crossref",
+    "first-page": "122584",
+    "DOI": "10.1016/j.jclepro.2020.122584",
+    "article-title": "Lithium-ion battery 2nd life used as a stationary energy storage system: ageing and economic analysis in two real cases",
+    "volume": "272",
+    "author": "Rallo",
+    "year": "2020",
+    "journal-title": "J.\u00a0Clean. Prod."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib41",
+    "doi-asserted-by": "crossref",
+    "first-page": "101278",
+    "DOI": "10.1016/j.est.2020.101278",
+    "article-title": "Repurposed electric vehicle battery performance in second-life electricity grid frequency regulation service",
+    "volume": "28",
+    "author": "White",
+    "year": "2020",
+    "journal-title": "J.\u00a0Energy Storage"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib42",
+    "doi-asserted-by": "crossref",
+    "first-page": "701",
+    "DOI": "10.1016/j.rser.2018.04.035",
+    "article-title": "Battery second life: hype, hope or reality? A critical review of the state of the art",
+    "volume": "93",
+    "author": "Martinez-Laserna",
+    "year": "2018",
+    "journal-title": "Renew. Sustain. Energy Rev."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib43",
+    "doi-asserted-by": "crossref",
+    "first-page": "73215",
+    "DOI": "10.1109/ACCESS.2019.2917859",
+    "article-title": "A comprehensive review on second-life batteries: current state, manufacturing considerations, applications, impacts, barriers & potential solutions, business strategies, and policies",
+    "volume": "7",
+    "author": "Hossain",
+    "year": "2019",
+    "journal-title": "IEEE Access"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib44",
+    "doi-asserted-by": "crossref",
+    "first-page": "416",
+    "DOI": "10.1016/j.est.2019.02.023",
+    "article-title": "Market and technology development of PV home storage systems in Germany",
+    "volume": "23",
+    "author": "Kairies",
+    "year": "2019",
+    "journal-title": "J.\u00a0Energy Storage"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib45",
+    "series-title": "Wissenschaftliches Mess- und Evaluierungsprogramm Solarstromspeicher 2.0",
+    "author": "Figgener",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib46",
+    "doi-asserted-by": "crossref",
+    "first-page": "80",
+    "DOI": "10.1016/j.egypro.2016.10.100",
+    "article-title": "Enhancing battery lifetime in PV battery home storage system using forecast based operating strategies",
+    "volume": "99",
+    "author": "Angenendt",
+    "year": "2016",
+    "journal-title": "Energy Proc."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib47",
+    "doi-asserted-by": "crossref",
+    "first-page": "102752",
+    "DOI": "10.1016/j.est.2021.102752",
+    "article-title": "Technical feasibility and economics of repurposed electric vehicles batteries for power peak shaving",
+    "volume": "40",
+    "author": "Lee",
+    "year": "2021",
+    "journal-title": "J.\u00a0Energy Storage"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib49",
+    "series-title": "McMicken Battery Energy Storage System Event -Technical Analysis and Recommendations",
+    "author": "Hill",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib50",
+    "author": "Ji-hyoung"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib53",
+    "doi-asserted-by": "crossref",
+    "first-page": "83",
+    "DOI": "10.1016/j.jechem.2020.10.017",
+    "article-title": "A review of lithium-ion battery safety concerns: the issues, strategies, and testing standards",
+    "volume": "59",
+    "author": "Chen",
+    "year": "2021",
+    "journal-title": "J.\u00a0Energy Chem."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib54",
+    "author": "Edwards"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib55",
+    "doi-asserted-by": "crossref",
+    "first-page": "111240",
+    "DOI": "10.1016/j.rser.2021.111240",
+    "article-title": "Risk management over the life cycle of lithium-ion batteries in electric vehicles",
+    "volume": "148",
+    "author": "Christensen",
+    "year": "2021",
+    "journal-title": "Renew. Sustain. Energy Rev."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib56",
+    "series-title": "UL 1974 - Creating a Safe Second Life for Electric Vehicle Batteries",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib58",
+    "author": "Gifford"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib59",
+    "doi-asserted-by": "crossref",
+    "first-page": "e01866",
+    "DOI": "10.1016/j.heliyon.2019.e01866",
+    "article-title": "Lithium battery reusing and recycling: a circular economy insight",
+    "volume": "5",
+    "author": "Pagliaro",
+    "year": "2019",
+    "journal-title": "Heliyon"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib62",
+    "doi-asserted-by": "crossref",
+    "first-page": "265",
+    "DOI": "10.1016/j.jpowsour.2015.01.072",
+    "article-title": "Quantifying EV battery end-of-life through analysis of travel needs with vehicle powertrain models",
+    "volume": "282",
+    "author": "Saxena",
+    "year": "2015",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib63",
+    "series-title": "Fahrzeugzulassungen (FZ), Bestand an Kraftfahrzeugen und Kraftfahrzeuganh\u00e4ngern nach Fahrzeugalter, 1. Januar 2021, FZ 15",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib64",
+    "doi-asserted-by": "crossref",
+    "first-page": "100167",
+    "DOI": "10.1016/j.etran.2022.100167",
+    "article-title": "Quantifying the state of the art of electric powertrains in battery electric vehicles: range, efficiency, and lifetime from component to system level of the Volkswagen ID",
+    "volume": "3",
+    "author": "Wassiliadis",
+    "year": "2022",
+    "journal-title": "eTransportation"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib68",
+    "doi-asserted-by": "crossref",
+    "first-page": "282",
+    "DOI": "10.1016/j.apenergy.2017.11.051",
+    "article-title": "Electric bus fleet size and mix problem with optimization of charging infrastructure",
+    "volume": "211",
+    "author": "Rogge",
+    "year": "2018",
+    "journal-title": "Appl. Energy"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib69",
+    "doi-asserted-by": "crossref",
+    "first-page": "4587",
+    "DOI": "10.3390/en8054587",
+    "article-title": "Fast charging battery buses for the electrification of urban public transport\u2014a feasibility study focusing on charging infrastructure and energy storage requirements",
+    "volume": "8",
+    "author": "Rogge",
+    "year": "2015",
+    "journal-title": "Energies"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib70",
+    "doi-asserted-by": "crossref",
+    "first-page": "901",
+    "DOI": "10.1016/j.joule.2021.03.007",
+    "article-title": "The feasibility of heavy battery electric trucks",
+    "volume": "5",
+    "author": "Nykvist",
+    "year": "2021",
+    "journal-title": "Joule"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib71",
+    "doi-asserted-by": "crossref",
+    "first-page": "10319",
+    "DOI": "10.1109/TVT.2018.2865664",
+    "article-title": "Co-estimation of state of charge and state of health for lithium-ion batteries based on fractional-order calculus",
+    "volume": "67",
+    "author": "Hu",
+    "year": "2018",
+    "journal-title": "IEEE Trans. Veh. Technol."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib72",
+    "doi-asserted-by": "crossref",
+    "first-page": "5141",
+    "DOI": "10.1016/j.egyr.2021.08.113",
+    "article-title": "A review on online state of charge and state of health estimation for lithium-ion batteries in electric vehicles",
+    "volume": "7",
+    "author": "Wang",
+    "year": "2021",
+    "journal-title": "Energy Rep."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib73",
+    "doi-asserted-by": "crossref",
+    "first-page": "834",
+    "DOI": "10.1016/j.rser.2017.05.001",
+    "article-title": "A review of lithium-ion battery state of charge estimation and management system in electric vehicle applications: challenges and recommendations",
+    "volume": "78",
+    "author": "Hannan",
+    "year": "2017",
+    "journal-title": "Renew. Sustain. Energy Rev."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib74",
+    "doi-asserted-by": "crossref",
+    "first-page": "333",
+    "DOI": "10.1016/j.jechem.2022.04.013",
+    "article-title": "Nonlinear health evaluation for lithium-ion battery within full-lifespan",
+    "volume": "72",
+    "author": "You",
+    "year": "2022",
+    "journal-title": "J.\u00a0Energy Chem."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib75",
+    "doi-asserted-by": "crossref",
+    "first-page": "228863",
+    "DOI": "10.1016/j.jpowsour.2020.228863",
+    "article-title": "Online capacity estimation of lithium-ion batteries with deep long short-term memory networks",
+    "volume": "482",
+    "author": "Li",
+    "year": "2021",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib76",
+    "doi-asserted-by": "crossref",
+    "first-page": "310",
+    "DOI": "10.1016/j.joule.2019.11.018",
+    "article-title": "Battery lifetime prognostics",
+    "volume": "4",
+    "author": "Hu",
+    "year": "2020",
+    "journal-title": "Joule"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib77",
+    "doi-asserted-by": "crossref",
+    "first-page": "680",
+    "DOI": "10.1016/j.jpowsour.2012.11.146",
+    "article-title": "Health diagnosis and remaining useful life prognostics of lithium-ion batteries using data-driven methods",
+    "volume": "239",
+    "author": "Nuhic",
+    "year": "2013",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib78",
+    "doi-asserted-by": "crossref",
+    "first-page": "230024",
+    "DOI": "10.1016/j.jpowsour.2021.230024",
+    "article-title": "One-shot battery degradation trajectory prediction with deep learning",
+    "volume": "506",
+    "author": "Li",
+    "year": "2021",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib79",
+    "doi-asserted-by": "crossref",
+    "first-page": "101557",
+    "DOI": "10.1016/j.est.2020.101557",
+    "article-title": "Digital twin for battery systems: cloud battery management system with online state-of-charge and state-of-health estimation",
+    "volume": "30",
+    "author": "Li",
+    "year": "2020",
+    "journal-title": "J.\u00a0Energy Storage"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib80",
+    "unstructured": "The European Commission. Proposal for a regulation of the European Parliament and of the council concerning batteries and waste batteries, repealing Directive 2006/66/EC and amending Regulation (EU) No 2019/1020."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib81",
+    "doi-asserted-by": "crossref",
+    "first-page": "3276",
+    "DOI": "10.3390/en14113276",
+    "article-title": "Inhomogeneities and cell-to-cell variations in lithium-ion batteries, a review",
+    "volume": "14",
+    "author": "Beck",
+    "year": "2021",
+    "journal-title": "Energies"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib82",
+    "series-title": "Modellbasierte Virtuelle Produktentwicklung",
+    "author": "Eigner",
+    "year": "2014"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib83",
+    "series-title": "System Lifecycle Management. Digitalisierung des Engineering",
+    "author": "Eigner",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib85",
+    "series-title": "mecPro2-Entwurf einer Beschreibungssystematik zur Entwicklung cybertronischer Systeme mit SysML. Tag des Systems Engineering",
+    "first-page": "163",
+    "author": "Eigner",
+    "year": "2015"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib86",
+    "series-title": "Pragmatic MBSE with SysML (Fredesdorf: MBSE4U)",
+    "article-title": "SYSMOD - the systems modeling toolbox",
+    "author": "Weilkiens",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib87",
+    "series-title": "Modellbasierter mechanischer Konzeptentwurf. Ergebnisse des FAS4M-Projektes",
+    "first-page": "419",
+    "author": "Moeser",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib88",
+    "doi-asserted-by": "crossref",
+    "first-page": "69",
+    "DOI": "10.3139/9783446447288.008",
+    "article-title": "Fortschrittsbericht zur modellbasierten Unterst\u00fctzung der Konstrukteurst\u00e4tigkeit durch FAS4M",
+    "author": "Moeser",
+    "year": "2015",
+    "journal-title": "Tag des Systems Engineering"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib89",
+    "series-title": "Design Methodology for Future Products",
+    "first-page": "243",
+    "article-title": "Function-oriented model-based product development",
+    "author": "Jacobs",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib90",
+    "doi-asserted-by": "crossref",
+    "first-page": "012001",
+    "DOI": "10.1088/1757-899X/1097/1/012001",
+    "article-title": "Mechanical concept development using principle solution models",
+    "volume": "1097",
+    "author": "Zerwas",
+    "year": "2021",
+    "journal-title": "IOP Conf. Ser. Mater. Sci. Eng."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib91",
+    "series-title": "Proceedings of the 23rd ACM/IEEE International Conference on Model Driven Engineering Languages and Systems",
+    "first-page": "79",
+    "article-title": "Modeling mechanical functional architectures in SysML",
+    "author": "Drave",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib92",
+    "first-page": "53",
+    "article-title": "Integration of production and cost models in model-based product development",
+    "volume": "09",
+    "author": "Sp\u00fctz",
+    "year": "2021",
+    "journal-title": "Open J. Soc. Sci."
+   },
+   {
+    "key": "10.1016/j.xcrp.2022.101095_bib93",
+    "doi-asserted-by": "crossref",
+    "first-page": "37",
+    "DOI": "10.1016/j.procir.2022.05.211",
+    "article-title": "Classification of Simulation models for the model-based design of plastic-metal hybrid joints",
+    "volume": "109",
+    "author": "Sp\u00fctz",
+    "year": "2022",
+    "journal-title": "Procedia CIRP"
+   }
+  ],
+  "container-title": [
+   "Cell Reports Physical Science"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S2666386422003976?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S2666386422003976?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2025,
+     11,
+     12
+    ]
+   ],
+   "date-time": "2025-11-12T23:28:22Z",
+   "timestamp": 1762990102000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S2666386422003976"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2022,
+     10
+    ]
+   ]
+  },
+  "references-count": 73,
+  "journal-issue": {
+   "issue": "10",
+   "published-print": {
+    "date-parts": [
+     [
+      2022,
+      10
+     ]
+    ]
+   }
+  },
+  "alternative-id": [
+   "S2666386422003976"
+  ],
+  "URL": "https://doi.org/10.1016/j.xcrp.2022.101095",
+  "relation": {},
+  "ISSN": [
+   "2666-3864"
+  ],
+  "issn-type": [
+   {
+    "value": "2666-3864",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2022,
+     10
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "Elsevier",
+    "name": "publisher",
+    "label": "This article is maintained by"
+   },
+   {
+    "value": "Challenges of second-life concepts for retired electric vehicle batteries",
+    "name": "articletitle",
+    "label": "Article Title"
+   },
+   {
+    "value": "Cell Reports Physical Science",
+    "name": "journaltitle",
+    "label": "Journal Title"
+   },
+   {
+    "value": "https://doi.org/10.1016/j.xcrp.2022.101095",
+    "name": "articlelink",
+    "label": "CrossRef DOI link to publisher maintained version"
+   },
+   {
+    "value": "article",
+    "name": "content_type",
+    "label": "Content Type"
+   },
+   {
+    "value": "\u00a9 2022 The Authors.",
+    "name": "copyright",
+    "label": "Copyright"
+   }
+  ],
+  "article-number": "101095"
+ }
+}

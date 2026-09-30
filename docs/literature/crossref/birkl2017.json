@@ -1,0 +1,672 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T15:01:19Z",
+   "timestamp": 1790780479314,
+   "version": "4.1.0"
+  },
+  "reference-count": 34,
+  "publisher": "Elsevier BV",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2017,
+       2,
+       1
+      ]
+     ],
+     "date-time": "2017-02-01T00:00:00Z",
+     "timestamp": 1485907200000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2016,
+       12,
+       7
+      ]
+     ],
+     "date-time": "2016-12-07T00:00:00Z",
+     "timestamp": 1481068800000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "http://creativecommons.org/licenses/by/4.0/"
+   }
+  ],
+  "funder": [
+   {
+    "name": "EPSRC UK",
+    "award": [
+     "EP/K504518/1"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "EP/K504518/1"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Jaguar Land Rover"
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "elsevier.com",
+    "sciencedirect.com"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Journal of Power Sources"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2017,
+     2
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jpowsour.2016.12.011",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2016,
+     12,
+     12
+    ]
+   ],
+   "date-time": "2016-12-12T00:15:14Z",
+   "timestamp": 1481501714000
+  },
+  "page": "373-386",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 1895,
+  "special_numbering": "C",
+  "title": [
+   "Degradation diagnostics for lithium ion cells"
+  ],
+  "prefix": "10.1016",
+  "volume": "341",
+  "author": [
+   {
+    "given": "Christoph R.",
+    "family": "Birkl",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Matthew R.",
+    "family": "Roberts",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Euan",
+    "family": "McTurk",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Peter G.",
+    "family": "Bruce",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-0620-3955",
+    "authenticated-orcid": false,
+    "given": "David A.",
+    "family": "Howey",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "issue": "1",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib1",
+    "doi-asserted-by": "crossref",
+    "first-page": "130",
+    "DOI": "10.1016/S0378-7753(02)00305-1",
+    "article-title": "Factors that affect cycle-life and possible degradation mechanisms of a Li-ion cell based on LiCoO2",
+    "volume": "111",
+    "author": "Choi",
+    "year": "2002",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "1\u20132",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib2",
+    "doi-asserted-by": "crossref",
+    "first-page": "90",
+    "DOI": "10.1016/j.jpowsour.2005.03.172",
+    "article-title": "Main aging mechanisms in Li ion batteries",
+    "volume": "146",
+    "author": "Broussely",
+    "year": "2005",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib3",
+    "doi-asserted-by": "crossref",
+    "first-page": "160",
+    "DOI": "10.1016/j.apenergy.2015.04.110",
+    "article-title": "Cycle aging of commercial NMC/graphite pouch cells at different temperatures",
+    "volume": "154",
+    "author": "Jalkanen",
+    "year": "2015",
+    "journal-title": "Appl. Energy"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib4",
+    "doi-asserted-by": "crossref",
+    "first-page": "238",
+    "DOI": "10.1016/S0378-7753(01)00783-2",
+    "article-title": "An accelerated calendar and cycle life study of Li-ion cells",
+    "volume": "101",
+    "author": "Bloom",
+    "year": "2001",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "1\u20132",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib5",
+    "doi-asserted-by": "crossref",
+    "first-page": "269",
+    "DOI": "10.1016/j.jpowsour.2005.01.006",
+    "article-title": "Ageing mechanisms in lithium-ion batteries",
+    "volume": "147",
+    "author": "Vetter",
+    "year": "2005",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "1\u20132",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib6",
+    "doi-asserted-by": "crossref",
+    "first-page": "67",
+    "DOI": "10.1016/S0013-4686(99)00194-2",
+    "article-title": "On the correlation between surface chemistry and performance of graphite negative electrodes for Li ion batteries",
+    "volume": "45",
+    "author": "Aurbach",
+    "year": "1999",
+    "journal-title": "Electrochim. Acta"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib7",
+    "doi-asserted-by": "crossref",
+    "first-page": "1310",
+    "DOI": "10.3390/ma6041310",
+    "article-title": "Lithium ion battery anode aging mechanisms",
+    "volume": "6",
+    "author": "Agubra",
+    "year": "2013",
+    "journal-title": "Materials"
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib8",
+    "article-title": "Understanding the degradation mechanisms of LiNi0.5Co0.2Mn0.3O2 cathode material in lithium ion batteries",
+    "author": "Jung",
+    "year": "2013",
+    "journal-title": "Adv. Energy Mater."
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib9",
+    "doi-asserted-by": "crossref",
+    "first-page": "39",
+    "DOI": "10.1016/S0378-7753(01)00586-9",
+    "article-title": "The complex electrochemistry of graphite electrodes in lithium-ion batteries",
+    "volume": "97\u201398",
+    "author": "Nov\u00e1k",
+    "year": "2001",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "22",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib10",
+    "doi-asserted-by": "crossref",
+    "first-page": "6332",
+    "DOI": "10.1016/j.electacta.2010.05.072",
+    "article-title": "A\u00a0review of the features and analyses of the solid electrolyte interphase in Li-ion batteries",
+    "volume": "55",
+    "author": "Verma",
+    "year": "2010",
+    "journal-title": "Electrochim. Acta"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib11",
+    "doi-asserted-by": "crossref",
+    "first-page": "A243",
+    "DOI": "10.1149/2.044302jes",
+    "article-title": "Theory of SEI formation in rechargeable batteries: capacity fade, accelerated aging and lifetime prediction",
+    "volume": "160",
+    "author": "Pinson",
+    "year": "2012",
+    "journal-title": "J.\u00a0Electrochem. Soc."
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib12",
+    "doi-asserted-by": "crossref",
+    "first-page": "A616",
+    "DOI": "10.1149/2.053304jes",
+    "article-title": "A\u00a0simplified electrochemical and thermal aging model of LiFePO4-graphite Li-ion batteries: power and capacity fade simulations",
+    "volume": "160",
+    "author": "Prada",
+    "year": "2013",
+    "journal-title": "J.\u00a0Electrochem. Soc."
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib13",
+    "series-title": "Stress Generation and Fracture in Lithium Insertion Materials",
+    "first-page": "293",
+    "author": "Christensen",
+    "year": "2006"
+   },
+   {
+    "issue": "10",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib14",
+    "doi-asserted-by": "crossref",
+    "first-page": "A1730",
+    "DOI": "10.1149/2.049210jes",
+    "article-title": "Battery cycle life prediction with coupled chemical degradation and fatigue mechanics",
+    "volume": "159",
+    "author": "Deshpande",
+    "year": "2012",
+    "journal-title": "J.\u00a0Electrochem. Soc."
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib15",
+    "doi-asserted-by": "crossref",
+    "first-page": "A145",
+    "DOI": "10.1149/1.3043429",
+    "article-title": "Multimodal physics-based aging model for life prediction of Li-Ion batteries",
+    "volume": "156",
+    "author": "Safari",
+    "year": "2009",
+    "journal-title": "J.\u00a0Electrochem. Soc."
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib16",
+    "doi-asserted-by": "crossref",
+    "first-page": "6481",
+    "DOI": "10.1021/jp311431z",
+    "article-title": "Effects of inhomogeneities - nanoscale to mesoscale - on the durability of Li-Ion batteries",
+    "volume": "117",
+    "author": "Harris",
+    "year": "2013",
+    "journal-title": "J.\u00a0Phys. Chem. C"
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib17",
+    "doi-asserted-by": "crossref",
+    "first-page": "212",
+    "DOI": "10.1016/j.est.2016.01.003",
+    "article-title": "Nonlinear aging of cylindrical lithium-ion cells linked to heterogeneous compression",
+    "volume": "5",
+    "author": "Bach",
+    "year": "2016",
+    "journal-title": "J.\u00a0Energy Storage"
+   },
+   {
+    "issue": "8",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib18",
+    "doi-asserted-by": "crossref",
+    "first-page": "A744",
+    "DOI": "10.1149/1.2742296",
+    "article-title": "Battery aging and its Influence on the electromotive force",
+    "volume": "154",
+    "author": "Pop",
+    "year": "2007",
+    "journal-title": "J.\u00a0Electrochem. Soc."
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib19",
+    "doi-asserted-by": "crossref",
+    "first-page": "204",
+    "DOI": "10.1016/j.jpowsour.2012.07.016",
+    "article-title": "Synthesize battery degradation modes via a diagnostic and prognostic model",
+    "volume": "219",
+    "author": "Dubarry",
+    "year": "2012",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib20",
+    "doi-asserted-by": "crossref",
+    "first-page": "33",
+    "DOI": "10.1016/j.jpowsour.2005.03.119",
+    "article-title": "The development of low cost lifepo 4-based high power lithium-ion batteries",
+    "volume": "146",
+    "author": "Striebel",
+    "year": "2005",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib21",
+    "doi-asserted-by": "crossref",
+    "first-page": "896",
+    "DOI": "10.1021/jp510071d",
+    "article-title": "Understanding lithium inventory loss and sudden performance fade in cylindrical cells during cycling with deep-discharge steps",
+    "volume": "119",
+    "author": "Sarasketa-Zabala",
+    "year": "2014",
+    "journal-title": "J.\u00a0Phys. Chem. C"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib22",
+    "doi-asserted-by": "crossref",
+    "first-page": "277",
+    "DOI": "10.1016/j.jpowsour.2004.02.033",
+    "article-title": "Extended Kalman filtering for battery management systems of LiPB-based HEV battery packs. Part 3. State and parameter estimation",
+    "volume": "134",
+    "author": "Plett",
+    "year": "2004",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "12",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib23",
+    "doi-asserted-by": "crossref",
+    "first-page": "5357",
+    "DOI": "10.1016/j.jpowsour.2010.08.035",
+    "article-title": "State-of-health monitoring of lithium-ion batteries in electric vehicles by on-board internal resistance estimation",
+    "volume": "196",
+    "author": "Remmlinger",
+    "year": "2011",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib24",
+    "doi-asserted-by": "crossref",
+    "first-page": "737",
+    "DOI": "10.1109/TEC.2011.2155657",
+    "article-title": "Reliable state estimation of multicell Lithium-ion battery systems",
+    "volume": "26",
+    "author": "Roscher",
+    "year": "2011",
+    "journal-title": "IEEE Trans. Energy Convers."
+   },
+   {
+    "issue": "9",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib25",
+    "doi-asserted-by": "crossref",
+    "first-page": "A1405",
+    "DOI": "10.1149/2.013209jes",
+    "article-title": "User-friendly differential voltage analysis freeware for the analysis of degradation mechanisms in Li-Ion batteries",
+    "volume": "159",
+    "author": "Dahn",
+    "year": "2012",
+    "journal-title": "J.\u00a0Electrochem. Soc."
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib26",
+    "doi-asserted-by": "crossref",
+    "first-page": "158",
+    "DOI": "10.1016/j.jpowsour.2016.05.041",
+    "article-title": "On-board capacity estimation of lithium iron phosphate batteries by means of half-cell curves",
+    "volume": "324",
+    "author": "Marongiu",
+    "year": "2016",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "10",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib27",
+    "doi-asserted-by": "crossref",
+    "first-page": "A454",
+    "DOI": "10.1149/1.2221767",
+    "article-title": "Incremental capacity analysis and close-to-equilibrium OCV measurements to quantify capacity fade in commercial rechargeable lithium batteries",
+    "volume": "9",
+    "author": "Dubarry",
+    "year": "2006",
+    "journal-title": "Electrochem. Solid-State Lett."
+   },
+   {
+    "issue": "1\u20132",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib28",
+    "doi-asserted-by": "crossref",
+    "first-page": "295",
+    "DOI": "10.1016/j.jpowsour.2004.07.021",
+    "article-title": "Differential voltage analyses of high-power, lithium-ion cells 1. Technique and application",
+    "volume": "139",
+    "author": "Bloom",
+    "year": "2005",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib29",
+    "doi-asserted-by": "crossref",
+    "first-page": "38",
+    "DOI": "10.1016/j.jpowsour.2013.11.029",
+    "article-title": "A\u00a0comparative study of commercial lithium ion battery cycle life in electrical vehicle: aging mechanism identification",
+    "volume": "251",
+    "author": "Han",
+    "year": "2014",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "1-2",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib30",
+    "doi-asserted-by": "crossref",
+    "first-page": "97",
+    "DOI": "10.1016/j.jpowsour.2005.03.105",
+    "article-title": "Overcharge reaction of lithium-ion batteries",
+    "volume": "146",
+    "author": "Ohsaki",
+    "year": "2005",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib31",
+    "doi-asserted-by": "crossref",
+    "first-page": "19",
+    "DOI": "10.1016/S0378-7753(98)00128-1",
+    "article-title": "In situ Scanning Electron Microscopy (SEM) observation of interfaces within plastic lithium batteries",
+    "volume": "76",
+    "author": "Orsini",
+    "year": "1998",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib32",
+    "doi-asserted-by": "crossref",
+    "first-page": "550",
+    "DOI": "10.1016/j.jpowsour.2009.05.002",
+    "article-title": "Analysis of internal short-circuit in a lithium ion cell",
+    "volume": "194",
+    "author": "Santhanagopalan",
+    "year": "2009",
+    "journal-title": "J.\u00a0Power Sources"
+   },
+   {
+    "issue": "12",
+    "key": "10.1016/j.jpowsour.2016.12.011_bib33",
+    "doi-asserted-by": "crossref",
+    "first-page": "A2271",
+    "DOI": "10.1149/2.0331512jes",
+    "article-title": "A\u00a0parametric open circuit voltage model for lithium ion batteries",
+    "volume": "162",
+    "author": "Birkl",
+    "year": "2015",
+    "journal-title": "J.\u00a0Electrochem. Soc."
+   },
+   {
+    "key": "10.1016/j.jpowsour.2016.12.011_bib34",
+    "doi-asserted-by": "crossref",
+    "first-page": "80",
+    "DOI": "10.1016/j.jpowsour.2013.12.060",
+    "article-title": "Nondestructive detection, characterization, and quantification of lithium plating in commercial lithium-ion batteries",
+    "volume": "254",
+    "author": "Petzl",
+    "year": "2014",
+    "journal-title": "J.\u00a0Power Sources"
+   }
+  ],
+  "container-title": [
+   "Journal of Power Sources"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0378775316316998?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0378775316316998?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2019,
+     1,
+     28
+    ]
+   ],
+   "date-time": "2019-01-28T11:39:32Z",
+   "timestamp": 1548675572000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0378775316316998"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2017,
+     2
+    ]
+   ]
+  },
+  "references-count": 34,
+  "alternative-id": [
+   "S0378775316316998"
+  ],
+  "URL": "https://doi.org/10.1016/j.jpowsour.2016.12.011",
+  "relation": {},
+  "ISSN": [
+   "0378-7753"
+  ],
+  "issn-type": [
+   {
+    "value": "0378-7753",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2017,
+     2
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "Elsevier",
+    "name": "publisher",
+    "label": "This article is maintained by"
+   },
+   {
+    "value": "Degradation diagnostics for lithium ion cells",
+    "name": "articletitle",
+    "label": "Article Title"
+   },
+   {
+    "value": "Journal of Power Sources",
+    "name": "journaltitle",
+    "label": "Journal Title"
+   },
+   {
+    "value": "https://doi.org/10.1016/j.jpowsour.2016.12.011",
+    "name": "articlelink",
+    "label": "CrossRef DOI link to publisher maintained version"
+   },
+   {
+    "value": "article",
+    "name": "content_type",
+    "label": "Content Type"
+   },
+   {
+    "value": "\u00a9 2016 The Authors. Published by Elsevier B.V.",
+    "name": "copyright",
+    "label": "Copyright"
+   }
+  ]
+ }
+}

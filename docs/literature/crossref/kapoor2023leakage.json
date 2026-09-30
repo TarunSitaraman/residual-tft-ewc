@@ -1,0 +1,1211 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T15:05:58Z",
+   "timestamp": 1790780758279,
+   "version": "4.1.0"
+  },
+  "reference-count": 104,
+  "publisher": "Elsevier BV",
+  "issue": "9",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2023,
+       9,
+       1
+      ]
+     ],
+     "date-time": "2023-09-01T00:00:00Z",
+     "timestamp": 1693526400000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2023,
+       9,
+       1
+      ]
+     ],
+     "date-time": "2023-09-01T00:00:00Z",
+     "timestamp": 1693526400000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/legal/tdmrep-license"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2023,
+       7,
+       5
+      ]
+     ],
+     "date-time": "2023-07-05T00:00:00Z",
+     "timestamp": 1688515200000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "http://creativecommons.org/licenses/by/4.0/"
+   }
+  ],
+  "funder": [
+   {
+    "DOI": "10.13039/100000001",
+    "name": "National Science Foundation",
+    "doi-asserted-by": "publisher",
+    "award": [
+     "IIS-1763642"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "IIS-1763642"
+      ]
+     }
+    ],
+    "id": [
+     {
+      "id": "10.13039/100000001",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "cell.com",
+    "elsevier.com",
+    "sciencedirect.com"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Patterns"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2023,
+     9
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.patter.2023.100804",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2023,
+     8,
+     4
+    ]
+   ],
+   "date-time": "2023-08-04T10:35:02Z",
+   "timestamp": 1691145302000
+  },
+  "page": "100804",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 1099,
+  "title": [
+   "Leakage and the reproducibility crisis in machine-learning-based science"
+  ],
+  "prefix": "10.1016",
+  "volume": "4",
+  "author": [
+   {
+    "ORCID": "https://orcid.org/0000-0001-5695-280X",
+    "authenticated-orcid": false,
+    "given": "Sayash",
+    "family": "Kapoor",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Arvind",
+    "family": "Narayanan",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "key": "10.1016/j.patter.2023.100804_bib1",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1126/sciadv.abd1705",
+    "article-title": "Nonreplicable publications are cited more than replicable ones",
+    "volume": "7",
+    "author": "Serra-Garcia",
+    "year": "2021",
+    "journal-title": "Sci. Adv."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib2",
+    "article-title": "Open Science Collaboration Estimating the reproducibility of psychological science",
+    "volume": "349",
+    "year": "2015",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib3",
+    "article-title": "The worst of both worlds: A comparative analysis of errors in learning from data in psychology and machine learning",
+    "author": "Hullman",
+    "year": "2022",
+    "journal-title": "arXiv"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib4",
+    "unstructured": "Pineau, J.; Vincent-Lamarre, P.; Sinha, K.; Larivi\u00e8re, V.; Beygelzimer, A.; d\u2019Alch\u00e9-Buc, F.; Fox, E.; Larochelle, H. Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program).Preprint at arXiv:https://doi.org/10.48550/arXiv.2003.122062003.12206 [cs, stat] 2020, arXiv: 2003.12206."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib5",
+    "article-title": "The fundamental principles of reproducibility",
+    "volume": "379",
+    "author": "Erik Gundersen",
+    "year": "2021",
+    "journal-title": "Philosophical Transactions of the Royal Society"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib6",
+    "series-title": "Perspectives on Machine Learning from Psychology\u2019s Reproducibility Crisis",
+    "author": "Bell",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib7",
+    "doi-asserted-by": "crossref",
+    "first-page": "192",
+    "DOI": "10.1016/j.obhdp.2020.11.003",
+    "article-title": "Expanding the scope of reproducibility research through data analysis replications",
+    "volume": "164",
+    "author": "Hofman",
+    "year": "2021",
+    "journal-title": "Organ. Behav. Hum. Decis. Process."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib8",
+    "doi-asserted-by": "crossref",
+    "first-page": "1645",
+    "DOI": "10.1073/pnas.1421412111",
+    "article-title": "Opinion: Reproducible research can still be wrong: Adopting a prevention approach",
+    "volume": "112",
+    "author": "Leek",
+    "year": "2015",
+    "journal-title": "Proc. Natl. Acad. Sci. USA"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib9",
+    "series-title": "Handbook of Statistical Analysis and Data Mining Applications",
+    "author": "Nisbet",
+    "year": "2009"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib10",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1145/2382577.2382579",
+    "article-title": "Leakage in data mining: Formulation, detection, and avoidance",
+    "volume": "6",
+    "author": "Kaufman",
+    "year": "2012",
+    "journal-title": "ACM Trans. Knowl. Discov. Data"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib11",
+    "series-title": "The Treachery of Leakage",
+    "author": "Fraser",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib12",
+    "series-title": "Top 10 Ways Your Machine Learning Models May Have Leakage",
+    "author": "Ghani",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib13",
+    "author": "Becker",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib14",
+    "series-title": "Data Leakage in Machine Learning",
+    "author": "Brownlee",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib15",
+    "unstructured": "Collins-Thompson, K. Data Leakage - Module 4: Supervised Machine Learning - Part 2, en."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib16",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1371/journal.pmed.1001221",
+    "article-title": "Reporting and Methods in Clinical Prediction Research: A Systematic Review",
+    "volume": "9",
+    "author": "Bouwmeester",
+    "year": "2012",
+    "journal-title": "PLOS Med."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib17",
+    "doi-asserted-by": "crossref",
+    "first-page": "746",
+    "DOI": "10.1016/j.biopsych.2013.05.014",
+    "article-title": "When Optimism Hurts: Inflated Predictions in Psychiatric Neuroimaging",
+    "volume": "75",
+    "author": "Whelan",
+    "year": "2014",
+    "journal-title": "Biol. Psychiatry"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib18",
+    "doi-asserted-by": "crossref",
+    "first-page": "363",
+    "DOI": "10.1186/s12859-015-0784-9",
+    "article-title": "Joint Use of Over- and under-Sampling Techniques and Cross-Validation for the Development and Assessment of Prediction Models",
+    "volume": "16",
+    "author": "Blagus",
+    "year": "2015",
+    "journal-title": "BMC Bioinformatics"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib19",
+    "doi-asserted-by": "crossref",
+    "first-page": "1121",
+    "DOI": "10.1007/s10803-014-2268-6",
+    "article-title": "Applying Machine Learning to Facilitate Autism Diagnostics: Pitfalls and Promises",
+    "volume": "45",
+    "author": "Bone",
+    "year": "2015",
+    "journal-title": "J. Autism Dev. Disord."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib20",
+    "doi-asserted-by": "crossref",
+    "first-page": "887",
+    "DOI": "10.1038/ijo.2015.214",
+    "article-title": "The Importance of Prediction Model Validation and Assessment in Obesity and Nutrition Research",
+    "volume": "40",
+    "author": "Ivanescu",
+    "year": "2016",
+    "journal-title": "Int. J. Obes."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib21",
+    "series-title": "Proceedings of the 2018 26th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering",
+    "first-page": "307",
+    "article-title": "Be Careful of When: An Empirical Study on Time-Related Misuse of Issue Tracking Data",
+    "author": "Tu",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib22",
+    "doi-asserted-by": "crossref",
+    "first-page": "3",
+    "DOI": "10.1093/toxsci/kfy286",
+    "article-title": "Oy Vey! A Comment on \u201cMachine Learning of Toxicological Big Data Enables Read-Across Structure Activity Relationships Outperforming Animal Test Reproducibility",
+    "volume": "167",
+    "author": "Alves",
+    "year": "2019",
+    "journal-title": "Toxicol. Sci."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib23",
+    "doi-asserted-by": "crossref",
+    "first-page": "12",
+    "DOI": "10.1016/j.jclinepi.2019.02.004",
+    "article-title": "A Systematic Review Shows No Performance Benefit of Machine Learning over Logistic Regression for Clinical Prediction Models",
+    "volume": "110",
+    "author": "Christodoulou",
+    "year": "2019",
+    "journal-title": "J. Clin. Epidemiol."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib24",
+    "doi-asserted-by": "crossref",
+    "first-page": "1264",
+    "DOI": "10.1109/LGRS.2019.2895697",
+    "article-title": "Validating Hyperspectral Image Segmentation",
+    "volume": "16",
+    "author": "Nalepa",
+    "year": "2019",
+    "journal-title": "IEEE Geosci. Remote Sens. Lett."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib25",
+    "doi-asserted-by": "crossref",
+    "first-page": "37",
+    "DOI": "10.1016/j.mri.2019.04.013",
+    "article-title": "Tractography and Machine Learning: Current State and Open Challenges",
+    "volume": "64",
+    "author": "Poulin",
+    "year": "2019",
+    "journal-title": "Magn. Reson. Imaging"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib26",
+    "doi-asserted-by": "crossref",
+    "first-page": "1042",
+    "DOI": "10.1109/TNSRE.2020.2974272",
+    "article-title": "Questionable Classification Accuracy Reported in \u201cDesigning a Sum of Squared Correlations Framework for Enhancing SSVEP-Based BCIs",
+    "volume": "28",
+    "author": "Nakanishi",
+    "year": "2020",
+    "journal-title": "IEEE Trans. Neural Syst. Rehabil. Eng."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib27",
+    "series-title": "Training Machine Learning Models on Patient Level Data Segregation Is Crucial in Practical Clinical Applications",
+    "author": "Oner",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib28",
+    "doi-asserted-by": "crossref",
+    "first-page": "534",
+    "DOI": "10.1001/jamapsychiatry.2019.3671",
+    "article-title": "Establishment of Best Practices for Evidence for Prediction A Review",
+    "volume": "77",
+    "author": "Poldrack",
+    "year": "2020",
+    "journal-title": "JAMA Psychiatry"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib29",
+    "article-title": "Confounds in the Data\u2014Comments on \u201cDecoding Brain Representations by Multimodal Learning of Neural Activity and Visual Features\u201d",
+    "author": "Ahmed",
+    "year": "2021",
+    "journal-title": "IEEE Trans. Pattern Anal. Mach. Intell."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib30",
+    "first-page": "316",
+    "article-title": "The Perils and Pitfalls of Block Design for EEG Classification Experiments",
+    "volume": "43",
+    "author": "Li",
+    "year": "2021",
+    "journal-title": "IEEE Trans. Pattern Anal. Mach. Intell."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib31",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1145/3447876",
+    "article-title": "An Empirical Study of the Impact of Data Splitting Decisions on the Performance of AIOps Solutions",
+    "volume": "30",
+    "author": "Lyu",
+    "year": "2021",
+    "journal-title": "ACM Trans. Software Eng. Method."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib32",
+    "article-title": "Data Leakage in Health Outcomes Prediction With Machine Learning. Comment on \u201cPrediction of Incident Hypertension Within the Next Year: Prospective Study Using Statewide Electronic Health Records and Machine Learning",
+    "volume": "23",
+    "author": "Filho",
+    "year": "2021",
+    "journal-title": "J. Med. Internet Res."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib33",
+    "doi-asserted-by": "crossref",
+    "first-page": "199",
+    "DOI": "10.1038/s42256-021-00307-0",
+    "article-title": "Common Pitfalls and Recommendations for Using Machine Learning to Detect and Prognosticate for COVID-19 Using Chest Radiographs and CT Scans",
+    "volume": "3",
+    "author": "Roberts",
+    "year": "2021",
+    "journal-title": "Nat. Mach. Intell."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib34",
+    "doi-asserted-by": "crossref",
+    "first-page": "7980",
+    "DOI": "10.1038/s41598-021-87157-3",
+    "article-title": "Inflated Prediction Accuracy of Neuropsychiatric Biomarkers Caused by Data Leakage in Feature Selection",
+    "volume": "11",
+    "author": "Shim",
+    "year": "2021",
+    "journal-title": "Sci. Rep."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib35",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.artmed.2020.101987",
+    "article-title": "Overly Optimistic Prediction Results on Imbalanced Data: A Case Study of Flaws and Benefits When Applying over-Sampling",
+    "volume": "111",
+    "author": "Vandewiele",
+    "year": "2021",
+    "journal-title": "Artif. Intell. Med."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib36",
+    "series-title": "Dos and Don\u2019ts of Machine Learning in Computer Security",
+    "author": "Arp",
+    "year": "2022"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib37",
+    "article-title": "Genomic Machine Learning Meta-Regression: Insights on Associations of Study Features with Reported Model Performance; techreport",
+    "author": "Barnett",
+    "year": "2022",
+    "journal-title": "medRxiv"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib38",
+    "article-title": "Checklist for Artificial Intelligence in Medical Imaging (CLAIM): A Guide for Authors and Reviewers",
+    "volume": "2",
+    "author": "Mongan",
+    "year": "2020",
+    "journal-title": "Radiology: Artif. Intell."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib39",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1186/s12916-014-0241-z",
+    "article-title": "Transparent reporting of a multivariable prediction model for individual prognosis or diagnosis (TRIPOD): the TRIPOD Statement",
+    "volume": "13",
+    "author": "Collins",
+    "year": "2015",
+    "journal-title": "BMC Med."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib40",
+    "series-title": "In Proceedings of the Conference on Fairness, Accountability, and Transparency",
+    "first-page": "220",
+    "author": "Mitchell",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib41",
+    "doi-asserted-by": "crossref",
+    "first-page": "685",
+    "DOI": "10.1146/annurev-economics-080217-053433",
+    "article-title": "Machine Learning Methods That Economists Should Know About",
+    "volume": "11",
+    "author": "Athey",
+    "year": "2019",
+    "journal-title": "Annu. Rev. Econom."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib42",
+    "doi-asserted-by": "crossref",
+    "first-page": "301",
+    "DOI": "10.1016/j.tig.2017.12.005",
+    "article-title": "Supervised Machine Learning for Population Genetics: A New Paradigm",
+    "volume": "34",
+    "author": "Schrider",
+    "year": "2018",
+    "journal-title": "Trends Genet."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib43",
+    "doi-asserted-by": "crossref",
+    "first-page": "203",
+    "DOI": "10.1016/j.anbehav.2016.12.005",
+    "article-title": "Applications of machine learning in animal behaviour studies",
+    "volume": "124",
+    "author": "Valletta",
+    "year": "2017",
+    "journal-title": "Anim. Behav."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib44",
+    "doi-asserted-by": "crossref",
+    "first-page": "2455",
+    "DOI": "10.1017/S0033291716001367",
+    "article-title": "Machine learning, statistical learning and the future of biological research in psychiatry",
+    "volume": "46",
+    "author": "Iniesta",
+    "year": "2016",
+    "journal-title": "Psychol. Med."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib45",
+    "doi-asserted-by": "crossref",
+    "first-page": "525",
+    "DOI": "10.1177/1094428116677299",
+    "article-title": "Big Data Methods: Leveraging Modern Data Analytic Techniques to Build Organizational Science",
+    "volume": "21",
+    "author": "Tonidandel",
+    "year": "2018",
+    "journal-title": "Organ. Res. Methods"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib46",
+    "doi-asserted-by": "crossref",
+    "first-page": "1100",
+    "DOI": "10.1177/1745691617693393",
+    "article-title": "Choosing Prediction Over Explanation in Psychology: Lessons From Machine Learning",
+    "volume": "12",
+    "author": "Yarkoni",
+    "year": "2017",
+    "journal-title": "Perspect. Psychol. Sci."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib47",
+    "doi-asserted-by": "crossref",
+    "first-page": "181",
+    "DOI": "10.1038/s41586-021-03659-0",
+    "article-title": "Integrating explanation and prediction in computational social science",
+    "volume": "595",
+    "author": "Hofman",
+    "year": "2021",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib48",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1126/scitranslmed.abb1655",
+    "article-title": "Reproducibility in machine learning for health research: Still a ways to go",
+    "volume": "13",
+    "author": "McDermott",
+    "year": "2021",
+    "journal-title": "Sci. Transl. Med."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib49",
+    "doi-asserted-by": "crossref",
+    "first-page": "8398",
+    "DOI": "10.1073/pnas.1915006117",
+    "article-title": "Measuring the predictability of life outcomes with a scientific mass collaboration",
+    "volume": "117",
+    "author": "Salganik",
+    "year": "2020",
+    "journal-title": "Proc. Natl. Acad. Sci. USA"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib50",
+    "doi-asserted-by": "crossref",
+    "first-page": "2584",
+    "DOI": "10.1073/pnas.1708290115",
+    "article-title": "An empirical analysis of journal policy effectiveness for computational reproducibility",
+    "volume": "115",
+    "author": "Stodden",
+    "year": "2018",
+    "journal-title": "Proc. Natl. Acad. Sci. USA"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib51",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1371/journal.pone.0251194",
+    "article-title": "A computational reproducibility study of PLOS ONE articles featuring longitudinal data analyses",
+    "volume": "16",
+    "author": "Seibold",
+    "year": "2021",
+    "journal-title": "PLoS One"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib52",
+    "doi-asserted-by": "crossref",
+    "first-page": "665",
+    "DOI": "10.1038/s42256-020-00257-z",
+    "article-title": "Shortcut learning in deep neural networks",
+    "volume": "2",
+    "author": "Geirhos",
+    "year": "2020",
+    "journal-title": "Nat. Mach. Intell."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib53",
+    "series-title": "In Proceedings of the 1st Conference on Fairness, Accountability and Transparency",
+    "first-page": "134",
+    "author": "Chouldechova",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib54",
+    "series-title": "Applied Predictive Modeling",
+    "author": "Kuhn",
+    "year": "2013"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib55",
+    "article-title": "Data Leakage in Health Outcomes Prediction With Machine Learning. Comment on \u201cPrediction of Incident Hypertension Within the Next Year: Prospective Study Using Statewide Electronic Health Records and Machine Learning\u201d",
+    "volume": "23",
+    "author": "Filho",
+    "year": "2021",
+    "journal-title": "J.\u00a0Med. Internet Res."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib56",
+    "series-title": "Training Machine Learning Models on Patient Level Data Segregation Is Crucial in Practical Clinical Applications; Tech. rep., Company",
+    "first-page": "2020",
+    "author": "Oner",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib57",
+    "doi-asserted-by": "crossref",
+    "first-page": "169",
+    "DOI": "10.1038/s41576-021-00434-9",
+    "article-title": "Navigating the pitfalls of applying machine learning in genomics",
+    "volume": "23",
+    "author": "Whalen",
+    "year": "2022",
+    "journal-title": "Nat. Rev. Genet."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib58",
+    "doi-asserted-by": "crossref",
+    "first-page": "913",
+    "DOI": "10.1111/ecog.02881",
+    "article-title": "Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure",
+    "volume": "40",
+    "author": "Roberts",
+    "year": "2017",
+    "journal-title": "Ecography"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib59",
+    "series-title": "Block Cross-Validation for Species Distribution Modelling",
+    "author": "Valavi",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib60",
+    "article-title": "Hierarchy of Limitations in Machine Learning",
+    "author": "Malik",
+    "year": "2020",
+    "journal-title": "arXiv"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib61",
+    "doi-asserted-by": "crossref",
+    "first-page": "1121",
+    "DOI": "10.1007/s10803-014-2268-6",
+    "article-title": "Applying Machine Learning to Facilitate Autism Diagnostics: Pitfalls and Promises",
+    "volume": "45",
+    "author": "Bone",
+    "year": "2015",
+    "journal-title": "J.\u00a0Autism Dev. Disord."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib62",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1371/journal.pmed.1002683",
+    "article-title": "Variable generalization performance of a deep learning model to detect pneumonia in chest radiographs: A cross-sectional study",
+    "volume": "15",
+    "author": "Zech",
+    "year": "2018",
+    "journal-title": "PLoS Med."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib63",
+    "article-title": "Intriguing properties of neural networks",
+    "author": "Szegedy",
+    "year": "2014",
+    "journal-title": "Proceedings of the International Conference on Learning Representations"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib64",
+    "series-title": "Proceedings of the International Conference on Learning Representations",
+    "article-title": "ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness",
+    "author": "Geirhos",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib65",
+    "article-title": "Overinterpretation reveals image classification model pathologies",
+    "author": "Carter",
+    "year": "2021",
+    "journal-title": "Adv. Neural Inf. Process. Syst."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib66",
+    "series-title": "In Proceedings of the 36th International Conference on Machine Learning",
+    "first-page": "5389",
+    "article-title": "Do ImageNet Classifiers Generalize to ImageNet?",
+    "author": "Recht",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib67",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Paullada, A.; Raji, I. D.; Bender, E. M.; Denton, E.; Hanna, A. Data and its (dis) contents: A survey of dataset development and use in machine learning research.Preprint at arXiv https://doi.org/10.1016/j.patter.2021.100336preprint arXiv:2012.05345 2020.",
+    "DOI": "10.1016/j.patter.2021.100336"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib68",
+    "first-page": "1",
+    "article-title": "Do Datasets Have Politics? Disciplinary Values in Computer Vision Dataset Development",
+    "volume": "5",
+    "author": "Scheuerman",
+    "year": "2021",
+    "journal-title": "Proc. ACM Hum. Comput. Interact."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib69",
+    "doi-asserted-by": "crossref",
+    "first-page": "86",
+    "DOI": "10.1145/3458723",
+    "article-title": "Datasheets for datasets",
+    "volume": "64",
+    "author": "Gebru",
+    "year": "2021",
+    "journal-title": "Commun. ACM"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib70",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1371/journal.pone.0183591",
+    "article-title": "A checklist is associated with increased quality of reporting preclinical biomedical research: A systematic review",
+    "volume": "12",
+    "author": "Han",
+    "year": "2017",
+    "journal-title": "PLoS One"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib71",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1148/ryai.210127",
+    "article-title": "Assessing Methods and Tools to Improve Reporting, Increase Transparency, and Reduce Failures in Machine Learning Applications in Health Care",
+    "volume": "4",
+    "author": "Garbin",
+    "year": "2022",
+    "journal-title": "Radiol. Artif. Intell."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib72",
+    "first-page": "1",
+    "article-title": "AI and the Everything in the Whole Wide World Benchmark",
+    "author": "Raji",
+    "year": "2021",
+    "journal-title": "Proceedings of the Neural Information Processing Systems Track on Datasets and Benchmarks"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib73",
+    "doi-asserted-by": "crossref",
+    "first-page": "532",
+    "DOI": "10.1177/00031224211004187",
+    "article-title": "What Is Your Estimand? Defining the Target Quantity Connects Statistical Evidence to Theory",
+    "volume": "86",
+    "author": "Lundberg",
+    "year": "2021",
+    "journal-title": "Am. Socio. Rev."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib74",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1177/2378023119849803",
+    "article-title": "Successes and Struggles with Computational Reproducibility: Lessons from the Fragile Families Challenge",
+    "volume": "5",
+    "author": "Liu",
+    "year": "2019",
+    "journal-title": "Socius."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib75",
+    "doi-asserted-by": "crossref",
+    "first-page": "87",
+    "DOI": "10.1093/pan/mpv024",
+    "article-title": "Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced CivilWar Onset Data",
+    "volume": "24",
+    "author": "Muchlinski",
+    "year": "2016",
+    "journal-title": "Polit. Anal."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib76",
+    "first-page": "193",
+    "article-title": "Do the robot: Lessons from machine learning to improve conflict forecasting",
+    "volume": "54",
+    "author": "Colaresi",
+    "year": "2017",
+    "journal-title": "J.\u00a0Peace Res."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib77",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Wang, Y. Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced Civil War Onset Data: A Comment. Political Analysis 2019, 27, Publisher: Cambridge University Press, 107\u2013110.",
+    "DOI": "10.1017/pan.2018.40"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib78",
+    "series-title": "Improving Supreme Court Forecasting Using Boosted Decision Trees. Political Analysis",
+    "first-page": "381",
+    "volume": "27",
+    "author": "Kaufman",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib79",
+    "series-title": "Forecasting civil war and political violence",
+    "first-page": "177",
+    "author": "Bara",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib80",
+    "series-title": "Scimago Journal and Country Rank",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib81",
+    "first-page": "363",
+    "article-title": "The perils of policy by p-value: Predicting civil conflicts",
+    "volume": "47",
+    "author": "Ward",
+    "year": "2010",
+    "journal-title": "J.\u00a0Peace Res."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib82",
+    "doi-asserted-by": "crossref",
+    "first-page": "199",
+    "DOI": "10.1214/ss/1009213726",
+    "article-title": "Statistical Modeling: The Two Cultures (with comments and a rejoinder by the author)",
+    "volume": "16",
+    "author": "Breiman",
+    "year": "2001",
+    "journal-title": "Stat. Sci."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib83",
+    "doi-asserted-by": "crossref",
+    "first-page": "eaao5580",
+    "DOI": "10.1126/sciadv.aao5580",
+    "article-title": "The accuracy, fairness, and limits of predicting recidivism",
+    "volume": "4",
+    "author": "Dressel",
+    "year": "2018",
+    "journal-title": "Sci. Adv."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib84",
+    "first-page": "192",
+    "article-title": "Data-driven advice for applying machine learning to bioinformatics problems. Pacific Symposium on Biocomputing",
+    "volume": "23",
+    "author": "Olson",
+    "year": "2018",
+    "journal-title": "Pac. Symp. Biocomput."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib85",
+    "series-title": "In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics",
+    "first-page": "2786",
+    "article-title": "We Need to Talk about Standard Splits",
+    "author": "Gorman",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib86",
+    "doi-asserted-by": "crossref",
+    "first-page": "1885",
+    "DOI": "10.1177/0022002720918923",
+    "article-title": "Forecasting Civil Wars: Theory and Structure in an Age of \u201cBig Data\u201d and Machine Learning",
+    "volume": "64",
+    "author": "Blair",
+    "year": "2020",
+    "journal-title": "J.\u00a0Conflict Resolut."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib87",
+    "doi-asserted-by": "crossref",
+    "first-page": "77",
+    "DOI": "10.1186/1471-2105-12-77",
+    "article-title": "pROC: an open-source package for R and S+ to analyze and compare ROC curves",
+    "volume": "12",
+    "author": "Robin",
+    "year": "2011",
+    "journal-title": "BMC Bioinf."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib88",
+    "article-title": "Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification",
+    "author": "He",
+    "year": "2015",
+    "journal-title": "CoRR"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib89",
+    "series-title": "Computer Vision: Algorithms and Applications",
+    "author": "Szeliski",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib90",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1097/MD.0000000000015987",
+    "article-title": "The trim-and-fill method for publication bias: practical guidelines and recommendations based on a large database of meta-analyses",
+    "volume": "98",
+    "author": "Shi",
+    "year": "2019",
+    "journal-title": "Medicine"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib91",
+    "doi-asserted-by": "crossref",
+    "first-page": "175",
+    "DOI": "10.1038/nature25753",
+    "article-title": "Meta-analysis and the science of research synthesis",
+    "volume": "555",
+    "author": "Gurevitch",
+    "year": "2018",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib92",
+    "doi-asserted-by": "crossref",
+    "first-page": "486",
+    "DOI": "10.1126/science.aal3856",
+    "article-title": "Prediction and explanation in social systems",
+    "volume": "355",
+    "author": "Hofman",
+    "year": "2017",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib93",
+    "series-title": "Reproducibility of Benchmarked Deep Reinforcement Learning Tasks for Continuous Control",
+    "author": "Islam",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib94",
+    "unstructured": "Lones, M. A. How to avoid machine learning pitfalls: a guide for academic researchers.Preprint at arXiv:2108.02497 [cs] 2021,https://doi.org/10.48550/arXiv.2108.02497 arXiv: 2108.02497."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib95",
+    "doi-asserted-by": "crossref",
+    "first-page": "211",
+    "DOI": "10.1007/s11263-015-0816-y",
+    "article-title": "ImageNet Large Scale Visual Recognition Challenge",
+    "volume": "115",
+    "author": "Russakovsky",
+    "year": "2015",
+    "journal-title": "Int. J. Comput. Vis."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib96",
+    "series-title": "In Proceedings of the 38th International Conference on Machine Learning",
+    "first-page": "5637",
+    "author": "Koh",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib97",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1177/25152459211026864",
+    "article-title": "Putting Psychology to the Test: Rethinking Model Evaluation Through Benchmarking and Prediction",
+    "volume": "4",
+    "author": "Rocca",
+    "year": "2021",
+    "journal-title": "Advances in Methods and Practices in Psychological Science"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib98",
+    "doi-asserted-by": "crossref",
+    "first-page": "745",
+    "DOI": "10.1080/10618600.2017.1384734",
+    "article-title": "50 Years of Data Science",
+    "volume": "26",
+    "author": "Donoho",
+    "year": "2017",
+    "journal-title": "J.\u00a0Comput. Graph Stat."
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib99",
+    "series-title": "Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing",
+    "first-page": "7297",
+    "article-title": "Scientific Credibility of Machine Translation Research: A Meta-Evaluation of 769 Papers",
+    "author": "Marie",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib100",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.15626/MP.2018.892",
+    "article-title": "Computational reproducibility via containers in social psychology",
+    "volume": "3",
+    "author": "Clyburne-Sherin",
+    "year": "2019",
+    "journal-title": "Meta-Psychology"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib101",
+    "doi-asserted-by": "crossref",
+    "first-page": "641",
+    "DOI": "10.1038/s41592-018-0137-5",
+    "article-title": "Easing the burden of code review",
+    "volume": "15",
+    "year": "2018",
+    "journal-title": "Nat. Methods"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib102",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1126/science.aay9534",
+    "article-title": "No coding required: Companies make it easier than ever for scientists to use artificial intelligence",
+    "author": "Hutson",
+    "year": "2019",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib103",
+    "series-title": "Claims of Superior Performance of Machine Learning over Logistic Regression for Civil War Prediction Don\u2019t Reproduce",
+    "author": "Kapoor",
+    "year": "2021"
+   },
+   {
+    "key": "10.1016/j.patter.2023.100804_bib104",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.3389/frma.2018.00023",
+    "article-title": "Dimensions: Building Context for Search and Evaluation",
+    "volume": "3",
+    "author": "Hook",
+    "year": "2018",
+    "journal-title": "Frontiers in Research Metrics and Analytics"
+   }
+  ],
+  "container-title": [
+   "Patterns"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S2666389923001599?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S2666389923001599?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2025,
+     11,
+     12
+    ]
+   ],
+   "date-time": "2025-11-12T23:50:33Z",
+   "timestamp": 1762991433000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S2666389923001599"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2023,
+     9
+    ]
+   ]
+  },
+  "references-count": 104,
+  "journal-issue": {
+   "issue": "9",
+   "published-print": {
+    "date-parts": [
+     [
+      2023,
+      9
+     ]
+    ]
+   }
+  },
+  "alternative-id": [
+   "S2666389923001599"
+  ],
+  "URL": "https://doi.org/10.1016/j.patter.2023.100804",
+  "relation": {},
+  "ISSN": [
+   "2666-3899"
+  ],
+  "issn-type": [
+   {
+    "value": "2666-3899",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2023,
+     9
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "Elsevier",
+    "name": "publisher",
+    "label": "This article is maintained by"
+   },
+   {
+    "value": "Leakage and the reproducibility crisis in machine-learning-based science",
+    "name": "articletitle",
+    "label": "Article Title"
+   },
+   {
+    "value": "Patterns",
+    "name": "journaltitle",
+    "label": "Journal Title"
+   },
+   {
+    "value": "https://doi.org/10.1016/j.patter.2023.100804",
+    "name": "articlelink",
+    "label": "CrossRef DOI link to publisher maintained version"
+   },
+   {
+    "value": "article",
+    "name": "content_type",
+    "label": "Content Type"
+   },
+   {
+    "value": "\u00a9 2023 The Author(s).",
+    "name": "copyright",
+    "label": "Copyright"
+   }
+  ],
+  "article-number": "100804"
+ }
+}

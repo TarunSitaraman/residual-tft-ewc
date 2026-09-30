@@ -1,0 +1,844 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     25
+    ]
+   ],
+   "date-time": "2026-09-25T16:19:44Z",
+   "timestamp": 1790353184582,
+   "version": "4.1.0"
+  },
+  "reference-count": 47,
+  "publisher": "Elsevier BV",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2024,
+       6,
+       1
+      ]
+     ],
+     "date-time": "2024-06-01T00:00:00Z",
+     "timestamp": 1717200000000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2024,
+       6,
+       1
+      ]
+     ],
+     "date-time": "2024-06-01T00:00:00Z",
+     "timestamp": 1717200000000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/legal/tdmrep-license"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2024,
+       6,
+       1
+      ]
+     ],
+     "date-time": "2024-06-01T00:00:00Z",
+     "timestamp": 1717200000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-017"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2024,
+       6,
+       1
+      ]
+     ],
+     "date-time": "2024-06-01T00:00:00Z",
+     "timestamp": 1717200000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-037"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2024,
+       6,
+       1
+      ]
+     ],
+     "date-time": "2024-06-01T00:00:00Z",
+     "timestamp": 1717200000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-012"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2024,
+       6,
+       1
+      ]
+     ],
+     "date-time": "2024-06-01T00:00:00Z",
+     "timestamp": 1717200000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-029"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2024,
+       6,
+       1
+      ]
+     ],
+     "date-time": "2024-06-01T00:00:00Z",
+     "timestamp": 1717200000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-004"
+   }
+  ],
+  "funder": [
+   {
+    "DOI": "10.13039/100020595",
+    "name": "National Science and Technology Council",
+    "doi-asserted-by": "publisher",
+    "award": [
+     "NSTC-112-2221-E011-114-MY3"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "NSTC-112-2221-E011-114-MY3"
+      ]
+     }
+    ],
+    "id": [
+     {
+      "id": "10.13039/100020595",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "elsevier.com",
+    "sciencedirect.com"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Energy"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2024,
+     6
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.energy.2024.131114",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2024,
+     3,
+     28
+    ]
+   ],
+   "date-time": "2024-03-28T10:23:19Z",
+   "timestamp": 1711621399000
+  },
+  "page": "131114",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 116,
+  "special_numbering": "C",
+  "title": [
+   "Li-ion battery capacity prediction using improved temporal fusion transformer model"
+  ],
+  "prefix": "10.1016",
+  "volume": "296",
+  "author": [
+   {
+    "ORCID": "https://orcid.org/0000-0002-1436-7677",
+    "authenticated-orcid": false,
+    "given": "William",
+    "family": "Gomez",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-4563-945X",
+    "authenticated-orcid": false,
+    "given": "Fu-Kwun",
+    "family": "Wang",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-4092-6591",
+    "authenticated-orcid": false,
+    "given": "Jia-Hong",
+    "family": "Chou",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "issue": "4",
+    "key": "10.1016/j.energy.2024.131114_bib1",
+    "doi-asserted-by": "crossref",
+    "first-page": "1206",
+    "DOI": "10.3390/en14041206",
+    "article-title": "Elbows of internal resistance rise curves in li-ion cells",
+    "volume": "14",
+    "author": "Strange",
+    "year": "2021",
+    "journal-title": "Energies"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib2",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.energy.2022.124538",
+    "article-title": "Battery monitoring and prognostics optimization techniques: challenges and opportunities",
+    "volume": "255",
+    "author": "Semeraro",
+    "year": "2022",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib3",
+    "doi-asserted-by": "crossref",
+    "first-page": "152",
+    "DOI": "10.1016/j.neucom.2023.02.031",
+    "article-title": "An overview of data-driven battery health estimation technology for battery management system",
+    "volume": "532",
+    "author": "Chen",
+    "year": "2023",
+    "journal-title": "Neurocomputing"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.energy.2024.131114_bib4",
+    "doi-asserted-by": "crossref",
+    "first-page": "1541",
+    "DOI": "10.1109/TTE.2023.3289997",
+    "article-title": "Comparative study on the thermal characteristics of solid-state lithium-ion batteries",
+    "volume": "10",
+    "author": "Yang",
+    "year": "2024",
+    "journal-title": "IEEE Trans Transp Electrif"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib5",
+    "doi-asserted-by": "crossref",
+    "first-page": "86166",
+    "DOI": "10.1109/ACCESS.2021.3089032",
+    "article-title": "A comprehensive review of available battery datasets, rul prediction approaches, and advanced battery management",
+    "volume": "9",
+    "author": "Hasib",
+    "year": "2021",
+    "journal-title": "IEEE Access"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.energy.2024.131114_bib6",
+    "doi-asserted-by": "crossref",
+    "first-page": "422",
+    "DOI": "10.1109/TTE.2020.3029295",
+    "article-title": "An ensemble learning-based data-driven method for online state-of-health estimation of lithium-ion batteries",
+    "volume": "7",
+    "author": "Gou",
+    "year": "2021",
+    "journal-title": "IEEE Trans Transp Electrif"
+   },
+   {
+    "issue": "22",
+    "key": "10.1016/j.energy.2024.131114_bib7",
+    "doi-asserted-by": "crossref",
+    "first-page": "4366",
+    "DOI": "10.3390/en12224366",
+    "article-title": "Online remaining useful life prediction for lithium-ion batteries using partial discharge data features",
+    "volume": "12",
+    "author": "Ali",
+    "year": "2019",
+    "journal-title": "Energies"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib8",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1149/1945-7111/ac6d13",
+    "article-title": "Review\u2014\u201cknees\u201d in lithium-ion battery aging trajectories",
+    "volume": "169",
+    "author": "Attia",
+    "year": "2022",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib9",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.egyai.2020.100006",
+    "article-title": "Identification and machine learning prediction of knee-point and knee-onset in capacity degradation curves of lithium-ion cells",
+    "volume": "1",
+    "author": "Ferm\u00edn-Cueto",
+    "year": "2020",
+    "journal-title": "Energy AI"
+   },
+   {
+    "issue": "15",
+    "key": "10.1016/j.energy.2024.131114_bib10",
+    "doi-asserted-by": "crossref",
+    "first-page": "2910",
+    "DOI": "10.3390/en12152910",
+    "article-title": "Algorithm to determine the knee point on capacity fade curves of lithium-ion cells",
+    "volume": "12",
+    "author": "Diao",
+    "year": "2019",
+    "journal-title": "Energies"
+   },
+   {
+    "issue": "5",
+    "key": "10.1016/j.energy.2024.131114_bib11",
+    "doi-asserted-by": "crossref",
+    "first-page": "280",
+    "DOI": "10.3390/batteries9050280",
+    "article-title": "Transfer learning based on transferability measures for state of health prediction of lithium-ion batteries",
+    "volume": "9",
+    "author": "Amogne",
+    "year": "2023",
+    "journal-title": "Batteries"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib12",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.jpowsour.2022.231818",
+    "article-title": "Multiple health indicators assisting data-driven prediction of the later service life for lithium-ion batteries",
+    "volume": "542",
+    "author": "Jiang",
+    "year": "2022",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib13",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.energy.2022.123233",
+    "article-title": "A deep learning approach to state of charge estimation of lithium-ion batteries based on dual-stage attention mechanism",
+    "volume": "244",
+    "author": "Yang",
+    "year": "2022",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib14",
+    "doi-asserted-by": "crossref",
+    "first-page": "95",
+    "DOI": "10.1016/j.neucom.2019.09.074",
+    "article-title": "Remaining useful life prediction of lithium-ion batteries with adaptive unscented kalman filter and optimized support vector regression",
+    "volume": "376",
+    "author": "Xue",
+    "year": "2020",
+    "journal-title": "Neurocomputing"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib15",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.est.2021.102841",
+    "article-title": "State of charge estimation of power lithium-ion battery based on a variable forgetting factor adaptive kalman filter",
+    "volume": "41",
+    "author": "Wu",
+    "year": "2021",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.energy.2024.131114_bib16",
+    "doi-asserted-by": "crossref",
+    "first-page": "1144",
+    "DOI": "10.1109/TII.2023.3266403",
+    "article-title": "A data-model interactive remaining useful life prediction approach of lithium-ion batteries based on PF-BiGRU-TSAM",
+    "volume": "20",
+    "author": "Zhang",
+    "year": "2024",
+    "journal-title": "IEEE Trans Ind Inf"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib17",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.est.2020.101879",
+    "article-title": "A data-driven approach to estimate battery cell temperature using a nonlinear autoregressive exogenous neural network model",
+    "volume": "32",
+    "author": "Hasan",
+    "year": "2020",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib18",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.est.2022.104215",
+    "article-title": "State of health estimation of lithium-ion battery based on improved ant lion optimization and support vector regression",
+    "volume": "50",
+    "author": "Li",
+    "year": "2022",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.energy.2024.131114_bib19",
+    "doi-asserted-by": "crossref",
+    "first-page": "13",
+    "DOI": "10.3390/batteries9010013",
+    "article-title": "A review of modern machine learning techniques in the prediction of remaining useful life of lithium-ion batteries",
+    "volume": "9",
+    "author": "Sharma",
+    "year": "2023",
+    "journal-title": "Batteries"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/j.energy.2024.131114_bib20",
+    "doi-asserted-by": "crossref",
+    "first-page": "165",
+    "DOI": "10.3390/batteries9030165",
+    "article-title": "Prediction of the heat generation rate of lithium-ion batteries based on three machine learning algorithms",
+    "volume": "9",
+    "author": "Cao",
+    "year": "2023",
+    "journal-title": "Batteries"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib21",
+    "doi-asserted-by": "crossref",
+    "first-page": "50587",
+    "DOI": "10.1109/ACCESS.2018.2858856",
+    "article-title": "Remaining useful life prediction for lithium-ion battery: a deep learning approach",
+    "volume": "6",
+    "author": "Ren",
+    "year": "2018",
+    "journal-title": "IEEE Access"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib22",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.measurement.2022.112093",
+    "article-title": "Remaining useful life prediction of lithium-ion batteries based on attention mechanism and bidirectional long short-term memory network",
+    "volume": "204",
+    "author": "Zhang",
+    "year": "2022",
+    "journal-title": "Measurement"
+   },
+   {
+    "issue": "9",
+    "key": "10.1016/j.energy.2024.131114_bib23",
+    "doi-asserted-by": "crossref",
+    "first-page": "234",
+    "DOI": "10.3390/act10090234",
+    "article-title": "Remaining useful life prediction of lithium-ion batteries based on deep learning and soft sensing",
+    "volume": "10",
+    "author": "Wang",
+    "year": "2021",
+    "journal-title": "Actuators"
+   },
+   {
+    "issue": "10",
+    "key": "10.1016/j.energy.2024.131114_bib24",
+    "doi-asserted-by": "crossref",
+    "first-page": "151",
+    "DOI": "10.3390/batteries8100151",
+    "article-title": "Early prediction of the health conditions for battery cathodes assisted by the fusion of feature signal analysis and deep-learning techniques",
+    "volume": "8",
+    "author": "Wang",
+    "year": "2022",
+    "journal-title": "Batteries"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib25",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.est.2022.104984",
+    "article-title": "A novel hybrid data-driven method based on uncertainty quantification to predict the remaining useful life of lithium battery",
+    "volume": "52",
+    "author": "Li",
+    "year": "2022",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.energy.2024.131114_bib26",
+    "doi-asserted-by": "crossref",
+    "first-page": "313",
+    "DOI": "10.3390/en16010313",
+    "article-title": "Remaining useful life prediction for lithium-ion batteries based on improved variational mode decomposition and machine learning algorithm",
+    "volume": "16",
+    "author": "Sun",
+    "year": "2022",
+    "journal-title": "Energies"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib27",
+    "doi-asserted-by": "crossref",
+    "first-page": "87178",
+    "DOI": "10.1109/ACCESS.2019.2925468",
+    "article-title": "A neural-network-based method for rul prediction and soh monitoring of lithium-ion battery",
+    "volume": "7",
+    "author": "Qu",
+    "year": "2019",
+    "journal-title": "IEEE Access"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib28",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.measurement.2022.111530",
+    "article-title": "Early prediction of lithium-ion battery lifetime via a hybrid deep learning model",
+    "volume": "199",
+    "author": "Tang",
+    "year": "2022",
+    "journal-title": "Measurement"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib29",
+    "first-page": "1",
+    "volume": "vol. 2023",
+    "author": "Chen",
+    "year": "2023"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib30",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.energy.2023.129597",
+    "article-title": "A new SOH estimation method for Lithium-ion batteries based on model-data-fusion",
+    "volume": "286",
+    "author": "Chen",
+    "year": "2024",
+    "journal-title": "Energy"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.energy.2024.131114_bib31",
+    "doi-asserted-by": "crossref",
+    "first-page": "220",
+    "DOI": "10.1109/TSM.2022.3164578",
+    "article-title": "Temporal convolution-based long-short term memory network with attention mechanism for remaining useful life prediction",
+    "volume": "35",
+    "author": "Hsu",
+    "year": "2022",
+    "journal-title": "IEEE Trans Semicond Manuf"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib32",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.est.2023.109741",
+    "article-title": "Joint evaluation and prediction of SOH and RUL for lithium batteries based on a GBLS booster multi-task model",
+    "volume": "75",
+    "author": "Yang",
+    "year": "2024",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.energy.2024.131114_bib33",
+    "doi-asserted-by": "crossref",
+    "first-page": "1748",
+    "DOI": "10.1016/j.ijforecast.2021.03.012",
+    "article-title": "Temporal fusion transformers for interpretable multi-horizon time series forecasting",
+    "volume": "37",
+    "author": "Lim",
+    "year": "2021",
+    "journal-title": "Int J Forecast"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/j.energy.2024.131114_bib34",
+    "doi-asserted-by": "crossref",
+    "first-page": "525",
+    "DOI": "10.1093/biomet/58.3.525",
+    "article-title": "Estimating the transition between two intersecting straight lines",
+    "volume": "58",
+    "author": "Bacon",
+    "year": "1971",
+    "journal-title": "Biometrika"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib35",
+    "doi-asserted-by": "crossref",
+    "first-page": "383",
+    "DOI": "10.1038/s41560-019-0356-8",
+    "article-title": "Data-driven prediction of battery cycle life before capacity degradation",
+    "volume": "4",
+    "author": "Severson",
+    "year": "2019",
+    "journal-title": "Nat Energy"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib36",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.est.2023.108120",
+    "article-title": "Predicting future capacity of lithium-ion batteries using transfer learning method",
+    "volume": "71",
+    "author": "Chou",
+    "year": "2023",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib37",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.ijepes.2022.108743",
+    "article-title": "Probabilistic forecasting method for mid-term hourly load time series based on an improved temporal fusion transformer model",
+    "volume": "146",
+    "author": "Li",
+    "year": "2023",
+    "journal-title": "Int J Electr Power Energy Syst"
+   },
+   {
+    "issue": "5\u20136",
+    "key": "10.1016/j.energy.2024.131114_bib38",
+    "doi-asserted-by": "crossref",
+    "first-page": "602",
+    "DOI": "10.1016/j.neunet.2005.06.042",
+    "article-title": "Framewise phoneme classification with bidirectional LSTM and other neural network architectures",
+    "volume": "18",
+    "author": "Graves",
+    "year": "2005",
+    "journal-title": "Neural Network"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib39",
+    "series-title": "Layer normalization",
+    "author": "Ba",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib40",
+    "series-title": "Fast and accurate deepnetwork learning by exponential linear units (ELUs)",
+    "author": "Clevert",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib41",
+    "first-page": "6000",
+    "article-title": "Attention is all you need",
+    "volume": "30",
+    "author": "Vaswani",
+    "year": "2017",
+    "journal-title": "Proc. Adv. Neural Inf. Process. Syst."
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib42",
+    "first-page": "2546",
+    "article-title": "Algorithms for hyper-parameter optimization",
+    "volume": "24",
+    "author": "Bergstra",
+    "year": "2011",
+    "journal-title": "Proc. Adv. Neural Inf. Process. Syst."
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib43",
+    "first-page": "8024",
+    "article-title": "PyTorch: an imperative style, highperformance deep learning library",
+    "volume": "32",
+    "author": "Paszke",
+    "year": "2019",
+    "journal-title": "Proc. Adv. Neural Inf. Process. Syst."
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib44",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.ress.2022.109046",
+    "article-title": "Explainability-driven model improvement for SOH estimation of lithium-ion battery",
+    "volume": "232",
+    "author": "Wang",
+    "year": "2023",
+    "journal-title": "Reliab Eng Syst Saf"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib45",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.energy.2023.126706",
+    "article-title": "State of health estimation with attentional long short-term memory network for lithium-ion batteries",
+    "volume": "268",
+    "author": "Lin",
+    "year": "2023",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib46",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.ijepes.2022.108073",
+    "article-title": "Applications of random forest in multivariable response surface for short-term load forecasting",
+    "volume": "139",
+    "author": "Fan",
+    "year": "2022",
+    "journal-title": "Int J Electr Power Energy Syst"
+   },
+   {
+    "key": "10.1016/j.energy.2024.131114_bib47",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.inffus.2023.101903",
+    "article-title": "Deep adversarial autoencoder recommendation algorithm based on group influence",
+    "volume": "100",
+    "author": "Niu",
+    "year": "2023",
+    "journal-title": "Inf Fusion"
+   }
+  ],
+  "container-title": [
+   "Energy"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0360544224008867?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0360544224008867?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2026,
+     5,
+     14
+    ]
+   ],
+   "date-time": "2026-05-14T08:55:06Z",
+   "timestamp": 1778748906000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0360544224008867"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2024,
+     6
+    ]
+   ]
+  },
+  "references-count": 47,
+  "alternative-id": [
+   "S0360544224008867"
+  ],
+  "URL": "https://doi.org/10.1016/j.energy.2024.131114",
+  "relation": {},
+  "ISSN": [
+   "0360-5442"
+  ],
+  "issn-type": [
+   {
+    "value": "0360-5442",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2024,
+     6
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "Elsevier",
+    "name": "publisher",
+    "label": "This article is maintained by"
+   },
+   {
+    "value": "Li-ion battery capacity prediction using improved temporal fusion transformer model",
+    "name": "articletitle",
+    "label": "Article Title"
+   },
+   {
+    "value": "Energy",
+    "name": "journaltitle",
+    "label": "Journal Title"
+   },
+   {
+    "value": "https://doi.org/10.1016/j.energy.2024.131114",
+    "name": "articlelink",
+    "label": "CrossRef DOI link to publisher maintained version"
+   },
+   {
+    "value": "article",
+    "name": "content_type",
+    "label": "Content Type"
+   },
+   {
+    "value": "\u00a9 2024 Elsevier Ltd. All rights reserved.",
+    "name": "copyright",
+    "label": "Copyright"
+   }
+  ],
+  "article-number": "131114"
+ }
+}

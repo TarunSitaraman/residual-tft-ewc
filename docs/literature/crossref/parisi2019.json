@@ -1,0 +1,2078 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T14:52:13Z",
+   "timestamp": 1790779933849,
+   "version": "4.1.0"
+  },
+  "reference-count": 196,
+  "publisher": "Elsevier BV",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2019,
+       5,
+       1
+      ]
+     ],
+     "date-time": "2019-05-01T00:00:00Z",
+     "timestamp": 1556668800000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2019,
+       2,
+       11
+      ]
+     ],
+     "date-time": "2019-02-11T00:00:00Z",
+     "timestamp": 1549843200000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+   }
+  ],
+  "funder": [
+   {
+    "DOI": "10.13039/501100001659",
+    "name": "German Research Foundation",
+    "doi-asserted-by": "publisher",
+    "id": [
+     {
+      "id": "10.13039/501100001659",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "elsevier.com",
+    "sciencedirect.com"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Neural Networks"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2019,
+     5
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.neunet.2019.01.012",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2019,
+     2,
+     10
+    ]
+   ],
+   "date-time": "2019-02-10T02:04:58Z",
+   "timestamp": 1549764298000
+  },
+  "page": "54-71",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 2544,
+  "special_numbering": "C",
+  "title": [
+   "Continual lifelong learning with neural networks: A review"
+  ],
+  "prefix": "10.1016",
+  "volume": "113",
+  "author": [
+   {
+    "given": "German I.",
+    "family": "Parisi",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0003-4087-4952",
+    "authenticated-orcid": false,
+    "given": "Ronald",
+    "family": "Kemker",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Jose L.",
+    "family": "Part",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-6412-995X",
+    "authenticated-orcid": false,
+    "given": "Christopher",
+    "family": "Kanan",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Stefan",
+    "family": "Wermter",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b1",
+    "doi-asserted-by": "crossref",
+    "first-page": "1178",
+    "DOI": "10.1038/81453",
+    "article-title": "Synaptic plasticity: taming the beast",
+    "volume": "3",
+    "author": "Abbott",
+    "year": "2000",
+    "journal-title": "Nature Neuroscience"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.neunet.2019.01.012_b2",
+    "doi-asserted-by": "crossref",
+    "first-page": "73",
+    "DOI": "10.1016/j.tins.2004.12.003",
+    "article-title": "Memory retention and weight plasticity in ANN simulations",
+    "volume": "28",
+    "author": "Abraham",
+    "year": "2005",
+    "journal-title": "Trends in Neurosciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b3",
+    "unstructured": "Achille, A., Rovere, M., & Soatto, S. (2017). Critical Learning Periods in Deep Neural Networks,."
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b4",
+    "series-title": "Recent advances on the modular organization of the cortex",
+    "article-title": "Active inference, predictive coding and cortical architecture",
+    "author": "Adams",
+    "year": "2015"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b5",
+    "doi-asserted-by": "crossref",
+    "first-page": "723",
+    "DOI": "10.1038/nn1707",
+    "article-title": "Potential role for adult neurogenesis in the encoding of time in new memories.",
+    "volume": "9",
+    "author": "Aimone",
+    "year": "2006",
+    "journal-title": "Nature Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b6",
+    "doi-asserted-by": "crossref",
+    "first-page": "187",
+    "DOI": "10.1016/j.neuron.2008.11.026",
+    "article-title": "Computational influence of adult neurogenesis on memory encoding.",
+    "volume": "61",
+    "author": "Aimone",
+    "year": "2009",
+    "journal-title": "Neuron"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b7",
+    "doi-asserted-by": "crossref",
+    "first-page": "573",
+    "DOI": "10.1002/ar.1091450409",
+    "article-title": "Autoradiographic investigation of cell proliferation in the brains of rats and cats",
+    "volume": "145",
+    "author": "Altman",
+    "year": "1963",
+    "journal-title": "The Anatomical Record"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b8",
+    "series-title": "Feedback systems: An introduction for scientists and engineers",
+    "author": "Astr\u00f6m",
+    "year": "2010"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b9",
+    "series-title": "Intrinsically motivated learning in natural and artificial systems",
+    "author": "Baldassarre",
+    "year": "2013"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.neunet.2019.01.012_b10",
+    "doi-asserted-by": "crossref",
+    "first-page": "49",
+    "DOI": "10.1016/j.robot.2012.05.008",
+    "article-title": "Active learning of inverse models with intrinsically motivated goal exploration in robots",
+    "volume": "61",
+    "author": "Baranes",
+    "year": "2013",
+    "journal-title": "Robotics and Autonomous Systems"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b11",
+    "doi-asserted-by": "crossref",
+    "first-page": "612",
+    "DOI": "10.1037/0033-2909.128.4.612",
+    "article-title": "When and where do we apply what we learn? a taxonomy for far transfer",
+    "volume": "128",
+    "author": "Barnett",
+    "year": "2002",
+    "journal-title": "Psychological Bulletin"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b12",
+    "series-title": "EUCog Meeting Proceedings",
+    "article-title": "Expectation learning for adaptive crossmodal stimuli association",
+    "author": "Barros",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b13",
+    "series-title": "Intrinsically motivated learning in natural and artificial systems",
+    "first-page": "17",
+    "article-title": "Intrinsic motivation and reinforcement learning",
+    "author": "Barto",
+    "year": "2013"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b14",
+    "series-title": "NIPS\u201916",
+    "article-title": "Unifying count-based exploration and intrinsic motivation",
+    "author": "Bellemare",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b15",
+    "series-title": "ICML\u201909",
+    "first-page": "41",
+    "article-title": "Curriculum learning",
+    "author": "Bengio",
+    "year": "2009"
+   },
+   {
+    "issue": "12",
+    "key": "10.1016/j.neunet.2019.01.012_b16",
+    "doi-asserted-by": "crossref",
+    "first-page": "1697",
+    "DOI": "10.1038/nn.4401",
+    "article-title": "Computational principles of synaptic memory consolidation",
+    "volume": "19",
+    "author": "Benna",
+    "year": "2016",
+    "journal-title": "Nature Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b17",
+    "doi-asserted-by": "crossref",
+    "first-page": "32",
+    "DOI": "10.1523/JNEUROSCI.02-01-00032.1982",
+    "article-title": "Theory for the development of neuron selectivity: orientation specificity and binocular interaction in visual cortex",
+    "volume": "2",
+    "author": "Bienenstock",
+    "year": "1982",
+    "journal-title": "The Journal of Neuroscience"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b18",
+    "doi-asserted-by": "crossref",
+    "first-page": "589",
+    "DOI": "10.1016/j.stem.2018.03.015",
+    "article-title": "Human hippocampal neurogenesis persists throughout aging",
+    "volume": "22",
+    "author": "Boldrini",
+    "year": "2018",
+    "journal-title": "Cell Stem Cell"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b19",
+    "doi-asserted-by": "crossref",
+    "first-page": "671",
+    "DOI": "10.1038/23270",
+    "article-title": "Time-dependent reorganization of brain circuitry underlying long-term memory storage",
+    "volume": "400",
+    "author": "Bontempi",
+    "year": "1999",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b20",
+    "doi-asserted-by": "crossref",
+    "first-page": "2259",
+    "DOI": "10.1093/brain/124.11.2259",
+    "article-title": "Dynamic organization of the somato-sensory cortex induced by motor activity",
+    "volume": "124",
+    "author": "Braun",
+    "year": "2001",
+    "journal-title": "Brain"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b21",
+    "series-title": "Multisensory development",
+    "author": "Bremner",
+    "year": "2012"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b22",
+    "doi-asserted-by": "crossref",
+    "first-page": "399",
+    "DOI": "10.1088/0954-898X_2_4_005",
+    "article-title": "Neural network models of list learning",
+    "volume": "2",
+    "author": "Burgess",
+    "year": "1991",
+    "journal-title": "Networks"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b23",
+    "series-title": "The handbook of multisensory processes",
+    "author": "Calvert",
+    "year": "2004"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.neunet.2019.01.012_b24",
+    "doi-asserted-by": "crossref",
+    "first-page": "337",
+    "DOI": "10.1016/0306-4522(93)90335-D",
+    "article-title": "Differentiation of newly born neurons and glia in the dentate gyrus of the adult rat",
+    "volume": "56",
+    "author": "Cameron",
+    "year": "1993",
+    "journal-title": "Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b25",
+    "series-title": "Developmental robotics: From babies to robots",
+    "author": "Cangelosi",
+    "year": "2015"
+   },
+   {
+    "issue": "445",
+    "key": "10.1016/j.neunet.2019.01.012_b26",
+    "article-title": "Assessing the role of the unity assumption on multisensory integration: a review",
+    "volume": "8",
+    "author": "Chen",
+    "year": "2017",
+    "journal-title": "Frontiers in Psychology"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b27",
+    "doi-asserted-by": "crossref",
+    "first-page": "180",
+    "DOI": "10.1038/nature14251",
+    "article-title": "Branch-specific dendritic Ca(2+) spikes cause persistent synaptic plasticity",
+    "volume": "520",
+    "author": "Cichon",
+    "year": "2015",
+    "journal-title": "Nature"
+   },
+   {
+    "issue": "10",
+    "key": "10.1016/j.neunet.2019.01.012_b28",
+    "doi-asserted-by": "crossref",
+    "first-page": "1623",
+    "DOI": "10.1109/TNNLS.2013.2264952",
+    "article-title": "Ensemble learning in fixed expansion layer networks for mitigating catastrophic forgetting",
+    "volume": "24",
+    "author": "Coop",
+    "year": "2013",
+    "journal-title": "IEEE Transactions on Neural Networks & Learning Systems"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b29",
+    "unstructured": "Cortes, C., Gonzalvo, X., Kuznetsov, V., Mohri, M., & Yang, S. (2016). AdaNet: Adaptive structural learning of artificial neural networks,."
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b30",
+    "series-title": "ICML\u201917",
+    "first-page": "193",
+    "article-title": "Boosting for transfer learning",
+    "author": "Dai",
+    "year": "2007"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b31",
+    "doi-asserted-by": "crossref",
+    "first-page": "307",
+    "DOI": "10.1146/annurev.neuro.28.061604.135751",
+    "article-title": "Homeostatic control of neural activity: from phenomenology to molecular design",
+    "volume": "29",
+    "author": "Davis",
+    "year": "2006",
+    "journal-title": "Annual Review of Neuroscience"
+   },
+   {
+    "issue": "5",
+    "key": "10.1016/j.neunet.2019.01.012_b32",
+    "doi-asserted-by": "crossref",
+    "first-page": "339",
+    "DOI": "10.1038/nrn2822",
+    "article-title": "New neurons and new memories: how does adult hippocampal neurogenesis affect learning and memory?",
+    "volume": "11",
+    "author": "Deng",
+    "year": "2010",
+    "journal-title": "Nature Reviews Neuroscience"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b33",
+    "doi-asserted-by": "crossref",
+    "first-page": "12",
+    "DOI": "10.1109/MCI.2015.2471196",
+    "article-title": "Learning in nonstationary environments: A survey",
+    "volume": "10",
+    "author": "Ditzler",
+    "year": "2015",
+    "journal-title": "IEEE Computational Intelligence Magazine"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b34",
+    "series-title": "ICML\u201914",
+    "article-title": "Decaf: A deep convolutional activation feature for generic visual recognition",
+    "author": "Donahue",
+    "year": "2014"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b35",
+    "doi-asserted-by": "crossref",
+    "first-page": "981",
+    "DOI": "10.1126/science.7638624",
+    "article-title": "Recurrent excitation in neocortical circuits",
+    "volume": "269",
+    "author": "Douglas",
+    "year": "1995",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b36",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1037/0033-295X.115.1.1",
+    "article-title": "A theory of the discovery and predication of relational concepts",
+    "volume": "115",
+    "author": "Doumas",
+    "year": "2008",
+    "journal-title": "Psychological Review"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b37",
+    "series-title": "IJCNN\u201917",
+    "first-page": "526",
+    "article-title": "Neurogenesis deep learning",
+    "author": "Draelos",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b38",
+    "series-title": "Proceedings of the international conference on human agent interaction (HAI\u201917)",
+    "first-page": "143",
+    "article-title": "Emotion recognition from body expressions with a neural network architecture",
+    "author": "Elfaramawy",
+    "year": "2017"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.neunet.2019.01.012_b39",
+    "doi-asserted-by": "crossref",
+    "first-page": "71",
+    "DOI": "10.1016/0010-0277(93)90058-4",
+    "article-title": "Learning and development in neural networks: The importance of starting small",
+    "volume": "48",
+    "author": "Elman",
+    "year": "1993",
+    "journal-title": "Cognition"
+   },
+   {
+    "issue": "11",
+    "key": "10.1016/j.neunet.2019.01.012_b40",
+    "doi-asserted-by": "crossref",
+    "first-page": "1313",
+    "DOI": "10.1038/3305",
+    "article-title": "Neurogenesis in the adult human hippocampus",
+    "volume": "4",
+    "author": "Eriksson",
+    "year": "1998",
+    "journal-title": "Nature medicine"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b41",
+    "doi-asserted-by": "crossref",
+    "first-page": "162",
+    "DOI": "10.1016/j.tics.2004.02.002",
+    "article-title": "Merging the senses into a robust percept",
+    "volume": "8",
+    "author": "Ernst",
+    "year": "2004",
+    "journal-title": "Trends in Cognitive Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b42",
+    "series-title": "ICCV\u201903",
+    "article-title": "A Bayesian approach to unsupervised one-shot learning of object categories",
+    "author": "Fei-Fei",
+    "year": "2003"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b43",
+    "unstructured": "Fernando, C., Banarse, D., Blundell, C., Zwols, Y., Ha, D., & Rusu, A. A., et al. (2017). Pathnet: Evolution channels gradient descent in super neural networks,."
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b44",
+    "unstructured": "Forestier, S., Mollard, Y., & Oudeyer, P. Y. (2017). Intrinsically Motivated Goal Exploration Processes with Automatic Curriculum Learning,."
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b45",
+    "series-title": "Proceedings of the annual conference of the cognitive science society",
+    "article-title": "Curiosity-driven development of tool use precursors: a computational model",
+    "author": "Forestier",
+    "year": "2016"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b46",
+    "doi-asserted-by": "crossref",
+    "first-page": "353",
+    "DOI": "10.1080/095400997116595",
+    "article-title": "Pseudo-recurrent connectionist networks: An approach to the sensitivity-stability dilemma",
+    "volume": "9",
+    "author": "French",
+    "year": "1997",
+    "journal-title": "Connection Science"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b47",
+    "doi-asserted-by": "crossref",
+    "first-page": "128",
+    "DOI": "10.1016/S1364-6613(99)01294-2",
+    "article-title": "CaTastrophic forgetting in connectionist networks",
+    "volume": "3",
+    "author": "French",
+    "year": "1999",
+    "journal-title": "Trends in Cognitive Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b48",
+    "doi-asserted-by": "crossref",
+    "first-page": "187",
+    "DOI": "10.1080/17588928.2015.1020053",
+    "article-title": "Active inference and epistemic value",
+    "volume": "6",
+    "author": "Friston",
+    "year": "2015",
+    "journal-title": "Cognitive neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b49",
+    "series-title": "NIPS\u201995, vol. 7",
+    "first-page": "625",
+    "article-title": "A growing neural gas network learns topologies",
+    "author": "Fritzke",
+    "year": "1992"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b50",
+    "doi-asserted-by": "crossref",
+    "first-page": "599",
+    "DOI": "10.1016/j.neuron.2005.02.001",
+    "article-title": "CaScade models of synaptically stored memories",
+    "volume": "45",
+    "author": "Fusi",
+    "year": "2005",
+    "journal-title": "Neuron"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b51",
+    "doi-asserted-by": "crossref",
+    "first-page": "1433",
+    "DOI": "10.1126/science.287.5457.1433",
+    "article-title": "Mammalian neural stem cells",
+    "volume": "287",
+    "author": "Gage",
+    "year": "2000",
+    "journal-title": "Science"
+   },
+   {
+    "issue": "47",
+    "key": "10.1016/j.neunet.2019.01.012_b52",
+    "doi-asserted-by": "crossref",
+    "first-page": "18778",
+    "DOI": "10.1073/pnas.0705454104",
+    "article-title": "Sleep transforms the cerebral trace of declarative memories",
+    "volume": "104",
+    "author": "Gais",
+    "year": "2007",
+    "journal-title": "Proceedings of the National Academy of Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b53",
+    "doi-asserted-by": "crossref",
+    "first-page": "96",
+    "DOI": "10.1126/science.1164685",
+    "article-title": "Internally generated reactivation of single neurons in human hippocampus during free recall",
+    "volume": "322",
+    "author": "Gelbard-Sagiv",
+    "year": "2008",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b54",
+    "series-title": "ICASSP\u201917",
+    "article-title": "Audio set: An ontology and human-labeled dataset for audio events",
+    "author": "Gemmeke",
+    "year": "2017"
+   },
+   {
+    "issue": "5",
+    "key": "10.1016/j.neunet.2019.01.012_b55",
+    "doi-asserted-by": "crossref",
+    "first-page": "924",
+    "DOI": "10.1007/s12559-016-9389-5",
+    "article-title": "A bio-inspired incremental learning architecture for applied perceptual problems",
+    "volume": "8",
+    "author": "Gepperth",
+    "year": "2015",
+    "journal-title": "Cognitive Computation"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b56",
+    "unstructured": "Goodfellow, I. J., Mirza, M., Xiao, D., Courville, A., & Bengio, Y. (2013). An empirical investigation of catastrophic forgetting in gradient-based neural networks,."
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b57",
+    "series-title": "The scientist in the crib: Minds, brains, and how children learn",
+    "author": "Gopnik",
+    "year": "1999"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b58",
+    "series-title": "ICCV\u201905",
+    "first-page": "1395",
+    "article-title": "Actions as space-time shapes",
+    "author": "Gorelick",
+    "year": "2005"
+   },
+   {
+    "issue": "11",
+    "key": "10.1016/j.neunet.2019.01.012_b59",
+    "doi-asserted-by": "crossref",
+    "first-page": "585",
+    "DOI": "10.1016/j.tics.2013.09.001",
+    "article-title": "Information seeking, curiosity and attention: Computational and neural mechanisms",
+    "volume": "17",
+    "author": "Gottlieb",
+    "year": "2013",
+    "journal-title": "Trends in Cognitive Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b60",
+    "doi-asserted-by": "crossref",
+    "first-page": "32",
+    "DOI": "10.1016/j.neunet.2017.01.007",
+    "article-title": "Biologically plausible learning in neural networks with modulatory feedback",
+    "volume": "88",
+    "author": "Grant",
+    "year": "2017",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b61",
+    "unstructured": "Graves, A., Bellemare, M. G., Menick, J., Munos, R., & Kavukcuoglu, K. (2017). Automated curriculum learning for neural networks,."
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b62",
+    "doi-asserted-by": "crossref",
+    "first-page": "471",
+    "DOI": "10.1038/nature20101",
+    "article-title": "Hybrid computing using a neural network with dynamic external memory",
+    "volume": "538",
+    "author": "Graves",
+    "year": "2016",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b63",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1037/0033-295X.87.1.1",
+    "article-title": "How does a brain build a cognitive code?",
+    "volume": "87",
+    "author": "Grossberg",
+    "year": "1980",
+    "journal-title": "Psychology Review"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b64",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1016/j.neunet.2012.09.017",
+    "article-title": "Adaptive resonance theory: how a brain learns to consciously attend, learn, and recognize a changing world.",
+    "volume": "37",
+    "author": "Grossberg",
+    "year": "2012",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "issue": "8",
+    "key": "10.1016/j.neunet.2019.01.012_b65",
+    "doi-asserted-by": "crossref",
+    "first-page": "27",
+    "DOI": "10.1016/j.neucom.2015.09.116",
+    "article-title": "Deep learning for visual understanding: A review",
+    "volume": "187",
+    "author": "Guo",
+    "year": "2016",
+    "journal-title": "Neurocomputing"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.neunet.2019.01.012_b66",
+    "doi-asserted-by": "crossref",
+    "first-page": "245",
+    "DOI": "10.1016/j.neuron.2017.06.011",
+    "article-title": "Neuroscience-inspired artificial intelligence",
+    "volume": "95",
+    "author": "Hassabis",
+    "year": "2017",
+    "journal-title": "Neuron Review"
+   },
+   {
+    "issue": "10",
+    "key": "10.1016/j.neunet.2019.01.012_b67",
+    "doi-asserted-by": "crossref",
+    "first-page": "2539",
+    "DOI": "10.1523/JNEUROSCI.5487-07.2008",
+    "article-title": "A hierarchy of temporal receptive windows in human cortex",
+    "volume": "28",
+    "author": "Hasson",
+    "year": "2008",
+    "journal-title": "The Journal of Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b68",
+    "series-title": "The organization of behavior",
+    "author": "Hebb",
+    "year": "1949"
+   },
+   {
+    "issue": "8",
+    "key": "10.1016/j.neunet.2019.01.012_b69",
+    "doi-asserted-by": "crossref",
+    "first-page": "1773",
+    "DOI": "10.1073/pnas.1619788114",
+    "article-title": "Theory of cortical function",
+    "volume": "114",
+    "author": "Heeger",
+    "year": "2017",
+    "journal-title": "Proceedings of the National Academy of Sciences of the United States of America"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b70",
+    "doi-asserted-by": "crossref",
+    "first-page": "549",
+    "DOI": "10.1146/annurev.neuro.27.070203.144327",
+    "article-title": "Critical period regulation",
+    "volume": "27",
+    "author": "Hensch",
+    "year": "2004",
+    "journal-title": "Annual Review of Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b71",
+    "doi-asserted-by": "crossref",
+    "first-page": "1504",
+    "DOI": "10.1126/science.282.5393.1504",
+    "article-title": "Local gaba circuit control of experience-dependent plasticity in developing visual cortex",
+    "volume": "282",
+    "author": "Hensch",
+    "year": "1998",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b72",
+    "series-title": "Introduction to the theory of neural computation",
+    "author": "Hertz",
+    "year": "1991"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b73",
+    "series-title": "Proceedings of the annual conference of the cognitive science society",
+    "first-page": "177",
+    "article-title": "Using fast weights to deblur old memories",
+    "author": "Hinton",
+    "year": "1987"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b74",
+    "series-title": "NIPS\u201914, workshop on deep learning and representation",
+    "article-title": "Distilling the knowledge in a neural network",
+    "author": "Hinton",
+    "year": "2014"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b75",
+    "doi-asserted-by": "crossref",
+    "first-page": "869",
+    "DOI": "10.1126/science.168.3933.869",
+    "article-title": "Visual experience modifies distribution of horizontally and vertically oriented receptive fields in cats",
+    "volume": "168",
+    "author": "Hirsch",
+    "year": "1970",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b76",
+    "doi-asserted-by": "crossref",
+    "first-page": "35",
+    "DOI": "10.1037/0003-066X.52.1.35",
+    "article-title": "The analogical mind",
+    "volume": "52",
+    "author": "Holyoak",
+    "year": "1997",
+    "journal-title": "American Psychologist"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b77",
+    "doi-asserted-by": "crossref",
+    "first-page": "106",
+    "DOI": "10.1113/jphysiol.1962.sp006837",
+    "article-title": "Receptive fields, binocular and functional architecture in the cats visual cortex",
+    "volume": "160",
+    "author": "Hubel",
+    "year": "1962",
+    "journal-title": "Journal Physiology"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b78",
+    "doi-asserted-by": "crossref",
+    "first-page": "1561",
+    "DOI": "10.1152/jn.1967.30.6.1561",
+    "article-title": "Cortical and callosal connections concerned with the vertical meridian of visual fields in the cat",
+    "volume": "30",
+    "author": "Hubel",
+    "year": "1967",
+    "journal-title": "Journal of Neurophysiology"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b79",
+    "doi-asserted-by": "crossref",
+    "first-page": "419",
+    "DOI": "10.1113/jphysiol.1970.sp009022",
+    "article-title": "The period of susceptibility to the psychological effects of unilateral eye closure in kittens",
+    "volume": "206",
+    "author": "Hubel",
+    "year": "1970",
+    "journal-title": "Journal Physiology"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b80",
+    "doi-asserted-by": "crossref",
+    "first-page": "377",
+    "DOI": "10.1098/rstb.1977.0050",
+    "article-title": "Plasticity of ocular dominance columns in monkey striate cortex",
+    "volume": "278",
+    "author": "Hubel",
+    "year": "1977",
+    "journal-title": "Philosophical Transactions of the Royal Society of London, Series B: Biological Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b81",
+    "series-title": "Less-forgetting learning in deep neural networks",
+    "author": "Jung",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b82",
+    "unstructured": "Kamra, N., Gupta, U., & Liu, Y. (2018). Deep Generative Dual Memory Network for Continual Learning,."
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b83",
+    "series-title": "ICLR\u201918",
+    "article-title": "Fearnet: Brain-inspired model for incremental learning",
+    "author": "Kemker",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b84",
+    "series-title": "AAAI\u201918",
+    "article-title": "Measuring catastrophic forgetting in neural networks",
+    "author": "Kemker",
+    "year": "2018"
+   },
+   {
+    "issue": "13",
+    "key": "10.1016/j.neunet.2019.01.012_b85",
+    "doi-asserted-by": "crossref",
+    "first-page": "3521",
+    "DOI": "10.1073/pnas.1611835114",
+    "article-title": "Overcoming catastrophic forgetting in neural networks",
+    "volume": "114",
+    "author": "Kirkpatrick",
+    "year": "2017",
+    "journal-title": "Proceedings of the National Academy of Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b86",
+    "doi-asserted-by": "crossref",
+    "first-page": "73",
+    "DOI": "10.1126/science.aam6808",
+    "article-title": "Engrams and circuits crucial for systems consolidation of a memory",
+    "volume": "356",
+    "author": "Kitamura",
+    "year": "2017",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b87",
+    "series-title": "Neurogenesis and brain repair",
+    "first-page": "575",
+    "author": "Kiyota",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b88",
+    "series-title": "Rewiring the brain: A computational approach to structural plasticity in the adult brain",
+    "first-page": "361",
+    "article-title": "Impact of structural plasticity on memory formation and decline",
+    "author": "Knoblauch",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b89",
+    "article-title": "Structural plasticity has high memory capacity and can explain graded amnesia, catastrophic forgetting, and the spacing effect",
+    "volume": "9:e96485",
+    "author": "Knoblauch",
+    "year": "2014",
+    "journal-title": "PLoS ONE"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b90",
+    "doi-asserted-by": "crossref",
+    "first-page": "59",
+    "DOI": "10.1007/BF00337288",
+    "article-title": "Self-organized formation of topologically correct feature maps",
+    "volume": "43",
+    "author": "Kohonen",
+    "year": "1982",
+    "journal-title": "Biological Cybernetics"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b91",
+    "series-title": "Self-organizing maps",
+    "author": "Kohonen",
+    "year": "1995"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b92",
+    "series-title": "Learning multiple layers of features from tiny images",
+    "author": "Krizhevsky",
+    "year": "2009"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b93",
+    "doi-asserted-by": "crossref",
+    "first-page": "380",
+    "DOI": "10.1016/j.cognition.2008.11.014",
+    "article-title": "Flexible shaping: how learning in small steps helps",
+    "volume": "110",
+    "author": "Krueger",
+    "year": "2009",
+    "journal-title": "Cognition"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b94",
+    "unstructured": "Kulkarni, T., Narasimhan, K., Saeedi, A., & Tenenbaum, J. (2016). Hierarchical deep reinforcement learning: integrating temporal abstraction and intrinsic motivation,."
+   },
+   {
+    "issue": "7",
+    "key": "10.1016/j.neunet.2019.01.012_b95",
+    "doi-asserted-by": "crossref",
+    "first-page": "512",
+    "DOI": "10.1016/j.tics.2016.05.004",
+    "article-title": "What learning systems do intelligent agents need? Complementary learning systems theory updated",
+    "volume": "20",
+    "author": "Kumaran",
+    "year": "2016",
+    "journal-title": "Trends in Cognitive Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b96",
+    "doi-asserted-by": "crossref",
+    "first-page": "573",
+    "DOI": "10.1037/a0028681",
+    "article-title": "Generalization through the recurrent interaction of episodic memories: a model of the hippocampal system",
+    "volume": "119",
+    "author": "Kumaran",
+    "year": "2012",
+    "journal-title": "Psychological Review"
+   },
+   {
+    "issue": "7\u20138",
+    "key": "10.1016/j.neunet.2019.01.012_b97",
+    "doi-asserted-by": "crossref",
+    "first-page": "928",
+    "DOI": "10.1080/13506280544000110",
+    "article-title": "Age of acquisition effects depend on the mapping between representations and the frequency of occurrence: empirical and computational evidence",
+    "volume": "13",
+    "author": "Lambon\u00a0Ralph",
+    "year": "2006",
+    "journal-title": "Visual Cognition"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b98",
+    "series-title": "CVPR\u201909",
+    "article-title": "Learning to detect unseen object classes by between-class attribute transfer",
+    "author": "Lampert",
+    "year": "2009"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b99",
+    "doi-asserted-by": "crossref",
+    "first-page": "436",
+    "DOI": "10.1038/nature14539",
+    "article-title": "Deep learning",
+    "volume": "521",
+    "author": "LeCun",
+    "year": "2015",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b100",
+    "series-title": "In Proceedings of the IEEE",
+    "article-title": "Gradient-based learning applied to document recognition",
+    "author": "LeCun",
+    "year": "1998"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b101",
+    "series-title": "Biological foundations of language",
+    "author": "Lenneberg",
+    "year": "1967"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b102",
+    "series-title": "New perspectives on interference and inhibition in cognition",
+    "article-title": "CaTastrophic interference in neural networks: Causes, solutions, and data",
+    "author": "Lewandowsky",
+    "year": "1994"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.neunet.2019.01.012_b103",
+    "doi-asserted-by": "crossref",
+    "first-page": "292",
+    "DOI": "10.1002/dev.21197",
+    "article-title": "Early experience & multisensory perceptual narrowing",
+    "volume": "56",
+    "author": "Lewkowicz",
+    "year": "2014",
+    "journal-title": "Developmental Psychobiology"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b104",
+    "doi-asserted-by": "crossref",
+    "first-page": "1345",
+    "DOI": "10.1016/j.neunet.2004.07.004",
+    "article-title": "Early lexical development in a self-organising neural network",
+    "volume": "17",
+    "author": "Li",
+    "year": "2004",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b105",
+    "series-title": "Learning without forgetting",
+    "first-page": "614",
+    "author": "Li",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b106",
+    "series-title": "CoRL",
+    "article-title": "Core50: A new dataset and benchmark for continuous object recognition",
+    "author": "Lomonaco",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b107",
+    "series-title": "NIPS\u201917",
+    "article-title": "Gradient episodic memory for continual learning",
+    "author": "Lopez-Paz",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b108",
+    "series-title": "NIPS\u201916, workshop on continual learning and deep networks",
+    "article-title": "Continual learning through evolvable neural turing machines",
+    "author": "L\u00fcders",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b109",
+    "unstructured": "Maltoni, D., & Lomonaco, V. (2018). Continuous Learning in Single-Incremental-Task Scenarios.,."
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.neunet.2019.01.012_b110",
+    "doi-asserted-by": "crossref",
+    "first-page": "215",
+    "DOI": "10.1162/jocn.1993.5.2.215",
+    "article-title": "Constraints on plasticity in a connectionist model of english past tense",
+    "volume": "5",
+    "author": "Marchman",
+    "year": "1993",
+    "journal-title": "Journal of Cognitive Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b111",
+    "series-title": "Neuroconstructivism: How the brain constructs cognition",
+    "author": "Mareschal",
+    "year": "2007"
+   },
+   {
+    "issue": "8\u20139",
+    "key": "10.1016/j.neunet.2019.01.012_b112",
+    "doi-asserted-by": "crossref",
+    "first-page": "1041",
+    "DOI": "10.1016/S0893-6080(02)00078-3",
+    "article-title": "A self-organising network that grows when required",
+    "volume": "15",
+    "author": "Marsland",
+    "year": "2002",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b113",
+    "doi-asserted-by": "crossref",
+    "first-page": "558",
+    "DOI": "10.1109/72.238311",
+    "article-title": "Neural-gas network for vector quantization and its application to time-series prediction",
+    "volume": "4",
+    "author": "Martinetz",
+    "year": "1993",
+    "journal-title": "IEEE Transactions on Neural Networks"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b114",
+    "doi-asserted-by": "crossref",
+    "first-page": "419",
+    "DOI": "10.1037/0033-295X.102.3.419",
+    "article-title": "Why there are complementary learning systems in the hippocampus and neocortex: Insights from the successes and failures of connectionist models of learning and memory",
+    "volume": "102",
+    "author": "McClelland",
+    "year": "1995",
+    "journal-title": "Psychological Review"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b115",
+    "first-page": "104",
+    "article-title": "CaTastrophic interference in connectionist networks: The sequential learning problem",
+    "volume": "24",
+    "author": "McCloskey",
+    "year": "1989",
+    "journal-title": "The Psychology of Learning & Motivation"
+   },
+   {
+    "issue": "504",
+    "key": "10.1016/j.neunet.2019.01.012_b116",
+    "article-title": "The stability-plasticity dilemma: Investigating the continuum from Catastrophic forgetting to age-limited learning effects",
+    "volume": "4",
+    "author": "Mermillod",
+    "year": "2013",
+    "journal-title": "Frontiers in Psychology"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b117",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Mici, L., Parisi, G. I., & Wermter, S. (2017). An Incremental Self-Organizing Architecture for Sensorimotor Learning and Prediction,.",
+    "DOI": "10.1109/TCDS.2018.2832844"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b118",
+    "doi-asserted-by": "crossref",
+    "first-page": "14",
+    "DOI": "10.1016/j.neucom.2018.04.015",
+    "article-title": "A self-organizing neural network architecture for learning human-object interactions",
+    "volume": "307",
+    "author": "Mici",
+    "year": "2018",
+    "journal-title": "Neurocomputing"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b119",
+    "doi-asserted-by": "crossref",
+    "first-page": "334",
+    "DOI": "10.1006/brln.1997.1820",
+    "article-title": "Dyslexic and category-specific aphasic impairments in a self-organizing feature map model of the lexicon",
+    "volume": "59",
+    "author": "Miikkulainen",
+    "year": "1997",
+    "journal-title": "Brain & Language"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b120",
+    "doi-asserted-by": "crossref",
+    "first-page": "605",
+    "DOI": "10.1126/science.2762813",
+    "article-title": "Occular dominance column development: Analysis and simulation",
+    "volume": "245",
+    "author": "Miller",
+    "year": "1989",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b121",
+    "doi-asserted-by": "crossref",
+    "first-page": "100",
+    "DOI": "10.1162/neco.1994.6.1.100",
+    "article-title": "The role of constraints in hebbian learning",
+    "volume": "6",
+    "author": "Miller",
+    "year": "1994",
+    "journal-title": "Neural Computation"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b122",
+    "doi-asserted-by": "crossref",
+    "first-page": "687",
+    "DOI": "10.1016/j.neuron.2011.05.001",
+    "article-title": "Adult neurogenesis in the mammalian brain: Significant answers and significant questions.",
+    "volume": "70",
+    "author": "Ming",
+    "year": "2011",
+    "journal-title": "Neuron"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b123",
+    "series-title": "NIPS\u201915",
+    "article-title": "Multimodal transfer deep learning with applications in audio-visual recognition",
+    "author": "Moon",
+    "year": "2015"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b124",
+    "doi-asserted-by": "crossref",
+    "first-page": "567",
+    "DOI": "10.1016/j.tins.2016.05.003",
+    "article-title": "Multisensory processes: A balancing act across the lifespan",
+    "volume": "39",
+    "author": "Murray",
+    "year": "2016",
+    "journal-title": "Trends in Neurosciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b125",
+    "doi-asserted-by": "crossref",
+    "first-page": "535",
+    "DOI": "10.1209/0295-5075/1/10/008",
+    "article-title": "Networks of formal neurons and memory palimpsets",
+    "volume": "1",
+    "author": "Nadal",
+    "year": "1986",
+    "journal-title": "Europhysics Letters"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.neunet.2019.01.012_b126",
+    "doi-asserted-by": "crossref",
+    "first-page": "115",
+    "DOI": "10.1111/1467-7687.00104",
+    "article-title": "Neural plasticity and human development: The role of early experience in sculpting memory systems",
+    "volume": "3",
+    "author": "Nelson",
+    "year": "2000",
+    "journal-title": "Developmental Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b127",
+    "series-title": "NIPS\u201911, Workshop on deep learning and unsupervised feature learning",
+    "article-title": "Reading digits in natural images with unsupervised feature learning",
+    "author": "Netzer",
+    "year": "2011"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b128",
+    "doi-asserted-by": "crossref",
+    "first-page": "220",
+    "DOI": "10.1016/j.tins.2010.01.006",
+    "article-title": "Play it again: Reactivation of waking experience and memory",
+    "volume": "33",
+    "author": "O\u2019Neill",
+    "year": "2010",
+    "journal-title": "Trends in Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b129",
+    "series-title": "The division of labor between the neocortex and hippocampus. connectionist modeling in cognitive (neuro-)science",
+    "author": "O\u2019Reilly",
+    "year": "2004"
+   },
+   {
+    "issue": "12",
+    "key": "10.1016/j.neunet.2019.01.012_b130",
+    "doi-asserted-by": "crossref",
+    "first-page": "505",
+    "DOI": "10.1016/S1364-6613(02)02005-3",
+    "article-title": "Hippocampal and neocortical contributions to memory: Advances in the complementary learning systems framework",
+    "volume": "6",
+    "author": "O\u2019Reilly",
+    "year": "2002",
+    "journal-title": "Trends in Cognitive Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b131",
+    "doi-asserted-by": "crossref",
+    "first-page": "389",
+    "DOI": "10.1002/1098-1063(2000)10:4<389::AID-HIPO5>3.0.CO;2-P",
+    "article-title": "Computational principles of learning in the neocortex and hippocampus",
+    "volume": "10",
+    "author": "O\u2019Reilly",
+    "year": "2000",
+    "journal-title": "Hippocampus"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.neunet.2019.01.012_b132",
+    "doi-asserted-by": "crossref",
+    "first-page": "265",
+    "DOI": "10.1109/TEVC.2006.890271",
+    "article-title": "Intrinsic motivation systems for autonomous mental development",
+    "volume": "11",
+    "author": "Oudeyer",
+    "year": "2007",
+    "journal-title": "IEEE Transactions on Evolutionary Computation"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b133",
+    "series-title": "NIPS\u201909",
+    "article-title": "Zero-shot learning with semantic output codes",
+    "author": "Palatucci",
+    "year": "2009"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b134",
+    "doi-asserted-by": "crossref",
+    "first-page": "155",
+    "DOI": "10.1093/cercor/13.2.155",
+    "article-title": "Brain imaging of language plasticity in adopted adults: can a second language replace a first?",
+    "volume": "13",
+    "author": "Pallier",
+    "year": "2003",
+    "journal-title": "Cerebral Cortex"
+   },
+   {
+    "issue": "10",
+    "key": "10.1016/j.neunet.2019.01.012_b135",
+    "doi-asserted-by": "crossref",
+    "first-page": "1345",
+    "DOI": "10.1109/TKDE.2009.191",
+    "article-title": "A survey on transfer learning",
+    "volume": "22",
+    "author": "Pan",
+    "year": "2010",
+    "journal-title": "IEEE Transactions on Knowledge and Data Engineering"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b136",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Parisi, G., Barros, P., Fu, D., Magg, S., Wu, H., & Liu, X., et al. (2018). A Neurorobotic Experiment for Crossmodal Conflict Resolution in Complex Environments,.",
+    "DOI": "10.1109/IROS.2018.8594036"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b137",
+    "series-title": "ICDL-EPIROB\u201917",
+    "first-page": "33",
+    "article-title": "A computational model of crossmodal processing for conflict resolution",
+    "author": "Parisi",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b138",
+    "series-title": "NIPS\u201918, workshop on continual learning",
+    "article-title": "On the role of neurogenesis in overcoming catastrophic forgetting.",
+    "author": "Parisi",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b139",
+    "series-title": "Proceedings of the IEEE international symposium on robot and human interactive communication",
+    "first-page": "71",
+    "article-title": "Human motion assessment in real time using recurrent self-organization",
+    "author": "Parisi",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b140",
+    "doi-asserted-by": "crossref",
+    "first-page": "137",
+    "DOI": "10.1016/j.neunet.2017.09.001",
+    "article-title": "Lifelong learning of humans actions with deep neural network self-organization",
+    "volume": "96",
+    "author": "Parisi",
+    "year": "2017",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b141",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Parisi, G., Tani, J., Weber, C., & Wermter, S. (2018). Lifelong Learning of Spatiotemporal Representations with Dual-Memory Recurrent Self-Organization,.",
+    "DOI": "10.3389/fnbot.2018.00078"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b142",
+    "series-title": "IROS\u201916, workshop on bio-inspired social robot learning in home scenarios",
+    "article-title": "Incremental on-line learning of object classes using a combination of self-organizing incremental neural networks and deep convolutional neural networks",
+    "author": "Part",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b143",
+    "series-title": "ICDL-EPIROB\u201917",
+    "article-title": "Incremental online learning of objects for robots operating in real environments",
+    "author": "Part",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b144",
+    "series-title": "ICML\u201917",
+    "article-title": "Curiosity-driven exploration by self-supervised prediction",
+    "author": "Pathak",
+    "year": "2017"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b145",
+    "doi-asserted-by": "crossref",
+    "first-page": "497",
+    "DOI": "10.1109/5326.983933",
+    "article-title": "Learn++: An incremental learning algorithm for supervised neural networks",
+    "volume": "31",
+    "author": "Polikar",
+    "year": "2001",
+    "journal-title": "IEEE Transactions on Systems, Man, and Cybernetics, Part C (Applications & Reviews)"
+   },
+   {
+    "issue": "216",
+    "key": "10.1016/j.neunet.2019.01.012_b146",
+    "article-title": "Neural plasticity across the lifespan",
+    "volume": "6",
+    "author": "Power",
+    "year": "2016",
+    "journal-title": "Wiley Interdisciplinary Reviews: Developmental Biology"
+   },
+   {
+    "issue": "17",
+    "key": "10.1016/j.neunet.2019.01.012_b147",
+    "article-title": "Adult neurogenesis in brain repair: Cellular plasticity vs. cellular replacement",
+    "volume": "8",
+    "author": "Quadrato",
+    "year": "2014",
+    "journal-title": "Frontiers in Neuroscience"
+   },
+   {
+    "issue": "1",
+    "key": "10.1016/j.neunet.2019.01.012_b148",
+    "doi-asserted-by": "crossref",
+    "first-page": "79",
+    "DOI": "10.1038/4580",
+    "article-title": "Predictive coding in the visual cortex: A functional interpretation of some extra-classical receptive-field effects",
+    "volume": "2",
+    "author": "Rao",
+    "year": "1999",
+    "journal-title": "Nature Neuroscience"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.neunet.2019.01.012_b149",
+    "doi-asserted-by": "crossref",
+    "first-page": "285",
+    "DOI": "10.1037/0033-295X.97.2.285",
+    "article-title": "Connectionist models of recognition memory: Constraints imposed by learning and forgetting functions",
+    "volume": "97",
+    "author": "Ratcliff",
+    "year": "1990",
+    "journal-title": "Psychological Review"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b150",
+    "series-title": "CNN features off-the-shelf: An astounding baseline for recognition",
+    "first-page": "806",
+    "author": "Razavian",
+    "year": "2014"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b151",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Rebuffi, S. A., Kolesnikov, A., Sperl, G., & Lampert, C. H. (2016). iCaRL: Incremental Classifier and Representation Learning,.",
+    "DOI": "10.1109/CVPR.2017.587"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b152",
+    "unstructured": "Reed, S., & de\u00a0Freitas, N. (2015). Neural programmer interpreters,."
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b153",
+    "doi-asserted-by": "crossref",
+    "first-page": "398",
+    "DOI": "10.1016/j.asoc.2017.03.005",
+    "article-title": "Life-long learning based on dynamic combination model",
+    "volume": "56",
+    "author": "Ren",
+    "year": "2017",
+    "journal-title": "Applied Soft Computing"
+   },
+   {
+    "issue": "3",
+    "key": "10.1016/j.neunet.2019.01.012_b154",
+    "doi-asserted-by": "crossref",
+    "first-page": "371",
+    "DOI": "10.1111/j.1467-7687.2008.00682.x",
+    "article-title": "Critical periods and catastrophic interference effects in the development of self-organising feature maps",
+    "volume": "11",
+    "author": "Richardson",
+    "year": "2008",
+    "journal-title": "Developmental Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b155",
+    "doi-asserted-by": "crossref",
+    "first-page": "77",
+    "DOI": "10.1023/A:1007331723572",
+    "article-title": "Child: A first step towards continual learning",
+    "volume": "28",
+    "author": "Ring",
+    "year": "1997",
+    "journal-title": "Machine Learning"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b156",
+    "series-title": "Proceedings of the first new zealand international two-stream conference on artificial neural networks and expert systems",
+    "article-title": "CaTastrophic forgetting in neural networks: The role of rehearsal mechanisms",
+    "author": "Robins",
+    "year": "1993"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.neunet.2019.01.012_b157",
+    "doi-asserted-by": "crossref",
+    "first-page": "123",
+    "DOI": "10.1080/09540099550039318",
+    "article-title": "CaTastrophic forgetting, rehearsal and pseudorehearsal",
+    "volume": "7",
+    "author": "Robins",
+    "year": "1995",
+    "journal-title": "Connection Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b158",
+    "unstructured": "Rusu, A. A., Rabinowitz, N. C., Desjardins, G., Soyer, H., Kirkpatrick, J., & Kavukcuoglu, K., et al. (2016). Progressive Neural Networks,."
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b159",
+    "series-title": "CoRL\u201917",
+    "article-title": "Sim-to-real robot learning from pixels with progressive nets",
+    "author": "Rusu",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b160",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1109/70.294207",
+    "article-title": "Neural network learning control of robot manipulators using gradually increasing task difficulty",
+    "volume": "10",
+    "author": "Sanger",
+    "year": "1994",
+    "journal-title": "IEEE Transactions on Robotics and Automation"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b161",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Schmidhuber, J. (1991). Curious model-building control systems.",
+    "DOI": "10.1109/IJCNN.1991.170605"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b162",
+    "series-title": "ICPR\u201904",
+    "first-page": "32",
+    "article-title": "Recognizing human actions: A local SVM approach",
+    "author": "Schuldt",
+    "year": "2004"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b163",
+    "series-title": "Processes of change in brain and cognitive development: Attention and Performance XXI",
+    "first-page": "315",
+    "article-title": "Connectionist models in developmental cognitive neuroscience: Critical periods and the paradox of success",
+    "author": "Seidenberg",
+    "year": "2006"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b164",
+    "doi-asserted-by": "crossref",
+    "first-page": "1779",
+    "DOI": "10.1126/science.1100199",
+    "article-title": "Children creating core properties of language: Evidence from an emerging sign language in nicaragua",
+    "volume": "305",
+    "author": "Senghas",
+    "year": "2004",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b165",
+    "doi-asserted-by": "crossref",
+    "first-page": "602",
+    "DOI": "10.1073/pnas.93.2.602",
+    "article-title": "Emergence of order in visual system development",
+    "volume": "93",
+    "author": "Shatz",
+    "year": "1996",
+    "journal-title": "Proceedings of the National Academy of Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b166",
+    "series-title": "NIPS\u201917",
+    "article-title": "Continual learning with deep generative replay",
+    "author": "Shin",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b167",
+    "doi-asserted-by": "crossref",
+    "first-page": "94",
+    "DOI": "10.1037/h0049039",
+    "article-title": "Reinforcement today",
+    "volume": "13",
+    "author": "Skinner",
+    "year": "1958",
+    "journal-title": "American Psychologist"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b168",
+    "doi-asserted-by": "crossref",
+    "first-page": "75",
+    "DOI": "10.1007/s00422-014-0628-0",
+    "article-title": "Short-term plasticity as cause-effect hypothesis testing is distal reward learning",
+    "volume": "109",
+    "author": "Soltoggio",
+    "year": "2015",
+    "journal-title": "Biological Cybernetics"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b169",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Soltoggio, A., Stanley, K. O., & Risi, S. (2017). Born to learn: the inspiration, progress, and future of evolved plastic artificial neural networks,.",
+    "DOI": "10.1016/j.neunet.2018.07.013"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b170",
+    "doi-asserted-by": "crossref",
+    "first-page": "919",
+    "DOI": "10.1038/78829",
+    "article-title": "Competitive hebbian learning through spike-timing-dependent synaptic plasticity",
+    "volume": "3",
+    "author": "Song",
+    "year": "2000",
+    "journal-title": "Nature Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b171",
+    "doi-asserted-by": "crossref",
+    "first-page": "377",
+    "DOI": "10.1038/nature25975",
+    "article-title": "Human hippocampal neurogenesis drops sharply in children to undetectable levels in adults",
+    "volume": "555",
+    "author": "Sorrells",
+    "year": "2018",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b172",
+    "doi-asserted-by": "crossref",
+    "first-page": "182",
+    "DOI": "10.1111/j.1749-6632.2010.05440.x",
+    "article-title": "Crossmodal spatial attention",
+    "volume": "1191",
+    "author": "Spence",
+    "year": "2010",
+    "journal-title": "Annals of the New York Academy of Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b173",
+    "series-title": "The Oxford handbook of attention",
+    "first-page": "446",
+    "article-title": "Orienting attention: A crossmodal perspective",
+    "author": "Spence",
+    "year": "2014"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b174",
+    "series-title": "The merging of the senses",
+    "author": "Stein",
+    "year": "1993"
+   },
+   {
+    "issue": "8",
+    "key": "10.1016/j.neunet.2019.01.012_b175",
+    "doi-asserted-by": "crossref",
+    "first-page": "520",
+    "DOI": "10.1038/nrn3742",
+    "article-title": "Development of multisensory integration from the perspective of the individual neuron",
+    "volume": "15",
+    "author": "Stein",
+    "year": "2014",
+    "journal-title": "Nature Reviews Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b176",
+    "doi-asserted-by": "crossref",
+    "first-page": "251",
+    "DOI": "10.1038/35067562",
+    "article-title": "Development and plasticity of cortical areas and networks",
+    "volume": "2",
+    "author": "Sur",
+    "year": "2001",
+    "journal-title": "Nature Reviews Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b177",
+    "series-title": "Exploring robotic minds: Actions, Symbols, and consciousness a self-organizing dynamic phenomena",
+    "author": "Tani",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b178",
+    "series-title": "CoRL\u201917",
+    "article-title": "Online learning with stochastic recurrent neural networks using intrinsic motivation signals",
+    "author": "Tanneberg",
+    "year": "2017"
+   },
+   {
+    "issue": "6",
+    "key": "10.1016/j.neunet.2019.01.012_b179",
+    "doi-asserted-by": "crossref",
+    "first-page": "745",
+    "DOI": "10.1002/jnr.10378",
+    "article-title": "Adult neurogenesis and neural stem cells of the central nervous system in mammals",
+    "volume": "69",
+    "author": "Taupin",
+    "year": "2002",
+    "journal-title": "Journal of Neuroscience Research"
+   },
+   {
+    "issue": "18112",
+    "key": "10.1016/j.neunet.2019.01.012_b180",
+    "article-title": "The global landscape of cognition: hierarchical aggregation as an organizational principle of human cortical networks and functions",
+    "volume": "5",
+    "author": "Taylor",
+    "year": "2015",
+    "journal-title": "Scientific Reports"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b181",
+    "series-title": "AAAI\u201917",
+    "article-title": "A deep hierarchical approach to lifelong learning in minecraft",
+    "author": "Tessler",
+    "year": "2017"
+   },
+   {
+    "issue": "4",
+    "key": "10.1016/j.neunet.2019.01.012_b182",
+    "doi-asserted-by": "crossref",
+    "first-page": "337",
+    "DOI": "10.1002/dev.20134",
+    "article-title": "The computational modelling of sensitive periods",
+    "volume": "48",
+    "author": "Thomas",
+    "year": "2006",
+    "journal-title": "Developmental Psychobiology"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b183",
+    "doi-asserted-by": "crossref",
+    "first-page": "25",
+    "DOI": "10.1016/0921-8890(95)00004-Y",
+    "article-title": "Lifelong robot learning",
+    "volume": "15",
+    "author": "Thrun",
+    "year": "1995",
+    "journal-title": "Robotics and Autonomous Systems"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b184",
+    "doi-asserted-by": "crossref",
+    "first-page": "891",
+    "DOI": "10.1126/science.1205274",
+    "article-title": "Schema-dependent gene activation and memory encoding in neocortex",
+    "volume": "333",
+    "author": "Tse",
+    "year": "2011",
+    "journal-title": "Science"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b185",
+    "doi-asserted-by": "crossref",
+    "first-page": "89",
+    "DOI": "10.1146/annurev-neuro-060909-153238",
+    "article-title": "Too many cooks? Intrinsic and synaptic homeostatic mechanisms in cortical circuit refinement",
+    "volume": "34",
+    "author": "Turrigiano",
+    "year": "2011",
+    "journal-title": "Annual Review of Neuroscience"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b186",
+    "doi-asserted-by": "crossref",
+    "first-page": "59",
+    "DOI": "10.1111/j.1467-9922.2006.00355.x",
+    "article-title": "Development of the human cortex and the concept of critical or sensitive periods",
+    "volume": "56",
+    "author": "Uylings",
+    "year": "2006",
+    "journal-title": "Language Learning"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b187",
+    "series-title": "NIPS\u201916",
+    "article-title": "Matching networks for one shot learning",
+    "author": "Vinyals",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b188",
+    "series-title": "Tech Report: CNS-TR-2011-001",
+    "article-title": "CaLtech-UCSD birds-200-2011 dataset",
+    "author": "Wah",
+    "year": "2011"
+   },
+   {
+    "issue": "9",
+    "key": "10.1016/j.neunet.2019.01.012_b189",
+    "article-title": "A survey of transfer learning",
+    "volume": "3",
+    "author": "Weiss",
+    "year": "2016",
+    "journal-title": "Journal of Big Data"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b190",
+    "series-title": "Biomimetic neural learning for intelligent robots",
+    "author": "Wermter",
+    "year": "2005"
+   },
+   {
+    "issue": "1117",
+    "key": "10.1016/j.neunet.2019.01.012_b191",
+    "doi-asserted-by": "crossref",
+    "first-page": "431",
+    "DOI": "10.1098/rspb.1976.0087",
+    "article-title": "How patterned neural connections can be set up by self-organization",
+    "volume": "194",
+    "author": "Willshaw",
+    "year": "1976",
+    "journal-title": "Proceedings of the Royal Society of London B: Biological Sciences"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b192",
+    "series-title": "Proceedings of the ACM International Conference on Multimedia, Orlando, FL",
+    "first-page": "177",
+    "article-title": "Error-driven incremental learning in deep convolutional neural network for large-scale image classification",
+    "author": "Xiao",
+    "year": "2014"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b193",
+    "series-title": "ICLR\u201918",
+    "article-title": "Lifelong learning with dynamically expandable networks",
+    "author": "Yoon",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b194",
+    "first-page": "166",
+    "article-title": "The temporal paradox of hebbian learning and homeostatic plasticity",
+    "volume": "43",
+    "author": "Zenke",
+    "year": "2017",
+    "journal-title": "Neurobiology"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b195",
+    "series-title": "Continual learning through synaptic intelligence",
+    "author": "Zenke",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.neunet.2019.01.012_b196",
+    "series-title": "International conference on artificial intelligence and statistics",
+    "first-page": "1453",
+    "article-title": "Online incremental feature learning with denoising autoencoders",
+    "author": "Zhou",
+    "year": "2012"
+   }
+  ],
+  "container-title": [
+   "Neural Networks"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0893608019300231?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S0893608019300231?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2019,
+     12,
+     21
+    ]
+   ],
+   "date-time": "2019-12-21T08:05:04Z",
+   "timestamp": 1576915504000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0893608019300231"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2019,
+     5
+    ]
+   ]
+  },
+  "references-count": 196,
+  "alternative-id": [
+   "S0893608019300231"
+  ],
+  "URL": "https://doi.org/10.1016/j.neunet.2019.01.012",
+  "relation": {},
+  "ISSN": [
+   "0893-6080"
+  ],
+  "issn-type": [
+   {
+    "value": "0893-6080",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2019,
+     5
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "Elsevier",
+    "name": "publisher",
+    "label": "This article is maintained by"
+   },
+   {
+    "value": "Continual lifelong learning with neural networks: A review",
+    "name": "articletitle",
+    "label": "Article Title"
+   },
+   {
+    "value": "Neural Networks",
+    "name": "journaltitle",
+    "label": "Journal Title"
+   },
+   {
+    "value": "https://doi.org/10.1016/j.neunet.2019.01.012",
+    "name": "articlelink",
+    "label": "CrossRef DOI link to publisher maintained version"
+   },
+   {
+    "value": "article",
+    "name": "content_type",
+    "label": "Content Type"
+   },
+   {
+    "value": "\u00a9 2019 The Authors. Published by Elsevier Ltd.",
+    "name": "copyright",
+    "label": "Copyright"
+   }
+  ]
+ }
+}

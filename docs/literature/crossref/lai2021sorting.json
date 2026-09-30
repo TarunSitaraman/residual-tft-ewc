@@ -1,0 +1,2133 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     29
+    ]
+   ],
+   "date-time": "2026-09-29T09:44:37Z",
+   "timestamp": 1790675077191,
+   "version": "4.1.0"
+  },
+  "reference-count": 171,
+  "publisher": "Elsevier BV",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2021,
+       8,
+       1
+      ]
+     ],
+     "date-time": "2021-08-01T00:00:00Z",
+     "timestamp": 1627776000000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2021,
+       8,
+       1
+      ]
+     ],
+     "date-time": "2021-08-01T00:00:00Z",
+     "timestamp": 1627776000000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://www.elsevier.com/legal/tdmrep-license"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2021,
+       8,
+       1
+      ]
+     ],
+     "date-time": "2021-08-01T00:00:00Z",
+     "timestamp": 1627776000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-017"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2021,
+       8,
+       1
+      ]
+     ],
+     "date-time": "2021-08-01T00:00:00Z",
+     "timestamp": 1627776000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-037"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2021,
+       8,
+       1
+      ]
+     ],
+     "date-time": "2021-08-01T00:00:00Z",
+     "timestamp": 1627776000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-012"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2021,
+       8,
+       1
+      ]
+     ],
+     "date-time": "2021-08-01T00:00:00Z",
+     "timestamp": 1627776000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-029"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2021,
+       8,
+       1
+      ]
+     ],
+     "date-time": "2021-08-01T00:00:00Z",
+     "timestamp": 1627776000000
+    },
+    "content-version": "stm-asf",
+    "delay-in-days": 0,
+    "URL": "https://doi.org/10.15223/policy-004"
+   }
+  ],
+  "funder": [
+   {
+    "DOI": "10.13039/100012543",
+    "name": "Shanghai Science and Technology Development Foundation",
+    "doi-asserted-by": "publisher",
+    "id": [
+     {
+      "id": "10.13039/100012543",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   },
+   {
+    "DOI": "10.13039/100007219",
+    "name": "Shanghai Municipal Natural Science Foundation",
+    "doi-asserted-by": "publisher",
+    "id": [
+     {
+      "id": "10.13039/100007219",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   },
+   {
+    "DOI": "10.13039/501100001809",
+    "name": "National Natural Science Foundation of China",
+    "doi-asserted-by": "publisher",
+    "id": [
+     {
+      "id": "10.13039/501100001809",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   },
+   {
+    "DOI": "10.13039/501100011283",
+    "name": "Tsinghua University State Key Laboratory of Automotive Safety and Energy",
+    "doi-asserted-by": "publisher",
+    "id": [
+     {
+      "id": "10.13039/501100011283",
+      "id-type": "DOI",
+      "asserted-by": "publisher"
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "elsevier.com",
+    "sciencedirect.com"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Renewable and Sustainable Energy Reviews"
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2021,
+     8
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.rser.2021.111162",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2021,
+     4,
+     30
+    ]
+   ],
+   "date-time": "2021-04-30T01:55:10Z",
+   "timestamp": 1619747710000
+  },
+  "page": "111162",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 231,
+  "special_numbering": "C",
+  "title": [
+   "Sorting, regrouping, and echelon utilization of the large-scale retired lithium batteries: A critical review"
+  ],
+  "prefix": "10.1016",
+  "volume": "146",
+  "author": [
+   {
+    "ORCID": "https://orcid.org/0000-0003-2190-6023",
+    "authenticated-orcid": false,
+    "given": "Xin",
+    "family": "Lai",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Yunfeng",
+    "family": "Huang",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Cong",
+    "family": "Deng",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Huanghui",
+    "family": "Gu",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Xuebing",
+    "family": "Han",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Yuejiu",
+    "family": "Zheng",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Minggao",
+    "family": "Ouyang",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "78",
+  "reference": [
+   {
+    "key": "10.1016/j.rser.2021.111162_bib1",
+    "doi-asserted-by": "crossref",
+    "first-page": "1057",
+    "DOI": "10.1016/j.electacta.2018.11.134",
+    "article-title": "A comparative study of global optimization methods for parameter identification of different equivalent circuit models for Li-ion batteries",
+    "volume": "295",
+    "author": "Lai",
+    "year": "2019",
+    "journal-title": "Electrochim Acta"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib2",
+    "doi-asserted-by": "crossref",
+    "first-page": "566",
+    "DOI": "10.1016/j.electacta.2017.10.153",
+    "article-title": "A comparative study of different equivalent circuit models for estimating state-of-charge of lithium-ion batteries",
+    "volume": "259",
+    "author": "Lai",
+    "year": "2018",
+    "journal-title": "Electrochim Acta"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib3",
+    "doi-asserted-by": "crossref",
+    "first-page": "432",
+    "DOI": "10.1016/j.jenvman.2019.05.095",
+    "article-title": "Towards sustainable business models for electric vehicle battery second use: a critical review",
+    "volume": "245",
+    "author": "Reinhardt",
+    "year": "2019",
+    "journal-title": "J Environ Manag"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib4",
+    "doi-asserted-by": "crossref",
+    "first-page": "382",
+    "DOI": "10.1109/TPEL.2019.2915675",
+    "article-title": "Cost-optimal energy management of hybrid electric vehicles using fuel cell/battery health-aware predictive control",
+    "volume": "35",
+    "author": "Hu",
+    "year": "2020",
+    "journal-title": "Ieee T Power Electr"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib5",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.xcrp.2020.100035",
+    "article-title": "Operando acoustic detection of lithium metal plating in commercial LiCoO2/graphite pouch cells",
+    "volume": "1",
+    "author": "Bommier",
+    "year": "2020",
+    "journal-title": "Cell Reports Physical Science"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib6",
+    "doi-asserted-by": "crossref",
+    "first-page": "101106",
+    "DOI": "10.1016/j.est.2019.101106",
+    "article-title": "A hybrid state-of-charge estimation method based on credible increment for electric vehicle applications with large sensor and model errors",
+    "volume": "27",
+    "author": "Lai",
+    "year": "2020",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib7",
+    "article-title": "Research gaps in environmental life cycle assessments of lithium ion batteries for grid-scale stationary energy storage systems: end-of-life options and other issues",
+    "volume": "23",
+    "author": "Pellow",
+    "year": "2020",
+    "journal-title": "Sustain Mater Techno"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib8",
+    "doi-asserted-by": "crossref",
+    "first-page": "233",
+    "DOI": "10.1016/j.resconrec.2017.08.019",
+    "article-title": "An overview of recycling and treatment of spent LiFePO4 batteries in China",
+    "volume": "127",
+    "author": "Wang",
+    "year": "2017",
+    "journal-title": "Resour Conserv Recycl"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib9",
+    "doi-asserted-by": "crossref",
+    "first-page": "135",
+    "DOI": "10.1016/j.resconrec.2017.10.021",
+    "article-title": "Reuse of Ni-Co-Mn oxides from spent Li-ion batteries to prepare bifunctional air electrodes",
+    "volume": "129",
+    "author": "Wei",
+    "year": "2018",
+    "journal-title": "Resour Conserv Recycl"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib10",
+    "doi-asserted-by": "crossref",
+    "first-page": "63",
+    "DOI": "10.1016/j.resconrec.2013.11.008",
+    "article-title": "A future perspective on lithium-ion battery waste flows from electric vehicles",
+    "volume": "83",
+    "author": "Richa",
+    "year": "2014",
+    "journal-title": "Resour Conserv Recycl"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib11",
+    "doi-asserted-by": "crossref",
+    "first-page": "1759",
+    "DOI": "10.1016/j.rser.2015.08.014",
+    "article-title": "Solving spent lithium-ion battery problems in China: opportunities and challenges",
+    "volume": "52",
+    "author": "Zeng",
+    "year": "2015",
+    "journal-title": "Renew Sustain Energy Rev"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib12",
+    "doi-asserted-by": "crossref",
+    "first-page": "10927",
+    "DOI": "10.1021/acs.est.7b04207",
+    "article-title": "Retired electric vehicle (EV) batteries: integrated waste management and research needs",
+    "volume": "51",
+    "author": "Hu",
+    "year": "2017",
+    "journal-title": "Environ Sci Technol"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib13",
+    "doi-asserted-by": "crossref",
+    "first-page": "263",
+    "DOI": "10.1016/j.resconrec.2017.11.001",
+    "article-title": "A review on the growing concern and potential management strategies of waste lithium-ion batteries",
+    "volume": "129",
+    "author": "Winslow",
+    "year": "2018",
+    "journal-title": "Resour Conserv Recycl"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib14",
+    "doi-asserted-by": "crossref",
+    "first-page": "274",
+    "DOI": "10.1016/j.jpowsour.2018.07.116",
+    "article-title": "Recycling of lithium-ion batteries: recent advances and perspectives",
+    "volume": "399",
+    "author": "Huang",
+    "year": "2018",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib15",
+    "article-title": "The case for recycling: overview and challenges in the material supply chain for automotive li-ion batteries",
+    "volume": "19",
+    "author": "Mayyas",
+    "year": "2019",
+    "journal-title": "Sustain Mater Techno"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib16",
+    "doi-asserted-by": "crossref",
+    "first-page": "219",
+    "DOI": "10.1016/j.wasman.2017.03.018",
+    "article-title": "Lithium recycling and cathode material regeneration from acid leach liquor of spent lithium-ion battery via facile co-extraction and co-precipitation processes",
+    "volume": "64",
+    "author": "Yang",
+    "year": "2017",
+    "journal-title": "Waste Manag"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib17",
+    "doi-asserted-by": "crossref",
+    "first-page": "A6184",
+    "DOI": "10.1149/2.0271701jes",
+    "article-title": "Ecological recycling of lithium-ion batteries from electric vehicles with focus on mechanical processes",
+    "volume": "164",
+    "author": "Diekmann",
+    "year": "2017",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib18",
+    "first-page": "242",
+    "article-title": "Environmental impact of spent lithium ion batteries and green recycling perspectives by organic acids - a review",
+    "author": "Meshram",
+    "year": "2020",
+    "journal-title": "Chemosphere"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib19",
+    "doi-asserted-by": "crossref",
+    "first-page": "75",
+    "DOI": "10.1038/s41586-019-1682-5",
+    "article-title": "Recycling lithium-ion batteries from electric vehicles",
+    "volume": "575",
+    "author": "Harper",
+    "year": "2019",
+    "journal-title": "Nature"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib20",
+    "doi-asserted-by": "crossref",
+    "first-page": "801",
+    "DOI": "10.1016/j.jclepro.2019.04.304",
+    "article-title": "Recycling of spent lithium-ion batteries in view of lithium recovery: a critical review",
+    "volume": "228",
+    "author": "Liu",
+    "year": "2019",
+    "journal-title": "J Clean Prod"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib21",
+    "doi-asserted-by": "crossref",
+    "first-page": "3473",
+    "DOI": "10.1002/cssc.201601062",
+    "article-title": "Graphite recycling from spent lithium-ion batteries",
+    "volume": "9",
+    "author": "Rothermel",
+    "year": "2016",
+    "journal-title": "Chemsuschem"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib22",
+    "doi-asserted-by": "crossref",
+    "first-page": "701",
+    "DOI": "10.1016/j.rser.2018.04.035",
+    "article-title": "Battery second life: hype, hope or reality? A critical review of the state of the art",
+    "volume": "93",
+    "author": "Martinez-Laserna",
+    "year": "2018",
+    "journal-title": "Renew Sustain Energy Rev"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib23",
+    "first-page": "86",
+    "article-title": "Environmental planning based on reduce, reuse, recycle and recover using artificial intelligence",
+    "author": "Yu",
+    "year": "2021",
+    "journal-title": "Environ Impact Asses"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib24",
+    "doi-asserted-by": "crossref",
+    "first-page": "765",
+    "DOI": "10.1016/j.jclepro.2017.05.181",
+    "article-title": "An investigation of the current status of recycling spent lithium-ion batteries from consumer electronics in China",
+    "volume": "161",
+    "author": "Gu",
+    "year": "2017",
+    "journal-title": "J Clean Prod"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib25",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1063/1.4944967",
+    "article-title": "A second life for mobile phone batteries in light emitting diode solar home systems",
+    "volume": "8",
+    "author": "Diouf",
+    "year": "2016",
+    "journal-title": "J Renew Sustain Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib26",
+    "doi-asserted-by": "crossref",
+    "first-page": "120",
+    "DOI": "10.1016/j.apenergy.2016.08.056",
+    "article-title": "Technical and economic assessment of the secondary use of repurposed electric vehicle batteries in the residential sector to support solar energy",
+    "volume": "181",
+    "author": "Assuncao",
+    "year": "2016",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib27",
+    "doi-asserted-by": "crossref",
+    "first-page": "99",
+    "DOI": "10.1016/j.jclepro.2018.12.005",
+    "article-title": "Reused second life batteries for aggregated demand response services",
+    "volume": "212",
+    "author": "Casals",
+    "year": "2019",
+    "journal-title": "J Clean Prod"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib28",
+    "doi-asserted-by": "crossref",
+    "first-page": "80",
+    "DOI": "10.1016/j.enconman.2018.11.079",
+    "article-title": "Modeling and multi-objective optimization of a stand-alone PV-hydrogen-retired EV battery hybrid energy system",
+    "volume": "181",
+    "author": "Huang",
+    "year": "2019",
+    "journal-title": "Energy Convers Manag"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib29",
+    "first-page": "251",
+    "article-title": "The social-economic-environmental impacts of recycling retired EV batteries under reward-penalty mechanism",
+    "author": "Tang",
+    "year": "2019",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib30",
+    "doi-asserted-by": "crossref",
+    "first-page": "354",
+    "DOI": "10.1016/j.jenvman.2018.11.046",
+    "article-title": "Second life batteries lifespan: rest of useful life and environmental analysis",
+    "volume": "232",
+    "author": "Casals",
+    "year": "2019",
+    "journal-title": "J Environ Manag"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib31",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.est.2019.04.021",
+    "article-title": "A second life for li-ion cells rescued from notebook batteries",
+    "volume": "24",
+    "author": "Salinas",
+    "year": "2019",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib32",
+    "doi-asserted-by": "crossref",
+    "first-page": "429",
+    "DOI": "10.1016/j.ijepes.2018.08.015",
+    "article-title": "Development of cell selection framework for second-life cells with homogeneous properties",
+    "volume": "105",
+    "author": "Lee",
+    "year": "2019",
+    "journal-title": "Int J Elec Power"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib33",
+    "doi-asserted-by": "crossref",
+    "first-page": "2337",
+    "DOI": "10.1002/er.5083",
+    "article-title": "A fast classification method of retired electric vehicle battery modules and their energy storage application in photovoltaic generation",
+    "volume": "44",
+    "author": "Li",
+    "year": "2020",
+    "journal-title": "Int J Energy Res"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib34",
+    "doi-asserted-by": "crossref",
+    "first-page": "710",
+    "DOI": "10.1016/j.energy.2017.04.116",
+    "article-title": "On the possibility of extending the lifetime of lithium-ion batteries through optimal V2G facilitated by an integrated vehicle and smart-grid system",
+    "volume": "133",
+    "author": "Uddin",
+    "year": "2017",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib35",
+    "doi-asserted-by": "crossref",
+    "first-page": "3657",
+    "DOI": "10.1002/er.5147",
+    "article-title": "Operational reliability and economy evaluation of reusing retired batteries in composite power systems",
+    "volume": "44",
+    "author": "Chen",
+    "year": "2020",
+    "journal-title": "Int J Energy Res"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib36",
+    "doi-asserted-by": "crossref",
+    "first-page": "7020",
+    "DOI": "10.1021/acs.chemrev.9b00535",
+    "article-title": "Sustainable recycling technology for Li-ion batteries and beyond: challenges and future prospects",
+    "volume": "120",
+    "author": "Fan",
+    "year": "2020",
+    "journal-title": "Chem Rev"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib37",
+    "doi-asserted-by": "crossref",
+    "first-page": "18817",
+    "DOI": "10.1016/j.ijhydene.2017.06.043",
+    "article-title": "Performance assessment and classification of retired, lithium ion battery from electric vehicles for energy storage",
+    "volume": "42",
+    "author": "Liao",
+    "year": "2017",
+    "journal-title": "Int J Hydrogen Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib38",
+    "first-page": "193",
+    "article-title": "Performance assessment of retired EV battery modules for echelon use",
+    "author": "Zhang",
+    "year": "2020",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib39",
+    "doi-asserted-by": "crossref",
+    "first-page": "1080",
+    "DOI": "10.1016/j.jclepro.2018.12.262",
+    "article-title": "Study on the performance evaluation and echelon utilization of retired LiFePO(4 )power battery for smart grid",
+    "volume": "213",
+    "author": "Xu",
+    "year": "2019",
+    "journal-title": "J Clean Prod"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib40",
+    "doi-asserted-by": "crossref",
+    "first-page": "82",
+    "DOI": "10.1016/j.jpowsour.2015.04.097",
+    "article-title": "Energy and climate effects of second-life use of electric vehicle batteries in California through 2050",
+    "volume": "288",
+    "author": "Sathre",
+    "year": "2015",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib41",
+    "article-title": "Predictive modeling of battery degradation and greenhouse gas emissions from US state-level electric vehicle operation",
+    "volume": "9",
+    "author": "Yang",
+    "year": "2018",
+    "journal-title": "Nat Commun"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib42",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.jclepro.2020.120203",
+    "article-title": "Co-estimation of state of charge and state of power for lithium-ion batteries based on fractional variable-order model",
+    "volume": "255",
+    "author": "Lai",
+    "year": "2020",
+    "journal-title": "J Clean Prod"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib43",
+    "doi-asserted-by": "crossref",
+    "first-page": "265",
+    "DOI": "10.1016/j.jpowsour.2015.01.072",
+    "article-title": "Quantifying EV battery end-of-life through analysis of travel needs with vehicle powertrain models",
+    "volume": "282",
+    "author": "Saxena",
+    "year": "2015",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib44",
+    "doi-asserted-by": "crossref",
+    "first-page": "720",
+    "DOI": "10.1016/j.apenergy.2015.05.005",
+    "article-title": "Charging ahead on the transition to electric vehicles with standard 120 V wall outlets",
+    "volume": "157",
+    "author": "Saxena",
+    "year": "2015",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib45",
+    "series-title": "Energy saving and new energy vehicle industry development plan",
+    "first-page": "2021",
+    "year": "2020"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib46",
+    "series-title": "Guidance on accelerating the promotion and application of new energy vehicles",
+    "year": "2014"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib47",
+    "series-title": "Industry standard for comprehensive utilization of waste power batteries for new energy vehicles",
+    "year": "2016"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib48",
+    "series-title": "Technical policy for the recovery and utilization of electric vehicle battery",
+    "year": "2015"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib49",
+    "series-title": "Specifications and dimensions of power battery products for electric vehicles",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib50",
+    "series-title": "Coding rules for automotive power battery",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib51",
+    "series-title": "Residual energy detection of vehicle power battery recycling",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib52",
+    "series-title": "Interim management method of power battery recycling of new energy vehicles",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib53",
+    "series-title": "Interim measures for the traceability management of the recycling and utilization of new energy vehicle power batteries",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib54",
+    "series-title": "Measures for the pilot implementation of power battery recycling of new energy vehicles",
+    "year": "2018"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib55",
+    "doi-asserted-by": "crossref",
+    "first-page": "321",
+    "DOI": "10.1016/j.matlet.2017.09.055",
+    "article-title": "Carbon encapsulated Sn-Co alloy: a stabilized tin-based material for sodium storage",
+    "volume": "210",
+    "author": "Huang",
+    "year": "2018",
+    "journal-title": "Mater Lett"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib56",
+    "doi-asserted-by": "crossref",
+    "first-page": "348",
+    "DOI": "10.1016/j.jpowsour.2012.10.072",
+    "article-title": "Recovery and heat treatment of the Li(Ni1/3Co1/3Mn1/3)O-2 cathode scrap material for lithium ion battery",
+    "volume": "232",
+    "author": "Song",
+    "year": "2013",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib57",
+    "doi-asserted-by": "crossref",
+    "first-page": "259",
+    "DOI": "10.1016/j.jpowsour.2019.04.048",
+    "article-title": "Efficient recycling of valuable resources from discarded lithium-ion batteries",
+    "volume": "426",
+    "author": "Jo",
+    "year": "2019",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib58",
+    "doi-asserted-by": "crossref",
+    "first-page": "19732",
+    "DOI": "10.1021/acssuschemeng.9b05003",
+    "article-title": "High-performance graphite recovered from spent lithium-ion batteries",
+    "volume": "7",
+    "author": "Ma",
+    "year": "2019",
+    "journal-title": "Acs Sustain Chem Eng"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib59",
+    "doi-asserted-by": "crossref",
+    "first-page": "168",
+    "DOI": "10.1007/s40831-015-0016-6",
+    "article-title": "Development of a highly efficient hydrometallurgical recycling process for automotive Li-ion batteries",
+    "volume": "1",
+    "author": "Wang",
+    "year": "2015",
+    "journal-title": "J Sustain Metall"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib60",
+    "doi-asserted-by": "crossref",
+    "first-page": "2500",
+    "DOI": "10.1039/C5GC02650D",
+    "article-title": "Environmentally friendly recycling and effective repairing of cathode powders from spent LiFePO4 batteries",
+    "volume": "18",
+    "author": "Chen",
+    "year": "2016",
+    "journal-title": "Green Chem"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib61",
+    "doi-asserted-by": "crossref",
+    "first-page": "173",
+    "DOI": "10.1016/j.jpowsour.2012.01.152",
+    "article-title": "Development of a recycling process for Li-ion batteries",
+    "volume": "207",
+    "author": "Georgi-Maschler",
+    "year": "2012",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib62",
+    "series-title": "2017 Ieee transportation Electrification Conference and Expo, Asia-Pacific (Itec Asia-Pacific). Harbin",
+    "first-page": "305",
+    "article-title": "Effect of remaining cycle life on economy of retired electric vehicle lithium-ion battery second-use in backup power for communication base station",
+    "author": "Zhu",
+    "year": "2017"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib63",
+    "doi-asserted-by": "crossref",
+    "first-page": "339",
+    "DOI": "10.1016/j.enbuild.2019.01.032",
+    "article-title": "Reuse of electric vehicle batteries in buildings: an integrated load match analysis and life cycle assessment approach",
+    "volume": "186",
+    "author": "Cusenza",
+    "year": "2019",
+    "journal-title": "Energy Build"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib64",
+    "doi-asserted-by": "crossref",
+    "first-page": "200",
+    "DOI": "10.1016/j.est.2017.03.003",
+    "article-title": "Demonstration of reusing electric vehicle battery for solar energy storage and demand side management",
+    "volume": "11",
+    "author": "Tong",
+    "year": "2017",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib65",
+    "doi-asserted-by": "crossref",
+    "first-page": "65624",
+    "DOI": "10.1109/ACCESS.2019.2916181",
+    "article-title": "Economic evaluation of micro-grid system in commercial parks based on echelon utilization batteries",
+    "volume": "7",
+    "author": "Han",
+    "year": "2019",
+    "journal-title": "Ieee Access"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib66",
+    "doi-asserted-by": "crossref",
+    "first-page": "750",
+    "DOI": "10.1016/j.jclepro.2017.04.028",
+    "article-title": "Development of a converterless energy management system for reusing automotive lithium-ion battery applied in smart-grid balancing",
+    "volume": "156",
+    "author": "Chiang",
+    "year": "2017",
+    "journal-title": "J Clean Prod"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib67",
+    "doi-asserted-by": "crossref",
+    "first-page": "22",
+    "DOI": "10.1016/j.enpol.2014.04.016",
+    "article-title": "Economic analysis of second use electric vehicle batteries for residential energy storage and load-levelling",
+    "volume": "71",
+    "author": "Heymans",
+    "year": "2014",
+    "journal-title": "Energy Pol"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib68",
+    "doi-asserted-by": "crossref",
+    "first-page": "114",
+    "DOI": "10.1016/j.ijepes.2016.03.006",
+    "article-title": "Gridable vehicles and second life batteries for generation side asset management in the Smart Grid",
+    "volume": "82",
+    "author": "Debnath",
+    "year": "2016",
+    "journal-title": "Int J Elec Power"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib69",
+    "doi-asserted-by": "crossref",
+    "first-page": "311",
+    "DOI": "10.1016/j.resconrec.2019.02.043",
+    "article-title": "Supply and demand response trends of lithium resources driven by the demand of emerging renewable energy technologies in China",
+    "volume": "145",
+    "author": "Liu",
+    "year": "2019",
+    "journal-title": "Resour Conserv Recycl"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib70",
+    "article-title": "A series-parallel PV-storage independent microgrid and its decentralized control",
+    "volume": "29",
+    "author": "Li",
+    "year": "2019",
+    "journal-title": "Int T Electr Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib71",
+    "doi-asserted-by": "crossref",
+    "first-page": "1188",
+    "DOI": "10.1109/TSTE.2017.2775339",
+    "article-title": "A stochastic optimization method for planning and real-time control of integrated PV-storage systems: design and experimental validation",
+    "volume": "9",
+    "author": "Conte",
+    "year": "2018",
+    "journal-title": "Ieee T Sustain Energ"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib72",
+    "doi-asserted-by": "crossref",
+    "first-page": "1708",
+    "DOI": "10.1109/TII.2019.2923641",
+    "article-title": "Robust normalized mixed-norm adaptive control scheme for PQ improvement at PCC of a remotely located wind-solar PV-BES microgrid",
+    "volume": "16",
+    "author": "Chishti",
+    "year": "2020",
+    "journal-title": "Ieee T Ind Inform"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib73",
+    "first-page": "251",
+    "article-title": "Economy analysis of second-life battery in wind power systems considering battery degradation in dynamic processes: real case scenarios",
+    "author": "Song",
+    "year": "2019",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib74",
+    "doi-asserted-by": "crossref",
+    "first-page": "10351",
+    "DOI": "10.1016/j.jpowsour.2011.06.053",
+    "article-title": "The ability of battery second use strategies to impact plug-in electric vehicle prices and serve utility energy storage applications",
+    "volume": "196",
+    "author": "Neubauer",
+    "year": "2011",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib75",
+    "doi-asserted-by": "crossref",
+    "first-page": "535",
+    "DOI": "10.1016/j.enpol.2017.11.002",
+    "article-title": "The reuse of electrified vehicle batteries as a means of integrating renewable energy into the European electricity grid: a policy and market analysis",
+    "volume": "113",
+    "author": "Gur",
+    "year": "2018",
+    "journal-title": "Energy Pol"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib76",
+    "series-title": "2012 International Symposium on Computer, Consumer and Control",
+    "first-page": "381",
+    "article-title": "Second use of retired lithium-ion battery packs from electric vehicles: technological challenges, cost analysis and optimal business model",
+    "author": "Lih",
+    "year": "2012"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib77",
+    "first-page": "251",
+    "article-title": "The social-economic-environmental impacts of recycling retired EV batteries under reward-penalty mechanism",
+    "author": "Tang",
+    "year": "2019",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib78",
+    "doi-asserted-by": "crossref",
+    "first-page": "64",
+    "DOI": "10.1016/j.seta.2014.01.006",
+    "article-title": "Environmental feasibility of re-use of electric vehicle batteries",
+    "volume": "6",
+    "author": "Ahmadi",
+    "year": "2014",
+    "journal-title": "Sustainable Energy Technologies and Assessments"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib79",
+    "doi-asserted-by": "crossref",
+    "first-page": "192",
+    "DOI": "10.1016/j.hydromet.2014.10.012",
+    "article-title": "Extraction of lithium from primary and secondary sources by pre-treatment, leaching and separation: a comprehensive review",
+    "volume": "150",
+    "author": "Meshram",
+    "year": "2014",
+    "journal-title": "Hydrometallurgy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib80",
+    "doi-asserted-by": "crossref",
+    "first-page": "310",
+    "DOI": "10.1016/j.joule.2019.11.018",
+    "article-title": "Battery lifetime prognostics",
+    "volume": "4",
+    "author": "Hu",
+    "year": "2020",
+    "journal-title": "Joule"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib81",
+    "doi-asserted-by": "crossref",
+    "first-page": "470",
+    "DOI": "10.1016/j.ensm.2020.11.026",
+    "article-title": "Mechanism, modeling, detection, and prevention of the internal short circuit in lithium-ion batteries: recent advances and perspectives",
+    "volume": "35",
+    "author": "Lai",
+    "year": "2021",
+    "journal-title": "Energy Storage Mater"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib82",
+    "article-title": "Online internal short circuit detection method considering equalization electric quantity for lithium-ion battery pack in electric vehicles",
+    "author": "Lai",
+    "year": "2020",
+    "journal-title": "Int J Energy Res"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib83",
+    "doi-asserted-by": "crossref",
+    "first-page": "85",
+    "DOI": "10.1016/j.ensm.2019.06.036",
+    "article-title": "Safety issues and mechanisms of lithium-ion battery cell upon mechanical abusive loading: a review",
+    "volume": "24",
+    "author": "Liu",
+    "year": "2020",
+    "journal-title": "Energy Storage Mater"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib84",
+    "doi-asserted-by": "crossref",
+    "first-page": "2599",
+    "DOI": "10.1016/j.joule.2019.10.013",
+    "article-title": "Battery safety: data-driven prediction of failure",
+    "volume": "3",
+    "author": "Finegan",
+    "year": "2019",
+    "journal-title": "Joule"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib85",
+    "doi-asserted-by": "crossref",
+    "first-page": "2703",
+    "DOI": "10.1016/j.joule.2019.07.026",
+    "article-title": "Data-driven safety envelope of lithium-ion batteries for electric vehicles",
+    "volume": "3",
+    "author": "Li",
+    "year": "2019",
+    "journal-title": "Joule"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib86",
+    "doi-asserted-by": "crossref",
+    "first-page": "44",
+    "DOI": "10.1016/j.est.2015.05.003",
+    "article-title": "Nonlinear aging characteristics of lithium-ion cells under different operational conditions",
+    "volume": "1",
+    "author": "Schuster",
+    "year": "2015",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib87",
+    "doi-asserted-by": "crossref",
+    "first-page": "A3595",
+    "DOI": "10.1149/2.0011816jes",
+    "article-title": "Use of asymmetric average charge- and average discharge-voltages as an indicator of the onset of unwanted lithium deposition in lithium-ion cells",
+    "volume": "165",
+    "author": "Harlow",
+    "year": "2018",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib88",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.est.2020.101514",
+    "article-title": "Online detection of early stage internal short circuits in series-connected lithium-ion battery packs based on state-of-charge correlation",
+    "volume": "30",
+    "author": "Lai",
+    "year": "2020",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib89",
+    "doi-asserted-by": "crossref",
+    "first-page": "212",
+    "DOI": "10.1016/j.est.2016.01.003",
+    "article-title": "Nonlinear aging of cylindrical lithium-ion cells linked to heterogeneous compression",
+    "volume": "5",
+    "author": "Bach",
+    "year": "2016",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib90",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.measurement.2019.107182",
+    "article-title": "Battery prognostics at different operating conditions",
+    "volume": "151",
+    "author": "Wang",
+    "year": "2020",
+    "journal-title": "Measurement"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib91",
+    "doi-asserted-by": "crossref",
+    "first-page": "113327",
+    "DOI": "10.1016/j.apenergy.2019.113327",
+    "article-title": "A novel capacity estimation method for lithium-ion batteries using fusion estimation of charging curve sections and discrete Arrhenius aging model",
+    "volume": "251",
+    "author": "Zheng",
+    "year": "2019",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib92",
+    "doi-asserted-by": "crossref",
+    "first-page": "743",
+    "DOI": "10.1016/j.joule.2020.02.010",
+    "article-title": "Mitigating thermal runaway of lithium-ion batteries",
+    "volume": "4",
+    "author": "Feng",
+    "year": "2020",
+    "journal-title": "Joule"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib93",
+    "doi-asserted-by": "crossref",
+    "first-page": "95",
+    "DOI": "10.1016/j.pecs.2019.03.002",
+    "article-title": "A review of lithium ion battery failure mechanisms and fire prevention strategies",
+    "volume": "73",
+    "author": "Wang",
+    "year": "2019",
+    "journal-title": "Prog Energy Combust Sci"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib94",
+    "doi-asserted-by": "crossref",
+    "first-page": "246",
+    "DOI": "10.1016/j.ensm.2017.05.013",
+    "article-title": "Thermal runaway mechanism of lithium ion battery for electric vehicles: a review",
+    "volume": "10",
+    "author": "Feng",
+    "year": "2018",
+    "journal-title": "Energy Storage Mater"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib95",
+    "first-page": "171",
+    "article-title": "Investigation of thermal runaway propagation characteristics of lithium-ion battery modules under different trigger modes",
+    "author": "Lai",
+    "year": "2021",
+    "journal-title": "Int J Heat Mass Tran"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib96",
+    "doi-asserted-by": "crossref",
+    "first-page": "373",
+    "DOI": "10.1016/j.jpowsour.2016.12.011",
+    "article-title": "Degradation diagnostics for lithium ion cells",
+    "volume": "341",
+    "author": "Birkl",
+    "year": "2017",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib97",
+    "doi-asserted-by": "crossref",
+    "first-page": "1264",
+    "DOI": "10.1016/j.jpowsour.2008.12.154",
+    "article-title": "Assessment and reuse of secondary batteries cells",
+    "volume": "189",
+    "author": "Schneider",
+    "year": "2009",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib98",
+    "doi-asserted-by": "crossref",
+    "first-page": "180",
+    "DOI": "10.1016/j.jpowsour.2017.06.007",
+    "article-title": "Recognition of battery aging variations for LiFePO4 batteries in 2nd use applications combining incremental capacity analysis and statistical approaches",
+    "volume": "360",
+    "author": "Jiang",
+    "year": "2017",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib99",
+    "doi-asserted-by": "crossref",
+    "first-page": "754",
+    "DOI": "10.1016/j.jclepro.2018.09.149",
+    "article-title": "State of health estimation of second-life LiFePO4 batteries for energy storage applications",
+    "volume": "205",
+    "author": "Jiang",
+    "year": "2018",
+    "journal-title": "J Clean Prod"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib100",
+    "doi-asserted-by": "crossref",
+    "first-page": "603",
+    "DOI": "10.1016/j.promfg.2017.02.077",
+    "article-title": "Quantifying uncertainties in reusing lithium-ion batteries from electric vehicles",
+    "volume": "8",
+    "author": "Rohr",
+    "year": "2017",
+    "journal-title": "Procedia Manuf"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib101",
+    "doi-asserted-by": "crossref",
+    "first-page": "776",
+    "DOI": "10.1016/j.jclepro.2018.12.210",
+    "article-title": "A rapid screening and regrouping approach based on neural networks for large-scale retired lithium-ion cells in second-use applications",
+    "volume": "213",
+    "author": "Lai",
+    "year": "2019",
+    "journal-title": "J Clean Prod"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib102",
+    "doi-asserted-by": "crossref",
+    "first-page": "2337",
+    "DOI": "10.1002/er.5083",
+    "article-title": "A fast classification method of retired electric vehicle battery modules and their energy storage application in photovoltaic generation",
+    "volume": "44",
+    "author": "Li",
+    "year": "2019",
+    "journal-title": "Int J Energy Res"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib103",
+    "doi-asserted-by": "crossref",
+    "first-page": "74",
+    "DOI": "10.1016/j.jpowsour.2015.01.097",
+    "article-title": "A study on the impact of lithium-ion cell relaxation on electrochemical impedance spectroscopy",
+    "volume": "280",
+    "author": "Barai",
+    "year": "2015",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib104",
+    "doi-asserted-by": "crossref",
+    "first-page": "185",
+    "DOI": "10.1016/j.jpowsour.2018.10.024",
+    "article-title": "Non-invasive investigation of predominant processes in the impedance spectra of high energy lithium-ion batteries with Nickel-Cobalt-Aluminum cathodes",
+    "volume": "406",
+    "author": "Sabet",
+    "year": "2018",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib105",
+    "doi-asserted-by": "crossref",
+    "first-page": "A2758",
+    "DOI": "10.1149/2.0711811jes",
+    "article-title": "Nonlinear electrochemical impedance spectroscopy of lithium-ion batteries: experimental approach, analysis, and initial findings",
+    "volume": "165",
+    "author": "Murbach",
+    "year": "2018",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib106",
+    "first-page": "338",
+    "article-title": "Investigation of magnesium-sulfur batteries using electrochemical impedance spectroscopy",
+    "author": "Hacker",
+    "year": "2020",
+    "journal-title": "Electrochim Acta"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib107",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.est.2019.101067",
+    "article-title": "EIS study on metal hydride electrodes using a porous model: fitting methodology and SOC effects",
+    "volume": "27",
+    "author": "Martinez",
+    "year": "2020",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib108",
+    "doi-asserted-by": "crossref",
+    "first-page": "191",
+    "DOI": "10.1016/j.jpowsour.2015.11.096",
+    "article-title": "Correlation between capacity and impedance of lithium-ion cells during calendar and cycle life",
+    "volume": "305",
+    "author": "Schuster",
+    "year": "2016",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib109",
+    "article-title": "Determination of the differential capacity of lithium-ion batteries by the deconvolution of electrochemical impedance spectra",
+    "volume": "13",
+    "author": "Guo",
+    "year": "2020",
+    "journal-title": "Energies"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib110",
+    "doi-asserted-by": "crossref",
+    "first-page": "A6401",
+    "DOI": "10.1149/2.0631701jes",
+    "article-title": "Investigation into state-of-health impedance diagnostic for 26650 4P1S battery packs",
+    "volume": "164",
+    "author": "Huhman",
+    "year": "2017",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib111",
+    "doi-asserted-by": "crossref",
+    "first-page": "390",
+    "DOI": "10.1016/j.apenergy.2016.08.118",
+    "article-title": "Novel state-of-health diagnostic method for Li-ion battery in service",
+    "volume": "183",
+    "author": "Mingant",
+    "year": "2016",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib112",
+    "doi-asserted-by": "crossref",
+    "first-page": "272",
+    "DOI": "10.1016/j.est.2018.11.029",
+    "article-title": "Investigation of the low frequency Warburg impedance of Li-ion cells by frequency domain measurements",
+    "volume": "21",
+    "author": "Oldenburger",
+    "year": "2019",
+    "journal-title": "J Energy Storage"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib113",
+    "doi-asserted-by": "crossref",
+    "first-page": "8449",
+    "DOI": "10.1109/TPEL.2017.2780184",
+    "article-title": "State of charge-dependent polynomial equivalent circuit modeling for electrochemical impedance spectroscopy of lithium-ion batteries",
+    "volume": "33",
+    "author": "Wang",
+    "year": "2018",
+    "journal-title": "Ieee T Power Electr"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib114",
+    "doi-asserted-by": "crossref",
+    "first-page": "168",
+    "DOI": "10.1016/j.jpowsour.2013.12.099",
+    "article-title": "A review of lithium deposition in lithium-ion and lithium metal secondary batteries",
+    "volume": "254",
+    "author": "Li",
+    "year": "2014",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib115",
+    "doi-asserted-by": "crossref",
+    "first-page": "107",
+    "DOI": "10.1016/j.jpowsour.2018.02.063",
+    "article-title": "Li plating as unwanted side reaction in commercial Li-ion cells - a review",
+    "volume": "384",
+    "author": "Waldmann",
+    "year": "2018",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib116",
+    "doi-asserted-by": "crossref",
+    "first-page": "309",
+    "DOI": "10.1016/j.jpowsour.2015.03.178",
+    "article-title": "Low temperature aging mechanism identification and lithium deposition in a large format lithium iron phosphate battery for different charge profiles",
+    "volume": "286",
+    "author": "Ouyang",
+    "year": "2015",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib117",
+    "doi-asserted-by": "crossref",
+    "first-page": "305",
+    "DOI": "10.1016/j.jpowsour.2013.12.022",
+    "article-title": "Low-temperature charging of lithium-ion cells part I: electrochemical modeling and experimental investigation of degradation behavior",
+    "volume": "252",
+    "author": "Tippmann",
+    "year": "2014",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib118",
+    "doi-asserted-by": "crossref",
+    "first-page": "A1050",
+    "DOI": "10.1149/2.0461706jes",
+    "article-title": "Investigating lithium plating in lithium-ion batteries at low temperatures using electrochemical model with NMR assisted parameterization",
+    "volume": "164",
+    "author": "Ge",
+    "year": "2017",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib119",
+    "doi-asserted-by": "crossref",
+    "first-page": "28",
+    "DOI": "10.1016/j.jpowsour.2017.05.110",
+    "article-title": "Modeling of lithium plating induced aging of lithium-ion batteries: transition from linear to nonlinear aging",
+    "volume": "360",
+    "author": "Yang",
+    "year": "2017",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib120",
+    "doi-asserted-by": "crossref",
+    "first-page": "1240",
+    "DOI": "10.1016/j.apenergy.2017.03.111",
+    "article-title": "Non-destructive fast charging algorithm of lithium-ion batteries based on the control-oriented electrochemical model",
+    "volume": "204",
+    "author": "Chu",
+    "year": "2017",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib121",
+    "doi-asserted-by": "crossref",
+    "first-page": "A1232",
+    "DOI": "10.1149/2.0591607jes",
+    "article-title": "Interplay of operational parameters on lithium deposition in lithium-ion cells: systematic measurements with reconstructed 3-electrode pouch full cells",
+    "volume": "163",
+    "author": "Waldmann",
+    "year": "2016",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib122",
+    "doi-asserted-by": "crossref",
+    "first-page": "231",
+    "DOI": "10.1016/j.mattod.2017.11.001",
+    "article-title": "Quantitative and time-resolved detection of lithium plating on graphite anodes in lithium ion batteries",
+    "volume": "21",
+    "author": "Wandt",
+    "year": "2018",
+    "journal-title": "Mater Today"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib123",
+    "doi-asserted-by": "crossref",
+    "first-page": "297",
+    "DOI": "10.1016/j.jpowsour.2014.03.142",
+    "article-title": "A new method for detecting lithium plating by measuring the cell thickness",
+    "volume": "262",
+    "author": "Bitzer",
+    "year": "2014",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib124",
+    "doi-asserted-by": "crossref",
+    "first-page": "A2646",
+    "DOI": "10.1149/2.0451514jes",
+    "article-title": "Lithium plating on graphite negative electrodes: innovative qualitative and quantitative investigation methods",
+    "volume": "162",
+    "author": "Birkenmaier",
+    "year": "2015",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib125",
+    "doi-asserted-by": "crossref",
+    "first-page": "A379",
+    "DOI": "10.1149/1.3544439",
+    "article-title": "Effects of electrolyte composition on lithium plating in lithium-ion cells",
+    "volume": "158",
+    "author": "Smart",
+    "year": "2011",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib126",
+    "doi-asserted-by": "crossref",
+    "first-page": "428",
+    "DOI": "10.1016/j.jpowsour.2015.01.046",
+    "article-title": "In situ detection of lithium metal plating on graphite in experimental cells",
+    "volume": "279",
+    "author": "Uhlmann",
+    "year": "2015",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib127",
+    "doi-asserted-by": "crossref",
+    "first-page": "A2167",
+    "DOI": "10.1149/2.0661810jes",
+    "article-title": "Investigation of lithium plating-stripping process in Li-ion batteries at low temperature using an electrochemical model",
+    "volume": "165",
+    "author": "Ren",
+    "year": "2018",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib128",
+    "doi-asserted-by": "crossref",
+    "first-page": "37",
+    "DOI": "10.1149/07523.0037ecst",
+    "article-title": "Lithium plating detection and quantification in Li-ion cells from degradation behaviors",
+    "volume": "75",
+    "author": "Zhang",
+    "year": "2017",
+    "journal-title": "Ecs Transactions"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib129",
+    "doi-asserted-by": "crossref",
+    "first-page": "A959",
+    "DOI": "10.1149/2.0621506jes",
+    "article-title": "In-situ detection of lithium plating using high precision coulometry",
+    "volume": "162",
+    "author": "Burns",
+    "year": "2015",
+    "journal-title": "J Electrochem Soc"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib130",
+    "doi-asserted-by": "crossref",
+    "first-page": "36",
+    "DOI": "10.1016/j.jpowsour.2017.04.072",
+    "article-title": "Operando lithium plating quantification and early detection of a commercial LiFePO4 cell cycled under dynamic driving schedule",
+    "volume": "356",
+    "author": "Ansean",
+    "year": "2017",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib131",
+    "series-title": "Thermal runaway of lithium-ion power battery during the whole life cycle: mechanism, modeling and safety management",
+    "author": "Dongsheng",
+    "year": "2019"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib132",
+    "first-page": "205",
+    "article-title": "Data-driven state of charge estimation for lithium-ion battery packs based on Gaussian process regression",
+    "author": "Deng",
+    "year": "2020",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib133",
+    "first-page": "1",
+    "article-title": "General discharge voltage information enabled health evaluation for lithium-ion batteries",
+    "author": "Deng",
+    "year": "2020",
+    "journal-title": "IEEE/ASME Transactions on Mechatronics."
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib134",
+    "doi-asserted-by": "crossref",
+    "first-page": "10319",
+    "DOI": "10.1109/TVT.2018.2865664",
+    "article-title": "Co-estimation of state of charge and state of health for lithium-ion batteries based on fractional-order calculus",
+    "volume": "67",
+    "author": "Hu",
+    "year": "2018",
+    "journal-title": "Ieee T Veh Technol"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib135",
+    "doi-asserted-by": "crossref",
+    "first-page": "277",
+    "DOI": "10.1016/j.jpowsour.2004.02.033",
+    "article-title": "Extended Kalman filtering for battery management systems of LiPB-based HEV battery packs",
+    "volume": "134",
+    "author": "Plett",
+    "year": "2004",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib136",
+    "doi-asserted-by": "crossref",
+    "first-page": "793",
+    "DOI": "10.1016/j.jpowsour.2014.09.146",
+    "article-title": "Combined State of Charge and State of Health estimation over lithium-ion battery cell cycle lifespan for electric vehicles",
+    "volume": "273",
+    "author": "Zou",
+    "year": "2015",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib137",
+    "doi-asserted-by": "crossref",
+    "first-page": "36",
+    "DOI": "10.1016/j.jpowsour.2013.02.012",
+    "article-title": "On-board state of health monitoring of lithium-ion batteries using incremental capacity analysis with support vector regression",
+    "volume": "235",
+    "author": "Weng",
+    "year": "2013",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib138",
+    "doi-asserted-by": "crossref",
+    "first-page": "424",
+    "DOI": "10.1016/j.jpowsour.2015.12.026",
+    "article-title": "Internal configuration of prismatic lithium-ion cells at the onset of mechanically induced short circuit",
+    "volume": "306",
+    "author": "Wang",
+    "year": "2016",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib139",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Torai S NM, Yoshitake S, et al. State-of-health estimation of LiFePO4/graphite batteries based on a model using differential capacity. J Power Sources.306:62-69.",
+    "DOI": "10.1016/j.jpowsour.2015.11.070"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib140",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Berecibar M, Garmendia M, Gandiaga Ii, Crego J, Villarreal I. State of health estimation algorithm of LiFePO4 battery packs based on differential voltage curves for battery management system application. Energy.103:784-796.",
+    "DOI": "10.1016/j.energy.2016.02.163"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib141",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Goh T, Park M, Seo M, Kim JG, Kim SW. Capacity estimation algorithm with a second-order differential voltage curve for Li-ion batteries with NMC cathodes. Energy.135:257-268.",
+    "DOI": "10.1016/j.energy.2017.06.141"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib142",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.nanoen.2019.103895",
+    "article-title": "In-situ visualization of lithium plating in all-solid-state lithium-metal battery",
+    "volume": "63",
+    "author": "Li",
+    "year": "2019",
+    "journal-title": "Nano Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib143",
+    "doi-asserted-by": "crossref",
+    "first-page": "218",
+    "DOI": "10.1016/j.jpowsour.2014.02.020",
+    "article-title": "Determination of lithium-ion battery state-of-health based on constant-voltage charge phase",
+    "volume": "258",
+    "author": "Eddahech",
+    "year": "2014",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib144",
+    "doi-asserted-by": "crossref",
+    "first-page": "661",
+    "DOI": "10.1016/j.energy.2018.11.008",
+    "article-title": "State of health estimation of lithium-ion batteries based on the constant voltage charging curve",
+    "volume": "167",
+    "author": "Wang",
+    "year": "2019",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib145",
+    "doi-asserted-by": "crossref",
+    "first-page": "1589",
+    "DOI": "10.1016/j.apenergy.2018.01.010",
+    "article-title": "Online state-of-health estimation for lithium-ion batteries using constant-voltage charging current analysis",
+    "volume": "212",
+    "author": "Yang",
+    "year": "2018",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib146",
+    "doi-asserted-by": "crossref",
+    "first-page": "2319",
+    "DOI": "10.1016/j.jpowsour.2010.09.048",
+    "article-title": "Recursive approximate weighted total least squares estimation of battery cell total capacity",
+    "volume": "196",
+    "author": "Plett",
+    "year": "2011",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib147",
+    "doi-asserted-by": "crossref",
+    "first-page": "412",
+    "DOI": "10.1016/j.jpowsour.2013.12.083",
+    "article-title": "Development of a voltage relaxation model for rapid open-circuit voltage prediction in lithium-ion batteries",
+    "volume": "253",
+    "author": "Pei",
+    "year": "2014",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib148",
+    "series-title": "On-line parameter, state-of-charge and aging estimation of Li-ion batteries. Vehicle Power and Propulsion Conference",
+    "first-page": "1122",
+    "author": "Rosca",
+    "year": "2012"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib149",
+    "doi-asserted-by": "crossref",
+    "first-page": "3531",
+    "DOI": "10.1016/j.energy.2011.03.059",
+    "article-title": "Adaptive unscented Kalman filtering for state of charge estimation of a lithium-ion battery for electric vehicles",
+    "volume": "36",
+    "author": "Sun",
+    "year": "2014",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib150",
+    "doi-asserted-by": "crossref",
+    "first-page": "951",
+    "DOI": "10.1016/j.engappai.2012.09.013",
+    "article-title": "Comparative study of a structured neural network and an extended Kalman filter for state of health determination of lithium-ion batteries in hybrid electricvehicles",
+    "volume": "26",
+    "author": "Andre",
+    "year": "2013",
+    "journal-title": "Eng Appl Artif Intell"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib151",
+    "doi-asserted-by": "crossref",
+    "first-page": "1225",
+    "DOI": "10.1109/TTE.2019.2944802",
+    "article-title": "Modified Gaussian process regression models for cyclic capacity prediction of lithium-ion batteries",
+    "volume": "5",
+    "author": "Liu",
+    "year": "2019",
+    "journal-title": "Ieee T Transp Electr"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib152",
+    "first-page": "216",
+    "article-title": "Capacity estimation of lithium-ion cells by combining model-based and data-driven methods based on a sequential extended Kalman filter",
+    "author": "Lai",
+    "year": "2021",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib153",
+    "doi-asserted-by": "crossref",
+    "first-page": "238",
+    "DOI": "10.1016/S0378-7753(01)00783-2",
+    "article-title": "An accelerated calendar and cycle life study of Li-ion cells",
+    "volume": "101",
+    "author": "Bloom",
+    "year": "2001",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib154",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1002/aic.14760",
+    "article-title": "State of health estimation of lithium\u2010ion batteries: a multiscale Gaussian process regression modeling approach",
+    "volume": "61",
+    "author": "He",
+    "year": "2015",
+    "journal-title": "AIChE J"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib155",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Miao Q, Xie L, Cui H, Liang W, Pecht M. Remaining useful life prediction of lithium-ion battery with unscented particle filter technique. Microelectron Reliab.53:805-810.",
+    "DOI": "10.1016/j.microrel.2012.12.004"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib156",
+    "first-page": "216",
+    "article-title": "Capacity estimation of lithium-ion cells by combining model-based and data-driven methods based on a sequential extended Kalman filter",
+    "author": "Lai",
+    "year": "2021",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib157",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1016/j.apenergy.2019.113327",
+    "article-title": "A novel capacity estimation method for lithium-ion batteries using fusion estimation of charging curve sections and discrete Arrhenius aging model",
+    "volume": "251",
+    "author": "Zheng",
+    "year": "2019",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib158",
+    "doi-asserted-by": "crossref",
+    "first-page": "877",
+    "DOI": "10.1016/j.energy.2019.116806",
+    "article-title": "Orderly charging strategy of battery electric vehicle driven by real-world driving data",
+    "volume": "193",
+    "author": "Tao",
+    "year": "2020",
+    "journal-title": "Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib159",
+    "first-page": "251",
+    "article-title": "State of charge-dependent failure prediction model for cylindrical lithium-ion batteries under mechanical abuse",
+    "author": "Wang",
+    "year": "2019",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "issue": "2",
+    "key": "10.1016/j.rser.2021.111162_bib160",
+    "doi-asserted-by": "crossref",
+    "first-page": "517",
+    "DOI": "10.1016/j.cstp.2019.11.005",
+    "article-title": "A case study to predict the capacity fade of the battery of electrified vehicles in real-world use conditions",
+    "volume": "8",
+    "author": "De Gennaro",
+    "year": "2019",
+    "journal-title": "Case Studies on Transport Policy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib161",
+    "doi-asserted-by": "crossref",
+    "first-page": "354",
+    "DOI": "10.1016/j.apenergy.2017.05.139",
+    "article-title": "Fault and defect diagnosis of battery for electric vehicles based on big data analysis methods",
+    "volume": "207",
+    "author": "Zhao",
+    "year": "2017",
+    "journal-title": "Appl Energy"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib162",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.3390/en10070919",
+    "article-title": "Big-data-based thermal runaway prognosis of battery systems for electric vehicles",
+    "volume": "10",
+    "author": "Hong",
+    "year": "2017",
+    "journal-title": "Energies"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib163",
+    "first-page": "468",
+    "article-title": "Battery life estimation based on cloud data for electric vehicles",
+    "author": "Li",
+    "year": "2020",
+    "journal-title": "J Power Sources"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib164",
+    "doi-asserted-by": "crossref",
+    "first-page": "200",
+    "DOI": "10.1016/j.eswa.2012.07.021",
+    "article-title": "A comparative study of efficient initialization methods for the k-means clustering algorithm",
+    "volume": "40",
+    "author": "Celebi",
+    "year": "2013",
+    "journal-title": "Expert Syst Appl"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib165",
+    "doi-asserted-by": "crossref",
+    "first-page": "1246",
+    "DOI": "10.1109/TVT.2021.3055068",
+    "article-title": "Rapid sorting and regrouping of retired lithium-ion battery modules for echelon utilization based on partial charging curves",
+    "volume": "70",
+    "author": "Lai",
+    "year": "2021",
+    "journal-title": "Ieee T Veh Technol"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib166",
+    "doi-asserted-by": "crossref",
+    "first-page": "27",
+    "DOI": "10.1007/s00357-019-09353-1",
+    "article-title": "Modified subspace constrained mean shift algorithm",
+    "volume": "38",
+    "author": "Ghassabeh",
+    "year": "2020",
+    "journal-title": "J Classif"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib167",
+    "doi-asserted-by": "crossref",
+    "first-page": "3937",
+    "DOI": "10.1007/s12652-020-01741-5",
+    "article-title": "Kernalized average entropy and density based spatial clustering with noise",
+    "volume": "12",
+    "author": "Ramalakshmi",
+    "year": "2020",
+    "journal-title": "J Amb Intel Hum Comp"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib168",
+    "doi-asserted-by": "crossref",
+    "first-page": "95",
+    "DOI": "10.1093/comjnl/bxx043",
+    "article-title": "A resource efficient expectation maximization clustering approach for cloud",
+    "volume": "61",
+    "author": "Chaurasia",
+    "year": "2018",
+    "journal-title": "Comput J"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib169",
+    "first-page": "1881",
+    "article-title": "Model order reduction based on agglomerative hierarchical clustering",
+    "volume": "30",
+    "author": "Al-Dabooni",
+    "year": "2019",
+    "journal-title": "Ieee T Neur Net Lear"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib170",
+    "doi-asserted-by": "crossref",
+    "first-page": "2087",
+    "DOI": "10.1016/j.scitotenv.2018.10.064",
+    "article-title": "An ensemble prediction of flood susceptibility using multivariate discriminant analysis, classification and regression trees, and support vector machines",
+    "volume": "651",
+    "author": "Choubin",
+    "year": "2019",
+    "journal-title": "Sci Total Environ"
+   },
+   {
+    "key": "10.1016/j.rser.2021.111162_bib171",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1088/1748-9326/9/9/094004",
+    "article-title": "Driving rural energy access: a second-life application for electric-vehicle batteries",
+    "volume": "9",
+    "author": "Ambrose",
+    "year": "2014",
+    "journal-title": "Environ Res Lett"
+   }
+  ],
+  "container-title": [
+   "Renewable and Sustainable Energy Reviews"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S1364032121004512?httpAccept=text/xml",
+    "content-type": "text/xml",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://api.elsevier.com/content/article/PII:S1364032121004512?httpAccept=text/plain",
+    "content-type": "text/plain",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2025,
+     10,
+     23
+    ]
+   ],
+   "date-time": "2025-10-23T20:59:41Z",
+   "timestamp": 1761253181000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://linkinghub.elsevier.com/retrieve/pii/S1364032121004512"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2021,
+     8
+    ]
+   ]
+  },
+  "references-count": 171,
+  "alternative-id": [
+   "S1364032121004512"
+  ],
+  "URL": "https://doi.org/10.1016/j.rser.2021.111162",
+  "relation": {},
+  "ISSN": [
+   "1364-0321"
+  ],
+  "issn-type": [
+   {
+    "value": "1364-0321",
+    "type": "print"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2021,
+     8
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "Elsevier",
+    "name": "publisher",
+    "label": "This article is maintained by"
+   },
+   {
+    "value": "Sorting, regrouping, and echelon utilization of the large-scale retired lithium batteries: A critical review",
+    "name": "articletitle",
+    "label": "Article Title"
+   },
+   {
+    "value": "Renewable and Sustainable Energy Reviews",
+    "name": "journaltitle",
+    "label": "Journal Title"
+   },
+   {
+    "value": "https://doi.org/10.1016/j.rser.2021.111162",
+    "name": "articlelink",
+    "label": "CrossRef DOI link to publisher maintained version"
+   },
+   {
+    "value": "article",
+    "name": "content_type",
+    "label": "Content Type"
+   },
+   {
+    "value": "\u00a9 2021 Elsevier Ltd. All rights reserved.",
+    "name": "copyright",
+    "label": "Copyright"
+   }
+  ],
+  "article-number": "111162"
+ }
+}

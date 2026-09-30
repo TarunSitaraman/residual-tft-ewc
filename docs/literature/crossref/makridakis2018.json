@@ -1,0 +1,1021 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     9,
+     30
+    ]
+   ],
+   "date-time": "2026-09-30T10:51:59Z",
+   "timestamp": 1790765519579,
+   "version": "4.1.0"
+  },
+  "reference-count": 81,
+  "publisher": "Public Library of Science (PLoS)",
+  "issue": "3",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2018,
+       3,
+       27
+      ]
+     ],
+     "date-time": "2018-03-27T00:00:00Z",
+     "timestamp": 1522108800000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "http://creativecommons.org/licenses/by/4.0/"
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "www.plosone.org"
+   ],
+   "crossmark-restriction": false
+  },
+  "short-container-title": [
+   "PLoS ONE"
+  ],
+  "DOI": "10.1371/journal.pone.0194889",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2018,
+     3,
+     27
+    ]
+   ],
+   "date-time": "2018-03-27T13:52:56Z",
+   "timestamp": 1522158776000
+  },
+  "page": "e0194889",
+  "update-policy": "https://doi.org/10.1371/journal.pone.corrections_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 1287,
+  "title": [
+   "Statistical and Machine Learning forecasting methods: Concerns and ways forward"
+  ],
+  "prefix": "10.1371",
+  "volume": "13",
+  "author": [
+   {
+    "given": "Spyros",
+    "family": "Makridakis",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-1854-1206",
+    "authenticated-orcid": true,
+    "given": "Evangelos",
+    "family": "Spiliotis",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Vassilios",
+    "family": "Assimakopoulos",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "340",
+  "published-online": {
+   "date-parts": [
+    [
+     2018,
+     3,
+     27
+    ]
+   ]
+  },
+  "reference": [
+   {
+    "key": "ref1",
+    "doi-asserted-by": "crossref",
+    "first-page": "46",
+    "DOI": "10.1016/j.futures.2017.03.006",
+    "article-title": "The forthcoming Artificial Intelligence (AI) revolution: Its impact on society and firms",
+    "volume": "90",
+    "author": "S Makridakis",
+    "year": "2017",
+    "journal-title": "Futures"
+   },
+   {
+    "issue": "1",
+    "key": "ref2",
+    "doi-asserted-by": "crossref",
+    "first-page": "35",
+    "DOI": "10.1016/S0169-2070(97)00044-7",
+    "article-title": "Forecasting with artificial neural networks:: The state of the art",
+    "volume": "14",
+    "author": "G Zhang",
+    "year": "1998",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "2, Part 2",
+    "key": "ref3",
+    "doi-asserted-by": "crossref",
+    "first-page": "3839",
+    "DOI": "10.1016/j.eswa.2008.02.042",
+    "article-title": "Comparison of direct and iterative artificial neural network forecast approaches in multi-periodic time series forecasting",
+    "volume": "36",
+    "author": "C Hamza\u00e7ebi",
+    "year": "2009",
+    "journal-title": "Expert Systems with Applications"
+   },
+   {
+    "key": "ref4",
+    "article-title": "A tutorial survey of architectures, algorithms, and applications for deep learning\u2014ERRATUM",
+    "volume": "3",
+    "author": "L Deng",
+    "year": "2014",
+    "journal-title": "APSIPA Transactions on Signal and Information Processing"
+   },
+   {
+    "issue": "Supplement C",
+    "key": "ref5",
+    "doi-asserted-by": "crossref",
+    "first-page": "146",
+    "DOI": "10.1016/j.ins.2016.01.039",
+    "article-title": "A survey of randomized algorithms for training neural networks",
+    "volume": "364\u2013365",
+    "author": "L Zhang",
+    "year": "2016",
+    "journal-title": "Information Sciences"
+   },
+   {
+    "key": "ref6",
+    "doi-asserted-by": "crossref",
+    "first-page": "516",
+    "DOI": "10.1016/j.neucom.2017.06.037",
+    "article-title": "Extreme learning machine based transfer learning algorithms: A survey",
+    "volume": "267",
+    "author": "SM Salaken",
+    "year": "2017",
+    "journal-title": "Neurocomputing"
+   },
+   {
+    "issue": "Supplement C",
+    "key": "ref7",
+    "doi-asserted-by": "crossref",
+    "first-page": "889",
+    "DOI": "10.1016/j.apenergy.2017.09.060",
+    "article-title": "Machine learning approaches for estimating commercial building energy consumption",
+    "volume": "208",
+    "author": "C Robinson",
+    "year": "2017",
+    "journal-title": "Applied Energy"
+   },
+   {
+    "issue": "Supplement C",
+    "key": "ref8",
+    "doi-asserted-by": "crossref",
+    "first-page": "569",
+    "DOI": "10.1016/j.renene.2016.12.095",
+    "article-title": "Machine learning methods for solar radiation forecasting: A review",
+    "volume": "105",
+    "author": "C Voyant",
+    "year": "2017",
+    "journal-title": "Renewable Energy"
+   },
+   {
+    "issue": "56",
+    "key": "ref9",
+    "doi-asserted-by": "crossref",
+    "first-page": "481",
+    "DOI": "10.1002/(SICI)1099-131X(1998090)17:5/6<481::AID-FOR709>3.0.CO;2-Q",
+    "article-title": "How effective are neural networks at forecasting and prediction? A review and evaluation",
+    "volume": "17",
+    "author": "M Adya",
+    "year": "1998",
+    "journal-title": "Journal of Forecasting"
+   },
+   {
+    "issue": "1",
+    "key": "ref10",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1016/0169-2070(93)90043-M",
+    "article-title": "Neural networks: Forecasting breakthrough or passing fad?",
+    "volume": "9",
+    "author": "C Chatfield",
+    "year": "1993",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "1",
+    "key": "ref11",
+    "doi-asserted-by": "crossref",
+    "first-page": "317",
+    "DOI": "10.1007/BF01577272",
+    "article-title": "Connectionist approach to time series prediction: An empirical test",
+    "volume": "3",
+    "author": "R Sharda",
+    "year": "1992",
+    "journal-title": "Journal of Intelligent Manufacturing"
+   },
+   {
+    "issue": "3",
+    "key": "ref12",
+    "doi-asserted-by": "crossref",
+    "first-page": "635",
+    "DOI": "10.1016/j.ijforecast.2011.04.001",
+    "article-title": "Advances in forecasting with neural networks? Empirical evidence from the NN3 competition on time series prediction",
+    "volume": "27",
+    "author": "SF Crone",
+    "year": "2011",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "4",
+    "key": "ref13",
+    "doi-asserted-by": "crossref",
+    "first-page": "349",
+    "DOI": "10.1023/A:1024988512476",
+    "article-title": "On the Need for Time Series Data Mining Benchmarks: A Survey and Empirical Demonstration",
+    "volume": "7",
+    "author": "E Keogh",
+    "year": "2003",
+    "journal-title": "Data Mining and Knowledge Discovery"
+   },
+   {
+    "key": "ref14",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1109/TSMCC.2006.876059",
+    "article-title": "Avoiding Pitfalls in Neural Network Research",
+    "volume": "37",
+    "author": "GP Zhang",
+    "year": "2007",
+    "journal-title": "IEEE Transactions on Systems, Man, and Cybernetics, Part C (Applications and Reviews)"
+   },
+   {
+    "issue": "5\u20136",
+    "key": "ref15",
+    "doi-asserted-by": "crossref",
+    "first-page": "594",
+    "DOI": "10.1080/07474938.2010.481556",
+    "article-title": "An Empirical Comparison of Machine Learning Models for Time Series Forecasting",
+    "volume": "29",
+    "author": "NK Ahmed",
+    "year": "2010",
+    "journal-title": "Econometric Reviews"
+   },
+   {
+    "issue": "4",
+    "key": "ref16",
+    "doi-asserted-by": "crossref",
+    "first-page": "451",
+    "DOI": "10.1016/S0169-2070(00)00057-1",
+    "article-title": "The M3-Competition: results, conclusions and implications",
+    "volume": "16",
+    "author": "S Makridakis",
+    "year": "2000",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "ref17",
+    "article-title": "Deep Learning",
+    "author": "I Goodfellow",
+    "year": "2016"
+   },
+   {
+    "key": "ref18",
+    "doi-asserted-by": "crossref",
+    "first-page": "8",
+    "DOI": "10.1016/j.neunet.2017.03.004",
+    "article-title": "Forecasting stochastic neural network based on financial empirical mode decomposition",
+    "volume": "90",
+    "author": "J Wang",
+    "year": "2017",
+    "journal-title": "Neural Networks"
+   },
+   {
+    "issue": "3",
+    "key": "ref19",
+    "doi-asserted-by": "crossref",
+    "first-page": "57",
+    "DOI": "10.19030/rbis.v13i3.4324",
+    "article-title": "Neural Networks In Business Time Series Forecasting: Benefits And Problems",
+    "volume": "13",
+    "author": "L Zhao",
+    "year": "2009",
+    "journal-title": "Review of Business Information Systems (RBIS)"
+   },
+   {
+    "issue": "4",
+    "key": "ref20",
+    "doi-asserted-by": "crossref",
+    "first-page": "521",
+    "DOI": "10.1016/S0169-2070(00)00066-2",
+    "article-title": "The theta model: a decomposition approach to forecasting",
+    "volume": "16",
+    "author": "V Assimakopoulos",
+    "year": "2000",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "ref21",
+    "unstructured": "Ilies I, Jaeger H, Kosuchinas O, Rincon M, Vak\u00c4?nas V, Vaskevicius N. Stepping forward through echoes of the past: Forecasting with Echo State Networks, Technical Report: Jacobs University Bremen; 2007."
+   },
+   {
+    "issue": "4",
+    "key": "ref22",
+    "doi-asserted-by": "crossref",
+    "first-page": "637",
+    "DOI": "10.1016/j.ijforecast.2006.03.005",
+    "article-title": "Exponential smoothing: The state of the art-Part II",
+    "volume": "22",
+    "author": "ES Gardner",
+    "year": "2006",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "4",
+    "key": "ref23",
+    "first-page": "37",
+    "article-title": "Financial Forecasting with Neural Networks",
+    "volume": "18",
+    "author": "SA Hamid",
+    "year": "2014",
+    "journal-title": "Academy of Accounting and Financial Studies Journal"
+   },
+   {
+    "issue": "5",
+    "key": "ref24",
+    "first-page": "1",
+    "article-title": "Predicting the Direction of Stock Market Index Movement Using an Optimized Artificial Neural Network Model",
+    "volume": "11",
+    "author": "M Qiu",
+    "year": "2016",
+    "journal-title": "PLOS ONE"
+   },
+   {
+    "issue": "8\u201310",
+    "key": "ref25",
+    "doi-asserted-by": "crossref",
+    "first-page": "1753",
+    "DOI": "10.1080/07474938.2015.1035163",
+    "article-title": "Forecasting Macroeconomic Variables Using Neural Network Models and Three Automated Model Selection Techniques",
+    "volume": "35",
+    "author": "AB Kock",
+    "year": "2016",
+    "journal-title": "Econometric Reviews"
+   },
+   {
+    "issue": "1",
+    "key": "ref26",
+    "first-page": "187",
+    "article-title": "Neural Networks Versus Box-Jenkins Method for Turnover Forecasting: a Case Study on the Romanian Organisation",
+    "volume": "16",
+    "author": "MR Gabor",
+    "year": "2017",
+    "journal-title": "Transformations in Business and Economics"
+   },
+   {
+    "key": "ref27",
+    "article-title": "The Top 10 AI And Machine Learning Use Cases Everyone Should Know About",
+    "author": "B Marr",
+    "year": "2016"
+   },
+   {
+    "issue": "2",
+    "key": "ref28",
+    "doi-asserted-by": "crossref",
+    "first-page": "501",
+    "DOI": "10.1016/j.ejor.2003.08.037",
+    "article-title": "Neural network forecasting for seasonal and trend time series",
+    "volume": "160",
+    "author": "GP Zhang",
+    "year": "2005",
+    "journal-title": "European Journal of Operational Research"
+   },
+   {
+    "key": "ref29",
+    "article-title": "Machine Learning: Introduction to Machine Learning",
+    "author": "E Alpaydin",
+    "year": "2004"
+   },
+   {
+    "key": "ref30",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.1007/978-0-387-84858-7",
+    "article-title": "The elements of statistical learning: Data mining, Inference, and Prediction",
+    "author": "T Hastie",
+    "year": "2009"
+   },
+   {
+    "issue": "4",
+    "key": "ref31",
+    "doi-asserted-by": "crossref",
+    "first-page": "679",
+    "DOI": "10.1016/j.ijforecast.2006.03.001",
+    "article-title": "Another look at measures of forecast accuracy",
+    "volume": "22",
+    "author": "RJ Hyndman",
+    "year": "2006",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "4",
+    "key": "ref32",
+    "doi-asserted-by": "crossref",
+    "first-page": "405",
+    "DOI": "10.1016/S0169-2070(99)00007-2",
+    "article-title": "On the asymmetry of the symmetric MAPE",
+    "volume": "15",
+    "author": "P Goodwin",
+    "year": "1999",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "10",
+    "key": "ref33",
+    "doi-asserted-by": "crossref",
+    "first-page": "993",
+    "DOI": "10.1109/34.58871",
+    "article-title": "Neural Network Ensembles",
+    "volume": "12",
+    "author": "LK Hansen",
+    "year": "1990",
+    "journal-title": "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+   },
+   {
+    "issue": "1",
+    "key": "ref34",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1002/for.3980040103",
+    "article-title": "Exponential smoothing: the state of the art",
+    "volume": "4",
+    "author": "ES Gardner",
+    "year": "1985",
+    "journal-title": "Journal of Forecasting"
+   },
+   {
+    "issue": "3",
+    "key": "ref35",
+    "doi-asserted-by": "crossref",
+    "first-page": "672",
+    "DOI": "10.1016/j.ijforecast.2010.09.005",
+    "article-title": "Forecast combinations of computational intelligence and linear models for the NN5 time series forecasting competition",
+    "volume": "27",
+    "author": "RR Andrawis",
+    "year": "2011",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "3",
+    "key": "ref36",
+    "first-page": "1",
+    "article-title": "Automatic time series forecasting: the forecast package for R",
+    "volume": "26",
+    "author": "R Hyndman",
+    "year": "2008",
+    "journal-title": "Journal of Statistical Software"
+   },
+   {
+    "issue": "3",
+    "key": "ref37",
+    "doi-asserted-by": "crossref",
+    "first-page": "439",
+    "DOI": "10.1016/S0169-2070(01)00110-8",
+    "article-title": "A state space framework for automatic forecasting using exponential smoothing methods",
+    "volume": "18",
+    "author": "RJ Hyndman",
+    "year": "2002",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "2",
+    "key": "ref38",
+    "doi-asserted-by": "crossref",
+    "first-page": "240",
+    "DOI": "10.1109/72.279188",
+    "article-title": "Recurrent neural networks and robust time series prediction",
+    "volume": "5",
+    "author": "JT Connor",
+    "year": "1994",
+    "journal-title": "IEEE transactions on neural networks"
+   },
+   {
+    "key": "ref39",
+    "article-title": "Forecasting: Methods and applications",
+    "author": "SG Makridakis",
+    "year": "1998"
+   },
+   {
+    "key": "ref40",
+    "article-title": "Recurrent Neural Networks: Design and Applications",
+    "author": "LC Jain",
+    "year": "1999"
+   },
+   {
+    "issue": "8",
+    "key": "ref41",
+    "doi-asserted-by": "crossref",
+    "first-page": "1735",
+    "DOI": "10.1162/neco.1997.9.8.1735",
+    "article-title": "Long Short-Term Memory",
+    "volume": "9",
+    "author": "S Hochreiter",
+    "year": "1997",
+    "journal-title": "Neural Computation"
+   },
+   {
+    "issue": "2",
+    "key": "ref42",
+    "doi-asserted-by": "crossref",
+    "first-page": "4",
+    "DOI": "10.1109/MASSP.1987.1165576",
+    "article-title": "An Introduction to Computing with Neural Nets",
+    "volume": "4",
+    "author": "RP Lippmann",
+    "year": "1987",
+    "journal-title": "IEEE ASSP Magazine"
+   },
+   {
+    "key": "ref43",
+    "doi-asserted-by": "crossref",
+    "first-page": "525",
+    "DOI": "10.1016/S0893-6080(05)80056-5",
+    "article-title": "A scaled conjugate gradient algorithm for fast supervised learning",
+    "volume": "6",
+    "author": "M M\u00f8ller",
+    "year": "1993",
+    "journal-title": "Neural networks"
+   },
+   {
+    "issue": "9",
+    "key": "ref44",
+    "doi-asserted-by": "crossref",
+    "first-page": "4235",
+    "DOI": "10.1016/j.eswa.2013.12.011",
+    "article-title": "Neural network ensemble operators for time series forecasting",
+    "volume": "41",
+    "author": "N Kourentzes",
+    "year": "2014",
+    "journal-title": "Expert Systems with Applications"
+   },
+   {
+    "issue": "7",
+    "key": "ref45",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.18637/jss.v046.i07",
+    "article-title": "Neural Networks in R Using the Stuttgart Neural Network Simulator: RSNNS",
+    "volume": "46",
+    "author": "C Bergmeir",
+    "year": "2012",
+    "journal-title": "Journal of Statistical Software"
+   },
+   {
+    "issue": "3",
+    "key": "ref46",
+    "doi-asserted-by": "crossref",
+    "first-page": "415",
+    "DOI": "10.1162/neco.1992.4.3.415",
+    "article-title": "Bayesian Interpolation",
+    "volume": "4",
+    "author": "DJC MacKay",
+    "year": "1992",
+    "journal-title": "Neural Computation"
+   },
+   {
+    "key": "ref47",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Dan Foresee F, Hagan MT. Gauss-Newton approximation to bayesian learning. In: IEEE International Conference on Neural Networks\u2014Conference Proceedings. vol. 3; 1997. p. 1930\u20131935.",
+    "DOI": "10.1109/ICNN.1997.614194"
+   },
+   {
+    "key": "ref48",
+    "first-page": "C21",
+    "article-title": "Improving the learning speed of 2-layer neural networks by choosing initial values of the adaptive weights",
+    "volume": "13",
+    "author": "D Nguyen",
+    "year": "1990",
+    "journal-title": "IJCNN Int Joint Conf Neural Networks"
+   },
+   {
+    "key": "ref49",
+    "article-title": "brnn: Bayesian Regularization for Feed-Forward Neural Networks",
+    "author": "PP Rodriguez",
+    "year": "2016"
+   },
+   {
+    "issue": "6",
+    "key": "ref50",
+    "doi-asserted-by": "crossref",
+    "first-page": "568",
+    "DOI": "10.1109/72.97934",
+    "article-title": "A general regression neural network",
+    "volume": "2",
+    "author": "DF Specht",
+    "year": "1991",
+    "journal-title": "IEEE Transactions on Neural Networks"
+   },
+   {
+    "key": "ref51",
+    "article-title": "GRNN: General regression neural network for the statistical software R",
+    "author": "P -O Chasset",
+    "year": "2013"
+   },
+   {
+    "key": "ref52",
+    "author": "WN Venables",
+    "year": "2002",
+    "unstructured": "<name name-style=\"western\"><surname>Venables</surname> <given-names>WN</given-names></name>, <name name-style=\"western\"><surname>Ripley</surname> <given-names>BD</given-names></name>. <chapter-title>Modern Applied Statistics with S</chapter-title>. <edition>4th ed</edition>. <publisher-loc>New York</publisher-loc>: <publisher-name>Springer</publisher-name>; <year>2002</year>. Available from: <ext-link xmlns:xlink=\"http://www.w3.org/1999/xlink\" ext-link-type=\"uri\" xlink:href=\"http://www.stats.ox.ac.uk/pub/MASS4\" xlink:type=\"simple\">http://www.stats.ox.ac.uk/pub/MASS4</ext-link>."
+   },
+   {
+    "key": "ref53",
+    "article-title": "Classification and Regression Trees",
+    "author": "L Breiman",
+    "year": "1993"
+   },
+   {
+    "key": "ref54",
+    "article-title": "rpart: Recursive Partitioning and Regression Trees",
+    "author": "T Therneau",
+    "year": "2015"
+   },
+   {
+    "key": "ref55",
+    "doi-asserted-by": "crossref",
+    "DOI": "10.7551/mitpress/4175.001.0001",
+    "article-title": "Learning with kernel: Support Vector Machines, Regularization, Optimization and Beyond",
+    "author": "B Sch\u00f6lkopf",
+    "year": "2001"
+   },
+   {
+    "key": "ref56",
+    "article-title": "e1071: Misc Functions of the Department of Statistics, Probability Theory Group",
+    "author": "D Meyer",
+    "year": "2017"
+   },
+   {
+    "key": "ref57",
+    "article-title": "Gaussian Processes for Machine Learning",
+    "author": "CE Rasmussen",
+    "year": "2006"
+   },
+   {
+    "issue": "9",
+    "key": "ref58",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.18637/jss.v011.i09",
+    "article-title": "kernlab\u2014An S4 Package for Kernel Methods in R",
+    "volume": "11",
+    "author": "A Karatzoglou",
+    "year": "2004",
+    "journal-title": "Journal of Statistical Software"
+   },
+   {
+    "issue": "2",
+    "key": "ref59",
+    "doi-asserted-by": "crossref",
+    "first-page": "179",
+    "DOI": "10.1207/s15516709cog1402_1",
+    "article-title": "Finding structure in time",
+    "volume": "14",
+    "author": "JL Elman",
+    "year": "1990",
+    "journal-title": "Cognitive Science"
+   },
+   {
+    "key": "ref60",
+    "article-title": "Keras",
+    "author": "F Chollet",
+    "year": "2015"
+   },
+   {
+    "key": "ref61",
+    "article-title": "TensorFlow: Large-Scale Machine Learning on Heterogeneous Systems",
+    "author": "M Abadi",
+    "year": "2015"
+   },
+   {
+    "issue": "1",
+    "key": "ref62",
+    "doi-asserted-by": "crossref",
+    "first-page": "1",
+    "DOI": "10.1016/0169-2070(94)90044-2",
+    "article-title": "Research prospective on neural network forecasting",
+    "volume": "10",
+    "author": "WL Gorr",
+    "year": "1994",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "key": "ref63",
+    "doi-asserted-by": "crossref",
+    "first-page": "649",
+    "DOI": "10.1109/HICSS.1994.323316",
+    "article-title": "Can neural networks applied to time series forecasting learn seasonal patterns: an empirical investigation",
+    "volume": "3",
+    "author": "M Nelson",
+    "year": "1994",
+    "journal-title": "System Sciences, 1994 Proceedings of the Twenty-Seventh Hawaii International Conference on"
+   },
+   {
+    "issue": "6",
+    "key": "ref64",
+    "doi-asserted-by": "crossref",
+    "first-page": "1355",
+    "DOI": "10.1109/72.471372",
+    "article-title": "Neural Modeling for Time Series: A Statistical Stepwise Method for Weight Elimination",
+    "volume": "6",
+    "author": "M Cottrell",
+    "year": "1995",
+    "journal-title": "IEEE Transactions on Neural Networks"
+   },
+   {
+    "issue": "2",
+    "key": "ref65",
+    "doi-asserted-by": "crossref",
+    "first-page": "139",
+    "DOI": "10.1016/0304-3932(82)90012-5",
+    "article-title": "Trends and random walks in macroeconmic time series. Some evidence and implications",
+    "volume": "10",
+    "author": "CR Nelson",
+    "year": "1982",
+    "journal-title": "Journal of Monetary Economics"
+   },
+   {
+    "issue": "2",
+    "key": "ref66",
+    "doi-asserted-by": "crossref",
+    "first-page": "211",
+    "DOI": "10.1111/j.2517-6161.1964.tb00553.x",
+    "article-title": "An Analysis of Transformations",
+    "volume": "26",
+    "author": "GEP Box",
+    "year": "1964",
+    "journal-title": "Journal of the Royal Statistical Society Series B (Methodological)"
+   },
+   {
+    "issue": "1\u20132",
+    "key": "ref67",
+    "doi-asserted-by": "crossref",
+    "first-page": "80",
+    "DOI": "10.1093/biomet/42.1-2.80",
+    "article-title": "Some Quick Sign Tests for Trend in Location and Dispersion",
+    "volume": "42",
+    "author": "DR Cox",
+    "year": "1955",
+    "journal-title": "Biometrika"
+   },
+   {
+    "key": "ref68",
+    "article-title": "Akaike Information Criterion Statistics",
+    "author": "Y Sakamoto",
+    "year": "1986"
+   },
+   {
+    "key": "ref69",
+    "article-title": "Recurrent Neural Network Regularization",
+    "author": "W Zaremba",
+    "year": "2014",
+    "journal-title": "CoRR"
+   },
+   {
+    "key": "ref70",
+    "article-title": "Statistical forecasting for inventory control",
+    "author": "RG Brown",
+    "year": "1959"
+   },
+   {
+    "key": "ref71",
+    "article-title": "Time Series Analysis: Forecasting and Control",
+    "author": "G Box",
+    "year": "1970"
+   },
+   {
+    "key": "ref72",
+    "article-title": "Causality: Models, Reasoning, and Inference",
+    "author": "J Pearl",
+    "year": "2000"
+   },
+   {
+    "issue": "1",
+    "key": "ref73",
+    "doi-asserted-by": "crossref",
+    "first-page": "79",
+    "DOI": "10.1002/jae.842",
+    "article-title": "Multivariate GARCH models: a survey",
+    "volume": "21",
+    "author": "L Bauwens",
+    "year": "2006",
+    "journal-title": "Journal of Applied Econometrics"
+   },
+   {
+    "issue": "6",
+    "key": "ref74",
+    "doi-asserted-by": "crossref",
+    "first-page": "934",
+    "DOI": "10.1002/jae.1248",
+    "article-title": "On the forecasting accuracy of multivariate GARCH models",
+    "volume": "27",
+    "author": "S Laurent",
+    "year": "2012",
+    "journal-title": "Journal of Applied Econometrics"
+   },
+   {
+    "issue": "8",
+    "key": "ref75",
+    "doi-asserted-by": "crossref",
+    "first-page": "1678",
+    "DOI": "10.1016/j.jbusres.2015.03.026",
+    "article-title": "Simple versus complex forecasting: The evidence",
+    "volume": "68",
+    "author": "KC Green",
+    "year": "2015",
+    "journal-title": "Journal of Business Research"
+   },
+   {
+    "issue": "2",
+    "key": "ref76",
+    "doi-asserted-by": "crossref",
+    "first-page": "97",
+    "DOI": "10.2307/2345077",
+    "article-title": "Accuracy of Forecasting: An Empirical Investigation",
+    "volume": "142",
+    "author": "S Makridakis",
+    "year": "1979",
+    "journal-title": "Journal of the Royal Statistical Society Series A (General)"
+   },
+   {
+    "key": "ref77",
+    "doi-asserted-by": "crossref",
+    "unstructured": "Spiliotis E, Assimakopoulos V. Are M3 Competition data representative of the reality? Working paper. 2018;.",
+    "DOI": "10.1016/j.ijforecast.2018.12.007"
+   },
+   {
+    "issue": "2",
+    "key": "ref78",
+    "doi-asserted-by": "crossref",
+    "first-page": "345",
+    "DOI": "10.1016/j.ijforecast.2016.09.004",
+    "article-title": "Visualising forecasting algorithm performance using time series instance spaces",
+    "volume": "33",
+    "author": "Y Kang",
+    "year": "2017",
+    "journal-title": "International Journal of Forecasting"
+   },
+   {
+    "issue": "1",
+    "key": "ref79",
+    "doi-asserted-by": "crossref",
+    "first-page": "152",
+    "DOI": "10.1016/j.ejor.2014.02.036",
+    "article-title": "\u2018Horses for Courses\u2019 in demand forecasting",
+    "volume": "237",
+    "author": "F Petropoulos",
+    "year": "2014",
+    "journal-title": "European Journal of Operational Research"
+   },
+   {
+    "issue": "Supplement C",
+    "key": "ref80",
+    "doi-asserted-by": "crossref",
+    "first-page": "11",
+    "DOI": "10.1016/j.neucom.2016.12.038",
+    "article-title": "A survey of deep neural network architectures and their applications",
+    "volume": "234",
+    "author": "W Liu",
+    "year": "2017",
+    "journal-title": "Neurocomputing"
+   },
+   {
+    "issue": "Supplement C",
+    "key": "ref81",
+    "doi-asserted-by": "crossref",
+    "first-page": "643",
+    "DOI": "10.1016/j.neucom.2017.08.043",
+    "article-title": "Facial expression recognition via learning deep sparse autoencoders",
+    "volume": "273",
+    "author": "N Zeng",
+    "year": "2018",
+    "journal-title": "Neurocomputing"
+   }
+  ],
+  "container-title": [
+   "PLOS ONE"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "http://dx.plos.org/10.1371/journal.pone.0194889",
+    "content-type": "unspecified",
+    "content-version": "vor",
+    "intended-application": "similarity-checking"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2024,
+     7,
+     2
+    ]
+   ],
+   "date-time": "2024-07-02T07:02:32Z",
+   "timestamp": 1719903752000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://dx.plos.org/10.1371/journal.pone.0194889"
+   }
+  },
+  "subtitle": [],
+  "editor": [
+   {
+    "given": "Alejandro Raul",
+    "family": "Hernandez Montoya",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "editor"
+     }
+    ]
+   }
+  ],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2018,
+     3,
+     27
+    ]
+   ]
+  },
+  "references-count": 81,
+  "journal-issue": {
+   "issue": "3",
+   "published-online": {
+    "date-parts": [
+     [
+      2018,
+      3,
+      27
+     ]
+    ]
+   }
+  },
+  "URL": "https://doi.org/10.1371/journal.pone.0194889",
+  "relation": {},
+  "ISSN": [
+   "1932-6203"
+  ],
+  "issn-type": [
+   {
+    "value": "1932-6203",
+    "type": "electronic"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2018,
+     3,
+     27
+    ]
+   ]
+  }
+ }
+}
