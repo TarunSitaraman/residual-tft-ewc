@@ -10,6 +10,8 @@
 
 ---
 
+**Results:** `docs/RESULTS.md` collects the findings, their provenance and the generated result tables (`results/tables/*.csv`).
+
 ## Data source and licence
 
 All data come from the public **Stanford second-life dataset** (six LG Chem INR21700-M50T cells), used under **CC BY 4.0**:
