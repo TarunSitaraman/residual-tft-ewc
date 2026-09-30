@@ -1,0 +1,131 @@
+% =============================================================================
+% Results
+%
+% Numbers in the text are from committed results files produced on clean
+% commits: results/diagnostic_features.json (c643f1e), results/forecasting.json
+% (S1, d710cad) and results/forecasting_wheeler.json (S6, 53ab76f). Tables are
+% generated from the same files by scripts/make_paper_tables.py; figures are
+% copied from the notebooks (11-13) by the same script.
+% =============================================================================
+
+\section{Results}
+\label{sec:results}
+
+% -----------------------------------------------------------------------------
+\subsection{Data and diagnostic features}
+\label{sec:res-data}
+
+\emph{S1 diagnostics.} The diagnostic features track the current SOH closely within each cell (Fig.~\ref{fig:ic}):
+\begin{itemize}
+  \item the height of the incremental-capacity peak near 4.07~V falls smoothly with ageing (median within-cell Spearman $\rho=0.97$ with SOH, same sign in all six cells);
+  \item pulse and EIS resistances rise ($|\rho|$ between 0.83 and 0.94).
+\end{itemize}
+
+Their association with the SOH change \emph{to the next RPT}, which a forecaster must predict beyond persistence, is weak (median $|\rho|\le0.3$ for most features). The exceptions are at the low-voltage end:
+\begin{itemize}
+  \item the low-frequency real impedance at 3.26~V, with $\rho\approx0.43$ and the same sign in all six cells;
+  \item the charge between 3.63 and 3.26~V, with $\rho=-0.52$ and the same sign in five cells.
+\end{itemize}
+These features also alternate from RPT to RPT with the 20/35~$^\circ$C cycling blocks, so part of this association may reflect the temperature schedule rather than ageing.
+
+\emph{S6.} The seven usage conditions produce clearly different fade (Fig.~\ref{fig:s6soh}). The 100\% depth-of-discharge case fades fastest, and the 2C-discharge case fades slowest per cycle. All cells cross from C0 to C3 during the test, so the reuse classes are populated. This contrasts with S1, where every sample stays in C0.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/13_soh_trajectories.png}
+  \caption{S6: SOH (C/25 discharge capacity relative to the first check) of the 20 LFP cells against ageing cycles, by test case. Dashed lines are the reuse-class boundaries.}
+  \label{fig:s6soh}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/11_ic_curves.png}
+  \caption{S1: incremental capacity of the C/20 discharge at every RPT (light: early, dark: late), one panel per cell.}
+  \label{fig:ic}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+\subsection{Selected hyperparameters}
+\label{sec:res-hyper}
+
+The selected values are listed in Table~\ref{tab:hyper}. After the grid extension on S1, no selection lies at a grid edge, except the replay buffer on S1, where every value exceeds the task size.
+
+\input{tables/hyper}
+
+% -----------------------------------------------------------------------------
+\subsection{Continual stream (P1)}
+\label{sec:res-p1}
+
+Table~\ref{tab:p1} gives the final average test error, skill and forgetting of every method on both datasets. Table~\ref{tab:horizon} breaks the error down by horizon, and Table~\ref{tab:tests} gives the paired comparisons with TFT\,+\,EWC.
+
+\emph{S1.}
+\begin{itemize}
+  \item \emph{Proposed model:} TFT\,+\,EWC reaches a final average RMSE of 0.462~pp, a skill of 0.27 relative to persistence (0.632~pp). It is significantly better than persistence, linear extrapolation, ridge regression on F0 and F1, and MLP fine-tuning and MLP\,+\,EWC.
+  \item \emph{Level with it:} gradient boosting (0.466~pp), TFT fine-tuning (0.467~pp) and MLP replay (0.475~pp).
+  \item \emph{Better than it:} a ridge regression on the planned usage alone, i.e. the days at each temperature set point and at rest (0.450~pp). Its advantage is 0.012~pp (95\% CI 0.007--0.017).
+  \item \emph{Forgetting} is small for every method (0.016--0.040~pp), and TFT\,+\,EWC does not differ significantly from TFT fine-tuning in error or forgetting.
+  \item \emph{Diagnostic features} improve TFT\,+\,EWC by 0.009~pp (CI 0.001--0.017), which is not significant after Holm correction ($p_{\mathrm{Holm}}=0.083$).
+  \item \emph{By horizon,} persistence and linear extrapolation degrade quickly (0.83 and 0.90~pp at $h{=}3$), while the learned models stay between 0.42 and 0.49~pp.
+\end{itemize}
+
+\emph{S6.} The picture changes when tasks differ in usage.
+\begin{itemize}
+  \item \emph{Forgetting is substantial:} 0.18--0.46~pp, an order of magnitude larger than on S1.
+  \item \emph{EWC matters for the TFT:} TFT\,+\,EWC (0.677~pp) is 0.206~pp better than TFT fine-tuning (0.883~pp; CI 0.091--0.338, $p_{\mathrm{Holm}}=0.005$, rank-biserial 0.52) and forgets 0.187~pp less ($p_{\mathrm{Holm}}=0.050$).
+  \item \emph{But TFT\,+\,EWC is not the most accurate method:}
+  \begin{itemize}
+    \item MLP fine-tuning (0.531~pp) and MLP\,+\,EWC (0.540~pp) are significantly better;
+    \item the joint upper bounds (MLP 0.414, TFT 0.427~pp) are better still, so the continual-learning cost is about 0.25~pp for the TFT;
+    \item linear extrapolation of the recent fade rate (0.343~pp) and gradient boosting on F1 (0.372~pp) are the best forecasters overall.
+  \end{itemize}
+  \item \emph{Instability:} the TFT results vary strongly with the task order (s.d.\ 0.26~pp over runs for TFT\,+\,EWC, 0.54~pp for TFT fine-tuning).
+  \item \emph{Diagnostic features:} without them (F0), TFT\,+\,EWC reaches 0.621~pp and forgets significantly less. The diagnostic features do not help the TFT on S6.
+  \item \emph{Reuse classes:} every S6 test period lies in class C3, so class agreement in P1 is trivially perfect for all methods and is not informative.
+\end{itemize}
+
+\input{tables/p1}
+\input{tables/horizon}
+\input{tables/tests}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.49\textwidth]{figures/12_p1_rmse.png}\hfill
+  \includegraphics[width=0.49\textwidth]{figures/13_p1_rmse.png}
+  \caption{P1 final-step test RMSE on S1 (left) and S6 (right), mean $\pm$ s.d.\ over runs; blue: TFT, green: MLP, grey: reference forecasters. The dashed line marks persistence.}
+  \label{fig:p1}
+\end{figure*}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.85\columnwidth]{figures/13_tft_ewc_matrix.png}
+  \caption{S6: mean error matrix $R_{i,j}$ of TFT\,+\,EWC over 50 runs (row: after training task $i$; column: task position $j$). Entries below the diagonal (an earlier task evaluated after later tasks) that exceed the diagonal entry of their column show forgetting.}
+  \label{fig:matrix}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+\subsection{Unseen cell or usage condition (P2)}
+\label{sec:res-p2}
+
+Table~\ref{tab:p2} gives the leave-one-group-out results.
+\begin{itemize}
+  \item \emph{S1 (unseen cell):} gradient boosting on F1 is best (0.219~pp). The MLP (0.285~pp), the TFT (0.292~pp) and the usage-only ridge regression (0.301~pp) are close, and persistence reaches 0.545~pp.
+  \item \emph{S6 (unseen usage condition):} gradient boosting is again best (0.710~pp), ahead of the MLP (0.821~pp), ridge regression on F0 (0.859~pp) and the TFT (0.868~pp); persistence reaches 2.817~pp.
+  \begin{itemize}
+    \item The 100\% depth-of-discharge condition is the hardest for every method (1.8--2.4~pp).
+    \item The forecast reuse class agrees with the measured class for 95--97\% of samples with the learned models (macro-F1 0.83--0.88), against 85\% (0.64) for persistence.
+  \end{itemize}
+  \item \emph{Significance:} with six or seven held-out groups, no difference with the TFT survives Holm correction in either dataset.
+\end{itemize}
+
+\input{tables/p2}
+
+% -----------------------------------------------------------------------------
+\subsection{Summary of findings}
+\label{sec:res-summary}
+
+\begin{enumerate}
+  \item The best learned forecasters clearly beat persistence: skill up to 0.29 on S1 and 0.79 on S6. Not every model does, though; on S1, ridge regression on F0 and linear extrapolation are worse than persistence.
+  \item Which information matters differs between the datasets. On S1, where fade is small and driven by the test schedule, the planned usage alone is the strongest predictor. On S6, where fade is large and smooth, the recent fade rate is.
+  \item Forgetting depends on how different the tasks are. It is negligible across the six homogeneous S1 cells and substantial across the seven S6 usage conditions. There, EWC significantly reduces both error and forgetting of the TFT.
+  \item The proposed TFT\,+\,EWC is not the most accurate forecaster on either dataset. It is level with gradient boosting and TFT fine-tuning on S1, and behind the MLP continual methods, gradient boosting and linear extrapolation on S6.
+\end{enumerate}
