@@ -158,3 +158,60 @@ All numbers are from `results/forecasting.json` (commit `d710cad`, clean). Error
 1. **For the paper**, the honest S1 result is that learned forecasters beat persistence by 21–29 % in RMSE (and linear extrapolation by more), driven mainly by the known temperature and rest schedule. TFT + EWC is competitive (level with gradient boosting and TFT fine-tuning) but does not beat a schedule-aware linear model. S1 is too homogeneous and too small to show continual-learning benefits.
 2. **This is why the second dataset is needed** (S6, D19). It has 20 cells in seven usage conditions, fade to 30–50 % SOH with knees, and about 2,400 forecasting samples. Continual learning, EWC and reuse classes can be tested meaningfully there.
 
+## 8. Second dataset: LFP first- and second-life ageing (S6, notebook 13, protocol D20)
+
+All numbers are from `results/forecasting_wheeler.json` (commit `53ab76f`, clean). The dataset is Wheeler et al. 2025, CC BY 4.0: 20 cells in 7 test cases, 847 checks at 50 °C, 843 with a label, and 2,409 forecasting samples. Its SOH falls from 100 % to 32–64 %.
+
+**Data checks.**
+- **Authors' capacity:** our parsing reproduces the authors' own C/3 charge capacity exactly on all 843 checks both of us have.
+- **Missing labels:** only the four acquisition faults the authors document are unlabelled.
+- **Row order:** the exports are not in time order and must be sorted (D20 disclosures).
+
+**Tuning (validation only).**
+- Learning rates: MLP 3e-3, TFT 1e-2, both inside the grid.
+- EWC λ: 10 for the MLP, 100 for the TFT.
+- Replay buffer: 100 per task.
+
+**P1, continual stream over the seven test cases** (10 orders × 5 seeds; RMSE of SOH(*k*+*h*) in pp):
+
+| Method | Final avg. RMSE | Forgetting | vs TFT + EWC (Holm) |
+|---|---|---|---|
+| Linear extrapolation | 0.343 | — | better by 0.33 (p < 0.001) |
+| Gradient boosting, F1 | 0.372 | — | better by 0.30 (p < 0.001) |
+| MLP, joint (upper bound) | 0.414 | — | not tested (upper bound) |
+| TFT, joint (upper bound) | 0.427 | — | not tested (upper bound) |
+| MLP fine-tuning / EWC | 0.531 / 0.540 | 0.21 / 0.21 | better by 0.15 / 0.14 (p 0.006 / 0.02) |
+| MLP replay | 0.597 | 0.21 | n.s. |
+| Ridge, F1 | 0.605 | — | n.s. |
+| TFT + EWC, F0 | 0.621 | 0.18 | n.s. (error); less forgetting (p 0.004) |
+| **TFT + EWC (proposed)** | **0.677** | **0.27** | — |
+| Ridge, F0 | 0.801 | — | worse (p < 0.001) |
+| **TFT fine-tuning** | **0.883** | **0.46** | **worse by 0.21 (p 0.005)** |
+| Ridge, schedule only | 1.274 | — | worse (p < 0.001) |
+| Persistence | 1.644 | — | worse (p < 0.001) |
+
+- **Forgetting is real on S6** (0.18–0.46 pp), unlike on S1 (≤ 0.04). Test cases differ in charge regime, voltage window and DoD, so a model moving through them does forget.
+- **EWC helps the TFT significantly:** TFT + EWC is 0.21 pp better than TFT fine-tuning (p_Holm 0.005), and its forgetting is lower (0.27 vs 0.46; p_Holm 0.05). This is the continual-learning effect the method targets.
+- **But the proposed model is not the best forecaster.**
+  - TFT + EWC is worse than the MLP continual methods and far from the joint upper bounds (0.41–0.43). The continual-learning cost is about 0.25 pp.
+  - Linear extrapolation of the recent fade rate and gradient boosting are best: late-life LFP fade is smooth and close to linear over 100–300 cycles.
+  - The TFT's results also vary strongly with the task order (sd 0.26 over runs, against 0.15–0.18 for the MLP methods).
+- **Diagnostics:** F1 does not improve TFT + EWC over F0 (0.621 vs 0.677, n.s.). F0 forgets less.
+- **By horizon:** errors grow with horizon for every method. Linear extrapolation gives 0.21 / 0.35 / 0.46 pp at *h* = 1 / 2 / 3; TFT + EWC gives 0.53 / 0.62 / 0.84.
+- **Reuse classes in P1 are uninformative:** every test period lies in class C3 (≤ 80 % SOH), so every method scores 1.0.
+
+**P2, unseen usage condition** (leave one test case out; seven folds):
+- Gradient boosting is best (0.710); then MLP 0.821, ridge F0 0.859, TFT 0.868; persistence 2.817.
+- Case 7 (100 % DoD, the fastest fade) is by far the hardest: 1.8–2.4 pp for every method.
+- With seven folds, no difference against the TFT survives Holm correction.
+- **Reuse-class agreement** of forecasts at the target: accuracy 0.95–0.97, macro-F1 0.83–0.88 for the learned models, against 0.85 / 0.64 for persistence.
+
+**What S1 and S6 show together.**
+1. **Learned forecasters beat persistence clearly on both datasets.** On S1, known-schedule models are strongest. On S6, fade-rate extrapolation and gradient boosting are.
+2. **Continual learning matters only when tasks differ.** Forgetting is negligible on the homogeneous S1 cells and substantial across S6's usage conditions, and there EWC significantly reduces it for the TFT.
+3. **TFT + EWC is not the most accurate forecaster on either dataset.** The paper should present EWC's effect on the TFT as the continual-learning result, and report honestly that simpler models forecast better on these data. It should also discuss why: few samples per task, smooth fade, and TFT instability across task orders.
+4. **Limitations:**
+   - S6 ageing is accelerated at 50 °C, and "second life" there means ageing below 80 % SOH, not a repurposed duty.
+   - There are two or three cells per task.
+   - The two datasets are not pooled.
+
