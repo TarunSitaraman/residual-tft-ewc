@@ -193,7 +193,7 @@ All numbers are from `results/forecasting_wheeler.json` (commit `53ab76f`, clean
 - **Forgetting is real on S6** (0.18–0.46 pp), unlike on S1 (≤ 0.04). Test cases differ in charge regime, voltage window and DoD, so a model moving through them does forget.
 - **EWC helps the TFT significantly:** TFT + EWC is 0.21 pp better than TFT fine-tuning (p_Holm 0.005), and its forgetting is lower (0.27 vs 0.46; p_Holm 0.05). This is the continual-learning effect the method targets.
 - **But the proposed model is not the best forecaster.**
-  - TFT + EWC is worse than the MLP continual methods and far from the joint upper bounds (0.41–0.43). The continual-learning cost is about 0.25 pp.
+  - TFT + EWC is significantly worse than MLP fine-tuning and MLP EWC (not than MLP replay), and far from the joint upper bounds (0.41–0.43). The continual-learning cost is about 0.25 pp.
   - Linear extrapolation of the recent fade rate and gradient boosting are best: late-life LFP fade is smooth and close to linear over 100–300 cycles.
   - The TFT's results also vary strongly with the task order (sd 0.26 over runs, against 0.15–0.18 for the MLP methods).
 - **Diagnostics:** F1 does not improve TFT + EWC over F0 (0.621 vs 0.677, n.s.). F0 forgets less.
