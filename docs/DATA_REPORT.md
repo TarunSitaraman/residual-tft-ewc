@@ -191,7 +191,7 @@ All numbers are from `results/forecasting_wheeler.json` (commit `53ab76f`, clean
 | Persistence | 1.644 | — | worse (p < 0.001) |
 
 - **Forgetting is real on S6** (0.18–0.46 pp), unlike on S1 (≤ 0.04). Test cases differ in charge regime, voltage window and DoD, so a model moving through them does forget.
-- **EWC helps the TFT significantly:** TFT + EWC is 0.21 pp better than TFT fine-tuning (p_Holm 0.005), and its forgetting is lower (0.27 vs 0.46; p_Holm 0.05). This is the continual-learning effect the method targets.
+- **EWC lowers the TFT's error significantly:** TFT + EWC is 0.21 pp better than TFT fine-tuning on average (p_Holm 0.005). The median paired difference is 0.062 pp, so much of the mean gain comes from unstable fine-tuning runs (s.d. 0.54 pp). Its forgetting is lower on average (0.27 vs 0.46; median difference 0.075 pp), but not significantly after Holm correction (p_Holm 0.0503).
 - **But the proposed model is not the best forecaster.**
   - TFT + EWC is significantly worse than MLP fine-tuning and MLP EWC (not than MLP replay), and far from the joint upper bounds (0.41–0.43). The continual-learning cost is about 0.25 pp.
   - Linear extrapolation of the recent fade rate and gradient boosting are best: late-life LFP fade is smooth and close to linear over 100–300 cycles.
@@ -207,8 +207,8 @@ All numbers are from `results/forecasting_wheeler.json` (commit `53ab76f`, clean
 - **Reuse-class agreement** of forecasts at the target: accuracy 0.95–0.97, macro-F1 0.83–0.88 for the learned models, against 0.85 / 0.64 for persistence.
 
 **What S1 and S6 show together.**
-1. **Learned forecasters beat persistence clearly on both datasets.** On S1, known-schedule models are strongest. On S6, fade-rate extrapolation and gradient boosting are.
-2. **Continual learning matters only when tasks differ.** Forgetting is negligible on the homogeneous S1 cells and substantial across S6's usage conditions, and there EWC significantly reduces it for the TFT.
+1. **The best forecasters beat persistence clearly on both datasets.** On S1, known-schedule models are strongest. On S6, fade-rate extrapolation (not a learned model) and gradient boosting are.
+2. **Continual learning matters only when tasks differ.** Forgetting is negligible on the homogeneous S1 cells and substantial across S6's usage conditions. There EWC significantly reduces the TFT's error; its reduction of forgetting is not significant after Holm correction (p_Holm 0.0503).
 3. **TFT + EWC is not the most accurate forecaster on either dataset.** The paper should present EWC's effect on the TFT as the continual-learning result, and report honestly that simpler models forecast better on these data. It should also discuss why: few samples per task, smooth fade, and TFT instability across task orders.
 4. **Limitations:**
    - S6 ageing is accelerated at 50 °C, and "second life" there means ageing below 80 % SOH, not a repurposed duty.

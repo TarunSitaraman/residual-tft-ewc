@@ -75,7 +75,7 @@ def interval_schedule(blocks: pd.DataFrame, battery: str, t0: pd.Timestamp, t1: 
     cyc = 0.0
     for sp, name in ((35.0, "days_35c"), (20.0, "days_20c")):
         s = b[b["setpoint_c"] == sp]
-        overlap = (np.minimum(s["end"], t1) - np.maximum(s["start"], t0)).dt.total_seconds().clip(lower=0) / 86400
+        overlap = (s["end"].clip(upper=t1) - s["start"].clip(lower=t0)).dt.total_seconds().clip(lower=0) / 86400
         out[name] = float(overlap.sum())
         cyc += out[name]
     out["days_rest"] = max(total - cyc, 0.0)

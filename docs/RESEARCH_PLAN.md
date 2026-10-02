@@ -1,5 +1,7 @@
 # Research plan
 
+> **Status (1 Oct 2026): superseded in part, kept as the original pre-data plan.** After the first real-data run, the current-SOH estimation task (E1–E11 below) was replaced by SOH forecasting (D16), with C/20 labels (D17), a forecasting protocol fixed before training (D18), and a second dataset (S6, D19–D20). The research questions, the continual-learning metrics and statistics (Stage B) and the claim boundary still apply. The experiment list, data description and workstream status below do not. The current state is in `docs/DECISIONS.md` (D14–D20) and `docs/RESULTS.md`.
+
 Plan from the validated data pipeline (notebooks 01–04) to a submittable IEEE paper. Decisions referenced as D1–D9 are in `docs/DECISIONS.md`.
 
 ## 1. Research questions and claim

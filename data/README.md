@@ -60,6 +60,8 @@ python scripts/fetch_wheeler_characterisation.py   # about 3.6 GB stored; the zi
 python scripts/build_wheeler_features.py           # writes data/wheeler_checks.csv; checks against the authors' values
 ```
 
+The fetch resumes per file after an interruption (files already on disk are reused only if their size and CRC-32 match the zip index). On Windows, Python's default certificate store may lack the root that signs the data host's storage server (HARICA TLS RSA Root CA 2021); use Mozilla's bundle rather than disabling verification: `SSL_CERT_FILE=$(python -c "import certifi; print(certifi.where())")`.
+
 `readme.txt`, `extractedData.mat` and `Matlab_BasicImportAndDisplay.m` from the dataset must also be in `data/raw/wheeler2025/`. Download them from the repository and check them against the MD5 values in `docs/external_data/metadata/wheeler2025_lfp_dataverse.dataset.json`.
 
 ## Revised handover package

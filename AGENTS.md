@@ -8,7 +8,7 @@ This repository contains the continual-learning workflow for SOH estimation and 
 - Preserve battery-group identity and temporal ordering in evaluation.
 - Document missing-temperature handling; do not fabricate values silently.
 - Keep generated checkpoints and experiment outputs out of version control.
-- Use `ml_training_dataset.csv` as the supervised-learning starting point.
+- Forecasting work (D16–D20) uses the C/20 labels in `data/rpt_health_c20.csv` and the features built from the raw archives (`data/README.md`). `ml_training_dataset.csv` is only the input of the superseded current-SOH notebooks 01–09.
 
 ## Invariants
 

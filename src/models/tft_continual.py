@@ -13,6 +13,11 @@ Adaptations for this project:
   cycles' features for one battery, ending at the cycle being estimated; the
   output is that cycle's SOH. Past SOH labels are never inputs, so the model
   cannot copy the step-function target (D4).
+- **Use in forecasting (D18, D20).** The same model serves the forecasting
+  task: a window holds the feature vectors of the four previous origins of the
+  same battery and horizon (``forecasting.TFT_SETTINGS``), and the output is
+  ΔSOH. There the inputs include the SOH measured at each origin, which is
+  known at forecast time; target labels are never inputs.
 - **No static covariates.** Battery identity is not an input, keeping the TFT
   task-agnostic like every other method; the static-enrichment GRN therefore
   runs without a context vector.
