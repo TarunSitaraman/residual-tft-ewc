@@ -1,0 +1,703 @@
+{
+ "environment": {
+  "python": "3.11.15",
+  "numpy": "2.4.6",
+  "pandas": "3.0.6",
+  "scikit-learn": "1.9.1",
+  "torch": "2.14.1+cpu",
+  "git_commit": "c517ffd282ff1ef227773530728dbae74a5ca931",
+  "git_dirty": false
+ },
+ "n_checks": 43,
+ "n_failed": 0,
+ "checks": [
+  {
+   "dataset": "S1",
+   "check": "SOH formula",
+   "status": "PASS",
+   "detail": "max |SOH - Capacity/Reference*100| = 2.84e-14"
+  },
+  {
+   "dataset": "S1",
+   "check": "reference = first valid measurement",
+   "status": "PASS",
+   "detail": "6 cells, reference constant within each cell and equal to its first valid capacity"
+  },
+  {
+   "dataset": "S1",
+   "check": "RPT count",
+   "status": "INFO",
+   "detail": {
+    "g1": {
+     "count": 19,
+     "min": 1,
+     "max": 19
+    },
+    "v4": {
+     "count": 19,
+     "min": 1,
+     "max": 19
+    },
+    "v5": {
+     "count": 19,
+     "min": 1,
+     "max": 19
+    },
+    "w10": {
+     "count": 19,
+     "min": 1,
+     "max": 19
+    },
+    "w8": {
+     "count": 19,
+     "min": 1,
+     "max": 19
+    },
+    "w9": {
+     "count": 16,
+     "min": 1,
+     "max": 16
+    }
+   }
+  },
+  {
+   "dataset": "S1",
+   "check": "RPT dates increase with RPT number",
+   "status": "PASS",
+   "detail": "all cells"
+  },
+  {
+   "dataset": "S1",
+   "check": "C/20 labels vs handover labels (D17: at most 0.089 pp)",
+   "status": "PASS",
+   "detail": "max |difference| = 0.0887 pp over 111 RPTs"
+  },
+  {
+   "dataset": "S1",
+   "check": "handover health table rows",
+   "status": "INFO",
+   "detail": "111 rows; diagnostic table 111 rows"
+  },
+  {
+   "dataset": "S1",
+   "check": "rpt_health_c20.csv agrees with diagnostic table",
+   "status": "PASS",
+   "detail": "111/111 rows matched"
+  },
+  {
+   "dataset": "S1",
+   "check": "voltage-window charges sum to the C/20 capacity",
+   "status": "INFO",
+   "detail": "max |sum - q_c20| = 0.0000 Ah over 111 RPTs (windows: ['q_4.20_4.00', 'q_4.00_3.63', 'q_3.63_3.26', 'q_3.26_2.50'])"
+  },
+  {
+   "dataset": "S1",
+   "check": "sample count",
+   "status": "PASS",
+   "detail": "279 (published 279)"
+  },
+  {
+   "dataset": "S1",
+   "check": "RPT 2 excluded",
+   "status": "PASS",
+   "detail": "RPT 2 is never an origin or a target"
+  },
+  {
+   "dataset": "S1",
+   "check": "target = SOH(k+h) - SOH(k)",
+   "status": "PASS",
+   "detail": "max deviation 0.00e+00"
+  },
+  {
+   "dataset": "S1",
+   "check": "target after origin",
+   "status": "PASS",
+   "detail": "every target lies h valid measurements after its origin"
+  },
+  {
+   "dataset": "S1",
+   "check": "purged splits",
+   "status": "PASS",
+   "detail": "per cell: max train target <= min val origin, max val target <= min test origin; no empty split"
+  },
+  {
+   "dataset": "S1",
+   "check": "samples per cell and split",
+   "status": "INFO",
+   "detail": {
+    "g1": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "v4": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "v5": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "w10": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "w8": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "w9": {
+     "none": 6,
+     "test": 6,
+     "train": 21,
+     "val": 6
+    }
+   }
+  },
+  {
+   "dataset": "S1",
+   "check": "schedule days add up to days to target",
+   "status": "PASS",
+   "detail": "max deviation 2.84e-14 days"
+  },
+  {
+   "dataset": "S1",
+   "check": "cycling days never exceed the interval",
+   "status": "PASS",
+   "detail": "0 samples exceed"
+  },
+  {
+   "dataset": "S1",
+   "check": "fade rate uses only the last three RPTs up to the origin",
+   "status": "PASS",
+   "detail": "max deviation 0.00e+00"
+  },
+  {
+   "dataset": "S1",
+   "check": "no protocol current among inputs",
+   "status": "PASS",
+   "detail": "none"
+  },
+  {
+   "dataset": "S1",
+   "check": "no input with median within-cell |rho| >= 0.95 with the target",
+   "status": "PASS",
+   "detail": "largest: [('horizon', 0.631), ('days_20c', 0.491), ('days_35c', 0.489), ('eis_arc_peak_3.63', 0.445), ('eis_zre_0.01hz_3.63', 0.436)]"
+  },
+  {
+   "dataset": "S1",
+   "check": "missing share per input (non-zero only)",
+   "status": "INFO",
+   "detail": {
+    "fade_rate_pp_per_day": 0.129,
+    "r_pulse_4.00_0.1s": 0.065,
+    "r_pulse_4.00_1s": 0.065,
+    "r_pulse_4.00_8s": 0.065,
+    "r_pulse_3.63_0.1s": 0.022,
+    "r_pulse_3.63_1s": 0.022,
+    "r_pulse_3.63_8s": 0.022,
+    "r_pulse_3.26_0.1s": 0.022,
+    "r_pulse_3.26_1s": 0.022,
+    "r_pulse_3.26_8s": 0.022,
+    "ic_pos_p1": 0.011,
+    "ic_height_p1": 0.011,
+    "ic_pos_p3": 0.011,
+    "ic_height_p3": 0.011,
+    "ic_pos_p4": 0.179,
+    "ic_height_p4": 0.179,
+    "eis_r0_3.26": 0.258,
+    "eis_rarc_3.26": 0.258,
+    "eis_arc_peak_3.26": 0.258,
+    "eis_zre_1000hz_3.26": 0.258,
+    "eis_zre_10hz_3.26": 0.258,
+    "eis_zre_1hz_3.26": 0.258,
+    "eis_zre_0.1hz_3.26": 0.258,
+    "eis_zre_0.01hz_3.26": 0.258,
+    "eis_r0_3.63": 0.254,
+    "eis_rarc_3.63": 0.254,
+    "eis_arc_peak_3.63": 0.254,
+    "eis_zre_1000hz_3.63": 0.254,
+    "eis_zre_10hz_3.63": 0.254,
+    "eis_zre_1hz_3.63": 0.254,
+    "eis_zre_0.1hz_3.63": 0.254,
+    "eis_zre_0.01hz_3.63": 0.254,
+    "eis_r0_4.00": 0.269,
+    "eis_rarc_4.00": 0.269,
+    "eis_arc_peak_4.00": 0.269,
+    "eis_zre_1000hz_4.00": 0.269,
+    "eis_zre_10hz_4.00": 0.269,
+    "eis_zre_1hz_4.00": 0.269,
+    "eis_zre_0.1hz_4.00": 0.269,
+    "eis_zre_0.01hz_4.00": 0.269
+   }
+  },
+  {
+   "dataset": "S1",
+   "check": "SOH increases > 0.1 pp between consecutive measurements",
+   "status": "INFO",
+   "detail": [
+    {
+     "cell": "g1",
+     "rpt_number": 16,
+     "increase_pp": 0.558
+    },
+    {
+     "cell": "v4",
+     "rpt_number": 18,
+     "increase_pp": 0.459
+    },
+    {
+     "cell": "v5",
+     "rpt_number": 16,
+     "increase_pp": 0.594
+    },
+    {
+     "cell": "w10",
+     "rpt_number": 18,
+     "increase_pp": 0.37
+    },
+    {
+     "cell": "w8",
+     "rpt_number": 16,
+     "increase_pp": 0.791
+    }
+   ]
+  },
+  {
+   "dataset": "S1",
+   "check": "days between consecutive valid RPTs",
+   "status": "INFO",
+   "detail": {
+    "median": 39.0,
+    "max": 178.0,
+    "n_gaps_over_60_days": 20
+   }
+  },
+  {
+   "dataset": "S6",
+   "check": "check count",
+   "status": "PASS",
+   "detail": "847 checks, 843 valid (published 847/843)"
+  },
+  {
+   "dataset": "S6",
+   "check": "unlabelled checks are exactly the documented acquisition faults",
+   "status": "PASS",
+   "detail": [
+    [
+     "cell1a",
+     100
+    ],
+    [
+     "cell2a",
+     100
+    ],
+    [
+     "cell2c",
+     100
+    ],
+    [
+     "cell3a",
+     100
+    ]
+   ]
+  },
+  {
+   "dataset": "S6",
+   "check": "cells per test case",
+   "status": "INFO",
+   "detail": {
+    "case1": 3,
+    "case2": 3,
+    "case3": 2,
+    "case4": 3,
+    "case5": 3,
+    "case6": 3,
+    "case7": 3
+   }
+  },
+  {
+   "dataset": "S6",
+   "check": "SOH formula",
+   "status": "PASS",
+   "detail": "max |SOH - Capacity/Reference*100| = 1.42e-14"
+  },
+  {
+   "dataset": "S6",
+   "check": "reference = first valid measurement",
+   "status": "PASS",
+   "detail": "20 cells, reference constant within each cell and equal to its first valid capacity"
+  },
+  {
+   "dataset": "S6",
+   "check": "check times increase with cycle number",
+   "status": "PASS",
+   "detail": "all cells"
+  },
+  {
+   "dataset": "S6",
+   "check": "calendar days per 100 cycles between consecutive valid checks (50 degC; not an input)",
+   "status": "INFO",
+   "detail": {
+    "median": 17.3,
+    "p95": 31.0,
+    "max": 557.5,
+    "by_case_median": {
+     "case1": 21.1,
+     "case2": 20.1,
+     "case3": 22.0,
+     "case4": 14.8,
+     "case5": 14.8,
+     "case6": 9.8,
+     "case7": 27.8
+    }
+   }
+  },
+  {
+   "dataset": "S6",
+   "check": "longest calendar gaps before a check",
+   "status": "INFO",
+   "detail": [
+    {
+     "cell": "cell3a",
+     "cycle": "150",
+     "gap_days": "121.9708329999994"
+    },
+    {
+     "cell": "cell3b",
+     "cycle": "150",
+     "gap_days": "69.1191350000009"
+    },
+    {
+     "cell": "cell7a",
+     "cycle": "113",
+     "gap_days": "62.0230549999978"
+    },
+    {
+     "cell": "cell7c",
+     "cycle": "111",
+     "gap_days": "61.3233560000008"
+    },
+    {
+     "cell": "cell7b",
+     "cycle": "111",
+     "gap_days": "61.32300899999981"
+    },
+    {
+     "cell": "cell7b",
+     "cycle": "100",
+     "gap_days": "60.6474799999996"
+    },
+    {
+     "cell": "cell7c",
+     "cycle": "100",
+     "gap_days": "60.647413999999095"
+    },
+    {
+     "cell": "cell7a",
+     "cycle": "100",
+     "gap_days": "59.9474740000005"
+    }
+   ]
+  },
+  {
+   "dataset": "S6",
+   "check": "physical plausibility (violations per rule)",
+   "status": "PASS",
+   "detail": {
+    "r_c3_c25 > 0 (ohm)": 0,
+    "q_ratio_c3_c25 <= 1.02": 0,
+    "hysteresis_c25_mid > 0 (V)": 0,
+    "C/25 capacity <= 1.2 x nominal": 0
+   }
+  },
+  {
+   "dataset": "S6",
+   "check": "SOH range per test case",
+   "status": "INFO",
+   "detail": {
+    "case1": {
+     "min": 56.1,
+     "max": 100.0
+    },
+    "case2": {
+     "min": 54.0,
+     "max": 100.0
+    },
+    "case3": {
+     "min": 53.8,
+     "max": 100.0
+    },
+    "case4": {
+     "min": 44.7,
+     "max": 100.0
+    },
+    "case5": {
+     "min": 48.7,
+     "max": 100.0
+    },
+    "case6": {
+     "min": 36.1,
+     "max": 100.0
+    },
+    "case7": {
+     "min": 31.8,
+     "max": 100.0
+    }
+   }
+  },
+  {
+   "dataset": "S6",
+   "check": "sample count",
+   "status": "PASS",
+   "detail": "2409 (published 2409)"
+  },
+  {
+   "dataset": "S6",
+   "check": "target = SOH(k+h) - SOH(k)",
+   "status": "PASS",
+   "detail": "max deviation 0.00e+00"
+  },
+  {
+   "dataset": "S6",
+   "check": "target after origin",
+   "status": "PASS",
+   "detail": "every target lies h valid measurements after its origin"
+  },
+  {
+   "dataset": "S6",
+   "check": "purged splits",
+   "status": "PASS",
+   "detail": "per cell: max train target <= min val origin, max val target <= min test origin; no empty split"
+  },
+  {
+   "dataset": "S6",
+   "check": "samples per cell and split",
+   "status": "INFO",
+   "detail": {
+    "cell1a": {
+     "none": 6,
+     "test": 18,
+     "train": 51,
+     "val": 15
+    },
+    "cell1b": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 18
+    },
+    "cell1c": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 15
+    },
+    "cell2a": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 15
+    },
+    "cell2b": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 18
+    },
+    "cell2c": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 15
+    },
+    "cell3a": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "cell3b": {
+     "none": 6,
+     "test": 21,
+     "train": 69,
+     "val": 21
+    },
+    "cell4a": {
+     "none": 6,
+     "test": 24,
+     "train": 72,
+     "val": 24
+    },
+    "cell4b": {
+     "none": 6,
+     "test": 24,
+     "train": 78,
+     "val": 24
+    },
+    "cell4c": {
+     "none": 6,
+     "test": 24,
+     "train": 75,
+     "val": 24
+    },
+    "cell5a": {
+     "none": 6,
+     "test": 24,
+     "train": 72,
+     "val": 21
+    },
+    "cell5b": {
+     "none": 6,
+     "test": 24,
+     "train": 69,
+     "val": 21
+    },
+    "cell5c": {
+     "none": 6,
+     "test": 24,
+     "train": 69,
+     "val": 21
+    },
+    "cell6a": {
+     "none": 6,
+     "test": 36,
+     "train": 108,
+     "val": 36
+    },
+    "cell6b": {
+     "none": 6,
+     "test": 39,
+     "train": 114,
+     "val": 36
+    },
+    "cell6c": {
+     "none": 6,
+     "test": 39,
+     "train": 114,
+     "val": 36
+    },
+    "cell7a": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 15
+    },
+    "cell7b": {
+     "none": 6,
+     "test": 18,
+     "train": 57,
+     "val": 18
+    },
+    "cell7c": {
+     "none": 6,
+     "test": 18,
+     "train": 57,
+     "val": 18
+    }
+   }
+  },
+  {
+   "dataset": "S6",
+   "check": "samples per test case (task) and split",
+   "status": "INFO",
+   "detail": {
+    "case1": {
+     "none": 18,
+     "test": 54,
+     "train": 159,
+     "val": 48
+    },
+    "case2": {
+     "none": 18,
+     "test": 54,
+     "train": 162,
+     "val": 48
+    },
+    "case3": {
+     "none": 12,
+     "test": 42,
+     "train": 135,
+     "val": 42
+    },
+    "case4": {
+     "none": 18,
+     "test": 72,
+     "train": 225,
+     "val": 72
+    },
+    "case5": {
+     "none": 18,
+     "test": 72,
+     "train": 210,
+     "val": 63
+    },
+    "case6": {
+     "none": 18,
+     "test": 114,
+     "train": 336,
+     "val": 108
+    },
+    "case7": {
+     "none": 18,
+     "test": 54,
+     "train": 168,
+     "val": 51
+    }
+   }
+  },
+  {
+   "dataset": "S6",
+   "check": "diagnostic features dropped as never observed (D20)",
+   "status": "INFO",
+   "detail": [
+    "ic_pos_p2",
+    "ic_height_p2"
+   ]
+  },
+  {
+   "dataset": "S6",
+   "check": "no protocol current among inputs",
+   "status": "PASS",
+   "detail": "none"
+  },
+  {
+   "dataset": "S6",
+   "check": "no input with median within-cell |rho| >= 0.95 with the target",
+   "status": "PASS",
+   "detail": "largest: [('horizon', 0.805), ('cycles_to_target', 0.8), ('ic_height_p5', 0.454), ('q_c3_dis', 0.418), ('ic_height_p3', 0.418)]"
+  },
+  {
+   "dataset": "S6",
+   "check": "missing share per input (non-zero only)",
+   "status": "INFO",
+   "detail": {
+    "fade_rate_pp_per_cycle": 0.05,
+    "q_c25_ch": 0.001,
+    "q_c3_dis": 0.021,
+    "ic_pos_p3": 0.006,
+    "ic_height_p3": 0.006,
+    "ic_pos_p5": 0.724,
+    "ic_height_p5": 0.724,
+    "hysteresis_c25_mid": 0.001,
+    "r_c3_c25": 0.021,
+    "q_ratio_c3_c25": 0.021
+   }
+  },
+  {
+   "dataset": "S6",
+   "check": "SOH increases > 0.5 pp between consecutive measurements",
+   "status": "INFO",
+   "detail": "none"
+  }
+ ]
+}
