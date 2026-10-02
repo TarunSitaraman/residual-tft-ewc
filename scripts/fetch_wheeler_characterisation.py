@@ -111,6 +111,34 @@ def fetch_entry(url: str, size: int, e: dict) -> bytes:
     return data
 
 
+def _verified_local(target: Path, e: dict) -> bytes | None:
+    """Content of an already-fetched file if it matches the zip index (size and CRC-32), else None.
+
+    A file cut short by an interrupted run fails to decompress or fails the
+    check, and is fetched again.
+    """
+    if not target.is_file():
+        return None
+    try:
+        with gzip.open(target, "rb") as f:
+            data = f.read()
+    except (OSError, EOFError):
+        return None
+    if len(data) != e["size"] or (zlib.crc32(data) & 0xFFFFFFFF) != e["crc32"]:
+        return None
+    return data
+
+
+def _write_manifest(manifest: dict, path: Path) -> None:
+    manifest.update({"source": "S6 in docs/EXTERNAL_DATA.md: doi:10.57745/OLBXKT, version 2.0 (CC BY 4.0)",
+                     "retrieved_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                     "n_files": len(manifest["files"]), "total_bytes": sum(f["size"] for f in manifest["files"])})
+    manifest["files"].sort(key=lambda f: f["path"])
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(manifest, indent=1))
+    tmp.replace(path)   # atomic, so an interruption never leaves a truncated manifest
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--dest", default="data/raw/wheeler2025")
@@ -134,20 +162,19 @@ def main() -> int:
             rel = e["name"]
             if rel in done:
                 continue
-            data = fetch_entry(url, size, e)
             target = dest / (rel + ".gz")
-            target.parent.mkdir(parents=True, exist_ok=True)
-            with gzip.open(target, "wb", compresslevel=6) as f:
-                f.write(data)
+            data = _verified_local(target, e)
+            if data is None:
+                data = fetch_entry(url, size, e)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with gzip.open(target, "wb", compresslevel=6) as f:
+                    f.write(data)
             manifest["files"].append({"path": rel, "zip": z["filename"], "zip_md5": z["checksum"]["value"],
                                       "size": e["size"], "crc32": f"{e['crc32']:08x}",
                                       "sha256": hashlib.sha256(data).hexdigest()})
             done.add(rel)
-        manifest.update({"source": "S6 in docs/EXTERNAL_DATA.md: doi:10.57745/OLBXKT, version 2.0 (CC BY 4.0)",
-                         "retrieved_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                         "n_files": len(manifest["files"]), "total_bytes": sum(f["size"] for f in manifest["files"])})
-        manifest["files"].sort(key=lambda f: f["path"])
-        manifest_path.write_text(json.dumps(manifest, indent=1))
+            _write_manifest(manifest, manifest_path)   # after every file, so an interrupted run resumes per file
+        _write_manifest(manifest, manifest_path)
     print(f"{manifest['n_files']} files, {manifest['total_bytes']:,} bytes uncompressed; manifest {manifest_path}")
     return 0
 

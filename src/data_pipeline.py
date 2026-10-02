@@ -777,9 +777,16 @@ def environment_info(repo_root: Path | None = None) -> dict:
         "numpy": np.__version__,
         "pandas": pd.__version__,
         "scikit-learn": sklearn.__version__,
+        "torch": None,
         "git_commit": None,
         "git_dirty": None,
     }
+    try:
+        import torch
+
+        info["torch"] = torch.__version__
+    except ImportError:
+        pass  # torch is only needed by the neural models; left as None rather than guessed
     root = repo_root or find_repo_root()
 
     def git(*args: str) -> str:

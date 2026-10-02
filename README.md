@@ -108,7 +108,7 @@ The current baseline in `notebooks/04_baseline_model.ipynb` is deliberately simp
 - Ridge regression uses train-fitted median imputation and missing-value indicators; histogram gradient boosting is also evaluated and handles missing values directly.
 - Test reporting includes the share of rows whose RPT interval was already present in training. This distinguishes interpolation within a known health state from later-life prediction.
 
-The proposed continual-learning model is a Temporal Fusion Transformer (TFT) with an Elastic Weight Consolidation (EWC) penalty and a multi-task reuse-suitability head. It is a planned research model, not yet an implemented result. The TFT will use explicit missing-value indicators/masking, temporal features, and battery-group context. EWC will protect parameters important to earlier battery groups while later groups are introduced sequentially.
+**Status update (D16–D20):** the current-SOH estimation task above was superseded by SOH forecasting, after this baseline was beaten by persistence on the real data (`docs/DATA_REPORT.md` §4). The proposed model, a Temporal Fusion Transformer (TFT) with an Elastic Weight Consolidation (EWC) penalty, is implemented (D12, D18) and evaluated on two datasets in notebooks 12–13; results are in `docs/RESULTS.md`. The multi-task reuse-suitability head originally planned was not implemented (`src/models/reuse_head.py` is a stub). Reuse classes are instead derived from the forecast SOH with fixed cut-points (D10, D20).
 
 ### 2.5 Reuse Assessment
 - SOH alone does not give complete application decision

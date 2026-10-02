@@ -71,7 +71,7 @@ Table~\ref{tab:p1} gives the final average test error, skill and forgetting of e
 \emph{S6.} The picture changes when tasks differ in usage.
 \begin{itemize}
   \item \emph{Forgetting is substantial:} 0.18--0.46~pp, an order of magnitude larger than on S1.
-  \item \emph{EWC matters for the TFT:} TFT\,+\,EWC (0.677~pp) is 0.206~pp better than TFT fine-tuning (0.883~pp; CI 0.091--0.338, $p_{\mathrm{Holm}}=0.005$, rank-biserial 0.52) and forgets 0.187~pp less ($p_{\mathrm{Holm}}=0.050$).
+  \item \emph{EWC matters for the TFT:} TFT\,+\,EWC (0.677~pp) is on average 0.206~pp better than TFT fine-tuning (0.883~pp; CI 0.091--0.338, $p_{\mathrm{Holm}}=0.005$, rank-biserial 0.52). The median paired difference is 0.062~pp, so the mean is driven partly by unstable fine-tuning runs. TFT\,+\,EWC also forgets 0.187~pp less on average (median 0.075~pp), but this is not significant after Holm correction ($p_{\mathrm{Holm}}=0.0503$).
   \item \emph{But TFT\,+\,EWC is not the most accurate method:}
   \begin{itemize}
     \item MLP fine-tuning (0.531~pp) and MLP\,+\,EWC (0.540~pp) are significantly better;
@@ -126,6 +126,6 @@ Table~\ref{tab:p2} gives the leave-one-group-out results.
 \begin{enumerate}
   \item The best learned forecasters clearly beat persistence: skill up to 0.29 on S1 and 0.79 on S6. Not every model does, though; on S1, ridge regression on F0 and linear extrapolation are worse than persistence.
   \item Which information matters differs between the datasets. On S1, where fade is small and driven by the test schedule, the planned usage alone is the strongest predictor. On S6, where fade is large and smooth, the recent fade rate is.
-  \item Forgetting depends on how different the tasks are. It is negligible across the six homogeneous S1 cells and substantial across the seven S6 usage conditions. There, EWC significantly reduces both error and forgetting of the TFT.
+  \item Forgetting depends on how different the tasks are. It is negligible across the six homogeneous S1 cells and substantial across the seven S6 usage conditions. There, EWC significantly reduces the error of the TFT; its reduction of forgetting is not significant after Holm correction.
   \item The proposed TFT\,+\,EWC is not the most accurate forecaster on either dataset. It is level with gradient boosting and TFT fine-tuning on S1, and behind the MLP continual methods, gradient boosting and linear extrapolation on S6.
 \end{enumerate}

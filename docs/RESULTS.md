@@ -43,8 +43,8 @@ Each file records Python and library versions (Python 3.11.15, numpy 2.4.6, pand
    - They track the current SOH closely: IC peak near 4.07 V, median within-cell ρ = 0.97; pulse and EIS resistances, |ρ| = 0.83–0.94.
    - They are weakly associated with the next ΔSOH (median |ρ| ≤ 0.3 for most features).
    - The exceptions are EIS Z′ at 3.26 V (ρ ≈ 0.43, same sign in 6/6 cells) and q_3.63_3.26 (ρ = −0.52, 5/6 cells). Both alternate with the 20/35 °C blocks, so the temperature schedule may drive them.
-3. **Learned forecasters beat persistence on both datasets, but not every model does.**
-   - Best skill: 0.29 on S1 (usage-only ridge) and 0.79 on S6 (linear extrapolation).
+3. **The best forecasters beat persistence on both datasets, but not every method does.**
+   - Best skill: 0.29 on S1 (usage-only ridge) and 0.79 on S6 (linear extrapolation, which is not a learned model).
    - On S1, ridge regression on F0 and linear extrapolation are worse than persistence.
 4. **What drives the forecast differs by dataset.**
    - S1 (small, schedule-driven fade): a ridge regression on planned usage alone is the best P1 model, at 0.450 pp.
@@ -53,7 +53,8 @@ Each file records Python and library versions (Python 3.11.15, numpy 2.4.6, pand
    - It is negligible across the homogeneous S1 cells (0.016–0.040 pp).
    - It is substantial across the S6 usage conditions (0.18–0.46 pp).
 6. **EWC helps the TFT only on the heterogeneous stream.**
-   - S6: TFT + EWC (0.677 pp) beats TFT fine-tuning (0.883 pp) by 0.206 pp (CI 0.091–0.338, p_Holm = 0.005, r = 0.52), and forgets 0.187 pp less (p_Holm = 0.050).
+   - S6: TFT + EWC (0.677 pp) beats TFT fine-tuning (0.883 pp) by 0.206 pp on average (CI 0.091–0.338, p_Holm = 0.005, r = 0.52). The median paired difference is only 0.062 pp: the mean is driven by unstable TFT fine-tuning runs (s.d. 0.54 pp).
+   - S6 forgetting: TFT + EWC forgets 0.187 pp less on average (median 0.075 pp), but this is not significant after Holm correction (p_Holm = 0.0503).
    - S1: there is no significant difference in error or forgetting.
 7. **TFT + EWC is not the most accurate forecaster on either dataset.**
    - S1: it is level with gradient boosting and TFT fine-tuning, and slightly behind the usage-only ridge (by 0.012 pp, CI 0.007–0.017).
@@ -80,6 +81,24 @@ Each file records Python and library versions (Python 3.11.15, numpy 2.4.6, pand
 - **No pooling.** The two datasets are not pooled, so no transfer between chemistries is claimed.
 - **Conditional forecasts.** Forecasts are conditional on the planned usage. On S1, the TFT has more parameters than the MLP.
 - **Excluded data.** The Cui/Relyion second-life LMO data (S5) is not used because it carries no licence.
+
+## Reproducibility check (2 Oct 2026)
+
+Notebook 12 (S1) was re-run in the pinned environment of `requirements.txt` (Python 3.11.15, numpy 2.4.6, pandas 3.0.6, scikit-learn 1.9.1, torch 2.14.1), on a different machine, from the C/20 data rebuilt from the raw archive. The torch version of the committed run was not recorded, so the two runs may differ in torch version as well as hardware.
+
+- **Identical:** all baseline results (persistence, linear extrapolation, ridge, gradient boosting), the tuned hyperparameters and the ranking of methods. The MLP joint and P2 MLP results agree to within 1e-8 pp.
+- **Neural models drift slightly:** P1 RMSE changes by at most 0.002 pp (TFT + EWC 0.4625 → 0.4605), P2 TFT by 0.0015 pp.
+- **S1 significance is not robust to that drift.** Five Holm-corrected comparisons with TFT + EWC cross p = 0.05:
+
+  | Comparison (S1, P1) | Mean difference (pp), committed → re-run | p_Holm, committed → re-run |
+  |---|---|---|
+  | final error, replay | 0.012 → 0.014 | 0.083 → 0.033 |
+  | final error, TFT + EWC F0 (diagnostics) | 0.009 → 0.010 | 0.083 → 0.033 |
+  | final error, TFT fine-tuning | 0.005 → 0.007 | 0.278 → 0.035 |
+  | forgetting, MLP fine-tuning | 0.014 → 0.014 | 0.052 → 0.018 |
+  | final error, gradient boosting F1 | — | 0.175 → 0.028 |
+
+  These differences (0.005–0.014 pp) are an order of magnitude below the label shift corrected by D17 (up to 0.089 pp). With 50 runs of very low variance, the paired test detects differences that have no practical meaning, and whether they cross 0.05 depends on the numerical environment. **On S1, method comparisons should be reported as practically equivalent, with no claim of significance in either direction.** The S6 comparisons involve differences 10–50 times larger and are re-checked when notebook 13 is re-run.
 
 ## Figures
 
