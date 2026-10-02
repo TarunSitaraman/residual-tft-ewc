@@ -252,7 +252,7 @@ The earlier question (whether it analyses the S1 cells) is resolved: it does not
 
 **What it contains (from the article).**
 - **Cells:** 20 A123 18650 Graphite/LFP cells, 1.1 Ah nominal, 3.2 V nominal, 2.0–3.65 V limits.
-- **Test cases:** seven, with three cells each (two for case 4). They vary the charge (CC-CV or CC; 3.65 or 3.55 V; C/3 or 2C), the discharge (WLTP at C/3 on average, or CC 2C) and the depth of discharge (70 % or 100 %).
+- **Test cases:** seven, with three cells each except **case 3, which has two** (cells 3a and 3b). The article contradicts itself here: its text says "Test case 4 had only two cells", but its Table 2 lists cells 4a–4c and 3a–3b only, and the table's footnote says "except for test case 3". The data archive agrees with Table 2 (`Cell4c.zip` exists; there is no `Cell3c.zip`). Cite the table, not the sentence. They vary the charge (CC-CV or CC; 3.65 or 3.55 V; C/3 or 2C), the discharge (WLTP at C/3 on average, or CC 2C) and the depth of discharge (70 % or 100 %).
 - **Ageing:** at 50 °C (accelerated) for 24 months, ending at 50–30 % SOH, including the "ageing knee".
 - **Characterisation every 100 cycles:** C/3 and C/25 (pseudo-OCV) charge and discharge. EIS at 0/50/100 % SOC before and after ageing. Initial and final characterisation at 25 °C.
 - **"Second life" here** means continued ageing below 80 % SOH under the same protocol, not a repurposed stationary duty cycle. The paper must say so.

@@ -27,6 +27,7 @@ import argparse
 import datetime as dt
 import gzip
 import hashlib
+import http.client
 import json
 import struct
 import sys
@@ -54,7 +55,7 @@ def _range(url: str, start: int, end: int, size: int, attempts: int = 15) -> byt
             if len(data) != end - start + 1:
                 raise ConnectionError("short read")
             return data
-        except (urllib.error.URLError, ConnectionError, TimeoutError) as err:
+        except (urllib.error.URLError, ConnectionError, TimeoutError, http.client.IncompleteRead) as err:
             if k == attempts - 1:
                 raise
             print(f"  retry after {err}", file=sys.stderr)
@@ -135,8 +136,16 @@ def _write_manifest(manifest: dict, path: Path) -> None:
                      "n_files": len(manifest["files"]), "total_bytes": sum(f["size"] for f in manifest["files"])})
     manifest["files"].sort(key=lambda f: f["path"])
     tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(manifest, indent=1))
-    tmp.replace(path)   # atomic, so an interruption never leaves a truncated manifest
+    for attempt in range(10):
+        try:
+            tmp.write_text(json.dumps(manifest, indent=1))
+            tmp.replace(path)   # atomic, so an interruption never leaves a truncated manifest
+            return
+        except PermissionError:
+            # Windows: a scanner or indexer may hold the file briefly.
+            if attempt == 9:
+                raise
+            time.sleep(1)
 
 
 def main() -> int:
