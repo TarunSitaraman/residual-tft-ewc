@@ -29,6 +29,7 @@ import gzip
 import hashlib
 import http.client
 import json
+import lzma
 import shutil
 import struct
 import sys
@@ -36,6 +37,7 @@ import time
 import urllib.error
 import urllib.request
 import zlib
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 RECORD = Path("docs/external_data/metadata/wheeler2025_lfp_dataverse.dataset.json")
@@ -126,22 +128,37 @@ def _is_kind(name: str, kind: str) -> bool:
     return "aging" in base and "charac" not in base and "eis" not in base
 
 
-def _verified_local(target: Path, e: dict) -> bytes | None:
-    """Content of an already-fetched file if it matches the zip index (size and CRC-32), else None.
+def _open_stored(path: Path):
+    return lzma.open(path, "rb") if path.suffix == ".xz" else gzip.open(path, "rb")
 
-    A file cut short by an interrupted run fails to decompress or fails the
-    check, and is fetched again.
+
+def _verified_local(target: Path, e: dict) -> bytes | None:
+    """Content of an already-fetched file (stored as .gz or .xz) if it matches the zip index, else None.
+
+    A file cut short by an interrupted run fails to decompress or fails the size and
+    CRC-32 check, and is fetched again.
     """
-    if not target.is_file():
-        return None
-    try:
-        with gzip.open(target, "rb") as f:
-            data = f.read()
-    except (OSError, EOFError):
-        return None
-    if len(data) != e["size"] or (zlib.crc32(data) & 0xFFFFFFFF) != e["crc32"]:
-        return None
-    return data
+    for path in (target.with_suffix(".xz"), target.with_suffix(".gz")):
+        if not path.is_file():
+            continue
+        try:
+            with _open_stored(path) as f:
+                data = f.read()
+        except (OSError, EOFError, lzma.LZMAError):
+            continue
+        if len(data) == e["size"] and (zlib.crc32(data) & 0xFFFFFFFF) == e["crc32"]:
+            return data
+    return None
+
+
+def _store(target: Path, data: bytes, store: str) -> None:
+    """Write compressed to a temporary name, then rename, so a partial file is never left under the final name."""
+    target.parent.mkdir(parents=True, exist_ok=True)
+    final = target.with_suffix("." + store)
+    tmp = final.with_name(final.name + ".part")
+    with (lzma.open(tmp, "wb", preset=6) if store == "xz" else gzip.open(tmp, "wb", compresslevel=6)) as f:
+        f.write(data)
+    tmp.replace(final)
 
 
 def _write_manifest(manifest: dict, path: Path) -> None:
@@ -169,6 +186,8 @@ def main() -> int:
     ap.add_argument("--cells", nargs="*", help="subset of cells, e.g. Cell1a (default: all 20)")
     ap.add_argument("--kind", choices=("charac", "aging"), default="charac",
                     help="characterisation files (default) or the between-check ageing files")
+    ap.add_argument("--store", choices=("gz", "xz"), default="gz",
+                    help="local compression: gz (as registered for the characterisation files) or xz (about 45 %% smaller)")
     ap.add_argument("--min-free-gb", type=float, default=5.0, help="stop before the disk has less free space than this")
     args = ap.parse_args()
     files = json.loads(RECORD.read_text())["data"]["latestVersion"]["files"]
@@ -179,6 +198,18 @@ def main() -> int:
     manifest_path = Path(args.manifest)
     manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {"files": []}
     done = {f["path"] for f in manifest["files"]}
+    # One writer thread: compressing a file (xz takes minutes) overlaps the download of the next one.
+    writer = ThreadPoolExecutor(max_workers=1)
+    pending: list = []
+
+    def finish_pending() -> None:
+        for fut, record in pending:
+            fut.result()                      # re-raises any error from the writer
+            manifest["files"].append(record)
+            done.add(record["path"])
+            _write_manifest(manifest, manifest_path)   # after every file, so an interrupted run resumes per file
+        pending.clear()
+
     for z in sorted(zips, key=lambda z: z["filename"]):
         url, size = ACCESS.format(id=z["id"]), int(z["filesize"])
         entries = [e for e in zip_index(url, size) if _is_kind(e["name"], args.kind) and not e["name"].endswith("/")
@@ -189,21 +220,23 @@ def main() -> int:
             if rel in done:
                 continue
             if shutil.disk_usage(dest if dest.exists() else ".").free < args.min_free_gb * 1e9:
+                finish_pending()
                 _write_manifest(manifest, manifest_path)
                 raise SystemExit(f"stopped: less than {args.min_free_gb} GB free on disk")
             target = dest / (rel + ".gz")
             data = _verified_local(target, e)
-            if data is None:
+            fetched = data is None
+            if fetched:
                 data = fetch_entry(url, size, e)
-                target.parent.mkdir(parents=True, exist_ok=True)
-                with gzip.open(target, "wb", compresslevel=6) as f:
-                    f.write(data)
-            manifest["files"].append({"path": rel, "zip": z["filename"], "zip_md5": z["checksum"]["value"],
-                                      "size": e["size"], "crc32": f"{e['crc32']:08x}",
-                                      "sha256": hashlib.sha256(data).hexdigest()})
-            done.add(rel)
-            _write_manifest(manifest, manifest_path)   # after every file, so an interrupted run resumes per file
+            finish_pending()                  # the previous file is written before this one is queued
+            # Write whatever was downloaded (this also replaces a corrupt local copy); a verified local copy is kept.
+            fut = writer.submit(_store, target, data, args.store) if fetched else writer.submit(lambda: None)
+            record = {"path": rel, "zip": z["filename"], "zip_md5": z["checksum"]["value"], "size": e["size"],
+                      "crc32": f"{e['crc32']:08x}", "sha256": hashlib.sha256(data).hexdigest()}
+            pending.append((fut, record))
+        finish_pending()
         _write_manifest(manifest, manifest_path)
+    writer.shutdown(wait=True)
     print(f"{manifest['n_files']} files, {manifest['total_bytes']:,} bytes uncompressed; manifest {manifest_path}")
     return 0
 
