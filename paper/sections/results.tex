@@ -120,12 +120,67 @@ Table~\ref{tab:p2} gives the leave-one-group-out results.
 \input{tables/p2}
 
 % -----------------------------------------------------------------------------
+\subsection{Reproducibility of the comparisons}
+\label{sec:res-repro}
+
+Both forecasting notebooks were re-run in a pinned environment (Python 3.11.15, numpy 2.4.6, pandas 3.0.6, scikit-learn 1.9.1, torch 2.14.1) on data rebuilt from the raw archives and verified file by file against recorded checksums. The torch version of the first run was not recorded.
+\begin{itemize}
+  \item \emph{Reproduced:} every baseline result, both joint upper bounds, every P2 result and the ranking of methods; the neural models move by at most 0.002~pp on S1, 0.006~pp in S6 P2 and 0.059~pp in S6 P1 (TFT\,+\,EWC: 0.677 to 0.704~pp).
+  \item \emph{Not reproduced on S1:} five Holm-corrected comparisons with TFT\,+\,EWC cross $p=0.05$. Their differences (0.005--0.014~pp) are an order of magnitude smaller than the shift the label definition alone causes (up to 0.089~pp).
+  \item \emph{Not reproduced on S6:} validation tuning selected EWC $\lambda=1000$ instead of 100 (a 0.008~pp tie over three tuning runs). The advantage of TFT\,+\,EWC over TFT fine-tuning then changes from $p_{\mathrm{Holm}}=0.005$ to 0.060, while its reduction of forgetting changes from 0.050 to 0.008.
+\end{itemize}
+We therefore report S1 method differences as practically equivalent and do not claim that EWC significantly helps the TFT on S6. The protocol below adds 10 tuning runs per grid value, a one-standard-error selection rule and a replication rule.
+
+% -----------------------------------------------------------------------------
+\subsection{First-life pretraining (P3)}
+\label{sec:res-p3}
+
+The first-life pool comprises 369 cells (S7--S9) and 36{,}711 forecasting samples, against 2{,}409 in S6. Validation tuning selected learning rates of $3\times10^{-4}$ (MLP) and $3\times10^{-3}$ (TFT), and EWC strengths of 1000 (MLP) and 0.01 (TFT): \emph{for the pretrained TFT, validation selects almost no EWC}. Fig.~\ref{fig:p3} shows the final average error on S6 for main seeds 0--4 and replicate seeds 5--9.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/d21_p3_final_error.png}
+  \caption{P3: final average test RMSE on S6, mean and 95\% bootstrap CI over 50 runs (10 orders $\times$ 5 seeds) for the main and replicate seed sets. Dashed lines: linear extrapolation and gradient boosting fitted on the S6 training data.}
+  \label{fig:p3}
+\end{figure}
+
+Applying the replication rule (significant after Holm correction in both seed sets, same sign, at least 0.05~pp in both) to the comparisons with pretrained TFT\,+\,EWC:
+\begin{itemize}
+  \item \emph{EWC versus fine-tuning on the pretrained TFT:} practically equivalent in final error, forgetting and backward transfer (differences of 0.015--0.017~pp in both seed sets).
+  \item \emph{Pretrained TFT\,+\,EWC versus pretrained MLP fine-tuning:} TFT\,+\,EWC is better, replicated in final error (by 0.334 and 0.185~pp), forgetting and backward transfer.
+  \item \emph{Pretraining versus training from scratch:} both backbones are better from scratch on average (TFT 0.401/0.415~pp from scratch against 0.509/0.591~pp pretrained with EWC); for the TFT the difference is significant only in the replicate set, so it is not replicated.
+  \item \emph{Baselines:} linear extrapolation (0.343~pp) remains the most accurate method on S6; the TFT from scratch is below gradient boosting (0.451~pp) on average.
+\end{itemize}
+The S6 stream does not degrade the pretrained models' error on the pool's test split (TFT\,+\,EWC: 3.280 to 3.148~pp, main seeds; Fig.~\ref{fig:retention}). On that split, however, the pretrained models are less accurate than linear extrapolation (3.001~pp): with the shared inputs, pretraining does not learn a first-life model that transfers.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/d21_p3_pool_retention.png}
+  \caption{Error of the pretrained models on the pool's test split before and after the S6 stream (mean of 50 runs per seed set). Dashed lines: persistence and linear extrapolation on the same split.}
+  \label{fig:retention}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+\subsection{What the TFT uses}
+\label{sec:res-interp}
+
+For the TFT trained from scratch on S6 (5 seeds), the variable-selection weights averaged over the test periods rank the time to the target (0.26) and the recent fade rate (0.08) highest, but the top-ranked input differs between seeds, and inputs that are constant within S6 (chemistry, calendar ageing) receive non-negligible weight (Fig.~\ref{fig:weights}). Attention over the four previous origins is nearly uniform (0.24--0.26 per lag). The weights are therefore not a reliable measure of importance on these data, and the TFT makes little use of its history window.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/d21_tft_variable_weights.png}
+  \caption{TFT variable-selection weights on the S6 test periods: mean (dot) and range (bar) over 5 seeds. Grey: inputs that are constant within S6.}
+  \label{fig:weights}
+\end{figure}
+
+% -----------------------------------------------------------------------------
 \subsection{Summary of findings}
 \label{sec:res-summary}
 
 \begin{enumerate}
   \item The best learned forecasters clearly beat persistence: skill up to 0.29 on S1 and 0.79 on S6. Not every model does, though; on S1, ridge regression on F0 and linear extrapolation are worse than persistence.
   \item Which information matters differs between the datasets. On S1, where fade is small and driven by the test schedule, the planned usage alone is the strongest predictor. On S6, where fade is large and smooth, the recent fade rate is.
-  \item Forgetting depends on how different the tasks are. It is negligible across the six homogeneous S1 cells and substantial across the seven S6 usage conditions. There, EWC significantly reduces the error of the TFT; its reduction of forgetting is not significant after Holm correction.
+  \item Forgetting depends on how different the tasks are. It is negligible across the six homogeneous S1 cells and substantial across the seven S6 usage conditions. Whether EWC significantly helps the TFT there depends on the run (Section~\ref{sec:res-repro}); after first-life pretraining, EWC and fine-tuning are practically equivalent for the TFT (Section~\ref{sec:res-p3}).
   \item The proposed TFT\,+\,EWC is not the most accurate forecaster on either dataset. It is level with gradient boosting and TFT fine-tuning on S1, and behind the MLP continual methods, gradient boosting and linear extrapolation on S6.
+  \item Pretraining on 369 first-life cells of three other chemistries does not improve the S6 forecasts and does not make EWC useful for the TFT; linear extrapolation of the recent fade rate remains the most accurate method on S6.
 \end{enumerate}
