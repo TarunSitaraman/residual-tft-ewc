@@ -285,3 +285,42 @@ CSV: `results/tables/p2.csv`
 | S6 | TFT | 0.868 | 0.551 | 2.390 | case7 | 0.962 | 0.877 |
 
 <!-- END GENERATED TABLES -->
+
+## D21 protocol P3: first-life pretraining, then the S6 stream (3 Oct 2026)
+
+Results file: `results/forecasting_d21_p3.json`, written by `scripts/run_p3.py` at commit `57e37aa` (clean; Python 3.11.15, numpy 2.4.6, pandas 3.0.6, scikit-learn 1.9.1, torch 2.14.1). Protocol: D21 and its disclosures. Pool: S7–S9, 369 cells, 36,711 samples (train 21,174 / val 6,439 / test 6,942); stream: the seven S6 test cases, 2,409 samples, 10 orders; main seeds 0–4 and replicate seeds 5–9 (50 runs each per method).
+
+**Tuning (validation only, 10 orders, one-SE rule, D11 edge rule).** MLP: learning rate 3e-4 (best value at the original lower edge; after extending the grid to 1e-4 and 3e-5 it is interior), EWC λ = 1000. TFT: learning rate 3e-3, EWC λ = 0.01 (the best value on the original grid was its lower edge 1; after extension the best is 0.1 and the one-SE rule selects 0.01). **For the pretrained TFT, validation selects almost no EWC.**
+
+**Final average test RMSE on S6 (pp), mean (s.d.; median) over 50 runs:**
+
+| Method | Main seeds | Replicate seeds |
+|---|---|---|
+| TFT from scratch, fine-tuning | 0.401 (0.169; 0.353) | 0.415 (0.241; 0.347) |
+| MLP from scratch, fine-tuning | 0.496 (0.270; 0.377) | 0.475 (0.248; 0.385) |
+| TFT pretrained + EWC | 0.509 (0.347; 0.402) | 0.591 (0.428; 0.443) |
+| TFT pretrained, fine-tuning | 0.525 (0.346; 0.409) | 0.606 (0.441; 0.451) |
+| MLP pretrained + EWC | 0.735 (0.436; 0.579) | 0.631 (0.293; 0.513) |
+| MLP pretrained, fine-tuning | 0.844 (0.686; 0.530) | 0.777 (0.579; 0.500) |
+
+Baselines (S6 training rows, D20 definitions, shared inputs): linear extrapolation 0.343, gradient boosting 0.451, schedule ridge 1.079, ridge 1.184, persistence 1.644.
+
+**Pre-registered comparisons (each method vs pretrained TFT + EWC; D21 replication rule: p_Holm < 0.05 in both seed sets with the same sign and |difference| ≥ 0.05 pp in both = replicated; |difference| < 0.05 pp in both = practically equivalent; otherwise not replicated).** Differences are method minus TFT + EWC, main / replicate.
+
+| Method | Final error | Forgetting | Backward transfer |
+|---|---|---|---|
+| TFT pretrained, fine-tuning | +0.016 / +0.015: **practically equivalent** | +0.016 / +0.016: **practically equivalent** | +0.017 / +0.016: **practically equivalent** |
+| MLP pretrained, fine-tuning | +0.334 / +0.185 (p_Holm < 0.001 / < 0.001): **replicated** | +0.320 / +0.178 (< 0.001 / 0.002): **replicated** | +0.303 / +0.182 (< 0.001 / 0.041): **replicated** |
+| MLP pretrained + EWC | +0.225 / +0.040: not replicated | +0.157 / −0.004: not replicated | +0.141 / +0.018: not replicated |
+| TFT from scratch | −0.108 / −0.176 (0.24 / < 0.001): not replicated | −0.083 / −0.135: not replicated | −0.076 / −0.147: not replicated |
+| MLP from scratch | −0.013 / −0.116: not replicated | +0.002 / −0.097: not replicated | −0.005 / −0.128: not replicated |
+
+**Retention of first-life knowledge.** Pool test RMSE before → after the S6 stream: TFT pretrained + EWC 3.280 → 3.148 (main) and 3.246 → 3.120 (replicate); TFT pretrained fine-tuning 3.280 → 3.153 and 3.246 → 3.134; MLP pretrained + EWC 3.494 → 3.395 and 3.537 → 3.443; MLP pretrained fine-tuning 3.494 → 3.377 and 3.537 → 3.434. The stream does not degrade the pool error. For context, on the pool test split persistence gives 3.878 pp and linear extrapolation 3.001 pp (S7 7.008 / 5.069, S8 2.128 / 2.325, S9 1.099 / 1.151): **the pretrained models are less accurate on the pool than linear extrapolation.**
+
+**What P3 shows.**
+1. **EWC does not help the pretrained TFT** (validation selects λ = 0.01, and test differences are below 0.05 pp in both seed sets).
+2. **Pretrained TFT + EWC beats pretrained MLP fine-tuning, replicated** in final error, forgetting and backward transfer.
+3. **Pretraining on the first-life pool does not improve the S6 forecasts.** Both backbones are, on average, better from scratch; for the TFT the difference is significant in the replicate set only (not replicated). An exploratory contrast (outside the pre-registered family) shows pretraining worsens the MLP in both seed sets. A likely reason is that the pretrained models do not beat linear extrapolation even on the pool itself: with these shared inputs, pretraining does not learn a model that transfers.
+4. **No forgetting of the pool:** the S6 stream leaves pool error unchanged or slightly lower, with or without EWC.
+5. **The best neural forecaster, TFT from scratch (0.40–0.42 pp), is below gradient boosting (0.451 pp) on average, but linear extrapolation (0.343 pp) remains the most accurate method on S6.**
+6. **Not attributable yet:** TFT from scratch reaches 0.401 pp here against 0.883 pp for TFT fine-tuning under D20. The two runs differ in inputs (calendar time, charge voltage and CV phase, chemistry and condition codes), in tuning (10 orders, one-SE and edge rules) and in preprocessing scope, so the gain cannot be attributed to any one change without an ablation.
