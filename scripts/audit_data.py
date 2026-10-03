@@ -40,10 +40,11 @@ sys.path.insert(0, str(ROOT))
 from src import data_pipeline as dp  # noqa: E402
 from src import diagnostic_features as F  # noqa: E402
 from src import forecasting as FC  # noqa: E402
+from src import pool  # noqa: E402
 from src import wheeler as W  # noqa: E402
 
 #: Values published in docs/RESULTS.md and the results JSON files; the audit must reproduce them.
-EXPECTED = {"s1_samples": 279, "s6_samples": 2409, "s6_checks": 847, "s6_valid_checks": 843,
+EXPECTED = {"s7_samples": 10251, "s8_samples": 9699, "s9_samples": 16761, "s1_samples": 279, "s6_samples": 2409, "s6_checks": 847, "s6_valid_checks": 843,
             "s6_invalid": {("cell1a", 100), ("cell2a", 100), ("cell2c", 100), ("cell3a", 100)}}
 LEAK_RHO = 0.95          # within-cell |Spearman| of an input with the target that triggers a leakage FAIL
 SOH_TOL = 1e-9
@@ -273,11 +274,43 @@ def audit_s6(a: Audit, data_root: Path) -> None:
     check_soh_increases(a, ds, v, "cell", "cycle", 0.5)
 
 
+# ---------------------------------------------------------------------------
+# Pool (D21): S7, S8, S9
+# ---------------------------------------------------------------------------
+
+POOL_STATIC = {"S7": list(pool.S7_STATIC), "S8": [], "S9": ["temp_c", "chemistry"]}
+
+
+def audit_pool(a: Audit, data_root: Path) -> None:
+    for ds in ("S7", "S8", "S9"):
+        t = dp.read_dataset(data_root / f"pool_{ds.lower()}_checks.csv")
+        t["check_time"] = pd.to_datetime(t["check_time"])
+        check_labels(a, ds, t, "cell", "check_time", t["Capacity_Ah"].notna())
+        order_col = "cycle" if "cycle" in t else "check_time"
+        bad = [c for c, g in t.sort_values(["cell", order_col]).groupby("cell") if not g["check_time"].is_monotonic_increasing]
+        a.check(ds, f"check time increases with {order_col}", not bad, bad[:5] or "all cells")
+        a.check(ds, "capacity positive and finite", bool((t["Capacity_Ah"] > 0).all() and np.isfinite(t["Capacity_Ah"]).all()),
+                f"{len(t)} checks")
+        s = pool.build_samples(t, static=POOL_STATIC[ds])
+        a.check(ds, "sample count", len(s) == EXPECTED[f"{ds.lower()}_samples"], f"{len(s)} (D21 disclosures: {EXPECTED[ds.lower() + '_samples']})")
+        check_sample_core(a, ds, s, "cell", "origin_pos", "target_pos")
+        feats = ["soh_origin", "days_since_first", "fade_rate_pp_per_day", "horizon", "days_to_target",
+                 *[c for c in ("cycles_since_first", "cycles_to_target") if c in s],
+                 *[c for c in POOL_STATIC[ds] if pd.api.types.is_numeric_dtype(s[c])]]
+        banned = [c for c in s.columns if any(k in c.lower() for k in ("throughput", "total_q", "delta_q", "cap_aged"))]
+        a.check(ds, "no throughput or extrapolated-capacity column in the samples", not banned, banned or "none")
+        check_leakage(a, ds, s, feats, "cell")
+        check_missingness(a, ds, s, feats)
+        a.check(ds, "cells and conditions with >= 5 checks", None,
+                {"cells": int(s["cell"].nunique()), "conditions": int(s["condition"].nunique())})
+        check_soh_increases(a, ds, t, "cell", order_col, 2.0)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--data-root", default=os.environ.get("DATA_ROOT", "data"))
     ap.add_argument("--out", default=str(ROOT / "results" / "data_audit.json"))
-    ap.add_argument("--datasets", nargs="+", choices=["S1", "S6"], default=["S1", "S6"])
+    ap.add_argument("--datasets", nargs="+", choices=["S1", "S6", "pool"], default=["S1", "S6", "pool"])
     args = ap.parse_args()
     data_root = dp.resolve_data_root(args.data_root, ROOT)
 
@@ -286,6 +319,8 @@ def main() -> int:
         audit_s1(a, data_root)
     if "S6" in args.datasets:
         audit_s6(a, data_root)
+    if "pool" in args.datasets:
+        audit_pool(a, data_root)
     report = {"environment": dp.environment_info(ROOT), "n_checks": len(a.rows), "n_failed": len(a.failed), "checks": a.rows}
     Path(args.out).write_text(json.dumps(report, indent=1, default=_jsonable), encoding="utf-8")
     print(f"\n{len(a.rows)} checks, {len(a.failed)} failed -> {args.out}")

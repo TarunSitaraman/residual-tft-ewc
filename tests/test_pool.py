@@ -112,3 +112,37 @@ def test_s9_time_restart_is_made_continuous():
     m = pool.s9_cell_measurements(pd.DataFrame(rows))
     assert m.attrs["time_resets"] == 1
     assert m["elapsed_s"].is_monotonic_increasing and m["cycle"].tolist() == [1, 2, 3, 4]
+
+
+def test_s9_short_segments_touching_cutoff_are_not_full_discharges():
+    rows = []
+    for cyc in range(1, 8):
+        q = 22.0 if cyc == 4 else 3200.0 - cyc                      # cycle 4: a 22 mAh segment that reaches 2.65 V
+        rows += [{"cycle number": cyc, "time/s": cyc * 100.0, "Ecell/V": 4.2, "Q discharge/mA.h": 0.0},
+                 {"cycle number": cyc, "time/s": cyc * 100.0 + 50, "Ecell/V": 2.65, "Q discharge/mA.h": q}]
+    m = pool.s9_cell_measurements(pd.DataFrame(rows))
+    assert 4 not in m["cycle"].tolist() and len(m) == 6
+
+
+def test_s9_reference_cycles_at_another_current_are_dropped():
+    rows = []
+    for cyc in range(1, 8):
+        i, q = (-2500.0, 3550.0) if cyc == 5 else (-5000.0, 2400.0 - cyc)   # cycle 5: a slow reference cycle
+        rows += [{"cycle number": cyc, "time/s": cyc * 100.0, "Ecell/V": 4.2, "Q discharge/mA.h": 0.0, "<I>/mA": 2000.0},
+                 {"cycle number": cyc, "time/s": cyc * 100.0 + 50, "Ecell/V": 2.5, "Q discharge/mA.h": q, "<I>/mA": i}]
+    m = pool.s9_cell_measurements(pd.DataFrame(rows))
+    assert m["cycle"].tolist() == [1, 2, 3, 4, 6, 7]
+
+
+def test_s9_cycles_with_two_discharge_steps_are_dropped():
+    rows = []
+    for cyc in range(1, 7):
+        rows += [{"cycle number": cyc, "time/s": cyc * 100.0, "Ecell/V": 4.2, "Q discharge/mA.h": 0.0, "<I>/mA": 2500.0},
+                 {"cycle number": cyc, "time/s": cyc * 100.0 + 10, "Ecell/V": 3.0, "Q discharge/mA.h": 1200.0, "<I>/mA": -2500.0}]
+        if cyc == 3:                                                  # rest, then a second discharge in the same cycle
+            rows += [{"cycle number": cyc, "time/s": cyc * 100.0 + 20, "Ecell/V": 3.4, "Q discharge/mA.h": 1200.0, "<I>/mA": 0.0},
+                     {"cycle number": cyc, "time/s": cyc * 100.0 + 30, "Ecell/V": 2.5, "Q discharge/mA.h": 3500.0, "<I>/mA": -2500.0}]
+        else:
+            rows += [{"cycle number": cyc, "time/s": cyc * 100.0 + 30, "Ecell/V": 2.5, "Q discharge/mA.h": 2400.0 - cyc, "<I>/mA": -2500.0}]
+    m = pool.s9_cell_measurements(pd.DataFrame(rows))
+    assert 3 not in m["cycle"].tolist() and len(m) == 5
