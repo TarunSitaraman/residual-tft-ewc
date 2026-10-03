@@ -169,6 +169,8 @@ A post hoc ablation (one seed set; Fig.~\ref{fig:ablation}) explains why the TFT
   \label{fig:ablation}
 \end{figure}
 
+\emph{Computational cost.} On one CPU thread, pretraining on the pool takes 22~s for the MLP and 251~s for the TFT on average (10 seeds). Learning the whole S6 stream then takes 1.0--3.0~s for the MLP variants and 15~s (fine-tuning) to 23~s (EWC) for the TFT; EWC adds about 50\% to the TFT's training time through the Fisher-information computation, without improving its accuracy.
+
 % -----------------------------------------------------------------------------
 \subsection{What the TFT uses}
 \label{sec:res-interp}

@@ -1,40 +1,110 @@
 \documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
 
-\usepackage{amsmath,amssymb}
-\usepackage{graphicx}
-\usepackage[table]{xcolor}
-\usepackage{booktabs}
 \usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+% Added for the generated result tables and links.
+\usepackage{iftex}
+\ifXeTeX
+  % XeTeX/Tectonic builds lack the Type-1 Times that IEEEtran uses under pdfLaTeX.
+  \usepackage{fontspec}
+  \setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+    ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\fi
+\usepackage{booktabs}
 \usepackage{array}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 
-% Visible placeholder for anything that depends on the real-data run or on a
-% team decision. The final version must compile with zero \todo occurrences.
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Visible placeholder for anything the team still has to check or decide.
+% The submitted version must compile with zero \todo occurrences.
 \newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
 
 \begin{document}
 
-\title{Continual State-of-Health Forecasting for Heterogeneous Second-Life Lithium-Ion Batteries: When Does Elastic Weight Consolidation Help?}
+% ============================================================
+% TITLE
+% ============================================================
+
+\title{
+Continual Learning for Adaptive Health and Reuse Assessment of
+Heterogeneous Second-Life EV Batteries
+}
+
+% ============================================================
+% AUTHORS
+% ============================================================
 
 \author{
-\IEEEauthorblockN{Darshan D, Sohan Sandeep Krishnan, Tarun Sitaraman}
-\IEEEauthorblockA{\todo{affiliation, e-mail; author order}}
+\IEEEauthorblockN{Tarun Sitaraman}
+\IEEEauthorblockA{
+\textit{Department of Networking and}\\
+\textit{Communications}\\
+\textit{SRM Institute of Science}\\
+\textit{and Technology}\\
+Chennai, India\\
+RA2411028010038
+}
+\and
+\IEEEauthorblockN{Sohan Sandeep Krishnan}
+\IEEEauthorblockA{
+\textit{Department of Networking and}\\
+\textit{Communications}\\
+\textit{SRM Institute of Science}\\
+\textit{and Technology}\\
+Chennai, India\\
+RA2411028010014
+}
+\and
+\IEEEauthorblockN{Darshan D}
+\IEEEauthorblockA{
+\textit{Department of Networking and}\\
+\textit{Communications}\\
+\textit{SRM Institute of Science}\\
+\textit{and Technology}\\
+Chennai, India\\
+RA2411028010056
+}
 }
 
 \maketitle
 
+% ============================================================
+% ABSTRACT
+% ============================================================
+
 \begin{abstract}
-\todo{abstract, written by the team}
+Retired electric-vehicle batteries can serve in second-life applications, but a health model trained on one battery population may fail on the next, and continual learning promises to adapt without forgetting. We evaluate this promise for forecasting the state of health (SOH) of second-life lithium-ion cells one to three capacity checks ahead. From five public datasets (395 cells after quality rules) we build a leakage-controlled benchmark: every file is verified against its repository record, labels are reproduced from raw data, and two label artefacts are removed, test currents set from the previous capacity and pulse charge counted in the capacity. A Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) is compared with fine-tuning, replay, joint training and simple forecasters under three protocols: a continual stream of cells or usage conditions, unseen groups, and pretraining on 369 first-life cells of other chemistries. Learned forecasters beat persistence, and forgetting appears whenever usage conditions differ (0.18--0.46 percentage points). However, TFT\,+\,EWC is never the most accurate method, EWC is practically equivalent to fine-tuning after pretraining, pretraining does not improve the forecasts, and extrapolating the recent fade rate remains best (0.343 percentage points on the heterogeneous dataset). A re-run shows that several significance results depend on the software environment, so the main results are required to replicate on a second seed set. Forecast SOH maps to reuse classes that agree with the measured class for 96--97\% of samples on unseen usage conditions.
 \end{abstract}
 
+% ============================================================
+% KEYWORDS
+% ============================================================
+
 \begin{IEEEkeywords}
-second-life batteries, state-of-health forecasting, continual learning, elastic weight consolidation, temporal fusion transformer, lithium-ion batteries
+Continual learning, second-life batteries, electric vehicles, state of health, battery degradation, heterogeneous batteries, catastrophic forgetting, machine learning
 \end{IEEEkeywords}
+
+\input{sections/introduction}
+
+\input{sections/related}
 
 \input{sections/methods}
 
 \input{sections/results}
+
+\input{sections/discussion}
+
+% ============================================================
+% REFERENCES
+% ============================================================
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

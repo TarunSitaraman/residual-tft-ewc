@@ -1,0 +1,49 @@
+% ============================================================
+% V. DISCUSSION and VI. CONCLUSION
+% Every number is taken from docs/RESULTS.md and the committed results files.
+% ============================================================
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why the Proposed Model Does Not Win}
+
+The proposed TFT\,+\,EWC was competitive but never the most accurate forecaster. Three properties of the data explain much of this. First, fade over one to three checks is smooth: on S6, extrapolating the recent fade rate (0.343~pp) beats every learned model, which leaves little structure for a sequence model to add. Second, the groups are few and small: six S1 cells and two or three cells per S6 condition give 21--27 and 135--225 training samples per task. Third, the TFT barely uses its history window: its attention is nearly uniform over the previous four origins, and its variable-selection weights change from seed to seed (Section~\ref{sec:res-interp}).
+
+EWC behaves as theory predicts where there is something to protect. Forgetting is negligible across the six near-identical S1 cells (at most 0.04~pp) and substantial across the seven S6 usage conditions (0.18--0.46~pp). Even there, its benefit for the TFT did not survive a re-run in a different software environment, and after first-life pretraining the validation data selected almost no EWC ($\lambda=0.01$). Among the pretrained models, TFT\,+\,EWC is better than MLP fine-tuning in a replicated comparison, so the TFT backbone does help relative to the MLP once both start from the pool.
+
+\subsection{What Matters for Forecasting}
+
+The post hoc ablation points to the inputs rather than the architecture. Removing 17 diagnostic features (incremental-capacity peaks, voltage windows and resistance proxies) improved the TFT by 0.23--0.35~pp, and adding the calendar time between checks improved it by 0.22--0.31~pp. The second finding agrees with an observation made on the training data before the protocol change: in S6, fade per cycle rises with the calendar time between checks at 50~$^\circ$C in all 20 cells. Usage that is known in advance, such as the time and cycles until the next check, is therefore a strong predictor, and forecasts are conditional on it.
+
+\subsection{Transfer From First Life}
+
+Pretraining on 369 first-life cells of three other chemistries did not improve the forecasts for the LFP cells of S6. The pretrained models did not beat linear extrapolation even on the pool's own test data, so the shared inputs were not sufficient to learn a first-life model worth transferring. Retention was not the problem: the S6 stream left the pool error unchanged or slightly lower.
+
+\subsection{Reproducibility on Small Battery Datasets}
+
+Several significance results changed when the same experiments were re-run on different hardware with a recorded PyTorch build (the original build was not recorded). The affected differences were either far below the effect of the label definition (0.005--0.014~pp on S1) or depended on a hyperparameter chosen by a near-tie (S6). Small datasets, many runs with low variance and Holm-corrected tests make such fragility likely. We therefore recommend, for battery continual-learning studies, recording the full software environment, tuning with enough runs to separate neighbouring grid values, and requiring that a claimed difference replicate on a second seed set and exceed a practically meaningful threshold.
+
+\subsection{Reuse Assessment}
+
+On unseen S6 usage conditions, the reuse class of the forecast SOH agreed with the measured class for 96--97\% of samples with the learned models, against 85\% for persistence. On S1 every sample is in class C0, and in the S6 continual stream every test period is in C3, so the class mapping is informative only when the forecast horizon crosses class boundaries. How close forecasts lie to the boundaries was not quantified.
+
+\subsection{Positioning With Respect to the Literature}
+
+The studies reviewed in Section~II estimate the current SOH or SOC, on different cells and with different SOH definitions, so their error figures cannot be compared directly with the forecasting errors reported here. Our results complement them in three ways: they evaluate continual learning for SOH on second-life data with explicit forgetting and retention metrics; they control label leakage through the test protocol; and they report which results replicate.
+
+\subsection{Limitations}
+
+\begin{itemize}
+  \item The task was changed from current-SOH estimation to forecasting after the first dataset had been inspected; the forecasting protocol was then fixed before any model was trained, and deviations are reported.
+  \item The second-life datasets are small: six S1 cells, and two or three cells per S6 condition, which limits the power of the unseen-group protocol.
+  \item S6 is aged at 50~$^\circ$C, and its ``second life'' is continued ageing below 80\% SOH under the same protocol, not a repurposed duty cycle.
+  \item SOH is relative to each cell's first valid measurement; for S1 that measurement is already an aged state.
+  \item Forecasts are conditional on the planned usage until the target.
+  \item The ablation of Section~\ref{sec:res-p3} was decided after the main results and is explanatory.
+\end{itemize}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+We built a leakage-controlled benchmark for forecasting the state of health of second-life lithium-ion cells from five public datasets and evaluated a Temporal Fusion Transformer with Elastic Weight Consolidation as a continual learner. Learned forecasters beat persistence clearly, and forgetting appears whenever the usage conditions differ. However, the proposed model was not the most accurate forecaster, EWC did not reliably improve it, and first-life pretraining on other chemistries did not transfer; extrapolating the recent fade rate remained hard to beat. The inputs mattered more than the architecture: calendar time between checks helped, and diagnostic features did not. Several earlier significance results did not survive a re-run, which motivated the replication rule used for the main results. Future work should test continual learning on larger and more varied second-life populations, use the dense per-cycle data between checks, and quantify forecast uncertainty near reuse-class boundaries.
