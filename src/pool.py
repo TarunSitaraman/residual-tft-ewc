@@ -95,15 +95,137 @@ def build_samples(table: pd.DataFrame, static: Sequence[str], horizons: Sequence
         g = g.sort_values("check_time").reset_index(drop=True)
         days = ((g["check_time"] - g["check_time"].iloc[0]).dt.total_seconds() / 86400).to_numpy()
         soh = g["SOH_Percent"].to_numpy(float)
+        cyc = g["cycle"].to_numpy(float) if "cycle" in g else None     # planned cycle count (S8, S9)
         for i in range(len(g)):
             rate = float(np.polyfit(days[i - 2:i + 1], soh[i - 2:i + 1], 1)[0]) if i >= 2 else np.nan
             base = {"dataset": g["dataset"].iloc[0], "cell": cell, "condition": g["condition"].iloc[0],
                     "origin_pos": i, "n_valid_rpts": len(g), "Cycle_Date": g["check_time"].iloc[i],
                     "soh_origin": soh[i], "days_since_first": days[i], "fade_rate_pp_per_day": rate,
-                    **{c: g[c].iloc[0] for c in static}}
+                    **{c: g[c].iloc[0] for c in static},
+                    **({"cycles_since_first": cyc[i] - cyc[0]} if cyc is not None else {})}
             for h in horizons:
                 j = i + h
                 if j < len(g):
                     rows.append({**base, "horizon": h, "target_pos": j, "days_to_target": days[j] - days[i],
+                                 **({"cycles_to_target": cyc[j] - cyc[i]} if cyc is not None else {}),
                                  "soh_target": soh[j], TARGET: soh[j] - soh[i]})
     return pd.DataFrame(rows)
+
+
+# ---------------------------------------------------------------------------
+# S8 (XJTU) and S9 (Tongji): checks from per-cycle data (D21 disclosures, 3 Oct 2026)
+# ---------------------------------------------------------------------------
+
+BLOCK_CYCLES = 10                       # regular full-discharge cycles averaged into one check
+CUTOFF_TOL_V = 0.02
+
+
+def block_checks(meas: pd.DataFrame, block: int) -> pd.DataFrame:
+    """Group consecutive valid measurement cycles into checks (mean capacity; time and cycle of the last one).
+
+    ``meas`` has ``cycle``, ``capacity_ah`` and ``elapsed_s`` (time since the cell's start), in cycle order.
+    An incomplete final block is dropped, so every check averages exactly ``block`` measurements.
+    """
+    m = meas.reset_index(drop=True)
+    n = len(m) // block * block
+    m = m.iloc[:n].assign(block=np.arange(n) // block)
+    g = m.groupby("block")
+    return pd.DataFrame({"cycle": g["cycle"].last(), "Capacity_Ah": g["capacity_ah"].mean(),
+                         "elapsed_s": g["elapsed_s"].last()}).reset_index(drop=True)
+
+
+S8_BATCH_RULES: dict[str, tuple[str, int]] = {
+    # batch: (which cycles are capacity measurements, cycles per check)
+    "Batch-1": ("1C full discharge", BLOCK_CYCLES), "Batch-2": ("1C full discharge", BLOCK_CYCLES),
+    "Batch-3": ("1C full discharge", BLOCK_CYCLES),
+    "Batch-4": ("test capacity", 1), "Batch-5": ("test capacity", 1), "Batch-6": ("test capacity", 1),
+}
+
+
+def s8_cell_measurements(mat, batch: str) -> pd.DataFrame:
+    """Valid capacity-measurement cycles of one S8 cell (authors' per-cycle discharge capacity).
+
+    The first cycle (initial 0.2C test) is never used. Batches 1–3: cycles described exactly as a
+    1C discharge (full, to 2.5 V); batches 4–6: cycles labelled "[test capacity]".
+    """
+    rule, _ = S8_BATCH_RULES[batch]
+    data, dcap = np.atleast_1d(mat["data"]), np.asarray(mat["summary"].discharge_capacity_Ah, float)
+    t0 = pd.to_datetime(np.atleast_1d(data[0].system_time)[0], format="%Y-%m-%d,%H:%M:%S")
+    rows = []
+    for i, c in enumerate(data):
+        desc = str(c.description)
+        if i == 0 or "0.2C discharge" in desc:
+            continue
+        is_meas = ("[test capacity]" in desc) if rule == "test capacity" else desc.endswith("and 1C discharge")
+        if not is_meas or np.min(c.voltage_V) > 2.5 + CUTOFF_TOL_V:
+            continue
+        t_end = pd.to_datetime(np.atleast_1d(c.system_time)[-1], format="%Y-%m-%d,%H:%M:%S")
+        rows.append({"cycle": i, "capacity_ah": float(dcap[i]), "elapsed_s": (t_end - t0).total_seconds()})
+    return pd.DataFrame(rows, columns=["cycle", "capacity_ah", "elapsed_s"])
+
+
+def s8_check_table(zip_path: Path | str) -> pd.DataFrame:
+    import io
+
+    import scipy.io as sio
+
+    out = []
+    with zipfile.ZipFile(zip_path) as zf:
+        for name in sorted(n for n in zf.namelist() if n.endswith(".mat") and "/Batch-" in n):
+            batch, fname = name.split("/")[-2], name.split("/")[-1][:-4]
+            mat = sio.loadmat(io.BytesIO(zf.read(name)), squeeze_me=True, struct_as_record=False)
+            checks = block_checks(s8_cell_measurements(mat, batch), S8_BATCH_RULES[batch][1])
+            out.append(checks.assign(dataset="S8", cell=f"S8-{batch}-{fname}", condition=f"S8-{batch}"))
+    return _finish(pd.concat(out, ignore_index=True))
+
+
+S9_FILE = re.compile(r"CY(\d+)-(\d+)_(\d+)-#(\d+)\.csv$")
+S9_CHEMISTRY: dict[str, str] = {"Dataset_1_NCA_battery": "NCA", "Dataset_2_NCM_battery": "NCM",
+                                "Dataset_3_NCM_NCA_battery": "NCM+NCA"}      # Zhu et al. 2022, abstract
+
+
+def s9_cell_measurements(df: pd.DataFrame) -> pd.DataFrame:
+    """Per-cycle discharge capacity of one S9 cell; a cycle counts only if it discharges to the cell's cut-off.
+
+    In three files the time counter restarts once while cycle numbers continue; time is made continuous
+    by carrying the elapsed time across the restart (the length of any pause there is not recorded).
+    ``attrs["time_resets"]`` gives the number of restarts.
+    """
+    t = df["time/s"].to_numpy(float)
+    jumps = np.flatnonzero(np.diff(t) < 0)
+    offset = np.zeros_like(t)
+    for j in jumps:
+        offset[j + 1:] += t[j] - t[j + 1]
+    df = df.assign(**{"time/s": t + offset})
+    g = df.groupby("cycle number")
+    per = pd.DataFrame({"capacity_ah": g["Q discharge/mA.h"].max() / 1000, "v_min": g["Ecell/V"].min(),
+                        "elapsed_s": g["time/s"].max()})
+    cutoff = per["v_min"].round(2).mode().iloc[0]          # 2.65 V (NCA) or 2.5 V (NCM, blend)
+    per = per[(per["v_min"] <= cutoff + CUTOFF_TOL_V) & (per["capacity_ah"] > 0)]
+    out = per.reset_index(names="cycle")[["cycle", "capacity_ah", "elapsed_s"]]
+    out.attrs["time_resets"] = len(jumps)
+    return out
+
+
+def s9_check_table(zip_paths: Sequence[Path | str]) -> pd.DataFrame:
+    out = []
+    for zp in zip_paths:
+        with zipfile.ZipFile(zp) as zf:
+            for name in sorted(n for n in zf.namelist() if n.endswith(".csv")):
+                m = S9_FILE.search(name)
+                if not m:
+                    continue
+                df = pd.read_csv(zf.open(name), usecols=["time/s", "Ecell/V", "Q discharge/mA.h", "cycle number"])
+                chem = S9_CHEMISTRY[name.split("/")[0]]
+                meas = s9_cell_measurements(df)
+                checks = block_checks(meas, BLOCK_CYCLES).assign(time_resets=meas.attrs["time_resets"])
+                cond = f"S9-{name.split('/')[0].replace('Dataset_', 'D')}-CY{m[1]}-{m[2]}_{m[3]}"
+                out.append(checks.assign(dataset="S9", cell=f"{cond}-#{m[4]}", condition=cond,
+                                         temp_c=float(m[1]), chemistry=chem))
+    return _finish(pd.concat(out, ignore_index=True))
+
+
+def _finish(t: pd.DataFrame) -> pd.DataFrame:
+    """Common layout: check_time as elapsed time (no absolute date is needed), SOH, check counts."""
+    t = t.assign(check_time=pd.Timestamp("2000-01-01") + pd.to_timedelta(t["elapsed_s"], unit="s"))
+    return add_soh(t)

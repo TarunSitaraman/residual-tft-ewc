@@ -40,6 +40,7 @@ from pathlib import Path
 
 RECORD = Path("docs/external_data/metadata/wheeler2025_lfp_dataverse.dataset.json")
 ACCESS = "https://entrepot.recherche.data.gouv.fr/api/access/datafile/{id}"
+CHUNK = 2 << 20          # bytes per range request: small enough to finish before slow links drop
 
 
 def _range(url: str, start: int, end: int, size: int, attempts: int = 15) -> bytes:
@@ -101,7 +102,9 @@ def fetch_entry(url: str, size: int, e: dict) -> bytes:
     head = _range(url, e["offset"], e["offset"] + 29, size)
     nl, el = struct.unpack("<HH", head[26:30])
     start = e["offset"] + 30 + nl + el
-    raw = _range(url, start, start + e["compressed"] - 1, size) if e["compressed"] else b""
+    # Fetch in pieces so a dropped connection costs one piece, not the whole entry (ageing files are ~37 MB).
+    raw = b"".join(_range(url, p, min(p + CHUNK, start + e["compressed"]) - 1, size)
+                   for p in range(start, start + e["compressed"], CHUNK))
     if e["method"] == 0:
         data = raw
     elif e["method"] == 8:

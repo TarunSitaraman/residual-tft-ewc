@@ -74,3 +74,41 @@ def test_s7_excludes_cold_checkups():
     eoc.loc[eoc.index[-1], "t_start_degC"] = 1.3          # a check-up that started cold (as CU 11 of P00x cells)
     c = pool.s7_cell_checks(eoc, "P001-1", "P001")
     assert len(c) == 5 and (c["check_temp_c"] >= pool.S7_MIN_CHECKUP_TEMP_C).all()
+
+
+def test_block_checks_average_complete_blocks_only():
+    meas = pd.DataFrame({"cycle": np.arange(1, 26), "capacity_ah": np.arange(25, dtype=float),
+                         "elapsed_s": np.arange(25) * 3600.0})
+    b = pool.block_checks(meas, 10)
+    assert len(b) == 2                                          # the incomplete third block is dropped
+    np.testing.assert_allclose(b["Capacity_Ah"], [4.5, 14.5])
+    assert b["cycle"].tolist() == [10, 20] and b["elapsed_s"].tolist() == [9 * 3600.0, 19 * 3600.0]
+
+
+def test_s9_measurements_require_a_full_discharge():
+    rows = []
+    for cyc, (vmin, q) in enumerate([(2.65, 3200), (2.65, 3190), (2.90, 2500), (2.65, 3180)], start=1):
+        rows += [{"cycle number": cyc, "time/s": cyc * 100.0, "Ecell/V": 4.2, "Q discharge/mA.h": 0.0},
+                 {"cycle number": cyc, "time/s": cyc * 100.0 + 50, "Ecell/V": vmin, "Q discharge/mA.h": q}]
+    m = pool.s9_cell_measurements(pd.DataFrame(rows))
+    assert m["cycle"].tolist() == [1, 2, 4]                     # cycle 3 stopped at 2.90 V: not a full discharge
+    np.testing.assert_allclose(m["capacity_ah"], [3.2, 3.19, 3.18])
+
+
+def test_samples_include_planned_cycles_when_known():
+    t = pool.add_soh(pd.DataFrame({"dataset": "S9", "cell": "c1", "condition": "k", "cycle": np.arange(10, 90, 10),
+                                   "Capacity_Ah": np.linspace(3.0, 2.8, 8),
+                                   "check_time": pd.Timestamp("2000-01-01") + pd.to_timedelta(np.arange(8), unit="D")}))
+    s = pool.build_samples(t, static=[])
+    assert (s["cycles_to_target"] == 10 * s["horizon"]).all() and (s["cycles_since_first"] == 10 * s["origin_pos"]).all()
+
+
+def test_s9_time_restart_is_made_continuous():
+    rows = []
+    for cyc in range(1, 5):
+        base = cyc * 100.0 if cyc <= 2 else (cyc - 2) * 100.0       # counter restarts after cycle 2
+        rows += [{"cycle number": cyc, "time/s": base, "Ecell/V": 4.2, "Q discharge/mA.h": 0.0},
+                 {"cycle number": cyc, "time/s": base + 50, "Ecell/V": 2.65, "Q discharge/mA.h": 3200 - cyc}]
+    m = pool.s9_cell_measurements(pd.DataFrame(rows))
+    assert m.attrs["time_resets"] == 1
+    assert m["elapsed_s"].is_monotonic_increasing and m["cycle"].tolist() == [1, 2, 3, 4]
