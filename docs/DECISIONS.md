@@ -598,3 +598,31 @@ The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB unco
 - **Learning rate (2 levels):** 1e-2 (selected for the TFT under D20) and 3e-3 (selected under D21).
 - **Sanity check:** D20 F1 at 1e-2 should reproduce D20's TFT fine-tuning result (0.883 pp) up to the run-to-run variation documented in the reproducibility check.
 - **Reported:** mean, s.d. and median final average error per cell of the 4 × 2 design; paired Wilcoxon tests (matched order × seed) for the input contrasts at each learning rate and the learning-rate contrast at each input level, Holm-corrected over that family. Script `scripts/run_ablation_a1.py`; results `results/forecasting_d21_ablation_a1.json`.
+
+---
+
+## D22. S6 between-check ageing cycles as inputs — DRAFT, not adopted
+
+**Status:** Draft (3 Oct 2026) for team review. Nothing in this entry may be run until it is adopted. The ageing files are being downloaded and verified (D21, route 1); no model has used them. Written after the P3 results and after reading one ageing file's structure (cell 1a, cycles 101–200), which must be stated.
+
+**What the files hold.** One CSV per cell and block of 100 ageing cycles (827 files, 132 GB uncompressed), Arbin export: `Test_Time`, `Step_Index`, `Cycle_Index`, current, voltage, charge and discharge capacity and energy, `Internal_Resistance` (only on some equipment, Wheeler et al. 2025), `dV/dt` (the authors advise against it). In cell 1a (case 1, 70 % DoD), every cycle discharges the same 0.841 Ah: the protocol sets it to 70 % of the last C/3 charge capacity (Wheeler et al. 2025).
+
+### Leakage rules (fixed before any use)
+- **Never inputs (protocol-scaled, D14 analogue):** discharged and charged charge and energy per cycle, the discharge current setpoints, and anything computed from them alone. In the 70 % DoD cases they encode the previous check's capacity. The audit must show this explicitly (within-cell correlation of per-cycle discharged charge with the previous check's capacity) before the rule is relied on.
+- **Allowed, measured responses:** end-of-discharge voltage, end-of-charge voltage after the CV phase, CV-phase duration and its final current, rest-voltage relaxation after charge and after discharge, and `Internal_Resistance` where recorded (missing otherwise, with an indicator). Ratios of protocol-scaled quantities (e.g. energy efficiency) are allowed only if the audit shows no within-cell correlation above 0.95 with the previous check's capacity.
+- **Causality:** a sample with origin check *k* may use only ageing cycles completed before check *k*; nothing from cycles between *k* and the target.
+- **Case 7 (100 % DoD):** every ageing cycle is a full discharge to 2.5 V, so its discharged charge is a capacity measurement at the ageing rate. It may serve as a dense label in a **separate, secondary analysis** only; the headline label stays the C/25 check capacity (D20).
+
+### Features and models
+- **F2 = D21 shared inputs + interval aggregates** of the allowed responses over the 100 cycles before the origin: mean, last value, and least-squares slope against cycle number. Used by every method, so comparisons stay matched.
+- **Per-cycle TFT (optional, secondary):** a TFT whose window is the last *N* ageing cycles' allowed responses instead of the last 4 checks. It is a different model and is reported separately from P1–P3.
+
+### Validation before use
+1. Every file verified against the zip index (CRC-32) and its SHA-256 recorded (as now).
+2. Completeness per cell: missing blocks, interrupted cycles, cycles with abnormal step structure (rules fixed before labels are read, as for S9).
+3. Leakage audit of every F2 feature (rules above) in `scripts/audit_data.py`.
+4. P1 and P3 re-run with F2 against the D21 inputs, under the D21 tuning and replication rules.
+
+### Open questions for the team
+- Whether to run the optional per-cycle TFT at all (compute and time).
+- Whether the case-7 dense-label analysis is worth including.
