@@ -626,3 +626,4 @@ The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB unco
 ### Open questions for the team
 - Whether to run the optional per-cycle TFT at all (compute and time).
 - Whether the case-7 dense-label analysis is worth including.
+- **4 Oct 2026, A1 replicate (decided before running it).** A1 is repeated on seeds 5–9 with everything else unchanged. Its contrasts are then judged by the D21 replication rule (significant after Holm correction in both seed sets, same sign, at least 0.05 pp in both); only replicated contrasts are stated as findings. Results: `results/forecasting_d21_ablation_a1_replicate.json`.

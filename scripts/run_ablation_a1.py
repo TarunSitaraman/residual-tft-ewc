@@ -52,8 +52,11 @@ def samples() -> tuple[pd.DataFrame, dict[str, list[str]]]:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--profile", choices=tuple(PROFILES), default="paper")
+    ap.add_argument("--replicate", action="store_true", help="seeds 5-9 instead of 0-4 (D21 replication rule)")
     args = ap.parse_args()
-    cfg = PROFILES[args.profile]
+    cfg = dict(PROFILES[args.profile])
+    if args.replicate:
+        cfg["seeds"] = tuple(s + 5 for s in cfg["seeds"])
     s6, inputs = samples()
     cases = sorted(s6["Battery_ID"].unique())
     orders = P.sample_orders(cases, cfg["n_orders"], 0)
@@ -86,8 +89,8 @@ def main() -> int:
         tests.append({"contrast": k, "median_diff": float(np.median(x - y)), **res})
     holm = ev.holm_correction(pv)
     tests = [{**t, "p_holm": holm[t["contrast"]]} for t in tests]
-    name = "forecasting_d21_ablation_a1.json" if args.profile == "paper" else "forecasting_d21_ablation_a1_smoke.json"
-    X.write_results(ROOT / "results" / name, {"profile": args.profile, "decision": "D21 addendum A1",
+    name = "forecasting_d21_ablation_a1" + ("_replicate" if args.replicate else "") + (".json" if args.profile == "paper" else "_smoke.json")
+    X.write_results(ROOT / "results" / name, {"profile": args.profile, "decision": "D21 addendum A1", "seeds": list(cfg["seeds"]),
                                               "inputs": inputs, "learning_rates": list(LRS),
                                               "orders": [list(o) for o in orders], "runs": runs.to_dict("records"),
                                               "summary": summary.to_dict("records"), "tests": tests}, ROOT)
