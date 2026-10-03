@@ -62,6 +62,15 @@ We read only the characterisation files from the published archives (1{,}007 fil
 A check is used only if its C/25 discharge starts from full charge ($\ge 3.40$~V) and reaches the 2.5~V cut-off. This leaves 843 of 847 checks at 50~$^\circ$C. The four exceptions are the acquisition faults the authors report. The initial and final characterisations were run at 25~$^\circ$C and are not used.
 
 % -----------------------------------------------------------------------------
+\subsubsection{First-life pool: S7--S9}
+For pretraining (protocol P3) we use three public first-life datasets under CC~BY~4.0, each verified against its repository record and checksums:
+\begin{itemize}
+  \item S7: 228 NMC/C+SiO cells under calendar, cyclic and WLTP-profile ageing at 0--40~$^\circ$C, with periodic check-ups at 25~$^\circ$C~\cite{luh2024agingdata,luh2024agingdatav2};
+  \item S8: 55 NCM cells under six charge and discharge protocols at room temperature~\cite{wang2024pinn,wang2024pinndata};
+  \item S9: 130 NCA, NCM and blended cells at 25--45~$^\circ$C~\cite{zhu2022relaxation,zhu2022relaxationdata}.
+\end{itemize}
+The S7 label is the measured check-up discharge capacity (check-ups after a thermal-management failure, or starting below 20~$^\circ$C, are excluded). S8 and S9 labels are capacities measured in dedicated capacity cycles, or the mean of 10 consecutive full-discharge cycles at the cell's standard current. Cells with at least five valid checks are kept: 369 cells and 36{,}711 forecasting samples.
+
 \subsection{State of health}
 \label{sec:soh}
 
@@ -140,6 +149,8 @@ Across the datasets this gives:
 
 \emph{P2, unseen group.} We leave one task out: an unseen cell in S1, an unseen usage condition in S6. Models are trained on the remaining groups (train and test splits for fitting, validation splits for early stopping) and tested on every sample of the held-out group.
 
+\emph{P3, first-life pretraining.} Every dataset is mapped onto one set of inputs: SOH history, calendar and cycle time, planned time to the target and the operating conditions (temperature, charge and discharge rates, depth of discharge, charge cut-off voltage and CV phase, calendar ageing and storage SoC, chemistry). A condition a dataset does not define is left missing and flagged. Models are pretrained on the pool's training splits (early stopping on its validation splits); the input scaling and the first EWC anchor (with its Fisher information) are taken from the pool. The seven S6 test cases then follow as a stream, as in P1. We compare training from scratch, pretraining with fine-tuning and pretraining with EWC, for both backbones, and record the error on the pool's test split before and after the stream.
+
 % -----------------------------------------------------------------------------
 \subsection{Models}
 \label{sec:backbones}
@@ -196,7 +207,7 @@ Hyperparameters are selected on validation data only, on three orders disjoint f
   \item \emph{Method hyperparameters.} Chosen with that learning rate by the lowest final average validation error: replay $B\in\{50,100,200,400\}$ and EWC $\lambda\in\{10^0,\dots,10^5\}$.
 \end{enumerate}
 
-A selection at a grid edge triggers extension of the grid. On S1, the first run selected the upper edge ($10^{-2}$) for the TFT, so the grid was extended to $\{3\!\cdot\!10^{-4},\dots,10^{-1}\}$ for both backbones and the experiment was repeated. The extended grid was used on S6 from the start. The selected values are in Table~\ref{tab:hyper}. On S1, every replay buffer size exceeds a task's training set, so replay reduces to full rehearsal.
+A selection at a grid edge triggers extension of the grid. On S1, the first run selected the upper edge ($10^{-2}$) for the TFT, so the grid was extended to $\{3\!\cdot\!10^{-4},\dots,10^{-1}\}$ for both backbones and the experiment was repeated. The extended grid was used on S6 from the start. The selected values are in Table~\ref{tab:hyper}. For P3, ten tuning orders are used, the most conservative grid value within one standard error of the best is selected, and the edge rule extends the grid on its own ladder. A difference is called replicated only if it is significant after Holm correction in the main seed set (0--4) and in a replicate set (5--9) with the same sign, and is at least 0.05~pp in both; differences below 0.05~pp in both sets are reported as practically equivalent. On S1, every replay buffer size exceeds a task's training set, so replay reduces to full rehearsal.
 
 % -----------------------------------------------------------------------------
 \subsection{Metrics and statistics}
