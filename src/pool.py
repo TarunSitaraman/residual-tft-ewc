@@ -118,6 +118,8 @@ def build_samples(table: pd.DataFrame, static: Sequence[str], horizons: Sequence
 
 BLOCK_CYCLES = 10                       # regular full-discharge cycles averaged into one check
 CUTOFF_TOL_V = 0.02
+CURRENT_TOL = 0.02                       # relative tolerance on a cycle's median discharge current (S9)
+FULL_DISCHARGE_FRACTION = 0.5           # of the cell's median per-cycle capacity (S9 validity)
 
 
 def block_checks(meas: pd.DataFrame, block: int) -> pd.DataFrame:
@@ -200,29 +202,55 @@ def s9_cell_measurements(df: pd.DataFrame) -> pd.DataFrame:
     g = df.groupby("cycle number")
     per = pd.DataFrame({"capacity_ah": g["Q discharge/mA.h"].max() / 1000, "v_min": g["Ecell/V"].min(),
                         "elapsed_s": g["time/s"].max()})
+    if "<I>/mA" in df:
+        # Regular cycles discharge at one current per cell. Periodic reference cycles (e.g. every 50th cycle of
+        # the blend cells: mostly 2.5 A for ~15 h instead of 5 A for ~4 h) are not comparable and are dropped.
+        i_dis = df.loc[df["<I>/mA"] < -10].groupby("cycle number")["<I>/mA"].median()
+        standard = i_dis.round(-1).mode().iloc[0]
+        per = per[(i_dis.reindex(per.index) - standard).abs() <= CURRENT_TOL * abs(standard)]
+        # A regular cycle has exactly one discharge step; reference cycles at the standard current but with
+        # two discharge steps (every 50th cycle of blend condition CY25-05_1) accumulate more charge than the cell holds.
+        dis = (df["<I>/mA"] < -10).astype(int)
+        starts = (dis.diff() == 1) | ((df["cycle number"].diff() != 0) & (dis == 1))
+        steps = starts.groupby(df["cycle number"]).sum()
+        per = per[steps.reindex(per.index) == 1]
     cutoff = per["v_min"].round(2).mode().iloc[0]          # 2.65 V (NCA) or 2.5 V (NCM, blend)
-    per = per[(per["v_min"] <= cutoff + CUTOFF_TOL_V) & (per["capacity_ah"] > 0)]
+    # Some "cycles" are short special segments (e.g. every 26th cycle in some NCA files discharges ~22 mAh of
+    # ~3,100) that still touch the cut-off; a full discharge must deliver at least half of the cell's median.
+    floor = FULL_DISCHARGE_FRACTION * per["capacity_ah"].median()
+    per = per[(per["v_min"] <= cutoff + CUTOFF_TOL_V) & (per["capacity_ah"] >= floor)]
     out = per.reset_index(names="cycle")[["cycle", "capacity_ah", "elapsed_s"]]
     out.attrs["time_resets"] = len(jumps)
     return out
 
 
-def s9_check_table(zip_paths: Sequence[Path | str]) -> pd.DataFrame:
+def s9_check_table(zip_paths: Sequence[Path | str], workers: int = 1) -> pd.DataFrame:
+    """Check table of all S9 cells; with ``workers`` > 1 the archives are read in parallel."""
+    if workers > 1:
+        from concurrent.futures import ProcessPoolExecutor
+
+        with ProcessPoolExecutor(max_workers=workers) as ex:
+            parts = list(ex.map(_s9_zip_checks, [str(z) for z in zip_paths]))
+    else:
+        parts = [_s9_zip_checks(str(z)) for z in zip_paths]
+    return _finish(pd.concat(parts, ignore_index=True))
+
+
+def _s9_zip_checks(zp: str) -> pd.DataFrame:
+    """Checks of every cell in one S9 archive."""
     out = []
-    for zp in zip_paths:
-        with zipfile.ZipFile(zp) as zf:
-            for name in sorted(n for n in zf.namelist() if n.endswith(".csv")):
-                m = S9_FILE.search(name)
-                if not m:
-                    continue
-                df = pd.read_csv(zf.open(name), usecols=["time/s", "Ecell/V", "Q discharge/mA.h", "cycle number"])
-                chem = S9_CHEMISTRY[name.split("/")[0]]
-                meas = s9_cell_measurements(df)
-                checks = block_checks(meas, BLOCK_CYCLES).assign(time_resets=meas.attrs["time_resets"])
-                cond = f"S9-{name.split('/')[0].replace('Dataset_', 'D')}-CY{m[1]}-{m[2]}_{m[3]}"
-                out.append(checks.assign(dataset="S9", cell=f"{cond}-#{m[4]}", condition=cond,
-                                         temp_c=float(m[1]), chemistry=chem))
-    return _finish(pd.concat(out, ignore_index=True))
+    with zipfile.ZipFile(zp) as zf:
+        for name in sorted(n for n in zf.namelist() if n.endswith(".csv")):
+            m = S9_FILE.search(name)
+            if not m:
+                continue
+            df = pd.read_csv(zf.open(name), usecols=["time/s", "Ecell/V", "Q discharge/mA.h", "cycle number", "<I>/mA"])
+            meas = s9_cell_measurements(df)
+            checks = block_checks(meas, BLOCK_CYCLES).assign(time_resets=meas.attrs["time_resets"])
+            cond = f"S9-{name.split('/')[0].replace('Dataset_', 'D')}-CY{m[1]}-{m[2]}_{m[3]}"
+            out.append(checks.assign(dataset="S9", cell=f"{cond}-#{m[4]}", condition=cond,
+                                     temp_c=float(m[1]), chemistry=S9_CHEMISTRY[name.split("/")[0]]))
+    return pd.concat(out, ignore_index=True)
 
 
 def _finish(t: pd.DataFrame) -> pd.DataFrame:

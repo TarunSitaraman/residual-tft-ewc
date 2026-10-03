@@ -39,23 +39,27 @@ def summarise(name: str, t, static) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--data-root", default=os.environ.get("DATA_ROOT", "data"))
+    ap.add_argument("--only", nargs="*", choices=("S7", "S8", "S9"), help="rebuild only these tables")
+    ap.add_argument("--workers", type=int, default=3, help="processes for reading the S9 archives")
     args = ap.parse_args()
     root = dp.resolve_data_root(args.data_root, Path(__file__).resolve().parents[1])
+    todo = set(args.only or ("S7", "S8", "S9"))
 
-    t = pool.s7_check_table(root / S7_EOC)
-    t.to_csv(root / "pool_s7_checks.csv", index=False)
-    kept = t[t["n_valid_checks"] >= pool.MIN_VALID_CHECKS]
-    s = pool.build_samples(t, static=pool.S7_STATIC)
-    print(f"S7: {t['cell'].nunique()} cells, {len(t)} valid check-ups; "
-          f"{kept['cell'].nunique()} cells in {kept['condition'].nunique()} condition sets with "
-          f">= {pool.MIN_VALID_CHECKS} check-ups ({len(kept)} check-ups); {len(s)} forecasting samples")
-    print(f"S7: reference capacity {t.groupby('cell')['Reference_Capacity_Ah'].first().min():.3f}-"
-          f"{t.groupby('cell')['Reference_Capacity_Ah'].first().max():.3f} Ah; "
-          f"SOH {kept['SOH_Percent'].min():.1f}-{kept['SOH_Percent'].max():.1f} %; "
-          f"check-up temperature {t['check_temp_c'].min():.1f}-{t['check_temp_c'].max():.1f} degC")
-    for name, build, arg, static in (("S8", pool.s8_check_table, root / S8_ZIP, []),
-                                     ("S9", pool.s9_check_table, [root / z for z in S9_ZIPS], ["temp_c", "chemistry"])):
-        t = build(arg)
+    if "S7" in todo:
+        t = pool.s7_check_table(root / S7_EOC)
+        t.to_csv(root / "pool_s7_checks.csv", index=False)
+        summarise("S7", t, list(pool.S7_STATIC))
+        print(f"S7: reference capacity {t.groupby('cell')['Reference_Capacity_Ah'].first().min():.3f}-"
+              f"{t.groupby('cell')['Reference_Capacity_Ah'].first().max():.3f} Ah; "
+              f"check-up temperature {t['check_temp_c'].min():.1f}-{t['check_temp_c'].max():.1f} degC")
+    builders = {"S8": (lambda: pool.s8_check_table(root / S8_ZIP), []),
+                "S9": (lambda: pool.s9_check_table([root / z for z in S9_ZIPS], workers=args.workers),
+                       ["temp_c", "chemistry"])}
+    for name in ("S8", "S9"):
+        if name not in todo:
+            continue
+        build, static = builders[name]
+        t = build()
         # Time must increase with cycle number within every cell (checked in cycle order, not time order).
         bad = t.sort_values(["cell", "cycle"]).groupby("cell")["elapsed_s"].apply(lambda x: not x.is_monotonic_increasing)
         assert not bad.any(), f"{name}: time not increasing with cycle in {bad[bad].index.tolist()[:3]}"
