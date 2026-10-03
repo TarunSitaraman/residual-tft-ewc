@@ -13,7 +13,14 @@
 \section{Methodology}
 \label{sec:methods}
 
-We study \emph{forecasting} of the state of health (SOH) of second-life cells: given everything measured up to a reference performance test (RPT), predict the SOH one to three RPTs ahead. Cells or usage conditions arrive as a stream of tasks, and a model must adapt to each new task without forgetting the earlier ones. Two public datasets are used (\S\ref{sec:data}); SOH is defined from a slow-rate discharge capacity (\S\ref{sec:soh}); inputs combine the SOH history, planned usage and diagnostic features measured at the RPT (\S\ref{sec:features}); and the protocols, models and statistics were fixed before any model was trained (\S\ref{sec:task}--\S\ref{sec:metrics}).
+We study \emph{forecasting} of the state of health (SOH) of second-life cells: given everything measured up to a reference performance test (RPT), predict the SOH one to three RPTs ahead. Cells or usage conditions arrive as a stream of tasks, and a model must adapt to each new task without forgetting the earlier ones. Five public datasets are used: two second-life datasets for the continual-learning streams and three first-life datasets for pretraining (\S\ref{sec:data}). SOH is defined from a slow-rate discharge capacity (\S\ref{sec:soh}); inputs combine the SOH history, planned usage and diagnostic features measured at the RPT (\S\ref{sec:features}); and the protocols, models and statistics were fixed before any model was trained (\S\ref{sec:task}--\S\ref{sec:metrics}). Fig.~\ref{fig:framework} summarises the framework.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/framework.png}
+  \caption{Framework of the study. Public data are verified and audited, converted into forecasting samples with purged chronological splits, and evaluated under three protocols with continual-learning metrics, a replication rule and a reuse-class mapping.}
+  \label{fig:framework}
+\end{figure*}
 
 \emph{Change of task after inspecting the data.} The study was first designed to estimate the \emph{current} SOH from cycle-level features of the cycling data. On the first dataset, those features carried almost no health information: the median within-battery Spearman correlation with SOH was 0.09, against $-0.99$ for elapsed time. Test errors of learned estimators were also larger than those of a persistence baseline (0.99~pp for persistence, against 1.78 and 2.37~pp for gradient boosting and ridge regression, on the labels of the processed tables). We therefore reframed the task as forecasting, which is the Temporal Fusion Transformer's native setting. This decision was taken after seeing the data. The forecasting protocol, including feature sets, splits, methods, hyperparameter grids and statistical tests, was then committed to the project repository before any forecasting model was fitted. Deviations from it are reported below.
 
@@ -92,7 +99,23 @@ Because the S1 cells are second-life, $C_{b,1}$ is already an aged capacity, and
 \label{sec:task}
 \label{sec:features}
 
-A sample is a triple (cell $b$, origin RPT $k$, horizon $h$), with $h\in\{1,2,3\}$ valid RPTs ahead: about one to three months in S1 and 100--300 cycles in S6. The target is the SOH change $\Delta_{b,k,h} = \mathrm{SOH}_{b,k+h} - \mathrm{SOH}_{b,k}$. Since $\mathrm{SOH}_{b,k}$ is known at the origin, an error in $\Delta$ equals the error in $\mathrm{SOH}_{b,k+h}$, and all errors are reported in SOH percentage points (pp). One model serves all horizons, with $h$ as an input. S1 yields 279 samples and S6 yields 2{,}409.
+A sample is a triple (cell $b$, origin RPT $k$, horizon $h$), with $h\in\{1,2,3\}$ valid RPTs ahead: about one to three months in S1 and 100--300 cycles in S6. The target is the SOH change
+\begin{equation}
+  \Delta_{b,k,h} = \mathrm{SOH}_{b,k+h} - \mathrm{SOH}_{b,k}.
+  \label{eq:target}
+\end{equation}
+Since $\mathrm{SOH}_{b,k}$ is known at the origin, an error in $\Delta$ equals the error in $\mathrm{SOH}_{b,k+h}$, and all errors are reported in SOH percentage points (pp). One model serves all horizons, with $h$ as an input. S1 yields 279 samples and S6 yields 2{,}409. Over a set $\mathcal{D}$ of $N$ samples with forecasts $\hat\Delta$, the error is
+\begin{equation}
+  \mathrm{RMSE}(\mathcal{D}) = \sqrt{\tfrac{1}{N}\textstyle\sum_{(b,k,h)\in\mathcal{D}} \big(\hat\Delta_{b,k,h} - \Delta_{b,k,h}\big)^2}.
+  \label{eq:rmse}
+\end{equation}
+
+The fade rate at the origin is the least-squares slope of SOH against time $t$ (days or cycles) over the last three valid RPTs,
+\begin{equation}
+  r_{b,k} = \frac{\sum_{i=k-2}^{k} (t_{b,i}-\bar t)(\mathrm{SOH}_{b,i}-\overline{\mathrm{SOH}})}{\sum_{i=k-2}^{k} (t_{b,i}-\bar t)^2},
+  \label{eq:fade}
+\end{equation}
+with means taken over the same three RPTs; it is missing when fewer than three valid RPTs exist.
 
 Inputs are restricted to information available at the origin. Two feature sets were fixed in advance.
 \begin{itemize}
@@ -191,8 +214,8 @@ Models are trained with Adam~\cite{kingma2015adam} on the mean squared error, wi
 \subsubsection{Reference forecasters}
 These are fitted on all tasks' training and validation data (they need no early stopping) and evaluated on the same test samples:
 \begin{itemize}
-  \item persistence ($\Delta=0$);
-  \item linear extrapolation of the fade rate over the planned time or cycles to the target;
+  \item persistence ($\hat\Delta=0$);
+  \item linear extrapolation of the fade rate~\eqref{eq:fade} over the planned time or cycles to the target, $\hat\Delta_{b,k,h} = r_{b,k}\,(t_{b,k+h}-t_{b,k})$ (zero when $r_{b,k}$ is missing);
   \item ridge regression on the planned usage and static descriptors only, on F0 and on F1 (median imputation with indicators, penalty by internal cross-validation);
   \item histogram gradient boosting on F1 (200 iterations, learning rate 0.05, eight leaves, at least five samples per leaf).
 \end{itemize}
@@ -207,7 +230,14 @@ Hyperparameters are selected on validation data only, on three orders disjoint f
   \item \emph{Method hyperparameters.} Chosen with that learning rate by the lowest final average validation error: replay $B\in\{50,100,200,400\}$ and EWC $\lambda\in\{10^0,\dots,10^5\}$.
 \end{enumerate}
 
-A selection at a grid edge triggers extension of the grid. On S1, the first run selected the upper edge ($10^{-2}$) for the TFT, so the grid was extended to $\{3\!\cdot\!10^{-4},\dots,10^{-1}\}$ for both backbones and the experiment was repeated. The extended grid was used on S6 from the start. The selected values are in Table~\ref{tab:hyper}. For P3, ten tuning orders are used, the most conservative grid value within one standard error of the best is selected, and the edge rule extends the grid on its own ladder. A difference is called replicated only if it is significant after Holm correction in the main seed set (0--4) and in a replicate set (5--9) with the same sign, and is at least 0.05~pp in both; differences below 0.05~pp in both sets are reported as practically equivalent. On S1, every replay buffer size exceeds a task's training set, so replay reduces to full rehearsal.
+A selection at a grid edge triggers extension of the grid. On S1, the first run selected the upper edge ($10^{-2}$) for the TFT, so the grid was extended to $\{3\!\cdot\!10^{-4},\dots,10^{-1}\}$ for both backbones and the experiment was repeated. The extended grid was used on S6 from the start. The selected values are in Table~\ref{tab:hyper}.
+
+For P3, ten tuning orders are used and the selection follows the one-standard-error rule: with $\bar m_g$ the mean validation criterion of grid value $g$ over the tuning runs and $s_g$ its standard error,
+\begin{equation}
+  g^{\star} = \min\big\{\,g : \bar m_g \le \bar m_{\hat g} + s_{\hat g}\big\},\qquad \hat g = \arg\min_g \bar m_g,
+  \label{eq:onese}
+\end{equation}
+i.e.\ the most conservative (smallest) value within one standard error of the best. If $\hat g$ lies at an end of the grid, the grid is extended by two values on its own ladder and the selection repeated. A difference $d$ between two methods is called \emph{replicated} only if it is significant after Holm correction in the main seed set (0--4) and in a replicate set (5--9), with the same sign, and $|d|\ge 0.05$~pp in both; if $|d|<0.05$~pp in both sets, the methods are reported as practically equivalent. The 0.05~pp threshold is about half of the label shift caused by the pulse-charge definition alone (\S\ref{sec:soh}). On S1, every replay buffer size exceeds a task's training set, so replay reduces to full rehearsal.
 
 % -----------------------------------------------------------------------------
 \subsection{Metrics and statistics}
@@ -237,7 +267,7 @@ In P2, the smallest attainable two-sided $p$-value is 0.031 with six groups and 
 \subsection{Implementation and reproducibility}
 \label{sec:repro}
 
-The pipeline is implemented in Python~3.11 with NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTorch~2.14, on four cores of an Intel Xeon processor at 2.1~GHz; the full S6 grid takes about one hour of single-thread computing.
+The pipeline is implemented in Python~3.11 with NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTorch. P1 and P2 were first run on four cores of an Intel Xeon processor at 2.1~GHz; that run did not record the PyTorch version. Both were re-run, and P3 and the ablation were run, with PyTorch~2.14.1 on an Intel Core~5~210H (8 cores, 16~GB) under Windows. All training uses one CPU thread; the full S6 grid of P1 takes about one hour and P3 about four hours.
 
 Every result file records the configuration, orders, seeds, library versions and the Git commit, and reported numbers come from runs on a clean commit. The tables of \S\ref{sec:results} are generated from these files by a script.
 
@@ -250,4 +280,4 @@ Unit tests cover:
   \item the separation of tuning from test data.
 \end{itemize}
 
-\emph{Data and code availability.} Both datasets are public under CC~BY~4.0: S1 at doi:10.17605/OSF.IO/8JNR5~\cite{moy2024secondlifedata} and S6 at doi:10.57745/OLBXKT~\cite{wheeler2025lfpdata}. They are obtained by download scripts that verify checksums. The code, the decision log with the fixed protocols, and the result files are in the repository \url{https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries}. \todo{Confirm repository visibility and code licence before submission.}
+\emph{Data and code availability.} All five datasets are public under CC~BY~4.0: S1 at doi:10.17605/OSF.IO/8JNR5~\cite{moy2024secondlifedata}, S6 at doi:10.57745/OLBXKT~\cite{wheeler2025lfpdata}, S7 at doi:10.35097/1969~\cite{luh2024agingdatav2}, S8 at doi:10.5281/zenodo.10963339~\cite{wang2024pinndata} and S9 at doi:10.5281/zenodo.6405084~\cite{zhu2022relaxationdata}. They are obtained by download scripts that verify checksums. The code, the decision log with the fixed protocols, and the result files are in the repository \url{https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries}. \todo{Confirm repository visibility and code licence before submission.}

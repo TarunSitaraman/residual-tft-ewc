@@ -1,0 +1,170 @@
+% ============================================================
+% II. RELATED WORK  (team draft; headings and text kept)
+% Bibliographic data of all ten studies verified against Crossref (4 Oct 2026); first authors corrected
+% where Crossref differs from the draft. Figures quoted for ref1, ref2, ref4, ref5, ref8 and ref10 were
+% checked against the published abstracts. Claims marked \todo could not be checked (no open abstract).
+% ============================================================
+
+\section{Related Work}
+
+The literature review considers research from 2022 to 2026 related to second-life lithium-ion batteries, State of Health estimation, machine learning, continual learning, domain adaptation, and reuse assessment. The reviewed studies demonstrate progress in faster health estimation, data-driven battery screening, adaptive learning, and methods for handling heterogeneous battery conditions.
+
+\subsection{SOH Estimation Under Real Operating Conditions}
+
+Braco \textit{et al.} investigated SOH estimation for second-life lithium-ion batteries under real operating profiles. The study used partial charging information and evaluated the method under residential household and fast-charging-station scenarios. The work demonstrated that useful SOH information can be obtained without always performing a complete capacity test. It reported offline RMSE values of approximately 0.6\% and 0.8\% for the studied profiles while reducing testing time by 85\% compared with a full capacity test \cite{ref1}.
+
+However, the quality of the estimate depends on the available charging profile and operating conditions. The study primarily addresses SOH estimation rather than continual adaptation to newly arriving heterogeneous battery populations.
+
+\subsection{Health Indicator Selection}
+
+Braco \textit{et al.} also investigated health-indicator selection for SOH estimation of second-life batteries under extended ageing. The study compared 58 health indicators obtained from incremental-capacity analysis, partial charging, constant-current/constant-voltage stages, and internal-resistance information. Six reused Nissan Leaf battery modules were studied during extended ageing.
+
+The study identified health indicators that can be useful during repurposing and second-life operation. The best indicator at the repurposing stage achieved approximately 0.2\% RMSE, while partial-charge indicators remained useful during second-life operation \cite{ref2}.
+
+A limitation is that different indicators can behave differently as ageing progresses. Therefore, a fixed health indicator may not be equally effective for every battery or operating stage.
+
+\subsection{Electrochemical Impedance and Machine Learning}
+
+Faraji-Niri \textit{et al.} proposed an accelerated SOH estimation approach using electrochemical impedance spectroscopy (EIS) and machine-learning techniques. Bayesian-optimized Gaussian Process Regression was used to learn the relationship between impedance information and battery health.
+
+The approach provides a relatively fast and non-destructive way to obtain battery health information and reported an SOH estimation error of approximately 1.1\% under the tested conditions \cite{ref3}. \todo{Confirm the method and the 1.1\% figure of \cite{ref3} against its full text.}
+
+However, EIS measurements can be influenced by temperature, state of charge, measurement noise, and equipment conditions. These requirements can make direct deployment more difficult than approaches based on ordinary battery-management-system measurements.
+
+\subsection{Machine Learning for Second-Life Screening}
+
+Takahashi \textit{et al.} investigated the feasibility of batteries for second-life applications using machine learning. The authors extracted statistical features from current and voltage measurements, performed feature selection, and used Gaussian Process Regression enhanced with bagging to determine whether batteries could be retained for second-life use or directed toward recycling.
+
+The method directly connects machine-learning-based health estimation with second-life screening and reported a mean root-mean-squared percent error below 1.48\% in the stated worst-case scenarios \cite{ref4}.
+
+However, the screening method depends on suitable measurable features and the quality of the available battery data. It does not address continual learning as new heterogeneous battery populations arrive.
+
+\subsection{Adaptive Online Health Estimation}
+
+Cui \textit{et al.} investigated second-life batteries through more than 15 months of testing on retired Nissan Leaf cells. The study analyzed health estimation under second-life, grid-storage-like operation and compared multiple machine-learning models. Adaptive online health estimation using clustering was also investigated.
+
+The study provides long-duration second-life experimental data and demonstrates adaptive online health estimation. The selected model achieved a mean absolute percentage error below 2.3\% on the reported test data \cite{ref5}.
+
+A limitation is that the experimental population is limited and long-duration testing is resource intensive. Although the work investigates adaptive health estimation, it does not fully address continual learning across many heterogeneous battery domains.
+
+\subsection{Review of Second-Life SOH Estimation Challenges}
+
+Vignesh \textit{et al.} reviewed physical, electrical, and artificial-intelligence-based SOH estimation methods for second-life lithium-ion batteries. The review discusses health indicators, testing equipment, test duration, computational requirements, battery history, and practical challenges.
+
+The review highlights missing first-life history, non-uniform degradation, chemistry differences, and variations in charging protocols as important challenges for second-life SOH estimation \cite{ref6}. \todo{Confirm this summary of \cite{ref6} against its full text.}
+
+The review does not introduce a single continual-learning model. However, it provides important evidence for the need to address heterogeneity and incomplete information in an adaptive second-life framework.
+
+\subsection{Continual Learning for Battery Degradation}
+
+Lee \textit{et al.} investigated bilevel-optimized continual learning for capacity degradation prediction of lithium-ion batteries. The approach combines Elastic Weight Consolidation (EWC) with bilevel optimization so that a model can learn from new battery batches while retaining information from earlier batches.
+
+The work is particularly relevant to the continual-learning component of the proposed project because it directly studies sequential learning and the problem of forgetting previous degradation patterns. The evaluation reported lower average MAE than comparison approaches after multiple batches while using only a small fraction of the complete historical data \cite{ref7}. \todo{Confirm the method and results of \cite{ref7} against its full text.}
+
+The main challenge is that degradation behaviour varies between battery groups and datasets. A continual-learning model therefore needs to balance adaptation to new patterns with retention of earlier knowledge.
+
+\subsection{Continual Learning for Diverse Lithium-Ion Batteries}
+
+Yao \textit{et al.} proposed continual learning for online State of Charge (SOC) estimation across diverse lithium-ion batteries. The work uses Progressive Neural Networks and Temporal Convolutional Networks and explicitly considers catastrophic forgetting and the order in which battery tasks are introduced.
+
+The study is a strong foundation for the proposed project because it directly combines continual learning and diverse battery populations. It reports strong estimation performance across three public battery drive-cycle datasets while reducing the need to maintain multiple independent single-task models \cite{ref8}.
+
+However, the work focuses on SOC rather than SOH or second-life reuse. Its continual-learning framework therefore provides a foundation that can be extended toward battery health estimation and reuse assessment.
+
+\subsection{Domain Generalization for Second-Life Batteries}
+
+Li \textit{et al.} investigated intelligent domain-generalized SOH estimation for second-life EV batteries using few-shot transfer learning, distribution alignment, and a KAN/Transformer-based architecture. The study specifically addresses incomplete charging/discharging information and differences between degradation domains.
+
+The approach is relevant to heterogeneous second-life batteries because it attempts to generalize across different battery domains using limited target-domain information. The study also establishes a real-world second-life battery ageing dataset for research \cite{ref9}. \todo{Confirm the method and the dataset of \cite{ref9} against its full text.}
+
+However, transfer learning and domain generalization do not automatically solve continual learning involving long sequences of new tasks and explicit knowledge-retention evaluation.
+
+\subsection{Reliability and Probabilistic SOH Prediction}
+
+Meskine \textit{et al.} compared BiLSTM, waveform BiLSTM, TCN, and probabilistic TCN-GPR approaches for SOH prediction using sparse and noisy battery-management-system-style information. The study emphasizes uncertainty and calibration in addition to prediction accuracy.
+
+The work demonstrates that reliability information can be incorporated into SOH prediction rather than reporting only a single point estimate. Isotonic recalibration substantially reduced the reported mean calibration error \cite{ref10}.
+
+Nevertheless, sparse and noisy measurements remain difficult, and reliable generalization to unseen cells remains a challenge. The study also does not combine uncertainty-aware SOH prediction with continual reuse assessment.
+
+% ============================================================
+% LITERATURE SURVEY SUMMARY
+% ============================================================
+
+\subsection{Literature Survey Summary}
+
+The reviewed studies can be summarized according to their primary methodology, main finding, and remaining challenge.
+
+\begin{table}[htbp]
+\caption{Summary of Reviewed Literature}
+\label{tab:literature}
+\centering
+\scriptsize
+\begin{tabular}{|c|p{1.35cm}|p{2.2cm}|p{1.8cm}|}
+\hline
+\textbf{No.} & \textbf{Study} & \textbf{Methodology} & \textbf{Main Challenge} \\
+\hline
+1 & Braco (2022) \cite{ref1} & Partial-charge / real-profile SOH & Depends on charging profile \\
+\hline
+2 & Braco (2022) \cite{ref2} & Health-indicator selection & Indicators change with ageing \\
+\hline
+3 & Faraji-Niri (2023) \cite{ref3} & EIS + optimized GPR & Measurement conditions \\
+\hline
+4 & Takahashi (2023) \cite{ref4} & Features + bagged GPR & Feature/data quality \\
+\hline
+5 & Cui (2024) \cite{ref5} & Online ML + clustering & Limited experimental population \\
+\hline
+6 & Vignesh (2024) \cite{ref6} & SOH methods review & No single adaptive model \\
+\hline
+7 & Lee (2024) \cite{ref7} & EWC + bilevel CL & Adaptation versus retention \\
+\hline
+8 & Yao (2025) \cite{ref8} & PNN + TCN continual learning & Focused on SOC \\
+\hline
+9 & Li (2025) \cite{ref9} & Few-shot transfer + KAN/Transformer & Requires target adaptation \\
+\hline
+10 & Meskine (2026) \cite{ref10} & BiLSTM/TCN + probabilistic model & Sparse/noisy data \\
+\hline
+\end{tabular}
+\end{table}
+
+% ============================================================
+% RESEARCH CHALLENGES
+% ============================================================
+
+\subsection{Major Challenges Identified}
+
+The literature reveals several challenges that are particularly relevant to the proposed work.
+
+\subsubsection{Heterogeneity of Second-Life Batteries}
+
+Retired EV batteries can differ in chemistry, manufacturer, capacity, ageing history, temperature exposure, and charging behaviour. A model that performs well on one battery group may not automatically generalize to another group.
+
+\subsubsection{Incomplete and Sparse Battery Information}
+
+Complete first-life usage history may not be available for retired batteries. Practical systems may also have incomplete charging/discharging measurements or noisy battery-management-system signals, making health estimation more difficult.
+
+\subsubsection{Continual Adaptation Versus Catastrophic Forgetting}
+
+When a model learns from a new battery group, it may lose useful knowledge learned from older groups. The framework therefore needs to evaluate both adaptation to new data and retention of previous knowledge.
+
+\subsubsection{SOH Estimation Versus Reuse Assessment}
+
+A predicted SOH value alone may not identify the most suitable second-life application. Reuse decisions may also require degradation behaviour, capacity, efficiency, power capability, and other health indicators.
+
+\subsubsection{Accuracy Versus Computational Cost}
+
+Complex deep-learning and adaptive methods can improve prediction but may require additional training, memory, testing, or model-update computation. A practical framework must consider the cost of continual updates together with prediction accuracy.
+
+% ============================================================
+% RESEARCH GAP
+% ============================================================
+
+\subsection{Research Gap}
+
+The reviewed literature shows strong progress in second-life SOH estimation, fast health screening, transfer learning, and battery degradation prediction. However, these areas are generally studied separately.
+
+Continual-learning research provides methods for learning new battery patterns while retaining previously learned knowledge, but it is less commonly integrated with heterogeneous retired EV battery SOH/RUL estimation and an explicit reuse decision.
+
+Therefore, the proposed project focuses on combining continual learning, adaptive health estimation, and reuse-suitability assessment within a single evaluation framework.
+
+The central research problem is to determine whether a continual-learning model can progressively learn from heterogeneous second-life EV battery populations while maintaining knowledge of previously observed batteries and producing health information that can support practical reuse decisions.

@@ -1,0 +1,77 @@
+% ============================================================
+% I. INTRODUCTION  (team draft; headings and text kept, contributions aligned with the results)
+% ============================================================
+
+\section{Introduction}
+
+\subsection{Background}
+
+Electric vehicles (EVs) have become an important part of modern transportation because they can reduce dependence on conventional fossil-fuel-based vehicles. Lithium-ion batteries are widely used in EVs because they provide high energy density, good efficiency, and the ability to undergo repeated charging and discharging. However, battery performance gradually decreases with use. Repeated cycling, temperature variation, charging conditions, and ageing mechanisms reduce the battery's available capacity and power capability.
+
+When an EV battery is no longer suitable for demanding automotive operation, it may still retain useful energy-storage capability. This creates an opportunity for second-life applications. A retired EV battery can potentially be reused in applications that have lower power and energy requirements than an EV. Examples include stationary energy storage, renewable-energy storage, backup power, and other grid-support applications.
+
+Reusing a battery can extend its useful life and delay recycling, but the battery must first be assessed carefully. A battery that is suitable for one application may not be suitable for another. Therefore, reliable health estimation and reuse assessment are important components of second-life battery management.
+
+\subsection{Battery Health Estimation}
+
+State of Health (SOH) is one of the main indicators used to describe the current condition of a battery. It generally represents how the present battery capability compares with its original condition. Remaining Useful Life (RUL) is related to how much useful operating life remains before the battery reaches a defined end-of-life condition.
+
+Machine-learning techniques can learn relationships between measurable battery signals and these health indicators. Previous research has demonstrated SOH estimation using voltage, current, temperature, partial charging information, electrochemical impedance spectroscopy, and other health indicators.
+
+However, battery health estimation becomes more difficult when the model is exposed to batteries that differ from the batteries used during training.
+
+\subsection{Heterogeneity in Second-Life Batteries}
+
+Retired EV batteries can be heterogeneous because they may have different chemistries, manufacturers, capacities, ageing histories, temperatures, charging protocols, and first-life usage patterns. In many real second-life situations, complete first-life records may also be unavailable.
+
+Consequently, a machine-learning model trained once on a fixed dataset may not maintain the same performance when new battery populations are introduced. A model that performs well on one battery group may not automatically generalize to another group with different degradation characteristics.
+
+This creates a need for learning systems that can adapt to new battery populations rather than assuming that all future batteries will follow the same distribution as the original training data.
+
+\subsection{Continual Learning}
+
+Continual learning is a machine-learning approach in which a model learns from new data progressively while attempting to preserve useful knowledge learned from earlier data. This differs from repeatedly training a completely new model from the beginning.
+
+A continual-learning framework is useful for second-life battery systems because new battery groups can become available over time. The model should adapt to new degradation behaviour without completely forgetting patterns learned from earlier batteries.
+
+Avoiding catastrophic forgetting is therefore an important part of the proposed project. The model must be evaluated not only on the newly introduced battery group but also on previously learned groups after subsequent learning.
+
+\subsection{Motivation for the Proposed Work}
+
+The proposed project combines continual learning, battery health estimation, and second-life reuse assessment into a single workflow.
+
+Battery measurements are first processed to obtain useful health-related features. A baseline model is then used to estimate battery health and degradation. New battery groups are introduced sequentially so that continual-learning methods can be evaluated. The model is tested on both newly introduced and previously learned batteries to determine whether it adapts successfully while retaining earlier knowledge.
+
+Finally, the estimated health information is used to support a practical second-life reuse assessment. An SOH value alone does not necessarily provide a complete application decision. For example, a battery with reduced capacity may still be useful for a lower-demand stationary application, whereas a battery with severe degradation or unsuitable characteristics may be better directed toward recycling.
+
+In this work, health is assessed by \emph{forecasting} the SOH one to three capacity checks ahead from everything measured up to the latest check. On the first dataset studied, estimating the current SOH from cycling features was beaten by simply carrying the last measured SOH forward (\S\ref{sec:methods}), whereas the future SOH is what a reuse decision needs.
+
+\subsection{Objectives}
+
+The primary objective of this work is to develop and evaluate a continual-learning framework for adaptive health and reuse assessment of heterogeneous second-life EV batteries.
+
+The specific objectives are:
+
+\begin{itemize}
+    \item To study the ageing behaviour of lithium-ion EV batteries and the concepts of SOH, degradation, and RUL.
+    \item To study existing machine-learning and data-driven approaches for second-life battery health estimation.
+    \item To investigate the effect of battery heterogeneity, incomplete history, sparse measurements, and different operating conditions.
+    \item To develop suitable health-related features from voltage, current, temperature, time, and other available measurements.
+    \item To establish a baseline SOH and degradation prediction model.
+    \item To apply continual-learning methods so that the model can learn from new battery groups or sequential data batches.
+    \item To evaluate catastrophic forgetting by measuring performance on previously learned battery groups after new learning.
+    \item To define interpretable reuse-suitability categories using health and degradation information.
+    \item To compare baseline and continual-learning approaches using prediction accuracy, adaptation, retention, and computational overhead.
+\end{itemize}
+
+\subsection{Contributions}
+
+The main contributions of this work are:
+
+\begin{itemize}
+    \item A leakage-controlled benchmark for forecasting the SOH of second-life cells, built from five public datasets (395 cells after quality rules) that are verified against their repository records, with automated data checks and protocols fixed before model training.
+    \item Two label artefacts identified and removed: test currents set from the previous capacity, which encode the label, and pulse charge in the capacity, which shifts labels by up to 0.09 percentage points.
+    \item An evaluation of a Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) against fine-tuning, replay, joint training and simple forecasters, under three protocols (a continual stream, unseen groups, and first-life pretraining), reporting adaptation, forgetting and retention.
+    \item A reproducibility analysis showing that several significance results on small battery datasets depend on the numerical environment, and a replication rule that the main results satisfy.
+    \item A mapping of forecast SOH to interpretable reuse-suitability classes and its agreement with the measured classes.
+\end{itemize}
