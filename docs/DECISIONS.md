@@ -565,3 +565,8 @@ The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB unco
 - The pool is first-life data under laboratory conditions; transfer to second life is tested only on S6 (aged at 50 °C) and S1.
 - S7 check-ups are at a single temperature (25 °C); S8 and S9 labels are cycling-rate capacities, not slow-rate checks.
 - Pseudo-checks (S8, S9) and check-ups (S7) differ in interval; time-to-target inputs carry this.
+
+### D21 deviations and disclosures
+- **3 Oct 2026, S7 cold check-ups excluded (implementation, before any model was fitted on S7).** Check-ups are run at room temperature (25 °C). Three check-ups (CU 11 of three cells aged at 0 °C) started at about 1 °C and read 18 pp below the cell's previous check-up (mean change into a warm check-up: −1.9 pp); each is its cell's last check-up. Check-ups starting below 20 °C are excluded (`pool.S7_MIN_CHECKUP_TEMP_C`), as RPT 2 of S1 and the 25 °C checks of S6 are excluded for temperature. The rule uses the measured start temperature only. Thirty-four check-ups started at 20–22 °C and are kept; their temperature is kept in the table (`check_temp_c`).
+- **3 Oct 2026, S7 time inputs (implementation).** D21 lists equivalent full cycles among the shared time inputs "where the dataset records them". For S7 they would come from charge throughput, which in cycling cells shrinks with capacity and so partly encodes the label (as in D14), and whose future value is not known at the origin. S7 therefore uses calendar days only.
+- **S7 table (3 Oct 2026, `scripts/build_pool_tables.py`):** 228 cells, 3,912 valid check-ups; 195 cells in 67 condition sets have at least 5 (3,807 check-ups), giving 10,251 forecasting samples. Reference capacities 2.899–2.944 Ah; SOH down to 32.1 %.
