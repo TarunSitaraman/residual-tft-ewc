@@ -71,7 +71,7 @@ Table~\ref{tab:p1} gives the final average test error, skill and forgetting of e
 \emph{S6.} The picture changes when tasks differ in usage.
 \begin{itemize}
   \item \emph{Forgetting is substantial:} 0.18--0.46~pp, an order of magnitude larger than on S1.
-  \item \emph{EWC matters for the TFT:} TFT\,+\,EWC (0.677~pp) is on average 0.206~pp better than TFT fine-tuning (0.883~pp; CI 0.091--0.338, $p_{\mathrm{Holm}}=0.005$, rank-biserial 0.52). The median paired difference is 0.062~pp, so the mean is driven partly by unstable fine-tuning runs. TFT\,+\,EWC also forgets 0.187~pp less on average (median 0.075~pp), but this is not significant after Holm correction ($p_{\mathrm{Holm}}=0.0503$).
+  \item \todo{The significance statements in this item and in the F0 item below did not reproduce in a re-run (EWC strength selected as 1000 instead of 100; see docs/RESULTS.md, Reproducibility check). Rewrite after the reportable re-run.} \emph{EWC matters for the TFT:} TFT\,+\,EWC (0.677~pp) is on average 0.206~pp better than TFT fine-tuning (0.883~pp; CI 0.091--0.338, $p_{\mathrm{Holm}}=0.005$, rank-biserial 0.52). The median paired difference is 0.062~pp, so the mean is driven partly by unstable fine-tuning runs. TFT\,+\,EWC also forgets 0.187~pp less on average (median 0.075~pp), but this is not significant after Holm correction ($p_{\mathrm{Holm}}=0.0503$).
   \item \emph{But TFT\,+\,EWC is not the most accurate method:}
   \begin{itemize}
     \item MLP fine-tuning (0.531~pp) and MLP\,+\,EWC (0.540~pp) are significantly better;

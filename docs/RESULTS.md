@@ -52,7 +52,7 @@ Each file records Python and library versions (Python 3.11.15, numpy 2.4.6, pand
 5. **Forgetting depends on task heterogeneity.**
    - It is negligible across the homogeneous S1 cells (0.016–0.040 pp).
    - It is substantial across the S6 usage conditions (0.18–0.46 pp).
-6. **EWC helps the TFT only on the heterogeneous stream.**
+6. **EWC helps the TFT only on the heterogeneous stream.** *(The significance statements below did not reproduce; see "Reproducibility check".)*
    - S6: TFT + EWC (0.677 pp) beats TFT fine-tuning (0.883 pp) by 0.206 pp on average (CI 0.091–0.338, p_Holm = 0.005, r = 0.52). The median paired difference is only 0.062 pp: the mean is driven by unstable TFT fine-tuning runs (s.d. 0.54 pp).
    - S6 forgetting: TFT + EWC forgets 0.187 pp less on average (median 0.075 pp), but this is not significant after Holm correction (p_Holm = 0.0503).
    - S1: there is no significant difference in error or forgetting.
@@ -60,7 +60,7 @@ Each file records Python and library versions (Python 3.11.15, numpy 2.4.6, pand
    - S1: it is level with gradient boosting and TFT fine-tuning, and slightly behind the usage-only ridge (by 0.012 pp, CI 0.007–0.017).
    - S6: it is behind MLP fine-tuning and MLP + EWC (significant), gradient boosting and linear extrapolation. The joint upper bounds (MLP 0.414, TFT 0.427 pp) put the continual-learning cost for the TFT at about 0.25 pp.
    - The TFT is also sensitive to task order: on S6 its s.d. over runs is 0.26 pp with EWC and 0.54 pp without, against 0.15–0.18 pp for the MLP methods.
-8. **Diagnostic features do not significantly improve TFT + EWC.**
+8. **Diagnostic features do not significantly improve TFT + EWC.** *(The S6 forgetting difference below did not reproduce; see "Reproducibility check".)*
    - S1: F1 improves on F0 by 0.009 pp, which is not significant after Holm correction (p_Holm = 0.083).
    - S6: F0 is 0.621 pp against 0.677 pp for F1 (not significant), and F0 forgets significantly less.
 9. **Unseen groups (P2).**
@@ -98,7 +98,26 @@ Notebook 12 (S1) was re-run in the pinned environment of `requirements.txt` (Pyt
   | forgetting, MLP fine-tuning | 0.014 → 0.014 | 0.052 → 0.018 |
   | final error, gradient boosting F1 | — | 0.175 → 0.028 |
 
-  These differences (0.005–0.014 pp) are an order of magnitude below the label shift corrected by D17 (up to 0.089 pp). With 50 runs of very low variance, the paired test detects differences that have no practical meaning, and whether they cross 0.05 depends on the numerical environment. **On S1, method comparisons should be reported as practically equivalent, with no claim of significance in either direction.** The S6 comparisons involve differences 10–50 times larger and are re-checked when notebook 13 is re-run.
+  These differences (0.005–0.014 pp) are an order of magnitude below the label shift corrected by D17 (up to 0.089 pp). With 50 runs of very low variance, the paired test detects differences that have no practical meaning, and whether they cross 0.05 depends on the numerical environment. **On S1, method comparisons should be reported as practically equivalent, with no claim of significance in either direction.**
+
+Notebook 13 (S6) was re-run the same way (3 Oct 2026, commit `ce46b99`), on S6 data re-fetched and verified file by file against the committed SHA-256 manifest.
+
+- **Identical or within 0.006 pp:** all baselines, both joint upper bounds, every P2 result (including reuse-class accuracy and macro-F1), and the backbone learning rates. The ranking of methods is unchanged except that ridge F1 and MLP replay swap places.
+- **TFT + EWC tuning flips.** The validation-selected EWC strength for the TFT changes from λ = 100 to λ = 1000. In the re-run, validation error was 0.4057 pp at λ = 1000 against 0.4138 at λ = 100, a 0.008 pp gap estimated from only 3 tuning runs, while TFT results vary by about 0.25 pp across task orders. The selection is a near-tie.
+- **Consequently the TFT + EWC comparisons are not robust:**
+
+  | Comparison (S6, P1, vs TFT + EWC) | Mean difference (pp), committed → re-run | p_Holm, committed → re-run |
+  |---|---|---|
+  | final error, TFT fine-tuning | +0.206 → +0.178 | 0.005 → 0.060 |
+  | forgetting, TFT fine-tuning | +0.187 → +0.218 | 0.050 → 0.008 |
+  | forgetting, TFT + EWC F0 | −0.098 → −0.071 | 0.004 → 0.243 |
+  | backward transfer, TFT + EWC F0 | −0.075 → −0.054 | 0.005 → 0.403 |
+  | TFT + EWC vs ridge F1 | — | 0.300 → 0.041 |
+
+  TFT + EWC itself moves from 0.677 to 0.704 pp. The directions agree in both runs (EWC lowers the TFT's mean error and mean forgetting), but which of the two is significant depends on the run.
+- **Robust in both runs:** TFT + EWC is significantly worse than MLP fine-tuning and MLP + EWC, than linear extrapolation and gradient boosting, and better than persistence, ridge F0 and the schedule ridge; forgetting is substantial on S6 (about 0.17–0.46 pp) and negligible on S1.
+
+**Implication.** Key findings 6 and 8 above (EWC significantly improves the TFT on S6; F0 forgets significantly less) are not reproducible as significance statements. A reportable version needs a run whose full environment is recorded (this one is), and a tuning stage with enough runs to separate neighbouring grid values. Any such change to the protocol must be recorded in `docs/DECISIONS.md` before the run.
 
 ## Figures
 
