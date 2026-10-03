@@ -50,6 +50,20 @@ PROFILES = {"paper": {"n_orders": 10, "n_tuning_orders": 10, "main_seeds": (0, 1
             "smoke": {"n_orders": 1, "n_tuning_orders": 2, "main_seeds": (0,), "replicate_seeds": (5,), "epochs": 2}}
 
 
+def ladder(v: float, direction: int, param: str, n: int = 2) -> list[float]:
+    """The next ``n`` grid values beyond ``v``: learning rates follow the 1-3 ladder (1e-4, 3e-4, 1e-3, ...),
+    EWC strengths powers of ten, as the D11/D18 grids do."""
+    out = []
+    for _ in range(n):
+        e = int(np.floor(np.log10(v) + 1e-9)); m = round(v / 10 ** e)
+        if param == "lr":
+            v = (3 * 10 ** (e - 1) if m == 1 else 1 * 10 ** e) if direction < 0 else (3 * 10 ** e if m == 1 else 1 * 10 ** (e + 1))
+        else:
+            v = 10 ** (e - 1) if direction < 0 else 10 ** (e + 1)
+        out.append(float(f"{v:.3g}"))
+    return out
+
+
 def variant_name(backbone: str, init: str, method: str) -> str:
     return f"{backbone}_{init}_{'ewc' if method.endswith('ewc') else 'finetune'}"
 
@@ -137,22 +151,35 @@ class Runner:
                         "best_se": float(g.loc[best, "se"]), "chosen": chosen,
                         "chosen_mean": float(g.loc[chosen, "mean"]), "table": g.reset_index().to_dict("records")}
 
+    def select(self, run_point, grid: list, param: str, criterion: str) -> tuple[float, dict]:
+        """One-SE selection with the D11 edge rule: if the *best* value lies at an end of the grid, the grid is
+        extended by two values beyond that end on the grid's own ladder (``ladder``) and selection is repeated
+        (at most twice). Every extension is recorded."""
+        grid, extensions = sorted(grid), []
+        for _ in range(3):
+            rows = [{param: v, "order": i, **run_point(v, o)} for v in grid for i, o in enumerate(self.tuning_orders)]
+            chosen, info = self.one_se(pd.DataFrame(rows), param, criterion)
+            best = info["best_value"]
+            if best not in (grid[0], grid[-1]) or len(extensions) == 2:
+                break
+            new = ladder(grid[0], -1, param) if best == grid[0] else ladder(grid[-1], +1, param)
+            extensions.append({"edge": "low" if best == grid[0] else "high", "added": new})
+            grid = sorted(grid + new)
+        info.update({"grid": grid, "extensions": extensions, "best_at_final_grid_edge": info["best_value"] in (grid[0], grid[-1])})
+        return chosen, info
+
     def tune(self) -> dict:
         out = {}
         for backbone in ("mlp", "tft"):
             ft = (backbone, "pre", "tft_finetune" if backbone == "tft" else "finetune")
-            rows = [{"lr": lr, "order": i, **self.stream_run(ft, o, 0, lr, None, "val")["metrics"]}
-                    for lr in LR_GRID for i, o in enumerate(self.tuning_orders)]
-            lr, lr_info = self.one_se(pd.DataFrame(rows), "lr", "plasticity")
+            lr, lr_info = self.select(lambda v, o: self.stream_run(ft, o, 0, v, None, "val")["metrics"],
+                                      LR_GRID, "lr", "plasticity")
             ewc = (backbone, "pre", "tft_ewc" if backbone == "tft" else "ewc")
-            rows = [{"lam": lam, "order": i, **self.stream_run(ewc, o, 0, lr, lam, "val")["metrics"]}
-                    for lam in LAMBDA_GRID for i, o in enumerate(self.tuning_orders)]
-            lam, lam_info = self.one_se(pd.DataFrame(rows), "lam", "final_avg_error")
-            out[backbone] = {"lr": lr, "ewc_lambda": lam, "lr_selection": lr_info, "lambda_selection": lam_info,
-                             "lr_at_grid_edge": lr in (min(LR_GRID), max(LR_GRID)),
-                             "lambda_at_grid_edge": lam in (min(LAMBDA_GRID), max(LAMBDA_GRID))}
-            print(f"tuned {backbone}: lr {lr} (best {lr_info['best_value']}), lambda {lam} (best {lam_info['best_value']})",
-                  flush=True)
+            lam, lam_info = self.select(lambda v, o: self.stream_run(ewc, o, 0, lr, v, "val")["metrics"],
+                                        LAMBDA_GRID, "lam", "final_avg_error")
+            out[backbone] = {"lr": lr, "ewc_lambda": lam, "lr_selection": lr_info, "lambda_selection": lam_info}
+            print(f"tuned {backbone}: lr {lr} (best {lr_info['best_value']}; extensions {lr_info['extensions']}), "
+                  f"lambda {lam} (best {lam_info['best_value']}; extensions {lam_info['extensions']})", flush=True)
         return out
 
     # -- evaluation ----------------------------------------------------------
