@@ -28,6 +28,10 @@ This file lists **every external data source** that this repository uses, or tha
 | [S6](#s6-lfp-first--and-second-life-dataset-wheeler-et-al-2025) | Wheeler et al., 2025, Recherche Data Gouv `10.57745/OLBXKT` | Second dataset (D19): 20 LFP cells, 7 ageing conditions, down to 30–50 % SOH | **Used** (D19, D20): characterisation files downloaded (checksummed) | `scripts/fetch_wheeler_characterisation.py`, `scripts/build_wheeler_features.py`, notebook 13, `results/forecasting_wheeler.json` |
 | [C1–C4](#candidates-screened-not-used) | NASA, Oxford, CALCE, MIT–Stanford ageing datasets | Suggested for more varied fade | **Not verified; nothing downloaded** | none |
 | [C5–C6](#candidates-screened-not-used) | Beatty et al. 2025 (Loughborough); Mowri et al. 2025 | Second-life datasets screened for D19 | Metadata verified; **rejected** (reasons below) | none |
+| [S7](#s7-s9-first-life-pretraining-pool-registered-3-oct-2026) | Luh and Blank, 2024, KIT RADAR `10.35097/1969` | First-life pool (D21 draft): 228 NMC/C+SiO cells, calendar/cyclic/driving ageing, periodic check-ups | **Downloaded and verified** (3 Oct 2026; MD5 matches the registry) | `scripts/fetch_pool.py`; D21 (draft) |
+| [S8](#s7-s9-first-life-pretraining-pool-registered-3-oct-2026) | Wang et al., 2024 (XJTU), Zenodo `10.5281/zenodo.10963339` | First-life pool: 55 NCM cells, 6 protocol batches | **Downloaded and verified** (3 Oct 2026; MD5 matches the registry) | `scripts/fetch_pool.py`; D21 (draft) |
+| [S9](#s7-s9-first-life-pretraining-pool-registered-3-oct-2026) | Zhu et al., 2022 (Tongji), Zenodo `10.5281/zenodo.6405084` | First-life pool: 130 cells, NCA / NCM / NCM+NCA | **Downloaded and verified** (3 Oct 2026; MD5 matches the registry) | `scripts/fetch_pool.py`; D21 (draft) |
+| [C7–C8](#candidates-screened-not-used) | Severson/Attia (MIT–Stanford–TRI, data.matr.io); Preger et al. 2020 (Sandia, batteryarchive.org) | First-life candidates for the pool | **Not usable yet:** no data licence verifiable from a primary record | none |
 
 ---
 
@@ -277,6 +281,40 @@ Its C/25 characterisation matches S1's C/20 capacity test, so the capacity label
 
 **Use:** forecasting protocol D20 (notebook 13).
 
+## S7–S9. First-life pretraining pool (registered 3 Oct 2026)
+
+**Why.** S1 and S6 together have 26 cells, too few for a Temporal Fusion Transformer to be the right model (`docs/RESULTS.md`). These three datasets are candidates for a first-life pretraining pool, followed by continual learning on the second-life data (S1, and S6 below 80 % SOH). Their use is fixed in decision D21 (draft) before any model is trained on them. They are first-life data: no second-life claim rests on them.
+
+**Verification (all on 3 Oct 2026, from primary records saved in `docs/external_data/metadata/`).** For each: the data repository's own record (licence, version, files, checksums), the data article on Crossref, and the article abstract on Europe PMC (cell counts).
+
+### S7. Luh and Blank 2024 (KIT)
+- **Article:** M. Luh and T. Blank, "Comprehensive battery aging dataset: capacity and impedance fade measurements of a lithium-ion NMC/C-SiO cell," *Scientific Data*, vol. 11, Art. no. 1004, 2024. doi:10.1038/s41597-024-03831-x. Article licence CC BY 4.0 (Crossref).
+- **Data:** "… [dataset – version 2: result data]," Karlsruhe Institute of Technology, RADAR4KIT, doi:[10.35097/1969](https://doi.org/10.35097/1969). Parent dataset doi:10.35097/1947 (version 2 raw log data, 81.9 GB, not needed: doi:10.35097/kww7jv8ajuvchcah).
+- **Licence:** **CC BY 4.0** (DataCite `rightsList`, SPDX `cc-by-4.0`, for both 10.35097/1969 and 10.35097/1947).
+- **Content (article abstract):** 228 commercial NMC/C+SiO cells aged for more than a year under calendar, cyclic and driving-cycle conditions; result data are the capacity and impedance measured in check-ups.
+- **File:** `10.35097-1969.tar`, 333,402,624 bytes, MD5 `aa60c8fd08755a253ac7479dde41c93d` (RADAR landing page; excerpt saved in `luh2024_kit_result_data.landing.txt`). Download URL: `https://radar.kit.edu/radar-backend/archives/CoNQplSNoVeXExyV/versions/1/content` (supports range requests).
+
+### S8. Wang et al. 2024 (XJTU)
+- **Article:** F. Wang, Z. Zhai, Z. Zhao, Y. Di *et al.*, "Physics-informed neural network for lithium-ion battery degradation stable modeling and prognosis," *Nature Communications*, 2024. doi:10.1038/s41467-024-48779-z. Article licence CC BY 4.0.
+- **Data:** Zenodo doi:[10.5281/zenodo.10963339](https://doi.org/10.5281/zenodo.10963339), version V1, published 2024-04-12, creator F. Wang. **Licence CC BY 4.0** (Zenodo record).
+- **Content:** 55 NCM cells (article abstract) in six protocol batches (`Batch-1` … `Batch-6`, 8+15+8+8+8+8 `.mat` files, read from the zip index without downloading). The archive holds only these authors' cells.
+- **File:** `Battery Dataset.zip`, 2.44 GB, MD5 `a635cef9678e0de21f9d5c1f78a4342c` (Zenodo).
+
+### S9. Zhu et al. 2022 (Tongji)
+- **Article:** J. Zhu, Y. Wang, Y. Huang, R. Bhushan Gopaluni *et al.*, "Data-driven capacity estimation of commercial lithium-ion batteries from voltage relaxation," *Nature Communications*, 2022. doi:10.1038/s41467-022-29837-w. Article licence CC BY 4.0.
+- **Data:** Zenodo doi:[10.5281/zenodo.6405084](https://doi.org/10.5281/zenodo.6405084), published 2022-04-01. **Licence CC BY 4.0** (Zenodo record).
+- **Content:** 130 commercial cells in three datasets (article abstract): NCA (66 files), NCM (55), NCM+NCA blend (9).
+- **Files (MD5, Zenodo):** `Dataset_1_NCA_battery.zip` `cbd6d7eab2a296b52385e025e8d0f42a`; `Dataset_2_NCM_battery.zip` `a05c485df92f4af560d1d8d7f659ce1b`; `Dataset_3_NCM_NCA_battery.zip` `d11e68e410a638058906af5e2f5f60f3`; `Impedance raw data and fitting data.zip` `be9a8088847edd6528ce888372b42465`. 1.67 GB in total.
+
+**Downloaded and verified (3 Oct 2026).** `scripts/fetch_pool.py` fetched every file above with resumable range requests, refused any file whose MD5 differs from the value registered here, and wrote the SHA-256 of each verified file to `docs/external_data/metadata/pool_downloads_manifest.json`. All six files matched. Files are in `data/raw/pool/` (git-ignored).
+
+**What the files contain (read 3 Oct 2026):**
+- **S7** is a BagIt package; all 14 payload files match its internal `manifest-md5.txt`. Its `Readme v2.pdf` states that the experiment ran from 12 Oct 2022, with regular check-ups CU 1–28 (CU 28 starting 17 Apr 2024). A thermal-management failure on 27 May 2024 ended the experiment, and a manual CU 29 was run at room temperature with air cooling only (to be excluded, like RPT 2 of S1). `cell_eocv2.zip` holds 240 per-cell result files: the 228 cells plus 12 records (`P000_0_S20_*`) from a reversible-loss side experiment in which one cell per calendar condition was held at 10 % SoC for about 2.5 days in January 2024 (Readme v2, Table 1).
+- **S8** holds one `.mat` file per cell with per-cycle time series (voltage, current, capacity, power, temperature) and a per-cycle summary (charge and discharge capacity, energy, median and mean voltages), plus the authors' data description (English and Chinese PDFs).
+- **S9** holds one CSV per cell with the raw time series (time, voltage, current, charge and discharge capacity, cycle number). File names encode the test temperature (`CY25`, `CY35`, `CY45`) and the current settings.
+
+The mapping of each dataset to the forecasting task (what counts as a capacity check, which temperature, which cycles) is fixed in D21 before any model is trained on these data.
+
 ## Candidates screened, not used
 
 | ID | Dataset | Result |
@@ -287,6 +325,9 @@ Its C/25 characterisation matches S1's C/20 capacity test, so the capacity label
 | C4 | MIT–Stanford–Toyota fast-charging data (Severson et al., 2019) | Not screened; first life only, no periodic RPT |
 | C5 | M. Beatty, D. Strickland, J. Warren, J. Chan, P. Ferreira, "Long-Term Sweat Testing Dataset for Second-Life Batteries," *Sci. Data* 12, 1068 (2025), doi:10.1038/s41597-025-05360-7; data doi:10.17028/rd.lboro.28732490.v2 (CC BY 4.0) | **Rejected:** capacity measured only at start and end of test (periodic checks failed), so there is no SOH series to forecast; about 34 GB |
 | C6 | S. T. Mowri, A. Barai, M. Sheikh, S. Moharana, J. Marco, "Dataset for assessing the impact of first-life lithium-ion battery degradation on second-life performance," *Data in Brief* 63, 112208 (2025), doi:10.1016/j.dib.2025.112208 (Mendeley Data) | **Rejected for now:** second life covers only 7 monthly cycles; data licence not yet verified |
+| C7 | K. A. Severson *et al.*, *Nature Energy* 4, 383 (2019), doi:10.1038/s41560-019-0356-8; P. M. Attia *et al.*, *Nature* 578, 397 (2020), doi:10.1038/s41586-020-1994-5; data at data.matr.io | **Not usable yet (3 Oct 2026):** articles verified on Crossref, but the data portal is a JavaScript application that exposes no licence in a retrievable record, and Crossref lists only the publisher's text-and-data-mining licence for the articles |
+| C8 | Y. Preger *et al.*, *J. Electrochem. Soc.* 167, 120532 (2020), doi:10.1149/1945-7111/abae37 (Sandia); data at batteryarchive.org | **Not usable yet (3 Oct 2026):** article verified (CC BY-NC-ND 4.0), but no data licence found on batteryarchive.org |
+| — | Zenodo record 6379165 (listed by a review as a Tongji dataset) | Not a valid record (the API returns no record); S9 is the verified Tongji record |
 
 ---
 
@@ -334,6 +375,14 @@ All records are in `docs/external_data/metadata/` and were retrieved on 29 Sep 2
 | `wheeler2025_lfp_dataverse.datacite.json` | DataCite, S6 dataset | `84de95a91194555d907731a74330214ba35a806635e8526dcd1aed80a8a02ca0` |
 | `wheeler2025_lfp_dataverse.dataset.json` | Dataverse API, S6 dataset (version, licence, files, MD5) | `0ad5ef469fdc6301ea0283a613fc5ae0d62f47dd89d4cb79992008a695ad49c4` |
 | `wheeler2025_characterisation_manifest.json` | Checksums of the 1,007 fetched S6 characterisation files | regenerated by `scripts/fetch_wheeler_characterisation.py` |
+| `luh2024_kit_result_data.datacite.json` | DataCite, S7 result data (10.35097/1969) | `4d903b8001e0a0cd40086dc884c1227fa8561f40668a106122cea3654563854a` |
+| `luh2024_kit_dataset.datacite.json` | DataCite, S7 parent dataset (10.35097/1947) | `18228e21a6850eeec913e24fbf3cd755cf86b183c0b2ca5c21f8eda95a43ec39` |
+| `luh2024_kit_result_data.landing.txt` | RADAR landing page excerpt: archive size, MD5, download URL (S7) | `a183016c66a6b71ac139468bc5374d07cf174250cf437f46abacfbed7798363b` |
+| `luh2024_sd.crossref.json` | Crossref, S7 article | `8839c09f46386601bd8a30daec086588d94e13f3211a132af9e3a96c6ea026cd` |
+| `wang2024_xjtu_zenodo.record.json` | Zenodo API, S8 record (licence, files, MD5) | `d35058254ce835727b7f8b0328a11f220c150b0c6598aed1c392a365b339c062` |
+| `wang2024_nc.crossref.json` | Crossref, S8 article | `36d48918b5bef29d6b26485f731e7237e4616b03927923c5c026f33934fd3186` |
+| `zhu2022_tju_zenodo.record.json` | Zenodo API, S9 record (licence, files, MD5) | `0c70dd5bb07e1bcb1215d81f5543af50e018cb1135763cf0f249ee6073d76526` |
+| `zhu2022_nc.crossref.json` | Crossref, S9 article | `da1ee88c7d802ab486e0b05f755395ee54ee029e1f91c0ee9146b9cc92d5e91c` |
 
 The remaining references in `paper/references.bib` that have DOIs (TFT, EWC, LwF, LSTM, Wilcoxon, Cohen, Kerby) were also checked against Crossref on the same date. Entries without DOIs still need checking against the publisher.
 

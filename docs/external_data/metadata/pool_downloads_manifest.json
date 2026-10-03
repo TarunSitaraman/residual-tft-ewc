@@ -1,0 +1,58 @@
+{
+ "files": [
+  {
+   "id": "S7",
+   "name": "10.35097-1969.tar",
+   "url": "https://radar.kit.edu/radar-backend/archives/CoNQplSNoVeXExyV/versions/1/content",
+   "size": 333402624,
+   "md5": "aa60c8fd08755a253ac7479dde41c93d",
+   "sha256": "5bb11e1a1d3eb5d8a13585bf32a9cfefcf34b94a488b5e0727994861f98d272e",
+   "retrieved_utc": "2026-10-03T06:19:43Z"
+  },
+  {
+   "id": "S8",
+   "name": "Battery Dataset.zip",
+   "url": "https://zenodo.org/api/records/10963339/files/Battery%20Dataset.zip/content",
+   "size": 2438769934,
+   "md5": "a635cef9678e0de21f9d5c1f78a4342c",
+   "sha256": "009deeda5ca935bf7b6230497aa492db12af120b6fc5211a9af05352affe55b1",
+   "retrieved_utc": "2026-10-03T06:59:34Z"
+  },
+  {
+   "id": "S9",
+   "name": "Dataset_1_NCA_battery.zip",
+   "url": "https://zenodo.org/api/records/6405084/files/Dataset_1_NCA_battery.zip/content",
+   "size": 579629324,
+   "md5": "cbd6d7eab2a296b52385e025e8d0f42a",
+   "sha256": "0d58f6f09f4ada76c2c3ab038ce98926ebdba7d18aaa31a9d7bebdccc9a834ac",
+   "retrieved_utc": "2026-10-03T06:25:32Z"
+  },
+  {
+   "id": "S9",
+   "name": "Dataset_2_NCM_battery.zip",
+   "url": "https://zenodo.org/api/records/6405084/files/Dataset_2_NCM_battery.zip/content",
+   "size": 737047539,
+   "md5": "a05c485df92f4af560d1d8d7f659ce1b",
+   "sha256": "942e1dc6cdaf900be350dd36dcb2b310cc49872775f1650e7b3306667e439d0f",
+   "retrieved_utc": "2026-10-03T06:33:25Z"
+  },
+  {
+   "id": "S9",
+   "name": "Dataset_3_NCM_NCA_battery.zip",
+   "url": "https://zenodo.org/api/records/6405084/files/Dataset_3_NCM_NCA_battery.zip/content",
+   "size": 356066478,
+   "md5": "d11e68e410a638058906af5e2f5f60f3",
+   "sha256": "a82e33ada100f91ab6cf99a654bb9f0572ce48ee7edbc5dad9d0665e7eccfe3a",
+   "retrieved_utc": "2026-10-03T06:38:58Z"
+  },
+  {
+   "id": "S9",
+   "name": "Impedance raw data and fitting data.zip",
+   "url": "https://zenodo.org/api/records/6405084/files/Impedance%20raw%20data%20and%20fitting%20data.zip/content",
+   "size": 1349129,
+   "md5": "be9a8088847edd6528ce888372b42465",
+   "sha256": "f0be0e3f4ef7478da13ca0c978aa1716c00f36e19e9cf29e077a3414053eee00",
+   "retrieved_utc": "2026-10-03T06:39:02Z"
+  }
+ ]
+}
