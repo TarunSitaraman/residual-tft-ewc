@@ -139,7 +139,8 @@ def fig_ablation(d: dict) -> Path:
     ax.set_xlabel("Final average test RMSE on S6 (SOH pp), TFT from scratch")
     ax.set_title("Ablation A1: what changed the TFT between D20 and D21", loc="left")
     ax.grid(axis="y", visible=False)
-    ax.legend(loc="lower right", fontsize=8)
+    ax.set_xlim(0, 1.05)
+    ax.legend(loc="center right", bbox_to_anchor=(1.0, 0.45), fontsize=8)
     fig.tight_layout()
     path = OUT / "d21_ablation_a1.png"
     fig.savefig(path)
