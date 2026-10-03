@@ -29,6 +29,7 @@ import gzip
 import hashlib
 import http.client
 import json
+import shutil
 import struct
 import sys
 import time
@@ -112,6 +113,16 @@ def fetch_entry(url: str, size: int, e: dict) -> bytes:
     return data
 
 
+def _is_kind(name: str, kind: str) -> bool:
+    """``charac``: any path containing "charac" (the 1,007 registered files, including the EIS files
+    in ``initialcharach_25degC``). ``aging``: ageing files, judged by file name only, because every
+    50 degC file sits in a folder named ``agingdata_50degC``."""
+    if kind == "charac":
+        return "charac" in name.lower()
+    base = name.rsplit("/", 1)[-1].lower()
+    return "aging" in base and "charac" not in base and "eis" not in base
+
+
 def _verified_local(target: Path, e: dict) -> bytes | None:
     """Content of an already-fetched file if it matches the zip index (size and CRC-32), else None.
 
@@ -153,6 +164,9 @@ def main() -> int:
     ap.add_argument("--dest", default="data/raw/wheeler2025")
     ap.add_argument("--manifest", default="docs/external_data/metadata/wheeler2025_characterisation_manifest.json")
     ap.add_argument("--cells", nargs="*", help="subset of cells, e.g. Cell1a (default: all 20)")
+    ap.add_argument("--kind", choices=("charac", "aging"), default="charac",
+                    help="characterisation files (default) or the between-check ageing files")
+    ap.add_argument("--min-free-gb", type=float, default=5.0, help="stop before the disk has less free space than this")
     args = ap.parse_args()
     files = json.loads(RECORD.read_text())["data"]["latestVersion"]["files"]
     zips = [f["dataFile"] for f in files if f["dataFile"]["filename"].startswith("Cell") and f["dataFile"]["filename"].endswith(".zip")]
@@ -164,13 +178,16 @@ def main() -> int:
     done = {f["path"] for f in manifest["files"]}
     for z in sorted(zips, key=lambda z: z["filename"]):
         url, size = ACCESS.format(id=z["id"]), int(z["filesize"])
-        entries = [e for e in zip_index(url, size) if "charac" in e["name"].lower() and not e["name"].endswith("/")
+        entries = [e for e in zip_index(url, size) if _is_kind(e["name"], args.kind) and not e["name"].endswith("/")
                    and not e["name"].startswith("__MACOSX")]
-        print(f"{z['filename']}: {len(entries)} characterisation files", flush=True)
+        print(f"{z['filename']}: {len(entries)} {args.kind} files", flush=True)
         for e in entries:
             rel = e["name"]
             if rel in done:
                 continue
+            if shutil.disk_usage(dest if dest.exists() else ".").free < args.min_free_gb * 1e9:
+                _write_manifest(manifest, manifest_path)
+                raise SystemExit(f"stopped: less than {args.min_free_gb} GB free on disk")
             target = dest / (rel + ".gz")
             data = _verified_local(target, e)
             if data is None:

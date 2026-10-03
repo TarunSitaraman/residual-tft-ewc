@@ -519,9 +519,9 @@ F1 − F0 answers whether the diagnostics help forecasting.
 
 ---
 
-## D21. Extended data and protocol for TFT-scale training — DRAFT, not adopted
+## D21. Extended data and protocol for TFT-scale training
 
-**Status:** **Draft for team review (3 Oct 2026). Nothing in this entry may be run until the team adopts it**; adoption is recorded here with its date, and any change after adoption is logged as a deviation. This entry is written **after** the S1 and S6 results, the reproducibility check (`docs/RESULTS.md`) and the data audit were seen, and must be reported as such. No model has been fitted on S7–S9.
+**Status:** Drafted 3 Oct 2026; reviewed and revised the same day (one-standard-error tie rule, 0.05 pp equivalence threshold, minimum series length, results files, pretraining mode); **adopted 3 Oct 2026 on the instruction of T. Sitaraman, before any model was fitted on S7–S9. The other team members have not yet reviewed it; their review is recorded here when it happens.** Any change after adoption is logged as a deviation. This entry is written **after** the S1 and S6 results, the reproducibility check (`docs/RESULTS.md`) and the data audit were seen, and must be reported as such. No model has been fitted on S7–S9.
 
 ### Why
 1. **Data size.** S1 (279 samples) and S6 (2,409) are too small for the TFT to be the right model: it is beaten by an MLP, linear extrapolation and gradient boosting, and varies by 0.25–0.54 pp across task orders.
@@ -536,6 +536,7 @@ F1 − F0 answers whether the diagnostics help forecasting.
 - **S7:** capacity = |`delta_q_dischg_Ah`| of the check-up discharge runs (`cyc_condition` = 2, `CHECKUP_RT`: 25 °C, 1.0 A to 2.5 V), read from `cell_eocv2`. The stored value is negative although the data dictionary says it is non-negative; the absolute value is used and the discrepancy disclosed. Excluded: the manual check-up after the thermal-management failure (any check-up dated after 27 May 2024; air-cooled, not comparable, as RPT 2 in S1) and the 12 side-experiment records `P000_0_S20_*`. The 12 cells that took part in the side experiment (Readme v2, Table 1) are kept and flagged. `cap_aged_est_Ah` (an extrapolated estimate) is **not** the label.
 - **S8, S9:** per-cycle data at the cycling protocol, not slow-rate checks. A **block** of *K* consecutive valid cycles is one pseudo-check; capacity = mean discharge capacity of the block. A cycle is valid only if its discharge reaches the protocol cut-off. *K* is fixed before any label is inspected beyond counting cycles: proposed *K* = 10. These capacities are measured at the cycling rate and temperature, which is stated in the paper.
 - **S1, S6:** unchanged (D17, D20).
+- **Minimum series:** a cell is used only if it has at least 5 valid checks (three for the fade rate, plus at least one target).
 
 ### Inputs
 - **Shared across all datasets (pool and stream):** SOH at origin; fade rate (least-squares slope over the last three valid checks); horizon *h*; time since the first check and time to the target, **in calendar days and in equivalent full cycles** where the dataset records them (missing-value indicators otherwise); test temperature; charge and discharge C-rates; SoC window or DoD; chemistry (one-hot). For S6 this adds calendar days to target, which is the change motivated by finding 3; it is applied identically to every method.
@@ -545,19 +546,20 @@ F1 − F0 answers whether the diagnostics help forecasting.
 ### Splits and protocols
 - Per-cell purged 60/80 splits within every dataset, as D18.
 - **P1, P2 on S1 and S6:** unchanged, re-run with the inputs above.
-- **P3 (new, headline for the TFT):** pretrain on the pool's training splits (early stopping on the pool's validation splits), then learn the S6 test cases as a continual stream (10 orders × 5 seeds, as D20). Methods: TFT from scratch; TFT pretrained + fine-tuning; **TFT pretrained + EWC** (anchor = pretrained weights, Fisher information from the pool); the same three for the MLP; the D18 baselines. Metrics: the D18 continual-learning metrics on S6 **plus retention on the pool's test splits** after the stream (forgetting of first-life knowledge).
+- **P3 (new, headline for the TFT):** pretrain jointly (all pool cells together, not as a stream) on the pool's training splits (early stopping on the pool's validation splits), then learn the S6 test cases as a continual stream (10 orders × 5 seeds, as D20). Methods: TFT from scratch; TFT pretrained + fine-tuning; **TFT pretrained + EWC** (anchor = pretrained weights, Fisher information from the pool); the same three for the MLP; the D18 baselines. Metrics: the D18 continual-learning metrics on S6 **plus retention on the pool's test splits** after the stream (forgetting of first-life knowledge).
 
 ### Tuning (changed from D11)
 - **10 tuning runs per grid point** instead of 3, on tuning orders disjoint from the evaluation orders.
-- **Tie rule, fixed now:** if the best grid value is within one standard error (over tuning runs) of a neighbour, choose the smaller learning rate or the smaller EWC λ. The selection margin is reported with every selected value.
+- **Tie rule, fixed now (one-standard-error rule):** among the grid values whose mean validation error is within one standard error (over tuning runs) of the best, choose the most conservative: the smallest learning rate, the smallest EWC λ, the smallest replay buffer. The selection margin is reported with every selected value.
 
 ### Statistics (changed from D18)
 - As D18 (paired Wilcoxon, Holm correction, rank-biserial effect sizes, bootstrap CIs), **plus medians** of every paired difference.
-- **Replication rule:** a difference is called significant only if p_Holm < 0.05 in the main run **and** in a replicate run with a different, pre-specified seed set (seeds 5–9). Differences below 0.02 pp are reported as practically equivalent whatever their p-value.
+- **Replication rule:** a difference is called significant only if p_Holm < 0.05 in the main run **and** in a replicate run with a different, pre-specified seed set (seeds 5–9). Differences below 0.05 pp are reported as practically equivalent whatever their p-value. Rationale: 0.05 pp is about half of the label shift caused by a definitional choice alone (pulse charge in or out, up to 0.089 pp, D17); a model difference smaller than that is not meaningful. (On the results seen so far, a 0.02 pp threshold would classify every comparison the same way.)
 - Every results file records the full environment, including torch.
+- **Results files:** runs under D21 write new files (`results/forecasting_d21_*.json`). The existing `results/forecasting.json` and `results/forecasting_wheeler.json` stay unchanged as the pre-D21 record.
 
-### S6 ageing cycles (route 1), deferred
-The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB uncompressed; measured from the zip indexes on 3 Oct 2026) would give per-cycle covariates. They are **not** part of this entry: the download takes about 5 days on the current connection, and in the 70 % DoD cases the ageing discharge is set from the last C/3 charge capacity (Wheeler et al. 2025), which needs its own leakage rules. A separate decision entry will cover them.
+### S6 ageing cycles (route 1): download authorised, use deferred
+The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB uncompressed; measured from the zip indexes on 3 Oct 2026) would give per-cycle covariates. They are **not** part of this entry: the download takes about 5 days on the current connection, and in the 70 % DoD cases the ageing discharge is set from the last C/3 charge capacity (Wheeler et al. 2025), which needs its own leakage rules. **3 Oct 2026: the download was authorised by T. Sitaraman** and started (stored gzip-compressed and checksummed like the characterisation files). Their use in any model needs a separate decision entry (D22) with those leakage rules, adopted before use.
 
 ### Limitations stated in advance
 - The pool is first-life data under laboratory conditions; transfer to second life is tested only on S6 (aged at 50 °C) and S1.
