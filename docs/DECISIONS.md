@@ -516,3 +516,50 @@ F1 − F0 answers whether the diagnostics help forecasting.
   - F1 now excludes features with no observed value in the samples. The rule uses no label information.
   - The notebook was re-run in full.
 - **Smoke profile.** Notebook 13 has an `EXPERIMENT_PROFILE=smoke` setting (one order, one seed, two epochs) that checks the code end to end. Its output is not reportable, was not kept, and changed no setting.
+
+---
+
+## D21. Extended data and protocol for TFT-scale training — DRAFT, not adopted
+
+**Status:** **Draft for team review (3 Oct 2026). Nothing in this entry may be run until the team adopts it**; adoption is recorded here with its date, and any change after adoption is logged as a deviation. This entry is written **after** the S1 and S6 results, the reproducibility check (`docs/RESULTS.md`) and the data audit were seen, and must be reported as such. No model has been fitted on S7–S9.
+
+### Why
+1. **Data size.** S1 (279 samples) and S6 (2,409) are too small for the TFT to be the right model: it is beaten by an MLP, linear extrapolation and gradient boosting, and varies by 0.25–0.54 pp across task orders.
+2. **Reproducibility.** Validation tuning with 3 runs per grid point selected the TFT's EWC λ by a 0.008 pp near-tie, and the S1 and S6 significance results changed with the numerical environment.
+3. **A missing input.** On S6 training data, fade per 100 cycles rises with the calendar days those cycles took (median within-cell ρ = 0.64, positive in 20/20 cells), but no S6 input carries calendar time. S1 already has it.
+
+### Data and roles
+- **First-life pretraining pool:** S7 (228 cells), S8 (55), S9 (130); `docs/EXTERNAL_DATA.md`. No second-life claim rests on them.
+- **Second-life continual stream:** S6 test cases (as D20) and S1 cells (as D18). Datasets are reported separately, as before.
+
+### Labels (one SOH series per cell, relative to its first valid measurement)
+- **S7:** capacity = |`delta_q_dischg_Ah`| of the check-up discharge runs (`cyc_condition` = 2, `CHECKUP_RT`: 25 °C, 1.0 A to 2.5 V), read from `cell_eocv2`. The stored value is negative although the data dictionary says it is non-negative; the absolute value is used and the discrepancy disclosed. Excluded: the manual check-up after the thermal-management failure (any check-up dated after 27 May 2024; air-cooled, not comparable, as RPT 2 in S1) and the 12 side-experiment records `P000_0_S20_*`. The 12 cells that took part in the side experiment (Readme v2, Table 1) are kept and flagged. `cap_aged_est_Ah` (an extrapolated estimate) is **not** the label.
+- **S8, S9:** per-cycle data at the cycling protocol, not slow-rate checks. A **block** of *K* consecutive valid cycles is one pseudo-check; capacity = mean discharge capacity of the block. A cycle is valid only if its discharge reaches the protocol cut-off. *K* is fixed before any label is inspected beyond counting cycles: proposed *K* = 10. These capacities are measured at the cycling rate and temperature, which is stated in the paper.
+- **S1, S6:** unchanged (D17, D20).
+
+### Inputs
+- **Shared across all datasets (pool and stream):** SOH at origin; fade rate (least-squares slope over the last three valid checks); horizon *h*; time since the first check and time to the target, **in calendar days and in equivalent full cycles** where the dataset records them (missing-value indicators otherwise); test temperature; charge and discharge C-rates; SoC window or DoD; chemistry (one-hot). For S6 this adds calendar days to target, which is the change motivated by finding 3; it is applied identically to every method.
+- **Dataset-specific diagnostics** (S1 F1, S6 F1) are used only within their own dataset, as before.
+- **Never inputs:** protocol currents set from a previous capacity (D14), throughput scaled from capacity, any label after the origin. Each new dataset's columns are screened with `scripts/audit_data.py` rules before use, and the screen is committed with the data tables.
+
+### Splits and protocols
+- Per-cell purged 60/80 splits within every dataset, as D18.
+- **P1, P2 on S1 and S6:** unchanged, re-run with the inputs above.
+- **P3 (new, headline for the TFT):** pretrain on the pool's training splits (early stopping on the pool's validation splits), then learn the S6 test cases as a continual stream (10 orders × 5 seeds, as D20). Methods: TFT from scratch; TFT pretrained + fine-tuning; **TFT pretrained + EWC** (anchor = pretrained weights, Fisher information from the pool); the same three for the MLP; the D18 baselines. Metrics: the D18 continual-learning metrics on S6 **plus retention on the pool's test splits** after the stream (forgetting of first-life knowledge).
+
+### Tuning (changed from D11)
+- **10 tuning runs per grid point** instead of 3, on tuning orders disjoint from the evaluation orders.
+- **Tie rule, fixed now:** if the best grid value is within one standard error (over tuning runs) of a neighbour, choose the smaller learning rate or the smaller EWC λ. The selection margin is reported with every selected value.
+
+### Statistics (changed from D18)
+- As D18 (paired Wilcoxon, Holm correction, rank-biserial effect sizes, bootstrap CIs), **plus medians** of every paired difference.
+- **Replication rule:** a difference is called significant only if p_Holm < 0.05 in the main run **and** in a replicate run with a different, pre-specified seed set (seeds 5–9). Differences below 0.02 pp are reported as practically equivalent whatever their p-value.
+- Every results file records the full environment, including torch.
+
+### S6 ageing cycles (route 1), deferred
+The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB uncompressed; measured from the zip indexes on 3 Oct 2026) would give per-cycle covariates. They are **not** part of this entry: the download takes about 5 days on the current connection, and in the 70 % DoD cases the ageing discharge is set from the last C/3 charge capacity (Wheeler et al. 2025), which needs its own leakage rules. A separate decision entry will cover them.
+
+### Limitations stated in advance
+- The pool is first-life data under laboratory conditions; transfer to second life is tested only on S6 (aged at 50 °C) and S1.
+- S7 check-ups are at a single temperature (25 °C); S8 and S9 labels are cycling-rate capacities, not slow-rate checks.
+- Pseudo-checks (S8, S9) and check-ups (S7) differ in interval; time-to-target inputs carry this.
