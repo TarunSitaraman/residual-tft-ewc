@@ -1,0 +1,4 @@
+Source: https://radar.kit.edu/radar/en/dataset/CoNQplSNoVeXExyV
+Retrieved: 2026-10-03T06:15:18Z
+Download: https://radar.kit.edu/radar-backend/archives/CoNQplSNoVeXExyV/versions/1/content (HTTP 206, Content-Range total 333402624, filename 10.35097-1969.tar)
+Excerpt: Archive size: 333.4 MB Archive creator: fd47211f4647eb1f08a6b86ca76db5d7 Archive checksum: aa60c8fd08755a253ac7479dde41c93d (MD5) Embargo period: - The metadata
