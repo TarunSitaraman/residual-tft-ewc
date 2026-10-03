@@ -5,10 +5,10 @@
   "pandas": "3.0.6",
   "scikit-learn": "1.9.1",
   "torch": "2.14.1+cpu",
-  "git_commit": "c517ffd282ff1ef227773530728dbae74a5ca931",
+  "git_commit": "b0032694e0004027a955c6b52256b85092f6e410",
   "git_dirty": false
  },
- "n_checks": 43,
+ "n_checks": 88,
  "n_failed": 0,
  "checks": [
   {
@@ -696,6 +696,2584 @@
   {
    "dataset": "S6",
    "check": "SOH increases > 0.5 pp between consecutive measurements",
+   "status": "INFO",
+   "detail": "none"
+  },
+  {
+   "dataset": "S7",
+   "check": "SOH formula",
+   "status": "PASS",
+   "detail": "max |SOH - Capacity/Reference*100| = 1.42e-14"
+  },
+  {
+   "dataset": "S7",
+   "check": "reference = first valid measurement",
+   "status": "PASS",
+   "detail": "228 cells, reference constant within each cell and equal to its first valid capacity"
+  },
+  {
+   "dataset": "S7",
+   "check": "check time increases with check_time",
+   "status": "PASS",
+   "detail": "all cells"
+  },
+  {
+   "dataset": "S7",
+   "check": "capacity positive and finite",
+   "status": "PASS",
+   "detail": "3912 checks"
+  },
+  {
+   "dataset": "S7",
+   "check": "sample count",
+   "status": "PASS",
+   "detail": "10251 (D21 disclosures: 10251)"
+  },
+  {
+   "dataset": "S7",
+   "check": "target = SOH(k+h) - SOH(k)",
+   "status": "PASS",
+   "detail": "max deviation 0.00e+00"
+  },
+  {
+   "dataset": "S7",
+   "check": "target after origin",
+   "status": "PASS",
+   "detail": "every target lies h valid measurements after its origin"
+  },
+  {
+   "dataset": "S7",
+   "check": "purged splits",
+   "status": "PASS",
+   "detail": "per cell: max train target <= min val origin, max val target <= min test origin; no empty split"
+  },
+  {
+   "dataset": "S7",
+   "check": "samples per cell and split",
+   "status": "INFO",
+   "detail": {
+    "P001-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P001-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P001-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P002-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P002-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P002-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P003-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P003-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P003-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P004-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P004-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P004-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P005-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P005-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P005-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P006-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P006-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P006-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P007-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P007-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P007-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P008-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P008-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P008-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P009-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P009-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P009-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P010-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P010-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P010-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P011-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P011-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P011-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P012-1": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 9
+    },
+    "P012-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P012-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P013-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P013-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P013-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P014-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P014-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P014-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P015-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P015-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P015-3": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 9
+    },
+    "P016-1": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 9
+    },
+    "P016-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P016-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P017-1": {
+     "none": 6,
+     "test": 3,
+     "train": 9,
+     "val": 3
+    },
+    "P017-2": {
+     "none": 6,
+     "test": 3,
+     "train": 9,
+     "val": 3
+    },
+    "P017-3": {
+     "none": 6,
+     "test": 3,
+     "train": 9,
+     "val": 3
+    },
+    "P018-1": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P018-2": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P018-3": {
+     "none": 4,
+     "test": 1,
+     "train": 6,
+     "val": 1
+    },
+    "P021-1": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P021-2": {
+     "none": 6,
+     "test": 6,
+     "train": 21,
+     "val": 6
+    },
+    "P021-3": {
+     "none": 6,
+     "test": 6,
+     "train": 21,
+     "val": 6
+    },
+    "P022-1": {
+     "none": 5,
+     "test": 3,
+     "train": 9,
+     "val": 1
+    },
+    "P022-2": {
+     "none": 5,
+     "test": 3,
+     "train": 9,
+     "val": 1
+    },
+    "P022-3": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P025-1": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 12
+    },
+    "P025-2": {
+     "none": 6,
+     "test": 12,
+     "train": 33,
+     "val": 9
+    },
+    "P025-3": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 9
+    },
+    "P026-1": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "P026-2": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "P026-3": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "P027-1": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P027-2": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P027-3": {
+     "none": 4,
+     "test": 1,
+     "train": 6,
+     "val": 1
+    },
+    "P029-1": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "P029-2": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "P029-3": {
+     "none": 6,
+     "test": 6,
+     "train": 21,
+     "val": 6
+    },
+    "P030-1": {
+     "none": 6,
+     "test": 3,
+     "train": 9,
+     "val": 3
+    },
+    "P030-2": {
+     "none": 6,
+     "test": 3,
+     "train": 9,
+     "val": 3
+    },
+    "P030-3": {
+     "none": 6,
+     "test": 3,
+     "train": 9,
+     "val": 3
+    },
+    "P033-1": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 9
+    },
+    "P033-2": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 9
+    },
+    "P033-3": {
+     "none": 6,
+     "test": 12,
+     "train": 33,
+     "val": 9
+    },
+    "P034-1": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P034-2": {
+     "none": 6,
+     "test": 6,
+     "train": 21,
+     "val": 6
+    },
+    "P034-3": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P035-2": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P035-3": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P037-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P037-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P037-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P038-1": {
+     "none": 6,
+     "test": 9,
+     "train": 33,
+     "val": 9
+    },
+    "P038-2": {
+     "none": 6,
+     "test": 12,
+     "train": 33,
+     "val": 9
+    },
+    "P038-3": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "P039-1": {
+     "none": 5,
+     "test": 3,
+     "train": 9,
+     "val": 1
+    },
+    "P039-2": {
+     "none": 5,
+     "test": 3,
+     "train": 9,
+     "val": 1
+    },
+    "P039-3": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P040-1": {
+     "none": 4,
+     "test": 1,
+     "train": 6,
+     "val": 1
+    },
+    "P040-2": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P040-3": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P041-1": {
+     "none": 6,
+     "test": 9,
+     "train": 33,
+     "val": 9
+    },
+    "P041-2": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P041-3": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "P042-1": {
+     "none": 6,
+     "test": 12,
+     "train": 33,
+     "val": 9
+    },
+    "P042-2": {
+     "none": 6,
+     "test": 6,
+     "train": 15,
+     "val": 3
+    },
+    "P042-3": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P043-1": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P043-2": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P043-3": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P045-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P045-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P045-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P046-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P046-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P046-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P047-1": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "P047-2": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "P047-3": {
+     "none": 6,
+     "test": 6,
+     "train": 15,
+     "val": 3
+    },
+    "P048-2": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P049-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P049-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P049-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P050-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P050-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P050-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P051-1": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P051-2": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 12
+    },
+    "P051-3": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 12
+    },
+    "P052-1": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "P052-2": {
+     "none": 6,
+     "test": 3,
+     "train": 12,
+     "val": 3
+    },
+    "P052-3": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P053-1": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "P053-2": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "P053-3": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P054-1": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "P054-2": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P054-3": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P055-1": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P055-2": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P055-3": {
+     "none": 6,
+     "test": 3,
+     "train": 9,
+     "val": 3
+    },
+    "P056-3": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P057-1": {
+     "none": 6,
+     "test": 6,
+     "train": 15,
+     "val": 3
+    },
+    "P057-2": {
+     "none": 6,
+     "test": 6,
+     "train": 15,
+     "val": 3
+    },
+    "P057-3": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 3
+    },
+    "P058-1": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "P058-2": {
+     "none": 6,
+     "test": 6,
+     "train": 15,
+     "val": 3
+    },
+    "P058-3": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 3
+    },
+    "P059-1": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P059-2": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P059-3": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P060-1": {
+     "none": 5,
+     "test": 3,
+     "train": 6,
+     "val": 1
+    },
+    "P060-3": {
+     "none": 4,
+     "test": 1,
+     "train": 6,
+     "val": 1
+    },
+    "P061-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P061-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P061-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P062-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P062-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P062-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P063-1": {
+     "none": 6,
+     "test": 12,
+     "train": 39,
+     "val": 12
+    },
+    "P063-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P063-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P064-1": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P064-2": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "P064-3": {
+     "none": 5,
+     "test": 3,
+     "train": 9,
+     "val": 1
+    },
+    "P065-1": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "P065-2": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "P065-3": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "P066-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P066-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P066-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P067-1": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P067-2": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P067-3": {
+     "none": 4,
+     "test": 1,
+     "train": 3,
+     "val": 1
+    },
+    "P068-1": {
+     "none": 6,
+     "test": 12,
+     "train": 42,
+     "val": 12
+    },
+    "P068-2": {
+     "none": 6,
+     "test": 12,
+     "train": 39,
+     "val": 12
+    },
+    "P068-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P069-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P069-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P069-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P070-1": {
+     "none": 4,
+     "test": 1,
+     "train": 6,
+     "val": 1
+    },
+    "P070-2": {
+     "none": 4,
+     "test": 1,
+     "train": 6,
+     "val": 1
+    },
+    "P070-3": {
+     "none": 5,
+     "test": 3,
+     "train": 9,
+     "val": 1
+    },
+    "P071-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P071-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P071-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P072-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P072-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P072-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P073-1": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "P073-2": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "P073-3": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 3
+    },
+    "P074-1": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "P074-2": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P074-3": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "P075-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P075-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P075-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P076-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P076-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "P076-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    }
+   }
+  },
+  {
+   "dataset": "S7",
+   "check": "no throughput or extrapolated-capacity column in the samples",
+   "status": "PASS",
+   "detail": "none"
+  },
+  {
+   "dataset": "S7",
+   "check": "no protocol current among inputs",
+   "status": "PASS",
+   "detail": "none"
+  },
+  {
+   "dataset": "S7",
+   "check": "no input with median within-cell |rho| >= 0.95 with the target",
+   "status": "PASS",
+   "detail": "largest: [('horizon', 0.66), ('days_to_target', 0.606), ('fade_rate_pp_per_day', 0.405), ('soh_origin', 0.35), ('days_since_first', 0.35)]"
+  },
+  {
+   "dataset": "S7",
+   "check": "missing share per input (non-zero only)",
+   "status": "INFO",
+   "detail": {
+    "fade_rate_pp_per_day": 0.114
+   }
+  },
+  {
+   "dataset": "S7",
+   "check": "cells and conditions with >= 5 checks",
+   "status": "INFO",
+   "detail": {
+    "cells": 195,
+    "conditions": 67
+   }
+  },
+  {
+   "dataset": "S7",
+   "check": "SOH increases > 2.0 pp between consecutive measurements",
+   "status": "INFO",
+   "detail": "none"
+  },
+  {
+   "dataset": "S8",
+   "check": "SOH formula",
+   "status": "PASS",
+   "detail": "max |SOH - Capacity/Reference*100| = 4.26e-14"
+  },
+  {
+   "dataset": "S8",
+   "check": "reference = first valid measurement",
+   "status": "PASS",
+   "detail": "55 cells, reference constant within each cell and equal to its first valid capacity"
+  },
+  {
+   "dataset": "S8",
+   "check": "check time increases with cycle",
+   "status": "PASS",
+   "detail": "all cells"
+  },
+  {
+   "dataset": "S8",
+   "check": "capacity positive and finite",
+   "status": "PASS",
+   "detail": "3343 checks"
+  },
+  {
+   "dataset": "S8",
+   "check": "sample count",
+   "status": "PASS",
+   "detail": "9699 (D21 disclosures: 9699)"
+  },
+  {
+   "dataset": "S8",
+   "check": "target = SOH(k+h) - SOH(k)",
+   "status": "PASS",
+   "detail": "max deviation 0.00e+00"
+  },
+  {
+   "dataset": "S8",
+   "check": "target after origin",
+   "status": "PASS",
+   "detail": "every target lies h valid measurements after its origin"
+  },
+  {
+   "dataset": "S8",
+   "check": "purged splits",
+   "status": "PASS",
+   "detail": "per cell: max train target <= min val origin, max val target <= min test origin; no empty split"
+  },
+  {
+   "dataset": "S8",
+   "check": "samples per cell and split",
+   "status": "INFO",
+   "detail": {
+    "S8-Batch-1-2C_battery-1": {
+     "none": 6,
+     "test": 21,
+     "train": 63,
+     "val": 18
+    },
+    "S8-Batch-1-2C_battery-2": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S8-Batch-1-2C_battery-3": {
+     "none": 6,
+     "test": 21,
+     "train": 63,
+     "val": 21
+    },
+    "S8-Batch-1-2C_battery-4": {
+     "none": 6,
+     "test": 21,
+     "train": 63,
+     "val": 21
+    },
+    "S8-Batch-1-2C_battery-5": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S8-Batch-1-2C_battery-6": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S8-Batch-1-2C_battery-7": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S8-Batch-1-2C_battery-8": {
+     "none": 6,
+     "test": 21,
+     "train": 69,
+     "val": 21
+    },
+    "S8-Batch-2-3C_battery-1": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 15
+    },
+    "S8-Batch-2-3C_battery-10": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "S8-Batch-2-3C_battery-11": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 3
+    },
+    "S8-Batch-2-3C_battery-12": {
+     "none": 6,
+     "test": 9,
+     "train": 33,
+     "val": 9
+    },
+    "S8-Batch-2-3C_battery-13": {
+     "none": 6,
+     "test": 12,
+     "train": 33,
+     "val": 9
+    },
+    "S8-Batch-2-3C_battery-14": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "S8-Batch-2-3C_battery-15": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "S8-Batch-2-3C_battery-2": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 15
+    },
+    "S8-Batch-2-3C_battery-3": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "S8-Batch-2-3C_battery-4": {
+     "none": 6,
+     "test": 18,
+     "train": 51,
+     "val": 15
+    },
+    "S8-Batch-2-3C_battery-5": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 15
+    },
+    "S8-Batch-2-3C_battery-6": {
+     "none": 6,
+     "test": 18,
+     "train": 51,
+     "val": 15
+    },
+    "S8-Batch-2-3C_battery-7": {
+     "none": 6,
+     "test": 15,
+     "train": 51,
+     "val": 15
+    },
+    "S8-Batch-2-3C_battery-8": {
+     "none": 6,
+     "test": 12,
+     "train": 42,
+     "val": 12
+    },
+    "S8-Batch-2-3C_battery-9": {
+     "none": 6,
+     "test": 15,
+     "train": 45,
+     "val": 12
+    },
+    "S8-Batch-3-R2.5_battery-1": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "S8-Batch-3-R2.5_battery-2": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "S8-Batch-3-R2.5_battery-3": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 3
+    },
+    "S8-Batch-3-R2.5_battery-4": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "S8-Batch-3-R2.5_battery-5": {
+     "none": 6,
+     "test": 3,
+     "train": 15,
+     "val": 3
+    },
+    "S8-Batch-3-R2.5_battery-6": {
+     "none": 6,
+     "test": 3,
+     "train": 12,
+     "val": 3
+    },
+    "S8-Batch-3-R2.5_battery-7": {
+     "none": 6,
+     "test": 3,
+     "train": 12,
+     "val": 3
+    },
+    "S8-Batch-3-R2.5_battery-8": {
+     "none": 6,
+     "test": 6,
+     "train": 15,
+     "val": 3
+    },
+    "S8-Batch-4-R3_battery-1": {
+     "none": 6,
+     "test": 78,
+     "train": 234,
+     "val": 75
+    },
+    "S8-Batch-4-R3_battery-2": {
+     "none": 6,
+     "test": 66,
+     "train": 195,
+     "val": 63
+    },
+    "S8-Batch-4-R3_battery-3": {
+     "none": 6,
+     "test": 66,
+     "train": 195,
+     "val": 63
+    },
+    "S8-Batch-4-R3_battery-4": {
+     "none": 6,
+     "test": 69,
+     "train": 213,
+     "val": 69
+    },
+    "S8-Batch-4-R3_battery-5": {
+     "none": 6,
+     "test": 72,
+     "train": 216,
+     "val": 69
+    },
+    "S8-Batch-4-R3_battery-6": {
+     "none": 6,
+     "test": 69,
+     "train": 207,
+     "val": 69
+    },
+    "S8-Batch-4-R3_battery-7": {
+     "none": 6,
+     "test": 57,
+     "train": 174,
+     "val": 57
+    },
+    "S8-Batch-4-R3_battery-8": {
+     "none": 6,
+     "test": 72,
+     "train": 219,
+     "val": 72
+    },
+    "S8-Batch-5-RW_battery-1": {
+     "none": 6,
+     "test": 9,
+     "train": 24,
+     "val": 6
+    },
+    "S8-Batch-5-RW_battery-2": {
+     "none": 6,
+     "test": 15,
+     "train": 42,
+     "val": 12
+    },
+    "S8-Batch-5-RW_battery-3": {
+     "none": 6,
+     "test": 15,
+     "train": 48,
+     "val": 15
+    },
+    "S8-Batch-5-RW_battery-4": {
+     "none": 6,
+     "test": 12,
+     "train": 33,
+     "val": 9
+    },
+    "S8-Batch-5-RW_battery-5": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 12
+    },
+    "S8-Batch-5-RW_battery-6": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S8-Batch-5-RW_battery-7": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "S8-Batch-5-RW_battery-8": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "S8-Batch-6-Sim_satellite_battery-1": {
+     "none": 6,
+     "test": 96,
+     "train": 288,
+     "val": 96
+    },
+    "S8-Batch-6-Sim_satellite_battery-2": {
+     "none": 6,
+     "test": 126,
+     "train": 375,
+     "val": 123
+    },
+    "S8-Batch-6-Sim_satellite_battery-3": {
+     "none": 6,
+     "test": 93,
+     "train": 276,
+     "val": 90
+    },
+    "S8-Batch-6-Sim_satellite_battery-4": {
+     "none": 6,
+     "test": 96,
+     "train": 288,
+     "val": 93
+    },
+    "S8-Batch-6-Sim_satellite_battery-5": {
+     "none": 6,
+     "test": 132,
+     "train": 399,
+     "val": 132
+    },
+    "S8-Batch-6-Sim_satellite_battery-6": {
+     "none": 6,
+     "test": 108,
+     "train": 330,
+     "val": 108
+    },
+    "S8-Batch-6-Sim_satellite_battery-7": {
+     "none": 6,
+     "test": 96,
+     "train": 288,
+     "val": 96
+    },
+    "S8-Batch-6-Sim_satellite_battery-8": {
+     "none": 6,
+     "test": 108,
+     "train": 321,
+     "val": 105
+    }
+   }
+  },
+  {
+   "dataset": "S8",
+   "check": "no throughput or extrapolated-capacity column in the samples",
+   "status": "PASS",
+   "detail": "none"
+  },
+  {
+   "dataset": "S8",
+   "check": "no protocol current among inputs",
+   "status": "PASS",
+   "detail": "none"
+  },
+  {
+   "dataset": "S8",
+   "check": "no input with median within-cell |rho| >= 0.95 with the target",
+   "status": "PASS",
+   "detail": "largest: [('days_since_first', 0.833), ('cycles_since_first', 0.833), ('fade_rate_pp_per_day', 0.764), ('soh_origin', 0.598), ('horizon', 0.284)]"
+  },
+  {
+   "dataset": "S8",
+   "check": "missing share per input (non-zero only)",
+   "status": "INFO",
+   "detail": {
+    "fade_rate_pp_per_day": 0.034
+   }
+  },
+  {
+   "dataset": "S8",
+   "check": "cells and conditions with >= 5 checks",
+   "status": "INFO",
+   "detail": {
+    "cells": 55,
+    "conditions": 6
+   }
+  },
+  {
+   "dataset": "S8",
+   "check": "SOH increases > 2.0 pp between consecutive measurements",
+   "status": "INFO",
+   "detail": [
+    {
+     "cell": "S8-Batch-2-3C_battery-1",
+     "cycle": 20,
+     "increase_pp": 2.019
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-10",
+     "cycle": 20,
+     "increase_pp": 2.278
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-11",
+     "cycle": 20,
+     "increase_pp": 2.349
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-12",
+     "cycle": 20,
+     "increase_pp": 2.373
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-13",
+     "cycle": 20,
+     "increase_pp": 2.272
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-14",
+     "cycle": 20,
+     "increase_pp": 2.32
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-15",
+     "cycle": 20,
+     "increase_pp": 2.293
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-2",
+     "cycle": 20,
+     "increase_pp": 2.023
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-6",
+     "cycle": 20,
+     "increase_pp": 2.097
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-8",
+     "cycle": 20,
+     "increase_pp": 2.084
+    },
+    {
+     "cell": "S8-Batch-2-3C_battery-9",
+     "cycle": 20,
+     "increase_pp": 2.347
+    },
+    {
+     "cell": "S8-Batch-5-RW_battery-1",
+     "cycle": 31,
+     "increase_pp": 2.252
+    },
+    {
+     "cell": "S8-Batch-5-RW_battery-4",
+     "cycle": 31,
+     "increase_pp": 2.141
+    },
+    {
+     "cell": "S8-Batch-5-RW_battery-6",
+     "cycle": 31,
+     "increase_pp": 2.252
+    },
+    {
+     "cell": "S8-Batch-5-RW_battery-7",
+     "cycle": 31,
+     "increase_pp": 2.194
+    }
+   ]
+  },
+  {
+   "dataset": "S9",
+   "check": "SOH formula",
+   "status": "PASS",
+   "detail": "max |SOH - Capacity/Reference*100| = 4.26e-14"
+  },
+  {
+   "dataset": "S9",
+   "check": "reference = first valid measurement",
+   "status": "PASS",
+   "detail": "130 cells, reference constant within each cell and equal to its first valid capacity"
+  },
+  {
+   "dataset": "S9",
+   "check": "check time increases with cycle",
+   "status": "PASS",
+   "detail": "all cells"
+  },
+  {
+   "dataset": "S9",
+   "check": "capacity positive and finite",
+   "status": "PASS",
+   "detail": "5856 checks"
+  },
+  {
+   "dataset": "S9",
+   "check": "sample count",
+   "status": "PASS",
+   "detail": "16761 (D21 disclosures: 16761)"
+  },
+  {
+   "dataset": "S9",
+   "check": "target = SOH(k+h) - SOH(k)",
+   "status": "PASS",
+   "detail": "max deviation 0.00e+00"
+  },
+  {
+   "dataset": "S9",
+   "check": "target after origin",
+   "status": "PASS",
+   "detail": "every target lies h valid measurements after its origin"
+  },
+  {
+   "dataset": "S9",
+   "check": "purged splits",
+   "status": "PASS",
+   "detail": "per cell: max train target <= min val origin, max val target <= min test origin; no empty split"
+  },
+  {
+   "dataset": "S9",
+   "check": "samples per cell and split",
+   "status": "INFO",
+   "detail": {
+    "S9-D1_NCA_battery-CY25-025_1-#1": {
+     "none": 6,
+     "test": 27,
+     "train": 81,
+     "val": 24
+    },
+    "S9-D1_NCA_battery-CY25-025_1-#2": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY25-025_1-#3": {
+     "none": 6,
+     "test": 15,
+     "train": 48,
+     "val": 15
+    },
+    "S9-D1_NCA_battery-CY25-025_1-#4": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 15
+    },
+    "S9-D1_NCA_battery-CY25-025_1-#5": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 15
+    },
+    "S9-D1_NCA_battery-CY25-025_1-#6": {
+     "none": 6,
+     "test": 12,
+     "train": 36,
+     "val": 12
+    },
+    "S9-D1_NCA_battery-CY25-025_1-#7": {
+     "none": 6,
+     "test": 12,
+     "train": 39,
+     "val": 12
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#1": {
+     "none": 6,
+     "test": 6,
+     "train": 18,
+     "val": 6
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#10": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#11": {
+     "none": 6,
+     "test": 6,
+     "train": 21,
+     "val": 6
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#12": {
+     "none": 6,
+     "test": 6,
+     "train": 21,
+     "val": 6
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#13": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#14": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#15": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#16": {
+     "none": 6,
+     "test": 6,
+     "train": 24,
+     "val": 6
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#17": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#18": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#19": {
+     "none": 6,
+     "test": 6,
+     "train": 21,
+     "val": 6
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#2": {
+     "none": 6,
+     "test": 9,
+     "train": 24,
+     "val": 6
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#3": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#4": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#5": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#6": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 6
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#7": {
+     "none": 6,
+     "test": 9,
+     "train": 24,
+     "val": 6
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#8": {
+     "none": 6,
+     "test": 3,
+     "train": 12,
+     "val": 3
+    },
+    "S9-D1_NCA_battery-CY25-05_1-#9": {
+     "none": 6,
+     "test": 3,
+     "train": 12,
+     "val": 3
+    },
+    "S9-D1_NCA_battery-CY35-05_1-#1": {
+     "none": 6,
+     "test": 30,
+     "train": 90,
+     "val": 30
+    },
+    "S9-D1_NCA_battery-CY35-05_1-#2": {
+     "none": 6,
+     "test": 30,
+     "train": 90,
+     "val": 27
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#1": {
+     "none": 6,
+     "test": 39,
+     "train": 123,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#10": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#11": {
+     "none": 6,
+     "test": 36,
+     "train": 108,
+     "val": 36
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#12": {
+     "none": 6,
+     "test": 45,
+     "train": 138,
+     "val": 45
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#13": {
+     "none": 6,
+     "test": 39,
+     "train": 123,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#14": {
+     "none": 6,
+     "test": 42,
+     "train": 123,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#15": {
+     "none": 6,
+     "test": 27,
+     "train": 81,
+     "val": 27
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#16": {
+     "none": 6,
+     "test": 33,
+     "train": 99,
+     "val": 33
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#17": {
+     "none": 6,
+     "test": 30,
+     "train": 87,
+     "val": 27
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#18": {
+     "none": 6,
+     "test": 33,
+     "train": 99,
+     "val": 33
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#19": {
+     "none": 6,
+     "test": 39,
+     "train": 117,
+     "val": 36
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#2": {
+     "none": 6,
+     "test": 39,
+     "train": 120,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#20": {
+     "none": 6,
+     "test": 42,
+     "train": 123,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#21": {
+     "none": 6,
+     "test": 36,
+     "train": 108,
+     "val": 33
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#22": {
+     "none": 6,
+     "test": 33,
+     "train": 96,
+     "val": 30
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#23": {
+     "none": 6,
+     "test": 39,
+     "train": 117,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#24": {
+     "none": 6,
+     "test": 42,
+     "train": 123,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#25": {
+     "none": 6,
+     "test": 42,
+     "train": 126,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#26": {
+     "none": 6,
+     "test": 39,
+     "train": 120,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#27": {
+     "none": 6,
+     "test": 36,
+     "train": 108,
+     "val": 36
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#28": {
+     "none": 6,
+     "test": 39,
+     "train": 123,
+     "val": 39
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#3": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#4": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#5": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#6": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#7": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#8": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D1_NCA_battery-CY45-05_1-#9": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#1": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#10": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#11": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#12": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#13": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#15": {
+     "none": 6,
+     "test": 15,
+     "train": 48,
+     "val": 15
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#16": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 15
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#17": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 15
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#18": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#19": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#2": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#20": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#21": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#22": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#23": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#3": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#4": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#5": {
+     "none": 6,
+     "test": 27,
+     "train": 81,
+     "val": 24
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#6": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#7": {
+     "none": 6,
+     "test": 9,
+     "train": 27,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#8": {
+     "none": 6,
+     "test": 18,
+     "train": 54,
+     "val": 15
+    },
+    "S9-D2_NCM_battery-CY25-05_1-#9": {
+     "none": 6,
+     "test": 18,
+     "train": 57,
+     "val": 18
+    },
+    "S9-D2_NCM_battery-CY35-05_1-#1": {
+     "none": 6,
+     "test": 63,
+     "train": 192,
+     "val": 63
+    },
+    "S9-D2_NCM_battery-CY35-05_1-#2": {
+     "none": 6,
+     "test": 72,
+     "train": 219,
+     "val": 72
+    },
+    "S9-D2_NCM_battery-CY35-05_1-#3": {
+     "none": 6,
+     "test": 69,
+     "train": 210,
+     "val": 69
+    },
+    "S9-D2_NCM_battery-CY35-05_1-#4": {
+     "none": 6,
+     "test": 66,
+     "train": 201,
+     "val": 66
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#1": {
+     "none": 6,
+     "test": 24,
+     "train": 75,
+     "val": 24
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#10": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#11": {
+     "none": 6,
+     "test": 45,
+     "train": 138,
+     "val": 45
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#12": {
+     "none": 6,
+     "test": 45,
+     "train": 138,
+     "val": 45
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#13": {
+     "none": 6,
+     "test": 48,
+     "train": 150,
+     "val": 48
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#14": {
+     "none": 6,
+     "test": 48,
+     "train": 150,
+     "val": 48
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#15": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#16": {
+     "none": 6,
+     "test": 33,
+     "train": 99,
+     "val": 33
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#17": {
+     "none": 6,
+     "test": 33,
+     "train": 99,
+     "val": 33
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#18": {
+     "none": 6,
+     "test": 33,
+     "train": 99,
+     "val": 33
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#19": {
+     "none": 6,
+     "test": 45,
+     "train": 135,
+     "val": 45
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#2": {
+     "none": 6,
+     "test": 24,
+     "train": 75,
+     "val": 24
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#20": {
+     "none": 6,
+     "test": 45,
+     "train": 135,
+     "val": 45
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#21": {
+     "none": 6,
+     "test": 51,
+     "train": 156,
+     "val": 51
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#22": {
+     "none": 6,
+     "test": 48,
+     "train": 150,
+     "val": 48
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#23": {
+     "none": 6,
+     "test": 54,
+     "train": 159,
+     "val": 51
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#24": {
+     "none": 6,
+     "test": 51,
+     "train": 153,
+     "val": 48
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#25": {
+     "none": 6,
+     "test": 54,
+     "train": 162,
+     "val": 51
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#26": {
+     "none": 6,
+     "test": 48,
+     "train": 147,
+     "val": 48
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#27": {
+     "none": 6,
+     "test": 54,
+     "train": 159,
+     "val": 51
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#28": {
+     "none": 6,
+     "test": 51,
+     "train": 153,
+     "val": 48
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#3": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#4": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#5": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#6": {
+     "none": 6,
+     "test": 9,
+     "train": 30,
+     "val": 9
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#7": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#8": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D2_NCM_battery-CY45-05_1-#9": {
+     "none": 6,
+     "test": 21,
+     "train": 66,
+     "val": 21
+    },
+    "S9-D3_NCM_NCA_battery-CY25-05_1-#1": {
+     "none": 6,
+     "test": 54,
+     "train": 159,
+     "val": 51
+    },
+    "S9-D3_NCM_NCA_battery-CY25-05_1-#2": {
+     "none": 6,
+     "test": 54,
+     "train": 162,
+     "val": 54
+    },
+    "S9-D3_NCM_NCA_battery-CY25-05_1-#3": {
+     "none": 6,
+     "test": 57,
+     "train": 171,
+     "val": 54
+    },
+    "S9-D3_NCM_NCA_battery-CY25-05_2-#1": {
+     "none": 6,
+     "test": 54,
+     "train": 168,
+     "val": 54
+    },
+    "S9-D3_NCM_NCA_battery-CY25-05_2-#2": {
+     "none": 6,
+     "test": 54,
+     "train": 162,
+     "val": 54
+    },
+    "S9-D3_NCM_NCA_battery-CY25-05_2-#3": {
+     "none": 6,
+     "test": 57,
+     "train": 177,
+     "val": 57
+    },
+    "S9-D3_NCM_NCA_battery-CY25-05_4-#1": {
+     "none": 6,
+     "test": 57,
+     "train": 168,
+     "val": 54
+    },
+    "S9-D3_NCM_NCA_battery-CY25-05_4-#2": {
+     "none": 6,
+     "test": 54,
+     "train": 168,
+     "val": 54
+    },
+    "S9-D3_NCM_NCA_battery-CY25-05_4-#3": {
+     "none": 6,
+     "test": 51,
+     "train": 153,
+     "val": 51
+    }
+   }
+  },
+  {
+   "dataset": "S9",
+   "check": "no throughput or extrapolated-capacity column in the samples",
+   "status": "PASS",
+   "detail": "none"
+  },
+  {
+   "dataset": "S9",
+   "check": "no protocol current among inputs",
+   "status": "PASS",
+   "detail": "none"
+  },
+  {
+   "dataset": "S9",
+   "check": "no input with median within-cell |rho| >= 0.95 with the target",
+   "status": "PASS",
+   "detail": "largest: [('days_to_target', 0.817), ('horizon', 0.766), ('cycles_to_target', 0.753), ('fade_rate_pp_per_day', 0.495), ('soh_origin', 0.478)]"
+  },
+  {
+   "dataset": "S9",
+   "check": "missing share per input (non-zero only)",
+   "status": "INFO",
+   "detail": {
+    "fade_rate_pp_per_day": 0.043
+   }
+  },
+  {
+   "dataset": "S9",
+   "check": "cells and conditions with >= 5 checks",
+   "status": "INFO",
+   "detail": {
+    "cells": 119,
+    "conditions": 10
+   }
+  },
+  {
+   "dataset": "S9",
+   "check": "SOH increases > 2.0 pp between consecutive measurements",
    "status": "INFO",
    "detail": "none"
   }
