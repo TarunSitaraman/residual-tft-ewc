@@ -67,3 +67,44 @@ def test_scratch_strategy_has_no_pool_error_before():
     s = p3.build_strategy("finetune", list(p3.SHARED_FEATURES), seed=0, history=None, settings={"epochs": 2})
     out = p3.run_stream(s, stream, pool_t)
     assert np.isnan(out["pool_error_before"]) and np.isfinite(out["pool_error_after"])
+
+
+# --- D23: linear-extrapolation residual -------------------------------------------------------------
+
+def _wheeler_checks():
+    from pathlib import Path
+    path = Path(__file__).resolve().parents[1] / "data" / "wheeler_checks.csv"
+    if not path.exists():
+        pytest.skip("S6 check table not built (data/wheeler_checks.csv)")
+    return pd.read_csv(path)
+
+
+def test_residual_target_leaves_every_error_unchanged():
+    rng = np.random.default_rng(0)
+    s = pd.DataFrame({FC.TARGET: rng.normal(size=50), "lin_forecast": rng.normal(size=50)})
+    pred, before = rng.normal(size=50), s.copy()
+    r = p3.residual_target(s)
+    assert np.allclose((s["lin_forecast"] + pred) - s[FC.TARGET], pred - r[FC.TARGET])
+    pd.testing.assert_frame_equal(s, before)                                  # input not mutated
+
+
+def test_s6_lin_forecast_reproduces_the_committed_d21_baseline():
+    import json
+    from pathlib import Path
+    s = p3.s6_samples(_wheeler_checks())
+    committed = json.loads((Path(__file__).resolve().parents[1] / "results" / "forecasting_d21_p3.json").read_text())
+    lin = next(b for b in committed["baselines"] if b["method"] == "linear_extrapolation")
+    order = sorted(s["Battery_ID"].unique())
+    errs = [np.sqrt(np.mean((t.test["lin_forecast"] - t.test[FC.TARGET]) ** 2)) for t in FC.forecast_stream(s, order)]
+    assert np.isclose(np.mean(errs), lin["rmse_final_mean_over_tasks"], atol=1e-9)
+
+
+def test_s6_longer_horizons_keep_the_origin_inputs():
+    wc = _wheeler_checks()
+    short, long = p3.s6_samples(wc), p3.s6_samples(wc, horizons=range(1, 7))
+    assert sorted(long["horizon"].unique()) == [1, 2, 3, 4, 5, 6]
+    key = ["cell", "origin_cycle", "horizon"]
+    both = short.merge(long, on=key, suffixes=("", "_l"), validate="one_to_one")
+    assert len(both) == len(short)
+    for c in ("lin_forecast", FC.TARGET, "fade_rate_pp_per_cycle"):
+        assert np.allclose(both[c], both[f"{c}_l"], equal_nan=True)

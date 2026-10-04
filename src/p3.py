@@ -113,7 +113,7 @@ def conditions_s6(t: pd.DataFrame) -> pd.DataFrame:
 CONDITIONS = {"S7": conditions_s7, "S8": conditions_s8, "S9": conditions_s9, "S6": conditions_s6}
 
 
-def harmonised_samples(checks: pd.DataFrame, dataset: str) -> pd.DataFrame:
+def harmonised_samples(checks: pd.DataFrame, dataset: str, horizons: Sequence[int] = FC.HORIZONS) -> pd.DataFrame:
     """D21 samples of one dataset with the shared inputs and the window keys the TFT needs.
 
     ``Battery_ID`` is the task (the dataset for the pool, the test case for S6), ``Cycling_Test``
@@ -125,7 +125,7 @@ def harmonised_samples(checks: pd.DataFrame, dataset: str) -> pd.DataFrame:
     t = checks.drop(columns=[c for c in cond.columns if c in checks.columns]).join(cond)
     static = ["temp_c", "charge_c_rate", "discharge_c_rate", "dod", "v_charge_max", "cv_charge", "calendar", "rest_soc",
               "chemistry"]
-    s = pool.build_samples(t, static=static)
+    s = pool.build_samples(t, static=static, horizons=horizons)
     for c in CHEMISTRIES:
         s[f"chem_{c}"] = (s["chemistry"] == c).astype(float)
     for c in ("cycles_since_first", "cycles_to_target"):
@@ -142,6 +142,25 @@ def s6_checks(wheeler_checks: pd.DataFrame) -> pd.DataFrame:
     v = wheeler_checks[wheeler_checks["valid"]].copy()
     v = v.assign(dataset="S6", condition=v["Battery_ID"], check_time=pd.to_datetime(v["check_time"]))
     return pool.add_soh(v[["dataset", "cell", "condition", "cycle", "check_time", "Capacity_Ah"]])
+
+
+def s6_samples(wheeler_checks: pd.DataFrame, horizons: Sequence[int] = FC.HORIZONS) -> pd.DataFrame:
+    """S6 samples with the D21 shared inputs, plus the D20 per-cycle fade rate and the linear-extrapolation
+    forecast ``lin_forecast`` (D23): fade rate x cycles to the target, 0 where the rate is missing, exactly the
+    D20/D21 baseline. The fade rate depends only on the origin, so it is joined per (cell, origin)."""
+    wc = wheeler_checks.assign(check_time=pd.to_datetime(wheeler_checks["check_time"]))
+    s = harmonised_samples(s6_checks(wc), "S6", horizons)
+    s["origin_cycle"] = s["Cycle_Date"].map(dict(zip(wc["check_time"], wc["cycle"]))).astype(int)
+    rate = W.build_samples(wc, horizons=(1,))[["cell", "origin_cycle", "fade_rate_pp_per_cycle"]]
+    s = s.merge(rate, on=["cell", "origin_cycle"], how="left", validate="many_to_one")
+    s["lin_forecast"] = np.nan_to_num(s["fade_rate_pp_per_cycle"].to_numpy(float) * s["cycles_to_target"].to_numpy(float))
+    return s
+
+
+def residual_target(samples: pd.DataFrame) -> pd.DataFrame:
+    """D23 residual arm: the target becomes ``Delta - lin_forecast``. ``lin_forecast`` is known at the origin, so
+    (lin + prediction) - Delta = prediction - (Delta - lin): every error is the same on both scales."""
+    return samples.assign(**{TARGET: samples[TARGET] - samples["lin_forecast"]})
 
 
 def pool_task(samples: pd.DataFrame) -> P.Task:
