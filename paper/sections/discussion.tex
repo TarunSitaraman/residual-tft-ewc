@@ -14,7 +14,7 @@ EWC behaves as theory predicts where there is something to protect. Forgetting i
 
 \subsection{What Matters for Forecasting}
 
-The post hoc ablation points to the inputs rather than the architecture. Removing 17 diagnostic features (incremental-capacity peaks, voltage windows and resistance proxies) improved the TFT by 0.23--0.35~pp, and adding the calendar time between checks improved it by 0.22--0.31~pp. The second finding agrees with an observation made on the training data before the protocol change: in S6, fade per cycle rises with the calendar time between checks at 50~$^\circ$C in all 20 cells. Usage that is known in advance, such as the time and cycles until the next check, is therefore a strong predictor, and forecasts are conditional on it.
+The post hoc ablation points to the inputs rather than the architecture. Removing 17 diagnostic features (incremental-capacity peaks, voltage windows and resistance proxies) improved the TFT by 0.17--0.35~pp, and adding the calendar time between checks improved it by 0.19--0.31~pp; both effects replicated on a second seed set. The second finding agrees with an observation made on the training data before the protocol change: in S6, fade per cycle rises with the calendar time between checks at 50~$^\circ$C in all 20 cells. Usage that is known in advance, such as the time and cycles until the next check, is therefore a strong predictor, and forecasts are conditional on it.
 
 \subsection{Transfer From First Life}
 
@@ -40,7 +40,7 @@ The studies reviewed in Section~II estimate the current SOH or SOC, on different
   \item S6 is aged at 50~$^\circ$C, and its ``second life'' is continued ageing below 80\% SOH under the same protocol, not a repurposed duty cycle.
   \item SOH is relative to each cell's first valid measurement; for S1 that measurement is already an aged state.
   \item Forecasts are conditional on the planned usage until the target.
-  \item The ablation of Section~\ref{sec:res-p3} was decided after the main results and is explanatory.
+  \item The ablation of Section~\ref{sec:res-p3} was decided after the main results; it replicated on a second seed set but remains explanatory.
 \end{itemize}
 
 \section{Conclusion}
