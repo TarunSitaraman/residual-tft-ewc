@@ -627,3 +627,35 @@ The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB unco
 - Whether to run the optional per-cycle TFT at all (compute and time).
 - Whether the case-7 dense-label analysis is worth including.
 - **4 Oct 2026, A1 replicate (decided before running it).** A1 is repeated on seeds 5–9 with everything else unchanged. Its contrasts are then judged by the D21 replication rule (significant after Holm correction in both seed sets, same sign, at least 0.05 pp in both); only replicated contrasts are stated as findings. Results: `results/forecasting_d21_ablation_a1_replicate.json`. **Outcome (4 Oct 2026):** dropping the diagnostics and adding calendar time replicate at both learning rates; D21 shared − D20 F0 replicates at 3e-3 only; the learning rate is practically equivalent for D21 shared and D20 F0 and inconclusive otherwise. Details in `docs/RESULTS.md`.
+
+---
+
+## D23. Learned residual on linear extrapolation, and longer horizons (pre-registered)
+
+**Status:** Adopted 5 Oct 2026 by Tarun, written and committed **before any D23 code was run**; team review of the protocol pending. Results go to `results/forecasting_d23_e1.json` and `results/forecasting_d23_e2.json`.
+
+**Provenance (must be stated).** This entry was written after the P1, P3 and A1 results. In particular, the per-horizon S6 errors for horizons 1–3 were known: linear extrapolation 0.21/0.35/0.46 pp, gradient boosting 0.27/0.34/0.50 pp. The idea of learning a residual is therefore motivated post hoc. Horizons 4–6 on S6 have never been computed by any method.
+
+**Question.** Linear extrapolation of the recent fade rate is the most accurate S6 forecaster (0.343 pp), and no learned model beats it. Can a continual learner that predicts only the *correction* to linear extrapolation beat it, and does any advantage grow with the horizon, where a straight line should fail first (accelerating fade)?
+
+### Setup (fixed here)
+- **Data and inputs:** S6 samples as in D21 (`p3.harmonised_samples`), the D21 shared inputs unchanged, the D18 purged per-cell splits, the seven S6 test cases as the stream. No pretraining (P3 showed none helps).
+- **Linear-extrapolation forecast:** `lin = fade_rate_pp_per_cycle x cycles_to_target`, 0 where the fade rate is missing; this is exactly the D20/D21 linear-extrapolation baseline.
+- **Residual arm:** the model target is `Delta - lin`; the forecast is `lin + prediction`. Because `lin` is known at the origin, every error (task RMSE, the error matrix, all CL metrics) is identical on the residual and the Delta scale, so the existing stream and metric code is reused unchanged.
+- **Direct arm:** target Delta, as in D21 (the matched comparison).
+- **Methods:** TFT and MLP backbones x fine-tuning and EWC, each in both arms (8 methods). Baselines: persistence, linear extrapolation, gradient boosting and ridge on the shared inputs, fitted as in D21.
+- **Tuning (D21 rules, per backbone and arm):** learning rate on fine-tuning streams (criterion: plasticity), then EWC lambda on EWC streams (criterion: final average error); D21 grids; 10 tuning orders disjoint from the evaluation orders; one-standard-error rule; grid-edge extension on the grid's ladder.
+- **Evaluation:** 10 orders x seeds 0–4 (main) and 5–9 (replicate).
+- **E1:** horizons 1–3 (as D21).
+- **E2:** horizons 1–6, everything else identical, tuned separately. Per-horizon errors are the RMSE over all tasks' test samples of that horizon after the last stream step.
+
+### Tests (fixed here)
+- **Primary, E1 and E2:** residual TFT + EWC against (a) linear extrapolation and (b) direct TFT + EWC, on final average error.
+- **Secondary:** residual TFT + EWC against every other method and baseline on final average error, and against the other stream methods on forgetting and backward transfer; in E2, residual TFT + EWC against linear extrapolation at each horizon 1–6.
+- Paired two-sided Wilcoxon on matched order x seed runs; against a deterministic baseline, the runs minus its single value. Holm correction within each seed set over all comparisons of one experiment (the per-horizon tests form their own family of six). The D21 replication rule decides: significant after Holm in both seed sets, same sign, |difference| >= 0.05 pp in both; |difference| < 0.05 pp in both is practically equivalent.
+- **What counts as a positive result:** primary test (a) replicated in favour of residual TFT + EWC in E1 or E2. If the best residual model is the MLP rather than the TFT, that is reported as such and does not count as support for the TFT.
+- Every outcome is reported, including a null or negative one; nothing here replaces the D21 results.
+
+### Not done, with reasons
+- **Leakage-inflation demonstration (considered, dropped):** the label leak of D14 concerns the superseded current-SOH task, where the protocol current is 0.9998 x the previous capacity; a leaky model there is trivially near-perfect and would not inform the forecasting results.
+- **Knee-specific error analysis:** not pre-registered (defining the knee region needs the outcome); E2's horizon-wise errors are the pre-specified proxy.
