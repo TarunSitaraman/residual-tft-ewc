@@ -1,23 +1,22 @@
-# Paper skeleton
+# Paper
 
-The manuscript prose (abstract, introduction, related work, discussion, conclusion) is written by the team. This directory holds only the parts that come straight from the implementation and the results: the methods record, the results section, the generated tables and figures, and the verified references. The consolidated results are in `docs/RESULTS.md`.
+IEEE conference paper (`IEEEtran`, 7 pages including references). The team's draft (title, authors, headings, introduction, related work) is merged with the methods, results and discussion written from the implementation and the committed results. The consolidated results are in `docs/RESULTS.md`.
 
-IEEE conference format (`IEEEtran`). Build from this directory:
+The longer 15-page version (full dataset descriptions, feature lists, all P1 tables and figures) is kept at the git tag `paper-long-draft`.
+
+Build from this directory:
 
 ```bash
 latexmk -pdf main.tex      # or: pdflatex main && bibtex main && pdflatex main && pdflatex main
+tectonic main.tex          # alternative; main.tex switches to TeX Gyre Termes under XeTeX
 ```
 
-- `sections/methods.tex`: methodology, written from the implementation and `docs/DECISIONS.md` (in particular D11, D12, D14, D16–D20).
-- `sections/results.tex`: results. Every number in the text comes from committed results files produced on clean commits (`results/diagnostic_features.json`, `results/forecasting.json`, `results/forecasting_wheeler.json`).
-- `tables/*.tex` and `figures/*.png` are **generated** (together with `results/tables/*.csv` and the tables in `docs/RESULTS.md`); do not edit them by hand. Regenerate them after re-running notebooks 11–13:
+On Overleaf: upload the contents of this directory (main.tex, references.bib, sections/, tables/, figures/) and compile with pdfLaTeX.
 
-  ```bash
-  python scripts/make_results_tables.py    # from the repository root
-  ```
-
-  Each table records the commit of the results file it was built from. The script refuses results written from a dirty working tree.
-- `references.bib`: entries with a DOI were checked against Crossref. The literature entries at the end are generated from the Crossref records saved in `docs/literature/crossref/`. Data sources are documented in `docs/EXTERNAL_DATA.md`.
-- `\todo{...}` marks what the team still has to write or decide: the abstract and remaining prose sections, affiliations and author order, and repository visibility and code licence. The submitted version must contain no `\todo`.
+- `sections/methods.tex`: methodology, written from the implementation and `docs/DECISIONS.md` (D11, D12, D14, D16–D21).
+- `sections/results.tex`: results. Every number comes from committed results files produced on clean commits; the sources are listed at the top of the file.
+- `tables/*.tex` and the notebook figures are **generated** by `scripts/make_results_tables.py`; the `d21_*` figures by `scripts/make_d21_figures.py`; `figures/framework.png` by `scripts/make_framework_figure.py`. Do not edit them by hand. `tables/hyper.tex`, `horizon.tex` and `tests.tex` are generated but not used in the short version.
+- `references.bib`: entries with a DOI were checked against Crossref. For refs 3, 6, 7 and 9 no open abstract could be read, so the related work states only what their titles state; extend those descriptions only after reading the full texts.
+- `\todo{...}` marks what the team still has to decide: repository visibility and code licence. The submitted version must contain no `\todo`.
 
 Build outputs (PDF, aux files) are not committed.
