@@ -325,21 +325,29 @@ Baselines (S6 training rows, D20 definitions, shared inputs): linear extrapolati
 5. **The best neural forecaster, TFT from scratch (0.40–0.42 pp), is below gradient boosting (0.451 pp) on average, but linear extrapolation (0.343 pp) remains the most accurate method on S6.**
 6. **Not attributable yet:** TFT from scratch reaches 0.401 pp here against 0.883 pp for TFT fine-tuning under D20. The two runs differ in inputs (calendar time, charge voltage and CV phase, chemistry and condition codes), in tuning (10 orders, one-SE and edge rules) and in preprocessing scope, so the gain cannot be attributed to any one change without an ablation.
 
-### D21 addendum A1: what changed the TFT between D20 and D21 (post hoc, one seed set)
+### D21 addendum A1: what changed the TFT between D20 and D21 (post hoc, replicated on a second seed set)
 
-Results file: `results/forecasting_d21_ablation_a1.json`, commit `0b739a2` (clean). TFT from scratch with fine-tuning on the S6 stream, 10 orders × seeds 0–4. Final average test RMSE (pp), mean (median):
+Results files: `results/forecasting_d21_ablation_a1.json` (seeds 0–4, commit `0b739a2`, clean) and `results/forecasting_d21_ablation_a1_replicate.json` (seeds 5–9, specified before running; the file records commit `72427b8`, which was made while the run was in progress and changed only `paper/` and `scripts/make_framework_figure.py`; `src/` and `scripts/run_ablation_a1.py` are identical to `a02dbe0`, where the run started). TFT from scratch with fine-tuning on the S6 stream, 10 orders × 5 seeds per set. Final average test RMSE (pp), mean (median), main / replicate:
 
 | Inputs | lr 1e-2 | lr 3e-3 |
 |---|---|---|
-| D20 F1 (with 17 diagnostics) | 0.891 (0.726) | 0.767 (0.644) |
-| D20 F0 (no diagnostics) | 0.540 (0.438) | 0.534 (0.422) |
-| D21 shared inputs | 0.424 (0.392) | 0.401 (0.353) |
-| D21 shared, no calendar-time inputs | 0.731 (0.614) | 0.619 (0.582) |
+| D20 F1 (with 17 diagnostics) | 0.891 (0.726) / 0.809 (0.669) | 0.767 (0.644) / 0.797 (0.701) |
+| D20 F0 (no diagnostics) | 0.540 (0.438) / 0.636 (0.453) | 0.534 (0.422) / 0.589 (0.504) |
+| D21 shared inputs | 0.424 (0.392) / 0.444 (0.379) | 0.401 (0.353) / 0.415 (0.347) |
+| D21 shared, no calendar-time inputs | 0.731 (0.614) / 0.673 (0.585) | 0.619 (0.582) / 0.604 (0.482) |
+
+Contrasts (mean paired difference in pp, main / replicate, with p_Holm), judged by the D21 replication rule:
+
+| Contrast | lr 1e-2 | lr 3e-3 |
+|---|---|---|
+| D20 F0 − D20 F1 (drop diagnostics) | −0.351 / −0.173 (< 0.001 / 0.002): **replicated** | −0.234 / −0.208 (< 0.001 / 0.001): **replicated** |
+| D21 shared − D21 no calendar (add calendar time) | −0.307 / −0.229 (< 0.001 / < 0.001): **replicated** | −0.218 / −0.189 (< 0.001 / < 0.001): **replicated** |
+| D21 shared − D20 F1 | −0.467 / −0.365 (< 0.001 / < 0.001): **replicated** | −0.366 / −0.382 (< 0.001 / < 0.001): **replicated** |
+| D21 shared − D20 F0 | −0.116 / −0.192 (0.076 / 0.006): not replicated | −0.132 / −0.174 (0.005 / < 0.001): **replicated** |
+
+Learning-rate contrasts (3e-3 − 1e-2): D21 shared −0.023 / −0.029 and D20 F0 −0.006 / −0.047, both **practically equivalent** (|d| < 0.05 pp in both sets); D20 F1 −0.124 / −0.012 and D21 no calendar −0.112 / −0.070, not significant in either set (inconclusive).
 
 - **Sanity check passed:** D20 F1 at 1e-2 gives 0.891 pp against 0.883 pp in D20.
-- **Removing the diagnostics helps the TFT:** F0 − F1 = −0.351 pp at 1e-2 and −0.234 pp at 3e-3 (p_Holm < 0.001 for both).
-- **Calendar time helps:** removing `days_since_first` and `days_to_target` from the D21 inputs worsens the error by 0.307 and 0.218 pp (p_Holm < 0.001). This agrees with the audit finding that fade per cycle rises with the calendar time between checks at 50 °C.
-- **D21 shared vs D20 F0:** −0.116 pp at 1e-2 (p_Holm 0.076) and −0.133 pp at 3e-3 (p_Holm 0.005).
-- **The learning rate matters little:** no learning-rate contrast is significant after Holm correction (largest effect −0.124 pp for D20 F1, p_Holm 0.10).
+- In the replicate, the bootstrap CI of the mean for D20 F0 − F1 at 1e-2 just includes zero (−0.342 to +0.005) while the Wilcoxon test is significant; the effect is skewed by a few runs.
 
-**Reading.** The D20 → D21 gain of the TFT comes mainly from dropping the 17 diagnostic features and adding calendar time, not from the tuning change. This is a post hoc, single-seed-set analysis and is reported as explanatory, not as a confirmed claim.
+**Reading.** The D20 → D21 gain of the TFT comes from dropping the 17 diagnostic features and adding calendar time, and both effects replicate on seeds 5–9 at both learning rates. The learning rate does not explain it. The analysis is still post hoc (decided after the P3 results) and is reported as explanatory.

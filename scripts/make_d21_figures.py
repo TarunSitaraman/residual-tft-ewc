@@ -121,26 +121,32 @@ def fig_interpretation(d: dict) -> Path:
     return path
 
 
-def fig_ablation(d: dict) -> Path:
+def fig_ablation(d: dict, rep: dict | None = None) -> Path:
     s = pd.DataFrame(d["summary"])
+    r5 = pd.DataFrame(rep["summary"]) if rep else None
     rows = ["D20_F1", "D20_F0", "D21_shared", "D21_shared_no_calendar"]
     names = {"D20_F1": "D20 inputs (with diagnostics)", "D20_F0": "D20 inputs, no diagnostics",
              "D21_shared": "D21 shared inputs", "D21_shared_no_calendar": "D21 shared, no calendar time"}
     lrs = sorted(s["lr"].unique(), reverse=True)
-    fig, ax = plt.subplots(figsize=(6.6, 2.8))
+    fig, ax = plt.subplots(figsize=(6.6, 3.1))
     for j, lr in enumerate(lrs):
         vals = [float(s[(s["inputs"] == r) & (s["lr"] == lr)]["mean"].iloc[0]) for r in rows]
         y = np.arange(len(rows)) + (j - 0.5) * 0.32
-        ax.barh(y, vals, height=0.28, color=BLUE if j == 0 else "#86b6ef", label=f"learning rate {lr:g}")
-        for yy, v in zip(y, vals):
-            ax.text(v, yy, f" {v:.3f}", va="center", fontsize=8, color=INK2)
+        ax.barh(y, vals, height=0.28, color=BLUE if j == 0 else "#86b6ef", label=f"learning rate {lr:g}, seeds 0-4")
+        ends = vals
+        if r5 is not None:
+            reps = [float(r5[(r5["inputs"] == r) & (r5["lr"] == lr)]["mean"].iloc[0]) for r in rows]
+            ax.scatter(reps, y, marker="D", s=14, color=INK, zorder=3, label="replicate, seeds 5-9" if j == 0 else None)
+            ends = np.maximum(vals, reps)
+        for yy, v, e in zip(y, vals, ends):
+            ax.text(e + 0.015, yy, f"{v:.3f}", va="center", fontsize=8, color=INK2)
     ax.set_yticks(range(len(rows)), [names[r] for r in rows])
     ax.invert_yaxis()
     ax.set_xlabel("Final average test RMSE on S6 (SOH pp), TFT from scratch")
     ax.set_title("Ablation A1: what changed the TFT between D20 and D21", loc="left")
     ax.grid(axis="y", visible=False)
     ax.set_xlim(0, 1.05)
-    ax.legend(loc="center right", bbox_to_anchor=(1.0, 0.45), fontsize=8)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.35, -0.22), ncol=3, fontsize=7.5)
     fig.tight_layout()
     path = OUT / "d21_ablation_a1.png"
     fig.savefig(path)
@@ -154,9 +160,10 @@ def main() -> None:
     made = [fig_p3(json.loads((res / "forecasting_d21_p3.json").read_text())),
             fig_retention(json.loads((res / "forecasting_d21_p3.json").read_text())),
             fig_interpretation(json.loads((res / "d21_tft_interpretation.json").read_text()))]
-    a1 = res / "forecasting_d21_ablation_a1.json"
+    a1, a1r = res / "forecasting_d21_ablation_a1.json", res / "forecasting_d21_ablation_a1_replicate.json"
     if a1.exists():
-        made.append(fig_ablation(json.loads(a1.read_text())))
+        rep = json.loads(a1r.read_text()) if a1r.exists() else None
+        made.append(fig_ablation(json.loads(a1.read_text()), rep))
     for p in made:
         print("wrote", p.relative_to(ROOT))
 
