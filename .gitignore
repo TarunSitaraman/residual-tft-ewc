@@ -30,6 +30,7 @@ venv/
 /paper/*.log
 /paper/*.out
 /paper/*.pdf
+!/paper/paper_single.pdf
 /paper/*.synctex.gz
 
 # Cache of converted raw diagnostic files (src/raw_diagnostics.py)
