@@ -659,3 +659,6 @@ The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB unco
 ### Not done, with reasons
 - **Leakage-inflation demonstration (considered, dropped):** the label leak of D14 concerns the superseded current-SOH task, where the protocol current is 0.9998 x the previous capacity; a leaky model there is trivially near-perfect and would not inform the forecasting results.
 - **Knee-specific error analysis:** not pre-registered (defining the knee region needs the outcome); E2's horizon-wise errors are the pre-specified proxy.
+
+### Run log
+- **5 Oct 2026, 03:05 IST.** Code committed (`c7fa340`) after a smoke run (1 order, 2 epochs; not reportable, output deleted). The smoke run printed the deterministic E2 baselines at horizons 1-6 (linear extrapolation 0.22/0.35/0.46/0.57/0.74/0.85 pp), so these were seen before the paper run; they involve no tuning and change nothing above. Paper run started as 8 processes (E1, E2 x four parts); logs `data/raw/d23_*.log`.
