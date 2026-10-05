@@ -656,6 +656,8 @@ Charge or discharge durations, charge, energy and currents are excluded (protoco
 
 **Before all 20 cells are downloaded and verified,** only feature extraction, the audit and smoke runs (not reportable) are done; the paper-profile run waits for the complete set. The case-7 dense-label analysis and the per-cycle TFT stay deferred.
 
+**Deviation, 5 Oct 2026, 15:40 IST (before any model used the ageing inputs).** The first extraction (177 blocks of 7 cells) found only 31 % of cycles valid under the rule above (cell 1a: 2 %). Inspecting late-life blocks showed why: one ageing cycle (one `Cycle_Index`, 100 per file) then splits its charge into several steps (a short pause, sometimes a separate CV step) and its discharge into a WLTP part and a CC completion step, separated by short rests, and a low-current step sits between two 30-min rests after charge. The rule is therefore changed to: **a cycle is valid if all its charge steps precede all its discharge steps and a rest step directly follows the last of each.** The responses use the last charge and last discharge step, and the two relaxations are measured over the single rest step right after each (merging adjacent rests had made them span 30 or 60 min depending on the pattern). Decided from the step structure and the validity rates only; no ageing input had been related to any label. The extraction found one block ending after its check (cell 2a, cycle 100); that check is invalid (acquisition fault) and is never an origin, so no sample is affected. Leakage audit (i) on the first extraction: per-cycle discharged charge correlates r = 0.990–0.995 within cell with the previous check's capacity (cases 1, 2, 6), confirming the protocol scaling the rules exclude.
+
 
 ---
 
