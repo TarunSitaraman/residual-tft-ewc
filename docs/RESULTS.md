@@ -351,3 +351,47 @@ Learning-rate contrasts (3e-3 − 1e-2): D21 shared −0.023 / −0.029 and D20 
 - In the replicate, the bootstrap CI of the mean for D20 F0 − F1 at 1e-2 just includes zero (−0.342 to +0.005) while the Wilcoxon test is significant; the effect is skewed by a few runs.
 
 **Reading.** The D20 → D21 gain of the TFT comes from dropping the 17 diagnostic features and adding calendar time, and both effects replicate on seeds 5–9 at both learning rates. The learning rate does not explain it. The analysis is still post hoc (decided after the P3 results) and is reported as explanatory.
+
+## D23: learned residual on linear extrapolation, and horizons 1–6 (5 Oct 2026)
+
+Results files: `results/forecasting_d23_e1.json` (horizons 1–3) and `results/forecasting_d23_e2.json` (horizons 1–6), collected at commit `5ae2f84` (clean). The units were computed by processes started at `c7fa340`; the only change between the two commits is the D23 run-log entry in `docs/DECISIONS.md`. Protocol fixed in D23 before any run (commit `4cc2df7`). S6 stream from scratch, D21 shared inputs, D21 tuning (10 tuning orders, one-SE rule, grid-edge extension), 10 orders × seeds 0–4 (main) and 5–9 (replicate). Reference: residual TFT + EWC. Differences are reference minus other (pp; negative favours the reference).
+
+**Final average test RMSE (pp), mean, main / replicate:**
+
+| Method | E1 (h = 1–3) | E2 (h = 1–6) |
+|---|---|---|
+| **TFT + EWC, residual** | **0.339 / 0.314** | **0.561 / 0.534** |
+| TFT fine-tuning, residual | 0.347 / 0.337 | 0.673 / 0.612 |
+| TFT + EWC, direct | 0.504 / 0.487 | 0.802 / 0.835 |
+| TFT fine-tuning, direct | 0.424 / 0.444 | 0.658 / 0.694 |
+| MLP + EWC, residual | 0.374 / 0.366 | 0.659 / 0.694 |
+| MLP fine-tuning, residual | 0.405 / 0.403 | 0.656 / 0.695 |
+| MLP + EWC, direct | 0.519 / 0.527 | 1.004 / 0.996 |
+| MLP fine-tuning, direct | 0.413 / 0.351 | 0.781 / 0.775 |
+| Linear extrapolation | 0.343 | 0.485 |
+| Gradient boosting (shared inputs) | 0.451 | 0.898 |
+| Persistence | 1.644 | 2.667 |
+
+**Registered tests (D21 replication rule):**
+
+| Comparison (residual TFT + EWC minus …) | E1 | E2 |
+|---|---|---|
+| **(a) linear extrapolation, final error** (primary) | −0.004 / −0.029 (p_Holm 0.46 / 0.046): **practically equivalent** | +0.076 / +0.049 (0.026 / 0.16): not replicated |
+| **(b) direct TFT + EWC, final error** (primary) | −0.165 / −0.174 (< 0.001 / < 0.001): **replicated** | −0.241 / −0.301 (< 0.001 / < 0.001): **replicated** |
+| residual TFT fine-tuning, final error | −0.008 / −0.023: practically equivalent | −0.112 / −0.078 (0.096 / 0.17): not replicated |
+| residual TFT fine-tuning, forgetting | −0.004 / −0.020: practically equivalent | −0.189 / −0.134 (< 0.001 / 0.002): **replicated** |
+| residual TFT fine-tuning, backward transfer | −0.005 / −0.020: practically equivalent | −0.145 / −0.108 (0.026 / 0.043): **replicated** |
+| gradient boosting, final error | −0.112 / −0.138: **replicated** | −0.337 / −0.365: **replicated** |
+| direct MLP + EWC, final error | −0.180 / −0.213: **replicated** | −0.443 / −0.462: **replicated** |
+| residual MLP fine-tuning, final error | −0.066 / −0.089: **replicated** | −0.095 / −0.162: not replicated |
+| residual MLP + EWC, final error | −0.035 / −0.052: not replicated | −0.098 / −0.160: not replicated |
+
+**E2, per horizon (residual TFT + EWC minus linear extrapolation, pooled test RMSE after the last step, family of six):** h1 +0.189 / +0.144 and h2 +0.103 / +0.076 (both replicated, extrapolation better); h3 +0.068 / +0.043 and h4 +0.090 / +0.041 (not replicated); h5 +0.047 / −0.000 and h6 +0.021 / −0.027 (practically equivalent). Extrapolation's advantage shrinks with the horizon, but the residual model does not overtake it by h = 6.
+
+**Tuning.** Residual TFT: lr 3e-3 in both experiments; EWC λ 1 in E1 (the λ grid was extended down to 0.01; best 1), 1000 in E2. Direct TFT: lr 1e-2 / λ 10 (E1), lr 3e-3 / λ 10⁴ (E2). Residual MLP in E2: lr 3e-5 after a low-edge extension (best 1e-4), i.e. it barely moves from its initial near-zero correction.
+
+**Reading.**
+1. **The registered positive result was not obtained.** The residual TFT + EWC does not beat linear extrapolation: it is practically equivalent at horizons 1–3 and not better at horizons 1–6.
+2. **Learning the residual is what makes the TFT competitive.** It improves TFT + EWC by 0.17 pp (E1) and 0.24–0.30 pp (E2), replicated, and makes it the most accurate learned model of the study, ahead of gradient boosting (replicated in both experiments). It is the first learned model level with linear extrapolation on S6.
+3. **EWC reduces forgetting, replicated, for the first time in this study.** With horizons 1–6, EWC lowers the residual TFT's forgetting from 0.28 / 0.22 to 0.09 pp and its backward transfer from 0.18 / 0.14 to 0.03 pp. Its effect on final error is not replicated. With horizons 1–3, where forgetting is already small for the residual TFT (about 0.1 pp), EWC and fine-tuning are practically equivalent.
+4. The residual is hard to learn from the shared inputs: per horizon, extrapolation stays better at h = 1–2 and the gap closes, without reversing, by h = 5–6.
