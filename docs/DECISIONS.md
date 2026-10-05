@@ -660,6 +660,8 @@ Charge or discharge durations, charge, energy and currents are excluded (protoco
 
 **Run log, 5 Oct 2026, 16:30 IST.** Re-extraction with the corrected rule (194 blocks, 7 cells): 97–98 % valid cycles in every cell; no block ends after a valid check; leakage audit (i) r = 0.993–0.995 (cases 1, 2, 6), 0.60 for cell 3a (7 blocks); audit (ii) in `results/d22_ageing_report.json`. `Internal_Resistance` is not recorded in any of these cells, so its three inputs are missing throughout (handled by the frozen preprocessor, as `rest_soc` on S6). A smoke run of `run_d23.py --inputs f2` (2 epochs, 1 order; not reportable, output deleted) checked the code end to end, including comparison (b) against the D23 reference runs. The paper-profile run waits for all 20 cells.
 
+**Spark implementation, 5 Oct 2026, 21:45 IST.** The extraction is also implemented as an Apache Spark job (`scripts/spark_ageing_features.py`, PySpark 4.2.0, local mode on one machine; Java 21): one map task per 100-cycle block parses the raw file into per-cycle responses with the same tested function, and Spark SQL reduces the valid cycles of each block to the F2 inputs (mean, last value, slope as covariance/variance, the 50-valid-cycle rule). The job compares its output with the pandas builder and records the result in `results/d22_spark_validation.json`. A test on 6 blocks (4 also in the pandas output) gave identical values (relative difference < 1e-9, same missing values). The F2 inputs used for D22 will be those of the Spark job if the full-set validation passes; otherwise the pandas output, with the discrepancy reported.
+
 
 ---
 
