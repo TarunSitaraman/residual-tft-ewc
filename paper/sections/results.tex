@@ -71,3 +71,36 @@ The S6 stream does not degrade the pool test error (TFT\,+\,EWC: 3.280 to 3.148~
 
 \emph{What the TFT uses.} Its variable-selection weights rank the time to the target (0.26) and the recent fade rate (0.08) highest on average, but the top input changes between seeds, inputs that are constant within S6 receive non-negligible weight, and attention over the four previous origins is nearly uniform (0.24--0.26 per lag). The weights are therefore not a reliable measure of importance here, and the TFT makes little use of its history window.
 \label{sec:res-interp}
+
+% -----------------------------------------------------------------------------
+\subsection{Learned residual on linear extrapolation}
+\label{sec:res-residual}
+
+\begin{table}[t]
+  \centering
+  \caption{Learned residual on S6 (stream from scratch): final average test RMSE (pp), mean over 50 runs, main / replicate seed sets, and forgetting (pp) for horizons 1--6.}
+  \label{tab:residual}
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{lccc}
+    \toprule
+    Method & E1: $h{=}1$--3 & E2: $h{=}1$--6 & Forgetting, E2 \\
+    \midrule
+    \textbf{TFT\,+\,EWC, residual} & \textbf{0.339 / 0.314} & \textbf{0.561 / 0.534} & \textbf{0.093 / 0.086} \\
+    TFT fine-tuning, residual & 0.347 / 0.337 & 0.673 / 0.612 & 0.282 / 0.220 \\
+    TFT\,+\,EWC, direct & 0.504 / 0.487 & 0.802 / 0.835 & 0.135 / 0.166 \\
+    MLP\,+\,EWC, residual & 0.374 / 0.366 & 0.659 / 0.694 & -- \\
+    \midrule
+    Linear extrapolation & 0.343 & 0.485 & -- \\
+    Gradient boosting & 0.451 & 0.898 & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:residual} and Fig.~\ref{fig:residual} give the results of the residual form~\eqref{eq:residual}. The criterion fixed in advance for a positive result, residual TFT\,+\,EWC beating linear extrapolation, was \emph{not} met: the two are practically equivalent for horizons 1--3 (differences of $-0.004$ and $-0.029$~pp), and for horizons 1--6 extrapolation is better on average ($+0.076$ and $+0.049$~pp, not replicated). Per horizon, extrapolation is better at $h=1$ and 2 (replicated), and the gap closes without reversing by $h=5$--6. Learning the residual is, however, what makes the TFT competitive: it improves TFT\,+\,EWC over the direct form by 0.17~pp (E1) and 0.24--0.30~pp (E2), and puts it ahead of gradient boosting, all replicated; it is the most accurate learned model on the S6 stream. With horizons 1--6, where the residual TFT forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp and its backward transfer from 0.18/0.14 to 0.03~pp, replicated; its effect on the final error is not. For horizons 1--3, EWC and fine-tuning are practically equivalent.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\columnwidth]{figures/d23_residual_horizon.png}
+  \caption{E2: test RMSE by horizon after the last stream step on S6. Filled markers: mean and 95\% bootstrap CI over 50 runs (seeds 0--4); open markers: replicate seeds 5--9. Dashed: linear extrapolation.}
+  \label{fig:residual}
+\end{figure}

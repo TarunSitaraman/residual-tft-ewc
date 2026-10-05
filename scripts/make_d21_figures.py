@@ -1,4 +1,4 @@
-"""Figures for the D21 results (P3, ablation A1, TFT interpretation), from the committed results files only.
+"""Figures for the D21 results (P3, ablation A1, TFT interpretation) and D23 (residual by horizon), from the committed results files only.
 
 Writes PNGs to paper/figures/ (300 dpi). Colours: TFT blue #2a78d6, MLP orange #eb6834 (validated
 categorical pair); baselines in neutral grey. Run from the repository root::
@@ -154,6 +154,37 @@ def fig_ablation(d: dict, rep: dict | None = None) -> Path:
     return path
 
 
+def fig_residual(d: dict) -> Path:
+    """D23 E2: test RMSE by horizon after the last stream step (main seeds: mean and 95% bootstrap CI;
+    replicate seeds: mean, open marker) against linear extrapolation."""
+    runs = pd.DataFrame(d["runs"])
+    hs = d["horizons"]
+    lin = next(b for b in d["baselines"] if b["method"] == "linear_extrapolation")
+    series = [("tft_residual_ewc", "TFT + EWC, residual", BLUE, "o"), ("tft_residual_finetune", "TFT fine-tuning, residual", "#86b6ef", "s"),
+              ("tft_direct_ewc", "TFT + EWC, direct", ORANGE, "^")]
+    fig, ax = plt.subplots(figsize=(3.4, 2.6))
+    ax.plot(hs, [lin[f"rmse_h{h}"] for h in hs], color=GREY, ls="--", lw=1.5, label="Linear extrapolation")
+    for k, (m, label, c, mk) in enumerate(series):
+        x = np.array(hs) + (k - 1) * 0.12
+        main = runs[(runs["method"] == m) & (runs["set"] == "main")]
+        rep = runs[(runs["method"] == m) & (runs["set"] == "replicate")]
+        mean = [main[f"rmse_h{h}"].mean() for h in hs]
+        ci = np.array([boot_ci(main[f"rmse_h{h}"].to_numpy()) for h in hs])
+        ax.errorbar(x, mean, yerr=[np.array(mean) - ci[:, 0], ci[:, 1] - np.array(mean)], color=c, marker=mk, ms=4,
+                    lw=1.5, capsize=2, label=label)
+        ax.scatter(x, [rep[f"rmse_h{h}"].mean() for h in hs], marker=mk, s=16, facecolors="white", edgecolors=c, zorder=3)
+    ax.set_xticks(hs)
+    ax.set_xlabel("Horizon h (checks ahead, 100 cycles each)")
+    ax.set_ylabel("Test RMSE of SOH (pp)")
+    ax.grid(axis="x", visible=False)
+    ax.legend(fontsize=6.5, loc="upper left")
+    fig.tight_layout()
+    path = OUT / "d23_residual_horizon.png"
+    fig.savefig(path)
+    plt.close(fig)
+    return path
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     res = ROOT / "results"
@@ -164,6 +195,9 @@ def main() -> None:
     if a1.exists():
         rep = json.loads(a1r.read_text()) if a1r.exists() else None
         made.append(fig_ablation(json.loads(a1.read_text()), rep))
+    e2 = res / "forecasting_d23_e2.json"
+    if e2.exists():
+        made.append(fig_residual(json.loads(e2.read_text())))
     for p in made:
         print("wrote", p.relative_to(ROOT))
 

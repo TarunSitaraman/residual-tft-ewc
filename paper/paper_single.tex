@@ -82,7 +82,7 @@ RA2411028010056
 % ============================================================
 
 \begin{abstract}
-Retired electric-vehicle batteries can serve in second-life applications, but a health model trained on one battery population may fail on the next, and continual learning promises to adapt without forgetting. We evaluate this promise for forecasting the state of health (SOH) of second-life lithium-ion cells one to three capacity checks ahead. From five public datasets (395 cells after quality rules) we build a leakage-controlled benchmark: every file is verified against its repository record, labels are reproduced from raw data, and two label artefacts are removed, test currents set from the previous capacity and pulse charge counted in the capacity. A Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) is compared with fine-tuning, replay, joint training and simple forecasters under three protocols: a continual stream of cells or usage conditions, unseen groups, and pretraining on 369 first-life cells of other chemistries. Learned forecasters beat persistence, and forgetting appears whenever usage conditions differ (0.18--0.46 percentage points). However, TFT\,+\,EWC is never the most accurate method, EWC is practically equivalent to fine-tuning after pretraining, pretraining does not improve the forecasts, and extrapolating the recent fade rate remains best (0.343 percentage points on the heterogeneous dataset). A re-run shows that several significance results depend on the software environment, so the main results are required to replicate on a second seed set. Forecast SOH maps to reuse classes that agree with the measured class for 95--97\% of samples on unseen usage conditions.
+Retired electric-vehicle batteries can serve in second-life applications, but a health model trained on one battery population may fail on the next, and continual learning promises to adapt without forgetting. We evaluate this promise for forecasting the state of health (SOH) of second-life lithium-ion cells one to three capacity checks ahead. From five public datasets (395 cells after quality rules) we build a leakage-controlled benchmark: every file is verified against its repository record, labels are reproduced from raw data, and two label artefacts are removed, test currents set from the previous capacity and pulse charge counted in the capacity. A Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) is compared with fine-tuning, replay, joint training and simple forecasters under three protocols: a continual stream of cells or usage conditions, unseen groups, and pretraining on 369 first-life cells of other chemistries. Learned forecasters beat persistence, and forgetting appears whenever usage conditions differ (0.18--0.46 percentage points). Trained directly, TFT\,+\,EWC is never the most accurate method, and first-life pretraining does not help. Trained instead on the correction to linear extrapolation of the recent fade rate, it becomes the most accurate learned forecaster on the S6 stream, 0.17--0.30 percentage points better than its direct form, level with extrapolation for horizons of one to three checks, and EWC then reduces forgetting over six horizons; none of the models beats extrapolation. A re-run shows that several significance results depend on the software environment, so the main results are required to replicate on a second seed set. Forecast SOH maps to reuse classes that agree with the measured class for 95--97\% of samples on unseen usage conditions.
 \end{abstract}
 
 % ============================================================
@@ -110,6 +110,7 @@ The contributions are:
   \item A leakage-controlled benchmark for forecasting the SOH of second-life cells, built from five public datasets (395 cells after quality rules) verified against their repository records, with automated data checks and protocols fixed before model training.
   \item Two label artefacts identified and removed: test currents set from the previous capacity, which encode the label, and pulse charge counted in the capacity, which shifts labels by up to 0.09 percentage points.
   \item An evaluation of a Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) against fine-tuning, replay, joint training and simple forecasters under three protocols (a continual stream, unseen groups and first-life pretraining), reporting adaptation, forgetting and retention.
+  \item A continual TFT\,+\,EWC that learns the correction to linear extrapolation: it is the most accurate learned forecaster on the S6 stream, level with extrapolation for horizons 1--3, and its EWC reduces forgetting over longer horizons (replicated).
   \item A reproducibility analysis showing that several significance results on small battery datasets depend on the numerical environment, and a replication rule that the main results satisfy.
 \end{itemize}
 
@@ -272,6 +273,13 @@ with $\theta^*_j$ the parameters after task $j$ and $F_j$ the empirical diagonal
 
 \emph{Reference forecasters} are persistence ($\hat\Delta=0$), linear extrapolation $\hat\Delta_{b,k,h} = r_{b,k}(t_{b,k+h}-t_{b,k})$, ridge regression (on planned usage only, F0 or F1) and histogram gradient boosting on F1.
 
+\emph{Learned residual.} Because linear extrapolation proved hardest to beat, a follow-up experiment, specified and committed before it was run, trains the continual learners on the correction to it. With $\hat\Delta^{\mathrm{lin}}_{b,k,h}$ the extrapolation above (zero when $r_{b,k}$ is missing), the model $g_\theta$ learns $\Delta_{b,k,h}-\hat\Delta^{\mathrm{lin}}_{b,k,h}$ and the forecast is
+\begin{equation}
+  \hat\Delta_{b,k,h} = \hat\Delta^{\mathrm{lin}}_{b,k,h} + g_\theta(\mathbf{x}_{b,k,h}).
+  \label{eq:residual}
+\end{equation}
+Since $\hat\Delta^{\mathrm{lin}}$ is known at the origin, every error is unchanged by this reparameterisation. The residual and the direct (target $\Delta$) forms are compared on the S6 stream with the P3 shared inputs, from scratch, for horizons 1--3 (E1) and 1--6 (E2), each tuned and evaluated as P3.
+
 \subsection{Hyperparameters, metrics and statistics}
 \label{sec:tuning}
 \label{sec:metrics}
@@ -423,6 +431,39 @@ The S6 stream does not degrade the pool test error (TFT\,+\,EWC: 3.280 to 3.148~
 \emph{What the TFT uses.} Its variable-selection weights rank the time to the target (0.26) and the recent fade rate (0.08) highest on average, but the top input changes between seeds, inputs that are constant within S6 receive non-negligible weight, and attention over the four previous origins is nearly uniform (0.24--0.26 per lag). The weights are therefore not a reliable measure of importance here, and the TFT makes little use of its history window.
 \label{sec:res-interp}
 
+% -----------------------------------------------------------------------------
+\subsection{Learned residual on linear extrapolation}
+\label{sec:res-residual}
+
+\begin{table}[t]
+  \centering
+  \caption{Learned residual on S6 (stream from scratch): final average test RMSE (pp), mean over 50 runs, main / replicate seed sets, and forgetting (pp) for horizons 1--6.}
+  \label{tab:residual}
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{lccc}
+    \toprule
+    Method & E1: $h{=}1$--3 & E2: $h{=}1$--6 & Forgetting, E2 \\
+    \midrule
+    \textbf{TFT\,+\,EWC, residual} & \textbf{0.339 / 0.314} & \textbf{0.561 / 0.534} & \textbf{0.093 / 0.086} \\
+    TFT fine-tuning, residual & 0.347 / 0.337 & 0.673 / 0.612 & 0.282 / 0.220 \\
+    TFT\,+\,EWC, direct & 0.504 / 0.487 & 0.802 / 0.835 & 0.135 / 0.166 \\
+    MLP\,+\,EWC, residual & 0.374 / 0.366 & 0.659 / 0.694 & -- \\
+    \midrule
+    Linear extrapolation & 0.343 & 0.485 & -- \\
+    Gradient boosting & 0.451 & 0.898 & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:residual} and Fig.~\ref{fig:residual} give the results of the residual form~\eqref{eq:residual}. The criterion fixed in advance for a positive result, residual TFT\,+\,EWC beating linear extrapolation, was \emph{not} met: the two are practically equivalent for horizons 1--3 (differences of $-0.004$ and $-0.029$~pp), and for horizons 1--6 extrapolation is better on average ($+0.076$ and $+0.049$~pp, not replicated). Per horizon, extrapolation is better at $h=1$ and 2 (replicated), and the gap closes without reversing by $h=5$--6. Learning the residual is, however, what makes the TFT competitive: it improves TFT\,+\,EWC over the direct form by 0.17~pp (E1) and 0.24--0.30~pp (E2), and puts it ahead of gradient boosting, all replicated; it is the most accurate learned model on the S6 stream. With horizons 1--6, where the residual TFT forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp and its backward transfer from 0.18/0.14 to 0.03~pp, replicated; its effect on the final error is not. For horizons 1--3, EWC and fine-tuning are practically equivalent.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\columnwidth]{figures/d23_residual_horizon.png}
+  \caption{E2: test RMSE by horizon after the last stream step on S6. Filled markers: mean and 95\% bootstrap CI over 50 runs (seeds 0--4); open markers: replicate seeds 5--9. Dashed: linear extrapolation.}
+  \label{fig:residual}
+\end{figure}
+
 % ============================================================
 % V. DISCUSSION and VI. CONCLUSION (condensed to the IEEE conference length)
 % Every number is taken from docs/RESULTS.md and the committed results files.
@@ -431,20 +472,20 @@ The S6 stream does not degrade the pool test error (TFT\,+\,EWC: 3.280 to 3.148~
 \section{Discussion}
 \label{sec:discussion}
 
-\emph{Why the proposed model does not win.} TFT\,+\,EWC was competitive but never the most accurate forecaster. Fade over one to three checks is smooth, so extrapolating the recent fade rate leaves little structure for a sequence model to add; the groups are few and small (21--27 and 135--225 training samples per task in S1 and S6); and the TFT barely uses its history window. EWC behaves as expected where there is something to protect: forgetting is negligible across the near-identical S1 cells and substantial across the S6 usage conditions. Even there its benefit did not survive a re-run, and after pretraining validation selected almost no EWC.
+\emph{Why the proposed model does not win.} TFT\,+\,EWC never beat linear extrapolation. Fade over one to three checks is smooth, so extrapolating the recent fade rate leaves little structure for a sequence model to add; the groups are few and small (21--27 and 135--225 training samples per task in S1 and S6); and the TFT barely uses its history window. EWC behaves as expected where there is something to protect: forgetting is negligible across the near-identical S1 cells and substantial across the S6 usage conditions. Even there its benefit to the direct TFT did not survive a re-run, and after pretraining validation selected almost no EWC. Its clearest benefit came once the TFT learned only the correction to extrapolation: over six horizons, EWC cut that model's forgetting by about two thirds, replicated.
 
-\emph{What matters.} The ablation points to the inputs rather than the architecture: the diagnostic features hurt the TFT, and the calendar time between checks helped, consistent with fade per cycle rising with that time at 50~$^\circ$C in all 20 S6 cells. Usage known in advance is a strong predictor, and forecasts are conditional on it. Pretraining on 369 first-life cells of other chemistries did not transfer to the LFP cells of S6, although retention of the pool was not the problem.
+\emph{What matters.} Building on the best simple forecaster mattered most: the learned residual made TFT\,+\,EWC the most accurate learned model on the S6 stream and level with extrapolation for horizons 1--3. The ablation also points to the inputs rather than the architecture: the diagnostic features hurt the TFT, and the calendar time between checks helped, consistent with fade per cycle rising with that time at 50~$^\circ$C in all 20 S6 cells. Usage known in advance is a strong predictor, and forecasts are conditional on it. Pretraining on 369 first-life cells of other chemistries did not transfer to the LFP cells of S6, although retention of the pool was not the problem.
 
 \emph{Reproducibility.} Several significance results changed when the experiments were re-run on different hardware; the affected differences were far below the label-definition effect or hinged on a near-tie in tuning. Small datasets, many low-variance runs and Holm-corrected tests make such fragility likely. We recommend recording the full software environment, tuning with enough runs to separate neighbouring grid values, and requiring that claimed differences replicate on a second seed set and exceed a practically meaningful threshold.
 
 \emph{Reuse and positioning.} The reuse-class mapping is informative only when the forecast horizon crosses class boundaries: S1 stays in C0 and the S6 stream's test periods lie in C3, while on unseen S6 conditions the classes agree for 95--97\% of samples with the learned models. The studies of Section~II estimate the current SOH or SOC on other cells and with other SOH definitions, so their errors are not directly comparable with ours.
 
-\emph{Limitations.} The task was changed to forecasting after the first dataset was inspected; the second-life datasets are small; S6 is aged at 50~$^\circ$C and its ``second life'' continues the same protocol; SOH is relative to each cell's first valid measurement; forecasts are conditional on planned usage; and the ablation was decided after the main results.
+\emph{Limitations.} The task was changed to forecasting after the first dataset was inspected; the second-life datasets are small; S6 is aged at 50~$^\circ$C and its ``second life'' continues the same protocol; SOH is relative to each cell's first valid measurement; forecasts are conditional on planned usage; and the ablation and the residual experiment were decided after the main results (the latter was specified and committed before it was run).
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-We built a leakage-controlled benchmark for forecasting the SOH of second-life lithium-ion cells from five public datasets and evaluated a Temporal Fusion Transformer with Elastic Weight Consolidation as a continual learner. Learned forecasters beat persistence clearly, and forgetting appears whenever usage conditions differ. However, the proposed model was not the most accurate forecaster, EWC did not reliably improve it, first-life pretraining on other chemistries did not transfer, and extrapolating the recent fade rate remained hard to beat. Inputs mattered more than architecture. Future work should test continual learning on larger and more varied second-life populations, use the dense per-cycle data between checks, and quantify forecast uncertainty near reuse-class boundaries.
+We built a leakage-controlled benchmark for forecasting the SOH of second-life lithium-ion cells from five public datasets and evaluated a Temporal Fusion Transformer with Elastic Weight Consolidation as a continual learner. Learned forecasters beat persistence clearly, and forgetting appears whenever usage conditions differ. Learning the correction to linear extrapolation made TFT\,+\,EWC the most accurate learned model on the S6 stream, 0.17--0.30~pp better than its direct form and level with extrapolation for horizons 1--3, and with this form EWC reduced forgetting over longer horizons; all of these replicated on a second seed set. No model, however, beat extrapolation of the recent fade rate, first-life pretraining on other chemistries did not transfer, and inputs mattered more than architecture. Future work should test continual learning on larger and more varied second-life populations, use the dense per-cycle data between checks, and quantify forecast uncertainty near reuse-class boundaries.
 
 % ============================================================
 % REFERENCES
