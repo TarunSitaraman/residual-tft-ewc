@@ -601,7 +601,7 @@ The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB unco
 
 ---
 
-## D22. S6 between-check ageing cycles as inputs — DRAFT, not adopted
+## D22. S6 between-check ageing cycles as inputs — adopted 5 Oct 2026 (see amendments)
 
 **Status:** Draft (3 Oct 2026) for team review. Nothing in this entry may be run until it is adopted. The ageing files are being downloaded and verified (D21, route 1); no model has used them. Written after the P3 results and after reading one ageing file's structure (cell 1a, cycles 101–200), which must be stated.
 
@@ -627,6 +627,35 @@ The between-check ageing files of S6 (827 files, 23.2 GB compressed, 132 GB unco
 - Whether to run the optional per-cycle TFT at all (compute and time).
 - Whether the case-7 dense-label analysis is worth including.
 - **4 Oct 2026, A1 replicate (decided before running it).** A1 is repeated on seeds 5–9 with everything else unchanged. Its contrasts are then judged by the D21 replication rule (significant after Holm correction in both seed sets, same sign, at least 0.05 pp in both); only replicated contrasts are stated as findings. Results: `results/forecasting_d21_ablation_a1_replicate.json`. **Outcome (4 Oct 2026):** dropping the diagnostics and adding calendar time replicate at both learning rates; D21 shared − D20 F0 replicates at 3e-3 only; the learning rate is practically equivalent for D21 shared and D20 F0 and inconclusive otherwise. Details in `docs/RESULTS.md`.
+
+### Adoption and amendments (5 Oct 2026, written before any ageing feature was computed)
+
+**Status change.** Adopted by Tarun on 5 Oct 2026 ("continue D22"); team review pending, as for D21. Since the draft, D23 has shown that learning the residual on linear extrapolation is the strongest form of the TFT, so the evaluation below uses the D23 setting. Before writing this, two ageing files were inspected for structure only (cell 1b, cycles 101–200; cell 1a, cycles 1101–1200): step order, currents and voltages of single cycles, and the check-cycle numbering. No feature was aggregated and nothing was related to any label.
+
+**Structure found.** Each cycle is: charge (CC, then a CV hold inside the same step when the voltage limit is reached), 30-min rest, discharge (WLTP profile, or 2C in case 6), 30-min rest. `Cycle_Index` restarts in every file; the global cycle is the file's first cycle − 1 + `Cycle_Index`. `Internal_Resistance` is 0 (not recorded) in the cell-1 files. Late in life the charge can stop before the voltage limit (cell 1a), so the CV hold can be absent.
+
+**Per-cycle responses (fixed here; the only ageing inputs).** Steps are classified by their median current: charge > +0.01 A, discharge < −0.01 A, rest otherwise.
+1. `v_end_charge`: last voltage of the charge step.
+2. `cv_seconds`: time in the charge step at or above `v_max − 0.002 V` (case `v_max`); missing for the CC-only cases 3 and 7.
+3. `cv_end_current`: current at the end of the charge step if `cv_seconds > 0`, else missing (and always missing for cases 3 and 7).
+4. `v_end_discharge`: last voltage of the discharge step.
+5. `relax_after_charge`: voltage at the end of the rest after charge minus at its start.
+6. `relax_after_discharge`: the same for the rest after discharge.
+7. `internal_resistance`: last non-zero value in the cycle, else missing.
+Charge or discharge durations, charge, energy and currents are excluded (protocol-scaled; for a fixed-current CC charge, the duration is the charge passed divided by the current).
+
+**Causality and mapping.** The check at cycle *c* follows the ageing block of cycles *c* − 99 … *c*. An origin check at cycle *c* uses only that block; the builder asserts that every row of the block is timestamped before the check. The first check (cycle 0) has no block: its F2 values are missing and flagged.
+
+**Completeness (fixed before any label is read).** A cycle is valid if it has a charge step, a rest, a discharge step and a rest, in that order. Invalid cycles are excluded from the aggregates and counted per cell. A block needs at least 50 valid cycles, otherwise its F2 values are missing. Missing or unreadable blocks are reported per cell, never filled.
+
+**F2.** The D21 shared inputs plus, for each of the 7 responses, the mean, the last value and the least-squares slope against global cycle number over the block's valid cycles (21 inputs).
+
+**Leakage audit (before any model).** (i) Within-cell correlation of per-cycle discharged charge with the previous check's capacity, to demonstrate the protocol scaling the rules exclude. (ii) For every F2 input, its within-cell Spearman correlation with the origin check's capacity, reported. Measured responses are not excluded for correlating with health, which is their purpose.
+
+**Evaluation (replaces item 4 of "Validation before use").** The D23 E1 setting: S6 stream from scratch, horizons 1–3, residual and direct arms, TFT and MLP × fine-tuning and EWC, D21 tuning, seeds 0–4 (main) and 5–9 (replicate). Inputs F2 against the D21 shared inputs, run in the same runner. Primary tests: residual TFT + EWC with F2 against (a) linear extrapolation and (b) residual TFT + EWC with the D21 inputs. Same test families and replication rule as D23. Positive result: (a) replicated in favour of the F2 model.
+
+**Before all 20 cells are downloaded and verified,** only feature extraction, the audit and smoke runs (not reportable) are done; the paper-profile run waits for the complete set. The case-7 dense-label analysis and the per-cycle TFT stay deferred.
+
 
 ---
 
