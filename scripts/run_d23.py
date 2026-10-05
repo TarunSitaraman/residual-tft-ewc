@@ -177,8 +177,10 @@ def add_d21_reference(runs: pd.DataFrame, exp: str, profile: str) -> tuple[pd.Da
     d23 = json.loads((ROOT / "results" / f"forecasting_d23_{exp}.json").read_text())
     ref = pd.DataFrame(d23["runs"])
     ref = ref[ref["method"] == REFERENCE].assign(method=REFERENCE_D21)
-    if profile != "paper":                                   # smoke: D23 values are not comparable; skip the check
-        return runs, {"checked": False}
+    keep = [c for c in runs.columns if c in ref.columns]
+    if profile != "paper":                                   # smoke: orders differ from D23's; no reproduction check
+        n = runs[["set", "seed", "order_id"]].drop_duplicates().merge(ref, on=["set", "seed", "order_id"])
+        return pd.concat([runs, n[keep]], ignore_index=True), {"checked": False}
     tuned = d23["tuning"]["tft_residual"]
     r = Runner(exp, profile, "d21")
     checks = []
@@ -190,7 +192,6 @@ def add_d21_reference(runs: pd.DataFrame, exp: str, profile: str) -> tuple[pd.Da
     ok = all(abs(c["recomputed"] - c["committed"]) < 1e-9 for c in checks)
     if not ok:
         raise SystemExit(f"committed D23 runs do not reproduce: {checks}")
-    keep = [c for c in runs.columns if c in ref.columns]
     return pd.concat([runs, ref[keep]], ignore_index=True), {"checked": True, "units": checks}
 
 
