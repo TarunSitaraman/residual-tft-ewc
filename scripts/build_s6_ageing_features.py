@@ -44,7 +44,7 @@ def case_settings() -> dict[str, tuple[float, bool]]:
 
 def one_file(args: tuple[str, float, bool]) -> Path:
     path, v_limit, cccv = args
-    out = CACHE / (Path(path).name.replace(".csv.xz", "") + ".csv")
+    out = CACHE / (Path(path).name.split(".csv")[0] + ".csv")
     if not out.exists():
         cell, first, last = A.block_range(path)
         c = A.cycle_responses(A.read_block(path), first, v_limit, cccv)
@@ -62,7 +62,11 @@ def main() -> int:
     ap.add_argument("--workers", type=int, default=2)
     args = ap.parse_args()
     settings = case_settings()
-    files = sorted(RAW.glob("Cell*/agingdata_50degC/*aging*.csv.xz"))
+    # The first ageing files were stored as .gz, later ones as .xz (fetch_wheeler_characterisation.py --store).
+    files = sorted([*RAW.glob("Cell*/agingdata_50degC/*aging*.csv.xz"), *RAW.glob("Cell*/agingdata_50degC/*aging*.csv.gz")])
+    stems = [f.name.rsplit(".", 1)[0] for f in files]
+    if len(stems) != len(set(stems)):
+        raise SystemExit("an ageing block is stored both as .xz and .gz")
     jobs = [(str(f), *settings[A.block_range(f)[0].lower()]) for f in files]
     with ProcessPoolExecutor(max_workers=args.workers) as pool:
         outs = list(pool.map(one_file, jobs))

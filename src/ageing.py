@@ -10,6 +10,7 @@ causality check only.
 
 from __future__ import annotations
 
+import gzip
 import lzma
 import re
 from pathlib import Path
@@ -42,7 +43,8 @@ def block_range(path: str | Path) -> tuple[str, int, int]:
 
 
 def read_block(path: str | Path) -> pd.DataFrame:
-    opener = lzma.open if str(path).endswith(".xz") else open
+    s = str(path)
+    opener = lzma.open if s.endswith(".xz") else gzip.open if s.endswith(".gz") else open   # early files are .gz
     with opener(path, "rb") as fh:
         return pd.read_csv(fh, sep=";", usecols=COLUMNS, dtype={c: "float64" for c in COLUMNS})
 
