@@ -35,3 +35,8 @@ venv/
 
 # Cache of converted raw diagnostic files (src/raw_diagnostics.py)
 /data/cache/
+
+# Local Spark artefacts (chosen screenshots are copied to docs/figures/spark)
+/data/spark_screens/
+/data/spark_ui_snapshot.json
+/data/spark-events/

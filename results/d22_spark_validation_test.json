@@ -1,0 +1,136 @@
+{
+  "generated_utc": "2026-10-05T17:27:56+00:00",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.1+cpu",
+    "git_commit": "44b8c7d565470e113ed46cb59bf00ec62a5059bc",
+    "git_dirty": true
+  },
+  "decision": "D22",
+  "engine": "Apache Spark 4.2.0 (PySpark), local[2] on one machine",
+  "blocks": 16,
+  "cycles": 1600,
+  "seconds": 496.9,
+  "compared_blocks": 11,
+  "identical_within_1e-9_relative": true,
+  "per_input": {
+    "age_valid_cycles": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "age_invalid_cycles": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "age_v_end_charge_mean": {
+      "same_missing": true,
+      "max_abs": 4.884981308350689e-15,
+      "max_rel": 1.395661118418605e-15
+    },
+    "age_v_end_charge_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "age_v_end_charge_slope": {
+      "same_missing": true,
+      "max_abs": 3.151491959378031e-17,
+      "max_rel": 4.089707434665312e-10
+    },
+    "age_cv_seconds_mean": {
+      "same_missing": true,
+      "max_abs": 5.684341886080802e-14,
+      "max_rel": 3.1860343256628883e-16
+    },
+    "age_cv_seconds_last": {
+      "same_missing": true,
+      "max_abs": 7.105427357601002e-15,
+      "max_rel": 1.7889372273878406e-16
+    },
+    "age_cv_seconds_slope": {
+      "same_missing": true,
+      "max_abs": 5.689893001203927e-15,
+      "max_rel": 4.2471970091812606e-13
+    },
+    "age_cv_end_current_mean": {
+      "same_missing": true,
+      "max_abs": 8.326672684688674e-17,
+      "max_rel": 1.2642656983478363e-15
+    },
+    "age_cv_end_current_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "age_cv_end_current_slope": {
+      "same_missing": true,
+      "max_abs": 2.930056371142076e-17,
+      "max_rel": 6.722774770905269e-12
+    },
+    "age_v_end_discharge_mean": {
+      "same_missing": true,
+      "max_abs": 2.220446049250313e-15,
+      "max_rel": 6.899872900438529e-16
+    },
+    "age_v_end_discharge_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "age_v_end_discharge_slope": {
+      "same_missing": true,
+      "max_abs": 3.474867962816042e-17,
+      "max_rel": 5.595154365035062e-12
+    },
+    "age_relax_after_charge_mean": {
+      "same_missing": true,
+      "max_abs": 1.249000902703301e-16,
+      "max_rel": 2.777007499519383e-15
+    },
+    "age_relax_after_charge_last": {
+      "same_missing": true,
+      "max_abs": 7.632783294297951e-17,
+      "max_rel": 1.8801193742523283e-15
+    },
+    "age_relax_after_charge_slope": {
+      "same_missing": true,
+      "max_abs": 1.043544591017298e-18,
+      "max_rel": 5.893889452736569e-14
+    },
+    "age_relax_after_discharge_mean": {
+      "same_missing": true,
+      "max_abs": 1.5265566588595902e-16,
+      "max_rel": 1.1404690000480191e-14
+    },
+    "age_relax_after_discharge_last": {
+      "same_missing": true,
+      "max_abs": 9.540979117872439e-17,
+      "max_rel": 1.1611561534070571e-14
+    },
+    "age_relax_after_discharge_slope": {
+      "same_missing": true,
+      "max_abs": 1.0367683274392636e-18,
+      "max_rel": 2.123890407903724e-13
+    },
+    "age_internal_resistance_mean": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "age_internal_resistance_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    },
+    "age_internal_resistance_slope": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0
+    }
+  }
+}
