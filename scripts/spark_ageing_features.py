@@ -12,6 +12,11 @@ inside Spark is avoided (PySpark 4.2 does not fully support pandas 3).
 Usage (from the repository root)::
 
     python scripts/spark_ageing_features.py [--cores 4] [--limit N]
+    python scripts/spark_ageing_features.py --limit 40 --ui 1800   # demo: Spark web UI at http://localhost:4040
+
+With ``--ui``, a snapshot of Spark's monitoring REST API (jobs, stages, executors, SQL) is saved to
+data/spark_ui_snapshot.json before the UI closes. ``--event-log`` writes a Spark event log to data/spark-events for
+the History Server (``scripts/spark_history_server.ps1``); on Windows this needs Hadoop's winutils.exe (HADOOP_HOME).
 """
 
 from __future__ import annotations
@@ -35,6 +40,7 @@ from src import experiments as X  # noqa: E402
 
 RAW = ROOT / "data" / "raw" / "wheeler2025"
 OUT = ROOT / "data" / "s6_ageing_blocks_spark.csv"
+EVENTS = ROOT / "data" / "spark-events"
 FIELDS = ["cell", "block_end", "global_cycle", "valid", "t_end", *A.RESPONSES]
 
 
@@ -54,10 +60,28 @@ def parse_block(job: tuple[str, float, bool]) -> list[tuple]:
     return rows
 
 
+def save_ui_snapshot(app_id: str, port: int = 4040) -> None:
+    """Save the Spark monitoring REST API views of this application (evidence that persists after the UI closes)."""
+    import json
+    import urllib.request
+    base = f"http://localhost:{port}/api/v1/applications/{app_id}"
+    snap = {}
+    for view in ("", "/jobs", "/stages", "/executors", "/sql"):
+        try:
+            with urllib.request.urlopen(base + view, timeout=10) as r:
+                snap[view or "/application"] = json.loads(r.read())
+        except OSError as e:
+            snap[view or "/application"] = {"error": str(e)}
+    (ROOT / "data" / "spark_ui_snapshot.json").write_text(json.dumps(snap, indent=1))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--cores", type=int, default=4, help="local[N] worker threads")
-    ap.add_argument("--limit", type=int, default=0, help="only the first N blocks (testing)")
+    ap.add_argument("--limit", type=int, default=0, help="only N blocks spread over the cells (testing, demo)")
+    ap.add_argument("--ui", type=int, default=0, metavar="SECONDS",
+                    help="enable the Spark web UI (port 4040) and keep it open this long after the job")
+    ap.add_argument("--event-log", action="store_true", help="write a Spark event log (History Server; needs winutils on Windows)")
     args = ap.parse_args()
 
     import build_s6_ageing_features as B
@@ -71,8 +95,11 @@ def main() -> int:
     os.environ.update({"PYSPARK_PYTHON": py, "PYSPARK_DRIVER_PYTHON": py, "PYTHONPATH": str(ROOT)})
     from pyspark.sql import SparkSession, functions as F, types as T
 
-    spark = (SparkSession.builder.master(f"local[{args.cores}]").appName("d22-ageing")
-             .config("spark.driver.memory", "1g").config("spark.ui.enabled", "false")
+    EVENTS.mkdir(parents=True, exist_ok=True)
+    spark = (SparkSession.builder.master(f"local[{args.cores}]").appName("D22 S6 ageing features")
+             .config("spark.driver.memory", "1g").config("spark.ui.enabled", "true" if args.ui else "false")
+             .config("spark.ui.port", "4040").config("spark.eventLog.enabled", "true" if args.event_log else "false")
+             .config("spark.eventLog.dir", EVENTS.as_uri())
              .config("spark.python.worker.reuse", "true").getOrCreate())
     spark.sparkContext.setLogLevel("ERROR")
     schema = T.StructType([T.StructField("cell", T.StringType()), T.StructField("block_end", T.IntegerType()),
@@ -97,13 +124,20 @@ def main() -> int:
     enough = F.col("age_valid_cycles") >= A.MIN_VALID_CYCLES
     blocks = blocks.select("cell", "block_end", "t_end", "age_valid_cycles", "age_invalid_cycles",
                            *[F.when(enough, F.col(c)).alias(c) for c in A.feature_names()])
-    rows = [r.asDict() for r in blocks.orderBy("cell", "block_end").collect()]
+    sc = spark.sparkContext
+    sc.setJobDescription(f"MAP: parse {len(jobs)} ageing blocks (100 cycles each) into per-cycle responses")
     n_cycles = cycles.count()
+    sc.setJobDescription("REDUCE: Spark SQL aggregation of valid cycles into F2 block inputs")
+    rows = [r.asDict() for r in blocks.orderBy("cell", "block_end").collect()]
     elapsed = time.perf_counter() - t0
+    if args.ui:
+        save_ui_snapshot(sc.applicationId)
+        print(f"Spark web UI: http://localhost:4040 (open for {args.ui} s)", flush=True)
+        time.sleep(args.ui)
     spark.stop()
 
     out = pd.DataFrame(rows).astype({c: float for c in A.feature_names()})
-    out.to_csv(OUT, index=False)
+    out.to_csv(OUT if not args.limit else OUT.with_name(OUT.stem + "_test.csv"), index=False)
 
     # Validation against the pandas implementation (blocks present in both).
     ref = pd.read_csv(ROOT / "data" / "s6_ageing_blocks.csv")

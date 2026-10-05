@@ -180,7 +180,7 @@ Given everything measured up to a reference performance test (RPT, or capacity c
 
 \begin{figure*}[t]
   \centering
-  \includegraphics[width=0.86\textwidth]{figures/framework.png}
+  \includegraphics[width=0.78\textwidth]{figures/framework.png}
   \caption{Framework of the study. Public data are verified and audited, converted into forecasting samples with purged chronological splits, and evaluated under three protocols with continual-learning metrics, a replication rule and a reuse-class mapping.}
   \label{fig:framework}
 \end{figure*}
@@ -217,6 +217,18 @@ Table~\ref{tab:data} lists the five public datasets (all CC~BY~4.0). Every file 
 \emph{S6} (Wheeler \textit{et al.}) was selected by criteria fixed before screening: a reuse licence, a series of capacity checks, ageing past first-life end of life, heterogeneity that S1 lacks and verifiable metadata. Its cells were characterised every 100 cycles and end at 32--64\% SOH; ``second life'' here means continued ageing below 80\% SOH under the same protocol. A check is used only if its C/25 discharge starts from full charge and reaches the cut-off (843 of 847 checks).
 
 \emph{S7--S9} are first-life datasets used for pretraining. Cells with at least five valid checks are kept: 369 cells and 36{,}711 samples.
+
+\subsection{Big-data processing of the ageing cycles}
+\label{sec:spark}
+
+Between checks, every S6 cell logged each ageing cycle at about one sample per second: 827 files (one per cell and 100-cycle block), 132~GB raw and about $1.4\times10^{9}$ rows. They are reduced to block-level inputs with Apache Spark~4.2 (PySpark) in local mode (Fig.~\ref{fig:spark}). In the map stage, one Spark task per block parses the raw rows into steps and derives, for every cycle, a validity flag and seven measured responses: end-of-charge and end-of-discharge voltage, constant-voltage hold time and final current, relaxation over the rest after charge and after discharge, and internal resistance where recorded. Charge, energy and current are excluded because the protocol scales them with the previous capacity. The per-cycle table (about 83{,}000 cycles) is cached, and Spark SQL then groups the valid cycles by cell and block into the mean, last value and least-squares slope of each response (21 inputs), requiring at least 50 valid cycles. The block ending at a check joins the origin at that check; every block is verified to end before it. The Spark output is compared with an independent pandas implementation: on a 16-block test run the values agreed to a relative difference below $10^{-9}$. \todo{Full-set validation, run time and the forecasting results with these inputs (D22) once the run is complete.}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/spark_pipeline.png}
+  \caption{Big-data pipeline for the S6 ageing cycles: Spark map (one task per 100-cycle block) to a cached per-cycle table, Spark SQL reduction to block inputs, and a causal join to the forecasting origins.}
+  \label{fig:spark}
+\end{figure*}
 
 \subsection{State of health and forecasting target}
 \label{sec:soh}
