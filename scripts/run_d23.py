@@ -61,7 +61,7 @@ class Runner(run_p3.Runner):
             # D22: the origin check at cycle c uses the ageing block ending at c (causality checked by the builder).
             # D22: the inputs come from the Spark job, used only if its full-set validation against pandas passed.
             check = json.loads((ROOT / "results" / "d22_spark_validation.json").read_text())
-            if not check["identical_within_1e-9_relative"]:
+            if not check["matches_pandas"]:
                 raise SystemExit("Spark ageing inputs differ from the pandas implementation; see d22_spark_validation.json")
             blocks = pd.read_csv(ROOT / "data" / "s6_ageing_blocks_spark.csv")[["cell", "block_end", *A.feature_names()]]
             direct = direct.merge(blocks.rename(columns={"block_end": "origin_cycle"}), on=["cell", "origin_cycle"],

@@ -22,6 +22,7 @@ the History Server (``scripts/spark_history_server.ps1``); on Windows this needs
 from __future__ import annotations
 
 import argparse
+import json
 import math
 import os
 import sys
@@ -82,7 +83,14 @@ def main() -> int:
     ap.add_argument("--ui", type=int, default=0, metavar="SECONDS",
                     help="enable the Spark web UI (port 4040) and keep it open this long after the job")
     ap.add_argument("--event-log", action="store_true", help="write a Spark event log (History Server; needs winutils on Windows)")
+    ap.add_argument("--validate-only", action="store_true",
+                    help="re-validate the saved Spark output (data/s6_ageing_blocks_spark.csv); keeps the run's recorded metadata")
     args = ap.parse_args()
+    if args.validate_only:
+        path = ROOT / "results" / "d22_spark_validation.json"
+        prev = json.loads(path.read_text())
+        run = {k: prev[k] for k in ("engine", "blocks", "cycles", "seconds")}
+        return validate(pd.read_csv(OUT), run, path)
 
     import build_s6_ageing_features as B
     files = sorted([*RAW.glob("Cell*/agingdata_50degC/*aging*.csv.xz"), *RAW.glob("Cell*/agingdata_50degC/*aging*.csv.gz")])
@@ -138,8 +146,20 @@ def main() -> int:
 
     out = pd.DataFrame(rows).astype({c: float for c in A.feature_names()})
     out.to_csv(OUT if not args.limit else OUT.with_name(OUT.stem + "_test.csv"), index=False)
+    from pyspark import __version__ as spark_version
+    run = {"engine": f"Apache Spark {spark_version} (PySpark), local[{args.cores}] on one machine",
+           "blocks": len(jobs), "cycles": int(n_cycles), "seconds": round(elapsed, 1)}
+    return validate(out, run, ROOT / "results" / ("d22_spark_validation.json" if not args.limit else "d22_spark_validation_test.json"))
 
-    # Validation against the pandas implementation (blocks present in both).
+
+# Agreement with pandas: |spark - pandas| <= RTOL * |pandas| + ATOL, and the same missing values. The absolute floor
+# covers values that are zero up to rounding (e.g. the slope of a flat end-of-charge voltage), where a relative
+# difference is meaningless; it is far below the data resolution (voltage ~1e-4 V).
+RTOL, ATOL = 1e-9, 1e-12
+
+
+def validate(out: pd.DataFrame, run: dict, path: Path) -> int:
+    """Compare the Spark block inputs with the pandas implementation on the blocks both contain."""
     ref = pd.read_csv(ROOT / "data" / "s6_ageing_blocks.csv")
     m = out.merge(ref, on=["cell", "block_end"], suffixes=("_spark", "_pandas"))
     diffs = {}
@@ -147,17 +167,17 @@ def main() -> int:
         a, b = m[f"{c}_spark"].to_numpy(float), m[f"{c}_pandas"].to_numpy(float)
         same_missing = bool(np.array_equal(np.isnan(a), np.isnan(b)))
         both = ~(np.isnan(a) | np.isnan(b))
-        rel = np.abs(a[both] - b[both]) / np.maximum(np.abs(b[both]), 1e-12)
-        diffs[c] = {"same_missing": same_missing, "max_abs": float(np.max(np.abs(a[both] - b[both]))) if both.any() else 0.0,
-                    "max_rel": float(rel.max()) if both.any() else 0.0}
-    ok = all(d["same_missing"] and d["max_rel"] < 1e-9 for d in diffs.values())
-    from pyspark import __version__ as spark_version
-    X.write_results(ROOT / "results" / ("d22_spark_validation.json" if not args.limit else "d22_spark_validation_test.json"), {
-        "decision": "D22", "engine": f"Apache Spark {spark_version} (PySpark), local[{args.cores}] on one machine",
-        "blocks": len(jobs), "cycles": int(n_cycles), "seconds": round(elapsed, 1),
-        "compared_blocks": int(len(m)), "identical_within_1e-9_relative": ok, "per_input": diffs}, ROOT)
-    print(f"Spark local[{args.cores}]: {len(jobs)} blocks, {n_cycles} cycles in {elapsed:.0f} s; "
-          f"compared {len(m)} blocks with pandas: {'identical' if ok else 'DIFFERENT'}", flush=True)
+        d = np.abs(a[both] - b[both])
+        rel = d / np.maximum(np.abs(b[both]), 1e-300)
+        diffs[c] = {"same_missing": same_missing, "max_abs": float(d.max()) if both.any() else 0.0,
+                    "max_rel": float(rel.max()) if both.any() else 0.0,
+                    "within_tolerance": bool(np.all(d <= RTOL * np.abs(b[both]) + ATOL))}
+    ok = all(d["same_missing"] and d["within_tolerance"] for d in diffs.values())
+    X.write_results(path, {"decision": "D22", **run, "compared_blocks": int(len(m)),
+                           "criterion": f"|spark - pandas| <= {RTOL:g} * |pandas| + {ATOL:g}, same missing values",
+                           "matches_pandas": ok, "per_input": diffs}, ROOT)
+    print(f"{run['engine']}: {run['blocks']} blocks, {run['cycles']} cycles in {run['seconds']:.0f} s; "
+          f"compared {len(m)} blocks with pandas: {'match' if ok else 'DIFFERENT'}", flush=True)
     return 0 if ok else 1
 
 
