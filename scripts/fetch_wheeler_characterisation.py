@@ -189,7 +189,10 @@ def main() -> int:
     ap.add_argument("--store", choices=("gz", "xz"), default="gz",
                     help="local compression: gz (as registered for the characterisation files) or xz (about 45 %% smaller)")
     ap.add_argument("--min-free-gb", type=float, default=5.0, help="stop before the disk has less free space than this")
+    ap.add_argument("--shard", default="0/1", metavar="I/N",
+                    help="parallel workers on one cell: take every N-th file not yet on disk, starting at I (own --manifest)")
     args = ap.parse_args()
+    shard_i, shard_n = (int(v) for v in args.shard.split("/"))
     files = json.loads(RECORD.read_text())["data"]["latestVersion"]["files"]
     zips = [f["dataFile"] for f in files if f["dataFile"]["filename"].startswith("Cell") and f["dataFile"]["filename"].endswith(".zip")]
     if args.cells:
@@ -214,7 +217,12 @@ def main() -> int:
         url, size = ACCESS.format(id=z["id"]), int(z["filesize"])
         entries = [e for e in zip_index(url, size) if _is_kind(e["name"], args.kind) and not e["name"].endswith("/")
                    and not e["name"].startswith("__MACOSX")]
-        print(f"{z['filename']}: {len(entries)} {args.kind} files", flush=True)
+        if shard_n > 1:
+            # A fixed split of the full sorted list, so shards never overlap even when a worker restarts;
+            # files already on disk are verified locally (not fetched) by _verified_local below.
+            entries = sorted(entries, key=lambda e: e["name"])[shard_i::shard_n]
+        print(f"{z['filename']}: {len(entries)} {args.kind} files" + (f" (shard {args.shard})" if shard_n > 1 else ""),
+              flush=True)
         for e in entries:
             rel = e["name"]
             if rel in done:
