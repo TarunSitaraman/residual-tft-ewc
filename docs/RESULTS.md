@@ -395,3 +395,31 @@ Results files: `results/forecasting_d23_e1.json` (horizons 1–3) and `results/f
 2. **Learning the residual is what makes the TFT competitive.** It improves TFT + EWC by 0.17 pp (E1) and 0.24–0.30 pp (E2), replicated, and makes it the most accurate learned model of the study, ahead of gradient boosting (replicated in both experiments). It is the first learned model level with linear extrapolation on S6.
 3. **EWC reduces forgetting, replicated, for the first time in this study.** With horizons 1–6, EWC lowers the residual TFT's forgetting from 0.28 / 0.22 to 0.09 pp and its backward transfer from 0.18 / 0.14 to 0.03 pp. Its effect on final error is not replicated. With horizons 1–3, where forgetting is already small for the residual TFT (about 0.1 pp), EWC and fine-tuning are practically equivalent.
 4. The residual is hard to learn from the shared inputs: per horizon, extrapolation stays better at h = 1–2 and the gap closes, without reversing, by h = 5–6.
+
+## D22: S6 between-check ageing cycles as inputs, extracted with Apache Spark (6 Oct 2026)
+
+**Data and extraction.** All 827 ageing files (131.9 GB raw, about 1.4 billion rows; 13 download manifests merged, no SHA-256 conflict). Pandas extraction: 82,529 cycles, 80,287 valid (97 %), 827 blocks, 7 blocks below 50 valid cycles (inputs missing). No block ends after a valid check. Full Spark run (PySpark 4.2.0, local[6]): 827 map tasks, 82,529 cycles, 1,175 s; matches the pandas implementation on all 827 blocks under |Spark − pandas| ≤ 1e-9·|pandas| + 1e-12 (largest absolute difference 2.0e-13); the originally stated relative-only criterion failed on one near-zero input (deviation recorded in D22). Files: `results/d22_ageing_report.json`, `results/d22_spark_validation.json`, `results/d22_spark_validation_strict_relative.json`.
+
+**Leakage audit.** Per-cycle discharged charge correlates r = 0.97–0.999 within cell with the previous check's capacity in every case (protocol scaling; excluded). Allowed responses carry health information: median within-cell Spearman ρ with the origin capacity −0.86 (relaxation after charge, mean) and 0.91 (CV-hold time, mean). `Internal_Resistance` is never recorded (inputs missing throughout).
+
+**Forecasting** (`results/forecasting_d22_e1_f2.json`, commit `d69b495`, clean). D23 E1 setting, inputs F2 = D21 shared + 21 ageing inputs (Spark output). The committed D23 runs of residual TFT + EWC (D21 inputs) reproduce exactly on two recomputed units before they are used as reference (b). Final average test RMSE (pp), mean, main / replicate:
+
+| Method (F2 inputs unless stated) | Final error |
+|---|---|
+| **TFT + EWC, residual** | **0.480 / 0.501** |
+| TFT + EWC, residual, **D21 inputs** (D23) | 0.339 / 0.314 |
+| TFT fine-tuning, residual | 0.756 / 0.645 |
+| TFT + EWC, direct | 0.757 / 0.709 |
+| MLP fine-tuning, residual | 0.398 / 0.354 |
+| MLP + EWC, residual | 0.691 / 0.656 |
+| Linear extrapolation | 0.343 |
+| Gradient boosting (F2) | 0.495 |
+
+**Registered tests (D21 replication rule), residual TFT + EWC with F2 minus …:**
+- **(a) linear extrapolation: +0.138 / +0.159 (p_Holm < 0.001 / < 0.001), replicated — worse. The registered positive result was not obtained.**
+- **(b) the same model with the D21 inputs: +0.141 / +0.188 (< 0.001 / < 0.001), replicated — the ageing inputs make it worse.**
+- Better than the direct TFT + EWC (−0.276 / −0.208) and direct TFT fine-tuning, and than all direct MLPs and the ridge baselines (replicated); worse than residual MLP fine-tuning (+0.082 / +0.147, replicated); practically equivalent to gradient boosting (−0.015 / +0.006).
+
+**Tuning.** Residual TFT: lr 0.1 (the grid was extended upward; 0.1 stayed best), λ 100. Residual MLP: lr 0.03, λ 100.
+
+**Reading.** Adding the between-check ageing responses does not help the proposed model: residual TFT + EWC is 0.14–0.19 pp worse with them (replicated), and so are the other TFT and MLP variants and gradient boosting (0.495 against 0.451) compared with the D23 runs on the D21 inputs, except residual MLP fine-tuning, which is slightly better with them (0.398 / 0.354 against 0.405 / 0.403; not a registered comparison). No model beats linear extrapolation. The responses do track health within a cell, but mostly its level, which the SOH history already gives; with 21 extra inputs and 135–225 training samples per task, they add variance (TFT + EWC: mean 0.48 against median 0.40). This is an interpretation, not a tested claim. The Spark pipeline itself is validated and reusable.
