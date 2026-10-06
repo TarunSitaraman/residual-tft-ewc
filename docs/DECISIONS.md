@@ -662,6 +662,8 @@ Charge or discharge durations, charge, energy and currents are excluded (protoco
 
 **Spark implementation, 5 Oct 2026, 21:45 IST.** The extraction is also implemented as an Apache Spark job (`scripts/spark_ageing_features.py`, PySpark 4.2.0, local mode on one machine; Java 21): one map task per 100-cycle block parses the raw file into per-cycle responses with the same tested function, and Spark SQL reduces the valid cycles of each block to the F2 inputs (mean, last value, slope as covariance/variance, the 50-valid-cycle rule). The job compares its output with the pandas builder and records the result in `results/d22_spark_validation.json`. A test on 6 blocks (4 also in the pandas output) gave identical values (relative difference < 1e-9, same missing values). The F2 inputs used for D22 will be those of the Spark job if the full-set validation passes; otherwise the pandas output, with the discrepancy reported.
 
+**Run plan, 6 Oct 2026, 09:10 IST.** A detached pipeline (`data/raw/run_d22_pipeline.ps1`) waits for the download and then runs, stopping at the first failure: merge of the per-worker manifests with a completeness check (`scripts/merge_ageing_manifests.py`, all 827 files, one SHA-256 each); the pandas extraction and report; a gate requiring no causality violation at a valid check; the full Spark extraction, which exits with an error unless it matches pandas on every block; the D22 E1 parts and the collect step. `run_d23.py --inputs f2` reads the Spark output and refuses to run unless `results/d22_spark_validation.json` records identical values. Every output is reviewed before any result is reported.
+
 
 ---
 

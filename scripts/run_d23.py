@@ -1,7 +1,7 @@
 """Run decision D23 (and D22 with ``--inputs f2``): learned residual on linear extrapolation on the S6 stream.
 
 D23: E1 (horizons 1-3) and E2 (horizons 1-6) with the D21 shared inputs. D22: the same setting with F2 = the
-D21 inputs plus the ageing-block aggregates (``data/s6_ageing_blocks.csv``, scripts/build_s6_ageing_features.py);
+D21 inputs plus the ageing-block aggregates from the Spark job (``data/s6_ageing_blocks_spark.csv``, scripts/spark_ageing_features.py, validated against scripts/build_s6_ageing_features.py);
 residual TFT + EWC with F2 is compared with the committed D23 runs of residual TFT + EWC on the D21 inputs, after
 checking that units of those runs reproduce exactly.
 
@@ -59,7 +59,11 @@ class Runner(run_p3.Runner):
         self.features = list(p3.SHARED_FEATURES)
         if inputs == "f2":
             # D22: the origin check at cycle c uses the ageing block ending at c (causality checked by the builder).
-            blocks = pd.read_csv(ROOT / "data" / "s6_ageing_blocks.csv")[["cell", "block_end", *A.feature_names()]]
+            # D22: the inputs come from the Spark job, used only if its full-set validation against pandas passed.
+            check = json.loads((ROOT / "results" / "d22_spark_validation.json").read_text())
+            if not check["identical_within_1e-9_relative"]:
+                raise SystemExit("Spark ageing inputs differ from the pandas implementation; see d22_spark_validation.json")
+            blocks = pd.read_csv(ROOT / "data" / "s6_ageing_blocks_spark.csv")[["cell", "block_end", *A.feature_names()]]
             direct = direct.merge(blocks.rename(columns={"block_end": "origin_cycle"}), on=["cell", "origin_cycle"],
                                   how="left", validate="many_to_one")
             self.features += A.feature_names()
