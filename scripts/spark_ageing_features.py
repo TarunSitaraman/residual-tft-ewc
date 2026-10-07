@@ -111,7 +111,9 @@ def main() -> int:
     from pyspark.sql import SparkSession, functions as F, types as T
 
     EVENTS.mkdir(parents=True, exist_ok=True)
-    spark = (SparkSession.builder.master(f"local[{args.cores}]").appName("D22 S6 ageing features")
+    # local[N, 4]: up to 4 attempts per task, so a Python worker that is slow to start on Windows (connect-back
+    # timeout) is retried instead of failing the run; tasks are deterministic, so retries cannot change results.
+    spark = (SparkSession.builder.master(f"local[{args.cores},4]").appName("D22 S6 ageing features")
              .config("spark.driver.memory", "1g").config("spark.ui.enabled", "true" if args.ui else "false")
              .config("spark.ui.port", "4040").config("spark.eventLog.enabled", "true" if args.event_log else "false")
              .config("spark.eventLog.dir", EVENTS.as_uri())
