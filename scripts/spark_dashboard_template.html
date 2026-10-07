@@ -1,4 +1,6 @@
-<title>Spark Ageing Run</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spark Big-Data Pipeline</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
@@ -25,8 +27,8 @@
   --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300; --c7: #9085e9;
 }
 * { box-sizing: border-box; }
-body { background: var(--ground); color: var(--ink); font: 15px/1.55 var(--sans); }
-.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; gap: 28px; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 15px/1.55 var(--sans); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
 header { display: grid; gap: 10px; }
 .eyebrow { font: 600 12px/1.3 var(--cond); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 h1 { font: 700 clamp(30px, 4.4vw, 46px)/1.05 var(--cond); margin: 0; letter-spacing: -.01em; text-wrap: balance; }
@@ -42,12 +44,12 @@ h2 { font: 600 21px/1.2 var(--cond); margin: 0; text-wrap: balance; }
 .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font: 600 12.5px/1.4 var(--sans);
   background: var(--good-soft); color: var(--good); width: fit-content; }
 .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-section { display: grid; gap: 12px; }
+section { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; display: grid; gap: 10px; min-width: 0; }
 .head { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; }
 .note { font-size: 13px; color: var(--muted); margin: 0; max-width: 75ch; }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media (max-width: 820px) { .two { grid-template-columns: 1fr; } .fact { border-right: 0; border-bottom: 1px solid var(--rule); } }
+@media (max-width: 820px) { .two { grid-template-columns: minmax(0, 1fr); } .wrap { padding-inline: 16px; } .fact { border-right: 0; border-bottom: 1px solid var(--rule); } }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--ink-2); }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
@@ -74,16 +76,62 @@ select { font: 14px var(--sans); color: var(--ink); background: var(--surface); 
   padding: 7px 10px; min-width: 0; max-width: 100%; }
 select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 footer { font-size: 12.5px; color: var(--muted); display: grid; gap: 4px; border-top: 1px solid var(--rule); padding-top: 14px; }
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 0; list-style: none; margin: 0; padding: 0;
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; counter-reset: st; }
+.flow li { padding: 14px 16px 16px; border-right: 1px solid var(--rule); display: grid; gap: 6px; align-content: start; position: relative; counter-increment: st; }
+.flow li:last-child { border-right: 0; }
+.flow li::before { content: counter(st); font: 700 12px/22px var(--cond); width: 22px; height: 22px; border-radius: 50%; text-align: center;
+  background: var(--accent-soft); color: var(--accent); }
+.flow li:not(:last-child)::after { content: ""; position: absolute; right: -6px; top: 20px; width: 10px; height: 10px; background: var(--surface);
+  border-top: 1px solid var(--rule); border-right: 1px solid var(--rule); transform: rotate(45deg); z-index: 1; }
+.flow .n { font: 600 16px/1.2 var(--cond); }
+.flow .tech { font: 500 12px/1.35 var(--mono); color: var(--accent); }
+.flow .big { font: 600 22px/1.1 var(--cond); font-variant-numeric: tabular-nums; }
+.flow p { margin: 0; font-size: 13px; color: var(--ink-2); }
+@media (max-width: 820px) { .flow li { border-right: 0; border-bottom: 1px solid var(--rule); } .flow li::after { display: none; } }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.shots figure { margin: 0; display: grid; gap: 6px; align-content: start; }
+.shots img { width: 100%; height: 200px; object-fit: cover; object-position: top left; border: 1px solid var(--rule); border-radius: 8px; background: #fff; }
+.shots figcaption { font-size: 12.5px; color: var(--muted); }
+td.prose { white-space: normal; min-width: 220px; }
 code { font-family: var(--mono); font-size: 12.5px; }
 </style>
 
 <div class="wrap">
   <header>
     <div class="eyebrow">D22 &middot; S6 between-check ageing data &middot; Apache Spark</div>
-    <h1>Spark ageing run</h1>
+    <h1>Big data with Apache Spark</h1>
     <p class="lede" id="lede"></p>
     <div class="strip" id="strip"></div>
   </header>
+
+  <section>
+    <div class="head"><h2>How the pipeline is built</h2></div>
+    <ol class="flow" id="flow"></ol>
+    <p class="note">Ingest runs once and is resumable; steps 3&ndash;5 are one Spark application. The pandas builder is an independent second implementation, used only as a check.</p>
+  </section>
+
+  <section>
+    <div class="head"><h2>Spark platform configuration</h2></div>
+    <div class="panel scroll"><table id="platform"></table></div>
+  </section>
+
+  <section>
+    <div class="head"><h2>Spark's own monitoring</h2></div>
+    <div class="shots">
+      <figure><a href="figures/spark/spark_history_server.png" target="_blank" rel="noopener"><img src="figures/spark/spark_history_server.png" alt="Spark History Server listing the completed D22 application, 32 min" loading="lazy"></a><figcaption>History Server: the completed run (event log), 32 min end to end.</figcaption></figure>
+      <figure><a href="figures/spark/spark_history_jobs.png" target="_blank" rel="noopener"><img src="figures/spark/spark_history_jobs.png" alt="Completed Spark jobs of the run, replayed in the History Server" loading="lazy"></a><figcaption>Its 7 completed jobs. Job 0 (below the fold, about 30 min) parses the 827 files; the later MAP and REDUCE jobs read the cached cycles and take seconds.</figcaption></figure>
+      <figure><a href="figures/spark/spark_ui_full_run_map_stage.png" target="_blank" rel="noopener"><img src="figures/spark/spark_ui_full_run_map_stage.png" alt="Spark web UI stage page of the map stage, mid-run, with task metrics" loading="lazy"></a><figcaption>Live web UI, map stage mid-run: per-task metrics, all tasks process-local, no failures.</figcaption></figure>
+      <figure><a href="figures/spark/spark_ui_full_run_executors.png" target="_blank" rel="noopener"><img src="figures/spark/spark_ui_full_run_executors.png" alt="Spark web UI executors page, mid-run, 6 cores, 6 active tasks" loading="lazy"></a><figcaption>Live web UI, executors mid-run: one local executor, 6 cores, 6 tasks active, 0 failed.</figcaption></figure>
+    </div>
+    <p class="note">Screenshots of the Spark web UI (port 4040) taken during the runs. Finished runs are replayed from their event logs in the Spark History Server (<code>scripts/spark_history_server.ps1</code>, port 18080); the charts below come from Spark's monitoring REST API.</p>
+  </section>
+
+  <section>
+    <div class="head"><h2>Full runs</h2></div>
+    <div class="panel scroll"><table id="runs"></table></div>
+    <p class="note">Each full run processes all 827 files from scratch and writes its comparison with pandas to the record listed. Run times vary with other load on the PC. * Working tree had uncommitted changes at run time.</p>
+  </section>
 
   <section>
     <div class="head"><h2>Map stage: one task per 100-cycle block</h2><div class="legend" id="legend"></div></div>
@@ -162,6 +210,30 @@ $("strip").innerHTML = facts.map(([k, v, s]) => `<div class="fact"><span class="
   + `<div class="fact"><span class="k">Spark vs pandas</span><span class="pill">${fmt(D.validation.compared_blocks)} / ${fmt(run.blocks)} match</span><span class="s">max diff ${D.max_abs.toExponential(1)}</span></div>`;
 $("legend").innerHTML = CASES.map(c => `<span><i style="background:${color(c)}"></i>${D.case_labels[c]}</span>`).join("");
 
+// ---------- pipeline ----------
+const flow = [
+  ["Source", "Dataverse · 20 zip archives", `${fmt(D.raw_gb, 0)} GB raw`, `${D.n_cells} cells, ${fmt(run.blocks)} ageing files of 100 cycles each, about 1.4 billion rows of time-series measurements (Wheeler et al. 2025, CC BY 4.0).`],
+  ["Ingest", "HTTP range requests", `${fmt(D.xz_gb, 1)} GB stored`, "Each file is read out of the remote zip without downloading the whole archive, checked against the zip's CRC-32 and stored xz-compressed, with its SHA-256 in a manifest. Resumable and sharded over parallel workers."],
+  ["Map", "RDD · flatMap · 827 partitions", `${fmt(run.blocks)} tasks`, "One partition per file. Each task parses its file into per-cycle responses in a Python worker, with the same unit-tested function the pandas builder uses."],
+  ["Cache", "typed DataFrame · .cache()", `${fmt(run.cycles)} rows`, "One row per cycle with an explicit schema, kept in Spark memory so the reduce does not re-read the raw files."],
+  ["Reduce", "Spark SQL · groupBy · agg", `${fmt(D.n_inputs)} inputs`, `Per (cell, block): mean, last value (max_by) and least-squares slope (covar_pop / var_pop) of each response over valid cycles; blocks with fewer than ${D.min_valid} valid cycles get missing values.`],
+  ["Validate", "vs independent pandas build", `${fmt(D.validation.compared_blocks)} / ${fmt(run.blocks)} match`, "Every block matches the pandas implementation to 1e-9 relative, with the same missing values, in all three full runs. The block inputs then feed the D22 forecasting models."],
+];
+$("flow").innerHTML = flow.map(([n, tech, big, p]) => `<li><span class="n">${n}</span><span class="tech">${tech}</span><span class="big">${big}</span><p>${p}</p></li>`).join("");
+const platform = [
+  ["Engine", "Apache Spark 4.2.0 (PySpark), Java 21", "Python API, so the tested parsing code runs unchanged inside Spark tasks."],
+  ["Master", `local[${run.cores},4]`, `${run.cores} worker threads on one PC; up to 4 attempts per task, so a Python worker that is slow to start on Windows is retried instead of failing the job.`],
+  ["Partitioning", `${fmt(run.blocks)} partitions, one per file`, "A file is the natural unit of work: independent, 35–450 MB raw, parsed in one pass."],
+  ["Python workers", "spark.python.worker.reuse = true", "Workers stay alive between tasks, avoiding an interpreter start per file."],
+  ["Driver memory", "spark.driver.memory = 1g", "Only the reduced block table (827 rows) returns to the driver."],
+  ["Event log", "spark.eventLog.enabled → data/spark-events", "Every run can be replayed in the Spark History Server after it finishes."],
+  ["Monitoring", "Web UI :4040, History Server :18080, REST API", "The REST API snapshot is the source of the task timeline and job table on this page."],
+  ["Cluster", "none (local mode)", "The job runs on one machine. Moving it to a cluster needs a different master URL and the raw files on shared storage."],
+];
+$("platform").innerHTML = `<thead><tr><th>Setting</th><th>Value</th><th>Why</th></tr></thead><tbody>`
+  + platform.map(([a, b, c]) => `<tr><td>${a}</td><td class="mono">${esc(b)}</td><td class="prose">${esc(c)}</td></tr>`).join("") + "</tbody>";
+$("runs").innerHTML = `<thead><tr><th>Run</th><th>Date</th><th>Commit</th><th class="r">Time</th><th class="r">Blocks compared</th><th>Matches pandas</th><th>Record</th></tr></thead><tbody>`
+  + D.runs.map(r => `<tr><td class="prose">${esc(r.label)}</td><td>${r.date}</td><td class="mono">${r.commit}${r.dirty ? "*" : ""}</td><td class="r">${fmt(r.seconds / 60, 1)} min</td><td class="r">${fmt(r.compared)} / ${fmt(r.blocks)}</td><td class="${r.match ? "ok" : ""}">${r.match ? "yes" : "no"}</td><td class="mono">${r.file}</td></tr>`).join("") + "</tbody>";
 // ---------- tooltip ----------
 function tipFor(host) {
   let t = host.querySelector(".tip");

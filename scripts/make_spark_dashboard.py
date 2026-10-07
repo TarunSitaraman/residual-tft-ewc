@@ -62,6 +62,21 @@ def pack(tasks: list[dict]) -> None:
             task["lane"] = len(ends) - 1
 
 
+RUNS = [("First full run (inputs used in D22)", "d22_spark_validation.json"),
+        ("Re-run recorded through the monitoring API (this page)", "d22_spark_validation_dashboard.json"),
+        ("Re-run with task retries and event log (History Server)", "d22_spark_validation_eventlog.json")]
+
+
+def runs() -> list[dict]:
+    out = []
+    for label, name in RUNS:
+        r = json.loads((ROOT / "results" / name).read_text())
+        out.append({"label": label, "file": f"results/{name}", "date": r["generated_utc"][:10], "seconds": r["seconds"],
+                    "commit": r["environment"]["git_commit"][:7], "dirty": r["environment"]["git_dirty"],
+                    "compared": r["compared_blocks"], "blocks": r["blocks"], "match": r["matches_pandas"]})
+    return out
+
+
 def main() -> int:
     snap = json.loads((ROOT / "data" / "spark_ui_snapshot_dashboard.json").read_text())
     val = json.loads((ROOT / "results" / "d22_spark_validation_dashboard.json").read_text())
@@ -120,7 +135,8 @@ def main() -> int:
         "valid_cycles": int(blocks["age_valid_cycles"].sum()), "tasks": tasks, "lanes": int(max(x["lane"] for x in tasks) + 1),
         "stage_seconds": float(max(x["start"] + x["dur"] for x in tasks)), "median_dur": float(np.median([x["dur"] for x in tasks])),
         "reduce_seconds": reduce_s, "jobs": jobs, "cells": cells, "case_labels": case_labels(), "features": feats, "blocks": bl,
-        "app_id": snap["/application"]["id"], "commit": commit}
+        "app_id": snap["/application"]["id"], "commit": commit, "runs": runs(),
+        "n_inputs": len(A.feature_names()), "min_valid": A.MIN_VALID_CYCLES, "n_cells": len(cells)}
     tpl = (ROOT / "scripts" / "spark_dashboard_template.html").read_text(encoding="utf-8")
     out = ROOT / "docs" / "spark_dashboard.html"
     out.write_text(tpl.replace("__DATA__", json.dumps(data, separators=(",", ":"))), encoding="utf-8")
