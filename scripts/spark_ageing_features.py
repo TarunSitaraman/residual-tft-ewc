@@ -61,19 +61,25 @@ def parse_block(job: tuple[str, float, bool]) -> list[tuple]:
     return rows
 
 
-def save_ui_snapshot(app_id: str, port: int = 4040) -> None:
-    """Save the Spark monitoring REST API views of this application (evidence that persists after the UI closes)."""
-    import json
+def save_ui_snapshot(app_id: str, jobs: list, path: Path, port: int = 4040) -> None:
+    """Save the Spark monitoring REST API views of this application (evidence that persists after the UI closes),
+    including the task list of every stage with one task per block; task ``index`` i is block ``jobs[i]``."""
     import urllib.request
     base = f"http://localhost:{port}/api/v1/applications/{app_id}"
-    snap = {}
-    for view in ("", "/jobs", "/stages", "/executors", "/sql"):
+
+    def get(view: str):
         try:
-            with urllib.request.urlopen(base + view, timeout=10) as r:
-                snap[view or "/application"] = json.loads(r.read())
+            with urllib.request.urlopen(base + view, timeout=30) as r:
+                return json.loads(r.read())
         except OSError as e:
-            snap[view or "/application"] = {"error": str(e)}
-    (ROOT / "data" / "spark_ui_snapshot.json").write_text(json.dumps(snap, indent=1))
+            return {"error": str(e)}
+    snap = {view or "/application": get(view) for view in ("", "/jobs", "/stages", "/executors", "/sql")}
+    stages = snap["/stages"] if isinstance(snap["/stages"], list) else []
+    snap["tasks"] = {f"{s['stageId']}": get(f"/stages/{s['stageId']}/{s['attemptId']}/taskList?offset=0&length={len(jobs) + 10}")
+                     for s in stages if s.get("numTasks") == len(jobs) and s.get("status") == "COMPLETE"}
+    snap["blocks"] = [{"index": i, "cell": A.block_range(p)[0].lower(), "block_end": A.block_range(p)[2],
+                       "file": Path(p).name} for i, (p, _, _) in enumerate(jobs)]
+    path.write_text(json.dumps(snap, indent=1))
 
 
 def main() -> int:
@@ -83,6 +89,7 @@ def main() -> int:
     ap.add_argument("--ui", type=int, default=0, metavar="SECONDS",
                     help="enable the Spark web UI (port 4040) and keep it open this long after the job")
     ap.add_argument("--event-log", action="store_true", help="write a Spark event log (History Server; needs winutils on Windows)")
+    ap.add_argument("--tag", default="", help="suffix for the output files (e.g. a dashboard re-run); default: the D22 files")
     ap.add_argument("--validate-only", action="store_true",
                     help="re-validate the saved Spark output (data/s6_ageing_blocks_spark.csv); keeps the run's recorded metadata")
     args = ap.parse_args()
@@ -138,18 +145,20 @@ def main() -> int:
     sc.setJobDescription("REDUCE: Spark SQL aggregation of valid cycles into F2 block inputs")
     rows = [r.asDict() for r in blocks.orderBy("cell", "block_end").collect()]
     elapsed = time.perf_counter() - t0
+    sfx = f"_{args.tag}" if args.tag else ""
     if args.ui:
-        save_ui_snapshot(sc.applicationId)
+        save_ui_snapshot(sc.applicationId, jobs, ROOT / "data" / f"spark_ui_snapshot{sfx}.json")
         print(f"Spark web UI: http://localhost:4040 (open for {args.ui} s)", flush=True)
         time.sleep(args.ui)
     spark.stop()
 
     out = pd.DataFrame(rows).astype({c: float for c in A.feature_names()})
-    out.to_csv(OUT if not args.limit else OUT.with_name(OUT.stem + "_test.csv"), index=False)
+    sfx = sfx or ("_test" if args.limit else "")
+    out.to_csv(OUT.with_name(OUT.stem + sfx + ".csv"), index=False)
     from pyspark import __version__ as spark_version
     run = {"engine": f"Apache Spark {spark_version} (PySpark), local[{args.cores}] on one machine",
            "blocks": len(jobs), "cycles": int(n_cycles), "seconds": round(elapsed, 1)}
-    return validate(out, run, ROOT / "results" / ("d22_spark_validation.json" if not args.limit else "d22_spark_validation_test.json"))
+    return validate(out, run, ROOT / "results" / f"d22_spark_validation{sfx}.json")
 
 
 # Agreement with pandas: |spark - pandas| <= RTOL * |pandas| + ATOL, and the same missing values. The absolute floor

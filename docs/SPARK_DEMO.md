@@ -55,3 +55,20 @@ Screenshots from a run on 16 blocks (5 Oct 2026) are in `docs/figures/spark/` fo
 ```
 
 writes `data/s6_ageing_blocks_spark.csv` (the D22 inputs) and `results/d22_spark_validation.json`.
+
+## Run dashboard
+
+`docs/spark_dashboard.html` (published at https://claude.ai/artifact/4nn8GK3uk7xyHEW59LPBua) shows a full Spark run
+recorded through Spark's monitoring API: the timeline of all 827 map tasks across the six worker slots, task
+durations, time against file size, the Spark jobs, data per cell, an explorer for the block-level ageing inputs, and
+the validation against pandas. It stays viewable without Spark running.
+
+To rebuild it from a new run:
+
+```powershell
+.venv\Scripts\python.exe scripts\spark_ageing_features.py --cores 6 --ui 900 --tag dashboard
+.venv\Scripts\python.exe scripts\make_spark_dashboard.py
+```
+
+The re-run of 7 Oct 2026 (43 min; other processes were competing for the CPU) gave block inputs identical to the
+first full run of 6 Oct (19.6 min), which supplied the D22 inputs (largest difference 0.0).

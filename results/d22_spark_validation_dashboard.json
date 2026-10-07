@@ -1,0 +1,160 @@
+{
+  "generated_utc": "2026-10-06T18:48:57+00:00",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.1+cpu",
+    "git_commit": "9bcb46041c3b6020e308557124bdfd054e44c5aa",
+    "git_dirty": true
+  },
+  "decision": "D22",
+  "engine": "Apache Spark 4.2.0 (PySpark), local[6] on one machine",
+  "blocks": 827,
+  "cycles": 82529,
+  "seconds": 2588.4,
+  "compared_blocks": 827,
+  "criterion": "|spark - pandas| <= 1e-09 * |pandas| + 1e-12, same missing values",
+  "matches_pandas": true,
+  "per_input": {
+    "age_valid_cycles": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_invalid_cycles": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_v_end_charge_mean": {
+      "same_missing": true,
+      "max_abs": 8.43769498715119e-15,
+      "max_rel": 2.3113571118324007e-15,
+      "within_tolerance": true
+    },
+    "age_v_end_charge_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_v_end_charge_slope": {
+      "same_missing": true,
+      "max_abs": 1.3205582460873444e-16,
+      "max_rel": 2.0599603019273514,
+      "within_tolerance": true
+    },
+    "age_cv_seconds_mean": {
+      "same_missing": true,
+      "max_abs": 2.2737367544323206e-13,
+      "max_rel": 1.0850221086937706e-15,
+      "within_tolerance": true
+    },
+    "age_cv_seconds_last": {
+      "same_missing": true,
+      "max_abs": 8.526512829121202e-14,
+      "max_rel": 3.948312661438791e-16,
+      "within_tolerance": true
+    },
+    "age_cv_seconds_slope": {
+      "same_missing": true,
+      "max_abs": 3.688022109926692e-14,
+      "max_rel": 1.410767780623459e-11,
+      "within_tolerance": true
+    },
+    "age_cv_end_current_mean": {
+      "same_missing": true,
+      "max_abs": 1.8041124150158794e-16,
+      "max_rel": 2.5427480752907297e-15,
+      "within_tolerance": true
+    },
+    "age_cv_end_current_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_cv_end_current_slope": {
+      "same_missing": true,
+      "max_abs": 9.890634318499014e-17,
+      "max_rel": 6.921585891433273e-11,
+      "within_tolerance": true
+    },
+    "age_v_end_discharge_mean": {
+      "same_missing": true,
+      "max_abs": 4.884981308350689e-15,
+      "max_rel": 1.954351693296775e-15,
+      "within_tolerance": true
+    },
+    "age_v_end_discharge_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_v_end_discharge_slope": {
+      "same_missing": true,
+      "max_abs": 1.2496785290611045e-16,
+      "max_rel": 9.71076929328476e-11,
+      "within_tolerance": true
+    },
+    "age_relax_after_charge_mean": {
+      "same_missing": true,
+      "max_abs": 2.220446049250313e-16,
+      "max_rel": 4.800995931626556e-15,
+      "within_tolerance": true
+    },
+    "age_relax_after_charge_last": {
+      "same_missing": true,
+      "max_abs": 9.93129189996722e-17,
+      "max_rel": 5.391580836030564e-14,
+      "within_tolerance": true
+    },
+    "age_relax_after_charge_slope": {
+      "same_missing": true,
+      "max_abs": 9.805253397415781e-17,
+      "max_rel": 2.901917150266124e-11,
+      "within_tolerance": true
+    },
+    "age_relax_after_discharge_mean": {
+      "same_missing": true,
+      "max_abs": 2.498001805406602e-16,
+      "max_rel": 5.601590178044691e-14,
+      "within_tolerance": true
+    },
+    "age_relax_after_discharge_last": {
+      "same_missing": true,
+      "max_abs": 9.974659986866641e-17,
+      "max_rel": 6.51861893503851e-14,
+      "within_tolerance": true
+    },
+    "age_relax_after_discharge_slope": {
+      "same_missing": true,
+      "max_abs": 9.952975943416931e-17,
+      "max_rel": 7.336604124458175e-12,
+      "within_tolerance": true
+    },
+    "age_internal_resistance_mean": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_internal_resistance_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_internal_resistance_slope": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    }
+  }
+}
