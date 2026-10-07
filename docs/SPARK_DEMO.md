@@ -24,8 +24,13 @@ presenting.
 
 - Java 17 or 21 with `JAVA_HOME` set (this PC: Java 21).
 - `pyspark==4.2.0` (in `requirements.txt`; installed in `.venv`).
-- No Hadoop installation is needed. Only the optional event log / History Server needs Hadoop's `winutils.exe` on
-  Windows.
+- No Hadoop installation is needed for the job itself. The event log and the Spark History Server need Hadoop's
+  Windows helpers, which Apache does not ship: `winutils.exe` and `hadoop.dll` from the community repository
+  github.com/cdarlint/winutils (folder `hadoop-3.3.6`, the newest available; PySpark 4.2 bundles the Hadoop 3.5.0
+  client), placed in `C:\Users\Tarun\tools\hadoop-3.3.6\bin` and checked against the repository's own file hashes.
+  SHA-256: winutils.exe `496a591eb1e67df2a620f710d529ba6ddfe1c19149e6647cc4e320bb0efd8553`, hadoop.dll
+  `d7ab36a68518748cef142be2da5069b4c763c2cd764c1d2e6ac48c7200405be3`. They are used only through `HADOOP_HOME` in the
+  launch scripts, not installed system-wide.
 
 ## Live demo for the review (about 5 minutes)
 
@@ -72,3 +77,27 @@ To rebuild it from a new run:
 
 The re-run of 7 Oct 2026 (43 min; other processes were competing for the CPU) gave block inputs identical to the
 first full run of 6 Oct (19.6 min), which supplied the D22 inputs (largest difference 0.0).
+
+## Official Spark UI for a finished run (History Server)
+
+The Spark History Server replays a finished run in the official Spark web UI (Jobs, Stages with DAG and event
+timeline, Storage, Environment, Executors, SQL), without re-running it.
+
+1. Record a run with the event log (once; outputs are tagged so the D22 files are untouched):
+
+   ```powershell
+   $env:HADOOP_HOME = "C:\Users\Tarun\tools\hadoop-3.3.6"
+   .venv\Scripts\python.exe scripts\spark_ageing_features.py --cores 6 --event-log --tag eventlog
+   ```
+
+2. Start the server and open **http://localhost:18080**:
+
+   ```powershell
+   pwsh scripts\spark_history_server.ps1
+   ```
+
+   Because the repository path contains a space, the script reads `data\spark-events` through a directory junction
+   at `%USERPROFILE%\spark-events` (created if missing). Stop the server with Ctrl+C.
+
+Spark runs as `local[N,4]` (up to 4 attempts per task): on Windows a Python worker can occasionally be slow to start
+and time out; the task is then retried, which cannot change the results because each task is deterministic.
