@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Spark Big-Data Pipeline</title>
+<title>Battery Data Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
@@ -94,94 +94,188 @@ footer { font-size: 12.5px; color: var(--muted); display: grid; gap: 4px; border
 .shots img { width: 100%; height: 200px; object-fit: cover; object-position: top left; border: 1px solid var(--rule); border-radius: 8px; background: #fff; }
 .shots figcaption { font-size: 12.5px; color: var(--muted); }
 td.prose { white-space: normal; min-width: 220px; }
+.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; gap: 4px; overflow-x: auto;
+  background: var(--ground); border-bottom: 1px solid var(--rule); padding-block: 8px 0; margin-top: -12px; scrollbar-width: thin; }
+.tabs button { font: 600 14px/1.2 var(--cond); letter-spacing: .02em; color: var(--muted); background: none; border: 0;
+  border-bottom: 3px solid transparent; padding: 10px 14px 9px; cursor: pointer; white-space: nowrap; }
+.tabs button:hover { color: var(--ink); }
+.tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 4px; }
+.tab[hidden] { display: none; }
+.tab { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.sub { font-size: 12.5px; color: var(--muted); }
+tr.hl td { background: var(--accent-soft); }
+.via { display: inline-block; font: 600 11px/1.2 var(--cond); letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px;
+  border-radius: 999px; border: 1px solid var(--rule); color: var(--ink-2); }
+.via.spark { background: var(--accent); border-color: var(--accent); color: var(--surface); margin-left: 8px; }
+.lineage { display: grid; grid-template-columns: 1.3fr .8fr .7fr 1.5fr 1.6fr; min-width: 820px; }
+.lineage .lh { font: 600 11px/1.3 var(--cond); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding: 4px 10px 8px;
+  border-bottom: 1px solid var(--rule); }
+.lineage .ln { padding: 10px; border-bottom: 1px solid var(--grid); display: flex; flex-direction: column; gap: 3px; align-items: flex-start;
+  justify-content: center; position: relative; font-size: 13.5px; }
+.lineage .ln:not(:nth-child(5n))::after { content: "→"; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 13px; }
+.lineage .ln.big { background: var(--accent-soft); }
+.lineage .ln span { color: var(--ink-2); }
+.lineage .ln .via.spark { margin-left: 0; }
+.lineage code { font-size: 12px; }
+.pipes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; }
+.pipe { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.pipe.big { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+.pipe .pn { display: grid; gap: 2px; }
+.pipe .pn b { font: 600 17px/1.2 var(--cond); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: s; }
+.steps li { counter-increment: s; display: flex; align-items: center; flex-wrap: wrap; gap: 4px; padding: 5px 0 5px 30px; position: relative; min-width: 0; }
+.steps li::before { content: counter(s); position: absolute; left: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--accent-soft);
+  color: var(--accent); font: 700 11px/20px var(--cond); text-align: center; }
+.steps li:not(:last-child)::after { content: ""; position: absolute; left: 9.5px; top: 25px; bottom: -5px; width: 1px; background: var(--rule); }
+.steps code { overflow-wrap: anywhere; }
+.po { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; font-size: 13px; color: var(--ink-2); border-top: 1px solid var(--grid); padding-top: 10px; }
+.po .k { font: 600 11px/1.2 var(--cond); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); flex-basis: 100%; }
+.po code { background: var(--ground); padding: 1px 6px; border-radius: 4px; }
+@media (prefers-reduced-motion: no-preference) { .tabs button { transition: color .15s, border-color .15s; } }
 code { font-family: var(--mono); font-size: 12.5px; }
 </style>
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">D22 &middot; S6 between-check ageing data &middot; Apache Spark</div>
-    <h1>Big data with Apache Spark</h1>
-    <p class="lede" id="lede"></p>
-    <div class="strip" id="strip"></div>
+    <div class="eyebrow">Second-life EV battery health &middot; continual learning &middot; data platform</div>
+    <h1>Battery Data Platform</h1>
+    <p class="lede" id="plede"></p>
+    <div class="strip" id="kpis"></div>
   </header>
 
-  <section>
-    <div class="head"><h2>How the pipeline is built</h2></div>
-    <ol class="flow" id="flow"></ol>
-    <p class="note">Ingest runs once and is resumable; steps 3&ndash;5 are one Spark application. The pandas builder is an independent second implementation, used only as a check.</p>
-  </section>
+  <nav class="tabs" role="tablist" aria-label="Platform views">
+    <button role="tab" id="t-overview" aria-controls="tab-overview">Overview</button>
+    <button role="tab" id="t-datasets" aria-controls="tab-datasets">Datasets</button>
+    <button role="tab" id="t-pipelines" aria-controls="tab-pipelines">Pipelines</button>
+    <button role="tab" id="t-runs" aria-controls="tab-runs">Runs</button>
+    <button role="tab" id="t-spark" aria-controls="tab-spark">Spark run</button>
+    <button role="tab" id="t-explorer" aria-controls="tab-explorer">Ageing explorer</button>
+  </nav>
 
-  <section>
-    <div class="head"><h2>Spark platform configuration</h2></div>
-    <div class="panel scroll"><table id="platform"></table></div>
-  </section>
+  <div class="tab" id="tab-overview" role="tabpanel" aria-labelledby="t-overview">
+    <section>
+      <div class="head"><h2>Data lineage</h2></div>
+      <div class="panel scroll"><div class="lineage" id="lineage"></div></div>
+      <p class="note">Each row is one path from a public dataset to the experiments that use it. Only the S6 ageing data is large enough to need Spark; the other paths run in pandas.</p>
+    </section>
+    <section>
+      <div class="head"><h2>Data held on this PC</h2><div class="legend"><span><i style="background:var(--accent)"></i>stored (compressed)</span><span><i style="background:var(--accent-soft);outline:1px solid var(--accent)"></i>original size at the source</span></div></div>
+      <div class="panel"><div class="chart" id="storage"></div></div>
+      <p class="note">Raw files are stored compressed (xz or gzip) and verified against the source's checksums. Original size is the uncompressed size from each download manifest; S2 has no separate source size.</p>
+    </section>
+  </div>
 
-  <section>
-    <div class="head"><h2>Spark's own monitoring</h2></div>
-    <div class="shots">
-      <figure><a href="figures/spark/spark_history_server.png" target="_blank" rel="noopener"><img src="figures/spark/spark_history_server.png" alt="Spark History Server listing the completed D22 application, 32 min" loading="lazy"></a><figcaption>History Server: the completed run (event log), 32 min end to end.</figcaption></figure>
-      <figure><a href="figures/spark/spark_history_jobs.png" target="_blank" rel="noopener"><img src="figures/spark/spark_history_jobs.png" alt="Completed Spark jobs of the run, replayed in the History Server" loading="lazy"></a><figcaption>Its 7 completed jobs. Job 0 (below the fold, about 30 min) parses the 827 files; the later MAP and REDUCE jobs read the cached cycles and take seconds.</figcaption></figure>
-      <figure><a href="figures/spark/spark_ui_full_run_map_stage.png" target="_blank" rel="noopener"><img src="figures/spark/spark_ui_full_run_map_stage.png" alt="Spark web UI stage page of the map stage, mid-run, with task metrics" loading="lazy"></a><figcaption>Live web UI, map stage mid-run: per-task metrics, all tasks process-local, no failures.</figcaption></figure>
-      <figure><a href="figures/spark/spark_ui_full_run_executors.png" target="_blank" rel="noopener"><img src="figures/spark/spark_ui_full_run_executors.png" alt="Spark web UI executors page, mid-run, 6 cores, 6 active tasks" loading="lazy"></a><figcaption>Live web UI, executors mid-run: one local executor, 6 cores, 6 tasks active, 0 failed.</figcaption></figure>
-    </div>
-    <p class="note">Screenshots of the Spark web UI (port 4040) taken during the runs. Finished runs are replayed from their event logs in the Spark History Server (<code>scripts/spark_history_server.ps1</code>, port 18080); the charts below come from Spark's monitoring REST API.</p>
-  </section>
+  <div class="tab" id="tab-datasets" role="tabpanel" aria-labelledby="t-datasets" hidden>
+    <section>
+      <div class="head"><h2>Source datasets</h2></div>
+      <div class="panel scroll"><table id="sources"></table></div>
+      <p class="note">All sources are CC BY 4.0. Cell counts are counted in the tables built from each source. Details, citations and checksums: <code>docs/EXTERNAL_DATA.md</code>.</p>
+    </section>
+    <section>
+      <div class="head"><h2>Derived tables</h2></div>
+      <div class="panel scroll"><table id="tables"></table></div>
+      <p class="note">Tables are rebuilt from the raw files by the scripts listed and are kept out of Git (<code>data/</code>). Row counts are read from the files on disk.</p>
+    </section>
+  </div>
 
-  <section>
-    <div class="head"><h2>Full runs</h2></div>
-    <div class="panel scroll"><table id="runs"></table></div>
-    <p class="note">Each full run processes all 827 files from scratch and writes its comparison with pandas to the record listed. Run times vary with other load on the PC. * Working tree had uncommitted changes at run time.</p>
-  </section>
+  <div class="tab" id="tab-pipelines" role="tabpanel" aria-labelledby="t-pipelines" hidden>
+    <section>
+      <div class="head"><h2>Pipelines</h2></div>
+      <div class="pipes" id="pipes"></div>
+    </section>
+    <section>
+      <div class="head"><h2>Big-data pipeline: S6 ageing cycles with Spark</h2></div>
+      <ol class="flow" id="flow"></ol>
+      <p class="note">Ingest runs once and is resumable; steps 3&ndash;5 are one Spark application. The pandas builder is an independent second implementation, used only as a check.</p>
+    </section>
+    <section>
+      <div class="head"><h2>Spark platform configuration</h2></div>
+      <div class="panel scroll"><table id="platform"></table></div>
+    </section>
+  </div>
 
-  <section>
-    <div class="head"><h2>Map stage: one task per 100-cycle block</h2><div class="legend" id="legend"></div></div>
-    <div class="panel">
-      <div class="chart" id="timeline"></div>
-      <p class="note" id="timeline-note"></p>
-    </div>
-  </section>
+  <div class="tab" id="tab-runs" role="tabpanel" aria-labelledby="t-runs" hidden>
+    <section>
+      <div class="head"><h2>Recorded runs over time</h2><div class="legend" id="kind-legend"></div></div>
+      <div class="panel"><div class="chart" id="runchart"></div></div>
+      <p class="note">One point per results file. Hover for the run; the table below lists them all.</p>
+    </section>
+    <section>
+      <div class="head"><h2>Run registry</h2></div>
+      <div class="panel scroll"><table id="registry"></table></div>
+      <p class="note">Date and commit come from the run record itself; where a record has none, the date is that of the commit that added it (marked &dagger;). * Working tree had uncommitted changes at run time.</p>
+    </section>
+    <section>
+      <div class="head"><h2>Spark full runs</h2></div>
+      <div class="panel scroll"><table id="spark-runs"></table></div>
+      <p class="note">Each full run processes all 827 files from scratch and writes its comparison with pandas to the record listed. Run times vary with other load on the PC.</p>
+    </section>
+  </div>
 
-  <section class="two">
-    <div class="panel">
-      <div class="head"><h2>Task durations</h2></div>
-      <div class="chart" id="hist"></div>
-      <p class="note">Wall time of each map task. The dashed line marks the median.</p>
-    </div>
-    <div class="panel">
-      <div class="head"><h2>Time against file size</h2></div>
-      <div class="chart" id="scatter"></div>
-      <p class="note">Each point is one block: its raw (uncompressed) size against the time its map task took.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="head"><h2>Spark jobs</h2></div>
-    <div class="panel scroll"><table id="jobs"></table></div>
-  </section>
-
-  <section>
-    <div class="head"><h2>Data by cell</h2></div>
-    <div class="panel scroll"><table id="cells"></table></div>
-    <p class="note">Discharged charge per cycle is set by the protocol from the previous capacity check, so it is excluded from the inputs; the last column shows that scaling within each cell.</p>
-  </section>
-
-  <section>
-    <div class="head"><h2>Ageing inputs by cell</h2></div>
-    <div class="panel">
-      <div class="controls">
-        <label for="feat">Input<select id="feat"></select></label>
-        <label for="cell">Cell<select id="cell"></select></label>
+  <div class="tab" id="tab-spark" role="tabpanel" aria-labelledby="t-spark" hidden>
+    <section>
+      <p class="lede" id="lede"></p>
+      <div class="strip" id="strip"></div>
+    </section>
+    <section>
+      <div class="head"><h2>Spark's own monitoring</h2></div>
+      <div class="shots">
+        <figure><a href="figures/spark/spark_history_server.png" target="_blank" rel="noopener"><img src="figures/spark/spark_history_server.png" alt="Spark History Server listing the completed D22 application, 32 min" loading="lazy"></a><figcaption>History Server: the completed run (event log), 32 min end to end.</figcaption></figure>
+        <figure><a href="figures/spark/spark_history_jobs.png" target="_blank" rel="noopener"><img src="figures/spark/spark_history_jobs.png" alt="Completed Spark jobs of the run, replayed in the History Server" loading="lazy"></a><figcaption>Its 7 completed jobs. Job 0 (below the fold, about 30 min) parses the 827 files; the later MAP and REDUCE jobs read the cached cycles and take seconds.</figcaption></figure>
+        <figure><a href="figures/spark/spark_ui_full_run_map_stage.png" target="_blank" rel="noopener"><img src="figures/spark/spark_ui_full_run_map_stage.png" alt="Spark web UI stage page of the map stage, mid-run, with task metrics" loading="lazy"></a><figcaption>Live web UI, map stage mid-run: per-task metrics, all tasks process-local, no failures.</figcaption></figure>
+        <figure><a href="figures/spark/spark_ui_full_run_executors.png" target="_blank" rel="noopener"><img src="figures/spark/spark_ui_full_run_executors.png" alt="Spark web UI executors page, mid-run, 6 cores, 6 active tasks" loading="lazy"></a><figcaption>Live web UI, executors mid-run: one local executor, 6 cores, 6 tasks active, 0 failed.</figcaption></figure>
       </div>
-      <div class="chart" id="explorer"></div>
-      <p class="note" id="explorer-note"></p>
-    </div>
-  </section>
+      <p class="note">Screenshots of the Spark web UI (port 4040) taken during the runs. Finished runs are replayed from their event logs in the Spark History Server (<code>scripts/spark_history_server.ps1</code>, port 18080); the charts below come from Spark's monitoring REST API.</p>
+    </section>
+    <section>
+      <div class="head"><h2>Map stage: one task per 100-cycle block</h2><div class="legend" id="legend"></div></div>
+      <div class="panel">
+        <div class="chart" id="timeline"></div>
+        <p class="note" id="timeline-note"></p>
+      </div>
+    </section>
+    <section class="two">
+      <div class="panel">
+        <div class="head"><h2>Task durations</h2></div>
+        <div class="chart" id="hist"></div>
+        <p class="note">Wall time of each map task. The dashed line marks the median.</p>
+      </div>
+      <div class="panel">
+        <div class="head"><h2>Time against file size</h2></div>
+        <div class="chart" id="scatter"></div>
+        <p class="note">Each point is one block: its raw (uncompressed) size against the time its map task took.</p>
+      </div>
+    </section>
+    <section>
+      <div class="head"><h2>Spark jobs</h2></div>
+      <div class="panel scroll"><table id="jobs"></table></div>
+    </section>
+    <section>
+      <div class="head"><h2>Data by cell</h2></div>
+      <div class="panel scroll"><table id="cells"></table></div>
+      <p class="note">Discharged charge per cycle is set by the protocol from the previous capacity check, so it is excluded from the inputs; the last column shows that scaling within each cell.</p>
+    </section>
+    <section>
+      <div class="head"><h2>Spark against pandas</h2><span class="pill" id="match-pill"></span></div>
+      <div class="panel scroll"><table id="valid"></table></div>
+      <p class="note" id="valid-note"></p>
+    </section>
+  </div>
 
-  <section>
-    <div class="head"><h2>Spark against pandas</h2><span class="pill" id="match-pill"></span></div>
-    <div class="panel scroll"><table id="valid"></table></div>
-    <p class="note" id="valid-note"></p>
-  </section>
+  <div class="tab" id="tab-explorer" role="tabpanel" aria-labelledby="t-explorer" hidden>
+    <section>
+      <div class="head"><h2>Ageing inputs by cell</h2></div>
+      <div class="panel">
+        <div class="controls">
+          <label for="feat">Input<select id="feat"></select></label>
+          <label for="cell">Cell<select id="cell"></select></label>
+        </div>
+        <div class="chart" id="explorer-chart"></div>
+        <p class="note" id="explorer-note"></p>
+      </div>
+    </section>
+  </div>
 
   <footer id="foot"></footer>
 </div>
@@ -198,7 +292,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 const run = D.run, first = D.first_run;
 $("lede").textContent = `Every S6 cell logged each ageing cycle between its capacity checks. Spark reads the ${fmt(run.blocks)} block files `
   + `in parallel (map), caches one row per cycle, and Spark SQL reduces each block to 21 model inputs (reduce; the 3 internal-resistance inputs are never recorded on these cells, so ${D.features.length} are shown below). `
-  + `This page shows a full re-run recorded through Spark's monitoring API; the inputs used in D22 came from the first full run (${fmt(first.seconds / 60, 1)} min), and both runs give the same values.`;
+  + `This tab shows a full re-run recorded through Spark's monitoring API; the inputs used in D22 came from the first full run (${fmt(first.seconds / 60, 1)} min), and both runs give the same values.`;
 const facts = [
   ["Files", fmt(run.blocks), "one per cell and 100-cycle block"],
   ["Raw data", `${fmt(D.raw_gb, 1)} GB`, `${fmt(D.xz_gb, 1)} GB compressed`],
@@ -232,7 +326,7 @@ const platform = [
 ];
 $("platform").innerHTML = `<thead><tr><th>Setting</th><th>Value</th><th>Why</th></tr></thead><tbody>`
   + platform.map(([a, b, c]) => `<tr><td>${a}</td><td class="mono">${esc(b)}</td><td class="prose">${esc(c)}</td></tr>`).join("") + "</tbody>";
-$("runs").innerHTML = `<thead><tr><th>Run</th><th>Date</th><th>Commit</th><th class="r">Time</th><th class="r">Blocks compared</th><th>Matches pandas</th><th>Record</th></tr></thead><tbody>`
+$("spark-runs").innerHTML = `<thead><tr><th>Run</th><th>Date</th><th>Commit</th><th class="r">Time</th><th class="r">Blocks compared</th><th>Matches pandas</th><th>Record</th></tr></thead><tbody>`
   + D.runs.map(r => `<tr><td class="prose">${esc(r.label)}</td><td>${r.date}</td><td class="mono">${r.commit}${r.dirty ? "*" : ""}</td><td class="r">${fmt(r.seconds / 60, 1)} min</td><td class="r">${fmt(r.compared)} / ${fmt(r.blocks)}</td><td class="${r.match ? "ok" : ""}">${r.match ? "yes" : "no"}</td><td class="mono">${r.file}</td></tr>`).join("") + "</tbody>";
 // ---------- tooltip ----------
 function tipFor(host) {
@@ -330,7 +424,7 @@ $("feat").innerHTML = FEATS.map(f => `<option value="${f.key}">${esc(f.label)}</
 $("cell").innerHTML = D.cells.map(c => `<option value="${c.cell}">${c.cell} (${c.case.replace("case", "case ")})</option>`).join("");
 $("feat").value = "age_relax_after_charge_mean"; $("cell").value = "cell1b";
 function drawExplorer() {
-  const el = $("explorer"), W = width(el), H = 260, L = 64, R = 14, T = 12, B = 34;
+  const el = $("explorer-chart"), W = width(el), H = 260, L = 64, R = 14, T = 12, B = 34;
   const key = $("feat").value, cell = $("cell").value, f = FEATS.find(f => f.key === key);
   const cc = D.cells.find(c => c.cell === cell).case;
   const pts = D.blocks.filter(b => b[key] !== null);
@@ -366,7 +460,126 @@ $("foot").innerHTML = `<span>Generated by <code>scripts/make_spark_dashboard.py<
   + `<code>data/s6_ageing_blocks_spark_dashboard.csv</code> and <code>results/d22_spark_validation_dashboard.json</code> (commit <code>${esc(D.commit)}</code>).</span>`
   + `<span>${esc(run.engine)}. Local mode on one PC; no cluster. Raw data: Wheeler et al., Recherche Data Gouv, doi:10.57745/OLBXKT (CC BY 4.0).</span>`;
 
-function drawAll() { drawTimeline(); drawHist(); drawScatter(); drawExplorer(); }
-tables(); drawAll();
-let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawAll, 150); });
+// ---------- platform: summary ----------
+const SRC = D.sources, gb = x => x >= 10 ? fmt(x, 0) + " GB" : x >= 1 ? fmt(x, 1) + " GB" : fmt(x * 1000, 0) + " MB";
+const age = SRC.find(s => s.big), stored = SRC.reduce((a, s) => a + s.stored_gb, 0);
+const nIds = new Set(SRC.map(s => s.id)).size;
+$("plede").textContent = `Every dataset, pipeline and run behind the SOH forecasting work, in one place. ${nIds} public datasets feed ${D.tables.length} derived tables and ${D.registry.length} recorded runs. `
+  + `The largest, the S6 ageing cycles (${gb(age.orig_gb)} raw, about 1.4 billion rows), is processed with Apache Spark and checked block by block against an independent pandas build.`;
+const kpis = [
+  ["Source datasets", fmt(nIds), `${SRC.length} downloads, all CC BY 4.0`],
+  ["Data held", gb(stored), "raw files, compressed and verified"],
+  ["Largest dataset", gb(age.orig_gb), `S6 ageing, ${fmt(age.files)} files`],
+  ["Derived tables", fmt(D.tables.length), `${fmt(D.tables.reduce((a, t) => a + t.rows, 0))} rows`],
+  ["Recorded runs", fmt(D.registry.length), `${D.registry[0].date} to ${D.registry[D.registry.length - 1].date}`],
+];
+$("kpis").innerHTML = kpis.map(([k, v, s]) => `<div class="fact"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${s}</span></div>`).join("")
+  + `<div class="fact"><span class="k">Spark vs pandas</span><span class="pill">${fmt(D.validation.compared_blocks)} / ${fmt(run.blocks)} match</span><span class="s">in all ${D.runs.length} full runs</span></div>`;
+// ---------- platform: lineage ----------
+const LINEAGE = [
+  { src: ["S1"], part: 0, tables: ["rpt_health_c20.csv", "diagnostic_features.csv"], via: "pandas", use: "C/20 labels and diagnostic features (D16, D17); notebooks 11–12" },
+  { src: ["S2"], part: 0, tables: ["cleaned_battery_data.csv", "ml_training_dataset.csv", "…"], via: "handover", use: "Notebooks 01–10 (current-SOH baselines, superseded)" },
+  { src: ["S6"], part: 0, tables: ["wheeler_checks.csv"], via: "pandas", use: "S6 forecasting stream (D20–D23)" },
+  { src: ["S6"], part: 1, tables: ["s6_ageing_blocks.csv"], via: "Spark", use: "Ageing inputs for the forecasting models (D22)" },
+  { src: ["S7", "S8", "S9"], part: 0, tables: ["pool_s7_checks.csv", "pool_s8_checks.csv", "pool_s9_checks.csv"], via: "pandas", use: "First-life pretraining pool (D21, P3)" },
+];
+function srcOf(l) { return l.src.map(id => SRC.filter(s => s.id === id)[l.part]); }
+$("lineage").innerHTML = `<div class="lh">Source</div><div class="lh">Raw store</div><div class="lh">Processing</div><div class="lh">Tables</div><div class="lh">Used for</div>`
+  + LINEAGE.map(l => {
+    const ss = srcOf(l), big = l.via === "Spark", sz = ss.reduce((a, s) => a + s.stored_gb, 0), files = ss.reduce((a, s) => a + s.files, 0);
+    return `<div class="ln${big ? " big" : ""}"><b>${l.src.join(", ")}</b><span>${esc(ss.length > 1 ? "First-life pool (3 datasets)" : ss[0].name)}</span></div>`
+      + `<div class="ln${big ? " big" : ""}"><b>${gb(sz)}</b><span>${fmt(files)} files</span></div>`
+      + `<div class="ln${big ? " big" : ""}"><span class="via${big ? " spark" : ""}">${l.via}</span></div>`
+      + `<div class="ln${big ? " big" : ""}">${l.tables.map(t => `<code>${esc(t)}</code>`).join("")}</div>`
+      + `<div class="ln${big ? " big" : ""}"><span>${esc(l.use)}</span></div>`;
+  }).join("");
+function drawStorage() {
+  const el = $("storage"), W = width(el), rows = SRC.map(s => ({ s, label: s.big ? "S6 ageing" : s.id === "S6" ? "S6 checks" : s.id }));
+  const L = 92, R = 70, T = 6, rh = 30, H = T + rows.length * rh + 26, xm = Math.ceil(Math.max(...SRC.map(s => s.orig_gb || s.stored_gb)) / 20) * 20;
+  const x = v => L + (W - L - R) * v / xm;
+  let g = "";
+  for (let v = 0; v <= xm; v += 20) g += `<line class="gl" x1="${x(v)}" x2="${x(v)}" y1="${T}" y2="${T + rows.length * rh}"/><text x="${x(v)}" y="${H - 6}" text-anchor="middle">${v} GB</text>`;
+  g += rows.map((r, i) => { const y = T + i * rh, s = r.s;
+    return `<text x="${L - 10}" y="${y + rh / 2 + 4}" text-anchor="end" style="fill:var(--ink)">${r.label}</text>`
+      + (s.orig_gb ? `<rect data-i="${i}" x="${L}" y="${y + 5}" width="${Math.max(1, x(s.orig_gb) - L)}" height="${rh - 10}" rx="3" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width=".8"/>` : "")
+      + `<rect data-i="${i}" x="${L}" y="${y + 9}" width="${Math.max(2, x(s.stored_gb) - L)}" height="${rh - 18}" rx="2" fill="var(--accent)"/>`
+      + `<text x="${x(Math.max(s.orig_gb || 0, s.stored_gb)) + 6}" y="${y + rh / 2 + 4}">${s.orig_gb ? gb(s.orig_gb) + " → " : ""}${gb(s.stored_gb)}</text>`; }).join("");
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Stored and original size of each dataset">${g}</svg>`;
+  const tip = tipFor(el);
+  el.querySelector("svg").addEventListener("mousemove", e => {
+    const i = e.target.dataset && e.target.dataset.i; if (i === undefined) { tip.hide(); return; }
+    const s = rows[+i].s, r = el.getBoundingClientRect(), b = e.target.getBoundingClientRect();
+    tip.show(`<b>${rows[+i].label}</b> · ${esc(s.who)}<br>${fmt(s.files)} files · ${gb(s.stored_gb)} stored${s.orig_gb ? ` · ${gb(s.orig_gb)} original` : ""}`, b.left - r.left + b.width / 2, b.top - r.top);
+  });
+  el.querySelector("svg").addEventListener("mouseleave", () => tip.hide());
+}
+// ---------- platform: catalogue ----------
+$("sources").innerHTML = `<thead><tr><th>ID</th><th>Dataset</th><th>Content</th><th class="r">Cells</th><th class="r">Files</th><th class="r">Original</th><th class="r">Stored</th><th>Fetched by</th><th>Verification</th><th>Used in</th></tr></thead><tbody>`
+  + SRC.map(s => `<tr${s.big ? ' class="hl"' : ""}><td class="mono">${s.id}</td><td class="prose"><b>${esc(s.name)}</b><br><span class="sub">${esc(s.who)} · ${esc(s.doi)}</span></td><td class="prose">${esc(s.role)}</td><td class="r">${fmt(s.cells)}</td><td class="r">${fmt(s.files)}</td><td class="r">${s.orig_gb ? gb(s.orig_gb) : "–"}</td><td class="r">${gb(s.stored_gb)}</td><td class="mono">${esc(s.fetch)}</td><td class="prose">${esc(s.verify)}</td><td>${esc(s.decisions)}</td></tr>`).join("") + "</tbody>";
+$("tables").innerHTML = `<thead><tr><th>Table</th><th class="r">Rows</th><th class="r">Columns</th><th class="r">Size</th><th>From</th><th>Built by</th><th>Used for</th></tr></thead><tbody>`
+  + D.tables.map(t => `<tr><td class="mono">${esc(t.file)}</td><td class="r">${fmt(t.rows)}</td><td class="r">${t.cols}</td><td class="r">${t.mb < 1 ? fmt(t.mb * 1000, 0) + " kB" : fmt(t.mb, 1) + " MB"}</td><td>${esc(t.source)}</td><td class="mono">${esc(t.builder)}</td><td class="prose">${esc(t.used)}</td></tr>`).join("") + "</tbody>";
+// ---------- platform: pipelines ----------
+const PIPES = [
+  { name: "S1 diagnostic tests", src: "S1", steps: ["fetch_osf_diagnostics.py", "build_diagnostic_features.py"], out: ["rpt_health_c20.csv", "diagnostic_features.csv"], check: "Archive SHA-256, CRC-32 per file; independent data audit (audit_data.py)" },
+  { name: "S6 capacity checks", src: "S6", steps: ["fetch_wheeler_characterisation.py", "build_wheeler_features.py"], out: ["wheeler_checks.csv"], check: "CRC-32 against the remote zip index; authors' capacity reproduced exactly on every check in both" },
+  { name: "S6 ageing cycles (big data)", src: "S6", spark: true, steps: ["fetch_wheeler_characterisation.py --kind aging", "merge_ageing_manifests.py", "spark_ageing_features.py", "build_s6_ageing_features.py"], out: ["s6_ageing_blocks.csv"], check: "Spark output equals the pandas build on all 827 blocks; causality, completeness and leakage audit" },
+  { name: "First-life pool", src: "S7–S9", steps: ["fetch_pool.py", "build_pool_tables.py"], out: ["pool_s7_checks.csv", "pool_s8_checks.csv", "pool_s9_checks.csv"], check: "MD5 against each repository's record; SHA-256 manifest" },
+  { name: "Experiments and paper", src: "tables above", steps: ["run_p3.py", "run_ablation_a1.py", "run_d23.py", "make_results_tables.py", "make_d21_figures.py"], out: ["results/forecasting_*.json", "paper tables and figures"], check: "Fixed seeds; environment and commit recorded in every results file; replication rule on registered comparisons" },
+];
+$("pipes").innerHTML = PIPES.map(p => `<article class="pipe${p.spark ? " big" : ""}"><div class="pn"><b>${esc(p.name)}</b><span class="sub">from ${esc(p.src)}</span></div>`
+  + `<ol class="steps">${p.steps.map(s => `<li><code>${esc(s)}</code>${s.startsWith("spark_") ? '<span class="via spark">Spark</span>' : ""}</li>`).join("")}</ol>`
+  + `<div class="po"><span class="k">Output</span>${p.out.map(o => `<code>${esc(o)}</code>`).join("")}</div>`
+  + `<div class="po"><span class="k">Checked by</span><span>${esc(p.check)}</span></div></article>`).join("");
+// ---------- platform: runs ----------
+const KINDS = ["Model", "Spark", "Data build", "Audit", "Analysis"];
+const kcol = k => `var(--c${KINDS.indexOf(k) + 1})`;
+$("kind-legend").innerHTML = KINDS.map(k => `<span><i style="background:${kcol(k)}"></i>${k}</span>`).join("");
+$("registry").innerHTML = `<thead><tr><th>Date</th><th>Run</th><th>Kind</th><th>Data</th><th>Decision</th><th>Commit</th><th>Record</th></tr></thead><tbody>`
+  + D.registry.slice().reverse().map(r => `<tr><td>${r.date}${r.dated_by === "commit" ? "&dagger;" : ""}</td><td class="prose">${esc(r.title)}</td><td><span class="swatch" style="background:${kcol(r.kind)}"></span>${r.kind}</td><td>${esc(r.data)}</td><td>${esc(r.decision || "–")}</td><td class="mono">${r.commit || "–"}${r.dirty ? "*" : ""}</td><td class="mono">${esc(r.file)}</td></tr>`).join("") + "</tbody>";
+function drawRuns() {
+  const el = $("runchart"), W = width(el), day = s => Date.parse(s + "T00:00:00Z") / 864e5;
+  const d0 = day(D.registry[0].date) - 0.5, d1 = day(D.registry[D.registry.length - 1].date) + 0.5;
+  const L = 84, R = 14, T = 8, lh = 34, H = T + KINDS.length * lh + 26, x = d => L + (W - L - R) * (d - d0) / (d1 - d0);
+  let g = "";
+  for (let d = Math.ceil(d0); d <= d1; d++) { const s = new Date(d * 864e5).toISOString().slice(5, 10);
+    g += `<line class="gl" x1="${x(d)}" x2="${x(d)}" y1="${T}" y2="${T + KINDS.length * lh}"/><text x="${x(d)}" y="${H - 6}" text-anchor="middle">${s.replace("-", "/")}</text>`; }
+  KINDS.forEach((k, i) => g += `<text x="${L - 10}" y="${T + i * lh + lh / 2 + 4}" text-anchor="end" style="fill:var(--ink)">${k}</text><line class="gl" x1="${L}" x2="${W - R}" y1="${T + i * lh + lh / 2}" y2="${T + i * lh + lh / 2}"/>`);
+  const seen = {};
+  const dots = D.registry.map((r, k) => { const key = r.date + r.kind, n = seen[key] = (seen[key] || 0) + 1, off = (n - 1) * 9 - 0;
+    return `<circle data-k="${k}" cx="${x(day(r.date)) + off - 9}" cy="${T + KINDS.indexOf(r.kind) * lh + lh / 2}" r="5.5" fill="${kcol(r.kind)}" stroke="var(--surface)" stroke-width="1.5"/>`; }).join("");
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Recorded runs by date and kind">${g}${dots}</svg>`;
+  const tip = tipFor(el);
+  el.querySelector("svg").addEventListener("mousemove", e => {
+    const k = e.target.dataset && e.target.dataset.k; if (k === undefined) { tip.hide(); return; }
+    const r = D.registry[+k], rr = el.getBoundingClientRect(), b = e.target.getBoundingClientRect();
+    tip.show(`<b>${esc(r.title)}</b><br>${r.date} · ${esc(r.data)}${r.commit ? " · " + r.commit : ""}`, b.left - rr.left + b.width / 2, b.top - rr.top);
+  });
+  el.querySelector("svg").addEventListener("mouseleave", () => tip.hide());
+}
+// ---------- tabs ----------
+const TABS = ["overview", "datasets", "pipelines", "runs", "spark", "explorer"];
+const DRAW = { overview: [drawStorage], runs: [drawRuns], spark: [drawTimeline, drawHist, drawScatter], explorer: [drawExplorer] };
+let current = "overview";
+function show(t) {
+  if (!TABS.includes(t)) t = "overview";
+  current = t;
+  TABS.forEach(n => { const on = n === t, b = $("t-" + n); $("tab-" + n).hidden = !on; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; });
+  (DRAW[t] || []).forEach(f => f());
+  try { localStorage.setItem("platform-tab", t); } catch (e) {}
+  try { if (location.hash.slice(1) !== t) history.replaceState(null, "", "#" + t); } catch (e) {}
+}
+TABS.forEach((n, i) => {
+  const b = $("t-" + n);
+  b.addEventListener("click", () => show(n));
+  b.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const j = (i + (e.key === "ArrowRight" ? 1 : -1) + TABS.length) % TABS.length;
+    show(TABS[j]); $("t-" + TABS[j]).focus();
+  });
+});
+let startTab = location.hash.slice(1);
+if (!TABS.includes(startTab)) { try { startTab = localStorage.getItem("platform-tab") || "overview"; } catch (e) { startTab = "overview"; } }
+tables(); show(startTab);
+window.addEventListener("hashchange", () => { if (location.hash.slice(1) !== current) show(location.hash.slice(1)); });
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => (DRAW[current] || []).forEach(f => f()), 150); });
 </script>

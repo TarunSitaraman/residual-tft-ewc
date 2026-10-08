@@ -1,4 +1,5 @@
-"""Build the Spark run dashboard (docs/spark_dashboard.html) from a recorded full Spark run.
+"""Build the data platform page (docs/spark_dashboard.html): dataset catalogue, lineage, pipelines and run registry
+(scripts/platform_catalog.py), and the Spark run views from a recorded full Spark run.
 
 Inputs: the monitoring snapshot of a run made with ``spark_ageing_features.py --ui ... --tag dashboard``
 (data/spark_ui_snapshot_dashboard.json), its outputs (data/s6_ageing_blocks_spark_dashboard.csv,
@@ -22,9 +23,11 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "scripts"))
 
 from src import ageing as A  # noqa: E402
 from src import wheeler as W  # noqa: E402
+import platform_catalog as PC  # noqa: E402
 
 RESP = {"v_end_charge": ("End-of-charge voltage", "V", 4), "cv_seconds": ("CV hold time", "s", 1),
         "cv_end_current": ("Current at end of CV hold", "A", 4), "v_end_discharge": ("End-of-discharge voltage", "V", 4),
@@ -136,7 +139,8 @@ def main() -> int:
         "stage_seconds": float(max(x["start"] + x["dur"] for x in tasks)), "median_dur": float(np.median([x["dur"] for x in tasks])),
         "reduce_seconds": reduce_s, "jobs": jobs, "cells": cells, "case_labels": case_labels(), "features": feats, "blocks": bl,
         "app_id": snap["/application"]["id"], "commit": commit, "runs": runs(),
-        "n_inputs": len(A.feature_names()), "min_valid": A.MIN_VALID_CYCLES, "n_cells": len(cells)}
+        "n_inputs": len(A.feature_names()), "min_valid": A.MIN_VALID_CYCLES, "n_cells": len(cells),
+        "sources": PC.sources(), "tables": PC.tables(), "registry": PC.registry()}
     tpl = (ROOT / "scripts" / "spark_dashboard_template.html").read_text(encoding="utf-8")
     out = ROOT / "docs" / "spark_dashboard.html"
     out.write_text(tpl.replace("__DATA__", json.dumps(data, separators=(",", ":"))), encoding="utf-8")

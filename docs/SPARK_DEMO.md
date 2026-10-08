@@ -61,9 +61,11 @@ Screenshots from a run on 16 blocks (5 Oct 2026) are in `docs/figures/spark/` fo
 
 writes `data/s6_ageing_blocks_spark.csv` (the D22 inputs) and `results/d22_spark_validation.json`.
 
-## Run dashboard
+## Data platform page
 
-`docs/spark_dashboard.html` (published at https://claude.ai/artifact/4nn8GK3uk7xyHEW59LPBua) shows how the pipeline is built (source, ingest, map, cache, reduce, validation), the Spark configuration, Spark UI and
+`docs/spark_dashboard.html` (published at https://claude.ai/artifact/4nn8GK3uk7xyHEW59LPBua) is the project's data
+platform page. Its tabs show the dataset catalogue and lineage (Overview, Datasets), every pipeline (Pipelines), all
+recorded runs (Runs), the Spark run and the ageing-input explorer. The Spark views show how the pipeline is built (source, ingest, map, cache, reduce, validation), the Spark configuration, Spark UI and
 History Server screenshots, the three full runs, and a full run recorded through Spark's monitoring API: the timeline of all 827 map tasks across the six worker slots, task
 durations, time against file size, the Spark jobs, data per cell, an explorer for the block-level ageing inputs, and
 the validation against pandas. It stays viewable without Spark running.
