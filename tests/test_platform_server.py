@@ -29,3 +29,11 @@ def test_fingerprint_changes_when_a_watched_file_changes(tmp_path):
 
     f.write_text('{"a": 1}')
     assert S.fingerprint(tmp_path) != before
+
+
+def test_host_allowed_rejects_other_hosts_such_as_dns_rebinding():
+    allowed = {"localhost", "127.0.0.1", "::1", "192.168.1.42"}
+    for ok in ["localhost:8050", "127.0.0.1:8050", "[::1]:8050", "192.168.1.42:8050", "LOCALHOST"]:
+        assert S.host_allowed(ok, allowed), ok
+    for bad in [None, "", "evil.example:8050", "evil.example", "localhost.evil.example:8050", "[::2]:8050"]:
+        assert not S.host_allowed(bad, allowed), bad

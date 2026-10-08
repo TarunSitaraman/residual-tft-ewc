@@ -55,6 +55,15 @@ def figure_path(root: Path, url_path: str) -> Path | None:
     return p if p.parent == base and p.suffix == ".png" and p.is_file() else None
 
 
+def host_allowed(host_header: str | None, allowed: set[str]) -> bool:
+    """True if the Host header names this machine (blocks DNS-rebinding requests from other sites)."""
+    if not host_header:
+        return False
+    h = host_header.strip().lower()
+    h = h[1:h.index("]")] if h.startswith("[") and "]" in h else h.rsplit(":", 1)[0] if h.count(":") == 1 else h
+    return h in allowed
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
@@ -152,7 +161,7 @@ class Status:
             time.sleep(POLL_S)
 
 
-def handler(page: Page, status: Status):
+def handler(page: Page, status: Status, allowed: set[str]):
     class H(BaseHTTPRequestHandler):
         def _send(self, code: int, body: bytes, ctype: str) -> None:
             self.send_response(code)
@@ -164,6 +173,9 @@ def handler(page: Page, status: Status):
             self.wfile.write(body)
 
         def do_GET(self) -> None:  # noqa: N802
+            if not host_allowed(self.headers.get("Host"), allowed):
+                self._send(421, b"Unknown host", "text/plain; charset=utf-8")
+                return
             path = self.path.split("?", 1)[0]
             if path in ("/", "/index.html"):
                 with page.lock:
@@ -201,7 +213,8 @@ def main() -> int:
     page = Page()
     status = Status(page)
     threading.Thread(target=status.loop, daemon=True).start()
-    server = ThreadingHTTPServer(("0.0.0.0" if args.lan else "127.0.0.1", args.port), handler(page, status))
+    allowed = {"localhost", "127.0.0.1", "::1"} | ({lan_ip(), socket.gethostname().lower()} if args.lan else set())
+    server = ThreadingHTTPServer(("0.0.0.0" if args.lan else "127.0.0.1", args.port), handler(page, status, allowed))
     print(f"Data platform page: http://localhost:{args.port}"
           + (f"  (network: http://{lan_ip()}:{args.port})" if args.lan else ""), flush=True)
     try:
