@@ -63,8 +63,19 @@ writes `data/s6_ageing_blocks_spark.csv` (the D22 inputs) and `results/d22_spark
 
 ## Data platform page
 
-`docs/spark_dashboard.html` (published at https://claude.ai/artifact/4nn8GK3uk7xyHEW59LPBua) is the project's data
-platform page. Its tabs show the dataset catalogue and lineage (Overview, Datasets), every pipeline (Pipelines), all
+The project's data platform page is a live web page served from this PC:
+
+```powershell
+.venv\Scripts\python.exe scripts\platform_server.py --lan   # http://localhost:8050; --lan also serves it on the local network
+```
+
+The server rebuilds the page whenever a results file, derived table, download manifest or the Spark snapshot changes,
+and open pages reload themselves. A status bar shows what is running now: a Spark job with its task progress (when the
+job runs with `--ui`), the History Server and its latest application, and any pipeline script from `scripts/`. Without
+`--lan` only this PC can open it; with `--lan` Windows may ask to allow Python through the firewall. A static snapshot
+is written to `docs/spark_dashboard.html` by `scripts/make_spark_dashboard.py`.
+
+The page Its tabs show the dataset catalogue and lineage (Overview, Datasets), every pipeline (Pipelines), all
 recorded runs (Runs), the Spark run and the ageing-input explorer. The Spark views show how the pipeline is built (source, ingest, map, cache, reduce, validation), the Spark configuration, Spark UI and
 History Server screenshots, the three full runs, and a full run recorded through Spark's monitoring API: the timeline of all 827 map tasks across the six worker slots, task
 durations, time against file size, the Spark jobs, data per cell, an explorer for the block-level ageing inputs, and

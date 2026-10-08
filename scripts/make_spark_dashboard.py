@@ -80,7 +80,8 @@ def runs() -> list[dict]:
     return out
 
 
-def main() -> int:
+def build() -> tuple[dict, dict]:
+    """The page data and the task/job timing record of the recorded run."""
     snap = json.loads((ROOT / "data" / "spark_ui_snapshot_dashboard.json").read_text())
     val = json.loads((ROOT / "results" / "d22_spark_validation_dashboard.json").read_text())
     first = json.loads((ROOT / "results" / "d22_spark_validation.json").read_text())
@@ -141,12 +142,21 @@ def main() -> int:
         "app_id": snap["/application"]["id"], "commit": commit, "runs": runs(),
         "n_inputs": len(A.feature_names()), "min_valid": A.MIN_VALID_CYCLES, "n_cells": len(cells),
         "sources": PC.sources(), "tables": PC.tables(), "registry": PC.registry()}
+    record = {"app_id": data["app_id"], "engine": data["run"]["engine"], "map_stage": map_stage["stageId"], "tasks": tasks, "jobs": jobs}
+    return data, record
+
+
+def render(data: dict) -> str:
     tpl = (ROOT / "scripts" / "spark_dashboard_template.html").read_text(encoding="utf-8")
+    return tpl.replace("__DATA__", json.dumps(data, separators=(",", ":")))
+
+
+def main() -> int:
+    data, record = build()
     out = ROOT / "docs" / "spark_dashboard.html"
-    out.write_text(tpl.replace("__DATA__", json.dumps(data, separators=(",", ":"))), encoding="utf-8")
-    (ROOT / "results" / "d22_spark_dashboard_run.json").write_text(json.dumps(
-        {"app_id": data["app_id"], "engine": data["run"]["engine"], "map_stage": map_stage["stageId"], "tasks": tasks, "jobs": jobs},
-        indent=1))
+    out.write_text(render(data), encoding="utf-8")
+    (ROOT / "results" / "d22_spark_dashboard_run.json").write_text(json.dumps(record, indent=1))
+    tasks = record["tasks"]
     print(f"wrote {out.relative_to(ROOT)} ({out.stat().st_size / 1e3:.0f} kB): {len(tasks)} tasks, {data['lanes']} slots, "
           f"stage {data['stage_seconds'] / 60:.1f} min, median task {data['median_dur']:.1f} s", flush=True)
     return 0

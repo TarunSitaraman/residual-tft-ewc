@@ -133,6 +133,23 @@ tr.hl td { background: var(--accent-soft); }
 .po .k { font: 600 11px/1.2 var(--cond); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); flex-basis: 100%; }
 .po code { background: var(--ground); padding: 1px 6px; border-radius: 4px; }
 @media (prefers-reduced-motion: no-preference) { .tabs button { transition: color .15s, border-color .15s; } }
+.live { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 16px; display: grid; gap: 10px; }
+.lv-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.lv-head b { font: 600 15px/1.2 var(--cond); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+.dot.on { background: var(--good); box-shadow: 0 0 0 3px var(--good-soft); }
+.dot.warn { background: var(--c4); }
+.lv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 10px 20px; }
+.lv-cell { display: grid; gap: 4px; align-content: start; min-width: 0; font-size: 13.5px; }
+.lv-cell > div { display: grid; gap: 4px; min-width: 0; }
+.live a { color: var(--accent); font-weight: 600; }
+.lv-cell .k { font: 600 11px/1.2 var(--cond); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.bar { height: 8px; border-radius: 4px; background: var(--accent-soft); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); }
+@media (prefers-reduced-motion: no-preference) { .bar i { transition: width .6s; } .dot.on { animation: pulse 2s infinite; } }
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px transparent; } }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips code { background: var(--ground); border: 1px solid var(--rule); padding: 2px 7px; border-radius: 5px; }
 code { font-family: var(--mono); font-size: 12.5px; }
 </style>
 
@@ -143,6 +160,15 @@ code { font-family: var(--mono); font-size: 12.5px; }
     <p class="lede" id="plede"></p>
     <div class="strip" id="kpis"></div>
   </header>
+
+  <div class="live" id="live" hidden aria-live="polite">
+    <div class="lv-head"><span class="dot" id="lv-dot"></span><b id="lv-title">Live</b><span class="sub" id="lv-when"></span></div>
+    <div class="lv-grid">
+      <div class="lv-cell"><span class="k">Spark job</span><div id="lv-spark"></div></div>
+      <div class="lv-cell"><span class="k">History Server</span><div id="lv-history"></div></div>
+      <div class="lv-cell"><span class="k">Pipeline scripts running</span><div id="lv-procs"></div></div>
+    </div>
+  </div>
 
   <nav class="tabs" role="tablist" aria-label="Platform views">
     <button role="tab" id="t-overview" aria-controls="tab-overview">Overview</button>
@@ -581,5 +607,25 @@ let startTab = location.hash.slice(1);
 if (!TABS.includes(startTab)) { try { startTab = localStorage.getItem("platform-tab") || "overview"; } catch (e) { startTab = "overview"; } }
 tables(); show(startTab);
 window.addEventListener("hashchange", () => { if (location.hash.slice(1) !== current) show(location.hash.slice(1)); });
+// ---------- live status (only when served by scripts/platform_server.py) ----------
+const hhmm = iso => new Date(iso).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+async function poll() {
+  let st;
+  try { const r = await fetch("api/status", { cache: "no-store" }); if (!r.ok) throw new Error(r.status); st = await r.json(); }
+  catch (e) { $("lv-dot").className = "dot warn"; $("lv-title").textContent = "Server not reachable"; $("lv-when").textContent = "showing the last loaded data"; return; }
+  if (!st.page) return;
+  if (D.live && st.page.fingerprint && st.page.fingerprint !== D.live.fingerprint && !st.page.building) { location.reload(); return; }
+  $("lv-dot").className = "dot on";
+  $("lv-title").textContent = st.page.building ? "Live · rebuilding with new data…" : "Live";
+  $("lv-when").textContent = `page built ${hhmm(st.page.built_utc)} · checked ${hhmm(st.checked_utc)}${st.page.error ? " · last rebuild failed: " + st.page.error : ""}`;
+  const sp = st.spark;
+  $("lv-spark").innerHTML = !sp.running ? `<span class="sub">No Spark job running</span>`
+    : `<b>${esc(sp.app)}</b>` + (sp.jobs.length ? sp.jobs.map(j => `<span>${esc(j.desc)}</span><div class="bar"><i style="width:${(100 * j.done / Math.max(1, j.total)).toFixed(1)}%"></i></div><span class="sub">${fmt(j.done)} / ${fmt(j.total)} tasks · ${j.active} active${j.failed ? ` · ${j.failed} failed` : ""}</span>`).join("") : `<span class="sub">between jobs</span>`);
+  const hs = st.history, hsUrl = `http://${location.hostname}:18080`;
+  $("lv-history").innerHTML = !hs.up ? `<span class="sub">Not running (start with scripts/spark_history_server.ps1)</span>`
+    : `<a href="${hsUrl}" target="_blank" rel="noopener">Open History Server</a><span class="sub">${fmt(hs.apps)} application${hs.apps === 1 ? "" : "s"}${hs.last ? ` · latest: ${esc(hs.last.name)}, ${hs.last.completed ? hs.last.minutes + " min, completed" : "in progress"}` : ""}</span>`;
+  $("lv-procs").innerHTML = st.processes.length ? `<div class="chips">${st.processes.map(p => `<code title="since ${hhmm(p.since)}">${esc(p.script)}</code>`).join("")}</div>` : `<span class="sub">None</span>`;
+}
+if (location.protocol.startsWith("http") && D.live) { $("live").hidden = false; poll(); setInterval(poll, 5000); }
 let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => (DRAW[current] || []).forEach(f => f()), 150); });
 </script>

@@ -15,4 +15,5 @@ pytest==9.1.1
 certifi==2026.07.22
 # Apache Spark (local mode) for the D22 ageing-feature extraction; needs Java 17 or 21 (JAVA_HOME).
 pyspark==4.2.0
+psutil==7.2.2
 py4j==0.10.9.9
