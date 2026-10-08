@@ -20,6 +20,7 @@ import sys
 import threading
 import time
 import traceback
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -30,12 +31,15 @@ import psutil
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import platform_data as PD  # noqa: E402
+
 WATCH = ["results/*.json", "data/*.csv", "data/spark_ui_snapshot_dashboard.json", "data/raw/*manifest*.json",
          "docs/external_data/metadata/*.json", "docs/figures/spark/*.png", "scripts/spark_dashboard_template.html",
          "scripts/platform_catalog.py", "scripts/make_spark_dashboard.py"]
 FIGURES = "docs/figures/spark"
 SPARK_UI, HISTORY = "http://localhost:4040/api/v1", "http://localhost:18080/api/v1"
 POLL_S = 5
+TYPES = {".png": "image/png", ".pdf": "application/pdf"}
 
 
 def fingerprint(root: Path) -> str:
@@ -176,8 +180,12 @@ def handler(page: Page, status: Status, allowed: set[str]):
             if not host_allowed(self.headers.get("Host"), allowed):
                 self._send(421, b"Unknown host", "text/plain; charset=utf-8")
                 return
-            path = self.path.split("?", 1)[0]
-            if path in ("/", "/index.html"):
+            path, _, query = self.path.partition("?")
+            if path.startswith("/api/data/"):
+                self._data(path, {k: v[-1] for k, v in urllib.parse.parse_qs(query).items()})
+            elif path.startswith("/files/") and (f := PD.allowed(ROOT, urllib.parse.unquote(path[7:]), "files")):
+                self._send(200, f.read_bytes(), TYPES.get(f.suffix, "application/octet-stream"))
+            elif path in ("/", "/index.html"):
                 with page.lock:
                     html = page.html
                 if not html:
@@ -190,6 +198,38 @@ def handler(page: Page, status: Status, allowed: set[str]):
                 self._send(200, f.read_bytes(), "image/png")
             else:
                 self._send(404, b"Not found", "text/plain; charset=utf-8")
+
+        def _json(self, obj, code: int = 200) -> None:
+            self._send(code, json.dumps(obj, allow_nan=False, default=str).encode(), "application/json")
+
+        def _data(self, path: str, q: dict) -> None:
+            """Read-only data API; every file is looked up in the platform_data catalogue."""
+            try:
+                kind = path.removeprefix("/api/data/")
+                if kind == "catalog":
+                    return self._json(PD.catalog(ROOT))
+                if kind in ("table", "stats", "json"):
+                    f = PD.allowed(ROOT, q.get("path", ""), "results" if kind == "json" else "tables")
+                    if f is None:
+                        return self._json({"error": "unknown file"}, 404)
+                    if kind == "json":
+                        return self._send(200, f.read_bytes(), "application/json")
+                    if kind == "stats":
+                        return self._json(PD.table_stats(f))
+                    return self._json(PD.table_page(f, int(q.get("offset", 0)), int(q.get("limit", 100)), q.get("sort") or None,
+                                                    q.get("desc") == "1", q.get("column") or None, q.get("q", "")))
+                if kind in ("raw-files", "raw-preview"):
+                    ds = q.get("dataset", "")
+                    if ds not in PD.RAW_MANIFESTS:
+                        return self._json({"error": "unknown dataset"}, 404)
+                    if kind == "raw-files":
+                        return self._json(PD.raw_files(ROOT, ds))
+                    return self._json(PD.raw_preview(ROOT, ds, q.get("path", "")))
+                return self._json({"error": "unknown endpoint"}, 404)
+            except (KeyError, FileNotFoundError) as e:
+                return self._json({"error": f"not found: {e}"}, 404)
+            except ValueError as e:
+                return self._json({"error": f"bad request: {e}"}, 400)
 
         def log_message(self, *args) -> None:  # quiet: the page polls every few seconds
             pass

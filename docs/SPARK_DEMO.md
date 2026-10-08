@@ -75,6 +75,17 @@ job runs with `--ui`), the History Server and its latest application, and any pi
 `--lan` only this PC can open it; with `--lan` Windows may ask to allow Python through the firewall. A static snapshot
 is written to `docs/spark_dashboard.html` by `scripts/make_spark_dashboard.py`.
 
+Besides the summaries, the served page is a read-only data browser:
+
+- **Tables:** every CSV in `data/` and `results/tables/`, with search (text or comparisons such as `>0.8`, `=cell1a`),
+  sorting, paging and per-column statistics with histograms.
+- **Raw files:** the first 200 rows of any S6 capacity-check or ageing file, decompressed from the verified copy, with
+  its original size and SHA-256.
+- **Results:** every results JSON as an expandable tree.
+- **Paper:** the compiled PDF and every figure.
+
+Only files in the catalogue (`scripts/platform_data.py`) are served; nothing can be changed from the page.
+
 The page Its tabs show the dataset catalogue and lineage (Overview, Datasets), every pipeline (Pipelines), all
 recorded runs (Runs), the Spark run and the ageing-input explorer. The Spark views show how the pipeline is built (source, ingest, map, cache, reduce, validation), the Spark configuration, Spark UI and
 History Server screenshots, the three full runs, and a full run recorded through Spark's monitoring API: the timeline of all 827 map tasks across the six worker slots, task
