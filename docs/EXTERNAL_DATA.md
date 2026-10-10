@@ -342,7 +342,7 @@ The mapping of each dataset to the forecasting task (what counts as a capacity c
 - [ ] **Data availability statement:** the raw data are at doi:10.17605/OSF.IO/8JNR5 under CC BY 4.0. Give the processing code and the commit hash.
 - [ ] **Hugging Face mirror:** fix the dataset card (S2), or remove the mirror, before submission.
 - [x] **Handover version:** version 2, settled by the folders and dates it contains (S1, "Evidence").
-- [x] **Capacity labels:** reproduce `Capacity_Ah` from the raw RPT files. Done: 112/112 exact (S1, "Evidence"). The handover capacity includes the pulses; the paper defines capacity as the C/20 discharge capacity with the pulses excluded (D17).
+- [x] **Capacity labels:** reproduce `Capacity_Ah` from the raw RPT files. Done: 112/112 RPT capacity rows exact, i.e. 111 RPTs (S1, "Evidence"). The handover capacity includes the pulses; the paper defines capacity as the C/20 discharge capacity with the pulses excluded (D17).
 - [x] **Cui et al. 2024:** a different dataset (8 retired Nissan Leaf LMO cells); cite it as related work (S5).
 - [ ] **Stanford–Relyion data (S5):** request permission to reuse; no licence is declared.
 - [ ] **Second dataset (S6):** cite both the article and the dataset DOI; state that "second life" there means ageing below 80 % SOH under the same protocol, at 50 °C.

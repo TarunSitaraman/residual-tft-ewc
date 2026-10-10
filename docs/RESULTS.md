@@ -38,7 +38,7 @@ Each file records Python and library versions (Python 3.11.15, numpy 2.4.6, pand
    - The processed capacity label included pulse charge, which shifted some labels by up to 0.09 pp.
    - Test currents are set from the previous capacity and would leak the label.
 
-   Our S1 capacities match the handover values for 112/112 RPTs, and our S6 parsing reproduces the authors' own capacities on all 843 checks.
+   Our recomputation from the raw S1 files reproduces the handover capacities exactly for all 112 RPT capacity rows (111 RPTs; g1's RPT 1 spans two files), and our S6 parsing reproduces the authors' own C/3 capacity on all 843 checks.
 2. **Diagnostics describe the current SOH, not its next change (S1).**
    - They track the current SOH closely: IC peak near 4.07 V, median within-cell ρ = 0.97; pulse and EIS resistances, |ρ| = 0.83–0.94.
    - They are weakly associated with the next ΔSOH (median |ρ| ≤ 0.3 for most features).

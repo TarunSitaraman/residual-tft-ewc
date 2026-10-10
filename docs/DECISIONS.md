@@ -274,7 +274,7 @@ On this dataset the indicators track SOH in the physically expected direction bu
 
 - **Decision.** The handover is complete, and no further processing will come from outside the team. From now on, all processed data are produced by code in this repository from the public raw archive (S1 in `docs/EXTERNAL_DATA.md`).
 - **Existing CSVs.** The handover CSVs are kept as frozen, verified inputs:
-  - all 112 RPT capacities are reproduced exactly from the raw files;
+  - all 112 RPT capacity rows (111 RPTs; g1's RPT 1 spans two files) are reproduced exactly from the raw files;
   - every RPT file and cycling block matches the archive.
 - **New inputs.** Anything the CSVs lack is extracted by committed scripts with checksums recorded: EIS spectra, raw RPT curves, and re-derived cycling features if needed.
 - **Why.** Every number in the paper must trace to code in this repository and to a public, citable source. Undocumented processing outside the repository cannot be reviewed.
