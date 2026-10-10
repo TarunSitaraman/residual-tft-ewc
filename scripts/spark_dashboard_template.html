@@ -456,7 +456,7 @@ $("legend").innerHTML = CASES.map(c => `<span><i style="background:${color(c)}">
 
 // ---------- pipeline ----------
 const flow = [
-  ["Source", "Dataverse · 20 zip archives", `${fmt(D.raw_gb, 0)} GB raw`, `${D.n_cells} cells, ${fmt(run.blocks)} ageing files of 100 cycles each, about 1.4 billion rows of time-series measurements (Wheeler et al. 2025, CC BY 4.0).`],
+  ["Source", "Dataverse · 20 zip archives", `${fmt(D.raw_gb, 0)} GB raw`, `${D.n_cells} cells, ${fmt(run.blocks)} ageing files of 100 cycles each, 902 million rows of time-series measurements (Wheeler et al. 2025, CC BY 4.0).`],
   ["Ingest", "HTTP range requests", `${fmt(D.xz_gb, 1)} GB stored`, "Each file is read out of the remote zip without downloading the whole archive, checked against the zip's CRC-32 and stored xz-compressed, with its SHA-256 in a manifest. Resumable and sharded over parallel workers."],
   ["Map", "RDD · flatMap · 827 partitions", `${fmt(run.blocks)} tasks`, "One partition per file. Each task parses its file into per-cycle responses in a Python worker, with the same unit-tested function the pandas builder uses."],
   ["Cache", "typed DataFrame · .cache()", `${fmt(run.cycles)} rows`, "One row per cycle with an explicit schema, kept in Spark memory so the reduce does not re-read the raw files."],
@@ -615,7 +615,7 @@ const SRC = D.sources, gb = x => x >= 10 ? fmt(x, 0) + " GB" : x >= 1 ? fmt(x, 1
 const age = SRC.find(s => s.big), stored = SRC.reduce((a, s) => a + s.stored_gb, 0);
 const nIds = new Set(SRC.map(s => s.id)).size;
 $("plede").textContent = `Every dataset, pipeline and run behind the SOH forecasting work, in one place. ${nIds} public datasets feed ${D.tables.length} derived tables and ${D.registry.length} recorded runs. `
-  + `The largest, the S6 ageing cycles (${gb(age.orig_gb)} raw, about 1.4 billion rows), is processed with Apache Spark and checked block by block against an independent pandas build.`;
+  + `The largest, the S6 ageing cycles (${gb(age.orig_gb)} raw, 902 million rows), is processed with Apache Spark and checked block by block against an independent pandas build.`;
 const kpis = [
   ["Source datasets", fmt(nIds), `${SRC.length} downloads, all CC BY 4.0`],
   ["Data held", gb(stored), "raw files, compressed and verified"],

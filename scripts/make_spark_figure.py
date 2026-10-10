@@ -19,8 +19,8 @@ from make_framework_figure import ACCENT, ACCENT_FILL, FILL, INK, INK2, RULE  # 
 ROOT = Path(__file__).resolve().parents[1]
 W, GAP = 0.172, 0.03
 BOXES = [
-    ("Raw S6 ageing data", ["827 files: one per cell", "and 100-cycle block", "132 GB raw (16 GB xz)",
-                              "~1.4 billion rows", "SHA-256 manifest"], False),
+    ("Raw S6 ageing data", ["827 files: one per cell", "and 100-cycle block", "132 GB raw (15 GB gz/xz)",
+                              "902 million rows", "SHA-256 manifest"], False),
     ("Spark map", ["one task per block", "parse raw rows into steps", "cycle validity, 7 responses",
                    "local[N] worker cores"], True),
     ("Per-cycle table", ["~83,000 cycles", "one row per cycle", "cached in Spark memory",

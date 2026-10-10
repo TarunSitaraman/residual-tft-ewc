@@ -42,7 +42,7 @@ This repository is both a course project and the code behind an IEEE paper. Ever
 | Task | **Forecast the State of Health (SOH)** of a cell at its next 1–6 capacity checks |
 | Models | Baselines (persistence, linear extrapolation, ridge, gradient boosting), an MLP, and the proposed **Temporal Fusion Transformer (TFT) with Elastic Weight Consolidation (EWC)** |
 | Learning setting | **Continual learning**: groups arrive one at a time; we measure accuracy, forgetting and transfer |
-| Big-data component | An **Apache Spark** job that reduces about 132 GB (roughly 0.9 billion rows) of raw ageing data to block-level features |
+| Big-data component | An **Apache Spark** job that reduces about 132 GB (902 million rows) of raw ageing data to block-level features |
 | Reuse | Forecast SOH is mapped to four fade classes (C0–C3) |
 | Tooling | 150 tests, pre-registered protocols, a live data-platform web page, and the paper |
 
@@ -232,7 +232,7 @@ IEEE conference paper (8 pages). Tables and figures are generated from committed
 ## 6. Apache Spark: what it does here and how
 
 ### 6.1 Why Spark
-The S6 between-check ageing data (decision D22) is the project's real big-data workload: **827 CSV files** (one per cell and 100-cycle block), about **132 GB raw** (about 15 GB as stored locally, 23 GB as downloaded zips), **roughly 0.9 billion rows** (estimated from the total size and about 146 bytes per row; not counted exactly). Pandas on one file works but is slow and awkward to scale and validate. Each file is independent, which is exactly the shape of a map-reduce job.
+The S6 between-check ageing data (decision D22) is the project's real big-data workload: **827 CSV files** (one per cell and 100-cycle block), about **132 GB raw** (about 15 GB as stored locally, 23 GB as downloaded zips), **901,974,259 data rows** (counted by `scripts/count_s6_ageing_rows.py`; `results/s6_ageing_row_count.json`). Pandas on one file works but is slow and awkward to scale and validate. Each file is independent, which is exactly the shape of a map-reduce job.
 
 ### 6.2 What the job computes
 `scripts/spark_ageing_features.py` turns the raw rows into **21 block-level ageing inputs**:

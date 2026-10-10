@@ -3,7 +3,7 @@
 ## What Spark does here
 
 The S6 between-check ageing data (decision D22) is the project's large dataset: 827 files, one per cell and 100-cycle
-block, about 132 GB raw (16 GB compressed) and about 1.4 billion rows. `scripts/spark_ageing_features.py` turns it
+block, about 132 GB raw (about 15 GB as stored, gz/xz) and 901,974,259 data rows (`results/s6_ageing_row_count.json`). `scripts/spark_ageing_features.py` turns it
 into the 21 block-level ageing inputs with Apache Spark 4.2 (PySpark), as a map-reduce job:
 
 - **Map:** one Spark task per block parses the raw rows into per-cycle measured responses (end-of-charge and

@@ -66,7 +66,7 @@ def sources() -> list[dict]:
          "fetch": "scripts/fetch_wheeler_characterisation.py", "verify": "Range reads from remote zips; CRC-32; SHA-256 manifest; authors' capacity reproduced exactly",
          "store": "data/raw/wheeler2025", "decisions": "D19–D23"},
         {"id": "S6", "name": "LFP first- and second-life: ageing cycles", "who": "Wheeler et al. 2025", "doi": "10.57745/OLBXKT",
-         "role": "Every ageing cycle between the checks, about 1.4 billion rows; processed with Spark", "cells": _cells("s6_ageing_blocks.csv", "cell"),
+         "role": "Every ageing cycle between the checks, 901,974,259 rows; processed with Spark", "cells": _cells("s6_ageing_blocks.csv", "cell"),
          "files": age_n, "orig_gb": age["total_bytes"] / GB, "stored_gb": age_disk / GB,
          "fetch": "scripts/fetch_wheeler_characterisation.py --kind aging", "verify": "Range reads; CRC-32; SHA-256 manifest; Spark output checked against pandas",
          "store": "data/raw/wheeler2025", "decisions": "D22", "big": True},

@@ -1,0 +1,4153 @@
+{
+  "generated_utc": "2026-10-10T09:12:01+00:00",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.1+cpu",
+    "git_commit": "6fdf7bab33e406399cefd07d859dc4ac45e62318",
+    "git_dirty": false
+  },
+  "decision": "D22",
+  "n_files": 827,
+  "data_rows": 901974259,
+  "uncompressed_bytes": 131886624409,
+  "files": [
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0001to0100.csv.gz",
+      "data_rows": 1698927,
+      "uncompressed_bytes": 249416695
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0101to0200.csv.gz",
+      "data_rows": 1713637,
+      "uncompressed_bytes": 251586363
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0201to0300.csv.gz",
+      "data_rows": 1704504,
+      "uncompressed_bytes": 250229037
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0301to0400.csv.gz",
+      "data_rows": 1658727,
+      "uncompressed_bytes": 243444039
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0401to0500.csv.gz",
+      "data_rows": 1624333,
+      "uncompressed_bytes": 238320748
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0501to0600.csv.gz",
+      "data_rows": 1598042,
+      "uncompressed_bytes": 234427632
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0601to0700.csv.gz",
+      "data_rows": 1593443,
+      "uncompressed_bytes": 233731748
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0701to0800.csv.gz",
+      "data_rows": 1531217,
+      "uncompressed_bytes": 224498463
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0801to0900.csv.gz",
+      "data_rows": 1596131,
+      "uncompressed_bytes": 234116866
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging0901to1000.csv.gz",
+      "data_rows": 1549218,
+      "uncompressed_bytes": 227155011
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1001to1100.csv.xz",
+      "data_rows": 1540855,
+      "uncompressed_bytes": 225921102
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1101to1200.csv.xz",
+      "data_rows": 1530799,
+      "uncompressed_bytes": 224434978
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1201to1300.csv.xz",
+      "data_rows": 1507328,
+      "uncompressed_bytes": 220957973
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1301to1400.csv.xz",
+      "data_rows": 1508503,
+      "uncompressed_bytes": 221133466
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1401to1500.csv.xz",
+      "data_rows": 1482060,
+      "uncompressed_bytes": 217206222
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1501to1600.csv.xz",
+      "data_rows": 1444761,
+      "uncompressed_bytes": 211696250
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1601to1700.csv.xz",
+      "data_rows": 1404733,
+      "uncompressed_bytes": 205768247
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1701to1800.csv.xz",
+      "data_rows": 1394990,
+      "uncompressed_bytes": 204323924
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1801to1900.csv.xz",
+      "data_rows": 1381638,
+      "uncompressed_bytes": 202346623
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging1901to2000.csv.xz",
+      "data_rows": 1377693,
+      "uncompressed_bytes": 201759296
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2001to2100.csv.xz",
+      "data_rows": 1367074,
+      "uncompressed_bytes": 200186127
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2101to2200.csv.xz",
+      "data_rows": 1362672,
+      "uncompressed_bytes": 199530408
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2201to2300.csv.xz",
+      "data_rows": 1351303,
+      "uncompressed_bytes": 197842820
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2301to2400.csv.xz",
+      "data_rows": 1339778,
+      "uncompressed_bytes": 196133222
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2401to2500.csv.xz",
+      "data_rows": 1336043,
+      "uncompressed_bytes": 195579660
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2501to2600.csv.xz",
+      "data_rows": 1337054,
+      "uncompressed_bytes": 195721921
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2601to2700.csv.xz",
+      "data_rows": 1324765,
+      "uncompressed_bytes": 193900866
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2701to2800.csv.xz",
+      "data_rows": 1326445,
+      "uncompressed_bytes": 194140655
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2801to2900.csv.xz",
+      "data_rows": 1311292,
+      "uncompressed_bytes": 191906069
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging2901to3000.csv.xz",
+      "data_rows": 1299994,
+      "uncompressed_bytes": 190239604
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging3001to3100.csv.xz",
+      "data_rows": 1280126,
+      "uncompressed_bytes": 187268836
+    },
+    {
+      "path": "Cell1a/agingdata_50degC/WWH_18650_cell1a_aging3101to3200.csv.xz",
+      "data_rows": 1279077,
+      "uncompressed_bytes": 187113405
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0001to0100.csv.xz",
+      "data_rows": 1711530,
+      "uncompressed_bytes": 251595820
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0101to0200.csv.xz",
+      "data_rows": 1717806,
+      "uncompressed_bytes": 252412052
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0201to0300.csv.xz",
+      "data_rows": 1708442,
+      "uncompressed_bytes": 250958821
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0301to0400.csv.xz",
+      "data_rows": 1662513,
+      "uncompressed_bytes": 244080610
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0401to0500.csv.xz",
+      "data_rows": 1603601,
+      "uncompressed_bytes": 235345948
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0501to0600.csv.xz",
+      "data_rows": 1563695,
+      "uncompressed_bytes": 229422579
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0601to0700.csv.xz",
+      "data_rows": 1574209,
+      "uncompressed_bytes": 230960725
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0701to0800.csv.xz",
+      "data_rows": 1531084,
+      "uncompressed_bytes": 224555399
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0801to0900.csv.xz",
+      "data_rows": 1562922,
+      "uncompressed_bytes": 229180918
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging0901to1000.csv.xz",
+      "data_rows": 1521584,
+      "uncompressed_bytes": 223122315
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1001to1100.csv.xz",
+      "data_rows": 1496812,
+      "uncompressed_bytes": 219461899
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1101to1200.csv.xz",
+      "data_rows": 1451154,
+      "uncompressed_bytes": 212817293
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1201to1300.csv.xz",
+      "data_rows": 1390157,
+      "uncompressed_bytes": 203710656
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1301to1400.csv.xz",
+      "data_rows": 1382521,
+      "uncompressed_bytes": 202503703
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1401to1500.csv.xz",
+      "data_rows": 1370411,
+      "uncompressed_bytes": 200694648
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1501to1600.csv.xz",
+      "data_rows": 1363227,
+      "uncompressed_bytes": 199681229
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1601to1700.csv.xz",
+      "data_rows": 1346187,
+      "uncompressed_bytes": 197146232
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1701to1800.csv.xz",
+      "data_rows": 1337550,
+      "uncompressed_bytes": 195883530
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1801to1900.csv.xz",
+      "data_rows": 1326931,
+      "uncompressed_bytes": 194310301
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging1901to2000.csv.xz",
+      "data_rows": 1315424,
+      "uncompressed_bytes": 192557324
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2001to2100.csv.xz",
+      "data_rows": 1314493,
+      "uncompressed_bytes": 192432917
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2101to2200.csv.xz",
+      "data_rows": 1291936,
+      "uncompressed_bytes": 189038648
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2201to2300.csv.xz",
+      "data_rows": 1268110,
+      "uncompressed_bytes": 185533963
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2301to2400.csv.xz",
+      "data_rows": 1258229,
+      "uncompressed_bytes": 184040591
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2401to2500.csv.xz",
+      "data_rows": 1247981,
+      "uncompressed_bytes": 182546838
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2501to2600.csv.xz",
+      "data_rows": 1240032,
+      "uncompressed_bytes": 181367776
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2601to2700.csv.xz",
+      "data_rows": 1233908,
+      "uncompressed_bytes": 180432235
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2701to2800.csv.xz",
+      "data_rows": 1227101,
+      "uncompressed_bytes": 179382276
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2801to2900.csv.xz",
+      "data_rows": 1219456,
+      "uncompressed_bytes": 178248842
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging2901to3000.csv.xz",
+      "data_rows": 1184681,
+      "uncompressed_bytes": 173197678
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging3001to3100.csv.xz",
+      "data_rows": 1179619,
+      "uncompressed_bytes": 172476507
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging3101to3200.csv.xz",
+      "data_rows": 1169852,
+      "uncompressed_bytes": 170931636
+    },
+    {
+      "path": "Cell1b/agingdata_50degC/WWH_18650_cell1b_aging3201to3300.csv.xz",
+      "data_rows": 1162401,
+      "uncompressed_bytes": 169853413
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0001to0100.csv.xz",
+      "data_rows": 1714323,
+      "uncompressed_bytes": 252015386
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0101to0200.csv.xz",
+      "data_rows": 1714920,
+      "uncompressed_bytes": 251840185
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0201to0300.csv.xz",
+      "data_rows": 1712504,
+      "uncompressed_bytes": 251457640
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0301to0400.csv.xz",
+      "data_rows": 1659659,
+      "uncompressed_bytes": 243629284
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0401to0500.csv.xz",
+      "data_rows": 1625250,
+      "uncompressed_bytes": 238453943
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0501to0600.csv.xz",
+      "data_rows": 1606731,
+      "uncompressed_bytes": 235832918
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0601to0700.csv.xz",
+      "data_rows": 1599284,
+      "uncompressed_bytes": 234670803
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0701to0800.csv.xz",
+      "data_rows": 1531023,
+      "uncompressed_bytes": 224508948
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0801to0900.csv.xz",
+      "data_rows": 1602071,
+      "uncompressed_bytes": 235020431
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging0901to1000.csv.xz",
+      "data_rows": 1563644,
+      "uncompressed_bytes": 229301931
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1001to1100.csv.xz",
+      "data_rows": 1550500,
+      "uncompressed_bytes": 227363067
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1101to1200.csv.xz",
+      "data_rows": 1535699,
+      "uncompressed_bytes": 225253459
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1201to1300.csv.xz",
+      "data_rows": 1513245,
+      "uncompressed_bytes": 221848776
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1301to1400.csv.xz",
+      "data_rows": 1514367,
+      "uncompressed_bytes": 222021607
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1401to1500.csv.xz",
+      "data_rows": 1482247,
+      "uncompressed_bytes": 217302020
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1501to1600.csv.xz",
+      "data_rows": 1445000,
+      "uncompressed_bytes": 211765266
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1601to1700.csv.xz",
+      "data_rows": 1407105,
+      "uncompressed_bytes": 206166486
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1701to1800.csv.xz",
+      "data_rows": 1394422,
+      "uncompressed_bytes": 204299830
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1801to1900.csv.xz",
+      "data_rows": 1380945,
+      "uncompressed_bytes": 202281068
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging1901to2000.csv.xz",
+      "data_rows": 1377028,
+      "uncompressed_bytes": 201696839
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2001to2100.csv.xz",
+      "data_rows": 1360413,
+      "uncompressed_bytes": 199241392
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2101to2200.csv.xz",
+      "data_rows": 1362904,
+      "uncompressed_bytes": 199639093
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2201to2300.csv.xz",
+      "data_rows": 1348638,
+      "uncompressed_bytes": 197540991
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2301to2400.csv.xz",
+      "data_rows": 1336642,
+      "uncompressed_bytes": 195698245
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2401to2500.csv.xz",
+      "data_rows": 1333386,
+      "uncompressed_bytes": 195265502
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2501to2600.csv.xz",
+      "data_rows": 1333808,
+      "uncompressed_bytes": 195263774
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2601to2700.csv.xz",
+      "data_rows": 1320872,
+      "uncompressed_bytes": 193322902
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2701to2800.csv.xz",
+      "data_rows": 1322526,
+      "uncompressed_bytes": 193586201
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2801to2900.csv.xz",
+      "data_rows": 1305101,
+      "uncompressed_bytes": 191011716
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging2901to3000.csv.xz",
+      "data_rows": 1281931,
+      "uncompressed_bytes": 187532340
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging3001to3100.csv.xz",
+      "data_rows": 1272504,
+      "uncompressed_bytes": 186130060
+    },
+    {
+      "path": "Cell1c/agingdata_50degC/WWH_18650_cell1c_aging3101to3200.csv.xz",
+      "data_rows": 1271440,
+      "uncompressed_bytes": 185965271
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0001to0100.csv.xz",
+      "data_rows": 1714205,
+      "uncompressed_bytes": 251662108
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0101to0200.csv.xz",
+      "data_rows": 1720593,
+      "uncompressed_bytes": 252587619
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0201to0300.csv.xz",
+      "data_rows": 1718000,
+      "uncompressed_bytes": 252204916
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0301to0400.csv.xz",
+      "data_rows": 1618126,
+      "uncompressed_bytes": 237397102
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0401to0500.csv.xz",
+      "data_rows": 1595443,
+      "uncompressed_bytes": 233999408
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0501to0600.csv.xz",
+      "data_rows": 1565380,
+      "uncompressed_bytes": 229548298
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0601to0700.csv.xz",
+      "data_rows": 1563152,
+      "uncompressed_bytes": 229217074
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0701to0800.csv.xz",
+      "data_rows": 1544985,
+      "uncompressed_bytes": 226525319
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0801to0900.csv.xz",
+      "data_rows": 1532340,
+      "uncompressed_bytes": 224668105
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging0901to1000.csv.xz",
+      "data_rows": 1521556,
+      "uncompressed_bytes": 223044816
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1001to1100.csv.xz",
+      "data_rows": 1500011,
+      "uncompressed_bytes": 219867464
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1101to1200.csv.xz",
+      "data_rows": 1497955,
+      "uncompressed_bytes": 219555550
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1201to1300.csv.xz",
+      "data_rows": 1388125,
+      "uncompressed_bytes": 203292155
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1301to1400.csv.xz",
+      "data_rows": 1382769,
+      "uncompressed_bytes": 202500606
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1401to1500.csv.xz",
+      "data_rows": 1373174,
+      "uncompressed_bytes": 201077511
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1501to1600.csv.xz",
+      "data_rows": 1366930,
+      "uncompressed_bytes": 200149909
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1601to1700.csv.xz",
+      "data_rows": 1343035,
+      "uncompressed_bytes": 196609494
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1701to1800.csv.xz",
+      "data_rows": 1351783,
+      "uncompressed_bytes": 197885206
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1801to1900.csv.xz",
+      "data_rows": 1327361,
+      "uncompressed_bytes": 194301765
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging1901to2000.csv.xz",
+      "data_rows": 1313384,
+      "uncompressed_bytes": 192201442
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2001to2100.csv.xz",
+      "data_rows": 1303358,
+      "uncompressed_bytes": 190723634
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2101to2200.csv.xz",
+      "data_rows": 1283003,
+      "uncompressed_bytes": 187676247
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2201to2300.csv.xz",
+      "data_rows": 1258952,
+      "uncompressed_bytes": 184119265
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2301to2400.csv.xz",
+      "data_rows": 1251661,
+      "uncompressed_bytes": 183037620
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2401to2500.csv.xz",
+      "data_rows": 1240685,
+      "uncompressed_bytes": 181393066
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2501to2600.csv.xz",
+      "data_rows": 1228752,
+      "uncompressed_bytes": 179626893
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2601to2700.csv.xz",
+      "data_rows": 1218795,
+      "uncompressed_bytes": 178140362
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2701to2800.csv.xz",
+      "data_rows": 1202100,
+      "uncompressed_bytes": 175653956
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2801to2900.csv.xz",
+      "data_rows": 1192909,
+      "uncompressed_bytes": 174302728
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging2901to3000.csv.xz",
+      "data_rows": 1167815,
+      "uncompressed_bytes": 170600266
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging3001to3100.csv.xz",
+      "data_rows": 1165760,
+      "uncompressed_bytes": 170285891
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging3101to3200.csv.xz",
+      "data_rows": 1141393,
+      "uncompressed_bytes": 166668071
+    },
+    {
+      "path": "Cell2a/agingdata_50degC/WWH_18650_cell2a_aging3201to3300.csv.xz",
+      "data_rows": 1105105,
+      "uncompressed_bytes": 161317900
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0001to0100.csv.xz",
+      "data_rows": 1712693,
+      "uncompressed_bytes": 251403483
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0101to0200.csv.xz",
+      "data_rows": 1719745,
+      "uncompressed_bytes": 252445950
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0201to0300.csv.xz",
+      "data_rows": 1716716,
+      "uncompressed_bytes": 252012654
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0301to0400.csv.xz",
+      "data_rows": 1617077,
+      "uncompressed_bytes": 237230973
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0401to0500.csv.xz",
+      "data_rows": 1594164,
+      "uncompressed_bytes": 233827698
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0501to0600.csv.xz",
+      "data_rows": 1585771,
+      "uncompressed_bytes": 232572144
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0601to0700.csv.xz",
+      "data_rows": 1578602,
+      "uncompressed_bytes": 231509147
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0701to0800.csv.xz",
+      "data_rows": 1567168,
+      "uncompressed_bytes": 229818960
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0801to0900.csv.xz",
+      "data_rows": 1546192,
+      "uncompressed_bytes": 226683193
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging0901to1000.csv.xz",
+      "data_rows": 1533219,
+      "uncompressed_bytes": 224795546
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1001to1100.csv.xz",
+      "data_rows": 1516046,
+      "uncompressed_bytes": 222234652
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1101to1200.csv.xz",
+      "data_rows": 1513311,
+      "uncompressed_bytes": 221839119
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1201to1300.csv.xz",
+      "data_rows": 1393966,
+      "uncompressed_bytes": 204187358
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1301to1400.csv.xz",
+      "data_rows": 1388050,
+      "uncompressed_bytes": 203277548
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1401to1500.csv.xz",
+      "data_rows": 1376019,
+      "uncompressed_bytes": 201485953
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1501to1600.csv.xz",
+      "data_rows": 1362723,
+      "uncompressed_bytes": 199508656
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1601to1700.csv.xz",
+      "data_rows": 1360983,
+      "uncompressed_bytes": 199266480
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1701to1800.csv.xz",
+      "data_rows": 1338955,
+      "uncompressed_bytes": 195985285
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1801to1900.csv.xz",
+      "data_rows": 1325420,
+      "uncompressed_bytes": 193981695
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging1901to2000.csv.xz",
+      "data_rows": 1311438,
+      "uncompressed_bytes": 191916438
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2001to2100.csv.xz",
+      "data_rows": 1300496,
+      "uncompressed_bytes": 190287910
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2101to2200.csv.xz",
+      "data_rows": 1279222,
+      "uncompressed_bytes": 187113634
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2201to2300.csv.xz",
+      "data_rows": 1255207,
+      "uncompressed_bytes": 183543375
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2301to2400.csv.xz",
+      "data_rows": 1246678,
+      "uncompressed_bytes": 182277842
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2401to2500.csv.xz",
+      "data_rows": 1236380,
+      "uncompressed_bytes": 180747885
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2501to2600.csv.xz",
+      "data_rows": 1223635,
+      "uncompressed_bytes": 178863333
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2601to2700.csv.xz",
+      "data_rows": 1210983,
+      "uncompressed_bytes": 176994706
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2701to2800.csv.xz",
+      "data_rows": 1193395,
+      "uncompressed_bytes": 174396390
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2801to2900.csv.xz",
+      "data_rows": 1187795,
+      "uncompressed_bytes": 173558169
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging2901to3000.csv.xz",
+      "data_rows": 1166823,
+      "uncompressed_bytes": 170415661
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging3001to3100.csv.xz",
+      "data_rows": 1142589,
+      "uncompressed_bytes": 166862492
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging3101to3200.csv.xz",
+      "data_rows": 1137357,
+      "uncompressed_bytes": 166060612
+    },
+    {
+      "path": "Cell2b/agingdata_50degC/WWH_18650_cell2b_aging3201to3300.csv.xz",
+      "data_rows": 1095785,
+      "uncompressed_bytes": 159918617
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0001to0100.csv.xz",
+      "data_rows": 1722066,
+      "uncompressed_bytes": 253258474
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0101to0200.csv.xz",
+      "data_rows": 1714717,
+      "uncompressed_bytes": 251939215
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0201to0300.csv.xz",
+      "data_rows": 1712122,
+      "uncompressed_bytes": 251453163
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0301to0400.csv.xz",
+      "data_rows": 1613164,
+      "uncompressed_bytes": 236771488
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0401to0500.csv.xz",
+      "data_rows": 1590270,
+      "uncompressed_bytes": 233469691
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0501to0600.csv.xz",
+      "data_rows": 1576083,
+      "uncompressed_bytes": 231309733
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0601to0700.csv.xz",
+      "data_rows": 1582956,
+      "uncompressed_bytes": 232274213
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0701to0800.csv.xz",
+      "data_rows": 1564976,
+      "uncompressed_bytes": 229662794
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0801to0900.csv.xz",
+      "data_rows": 1542746,
+      "uncompressed_bytes": 226563522
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging0901to1000.csv.xz",
+      "data_rows": 1529416,
+      "uncompressed_bytes": 224306095
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1001to1100.csv.xz",
+      "data_rows": 1506698,
+      "uncompressed_bytes": 220935734
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1101to1200.csv.xz",
+      "data_rows": 1506765,
+      "uncompressed_bytes": 221007086
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1201to1300.csv.xz",
+      "data_rows": 1464976,
+      "uncompressed_bytes": 214854117
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1301to1400.csv.xz",
+      "data_rows": 1401117,
+      "uncompressed_bytes": 205447465
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1401to1500.csv.xz",
+      "data_rows": 1384122,
+      "uncompressed_bytes": 202846349
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1501to1600.csv.xz",
+      "data_rows": 1376469,
+      "uncompressed_bytes": 201693888
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1601to1700.csv.xz",
+      "data_rows": 1360404,
+      "uncompressed_bytes": 199342645
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1701to1800.csv.xz",
+      "data_rows": 1345351,
+      "uncompressed_bytes": 197182638
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1801to1900.csv.xz",
+      "data_rows": 1344029,
+      "uncompressed_bytes": 196964881
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging1901to2000.csv.xz",
+      "data_rows": 1335338,
+      "uncompressed_bytes": 195620410
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2001to2100.csv.xz",
+      "data_rows": 1314501,
+      "uncompressed_bytes": 192571250
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2101to2200.csv.xz",
+      "data_rows": 1314397,
+      "uncompressed_bytes": 192524267
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2201to2300.csv.xz",
+      "data_rows": 1296669,
+      "uncompressed_bytes": 189896857
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2301to2400.csv.xz",
+      "data_rows": 1274855,
+      "uncompressed_bytes": 186610062
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2401to2500.csv.xz",
+      "data_rows": 1256996,
+      "uncompressed_bytes": 184056584
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2501to2600.csv.xz",
+      "data_rows": 1253127,
+      "uncompressed_bytes": 183393531
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2601to2700.csv.xz",
+      "data_rows": 1241068,
+      "uncompressed_bytes": 181592363
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2701to2800.csv.xz",
+      "data_rows": 1238185,
+      "uncompressed_bytes": 181071739
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2801to2900.csv.xz",
+      "data_rows": 1229063,
+      "uncompressed_bytes": 179757787
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging2901to3000.csv.xz",
+      "data_rows": 1193960,
+      "uncompressed_bytes": 174614401
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging3001to3100.csv.xz",
+      "data_rows": 1184334,
+      "uncompressed_bytes": 173154670
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging3101to3200.csv.xz",
+      "data_rows": 1176632,
+      "uncompressed_bytes": 172032508
+    },
+    {
+      "path": "Cell2c/agingdata_50degC/WWH_18650_cell2c_aging3201to3300.csv.xz",
+      "data_rows": 1166905,
+      "uncompressed_bytes": 170584684
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0001to0100.csv.xz",
+      "data_rows": 1701626,
+      "uncompressed_bytes": 249709961
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0101to0150.csv.xz",
+      "data_rows": 852169,
+      "uncompressed_bytes": 124153233
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0151to0200.csv.xz",
+      "data_rows": 897951,
+      "uncompressed_bytes": 131159868
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0201to0300.csv.xz",
+      "data_rows": 1709148,
+      "uncompressed_bytes": 250844528
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0301to0400.csv.xz",
+      "data_rows": 1709076,
+      "uncompressed_bytes": 250832478
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0401to0500.csv.xz",
+      "data_rows": 1436229,
+      "uncompressed_bytes": 210380289
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0501to0600.csv.xz",
+      "data_rows": 1436190,
+      "uncompressed_bytes": 210360396
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0601to0700.csv.xz",
+      "data_rows": 1599527,
+      "uncompressed_bytes": 234551399
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0701to0800.csv.xz",
+      "data_rows": 1600011,
+      "uncompressed_bytes": 234623734
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0801to0900.csv.xz",
+      "data_rows": 1523353,
+      "uncompressed_bytes": 223243127
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging0901to1000.csv.xz",
+      "data_rows": 1523510,
+      "uncompressed_bytes": 223269158
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1001to1100.csv.xz",
+      "data_rows": 1492164,
+      "uncompressed_bytes": 218627513
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1101to1200.csv.xz",
+      "data_rows": 1468030,
+      "uncompressed_bytes": 215065002
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1201to1300.csv.xz",
+      "data_rows": 1947317,
+      "uncompressed_bytes": 286311666
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1301to1400.csv.xz",
+      "data_rows": 1394188,
+      "uncompressed_bytes": 204147438
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1401to1500.csv.xz",
+      "data_rows": 1386523,
+      "uncompressed_bytes": 203013086
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1501to1600.csv.xz",
+      "data_rows": 1375841,
+      "uncompressed_bytes": 201425307
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1601to1700.csv.xz",
+      "data_rows": 1358687,
+      "uncompressed_bytes": 198907464
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1701to1800.csv.xz",
+      "data_rows": 1358632,
+      "uncompressed_bytes": 198868628
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1801to1900.csv.xz",
+      "data_rows": 1341353,
+      "uncompressed_bytes": 196317246
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging1901to2000.csv.xz",
+      "data_rows": 1324713,
+      "uncompressed_bytes": 193837344
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2001to2100.csv.xz",
+      "data_rows": 1325521,
+      "uncompressed_bytes": 193950498
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2101to2200.csv.xz",
+      "data_rows": 1309242,
+      "uncompressed_bytes": 191530627
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2201to2300.csv.xz",
+      "data_rows": 1299089,
+      "uncompressed_bytes": 190023854
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2301to2400.csv.xz",
+      "data_rows": 1281583,
+      "uncompressed_bytes": 187420576
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2401to2500.csv.xz",
+      "data_rows": 1264409,
+      "uncompressed_bytes": 184865551
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2501to2600.csv.xz",
+      "data_rows": 1251351,
+      "uncompressed_bytes": 182922293
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2601to2700.csv.xz",
+      "data_rows": 1241294,
+      "uncompressed_bytes": 181428841
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2701to2800.csv.xz",
+      "data_rows": 1232617,
+      "uncompressed_bytes": 180143585
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2801to2900.csv.xz",
+      "data_rows": 1221373,
+      "uncompressed_bytes": 178472142
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging2901to3000.csv.xz",
+      "data_rows": 1211624,
+      "uncompressed_bytes": 177026737
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging3001to3100.csv.xz",
+      "data_rows": 1193130,
+      "uncompressed_bytes": 174293662
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging3101to3200.csv.xz",
+      "data_rows": 1179852,
+      "uncompressed_bytes": 172330073
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging3201to3300.csv.xz",
+      "data_rows": 1172958,
+      "uncompressed_bytes": 171310306
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging3301to3400.csv.xz",
+      "data_rows": 1168789,
+      "uncompressed_bytes": 170687232
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging3401to3500.csv.xz",
+      "data_rows": 1159782,
+      "uncompressed_bytes": 169351100
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging3501to3600.csv.xz",
+      "data_rows": 1150754,
+      "uncompressed_bytes": 168014745
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging3601to3700.csv.xz",
+      "data_rows": 1133013,
+      "uncompressed_bytes": 165384085
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging3701to3800.csv.xz",
+      "data_rows": 1097737,
+      "uncompressed_bytes": 160166066
+    },
+    {
+      "path": "Cell3a/agingdata_50degC/WWH_18650_cell3a_aging3801to3900.csv.xz",
+      "data_rows": 1086999,
+      "uncompressed_bytes": 158572073
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0001to0100.csv.xz",
+      "data_rows": 1701543,
+      "uncompressed_bytes": 249698592
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0101to0150.csv.xz",
+      "data_rows": 852116,
+      "uncompressed_bytes": 124150647
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0151to0200.csv.xz",
+      "data_rows": 897835,
+      "uncompressed_bytes": 131147668
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0201to0300.csv.xz",
+      "data_rows": 1709006,
+      "uncompressed_bytes": 250824993
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0301to0400.csv.xz",
+      "data_rows": 1708783,
+      "uncompressed_bytes": 250791827
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0401to0500.csv.xz",
+      "data_rows": 1436118,
+      "uncompressed_bytes": 210360129
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0501to0600.csv.xz",
+      "data_rows": 1436074,
+      "uncompressed_bytes": 210347910
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0601to0700.csv.xz",
+      "data_rows": 1599247,
+      "uncompressed_bytes": 234515857
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0701to0800.csv.xz",
+      "data_rows": 1599777,
+      "uncompressed_bytes": 234595474
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0801to0900.csv.xz",
+      "data_rows": 1523225,
+      "uncompressed_bytes": 223230360
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging0901to1000.csv.xz",
+      "data_rows": 1523302,
+      "uncompressed_bytes": 223246637
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1001to1100.csv.xz",
+      "data_rows": 1493212,
+      "uncompressed_bytes": 218790406
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1101to1200.csv.xz",
+      "data_rows": 1472662,
+      "uncompressed_bytes": 215753810
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1201to1300.csv.xz",
+      "data_rows": 1760094,
+      "uncompressed_bytes": 258501671
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1301to1400.csv.xz",
+      "data_rows": 1398730,
+      "uncompressed_bytes": 204819928
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1401to1500.csv.xz",
+      "data_rows": 1383169,
+      "uncompressed_bytes": 202511544
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1501to1600.csv.xz",
+      "data_rows": 1372423,
+      "uncompressed_bytes": 200917874
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1601to1700.csv.xz",
+      "data_rows": 1354409,
+      "uncompressed_bytes": 198254163
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1701to1800.csv.xz",
+      "data_rows": 1353485,
+      "uncompressed_bytes": 198106940
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1801to1900.csv.xz",
+      "data_rows": 1337371,
+      "uncompressed_bytes": 195719609
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging1901to2000.csv.xz",
+      "data_rows": 1318506,
+      "uncompressed_bytes": 192954689
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2001to2100.csv.xz",
+      "data_rows": 1325080,
+      "uncompressed_bytes": 193884521
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2101to2200.csv.xz",
+      "data_rows": 1312015,
+      "uncompressed_bytes": 191944312
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2201to2300.csv.xz",
+      "data_rows": 1306221,
+      "uncompressed_bytes": 191082321
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2301to2400.csv.xz",
+      "data_rows": 1297940,
+      "uncompressed_bytes": 189847001
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2401to2500.csv.xz",
+      "data_rows": 1275637,
+      "uncompressed_bytes": 186529159
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2501to2600.csv.xz",
+      "data_rows": 1266481,
+      "uncompressed_bytes": 185172287
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2601to2700.csv.xz",
+      "data_rows": 1255398,
+      "uncompressed_bytes": 183526099
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2701to2800.csv.xz",
+      "data_rows": 1244116,
+      "uncompressed_bytes": 181852137
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2801to2900.csv.xz",
+      "data_rows": 1235771,
+      "uncompressed_bytes": 180612538
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging2901to3000.csv.xz",
+      "data_rows": 1229194,
+      "uncompressed_bytes": 179636230
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging3001to3100.csv.xz",
+      "data_rows": 1218151,
+      "uncompressed_bytes": 177996008
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging3101to3200.csv.xz",
+      "data_rows": 1210635,
+      "uncompressed_bytes": 176879783
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging3201to3300.csv.xz",
+      "data_rows": 1196137,
+      "uncompressed_bytes": 174728487
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging3301to3400.csv.xz",
+      "data_rows": 1186876,
+      "uncompressed_bytes": 173355563
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging3401to3500.csv.xz",
+      "data_rows": 1179809,
+      "uncompressed_bytes": 172306874
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging3501to3600.csv.xz",
+      "data_rows": 1176572,
+      "uncompressed_bytes": 171826065
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging3601to3700.csv.xz",
+      "data_rows": 1164554,
+      "uncompressed_bytes": 170042837
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging3701to3800.csv.xz",
+      "data_rows": 1158390,
+      "uncompressed_bytes": 169130292
+    },
+    {
+      "path": "Cell3b/agingdata_50degC/WWH_18650_cell3b_aging3801to3900.csv.xz",
+      "data_rows": 1150768,
+      "uncompressed_bytes": 167993203
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0001to0100.csv.xz",
+      "data_rows": 1178195,
+      "uncompressed_bytes": 172356224
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0101to0200.csv.xz",
+      "data_rows": 1180139,
+      "uncompressed_bytes": 172674492
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0201to0300.csv.xz",
+      "data_rows": 1176628,
+      "uncompressed_bytes": 172204333
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0301to0400.csv.xz",
+      "data_rows": 1154986,
+      "uncompressed_bytes": 168891691
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0401to0500.csv.xz",
+      "data_rows": 1133149,
+      "uncompressed_bytes": 165650681
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0501to0600.csv.xz",
+      "data_rows": 1127147,
+      "uncompressed_bytes": 164770156
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0601to0700.csv.xz",
+      "data_rows": 1120045,
+      "uncompressed_bytes": 163684529
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0701to0800.csv.xz",
+      "data_rows": 1118627,
+      "uncompressed_bytes": 163453250
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0801to0900.csv.xz",
+      "data_rows": 1111424,
+      "uncompressed_bytes": 162402095
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging0901to1000.csv.xz",
+      "data_rows": 1106108,
+      "uncompressed_bytes": 161603172
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1001to1100.csv.xz",
+      "data_rows": 1090966,
+      "uncompressed_bytes": 159350658
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1101to1200.csv.xz",
+      "data_rows": 1100232,
+      "uncompressed_bytes": 160691005
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1201to1300.csv.xz",
+      "data_rows": 1080823,
+      "uncompressed_bytes": 157815436
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1301to1400.csv.xz",
+      "data_rows": 1070554,
+      "uncompressed_bytes": 156323310
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1401to1500.csv.xz",
+      "data_rows": 1064424,
+      "uncompressed_bytes": 155429185
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1501to1600.csv.xz",
+      "data_rows": 1026004,
+      "uncompressed_bytes": 149732479
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1601to1700.csv.xz",
+      "data_rows": 978507,
+      "uncompressed_bytes": 142726603
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1701to1800.csv.xz",
+      "data_rows": 978511,
+      "uncompressed_bytes": 142729955
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1801to1900.csv.xz",
+      "data_rows": 976561,
+      "uncompressed_bytes": 142466871
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging1901to2000.csv.xz",
+      "data_rows": 972336,
+      "uncompressed_bytes": 141839876
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2001to2100.csv.xz",
+      "data_rows": 971135,
+      "uncompressed_bytes": 141641700
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2101to2200.csv.xz",
+      "data_rows": 969611,
+      "uncompressed_bytes": 141403257
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2201to2300.csv.xz",
+      "data_rows": 967003,
+      "uncompressed_bytes": 141029951
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2301to2400.csv.xz",
+      "data_rows": 961297,
+      "uncompressed_bytes": 140216107
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2401to2500.csv.xz",
+      "data_rows": 956537,
+      "uncompressed_bytes": 139527084
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2501to2600.csv.xz",
+      "data_rows": 953033,
+      "uncompressed_bytes": 138985572
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2601to2700.csv.xz",
+      "data_rows": 954349,
+      "uncompressed_bytes": 139166920
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2701to2800.csv.xz",
+      "data_rows": 947269,
+      "uncompressed_bytes": 138140393
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2801to2900.csv.xz",
+      "data_rows": 941684,
+      "uncompressed_bytes": 137334691
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging2901to3000.csv.xz",
+      "data_rows": 923663,
+      "uncompressed_bytes": 134685946
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3001to3100.csv.xz",
+      "data_rows": 918825,
+      "uncompressed_bytes": 134005676
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3101to3200.csv.xz",
+      "data_rows": 910173,
+      "uncompressed_bytes": 132682629
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3201to3300.csv.xz",
+      "data_rows": 905632,
+      "uncompressed_bytes": 132033976
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3301to3400.csv.xz",
+      "data_rows": 902733,
+      "uncompressed_bytes": 131636070
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3401to3500.csv.xz",
+      "data_rows": 900506,
+      "uncompressed_bytes": 131289323
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3501to3600.csv.xz",
+      "data_rows": 900183,
+      "uncompressed_bytes": 131208592
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3601to3700.csv.xz",
+      "data_rows": 887958,
+      "uncompressed_bytes": 129431986
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3701to3800.csv.xz",
+      "data_rows": 881002,
+      "uncompressed_bytes": 128393164
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3801to3900.csv.xz",
+      "data_rows": 864656,
+      "uncompressed_bytes": 126051026
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging3901to4000.csv.xz",
+      "data_rows": 862135,
+      "uncompressed_bytes": 125648578
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging4001to4100.csv.xz",
+      "data_rows": 857096,
+      "uncompressed_bytes": 124938642
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging4101to4200.csv.xz",
+      "data_rows": 843248,
+      "uncompressed_bytes": 122892144
+    },
+    {
+      "path": "Cell4a/agingdata_50degC/WWH_18650_cell4a_aging4201to4300.csv.xz",
+      "data_rows": 839555,
+      "uncompressed_bytes": 122377133
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0001to0100.csv.xz",
+      "data_rows": 1185866,
+      "uncompressed_bytes": 173452771
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0101to0200.csv.xz",
+      "data_rows": 1187409,
+      "uncompressed_bytes": 173674324
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0201to0300.csv.xz",
+      "data_rows": 1182573,
+      "uncompressed_bytes": 172953660
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0301to0400.csv.xz",
+      "data_rows": 1160616,
+      "uncompressed_bytes": 169704108
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0401to0500.csv.xz",
+      "data_rows": 1136835,
+      "uncompressed_bytes": 166160611
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0501to0600.csv.xz",
+      "data_rows": 1131160,
+      "uncompressed_bytes": 165312195
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0601to0700.csv.xz",
+      "data_rows": 1106295,
+      "uncompressed_bytes": 161609093
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0701to0800.csv.xz",
+      "data_rows": 1104962,
+      "uncompressed_bytes": 161416462
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0801to0900.csv.xz",
+      "data_rows": 1077434,
+      "uncompressed_bytes": 157330397
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging0901to1000.csv.xz",
+      "data_rows": 1072485,
+      "uncompressed_bytes": 156591108
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1001to1100.csv.xz",
+      "data_rows": 1090966,
+      "uncompressed_bytes": 159350658
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1101to1200.csv.xz",
+      "data_rows": 1062349,
+      "uncompressed_bytes": 155073872
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1201to1300.csv.xz",
+      "data_rows": 989949,
+      "uncompressed_bytes": 144362471
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1301to1400.csv.xz",
+      "data_rows": 975941,
+      "uncompressed_bytes": 142321949
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1401to1500.csv.xz",
+      "data_rows": 977764,
+      "uncompressed_bytes": 142585421
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1501to1600.csv.xz",
+      "data_rows": 970972,
+      "uncompressed_bytes": 141591133
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1601to1700.csv.xz",
+      "data_rows": 959347,
+      "uncompressed_bytes": 139886974
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1701to1800.csv.xz",
+      "data_rows": 958630,
+      "uncompressed_bytes": 139779161
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1801to1900.csv.xz",
+      "data_rows": 957690,
+      "uncompressed_bytes": 139643043
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging1901to2000.csv.xz",
+      "data_rows": 950216,
+      "uncompressed_bytes": 138555505
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2001to2100.csv.xz",
+      "data_rows": 945163,
+      "uncompressed_bytes": 137812588
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2101to2200.csv.xz",
+      "data_rows": 924212,
+      "uncompressed_bytes": 134735130
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2201to2300.csv.xz",
+      "data_rows": 913956,
+      "uncompressed_bytes": 133229266
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2301to2400.csv.xz",
+      "data_rows": 908628,
+      "uncompressed_bytes": 132449481
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2401to2500.csv.xz",
+      "data_rows": 899517,
+      "uncompressed_bytes": 131116387
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2501to2600.csv.xz",
+      "data_rows": 889716,
+      "uncompressed_bytes": 129679587
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2601to2700.csv.xz",
+      "data_rows": 891095,
+      "uncompressed_bytes": 129879172
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2701to2800.csv.xz",
+      "data_rows": 868414,
+      "uncompressed_bytes": 126562814
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2801to2900.csv.xz",
+      "data_rows": 858523,
+      "uncompressed_bytes": 125124802
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging2901to3000.csv.xz",
+      "data_rows": 850324,
+      "uncompressed_bytes": 123927228
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3001to3100.csv.xz",
+      "data_rows": 834831,
+      "uncompressed_bytes": 121662281
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3101to3200.csv.xz",
+      "data_rows": 811260,
+      "uncompressed_bytes": 118222834
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3201to3300.csv.xz",
+      "data_rows": 772699,
+      "uncompressed_bytes": 112594050
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3301to3400.csv.xz",
+      "data_rows": 768421,
+      "uncompressed_bytes": 111967058
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3401to3500.csv.xz",
+      "data_rows": 767840,
+      "uncompressed_bytes": 111877597
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3501to3600.csv.xz",
+      "data_rows": 766751,
+      "uncompressed_bytes": 111719090
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3601to3700.csv.xz",
+      "data_rows": 769498,
+      "uncompressed_bytes": 112109678
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3701to3800.csv.xz",
+      "data_rows": 762317,
+      "uncompressed_bytes": 111071395
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3801to3900.csv.xz",
+      "data_rows": 765316,
+      "uncompressed_bytes": 111496141
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging3901to4000.csv.xz",
+      "data_rows": 757573,
+      "uncompressed_bytes": 110380117
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging4001to4100.csv.xz",
+      "data_rows": 759204,
+      "uncompressed_bytes": 110613328
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging4101to4200.csv.xz",
+      "data_rows": 752343,
+      "uncompressed_bytes": 109614042
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging4201to4300.csv.xz",
+      "data_rows": 753139,
+      "uncompressed_bytes": 109729529
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging4301to4400.csv.xz",
+      "data_rows": 747792,
+      "uncompressed_bytes": 108942893
+    },
+    {
+      "path": "Cell4b/agingdata_50degC/WWH_18650_cell4b_aging4401to4500.csv.xz",
+      "data_rows": 748643,
+      "uncompressed_bytes": 109063179
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0001to0100.csv.xz",
+      "data_rows": 1179086,
+      "uncompressed_bytes": 172456446
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0101to0200.csv.xz",
+      "data_rows": 1181483,
+      "uncompressed_bytes": 172799522
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0201to0300.csv.xz",
+      "data_rows": 1177678,
+      "uncompressed_bytes": 172242141
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0301to0400.csv.xz",
+      "data_rows": 1157380,
+      "uncompressed_bytes": 169228957
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0401to0500.csv.xz",
+      "data_rows": 1134155,
+      "uncompressed_bytes": 165767910
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0501to0600.csv.xz",
+      "data_rows": 1128616,
+      "uncompressed_bytes": 164938747
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0601to0700.csv.xz",
+      "data_rows": 1127006,
+      "uncompressed_bytes": 164704348
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0701to0800.csv.xz",
+      "data_rows": 1125506,
+      "uncompressed_bytes": 164475691
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0801to0900.csv.xz",
+      "data_rows": 1114147,
+      "uncompressed_bytes": 162793926
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging0901to1000.csv.xz",
+      "data_rows": 1114361,
+      "uncompressed_bytes": 162816841
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1001to1100.csv.xz",
+      "data_rows": 749381,
+      "uncompressed_bytes": 109220799
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1101to1200.csv.xz",
+      "data_rows": 1112834,
+      "uncompressed_bytes": 162592419
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1201to1300.csv.xz",
+      "data_rows": 1088568,
+      "uncompressed_bytes": 158959406
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1301to1400.csv.xz",
+      "data_rows": 1077995,
+      "uncompressed_bytes": 157405725
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1401to1500.csv.xz",
+      "data_rows": 1071080,
+      "uncompressed_bytes": 156386799
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1501to1600.csv.xz",
+      "data_rows": 1045786,
+      "uncompressed_bytes": 152640596
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1601to1700.csv.xz",
+      "data_rows": 979485,
+      "uncompressed_bytes": 142866483
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1701to1800.csv.xz",
+      "data_rows": 979041,
+      "uncompressed_bytes": 142784049
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1801to1900.csv.xz",
+      "data_rows": 976928,
+      "uncompressed_bytes": 142470233
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging1901to2000.csv.xz",
+      "data_rows": 971959,
+      "uncompressed_bytes": 141778386
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2001to2100.csv.xz",
+      "data_rows": 970706,
+      "uncompressed_bytes": 141565313
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2101to2200.csv.xz",
+      "data_rows": 968767,
+      "uncompressed_bytes": 141274780
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2201to2300.csv.xz",
+      "data_rows": 964040,
+      "uncompressed_bytes": 140577291
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2301to2400.csv.xz",
+      "data_rows": 959245,
+      "uncompressed_bytes": 139883942
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2401to2500.csv.xz",
+      "data_rows": 953891,
+      "uncompressed_bytes": 139093581
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2501to2600.csv.xz",
+      "data_rows": 947563,
+      "uncompressed_bytes": 138157736
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2601to2700.csv.xz",
+      "data_rows": 949241,
+      "uncompressed_bytes": 138408784
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2701to2800.csv.xz",
+      "data_rows": 922564,
+      "uncompressed_bytes": 134479150
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2801to2900.csv.xz",
+      "data_rows": 911720,
+      "uncompressed_bytes": 132905672
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging2901to3000.csv.xz",
+      "data_rows": 906670,
+      "uncompressed_bytes": 132153804
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3001to3100.csv.xz",
+      "data_rows": 904636,
+      "uncompressed_bytes": 131863747
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3101to3200.csv.xz",
+      "data_rows": 894028,
+      "uncompressed_bytes": 130312318
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3201to3300.csv.xz",
+      "data_rows": 878956,
+      "uncompressed_bytes": 128123791
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3301to3400.csv.xz",
+      "data_rows": 869244,
+      "uncompressed_bytes": 126690560
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3401to3500.csv.xz",
+      "data_rows": 861042,
+      "uncompressed_bytes": 125494178
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3501to3600.csv.xz",
+      "data_rows": 862029,
+      "uncompressed_bytes": 125631754
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3601to3700.csv.xz",
+      "data_rows": 842240,
+      "uncompressed_bytes": 122743977
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3701to3800.csv.xz",
+      "data_rows": 821601,
+      "uncompressed_bytes": 119718643
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3801to3900.csv.xz",
+      "data_rows": 794098,
+      "uncompressed_bytes": 115719264
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging3901to4000.csv.xz",
+      "data_rows": 771741,
+      "uncompressed_bytes": 112450238
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging4001to4100.csv.xz",
+      "data_rows": 770188,
+      "uncompressed_bytes": 112219183
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging4101to4200.csv.xz",
+      "data_rows": 766864,
+      "uncompressed_bytes": 111739549
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging4201to4300.csv.xz",
+      "data_rows": 764747,
+      "uncompressed_bytes": 111427670
+    },
+    {
+      "path": "Cell4c/agingdata_50degC/WWH_18650_cell4c_aging4301to4400.csv.xz",
+      "data_rows": 765705,
+      "uncompressed_bytes": 111567076
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0001to0100.csv.xz",
+      "data_rows": 1189331,
+      "uncompressed_bytes": 173992147
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0101to0200.csv.xz",
+      "data_rows": 1172252,
+      "uncompressed_bytes": 171469227
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0201to0300.csv.xz",
+      "data_rows": 1160972,
+      "uncompressed_bytes": 169778114
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0301to0400.csv.xz",
+      "data_rows": 1143850,
+      "uncompressed_bytes": 167219442
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0401to0500.csv.xz",
+      "data_rows": 1131798,
+      "uncompressed_bytes": 165412317
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0501to0600.csv.xz",
+      "data_rows": 1126600,
+      "uncompressed_bytes": 164672387
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0601to0700.csv.xz",
+      "data_rows": 1120886,
+      "uncompressed_bytes": 163793124
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0701to0800.csv.xz",
+      "data_rows": 1115180,
+      "uncompressed_bytes": 162949184
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0801to0900.csv.xz",
+      "data_rows": 1096122,
+      "uncompressed_bytes": 160114376
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging0901to1000.csv.xz",
+      "data_rows": 1094280,
+      "uncompressed_bytes": 159866048
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1001to1100.csv.xz",
+      "data_rows": 1088266,
+      "uncompressed_bytes": 158960837
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1101to1200.csv.xz",
+      "data_rows": 1070655,
+      "uncompressed_bytes": 156349346
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1201to1300.csv.xz",
+      "data_rows": 1043860,
+      "uncompressed_bytes": 152413832
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1301to1400.csv.xz",
+      "data_rows": 1023608,
+      "uncompressed_bytes": 149381705
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1401to1500.csv.xz",
+      "data_rows": 985319,
+      "uncompressed_bytes": 143731068
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1501to1600.csv.xz",
+      "data_rows": 984223,
+      "uncompressed_bytes": 143563653
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1601to1700.csv.xz",
+      "data_rows": 981416,
+      "uncompressed_bytes": 143162528
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1701to1800.csv.xz",
+      "data_rows": 977141,
+      "uncompressed_bytes": 142534506
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1801to1900.csv.xz",
+      "data_rows": 974668,
+      "uncompressed_bytes": 142174237
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging1901to2000.csv.xz",
+      "data_rows": 971165,
+      "uncompressed_bytes": 141655916
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2001to2100.csv.xz",
+      "data_rows": 965240,
+      "uncompressed_bytes": 140789830
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2101to2200.csv.xz",
+      "data_rows": 961510,
+      "uncompressed_bytes": 140239844
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2201to2300.csv.xz",
+      "data_rows": 953524,
+      "uncompressed_bytes": 139041991
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2301to2400.csv.xz",
+      "data_rows": 932242,
+      "uncompressed_bytes": 135917240
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2401to2500.csv.xz",
+      "data_rows": 933638,
+      "uncompressed_bytes": 136132314
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2501to2600.csv.xz",
+      "data_rows": 919322,
+      "uncompressed_bytes": 134013642
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2601to2700.csv.xz",
+      "data_rows": 912844,
+      "uncompressed_bytes": 133095108
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2701to2800.csv.xz",
+      "data_rows": 905134,
+      "uncompressed_bytes": 131948213
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2801to2900.csv.xz",
+      "data_rows": 898870,
+      "uncompressed_bytes": 131037446
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging2901to3000.csv.xz",
+      "data_rows": 881358,
+      "uncompressed_bytes": 128459211
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3001to3100.csv.xz",
+      "data_rows": 875597,
+      "uncompressed_bytes": 127657826
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3101to3200.csv.xz",
+      "data_rows": 867657,
+      "uncompressed_bytes": 126475470
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3201to3300.csv.xz",
+      "data_rows": 858299,
+      "uncompressed_bytes": 125102832
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3301to3400.csv.xz",
+      "data_rows": 856077,
+      "uncompressed_bytes": 124793429
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3401to3500.csv.xz",
+      "data_rows": 816928,
+      "uncompressed_bytes": 119057114
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3501to3600.csv.xz",
+      "data_rows": 814060,
+      "uncompressed_bytes": 118638377
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3601to3700.csv.xz",
+      "data_rows": 776926,
+      "uncompressed_bytes": 113221390
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3701to3800.csv.xz",
+      "data_rows": 777055,
+      "uncompressed_bytes": 113239841
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3801to3900.csv.xz",
+      "data_rows": 775971,
+      "uncompressed_bytes": 113093666
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging3901to4000.csv.xz",
+      "data_rows": 772357,
+      "uncompressed_bytes": 112555086
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging4001to4100.csv.xz",
+      "data_rows": 770549,
+      "uncompressed_bytes": 112305418
+    },
+    {
+      "path": "Cell5a/agingdata_50degC/WWH_18650_cell5a_aging4101to4200.csv.xz",
+      "data_rows": 771842,
+      "uncompressed_bytes": 112506598
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0001to0100.csv.xz",
+      "data_rows": 1195372,
+      "uncompressed_bytes": 174852868
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0101to0200.csv.xz",
+      "data_rows": 1178635,
+      "uncompressed_bytes": 172383635
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0201to0300.csv.xz",
+      "data_rows": 1167713,
+      "uncompressed_bytes": 170745002
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0301to0400.csv.xz",
+      "data_rows": 1150486,
+      "uncompressed_bytes": 168174286
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0401to0500.csv.xz",
+      "data_rows": 1151582,
+      "uncompressed_bytes": 168335975
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0501to0600.csv.xz",
+      "data_rows": 1141963,
+      "uncompressed_bytes": 166908743
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0601to0700.csv.xz",
+      "data_rows": 1134205,
+      "uncompressed_bytes": 165752639
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0701to0800.csv.xz",
+      "data_rows": 1133888,
+      "uncompressed_bytes": 165704380
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0801to0900.csv.xz",
+      "data_rows": 1124342,
+      "uncompressed_bytes": 164279128
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging0901to1000.csv.xz",
+      "data_rows": 1114969,
+      "uncompressed_bytes": 162904297
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1001to1100.csv.xz",
+      "data_rows": 1107920,
+      "uncompressed_bytes": 161836859
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1101to1200.csv.xz",
+      "data_rows": 1094064,
+      "uncompressed_bytes": 159781599
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1201to1300.csv.xz",
+      "data_rows": 1082455,
+      "uncompressed_bytes": 158060623
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1301to1400.csv.xz",
+      "data_rows": 1071873,
+      "uncompressed_bytes": 156499111
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1401to1500.csv.xz",
+      "data_rows": 994516,
+      "uncompressed_bytes": 145047509
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1501to1600.csv.xz",
+      "data_rows": 993788,
+      "uncompressed_bytes": 144933674
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1601to1700.csv.xz",
+      "data_rows": 991794,
+      "uncompressed_bytes": 144641001
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1701to1800.csv.xz",
+      "data_rows": 987119,
+      "uncompressed_bytes": 143960820
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1801to1900.csv.xz",
+      "data_rows": 985692,
+      "uncompressed_bytes": 143741893
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging1901to2000.csv.xz",
+      "data_rows": 983889,
+      "uncompressed_bytes": 143474075
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2001to2100.csv.xz",
+      "data_rows": 979485,
+      "uncompressed_bytes": 142827871
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2101to2200.csv.xz",
+      "data_rows": 975372,
+      "uncompressed_bytes": 142220854
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2201to2300.csv.xz",
+      "data_rows": 970293,
+      "uncompressed_bytes": 141478480
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2301to2400.csv.xz",
+      "data_rows": 966235,
+      "uncompressed_bytes": 140886630
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2401to2500.csv.xz",
+      "data_rows": 968062,
+      "uncompressed_bytes": 141147206
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2501to2600.csv.xz",
+      "data_rows": 960035,
+      "uncompressed_bytes": 139965938
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2601to2700.csv.xz",
+      "data_rows": 941451,
+      "uncompressed_bytes": 137233510
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2701to2800.csv.xz",
+      "data_rows": 934764,
+      "uncompressed_bytes": 136272309
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2801to2900.csv.xz",
+      "data_rows": 928725,
+      "uncompressed_bytes": 135371159
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging2901to3000.csv.xz",
+      "data_rows": 924474,
+      "uncompressed_bytes": 134743872
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3001to3100.csv.xz",
+      "data_rows": 920918,
+      "uncompressed_bytes": 134220834
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3101to3200.csv.xz",
+      "data_rows": 918852,
+      "uncompressed_bytes": 133918002
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3201to3300.csv.xz",
+      "data_rows": 912012,
+      "uncompressed_bytes": 132911927
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3301to3400.csv.xz",
+      "data_rows": 916050,
+      "uncompressed_bytes": 133528519
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3401to3500.csv.xz",
+      "data_rows": 897323,
+      "uncompressed_bytes": 130757687
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3501to3600.csv.xz",
+      "data_rows": 897465,
+      "uncompressed_bytes": 130767345
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3601to3700.csv.xz",
+      "data_rows": 881873,
+      "uncompressed_bytes": 128503903
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3701to3800.csv.xz",
+      "data_rows": 878404,
+      "uncompressed_bytes": 127984552
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3801to3900.csv.xz",
+      "data_rows": 875235,
+      "uncompressed_bytes": 127537488
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging3901to4000.csv.xz",
+      "data_rows": 868920,
+      "uncompressed_bytes": 126610834
+    },
+    {
+      "path": "Cell5b/agingdata_50degC/WWH_18650_cell5b_aging4001to4100.csv.xz",
+      "data_rows": 857663,
+      "uncompressed_bytes": 124969245
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0001to0100.csv.xz",
+      "data_rows": 1192049,
+      "uncompressed_bytes": 174395795
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0101to0200.csv.xz",
+      "data_rows": 1175294,
+      "uncompressed_bytes": 171889138
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0201to0300.csv.xz",
+      "data_rows": 1164691,
+      "uncompressed_bytes": 170324092
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0301to0400.csv.xz",
+      "data_rows": 1147791,
+      "uncompressed_bytes": 167795256
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0401to0500.csv.xz",
+      "data_rows": 1133971,
+      "uncompressed_bytes": 165743870
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0501to0600.csv.xz",
+      "data_rows": 1129873,
+      "uncompressed_bytes": 165150063
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0601to0700.csv.xz",
+      "data_rows": 1124029,
+      "uncompressed_bytes": 164252447
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0701to0800.csv.xz",
+      "data_rows": 1119370,
+      "uncompressed_bytes": 163554924
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0801to0900.csv.xz",
+      "data_rows": 749747,
+      "uncompressed_bytes": 109264831
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging0901to1000.csv.xz",
+      "data_rows": 1095299,
+      "uncompressed_bytes": 159957052
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1001to1100.csv.xz",
+      "data_rows": 1085687,
+      "uncompressed_bytes": 158525170
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1101to1200.csv.xz",
+      "data_rows": 1071815,
+      "uncompressed_bytes": 156506356
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1201to1300.csv.xz",
+      "data_rows": 1043436,
+      "uncompressed_bytes": 152296194
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1301to1400.csv.xz",
+      "data_rows": 1025813,
+      "uncompressed_bytes": 149682565
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1401to1500.csv.xz",
+      "data_rows": 987125,
+      "uncompressed_bytes": 143977110
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1501to1600.csv.xz",
+      "data_rows": 986682,
+      "uncompressed_bytes": 143906091
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1601to1700.csv.xz",
+      "data_rows": 985106,
+      "uncompressed_bytes": 143678595
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1701to1800.csv.xz",
+      "data_rows": 981332,
+      "uncompressed_bytes": 143128031
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1801to1900.csv.xz",
+      "data_rows": 980167,
+      "uncompressed_bytes": 142952987
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging1901to2000.csv.xz",
+      "data_rows": 977092,
+      "uncompressed_bytes": 142505691
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2001to2100.csv.xz",
+      "data_rows": 971484,
+      "uncompressed_bytes": 141692322
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2101to2200.csv.xz",
+      "data_rows": 969302,
+      "uncompressed_bytes": 141350684
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2201to2300.csv.xz",
+      "data_rows": 967918,
+      "uncompressed_bytes": 141147515
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2301to2400.csv.xz",
+      "data_rows": 960010,
+      "uncompressed_bytes": 139991212
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2401to2500.csv.xz",
+      "data_rows": 961527,
+      "uncompressed_bytes": 140210203
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2501to2600.csv.xz",
+      "data_rows": 938614,
+      "uncompressed_bytes": 136839241
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2601to2700.csv.xz",
+      "data_rows": 930345,
+      "uncompressed_bytes": 135627625
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2701to2800.csv.xz",
+      "data_rows": 922824,
+      "uncompressed_bytes": 134531807
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2801to2900.csv.xz",
+      "data_rows": 920829,
+      "uncompressed_bytes": 134236019
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging2901to3000.csv.xz",
+      "data_rows": 917647,
+      "uncompressed_bytes": 133756086
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3001to3100.csv.xz",
+      "data_rows": 913602,
+      "uncompressed_bytes": 133180410
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3101to3200.csv.xz",
+      "data_rows": 906331,
+      "uncompressed_bytes": 132101196
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3201to3300.csv.xz",
+      "data_rows": 900522,
+      "uncompressed_bytes": 131242576
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3301to3400.csv.xz",
+      "data_rows": 896038,
+      "uncompressed_bytes": 130584391
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3401to3500.csv.xz",
+      "data_rows": 883387,
+      "uncompressed_bytes": 128748722
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3501to3600.csv.xz",
+      "data_rows": 885813,
+      "uncompressed_bytes": 129081281
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3601to3700.csv.xz",
+      "data_rows": 868859,
+      "uncompressed_bytes": 126635452
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3701to3800.csv.xz",
+      "data_rows": 867985,
+      "uncompressed_bytes": 126492405
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3801to3900.csv.xz",
+      "data_rows": 856597,
+      "uncompressed_bytes": 124831333
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging3901to4000.csv.xz",
+      "data_rows": 836019,
+      "uncompressed_bytes": 121829079
+    },
+    {
+      "path": "Cell5c/agingdata_50degC/WWH_18650_cell5c_aging4001to4100.csv.xz",
+      "data_rows": 819807,
+      "uncompressed_bytes": 119462566
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0001to0100.csv.xz",
+      "data_rows": 621751,
+      "uncompressed_bytes": 90460563
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0101to0200.csv.xz",
+      "data_rows": 621474,
+      "uncompressed_bytes": 90413578
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0201to0300.csv.xz",
+      "data_rows": 621498,
+      "uncompressed_bytes": 90412289
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0301to0400.csv.xz",
+      "data_rows": 602459,
+      "uncompressed_bytes": 87627166
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0401to0500.csv.xz",
+      "data_rows": 604312,
+      "uncompressed_bytes": 87889571
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0501to0600.csv.xz",
+      "data_rows": 596428,
+      "uncompressed_bytes": 86731469
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0601to0700.csv.xz",
+      "data_rows": 592157,
+      "uncompressed_bytes": 86110124
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0701to0800.csv.xz",
+      "data_rows": 594224,
+      "uncompressed_bytes": 86404517
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0801to0900.csv.xz",
+      "data_rows": 592641,
+      "uncompressed_bytes": 86177002
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging0901to1000.csv.xz",
+      "data_rows": 584560,
+      "uncompressed_bytes": 84989742
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1001to1100.csv.xz",
+      "data_rows": 584068,
+      "uncompressed_bytes": 84907794
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1101to1200.csv.xz",
+      "data_rows": 579252,
+      "uncompressed_bytes": 84208032
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1201to1300.csv.xz",
+      "data_rows": 579249,
+      "uncompressed_bytes": 84199815
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1301to1400.csv.xz",
+      "data_rows": 575700,
+      "uncompressed_bytes": 83683287
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1401to1500.csv.xz",
+      "data_rows": 575600,
+      "uncompressed_bytes": 83662382
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1501to1600.csv.xz",
+      "data_rows": 571870,
+      "uncompressed_bytes": 83117905
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1601to1700.csv.xz",
+      "data_rows": 570171,
+      "uncompressed_bytes": 82870409
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1701to1800.csv.xz",
+      "data_rows": 574320,
+      "uncompressed_bytes": 83464047
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1801to1900.csv.xz",
+      "data_rows": 570832,
+      "uncompressed_bytes": 82947596
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging1901to2000.csv.xz",
+      "data_rows": 568969,
+      "uncompressed_bytes": 82674216
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2001to2100.csv.xz",
+      "data_rows": 565643,
+      "uncompressed_bytes": 82188386
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2101to2200.csv.xz",
+      "data_rows": 558928,
+      "uncompressed_bytes": 81216994
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2201to2300.csv.xz",
+      "data_rows": 556374,
+      "uncompressed_bytes": 80846425
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2301to2400.csv.xz",
+      "data_rows": 551420,
+      "uncompressed_bytes": 80122471
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2401to2500.csv.xz",
+      "data_rows": 547974,
+      "uncompressed_bytes": 79617270
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2501to2600.csv.xz",
+      "data_rows": 545169,
+      "uncompressed_bytes": 79204613
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2601to2700.csv.xz",
+      "data_rows": 544489,
+      "uncompressed_bytes": 79107145
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2701to2800.csv.xz",
+      "data_rows": 535071,
+      "uncompressed_bytes": 77730496
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2801to2900.csv.xz",
+      "data_rows": 531134,
+      "uncompressed_bytes": 77157530
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging2901to3000.csv.xz",
+      "data_rows": 525322,
+      "uncompressed_bytes": 76310145
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3001to3100.csv.xz",
+      "data_rows": 523083,
+      "uncompressed_bytes": 75983884
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3101to3200.csv.xz",
+      "data_rows": 517957,
+      "uncompressed_bytes": 75240368
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3201to3300.csv.xz",
+      "data_rows": 516347,
+      "uncompressed_bytes": 75006620
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3301to3400.csv.xz",
+      "data_rows": 512458,
+      "uncompressed_bytes": 74440280
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3401to3500.csv.xz",
+      "data_rows": 509051,
+      "uncompressed_bytes": 73943210
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3501to3600.csv.xz",
+      "data_rows": 506761,
+      "uncompressed_bytes": 73610902
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3601to3700.csv.xz",
+      "data_rows": 508782,
+      "uncompressed_bytes": 73900865
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3701to3800.csv.xz",
+      "data_rows": 507645,
+      "uncompressed_bytes": 73738001
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3801to3900.csv.xz",
+      "data_rows": 498239,
+      "uncompressed_bytes": 72369315
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging3901to4000.csv.xz",
+      "data_rows": 492989,
+      "uncompressed_bytes": 71603324
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4001to4100.csv.xz",
+      "data_rows": 491412,
+      "uncompressed_bytes": 71365538
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4101to4200.csv.xz",
+      "data_rows": 490973,
+      "uncompressed_bytes": 71302421
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4201to4300.csv.xz",
+      "data_rows": 485518,
+      "uncompressed_bytes": 70512607
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4301to4400.csv.xz",
+      "data_rows": 484785,
+      "uncompressed_bytes": 70398941
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4401to4500.csv.xz",
+      "data_rows": 481054,
+      "uncompressed_bytes": 69862594
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4501to4600.csv.xz",
+      "data_rows": 480827,
+      "uncompressed_bytes": 69823036
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4601to4700.csv.xz",
+      "data_rows": 477451,
+      "uncompressed_bytes": 69337714
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4701to4800.csv.xz",
+      "data_rows": 476100,
+      "uncompressed_bytes": 69133202
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4801to4900.csv.xz",
+      "data_rows": 474422,
+      "uncompressed_bytes": 68891162
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging4901to5000.csv.xz",
+      "data_rows": 472722,
+      "uncompressed_bytes": 68644635
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5001to5100.csv.xz",
+      "data_rows": 468975,
+      "uncompressed_bytes": 68098255
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5101to5200.csv.xz",
+      "data_rows": 468437,
+      "uncompressed_bytes": 68015314
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5201to5300.csv.xz",
+      "data_rows": 465813,
+      "uncompressed_bytes": 67637675
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5301to5400.csv.xz",
+      "data_rows": 466004,
+      "uncompressed_bytes": 67657865
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5401to5500.csv.xz",
+      "data_rows": 463238,
+      "uncompressed_bytes": 67262428
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5501to5600.csv.xz",
+      "data_rows": 463677,
+      "uncompressed_bytes": 67318641
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5601to5700.csv.xz",
+      "data_rows": 464603,
+      "uncompressed_bytes": 67443964
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5701to5800.csv.xz",
+      "data_rows": 463475,
+      "uncompressed_bytes": 67279399
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5801to5900.csv.xz",
+      "data_rows": 458897,
+      "uncompressed_bytes": 66625660
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging5901to6000.csv.xz",
+      "data_rows": 459644,
+      "uncompressed_bytes": 66721241
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging6001to6100.csv.xz",
+      "data_rows": 459236,
+      "uncompressed_bytes": 66656406
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging6101to6200.csv.xz",
+      "data_rows": 452144,
+      "uncompressed_bytes": 65642541
+    },
+    {
+      "path": "Cell6a/agingdata_50degC/WWH_18650_cell6a_aging6201to6300.csv.xz",
+      "data_rows": 452917,
+      "uncompressed_bytes": 65748779
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0001to0100.csv.xz",
+      "data_rows": 624337,
+      "uncompressed_bytes": 90845322
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0101to0200.csv.xz",
+      "data_rows": 624208,
+      "uncompressed_bytes": 90821239
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0201to0300.csv.xz",
+      "data_rows": 623845,
+      "uncompressed_bytes": 90764109
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0301to0400.csv.xz",
+      "data_rows": 605043,
+      "uncompressed_bytes": 88013897
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0401to0500.csv.xz",
+      "data_rows": 606649,
+      "uncompressed_bytes": 88239588
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0501to0600.csv.xz",
+      "data_rows": 598782,
+      "uncompressed_bytes": 87084496
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0601to0700.csv.xz",
+      "data_rows": 594681,
+      "uncompressed_bytes": 86487415
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0701to0800.csv.xz",
+      "data_rows": 596628,
+      "uncompressed_bytes": 86764454
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0801to0900.csv.xz",
+      "data_rows": 595137,
+      "uncompressed_bytes": 86550116
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging0901to1000.csv.xz",
+      "data_rows": 591969,
+      "uncompressed_bytes": 86086335
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1001to1100.csv.xz",
+      "data_rows": 591823,
+      "uncompressed_bytes": 86055951
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1101to1200.csv.xz",
+      "data_rows": 587571,
+      "uncompressed_bytes": 85439768
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1201to1300.csv.xz",
+      "data_rows": 587404,
+      "uncompressed_bytes": 85406890
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1301to1400.csv.xz",
+      "data_rows": 583862,
+      "uncompressed_bytes": 84891214
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1401to1500.csv.xz",
+      "data_rows": 583924,
+      "uncompressed_bytes": 84894416
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1501to1600.csv.xz",
+      "data_rows": 580552,
+      "uncompressed_bytes": 84402623
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1601to1700.csv.xz",
+      "data_rows": 579074,
+      "uncompressed_bytes": 84187182
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1701to1800.csv.xz",
+      "data_rows": 583082,
+      "uncompressed_bytes": 84757691
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1801to1900.csv.xz",
+      "data_rows": 579988,
+      "uncompressed_bytes": 84297858
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging1901to2000.csv.xz",
+      "data_rows": 578761,
+      "uncompressed_bytes": 84117330
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2001to2100.csv.xz",
+      "data_rows": 576357,
+      "uncompressed_bytes": 83764895
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2101to2200.csv.xz",
+      "data_rows": 571033,
+      "uncompressed_bytes": 82994529
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2201to2300.csv.xz",
+      "data_rows": 569190,
+      "uncompressed_bytes": 82726528
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2301to2400.csv.xz",
+      "data_rows": 565704,
+      "uncompressed_bytes": 82218771
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2401to2500.csv.xz",
+      "data_rows": 563515,
+      "uncompressed_bytes": 81895549
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2501to2600.csv.xz",
+      "data_rows": 562124,
+      "uncompressed_bytes": 81689774
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2601to2700.csv.xz",
+      "data_rows": 560854,
+      "uncompressed_bytes": 81508526
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2701to2800.csv.xz",
+      "data_rows": 554561,
+      "uncompressed_bytes": 80585413
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2801to2900.csv.xz",
+      "data_rows": 552891,
+      "uncompressed_bytes": 80341264
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging2901to3000.csv.xz",
+      "data_rows": 548165,
+      "uncompressed_bytes": 79649220
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3001to3100.csv.xz",
+      "data_rows": 547171,
+      "uncompressed_bytes": 79503695
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3101to3200.csv.xz",
+      "data_rows": 543752,
+      "uncompressed_bytes": 79006884
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3201to3300.csv.xz",
+      "data_rows": 542838,
+      "uncompressed_bytes": 78871830
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3301to3400.csv.xz",
+      "data_rows": 540482,
+      "uncompressed_bytes": 78526885
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3401to3500.csv.xz",
+      "data_rows": 537604,
+      "uncompressed_bytes": 78104536
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3501to3600.csv.xz",
+      "data_rows": 535172,
+      "uncompressed_bytes": 77749346
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3601to3700.csv.xz",
+      "data_rows": 534730,
+      "uncompressed_bytes": 77679275
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3701to3800.csv.xz",
+      "data_rows": 532248,
+      "uncompressed_bytes": 77317592
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3801to3900.csv.xz",
+      "data_rows": 529940,
+      "uncompressed_bytes": 76985583
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging3901to4000.csv.xz",
+      "data_rows": 525063,
+      "uncompressed_bytes": 76275600
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4001to4100.csv.xz",
+      "data_rows": 525132,
+      "uncompressed_bytes": 76278058
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4101to4200.csv.xz",
+      "data_rows": 522357,
+      "uncompressed_bytes": 75880595
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4201to4300.csv.xz",
+      "data_rows": 521307,
+      "uncompressed_bytes": 75726641
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4301to4400.csv.xz",
+      "data_rows": 521247,
+      "uncompressed_bytes": 75713891
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4401to4500.csv.xz",
+      "data_rows": 518551,
+      "uncompressed_bytes": 75325858
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4501to4600.csv.xz",
+      "data_rows": 517544,
+      "uncompressed_bytes": 75177945
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4601to4700.csv.xz",
+      "data_rows": 515501,
+      "uncompressed_bytes": 74877459
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4701to4800.csv.xz",
+      "data_rows": 515259,
+      "uncompressed_bytes": 74841516
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4801to4900.csv.xz",
+      "data_rows": 512419,
+      "uncompressed_bytes": 74431594
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging4901to5000.csv.xz",
+      "data_rows": 511532,
+      "uncompressed_bytes": 74297475
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5001to5100.csv.xz",
+      "data_rows": 509732,
+      "uncompressed_bytes": 74040984
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5101to5200.csv.xz",
+      "data_rows": 509930,
+      "uncompressed_bytes": 74065426
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5201to5300.csv.xz",
+      "data_rows": 507431,
+      "uncompressed_bytes": 73705545
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5301to5400.csv.xz",
+      "data_rows": 505106,
+      "uncompressed_bytes": 73365153
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5401to5500.csv.xz",
+      "data_rows": 505472,
+      "uncompressed_bytes": 73415365
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5501to5600.csv.xz",
+      "data_rows": 507333,
+      "uncompressed_bytes": 73676222
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5601to5700.csv.xz",
+      "data_rows": 503882,
+      "uncompressed_bytes": 73180142
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5701to5800.csv.xz",
+      "data_rows": 501852,
+      "uncompressed_bytes": 72884684
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5801to5900.csv.xz",
+      "data_rows": 503118,
+      "uncompressed_bytes": 73061589
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging5901to6000.csv.xz",
+      "data_rows": 497472,
+      "uncompressed_bytes": 72252373
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging6001to6100.csv.xz",
+      "data_rows": 496808,
+      "uncompressed_bytes": 72149258
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging6101to6200.csv.xz",
+      "data_rows": 494217,
+      "uncompressed_bytes": 71776375
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging6201to6300.csv.xz",
+      "data_rows": 493057,
+      "uncompressed_bytes": 71609001
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging6301to6400.csv.xz",
+      "data_rows": 492378,
+      "uncompressed_bytes": 71505094
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging6401to6600.csv.xz",
+      "data_rows": 983384,
+      "uncompressed_bytes": 143560622
+    },
+    {
+      "path": "Cell6b/agingdata_50degC/WWH_18650_cell6b_aging6601to6800.csv.xz",
+      "data_rows": 984969,
+      "uncompressed_bytes": 143786508
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0001to0100.csv.xz",
+      "data_rows": 622124,
+      "uncompressed_bytes": 90516471
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0101to0200.csv.xz",
+      "data_rows": 621996,
+      "uncompressed_bytes": 90493293
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0201to0300.csv.xz",
+      "data_rows": 621748,
+      "uncompressed_bytes": 90451828
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0301to0400.csv.xz",
+      "data_rows": 602953,
+      "uncompressed_bytes": 87702930
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0401to0500.csv.xz",
+      "data_rows": 604491,
+      "uncompressed_bytes": 87919611
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0501to0600.csv.xz",
+      "data_rows": 596646,
+      "uncompressed_bytes": 86767083
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0601to0700.csv.xz",
+      "data_rows": 592423,
+      "uncompressed_bytes": 86152773
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0701to0800.csv.xz",
+      "data_rows": 594219,
+      "uncompressed_bytes": 86408142
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0801to0900.csv.xz",
+      "data_rows": 592688,
+      "uncompressed_bytes": 86187922
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging0901to1000.csv.xz",
+      "data_rows": 591012,
+      "uncompressed_bytes": 85942791
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1001to1100.csv.xz",
+      "data_rows": 590949,
+      "uncompressed_bytes": 85925430
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1101to1200.csv.xz",
+      "data_rows": 586767,
+      "uncompressed_bytes": 85318960
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1201to1300.csv.xz",
+      "data_rows": 586864,
+      "uncompressed_bytes": 85326109
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1301to1400.csv.xz",
+      "data_rows": 583451,
+      "uncompressed_bytes": 84829635
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1401to1500.csv.xz",
+      "data_rows": 583778,
+      "uncompressed_bytes": 84870576
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1501to1600.csv.xz",
+      "data_rows": 579891,
+      "uncompressed_bytes": 84304301
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1601to1700.csv.xz",
+      "data_rows": 578681,
+      "uncompressed_bytes": 84127831
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1701to1800.csv.xz",
+      "data_rows": 582685,
+      "uncompressed_bytes": 84696986
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1801to1900.csv.xz",
+      "data_rows": 580341,
+      "uncompressed_bytes": 84348481
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging1901to2000.csv.xz",
+      "data_rows": 579152,
+      "uncompressed_bytes": 84173244
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2001to2100.csv.xz",
+      "data_rows": 577060,
+      "uncompressed_bytes": 83867619
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2101to2200.csv.xz",
+      "data_rows": 571873,
+      "uncompressed_bytes": 83116575
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2201to2300.csv.xz",
+      "data_rows": 570377,
+      "uncompressed_bytes": 82899555
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2301to2400.csv.xz",
+      "data_rows": 567111,
+      "uncompressed_bytes": 82423047
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2401to2500.csv.xz",
+      "data_rows": 565185,
+      "uncompressed_bytes": 82137856
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2501to2600.csv.xz",
+      "data_rows": 563935,
+      "uncompressed_bytes": 81952221
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2601to2700.csv.xz",
+      "data_rows": 562621,
+      "uncompressed_bytes": 81764088
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2701to2800.csv.xz",
+      "data_rows": 556759,
+      "uncompressed_bytes": 80904947
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2801to2900.csv.xz",
+      "data_rows": 554627,
+      "uncompressed_bytes": 80593001
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging2901to3000.csv.xz",
+      "data_rows": 549655,
+      "uncompressed_bytes": 79865164
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3001to3100.csv.xz",
+      "data_rows": 548022,
+      "uncompressed_bytes": 79625359
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3101to3200.csv.xz",
+      "data_rows": 543503,
+      "uncompressed_bytes": 78969476
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3201to3300.csv.xz",
+      "data_rows": 541307,
+      "uncompressed_bytes": 78647229
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3301to3400.csv.xz",
+      "data_rows": 537466,
+      "uncompressed_bytes": 78085214
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3401to3500.csv.xz",
+      "data_rows": 533139,
+      "uncompressed_bytes": 77453473
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3501to3600.csv.xz",
+      "data_rows": 529240,
+      "uncompressed_bytes": 76885582
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3601to3700.csv.xz",
+      "data_rows": 527839,
+      "uncompressed_bytes": 76675705
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3701to3800.csv.xz",
+      "data_rows": 524401,
+      "uncompressed_bytes": 76175571
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3801to3900.csv.xz",
+      "data_rows": 521077,
+      "uncompressed_bytes": 75698092
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging3901to4000.csv.xz",
+      "data_rows": 515978,
+      "uncompressed_bytes": 74954491
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4001to4100.csv.xz",
+      "data_rows": 515055,
+      "uncompressed_bytes": 74813457
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4101to4200.csv.xz",
+      "data_rows": 514365,
+      "uncompressed_bytes": 74715053
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4201to4300.csv.xz",
+      "data_rows": 509469,
+      "uncompressed_bytes": 74007005
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4301to4400.csv.xz",
+      "data_rows": 508281,
+      "uncompressed_bytes": 73827903
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4401to4500.csv.xz",
+      "data_rows": 505068,
+      "uncompressed_bytes": 73366366
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4501to4600.csv.xz",
+      "data_rows": 504685,
+      "uncompressed_bytes": 73304456
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4601to4700.csv.xz",
+      "data_rows": 501948,
+      "uncompressed_bytes": 72911799
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4701to4800.csv.xz",
+      "data_rows": 500054,
+      "uncompressed_bytes": 72630649
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4801to4900.csv.xz",
+      "data_rows": 498786,
+      "uncompressed_bytes": 72446967
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging4901to5000.csv.xz",
+      "data_rows": 497159,
+      "uncompressed_bytes": 72210257
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5001to5100.csv.xz",
+      "data_rows": 493094,
+      "uncompressed_bytes": 71621265
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5101to5200.csv.xz",
+      "data_rows": 492992,
+      "uncompressed_bytes": 71600635
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5201to5300.csv.xz",
+      "data_rows": 490410,
+      "uncompressed_bytes": 71229083
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5301to5400.csv.xz",
+      "data_rows": 489209,
+      "uncompressed_bytes": 71050659
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5401to5500.csv.xz",
+      "data_rows": 486990,
+      "uncompressed_bytes": 70726855
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5501to5600.csv.xz",
+      "data_rows": 488818,
+      "uncompressed_bytes": 70978381
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5601to5700.csv.xz",
+      "data_rows": 487552,
+      "uncompressed_bytes": 70793180
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5701to5800.csv.xz",
+      "data_rows": 482837,
+      "uncompressed_bytes": 70118865
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5801to5900.csv.xz",
+      "data_rows": 483749,
+      "uncompressed_bytes": 70238402
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging5901to6000.csv.xz",
+      "data_rows": 483652,
+      "uncompressed_bytes": 70221231
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging6001to6100.csv.xz",
+      "data_rows": 476146,
+      "uncompressed_bytes": 69147312
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging6101to6200.csv.xz",
+      "data_rows": 476664,
+      "uncompressed_bytes": 69215205
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging6201to6300.csv.xz",
+      "data_rows": 474813,
+      "uncompressed_bytes": 68951461
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging6301to6400.csv.xz",
+      "data_rows": 473049,
+      "uncompressed_bytes": 68695822
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging6401to6600.csv.xz",
+      "data_rows": 943911,
+      "uncompressed_bytes": 137794338
+    },
+    {
+      "path": "Cell6c/agingdata_50degC/WWH_18650_cell6c_aging6601to6800.csv.xz",
+      "data_rows": 940318,
+      "uncompressed_bytes": 137265223
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0001to0100.csv.xz",
+      "data_rows": 2309336,
+      "uncompressed_bytes": 339754892
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0101to0113.csv.xz",
+      "data_rows": 273308,
+      "uncompressed_bytes": 39525024
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0114to0200.csv.xz",
+      "data_rows": 1912967,
+      "uncompressed_bytes": 281343725
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0201to0300.csv.xz",
+      "data_rows": 2197437,
+      "uncompressed_bytes": 323139855
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0301to0400.csv.xz",
+      "data_rows": 2086390,
+      "uncompressed_bytes": 306713036
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0401to0500.csv.xz",
+      "data_rows": 2067043,
+      "uncompressed_bytes": 303837474
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0501to0600.csv.xz",
+      "data_rows": 2045619,
+      "uncompressed_bytes": 300658065
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0601to0700.csv.xz",
+      "data_rows": 2016392,
+      "uncompressed_bytes": 296324518
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0701to0800.csv.xz",
+      "data_rows": 1985973,
+      "uncompressed_bytes": 291795862
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0801to0900.csv.xz",
+      "data_rows": 1931218,
+      "uncompressed_bytes": 283654804
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging0901to1000.csv.xz",
+      "data_rows": 1862600,
+      "uncompressed_bytes": 273482866
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1001to1100.csv.xz",
+      "data_rows": 1710168,
+      "uncompressed_bytes": 250923159
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1101to1200.csv.xz",
+      "data_rows": 1676808,
+      "uncompressed_bytes": 245978544
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1201to1300.csv.xz",
+      "data_rows": 1627868,
+      "uncompressed_bytes": 238715361
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1301to1400.csv.xz",
+      "data_rows": 1571486,
+      "uncompressed_bytes": 230334008
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1401to1500.csv.xz",
+      "data_rows": 1520773,
+      "uncompressed_bytes": 222809704
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1501to1600.csv.xz",
+      "data_rows": 1412909,
+      "uncompressed_bytes": 206852476
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1601to1700.csv.xz",
+      "data_rows": 1353711,
+      "uncompressed_bytes": 198081856
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1701to1800.csv.xz",
+      "data_rows": 1327298,
+      "uncompressed_bytes": 194156114
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1801to1900.csv.xz",
+      "data_rows": 1303808,
+      "uncompressed_bytes": 190666255
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging1901to2000.csv.xz",
+      "data_rows": 1275252,
+      "uncompressed_bytes": 186425797
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2001to2100.csv.xz",
+      "data_rows": 1244095,
+      "uncompressed_bytes": 181791346
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2101to2200.csv.xz",
+      "data_rows": 1220290,
+      "uncompressed_bytes": 178254779
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2201to2300.csv.xz",
+      "data_rows": 1177794,
+      "uncompressed_bytes": 171952742
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2301to2400.csv.xz",
+      "data_rows": 1156941,
+      "uncompressed_bytes": 168861461
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2401to2500.csv.xz",
+      "data_rows": 1123723,
+      "uncompressed_bytes": 163947857
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2501to2600.csv.xz",
+      "data_rows": 1042110,
+      "uncompressed_bytes": 151882370
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2601to2700.csv.xz",
+      "data_rows": 1026938,
+      "uncompressed_bytes": 149641490
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2701to2800.csv.xz",
+      "data_rows": 1016647,
+      "uncompressed_bytes": 148115386
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2801to2900.csv.xz",
+      "data_rows": 1006213,
+      "uncompressed_bytes": 146569996
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging2901to3000.csv.xz",
+      "data_rows": 997235,
+      "uncompressed_bytes": 145243484
+    },
+    {
+      "path": "Cell7a/agingdata_50degC/WWH_18650_cell7a_aging3001to3100.csv.xz",
+      "data_rows": 986382,
+      "uncompressed_bytes": 143642875
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0001to0100.csv.xz",
+      "data_rows": 2340917,
+      "uncompressed_bytes": 344420825
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0101to0111.csv.xz",
+      "data_rows": 239311,
+      "uncompressed_bytes": 34554645
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0112to0200.csv.xz",
+      "data_rows": 1997672,
+      "uncompressed_bytes": 293885481
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0201to0300.csv.xz",
+      "data_rows": 2232312,
+      "uncompressed_bytes": 328283266
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0301to0400.csv.xz",
+      "data_rows": 2200882,
+      "uncompressed_bytes": 323625191
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0401to0500.csv.xz",
+      "data_rows": 2142016,
+      "uncompressed_bytes": 314915192
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0501to0600.csv.xz",
+      "data_rows": 2078261,
+      "uncompressed_bytes": 305485544
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0601to0700.csv.xz",
+      "data_rows": 2055547,
+      "uncompressed_bytes": 302115810
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0701to0800.csv.xz",
+      "data_rows": 2036890,
+      "uncompressed_bytes": 299348306
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0801to0900.csv.xz",
+      "data_rows": 2018432,
+      "uncompressed_bytes": 296608821
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging0901to1000.csv.xz",
+      "data_rows": 2511612,
+      "uncompressed_bytes": 371140462
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1001to1100.csv.xz",
+      "data_rows": 1981391,
+      "uncompressed_bytes": 291109132
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1101to1200.csv.xz",
+      "data_rows": 1942003,
+      "uncompressed_bytes": 285249098
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1201to1300.csv.xz",
+      "data_rows": 2095356,
+      "uncompressed_bytes": 308017567
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1301to1400.csv.xz",
+      "data_rows": 1876797,
+      "uncompressed_bytes": 275572416
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1401to1500.csv.xz",
+      "data_rows": 1820570,
+      "uncompressed_bytes": 267244438
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1501to1600.csv.xz",
+      "data_rows": 1721778,
+      "uncompressed_bytes": 252627274
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1601to1700.csv.xz",
+      "data_rows": 1694353,
+      "uncompressed_bytes": 248564511
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1701to1800.csv.xz",
+      "data_rows": 1666093,
+      "uncompressed_bytes": 244374556
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1801to1900.csv.xz",
+      "data_rows": 1646946,
+      "uncompressed_bytes": 241534428
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging1901to2000.csv.xz",
+      "data_rows": 1602193,
+      "uncompressed_bytes": 234880986
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2001to2100.csv.xz",
+      "data_rows": 1568134,
+      "uncompressed_bytes": 229821120
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2101to2200.csv.xz",
+      "data_rows": 1525992,
+      "uncompressed_bytes": 223570979
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2201to2300.csv.xz",
+      "data_rows": 1493486,
+      "uncompressed_bytes": 218752011
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2301to2400.csv.xz",
+      "data_rows": 1401298,
+      "uncompressed_bytes": 205117990
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2401to2500.csv.xz",
+      "data_rows": 1370701,
+      "uncompressed_bytes": 200586550
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2501to2600.csv.xz",
+      "data_rows": 1352006,
+      "uncompressed_bytes": 197813007
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2601to2700.csv.xz",
+      "data_rows": 1334213,
+      "uncompressed_bytes": 195171747
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2701to2800.csv.xz",
+      "data_rows": 1317011,
+      "uncompressed_bytes": 192621043
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2801to2900.csv.xz",
+      "data_rows": 1304290,
+      "uncompressed_bytes": 190736194
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging2901to3000.csv.xz",
+      "data_rows": 1280986,
+      "uncompressed_bytes": 187272301
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging3001to3100.csv.xz",
+      "data_rows": 1256216,
+      "uncompressed_bytes": 183589710
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging3101to3200.csv.xz",
+      "data_rows": 1236753,
+      "uncompressed_bytes": 180694981
+    },
+    {
+      "path": "Cell7b/agingdata_50degC/WWH_18650_cell7b_aging3201to3300.csv.xz",
+      "data_rows": 1225160,
+      "uncompressed_bytes": 178973061
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0001to0100.csv.xz",
+      "data_rows": 2338285,
+      "uncompressed_bytes": 344036950
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0100to0111.csv.xz",
+      "data_rows": 239255,
+      "uncompressed_bytes": 34546978
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0112to0200.csv.xz",
+      "data_rows": 1987324,
+      "uncompressed_bytes": 292351453
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0201to0300.csv.xz",
+      "data_rows": 2215891,
+      "uncompressed_bytes": 325854059
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0301to0400.csv.xz",
+      "data_rows": 2170785,
+      "uncompressed_bytes": 319172468
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0401to0500.csv.xz",
+      "data_rows": 2090184,
+      "uncompressed_bytes": 307254282
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0501to0600.csv.xz",
+      "data_rows": 2069109,
+      "uncompressed_bytes": 304128491
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0601to0700.csv.xz",
+      "data_rows": 2051051,
+      "uncompressed_bytes": 301450670
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0701to0800.csv.xz",
+      "data_rows": 2032147,
+      "uncompressed_bytes": 298644033
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0801to0900.csv.xz",
+      "data_rows": 2010916,
+      "uncompressed_bytes": 295497110
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging0901to1000.csv.xz",
+      "data_rows": 1985479,
+      "uncompressed_bytes": 291718787
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1001to1100.csv.xz",
+      "data_rows": 2448197,
+      "uncompressed_bytes": 361199147
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1101to1200.csv.xz",
+      "data_rows": 1904575,
+      "uncompressed_bytes": 279691977
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1201to1300.csv.xz",
+      "data_rows": 1847592,
+      "uncompressed_bytes": 271247546
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1301to1400.csv.xz",
+      "data_rows": 3040857,
+      "uncompressed_bytes": 448664713
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1401to1500.csv.xz",
+      "data_rows": 1682554,
+      "uncompressed_bytes": 246815627
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1501to1600.csv.xz",
+      "data_rows": 1647139,
+      "uncompressed_bytes": 241559596
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1601to1700.csv.xz",
+      "data_rows": 1603351,
+      "uncompressed_bytes": 235052660
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1701to1800.csv.xz",
+      "data_rows": 1576879,
+      "uncompressed_bytes": 231116511
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1801to1900.csv.xz",
+      "data_rows": 1551781,
+      "uncompressed_bytes": 227389447
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging1901to2000.csv.xz",
+      "data_rows": 1508854,
+      "uncompressed_bytes": 221028752
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2001to2100.csv.xz",
+      "data_rows": 1412666,
+      "uncompressed_bytes": 206801567
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2101to2200.csv.xz",
+      "data_rows": 1380821,
+      "uncompressed_bytes": 202085522
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2201to2300.csv.xz",
+      "data_rows": 1365072,
+      "uncompressed_bytes": 199747511
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2301to2400.csv.xz",
+      "data_rows": 1352418,
+      "uncompressed_bytes": 197871116
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2401to2500.csv.xz",
+      "data_rows": 1340202,
+      "uncompressed_bytes": 196057663
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2501to2600.csv.xz",
+      "data_rows": 1325346,
+      "uncompressed_bytes": 193851150
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2601to2700.csv.xz",
+      "data_rows": 1313861,
+      "uncompressed_bytes": 192148936
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2701to2800.csv.xz",
+      "data_rows": 1303408,
+      "uncompressed_bytes": 190599425
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2801to2900.csv.xz",
+      "data_rows": 1288476,
+      "uncompressed_bytes": 188381109
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging2901to3000.csv.xz",
+      "data_rows": 1263805,
+      "uncompressed_bytes": 184714588
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging3001to3100.csv.xz",
+      "data_rows": 1241246,
+      "uncompressed_bytes": 181358208
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging3101to3200.csv.xz",
+      "data_rows": 1230220,
+      "uncompressed_bytes": 179721212
+    },
+    {
+      "path": "Cell7c/agingdata_50degC/WWH_18650_cell7c_aging3201to3300.csv.xz",
+      "data_rows": 1216400,
+      "uncompressed_bytes": 177667032
+    }
+  ]
+}
