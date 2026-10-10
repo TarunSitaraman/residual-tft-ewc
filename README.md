@@ -42,13 +42,13 @@ This repository is both a course project and the code behind an IEEE paper. Ever
 | Task | **Forecast the State of Health (SOH)** of a cell at its next 1–6 capacity checks |
 | Models | Baselines (persistence, linear extrapolation, ridge, gradient boosting), an MLP, and the proposed **Temporal Fusion Transformer (TFT) with Elastic Weight Consolidation (EWC)** |
 | Learning setting | **Continual learning**: groups arrive one at a time; we measure accuracy, forgetting and transfer |
-| Big-data component | An **Apache Spark** job that reduces about 132 GB / 1.4 billion rows of raw ageing data to block-level features |
+| Big-data component | An **Apache Spark** job that reduces about 132 GB (roughly 0.9 billion rows) of raw ageing data to block-level features |
 | Reuse | Forecast SOH is mapped to four fade classes (C0–C3) |
 | Tooling | 150 tests, pre-registered protocols, a live data-platform web page, and the paper |
 
 **Headline findings** (details and caveats in [Section 8](#8-results)):
 
-1. Simple methods are hard to beat. On the large LFP dataset, **linear extrapolation** of the recent fade rate (0.343 pp RMSE) is the most accurate method.
+1. Simple methods are hard to beat. On the large LFP dataset no method beats **linear extrapolation** of the recent fade rate (0.343 pp RMSE); the best learned model is only level with it.
 2. A TFT that learns only the **residual** on top of linear extrapolation is the best learned model and is practically equivalent to extrapolation at horizons 1–3.
 3. **EWC reduces forgetting** of the residual TFT at longer horizons (replicated across two seed sets), but forgetting only matters when the groups differ a lot.
 4. Extra diagnostic features (EIS, pulse resistance, incremental-capacity peaks) describe the *current* SOH well but add little for the *next change*.
@@ -90,7 +90,7 @@ All data are public and used under their licences. `docs/EXTERNAL_DATA.md` recor
 | **S6** | Wheeler et al., 2025, Recherche Data Gouv `10.57745/OLBXKT`, CC BY 4.0 | 20 A123 LFP cells, 7 usage conditions, aged at 50 °C; 847 checks (843 labelled); 2,409 forecasting samples; 827 ageing files, about 132 GB raw | Dataset 2: the main continual stream, and the Spark workload |
 | **S7–S9** | Luh and Blank 2024 (KIT), Wang et al. 2024 (XJTU), Zhu et al. 2022 (Tongji) | 228 + 55 + 130 first-life cells; 369 cells and 36,711 samples after filtering | First-life **pretraining pool** (protocol P3) |
 
-Not used: S3 (first-life data of the S1 cells), S4 and S5 (no licence for the Relyion data). The two main datasets are never pooled, so no cross-chemistry transfer is claimed.
+Not used: S3 (first-life data of the S1 cells), S4 (synthetic duty-cycle profiles, cited only) and S5 (Relyion data, no licence). The two main datasets are never pooled, so no cross-chemistry transfer is claimed.
 
 **What "heterogeneous" means here.** In S1 the cells are one cell type that differs in first-life history and second-life duty cycle. In S6 the seven usage conditions differ in depth of discharge and related settings. Different chemistries and manufacturers motivate the work but are not present within one dataset.
 
@@ -101,7 +101,7 @@ Not used: S3 (first-life data of the S1 cells), S4 and S5 (no licence for the Re
 | File | Rows | Content |
 |---|---|---|
 | `cleaned_battery_data.csv` | 223,973 | Point-level cycling data (voltage, current, capacity, energy, temperature) |
-| `final_battery_cycling_features.csv` | ~223,900 | Cycle-level features, 18 model inputs plus identifiers |
+| `final_battery_cycling_features.csv` | 223,925 | Cycle-level features, 18 model inputs plus identifiers |
 | `final_ml_dataset.csv` | 609 | All cycles with the most recent RPT attached; SOH missing before the first RPT |
 | `ml_training_dataset.csv` | 582 | The SOH-labelled subset |
 | `final_battery_health_dataset.csv` | 111 | RPT capacity and SOH per battery |
@@ -128,7 +128,7 @@ The six S1 batteries are `g1, v4, v5, w8, w9, w10`, with 16–19 RPTs each. Thei
 2. **Labels repeat between checks.** SOH is a step function: it only changes at an RPT. So a model that "estimates current SOH" can score well by copying the last label. That is exactly what happened with the original task, so we reframed it as forecasting (D16).
 3. **Temporal alignment.** A cycle may only use the most recent RPT on or before its date. Same-day RPTs stored as a date only are read as midnight (D3).
 4. **Leakage via test currents.** Protocol currents are set from the previous capacity (for example, 0.9998 × the previous capacity), so they would leak the label. They are never inputs (D14).
-5. **Label correction.** The handover capacity included pulse charge, shifting some labels by up to 0.09 pp. We rebuilt labels from the raw C/20 discharge (D17). They match the handover for all RPTs and reproduce the S6 authors' own capacities on all 843 checks.
+5. **Label correction.** The handover capacity included pulse charge, shifting some labels by up to 0.09 pp. We rebuilt labels from the raw C/20 discharge (D17). The handover's own pulse-inclusive capacities were reproduced exactly from the raw files (all 112 RPT capacity rows, i.e. 111 RPTs; g1's RPT 1 spans two files), and our S6 parser reproduces the authors' C/3 capacity on all 843 checks.
 6. **Groups stay separate.** Splits are chronological within each cell, purged, and never shuffled. Results are reported per group.
 7. **Missing temperature is not invented.** Missingness is flagged, imputation is fit on training data only, and robustness is tested by removing values, never by adding data (D13).
 8. **No synthetic data in results.** Synthetic data may test code paths only and live outside the repository.
@@ -157,7 +157,7 @@ The six S1 batteries are `g1, v4, v5, w8, w9, w10`, with 16–19 RPTs each. Thei
         ▼
  EVALUATION                 RMSE, forgetting, backward transfer, Wilcoxon + Holm, bootstrap CIs, reuse classes
         ▼
- results/*.json  ─►  scripts/make_results_tables.py  ─►  docs/RESULTS.md, paper/tables
+ results/*.json  ─►  make_results_tables.py, make_d21_figures.py  ─►  docs/RESULTS.md, paper/
         ▼
  Paper (paper/)   +   Live data platform (scripts/platform_server.py)
 ```
@@ -191,14 +191,14 @@ A sample is (cell, origin check *k*, horizon *h*). Inputs known at the origin: S
 ### 5.5 Neural models and continual-learning strategies
 - **MLP backbone** (`src/models/baseline_dnn.py`): a small feed-forward network with train-fitted standardisation and explicit missing indicators.
 - **TFT backbone** (`src/models/tft_continual.py`): gated residual networks, variable selection, LSTM encoder, interpretable causal attention. Input: a window of the previous four checks of the same cell, values plus missing indicators plus a padding flag. No battery ID is an input, so every method stays task-agnostic.
-- **Strategies** (`src/continual_learning.py`). The benchmark (`CL_METHODS`) runs fine-tuning and EWC on both backbones, and replay on the MLP only; joint training gives the upper bound for each backbone:
+- **Strategies** (`src/continual_learning.py`). The D18/D20 benchmarks (notebooks 12–13, `CL_METHODS`) run fine-tuning and EWC on both backbones, and replay on the MLP only; joint training gives the upper bound for each backbone. The later D21–D23 runs compare fine-tuning and EWC only:
 
 | Strategy | What it does |
 |---|---|
 | Fine-tuning | Train on the new task only (the forgetting baseline) |
 | Replay | Keep a small buffer of old samples per task |
 | **EWC** | Multi-penalty EWC with a diagonal Fisher per finished task |
-| LwF | Distillation from the previous model (implemented and tested; not in the benchmark) |
+| LwF | Distillation from the previous model (implemented and tested; run only in the superseded notebooks 06–07, not in the forecasting benchmarks) |
 | Joint | Train on all tasks at once (the upper bound, not a continual method) |
 
 - **Residual formulation (D23).** The best-performing variant predicts only the *correction* to linear extrapolation instead of ΔSOH directly. This is what made the TFT competitive.
@@ -219,30 +219,30 @@ Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, ra
 | **12** | **S1 forecasting benchmark** (about 15 min on one CPU thread) | Current |
 | **13** | **S6 forecasting benchmark** (about 1 h) | Current |
 
-Notebooks 05–09 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile gives reportable numbers.
+Notebooks 05–09 and 13 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile gives reportable numbers.
 
 ### 5.9 Live data platform (`scripts/platform_server.py`)
-A local web server (default `http://localhost:8050`) that rebuilds a single page whenever a results file, table, manifest or Spark snapshot changes. Tabs: Overview, Datasets (catalogue and lineage), Pipelines, Runs, Spark views, and a read-only **data browser** for every table, raw S6 file preview, results JSON and paper figure. A status bar shows running Spark jobs, the History Server and pipeline scripts. It serves only catalogued files, checks the `Host` header against DNS rebinding, and cannot change anything. `--lan` serves it on the local network. A static snapshot is `docs/spark_dashboard.html`.
+A local web server (default `http://localhost:8050`) that rebuilds a single page whenever a results file, table, manifest or Spark snapshot changes. Tabs: Overview, Datasets (catalogue and lineage), Tables, Raw files, Pipelines, Runs, Results, Spark run, Ageing explorer and Paper. Tables, Raw files, Results and Paper form a read-only **data browser** over every table, raw S6 file preview, results JSON and paper figure. A status bar shows running Spark jobs, the History Server and pipeline scripts. It serves only catalogued files, checks the `Host` header against DNS rebinding, and cannot change anything. `--lan` serves it on the local network. A static snapshot is `docs/spark_dashboard.html`.
 
 ### 5.10 Paper (`paper/`)
-IEEE conference paper (8 pages). Tables and figures are generated from committed results files by `scripts/make_results_tables.py` and `make_d21_figures.py`, which refuse results written from a dirty tree.
+IEEE conference paper (8 pages). Tables and figures are generated from committed results files: `scripts/make_results_tables.py` writes the D18/D20 tables and refuses results written from a dirty tree; `scripts/make_d21_figures.py` draws the D21/D23 figures. The D21–D23 sections of `docs/RESULTS.md` are written by hand from their results files.
 
 ---
 
 ## 6. Apache Spark: what it does here and how
 
 ### 6.1 Why Spark
-The S6 between-check ageing data (decision D22) is the project's real big-data workload: **827 CSV files** (one per cell and 100-cycle block), about **132 GB raw / 16 GB compressed**, **about 1.4 billion rows**. Pandas on one file works but is slow and awkward to scale and validate. Each file is independent, which is exactly the shape of a map-reduce job.
+The S6 between-check ageing data (decision D22) is the project's real big-data workload: **827 CSV files** (one per cell and 100-cycle block), about **132 GB raw** (about 15 GB as stored locally, 23 GB as downloaded zips), **roughly 0.9 billion rows** (estimated from the total size and about 146 bytes per row; not counted exactly). Pandas on one file works but is slow and awkward to scale and validate. Each file is independent, which is exactly the shape of a map-reduce job.
 
 ### 6.2 What the job computes
 `scripts/spark_ageing_features.py` turns the raw rows into **21 block-level ageing inputs**:
 
-1. **Map.** One Spark task per block reads the raw rows and extracts, for each ageing cycle, the *measured responses*: end-of-charge and end-of-discharge voltage, constant-voltage (CV) hold time and final current, voltage relaxation after charge and after discharge, and internal resistance where recorded. It also sets a validity flag. The parsing function is `src/ageing.py::cycle_responses`, a plain tested Python function.
+1. **Map.** One Spark task per block reads the raw rows and extracts, for each ageing cycle, the *measured responses*: end-of-charge and end-of-discharge voltage, constant-voltage (CV) hold time and final current, voltage relaxation after charge and after discharge, and internal resistance where recorded (S6 never records it, so its 3 inputs are always missing). It also sets a validity flag. The parsing function is `src/ageing.py::cycle_responses`, a plain tested Python function.
 2. **Cache.** The per-cycle table (82,529 cycles) is cached in Spark memory.
 3. **Reduce.** Spark SQL groups valid cycles by (cell, block) and computes the mean, the last value and the least-squares slope against cycle number (covariance / variance). A block needs at least 50 valid cycles.
-4. **Validate.** The output is compared with the pandas implementation (`build_s6_ageing_features.py`). `results/d22_spark_validation.json` records that all 827 blocks match within 1e-9 relative tolerance.
+4. **Validate.** The output is compared with the pandas implementation (`build_s6_ageing_features.py`). `results/d22_spark_validation.json` records that all 827 blocks match under |Spark − pandas| ≤ 1e-9·|pandas| + 1e-12 (largest absolute difference about 2e-13). A purely relative 1e-9 criterion, stated first, failed only on a slope that is zero up to rounding (`results/d22_spark_validation_strict_relative.json`).
 
-Protocol-scaled quantities (discharged charge, setpoint currents) are **never** used as inputs, because in most cases they encode the previous check's capacity (D22 leakage rules). A causality check confirmed that no valid check uses cycles that finish after it.
+Protocol-scaled quantities (discharged charge, setpoint currents) are **never** used as inputs, because in most cases they encode the previous check's capacity (D22 leakage rules). A causality check found no block ending after a valid check; one block (cell 2a, cycle 100) ends after an invalid check, which is never a forecast origin.
 
 ### 6.3 How it is implemented
 - **PySpark 4.2.0** in **local mode** (`local[N]` worker threads) on one Windows PC. There is **no cluster**; say so when presenting.
@@ -263,7 +263,7 @@ Screenshots are in `docs/figures/spark/`. The **History Server** (`scripts/spark
 ![Spark pipeline](paper/figures/spark_pipeline.png)
 
 ### 6.5 What came out of it
-The 21 ageing inputs were used as feature set F2. They track health within a cell but mostly its *level*, which the SOH history already gives. With 135–225 training samples per task they add variance: **residual TFT + EWC got 0.14–0.19 pp worse** (replicated). So the Spark pipeline is validated and reusable, but the features did not improve the forecast. This is reported as a negative result.
+The 21 ageing inputs were used as feature set F2. They track health within a cell but mostly its *level*, which the SOH history already gives (an interpretation, not a tested claim). With 135–225 training samples per task they add variance: **residual TFT + EWC got 0.14–0.19 pp worse** (replicated). So the Spark pipeline is validated and reusable, but the features did not improve the forecast. This is reported as a negative result.
 
 Run it: `python scripts/spark_ageing_features.py --cores 6 --ui 900` and open `http://localhost:4040`. The demo script is in `docs/SPARK_DEMO.md`.
 
@@ -273,7 +273,7 @@ Run it: `python scripts/spark_ageing_features.py --cores 6 --ui 900` and open `h
 
 | Protocol | Setting |
 |---|---|
-| **P1** | A continual **stream** of tasks (S1: cells; S6: test cases), 10 task orders × 5 seeds (replicate seeds 5–9) |
+| **P1** | A continual **stream** of tasks (S1: cells; S6: test cases), 10 task orders × 5 seeds; from D21 on, also replicate seeds 5–9 |
 | **P2** | **Leave one group out**: train on the others, test on the held-out group |
 | **P3** | **Pretrain** on the first-life pool S7–S9, then learn the S6 stream |
 | Joint | All tasks at once; an upper bound |
@@ -282,7 +282,7 @@ Run it: `python scripts/spark_ageing_features.py --cores 6 --ui 900` and open `h
 
 **Statistics.** Paired Wilcoxon tests with Holm correction, rank-biserial effect sizes, bootstrap 95 % CIs. From D21, a result counts as **replicated** only if p_Holm < 0.05 in both seed sets, with the same sign and |difference| ≥ 0.05 pp; |difference| < 0.05 pp in both is **practically equivalent**.
 
-**Pre-registration.** Protocols D18, D20, D21, D23 were written into `docs/DECISIONS.md` before the runs they govern. Deviations and post-hoc analyses are labelled as such.
+**Pre-registration.** Protocols D18, D20, D21, D22 and D23 were written into `docs/DECISIONS.md` before the runs they govern. Deviations and post-hoc analyses are labelled as such.
 
 ---
 
@@ -290,22 +290,28 @@ Run it: `python scripts/spark_ageing_features.py --cores 6 --ui 900` and open `h
 
 Full results, provenance and generated tables: `docs/RESULTS.md`.
 
-**Final average test RMSE (pp) on S6, mean over runs** (lower is better; persistence = 1.644):
+**Final average test RMSE (pp) on S6, experiment D23 E1** (horizons 1–3, D21 shared inputs, same runner and tuning for every method). Learned methods: mean over 50 runs, main / replicate seeds. Baselines: single deterministic fits. Lower is better.
 
 | Method | RMSE (pp) |
 |---|---|
-| Linear extrapolation | **0.343** |
-| TFT + EWC, residual (D23) | 0.339 / 0.314 (main / replicate seeds) |
-| TFT from scratch, fine-tuning (D21) | 0.401 |
+| TFT + EWC, residual | 0.339 / 0.314 |
+| Linear extrapolation | 0.343 |
+| TFT fine-tuning, residual | 0.347 / 0.337 |
+| MLP + EWC, residual | 0.374 / 0.366 |
+| MLP fine-tuning, direct | 0.413 / 0.351 |
+| TFT fine-tuning, direct | 0.424 / 0.444 |
 | Gradient boosting | 0.451 |
-| TFT + EWC, direct (D23) | 0.504 / 0.487 |
+| TFT + EWC, direct | 0.504 / 0.487 |
+| Persistence | 1.644 |
+
+Residual TFT + EWC and linear extrapolation are practically equivalent under the registered test. With the D20 inputs (including the 17 diagnostics), gradient boosting reaches 0.372 pp.
 
 **What we learned**
 
-1. **Diagnostics describe the present, not the next change.** IC peak near 4.07 V, pulse and EIS resistances track current SOH (|ρ| 0.83–0.97 within cells) but are weakly associated with the next ΔSOH (median |ρ| ≤ 0.3).
+1. **Diagnostics describe the present, not the next change.** IC peak near 4.07 V, pulse and EIS resistances track current SOH (|ρ| 0.83–0.97 within cells) but are weakly associated with the next ΔSOH (median |ρ| ≤ 0.3 for most features; exceptions are EIS Z′ at 3.26 V and q_3.63_3.26, which may follow the temperature schedule).
 2. **Best methods beat persistence on both datasets**, but not every method does. On S1 the best is a ridge on planned usage alone (0.450 pp); on S6, linear extrapolation.
 3. **Forgetting depends on task heterogeneity**: negligible across the S1 cells (0.016–0.040 pp), substantial across S6 usage conditions (0.18–0.46 pp).
-4. **Calendar time is a key input.** On S6, fade per 100 cycles rises with the days those cycles took (within-cell ρ = 0.64, positive in 20/20 cells). Adding calendar time and dropping the 17 diagnostic features improved the TFT by 0.37–0.47 pp (replicated, post hoc).
+4. **Calendar time is a key input.** On S6, fade per 100 cycles rises with the days those cycles took (within-cell ρ = 0.64, positive in 20/20 cells). Switching from the D20 F1 inputs to the D21 shared inputs improved the TFT by 0.37–0.47 pp; dropping the 17 diagnostics (0.17–0.35 pp) and adding calendar time (0.19–0.31 pp) each replicate on their own (post hoc).
 5. **Pretraining on first-life data did not help** S6 forecasts (P3). The stream did not degrade pool error either.
 6. **Residual learning makes the TFT competitive** (0.17 pp better than direct in horizons 1–3, 0.24–0.30 pp in horizons 1–6, replicated). The registered goal of *beating* linear extrapolation was **not** reached.
 7. **EWC lowers forgetting of the residual TFT** at horizons 1–6 (from 0.28 / 0.22 pp to 0.09 pp, replicated); its effect on final error is not replicated.
@@ -339,8 +345,9 @@ PLAN_OF_ACTION.md   original plan;  docs/RESEARCH_PLAN.md  revised research plan
 data/               datasets (git-ignored) + data/README.md (how to obtain them)
 docs/               RESULTS, DECISIONS (D1–D23), DATA_REPORT, EXTERNAL_DATA, REUSE_CATEGORIES, SPARK_DEMO
 notebooks/          01–13 (12 and 13 are the current forecasting benchmarks)
-src/                library code: pipeline, forecasting, wheeler, pool, ageing, protocols,
-                    continual_learning, evaluation, reuse, robustness, p3; models/ (MLP, TFT)
+src/                library code: data_pipeline, raw_diagnostics, diagnostic_features, health_indicators,
+                    forecasting, wheeler, pool, ageing, protocols, experiments, continual_learning,
+                    evaluation, reuse, robustness, p3; models/ (MLP, TFT)
 scripts/            fetchers, feature builders, experiment runners (run_p3, run_d23, run_ablation_a1),
                     Spark job, platform server, figure and table generators
 tests/              150 pytest tests
@@ -412,9 +419,6 @@ The novelty claim is therefore an integrated, battery-focused evaluation framewo
 
 ---
 
-
----
-
 ## 13. Legacy data dictionary
 
 Columns of the handover files (`DATA_DICTIONARY.csv`), used by the superseded current-SOH notebooks 01–09.
@@ -448,8 +452,6 @@ Columns of the handover files (`DATA_DICTIONARY.csv`), used by the superseded cu
 | `Reference_Capacity_Ah` | First observed RPT capacity for that battery | Ah |
 | `SOH_Percent` | Capacity relative to first observed RPT capacity | % |
 | `Days_Since_RPT` | Days from associated RPT date to cycle | Days |
-
----
 
 ---
 
