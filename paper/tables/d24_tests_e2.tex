@@ -1,0 +1,45 @@
+\begin{table}[t]
+  \centering
+  \caption{Paired tests, TFT + EWC, residual minus each other method (pp; negative favours the reference), horizons 1--6, main / replicate seeds, Holm-adjusted Wilcoxon p, D21 replication rule.}
+  \label{tab:d24-tests-e2}
+  \setlength{\tabcolsep}{3pt}
+  \scriptsize
+  \begin{tabular}{lllrrrrl}
+    \toprule
+    Family & Metric & Other & Diff. main & $p$ main & Diff. rep. & $p$ rep. & Verdict \\
+    \midrule
+    final & final error & MLP + EWC, direct & -0.443 & 0.000 & -0.462 & 0.000 & replicated, reference better \\
+    final & forgetting & MLP + EWC, direct & -0.292 & 0.000 & -0.327 & 0.000 & replicated, reference better \\
+    final & backward\_transfer & MLP + EWC, direct & -0.266 & 0.000 & -0.282 & 0.002 & replicated, reference better \\
+    final & final error & MLP fine-tuning, direct & -0.220 & 0.000 & -0.241 & 0.000 & replicated, reference better \\
+    final & forgetting & MLP fine-tuning, direct & -0.321 & 0.000 & -0.315 & 0.000 & replicated, reference better \\
+    final & backward\_transfer & MLP fine-tuning, direct & -0.272 & 0.000 & -0.269 & 0.000 & replicated, reference better \\
+    final & final error & MLP + EWC, residual & -0.098 & 0.096 & -0.160 & 0.000 & not replicated \\
+    final & forgetting & MLP + EWC, residual & -0.112 & 0.013 & -0.139 & 0.000 & replicated, reference better \\
+    final & backward\_transfer & MLP + EWC, residual & -0.122 & 0.004 & -0.134 & 0.000 & replicated, reference better \\
+    final & final error & MLP fine-tuning, residual & -0.095 & 0.096 & -0.162 & 0.000 & not replicated \\
+    final & forgetting & MLP fine-tuning, residual & -0.108 & 0.020 & -0.138 & 0.000 & replicated, reference better \\
+    final & backward\_transfer & MLP fine-tuning, residual & -0.118 & 0.005 & -0.134 & 0.000 & replicated, reference better \\
+    final & final error & TFT + EWC, direct & -0.241 & 0.000 & -0.301 & 0.000 & replicated, reference better \\
+    final & forgetting & TFT + EWC, direct & -0.043 & 0.336 & -0.080 & 0.121 & not replicated \\
+    final & backward\_transfer & TFT + EWC, direct & +0.007 & 1.000 & -0.008 & 1.000 & practically equivalent \\
+    final & final error & TFT fine-tuning, direct & -0.097 & 1.000 & -0.160 & 0.446 & not replicated \\
+    final & forgetting & TFT fine-tuning, direct & -0.215 & 0.026 & -0.245 & 0.037 & replicated, reference better \\
+    final & backward\_transfer & TFT fine-tuning, direct & -0.033 & 1.000 & -0.018 & 1.000 & practically equivalent \\
+    final & final error & TFT fine-tuning, residual & -0.112 & 0.096 & -0.078 & 0.172 & not replicated \\
+    final & forgetting & TFT fine-tuning, residual & -0.189 & 0.000 & -0.134 & 0.002 & replicated, reference better \\
+    final & backward\_transfer & TFT fine-tuning, residual & -0.145 & 0.026 & -0.108 & 0.043 & replicated, reference better \\
+    final & final error & Persistence & -2.106 & 0.000 & -2.133 & 0.000 & replicated, reference better \\
+    final & final error & Linear extrapolation & +0.076 & 0.026 & +0.049 & 0.160 & not replicated \\
+    final & final error & Ridge, usage only & -1.092 & 0.000 & -1.119 & 0.000 & replicated, reference better \\
+    final & final error & Ridge & -1.640 & 0.000 & -1.668 & 0.000 & replicated, reference better \\
+    final & final error & Gradient boosting & -0.337 & 0.000 & -0.365 & 0.000 & replicated, reference better \\
+    horizon & rmse\_h1 & Linear extrapolation & +0.189 & 0.000 & +0.144 & 0.000 & replicated, reference worse \\
+    horizon & rmse\_h2 & Linear extrapolation & +0.103 & 0.000 & +0.076 & 0.000 & replicated, reference worse \\
+    horizon & rmse\_h3 & Linear extrapolation & +0.068 & 0.030 & +0.043 & 0.186 & not replicated \\
+    horizon & rmse\_h4 & Linear extrapolation & +0.090 & 0.030 & +0.041 & 0.389 & not replicated \\
+    horizon & rmse\_h5 & Linear extrapolation & +0.047 & 0.430 & -0.000 & 0.389 & practically equivalent \\
+    horizon & rmse\_h6 & Linear extrapolation & +0.021 & 0.702 & -0.027 & 0.149 & practically equivalent \\
+    \bottomrule
+  \end{tabular}
+\end{table}

@@ -1,0 +1,26 @@
+\begin{table}[t]
+  \centering
+  \caption{S6 stream, horizons 1--3: final average test RMSE (pp), mean (s.d.) over 50 runs per seed set (main 0--4 / replicate 5--9); forgetting and backward transfer (BWT, pp) on main seeds. Baselines without a spread are single fits. Source: \texttt{results/forecasting\_d23\_e1.json}.}
+  \label{tab:d24-comparison-e1}
+  \setlength{\tabcolsep}{3pt}
+  \scriptsize
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Method & RMSE main & RMSE replicate & Forget. & BWT & Params \\
+    \midrule
+    \textbf{TFT + EWC, residual} & 0.339 (0.164) & 0.314 (0.067) & 0.100 & 0.040 &  \\
+    Linear extrapolation & 0.343 &  &  &  &  \\
+    TFT fine-tuning, residual & 0.347 (0.121) & 0.337 (0.110) & 0.103 & 0.045 &  \\
+    MLP + EWC, residual & 0.374 (0.056) & 0.366 (0.071) & 0.053 & 0.036 &  \\
+    MLP fine-tuning, residual & 0.405 (0.082) & 0.403 (0.084) & 0.082 & 0.060 &  \\
+    MLP fine-tuning, direct & 0.413 (0.133) & 0.351 (0.106) & 0.207 & 0.157 &  \\
+    TFT fine-tuning, direct & 0.424 (0.191) & 0.444 (0.207) & 0.151 & 0.008 &  \\
+    Gradient boosting & 0.451 &  &  &  &  \\
+    TFT + EWC, direct & 0.504 (0.206) & 0.487 (0.213) & 0.228 & 0.088 &  \\
+    MLP + EWC, direct & 0.519 (0.286) & 0.527 (0.239) & 0.216 & 0.170 &  \\
+    Ridge, usage only & 1.079 &  &  &  &  \\
+    Ridge & 1.184 &  &  &  &  \\
+    Persistence & 1.644 &  &  &  &  \\
+    \bottomrule
+  \end{tabular}
+\end{table}

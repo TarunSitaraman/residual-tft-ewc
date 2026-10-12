@@ -1,0 +1,21 @@
+\begin{table}[t]
+  \centering
+  \caption{Test RMSE (pp) per S6 test case after the last stream step, horizons 1--6; learned methods: mean over the 50 main-seed runs.}
+  \label{tab:d24-per-group-e2}
+  \setlength{\tabcolsep}{3pt}
+  \scriptsize
+  \begin{tabular}{lrrrrrrrr}
+    \toprule
+    Method & Case 1 & Case 2 & Case 3 & Case 4 & Case 5 & Case 6 & Case 7 & Mean \\
+    \midrule
+    TFT + EWC, residual & 0.403 & 0.463 & 0.560 & 0.583 & 0.524 & 0.682 & 0.713 & 0.561 \\
+    MLP fine-tuning, residual & 0.484 & 0.530 & 0.661 & 0.707 & 0.675 & 0.886 & 0.648 & 0.656 \\
+    TFT fine-tuning, direct & 0.657 & 0.583 & 0.869 & 0.516 & 0.619 & 0.688 & 0.679 & 0.658 \\
+    MLP + EWC, residual & 0.485 & 0.532 & 0.662 & 0.713 & 0.679 & 0.892 & 0.649 & 0.659 \\
+    TFT fine-tuning, residual & 0.563 & 0.611 & 0.638 & 0.657 & 0.576 & 0.891 & 0.772 & 0.673 \\
+    MLP fine-tuning, direct & 0.601 & 0.539 & 1.026 & 0.636 & 0.632 & 0.944 & 1.091 & 0.781 \\
+    TFT + EWC, direct & 0.732 & 0.617 & 1.120 & 0.668 & 0.768 & 0.839 & 0.871 & 0.802 \\
+    MLP + EWC, direct & 0.739 & 0.730 & 1.240 & 1.025 & 1.021 & 1.299 & 0.971 & 1.004 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

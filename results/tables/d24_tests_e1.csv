@@ -1,0 +1,27 @@
+family,metric,reference,other,diff_main,ci_main,p_holm_main,r_main,diff_replicate,p_holm_replicate,verdict
+final,final_avg_error,"TFT + EWC, residual","MLP + EWC, direct",-0.17999848305517963,"[-0.271, -0.092]",0.006922151688684153,-0.556078431372549,-0.21344450880000906,5.803171774232396e-07,"replicated, reference better"
+final,forgetting,"TFT + EWC, residual","MLP + EWC, direct",-0.11599031316834461,"[-0.196, -0.039]",0.054319794250160314,-0.4588235294117647,-0.13192826409620256,0.00324474772739336,not replicated
+final,backward_transfer,"TFT + EWC, residual","MLP + EWC, direct",-0.12940551791586832,"[-0.211, -0.048]",0.026728878937078093,-0.4949019607843137,-0.12547171836241616,0.008690798790084386,"replicated, reference better"
+final,final_avg_error,"TFT + EWC, residual","MLP fine-tuning, direct",-0.07414970786432679,"[-0.128, -0.010]",0.014256126211051878,-0.5247058823529411,-0.0372785149012896,0.8738446471055656,not replicated
+final,forgetting,"TFT + EWC, residual","MLP fine-tuning, direct",-0.10713415320380233,"[-0.163, -0.042]",0.0005110585269108014,-0.6533333333333333,-0.07774723887630816,0.00324474772739336,"replicated, reference better"
+final,backward_transfer,"TFT + EWC, residual","MLP fine-tuning, direct",-0.11713144119085463,"[-0.176, -0.049]",0.0002445570626221638,-0.6768627450980392,-0.0632269388059494,0.09702746656451211,not replicated
+final,final_avg_error,"TFT + EWC, residual","MLP + EWC, residual",-0.035009792506383926,"[-0.073, 0.014]",0.002047442424785828,-0.6047058823529412,-0.0521147257797055,0.000337663308162206,not replicated
+final,forgetting,"TFT + EWC, residual","MLP + EWC, residual",0.046311938439382604,"[0.008, 0.096]",0.21546554595695788,0.3772549019607843,0.020655485609253135,0.8738446471055656,practically equivalent
+final,backward_transfer,"TFT + EWC, residual","MLP + EWC, residual",0.004335407646986428,"[-0.037, 0.057]",1.0,-0.12156862745098039,-0.0065352114280216025,1.0,practically equivalent
+final,final_avg_error,"TFT + EWC, residual","MLP fine-tuning, residual",-0.06614451371604772,"[-0.112, -0.011]",0.0009730074850065051,-0.6313725490196078,-0.0891963465975177,6.18800477525383e-07,"replicated, reference better"
+final,forgetting,"TFT + EWC, residual","MLP fine-tuning, residual",0.017593020689124536,"[-0.028, 0.072]",1.0,0.06352941176470588,-0.011266620358546121,1.0,practically equivalent
+final,backward_transfer,"TFT + EWC, residual","MLP fine-tuning, residual",-0.019531914781283084,"[-0.066, 0.037]",0.6800586021340838,-0.28941176470588237,-0.03336683871205067,1.0,practically equivalent
+final,final_avg_error,"TFT + EWC, residual","TFT + EWC, direct",-0.16450562673296798,"[-0.231, -0.097]",0.00011807960494891745,-0.6988235294117647,-0.17359518377722608,6.000524344074165e-07,"replicated, reference better"
+final,forgetting,"TFT + EWC, residual","TFT + EWC, direct",-0.12850973887385758,"[-0.196, -0.062]",0.006240981517759536,-0.5623529411764706,-0.15161037200851338,7.222606724610614e-05,"replicated, reference better"
+final,backward_transfer,"TFT + EWC, residual","TFT + EWC, direct",-0.04740238866707108,"[-0.120, 0.026]",1.0,-0.18901960784313726,-0.0717068092975713,0.5673869865633208,not replicated
+final,final_avg_error,"TFT + EWC, residual","TFT fine-tuning, direct",-0.08474970225722048,"[-0.148, -0.022]",0.07357416279003104,-0.44,-0.13066926180912466,0.0021173172701391962,not replicated
+final,forgetting,"TFT + EWC, residual","TFT fine-tuning, direct",-0.051614370662995734,"[-0.118, 0.012]",1.0,-0.22666666666666666,-0.10177529534583839,0.1064195388274829,not replicated
+final,backward_transfer,"TFT + EWC, residual","TFT fine-tuning, direct",0.032143065023157925,"[-0.037, 0.099]",1.0,0.1843137254901961,-0.019265943861566322,1.0,practically equivalent
+final,final_avg_error,"TFT + EWC, residual","TFT fine-tuning, residual",-0.007983601333834411,"[-0.063, 0.049]",1.0,-0.09647058823529411,-0.02337689339765693,1.0,practically equivalent
+final,forgetting,"TFT + EWC, residual","TFT fine-tuning, residual",-0.003660549221984819,"[-0.062, 0.056]",1.0,-0.06352941176470588,-0.020423339567235035,1.0,practically equivalent
+final,backward_transfer,"TFT + EWC, residual","TFT fine-tuning, residual",-0.0049394094958808065,"[-0.064, 0.056]",1.0,-0.09333333333333334,-0.02025198595695418,1.0,practically equivalent
+final,final_avg_error,"TFT + EWC, residual",Persistence,-1.3049571666496471,"[-1.342, -1.255]",4.618527782440651e-14,-1.0,-1.3305052397469674,4.618527782440651e-14,"replicated, reference better"
+final,final_avg_error,"TFT + EWC, residual",Linear extrapolation,-0.0035974713902632597,"[-0.041, 0.047]",0.4610038786489312,-0.323921568627451,-0.029145544487583844,0.04606738311636427,practically equivalent
+final,final_avg_error,"TFT + EWC, residual","Ridge, usage only",-0.7396975233770039,"[-0.777, -0.689]",8.881784197001252e-14,-0.9984313725490196,-0.7652455964743244,4.618527782440651e-14,"replicated, reference better"
+final,final_avg_error,"TFT + EWC, residual",Ridge,-0.8445617294841135,"[-0.882, -0.794]",8.881784197001252e-14,-0.9984313725490196,-0.8701098025814339,4.618527782440651e-14,"replicated, reference better"
+final,final_avg_error,"TFT + EWC, residual",Gradient boosting,-0.1121553799226552,"[-0.150, -0.062]",2.0631918928870618e-07,-0.8431372549019608,-0.13770345301997577,2.042810365310288e-13,"replicated, reference better"

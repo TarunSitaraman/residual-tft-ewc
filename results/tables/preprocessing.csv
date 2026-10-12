@@ -1,0 +1,35 @@
+dataset,stage,value,unit,source
+S1,"raw diagnostic files (RPT, EIS), verified",351,files,osf_8jnr5_v2_diagnostic_manifest.json
+S1,raw size,2.2 GB,,osf_8jnr5_v2_diagnostic_manifest.json
+S1,RPTs with C/20 label and diagnostics,111,"(battery, RPT)",results/diagnostic_features.json
+S1,diagnostic features per RPT,47,features,results/diagnostic_features.json
+S1,forecasting samples (h = 1-3),279,samples,results/forecasting.json
+S6 checks,"check files read from the archive, verified",1007,files,wheeler2025_characterisation_manifest.json
+S6 checks,uncompressed size of the files read,20.0 GB,,wheeler2025_characterisation_manifest.json
+S6 checks,capacity checks parsed,847,checks,results/forecasting_wheeler.json
+S6 checks,valid (labelled) checks,843,checks,results/forecasting_wheeler.json
+S6 checks,forecasting samples (h = 1-3),2409,samples,results/forecasting_wheeler.json
+S6 checks,forecasting samples (h = 1-6),4638,samples,results/forecasting_d23_e2.json
+S6 ageing,"raw ageing files (cells x 100-cycle blocks), verified",827,files,results/s6_ageing_row_count.json
+S6 ageing,raw size (uncompressed),131.9 GB,,results/s6_ageing_row_count.json
+S6 ageing,raw data rows (about 1 Hz),901974259,rows,results/s6_ageing_row_count.json
+S6 ageing,ageing cycles parsed (Spark map),82529,cycles,results/d22_spark_validation.json
+S6 ageing,valid cycles,80287,cycles,results/d22_ageing_report.json
+S6 ageing,invalid cycles (excluded),2242,cycles,results/d22_ageing_report.json
+S6 ageing,block feature rows (Spark SQL reduce),827,blocks,results/d22_spark_validation.json
+S6 ageing,blocks below 50 valid cycles (inputs missing),7,blocks,results/d22_ageing_report.json
+S6 ageing,ageing inputs per block,21,inputs,results/d22_spark_validation.json
+S6 ageing,"Spark run time, full set",19.6 min,"Apache Spark 4.2.0 (PySpark), local[6] on one machine",results/d22_spark_validation.json
+S6 ageing,Spark output equals pandas output,yes,"|spark - pandas| <= 1e-09 * |pandas| + 1e-12, same missing values",results/d22_spark_validation.json
+S6 ageing,"reduction, raw rows per block feature row",1090658,rows,derived from the two lines above
+Pool S7,"downloaded archives, verified",1,archives,pool_downloads_manifest.json
+Pool S7,download size,0.3 GB,,pool_downloads_manifest.json
+Pool S8,"downloaded archives, verified",1,archives,pool_downloads_manifest.json
+Pool S8,download size,2.4 GB,,pool_downloads_manifest.json
+Pool S9,"downloaded archives, verified",4,archives,pool_downloads_manifest.json
+Pool S9,download size,1.7 GB,,pool_downloads_manifest.json
+Pool S7-S9,cells used (>= 5 valid checks),369,cells,results/forecasting_d21_p3.json
+Pool S7-S9,forecasting samples,36711,samples,results/forecasting_d21_p3.json
+Pool S7-S9,  train split,21174,samples,results/forecasting_d21_p3.json
+Pool S7-S9,  val split,6439,samples,results/forecasting_d21_p3.json
+Pool S7-S9,  test split,6942,samples,results/forecasting_d21_p3.json
