@@ -704,3 +704,58 @@ Charge or discharge durations, charge, energy and currents are excluded (protoco
 ### Run log
 - **5 Oct 2026, 03:05 IST.** Code committed (`c7fa340`) after a smoke run (1 order, 2 epochs; not reportable, output deleted). The smoke run printed the deterministic E2 baselines at horizons 1-6 (linear extrapolation 0.22/0.35/0.46/0.57/0.74/0.85 pp), so these were seen before the paper run; they involve no tuning and change nothing above. Paper run started as 8 processes (E1, E2 x four parts); logs `data/raw/d23_*.log`.
 - **5 Oct 2026, 11:45 IST. Outcome.** All parts finished (07:37); results collected at `5ae2f84`. Primary (a), residual TFT + EWC vs linear extrapolation: practically equivalent in E1 (−0.004 / −0.029 pp), not replicated in E2 (+0.076 / +0.049 pp); **the registered positive result was not obtained.** Primary (b), residual vs direct TFT + EWC: replicated in E1 and E2 (−0.17 and −0.24 to −0.30 pp). In E2, EWC lowers the residual TFT's forgetting and backward transfer (replicated). Details: `docs/RESULTS.md`, D23 section.
+
+## D24. Proposed model RC-TFT (residual TFT with shift-adaptive EWC) and literature baselines (pre-registered)
+
+**Status:** Adopted 12 Oct 2026 on the instruction of T. Sitaraman, written and committed **before any D24 code was run on real data** (code is tested on synthetic data in pytest temporary directories only). Results go to `results/forecasting_d24_e1.json` and `results/forecasting_d24_e2.json`. Plan and motivation: `docs/WORK_PLAN.md`.
+
+**Provenance (must be stated).** Written after every earlier result, including D22 and D23. Two observations motivate it post hoc: forgetting appears only when groups differ (S1 cells 0.016–0.040 pp, S6 conditions 0.18–0.46 pp), and validation selected very different fixed EWC strengths across experiments (λ from 0.01 to 10⁵). The literature baselines answer a gap found in the audit of 12 Oct 2026: none of the model families of our own literature review (GPR, LSTM, TCN) had been run.
+
+### The proposed model: RC-TFT
+**RC-TFT** = *Residual Continual Temporal Fusion Transformer*: the D23 residual TFT (forecast = linear extrapolation + learned correction; label-free causal window of the four previous origins of the same cell and horizon; no task ID as input) trained continually with **shift-adaptive EWC (SA-EWC)**. TFT (Lim et al. 2021) and EWC (Kirkpatrick et al. 2017) are existing components; the contribution is their leakage-safe, extrapolation-anchored combination with a penalty that scales with the measured shift between battery groups. The D23 model (residual TFT + EWC with a fixed λ) is its ablation.
+
+**SA-EWC (fixed here).**
+- After task *j* ends, store, besides the EWC Fisher `F_j` and anchor `θ*_j`, the mean `μ_j` and standard deviation `σ_j` (population) of task *j*'s training inputs after the frozen first-task preprocessing (standardised values and missing indicators; dimension `D`). No rows are stored.
+- When task *t* starts, for every finished task *j*: `d_{j,t} = sqrt((‖μ_t − μ_j‖² + ‖σ_t − σ_j‖²) / D)`, the 2-Wasserstein distance between diagonal Gaussians, per dimension. It uses only training inputs, never labels, and is fixed for the whole of task *t*.
+- Penalty during task *t*: `(λ₀ / 2) Σ_j d_{j,t} Σ_p F_{j,p} (θ_p − θ*_{j,p})²`. A past task is protected more when the new task differs more from it. With every `d_{j,t} = 1` this is exactly the D23 EWC (unit-tested).
+- λ₀ is tuned like λ (D21 grid and rules, criterion final average validation error). The backbone learning rate is the one D23 selected for the residual TFT (3e-3 in E1 and E2): it is selected on fine-tuning streams, which SA-EWC does not change.
+
+### Literature baselines (fixed here)
+Run in the D23 setting and runner: S6 stream from scratch, D21 shared inputs, D18 purged per-cell splits, the D23 evaluation orders and seeds (10 orders × seeds 0–4 main and 5–9 replicate) and the D23 tuning orders and rules (learning rate on fine-tuning streams, criterion plasticity; then EWC λ on EWC streams, criterion final average error; one-SE rule; grid-edge extension).
+
+| Model | Literature link | Mode | Arms |
+|---|---|---|---|
+| BiLSTM (one layer, both directions over the window) | Meskine 2026 (ref 10) | continual: fine-tuning and EWC | residual (E1, E2); direct (E1) |
+| TCN (two residual blocks of dilated causal 1-D convolutions, kernel 2, dilations 1 and 2) | Yao 2025 (ref 8), Meskine 2026 | continual: fine-tuning and EWC | residual (E1, E2); direct (E1) |
+| Transformer encoder (one layer, two heads, learned positions, causal and padding mask) | closest ablation of the TFT (no variable selection or gating) | continual: fine-tuning and EWC | residual (E1, E2); direct (E1) |
+| GPR (constant × Matérn ν = 2.5 with one length scale per input, plus white noise; hyperparameters by marginal likelihood, 3 restarts) | Takahashi 2023 (ref 4), Faraji-Niri 2023 (ref 3) | fitted once on all S6 training rows (as the D21 gradient boosting) | direct and residual |
+| Random forest (500 trees, scikit-learn defaults otherwise) | classical baseline | as GPR | direct and residual |
+| SVR (RBF kernel, standardised target, ε = 0.1; C from {0.1, 1, 10, 100} by RMSE on all S6 validation rows, then refitted on the training rows) | classical baseline | as GPR | direct and residual |
+
+- The three sequence models use the TFT's input contract (window of 4, values plus missing indicators plus a padding flag; inputs only, never labels), its training loop, early stopping, frozen first-task preprocessing and target scaling, and EWC code. Their size is matched to the TFT within ±20 % of its parameter count; counts are recorded in the results file.
+- Tabular baselines (GPR, random forest, SVR) use median imputation with missing indicators, standardisation and constant-column removal, fitted on training rows only. Like gradient boosting they see every task's training rows at once, so they are not continual learners; this is stated with every comparison.
+- Direct arms in E2 are not run (compute budget, below).
+
+### Tests (fixed here)
+Reference: RC-TFT (`tft_residual_saewc`). The committed D23 runs (all eight methods, D21 inputs) enter the comparison after one main and one replicate unit of residual TFT + EWC are recomputed and reproduce to 1e-9 pp (as in D22); otherwise the run stops.
+- **Primary (one Holm family per seed set):** RC-TFT against (a) residual TFT + EWC with a fixed λ (D23), on final average error and on forgetting, and (b) linear extrapolation, on final average error.
+- **Secondary:** RC-TFT against every other method and baseline on final average error, and against the stream methods on forgetting and backward transfer (one family, as in D23); in E2, against linear extrapolation at each horizon 1–6 (a family of six).
+- Paired two-sided Wilcoxon over matched (order, seed) runs; against a deterministic baseline, the runs minus its single value. The D21 replication rule decides (p_Holm < 0.05 in both seed sets, same sign, |difference| ≥ 0.05 pp in both = replicated; |difference| < 0.05 pp in both = practically equivalent; otherwise not replicated).
+- **What counts as a positive result for SA-EWC:** (a) replicated in favour of RC-TFT on final error or on forgetting, and not replicated against it on the other. If it fails, RC-TFT is reported with that outcome and the fixed-λ model stays the best-supported variant; nothing is re-run to change it.
+- Reported for every method: final average error (RMSE and per horizon), forgetting, backward transfer, plasticity, the error of every task after the last step (per-group table), training time and parameter count.
+
+### Compute budget and run plan
+One night on the team's ASUS PC (`scripts/run_d24_night.py`). D23 timings: about 23–37 s per TFT stream in E1 and 37–59 s in E2, single-threaded; D23 ran 8 processes in parallel. Parts in priority order (a part = tuning + 200 evaluation streams):
+1. E1: RC-TFT; BiLSTM, TCN and Transformer residual.
+2. E2: RC-TFT; BiLSTM, TCN and Transformer residual.
+3. E1: BiLSTM, TCN and Transformer direct.
+4. After the parts: the D23 reference reproduction, the tabular baselines and the results files.
+5. Only if time remains, on an otherwise idle machine: the Spark scaling run (WS2.2 of the work plan: the same 120 blocks, spread over the cells, at 1, 2, 4 and 6 cores; outputs checked against pandas).
+Parts that do not finish are reported as not run; nothing is shortened silently. Smoke runs (1 order, 2 epochs) only check the code path and are not reportable.
+
+### Not done, with reasons
+- **P2 (unseen condition) for the new models:** not in the one-night budget; planned as a follow-up.
+- **Direct arms in E2 and MLP with SA-EWC:** budget; the MLP is not the proposed backbone.
+- **Bagged GPR as in ref 4:** a single GPR with per-input length scales is used; bagging is not part of D24.
+
+### Run log
