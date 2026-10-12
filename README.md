@@ -204,7 +204,7 @@ A sample is (cell, origin check *k*, horizon *h*). Inputs known at the origin: S
 - **Residual formulation (D23).** The best-performing variant predicts only the *correction* to linear extrapolation instead of ΔSOH directly. This is what made the TFT competitive.
 
 ### 5.6 Reuse assessment (`src/reuse.py`, `docs/REUSE_CATEGORIES.md`)
-Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, rather than training a separate classifier. We report accuracy, macro-F1, linear-weighted kappa and confusion matrices. On S1 all samples stay in C0 and on S6 P1 all test periods are in C3, so classes can only be evaluated meaningfully in P2. The multi-task reuse head originally planned was **not** implemented (`src/models/reuse_head.py` is a stub).
+Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, rather than training a separate classifier. We report accuracy, macro-F1, linear-weighted kappa and confusion matrices. On S1 all samples stay in C0 and on S6 P1 all test periods are in C3, so classes can only be evaluated meaningfully in P2. The multi-task reuse head originally planned was **not** implemented; its empty stub was removed (12 Oct 2026).
 
 ### 5.7 Robustness and audits
 `src/robustness.py` tests missing temperature by removal (D13). `scripts/audit_data.py` writes `results/data_audit.json`. `docs/DATA_REPORT.md` records how the delivered data differ from the handover description.
@@ -388,17 +388,19 @@ The handover CSVs are not in Git. A mirror is at `https://huggingface.co/dataset
 
 ## 12. Literature review (10 Key Papers)
 
+Bibliographic data match `paper/references.bib` (checked against Crossref). For refs 3, 6, 7 and 9 no open abstract could be read, so only what their titles state is given.
+
 | # | Paper (Year) | Methodology | Main Finding | Main Challenge |
 |---|-------------|-------------|--------------|----------------|
 | 1 | Braco (2022) | Partial-charge / real-profile SOH | RMSE 0.6–0.8%; reduced testing time | Quality depends on profile/conditions |
 | 2 | Braco (2022) | Health-indicator selection (58 indicators) | Best HI: 0.2% RMSE at repurposing; partial-charge useful in second-life | Indicators change with ageing |
-| 3 | Rashid (2023) | EIS + optimized GPR | SOH error ~1.1%; fast/non-destructive | EIS influenced by temperature, SOC, noise, equipment |
+| 3 | Faraji-Niri (2023) | EIS + machine learning | Accelerated SOH estimation from EIS tests (title only; abstract not verified) | EIS depends on measurement conditions |
 | 4 | Takahashi (2023) | Features + bagged GPR | Mean RMSE <1.48% worst-case | Depends on measurable feature quality |
 | 5 | Cui (2024) | Online ML + clustering (15+ months testing) | MAPE <2.3%; long-duration second-life data | Limited experimental population; resource-intensive |
-| 6 | Srinivasan (2024) | SOH methods review | Identifies history/heterogeneity gaps; no single adaptive model | Review-level; no new model |
-| 7 | Bilevel CL (2024) | EWC + bilevel continual learning | Improved degradation prediction; lower MAE after multiple batches | Adaptation vs retention trade-off |
+| 6 | Vignesh (2024) | Review of second-life SOH estimation methods | Review and challenges (title only; abstract not verified) | Review-level; no new model |
+| 7 | Lee (2024) | Bilevel-optimised continual learning | Capacity-degradation prediction (title only; abstract not verified) | Adaptation vs retention trade-off |
 | 8 | Yao (2025) | PNN + TCN continual learning (3 public datasets) | Strong estimation across diverse batteries; reduces need for multiple single-task models | Focuses on SOC, not SOH/reuse |
-| 9 | Li (2025) | Few-shot transfer + KAN/Transformer | Handles incomplete/data-shifted data; domain generalization | Needs target-domain adaptation |
+| 9 | Li (2025) | Domain generalisation | Domain-generalised second-life SOH estimation (title only; abstract not verified) | Not continual learning |
 | 10 | Meskine (2026) | BiLSTM/TCN + probabilistic model | Reliability calibration improvements; uncertainty-aware SOH | Sparse/noisy measurements; unseen-cell generalization |
 
 ### 12.1 Literature Survey Summary
@@ -461,15 +463,15 @@ Columns of the handover files (`DATA_DICTIONARY.csv`), used by the superseded cu
 
 [2] E. Braco, I. San Martín, P. Sanchis, A. Ursúa, and D.-I. Stroe, “Health indicator selection for state of health estimation of second-life lithium-ion batteries under extended ageing,” *Journal of Energy Storage*, vol. 55, 105366, 2022.
 
-[3] M. Rashid, M. Faraji-Niri, J. Sansom, M. Sheikh, D. Widanage, and J. Marco, “Accelerated state of health estimation of second life lithium-ion batteries via electrochemical impedance spectroscopy tests and machine learning techniques,” *Journal of Energy Storage*, vol. 58, 106295, 2023.
+[3] M. Faraji-Niri, M. Rashid, J. Sansom, M. Sheikh, D. Widanage, and J. Marco, “Accelerated state of health estimation of second life lithium-ion batteries via electrochemical impedance spectroscopy tests and machine learning techniques,” *Journal of Energy Storage*, vol. 58, 106295, 2023.
 
 [4] A. Takahashi, A. Allam, and S. Onori, “Evaluating the feasibility of batteries for second-life applications using machine learning,” *iScience*, vol. 26, 106547, 2023.
 
 [5] X. Cui, M. A. Khan, G. Pozzato, S. Singh, R. Sharma, and S. Onori, “Taking second-life batteries from exhausted to empowered using experiments, data analysis, and health estimation,” *Cell Reports Physical Science*, vol. 5, 101941, 2024.
 
-[6] V. Srinivasan, H. S. Che, J. Selvaraj, K. S. Tey, J. W. Lee, H. Shareef, and R. Errouissi, “State of Health (SoH) estimation methods for second life lithium-ion battery—Review and challenges,” *Applied Energy*, vol. 369, 123542, 2024.
+[6] V. S, H. S. Che, J. Selvaraj, K. S. Tey, J. W. Lee, H. Shareef, and R. Errouissi, “State of Health (SoH) estimation methods for second life lithium-ion battery—Review and challenges,” *Applied Energy*, vol. 369, 123542, 2024.
 
-[7] “Bilevel-optimized continual learning for predicting capacity degradation of lithium-ion batteries,” *Journal of Energy Storage*, vol. 86, 111187, 2024.
+[7] M. Lee, S. Kim, S. Kim, and J.-I. Choi, “Bilevel-optimized continual learning for predicting capacity degradation of lithium-ion batteries,” *Journal of Energy Storage*, vol. 86, 111187, 2024.
 
 [8] J. Yao, B. Zheng, and J. Kowal, “Continual learning for online state of charge estimation across diverse lithium-ion batteries,” *Journal of Energy Storage*, vol. 117, 116086, 2025.
 

@@ -1,0 +1,29 @@
+Copyright (c) 2026 Tarun Sitaraman, Sohan Sandeep Krishnan and Darshan D.
+All rights reserved.
+
+This repository is private. Its source code, documentation, figures, result
+files and manuscript drafts (the "Work") are proprietary to the copyright
+holders named above.
+
+No licence is granted. Without the prior written permission of all copyright
+holders, no part of the Work may be copied, modified, merged, published,
+distributed, sublicensed, sold, or used to train or evaluate any model, except
+that persons given access to this repository by the copyright holders may view
+and run the Work for the purpose of reviewing or contributing to it.
+
+Third-party material is not covered by this notice and remains under its own
+terms. In particular, the battery datasets used by the Work (see
+docs/EXTERNAL_DATA.md) are published by their authors under the Creative
+Commons Attribution 4.0 International licence (CC BY 4.0); they are not part of
+this repository, and their attribution requirements apply to any use of them.
+Python packages listed in requirements.txt are distributed under their own
+licences.
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS
+BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE WORK OR ITS USE.
+
+The copyright holders intend to replace this notice with an open-source licence
+if and when the repository is made public.
