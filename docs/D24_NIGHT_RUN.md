@@ -20,10 +20,10 @@ Estimates come from D23's recorded training times (TFT 23–37 s per stream in E
 
 ## Before starting
 
-1. Pull the branch with the D24 code and check the tree is clean:
+1. Pull `main` (the D24 code is merged there) and check the tree is clean:
    ```powershell
    git fetch origin
-   git checkout claude/ecstatic-cori-4v2ble
+   git checkout main
    git pull
    git status            # must show nothing to commit
    ```
