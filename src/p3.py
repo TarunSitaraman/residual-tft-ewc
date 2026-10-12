@@ -40,7 +40,7 @@ from src import forecasting as FC
 from src import pool
 from src import protocols as P
 from src import wheeler as W
-from src.continual_learning import make_strategy
+from src.continual_learning import make_strategy, needs_history
 
 TARGET = FC.TARGET
 CHEMISTRIES: tuple[str, ...] = ("NMC", "NCA", "NMC_NCA", "LFP")
@@ -211,8 +211,9 @@ def run_stream(strategy, stream: Sequence[P.Task], pool: P.Task | None, eval_spl
 
 def build_strategy(method: str, features: Sequence[str], seed: int, history: pd.DataFrame | None,
                    settings: Mapping) -> object:
-    """``method`` is the D18 strategy name (``finetune``, ``ewc``, ``tft_finetune``, ``tft_ewc``)."""
+    """``method`` is the strategy name (``finetune``, ``ewc``, ``tft_finetune``, ``tft_ewc``; D24 adds ``tft_saewc``
+    and ``lstm_``/``tcn_``/``transformer_`` + ``finetune``/``ewc``)."""
     kwargs = dict(settings)
-    if method.startswith("tft"):
+    if needs_history(method):
         kwargs.update(history=history)
     return make_strategy(method, features, seed=seed, target=TARGET, **kwargs)

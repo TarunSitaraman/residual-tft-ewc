@@ -143,18 +143,23 @@ def horizon_rmse(frame: pd.DataFrame, pred: np.ndarray) -> dict[int, float]:
     return {int(k): float(np.sqrt(np.mean(err[h == k] ** 2))) for k in sorted(np.unique(h))}
 
 
-def tests(runs: pd.DataFrame, base: pd.DataFrame, families: dict[str, tuple[list[str], bool, list[str]]]) -> list[dict]:
-    """Paired Wilcoxon of ``REFERENCE`` against other methods and baselines, Holm-corrected per seed set and family.
+def tests(runs: pd.DataFrame, base: pd.DataFrame, families: dict[str, tuple[list[str], bool | list[str], list[str]]],
+          reference: str = REFERENCE) -> list[dict]:
+    """Paired Wilcoxon of ``reference`` against other methods and baselines, Holm-corrected per seed set and family.
 
-    ``families`` maps a name to (metrics, include the other stream methods?, baselines to include). A baseline is a
-    single value, repeated against the runs, and only for the metrics it has. Differences are reference minus
-    other: negative favours ``REFERENCE``."""
+    ``families`` maps a name to (metrics, the other stream methods to include: all if True, none if False, or a
+    list, baselines to include). A baseline is a single value, repeated against the runs, and only for the metrics
+    it has. Differences are reference minus other: negative favours ``reference``."""
+    REFERENCE = reference  # noqa: N806 (local alias keeps the body unchanged for the D23 default)
     out = []
     key = ["order_id", "seed"]
     for set_name, g in runs.groupby("set"):
         ref = g[g["method"] == REFERENCE].set_index(key)
         for family, (metrics, with_methods, baselines) in families.items():
-            others = [(m, g[g["method"] == m].set_index(key)) for m in sorted(set(g["method"]) - {REFERENCE})] if with_methods else []
+            pool = sorted(set(g["method"]) - {REFERENCE})
+            if not isinstance(with_methods, bool):
+                pool = [m for m in pool if m in with_methods]
+            others = [(m, g[g["method"] == m].set_index(key)) for m in pool] if with_methods else []
             others += [(b["method"], b) for b in base.to_dict("records") if b["method"] in baselines]
             rows, pv = [], {}
             for name, other in others:

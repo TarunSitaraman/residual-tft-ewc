@@ -38,7 +38,7 @@ def _rmse(strategy, task: Task) -> float:
     return float(np.sqrt(np.mean(err ** 2)))
 
 
-@pytest.mark.parametrize("name", sorted(n for n in cl.STRATEGIES if not cl.is_tft(n)))  # TFT: tests/test_tft.py
+@pytest.mark.parametrize("name", sorted(n for n in cl.STRATEGIES if not cl.needs_history(n)))  # windowed: test_tft, test_d24
 def test_strategy_trains_on_stream(name, tasks, features):
     s = cl.make_strategy(name, features, **FAST)
     with pytest.raises(RuntimeError):

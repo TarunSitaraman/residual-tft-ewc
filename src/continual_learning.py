@@ -511,3 +511,115 @@ __all__ += ["TFTFineTune", "TFTEWC", "TFTJoint", "is_tft"]
 def is_tft(name: str) -> bool:
     """True for strategies that need a cycle ``history`` (TFT backbone)."""
     return name.lower().startswith("tft")
+
+
+# ---------------------------------------------------------------------------
+# Decision D24: shift-adaptive EWC (the proposed RC-TFT) and the literature sequence baselines
+# ---------------------------------------------------------------------------
+
+from src.models.sequence_baselines import SEQUENCE_BACKBONES  # noqa: E402
+
+
+class ShiftAdaptiveEWC(EWC):
+    """EWC whose penalty for each finished task scales with the input shift between that task and the current one.
+
+    After task ``j`` the mean ``mu_j`` and population standard deviation ``sigma_j`` of its training inputs after
+    the frozen first-task preprocessing are stored (statistics only, no rows). When task ``t`` starts, every
+    finished task gets the weight
+
+        d_jt = sqrt((||mu_t - mu_j||^2 + ||sigma_t - sigma_j||^2) / D),
+
+    the 2-Wasserstein distance between diagonal Gaussians per input dimension, from training inputs only (never
+    labels), fixed for the whole task. The penalty is
+
+        (ewc_lambda / 2) * sum_j d_jt * sum_i F_j,i * (theta_i - theta*_j,i)^2,
+
+    so a past task is protected more when the new task differs more from it. With every ``d_jt = 1`` it equals
+    ``EWC``. The weights of every task are kept in ``shift_weights_`` for reporting.
+    """
+
+    name = "saewc"
+
+    def __init__(self, features: Sequence[str], **kwargs) -> None:
+        super().__init__(features, **kwargs)
+        self.input_stats_: list[tuple[np.ndarray, np.ndarray]] = []
+        self.task_weights_: list[float] = []
+        self.shift_weights_: list[list[float]] = []
+
+    def config(self) -> dict:
+        return {**super().config(), "ewc_variant": "shift-adaptive multi-penalty (D24)",
+                "shift_measure": "W2 between diagonal Gaussians of preprocessed training inputs, per dimension"}
+
+    def _input_stats(self, train: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:
+        x = self.preprocessor.transform(train).astype(np.float64)
+        return x.mean(axis=0), x.std(axis=0)
+
+    @staticmethod
+    def shift(a: tuple[np.ndarray, np.ndarray], b: tuple[np.ndarray, np.ndarray]) -> float:
+        (mu_a, sd_a), (mu_b, sd_b) = a, b
+        return float(np.sqrt((np.sum((mu_a - mu_b) ** 2) + np.sum((sd_a - sd_b) ** 2)) / len(mu_a)))
+
+    def _before_task(self, task: Task) -> None:
+        super()._before_task(task)
+        current = self._input_stats(task.train)
+        self.task_weights_ = [self.shift(s, current) for s in self.input_stats_]
+        self.shift_weights_.append(list(self.task_weights_))
+
+    def _after_task(self, task: Task) -> None:
+        super()._after_task(task)
+        self.input_stats_.append(self._input_stats(task.train))
+
+    def penalty(self) -> torch.Tensor:
+        if self.model is None or not self.fishers_:
+            return torch.zeros(())
+        if len(self.task_weights_) != len(self.fishers_):
+            raise RuntimeError("shift weights and Fisher terms out of step")
+        theta = torch.cat([p.reshape(-1) for p in self.model.parameters()])
+        total = torch.zeros(())
+        for w, (fisher, optimum) in zip(self.task_weights_, self._flat_penalty_terms()):
+            total = total + w * (fisher * (theta - optimum) ** 2).sum()
+        return 0.5 * self.ewc_lambda * total
+
+
+class SequenceMixin(TFTMixin):
+    """A literature sequence backbone (``SEQUENCE_BACKBONES``) in place of the TFT, on the TFT's windows.
+
+    Windows, label-free history, frozen preprocessing, training loop and EWC are the TFT's, so results differ
+    from the TFT only by the network. Sizes are matched to the TFT (``src/models/sequence_baselines.py``).
+    """
+
+    backbone = ""
+
+    def config(self) -> dict:
+        return {**super().config(), "backbone": self.backbone}
+
+    def _build_model(self) -> nn.Module:
+        return SEQUENCE_BACKBONES[self.backbone](len(self.features), dropout=self.dropout)
+
+    def interpret(self, df: pd.DataFrame) -> dict[str, pd.Series]:
+        raise NotImplementedError(f"{self.backbone} has no interpretation outputs")
+
+
+class TFTSAEWC(TFTMixin, ShiftAdaptiveEWC):
+    """TFT with shift-adaptive EWC; on the residual target this is RC-TFT, the proposed model (D24)."""
+
+    name = "tft_saewc"
+
+
+STRATEGIES.update({"saewc": ShiftAdaptiveEWC, "tft_saewc": TFTSAEWC})
+for _bb, _label in (("lstm", "LSTM"), ("tcn", "TCN"), ("transformer", "Transformer")):
+    for _base, _suffix in ((FineTune, "FineTune"), (EWC, "EWC")):
+        _cls = type(f"{_label}{_suffix}", (SequenceMixin, _base),
+                    {"name": f"{_bb}_{_base.name}", "backbone": _bb,
+                     "__doc__": f"{_label} backbone (D24 literature baseline) with {_base.name}."})
+        globals()[_cls.__name__] = _cls
+        STRATEGIES[_cls.name] = _cls
+        __all__.append(_cls.__name__)
+__all__ += ["ShiftAdaptiveEWC", "TFTSAEWC", "SequenceMixin", "needs_history"]
+
+SEQUENCE_PREFIXES = ("tft", *SEQUENCE_BACKBONES)
+
+
+def needs_history(name: str) -> bool:
+    """True for strategies that read windows from a ``history`` (the TFT and the D24 sequence baselines)."""
+    return name.lower().split("_")[0] in SEQUENCE_PREFIXES

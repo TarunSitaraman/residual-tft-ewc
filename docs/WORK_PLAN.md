@@ -2,6 +2,27 @@
 
 Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan says what is still missing for the three deliverables (big-data preprocessing results, the proposed deep-learning model, and a comparison with at least four existing ML/DL models with tables and figures), in what order to do it, and how to tell when each item is done. Rules from `CLAUDE.md` and `AGENTS.md` apply to every item: no fabricated or synthetic data in results, battery groups kept separate, chronological purged splits, protocols written into `docs/DECISIONS.md` before the runs they govern, every reported number traceable to a clean commit.
 
+## Decisions and status (updated 12 Oct 2026)
+
+| Question | Decision |
+|---|---|
+| Proposed model | **RC-TFT**: residual TFT with **shift-adaptive EWC** (the TFT + EWC hybrid), pre-registered as D24. The D23 fixed-λ model is its ablation. |
+| Name | *Residual Continual TFT*: R = forecasts the correction to linear extrapolation; C = continual training with shift-adaptive EWC; TFT = the (cited) backbone. |
+| Compute | One night on the ASUS (`docs/D24_NIGHT_RUN.md`); parts in a fixed priority order, anything unfinished reported as not run. |
+| Licence | Proprietary, all rights reserved, while the repository is private (`LICENSE`). |
+| Paper | Kept long for now; cut later. Results come first. |
+
+| Item | Status |
+|---|---|
+| WS1 docs fixes | Done: README references synced with the bibliography, licence, stub removed, paper `\todo` resolved (`paper_single.pdf` still needs a LaTeX rebuild) |
+| WS2.1 preprocessing table | Done from committed files (`scripts/make_preprocessing_table.py`); per-dataset pool counts are added when run on the data machine |
+| WS2.2 Spark scaling | Code ready (`scripts/run_spark_scaling.py`); runs at the end of the night |
+| WS3 literature baselines | Code and tests done (BiLSTM, TCN, Transformer, GPR, random forest, SVR); runs tonight |
+| WS4 shift-adaptive EWC | Code and tests done (`ShiftAdaptiveEWC`, `tft_saewc`); runs tonight |
+| WS5 tables and figures | Script done (`scripts/make_d24_outputs.py`); currently drawn from the D23 files, switches to D24 automatically |
+| WS6 P2 for new models | Not in tonight's budget |
+| WS7 paper | Later |
+
 ## 0. Where we are (audit summary)
 
 | Deliverable | Status | Evidence | Gap |
