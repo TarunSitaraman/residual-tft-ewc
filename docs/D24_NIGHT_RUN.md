@@ -10,8 +10,9 @@ Runbook for the one-night D24 run (decision D24 in `docs/DECISIONS.md`, work pla
 | Smoke | every part once, 1 order, 2 epochs (not reportable) | 5–10 min |
 | Parts 1–4 | E1: RC-TFT, BiLSTM, TCN, Transformer (residual) | RC-TFT about 1.5–2 h; the others about 1 h each |
 | Parts 5–8 | E2 (horizons 1–6): the same four | RC-TFT about 2.5–3 h; the others about 1.5 h each |
-| Parts 9–11 | E1: BiLSTM, TCN, Transformer (direct) | about 1 h each |
-| Collect | D23 reproduction check (2 units), GPR / random forest / SVR, tests, `results/forecasting_d24_e1.json`, `..._e2.json` | 10–20 min |
+| Parts 9–10 | E1 and E2 baselines: persistence, extrapolation, ridge, gradient boosting, GPR (at most 1,000 rows), random forest, SVR, direct and residual | about 30–45 min each |
+| Parts 11–13 | E1: BiLSTM, TCN, Transformer (direct) | about 1 h each |
+| Collect | D23 reproduction check (2 units), tests, `results/forecasting_d24_e1.json`, `..._e2.json` | a few minutes |
 | Spark scaling (optional) | 120 blocks at 1, 2, 4, 6 threads | about 35 min |
 | Outputs | tables and figures | 1 min |
 
@@ -70,7 +71,10 @@ If the machine restarts, run the same command again: every unit is checkpointed 
    python scripts/make_d24_outputs.py
    python scripts/make_preprocessing_table.py
    ```
-3. Check that `results/forecasting_d24_e1.json` records `"git_dirty": false` and lists the parts run and not run.
+3. Check that `results/forecasting_d24_e1.json` records `"git_dirty": false` and lists the parts run and not run. Then write the report from the files only:
+   ```powershell
+   python scripts/summarise_d24.py --out data/cache/d24/d24_summary.md
+   ```
 4. Commit the outputs (no other files):
    ```powershell
    git add results/forecasting_d24_e1.json results/forecasting_d24_e2.json results/d22_spark_scaling.json results/d22_spark_validation_scale_c*.json results/preprocessing_funnel.json results/tables paper/figures paper/tables

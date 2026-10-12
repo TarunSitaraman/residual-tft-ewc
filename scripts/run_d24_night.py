@@ -38,9 +38,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-PRIORITY = [  # D24 run plan, steps 1-3
+PRIORITY = [  # D24 run plan, steps 1-3 (baselines moved into the parallel phase by the D24 amendment)
     ("e1", "tft_residual_saewc"), ("e1", "lstm_residual"), ("e1", "tcn_residual"), ("e1", "transformer_residual"),
     ("e2", "tft_residual_saewc"), ("e2", "lstm_residual"), ("e2", "tcn_residual"), ("e2", "transformer_residual"),
+    ("e1", "baselines"), ("e2", "baselines"),   # D24 amendment: tabular baselines in the parallel phase
     ("e1", "lstm_direct"), ("e1", "tcn_direct"), ("e1", "transformer_direct"),
 ]
 LOGS = ROOT / "data" / "cache" / "d24" / "logs"

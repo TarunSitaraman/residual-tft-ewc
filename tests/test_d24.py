@@ -200,3 +200,32 @@ def test_d24_runner_smoke_part_and_collect(tmp_path):
     assert all(len(r["shift_weights"]) == 3 for r in data["runs"] if r["method"] == "tft_residual_saewc")
     assert not (ROOT / "results" / "forecasting_d24_e1_smoke.json").exists()   # smoke output stays outside Git
     assert "not run" in res.stdout
+    gpr = next(b for b in data["baselines"] if b["method"] == "gpr_direct")["config"]
+    assert gpr["n_fit_rows"] == min(gpr["n_train_rows"], 200)                    # smoke cap
+    # Tables, figures and the summary work on a D24-shaped results file (written outside the repository).
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "make_d24_outputs.py"), "--results", str(out.parent),
+                    "--out", str(tmp_path / "outputs")], cwd=ROOT, env=env, check=True, capture_output=True, timeout=600)
+    comp = pd.read_csv(tmp_path / "outputs" / "tables" / "d24_comparison_e1.csv")
+    assert {"tft_residual_saewc", "lstm_residual_ewc", "gpr_residual", "linear_extrapolation"} <= set(comp["method"])
+    assert (tmp_path / "outputs" / "figures" / "d24_comparison_e1.png").exists()
+    summ = subprocess.run([sys.executable, str(ROOT / "scripts" / "summarise_d24.py"), "--results", str(out.parent)],
+                          cwd=ROOT, env=env, check=True, capture_output=True, text=True, encoding="utf-8", timeout=600)
+    assert "RC-TFT" in summ.stdout and "Parts not run" in summ.stdout
+
+
+def test_baselines_part_is_checkpointed(tmp_path):
+    _wheeler_table(tmp_path / "wheeler_checks.csv")
+    env = {**os.environ, "DATA_ROOT": str(tmp_path), "PYTHONPATH": str(ROOT)}
+    script = str(ROOT / "scripts" / "run_d24.py")
+    subprocess.run([sys.executable, script, "--exp", "e2", "--part", "baselines", "--profile", "smoke"],
+                   cwd=ROOT, env=env, check=True, capture_output=True, timeout=900)
+    ck = list((tmp_path / "cache" / "d24").rglob("baselines__*.pickle"))
+    assert len(ck) == 1 and list((tmp_path / "cache" / "d24").rglob("done_baselines.json"))
+
+
+def test_gpr_subsample_cap():
+    frame = _s6_frame().assign(lin_forecast=0.0)
+    tasks = FC.forecast_stream(frame, ["case1", "case4", "case7"])
+    train = pd.concat([t.train for t in tasks], ignore_index=True)
+    out = TB.fit_predict("gpr", train, train, {"x": tasks[0].test}, p3.SHARED_FEATURES, gpr_max_rows=40)
+    assert out["config"]["n_fit_rows"] == 40 < out["config"]["n_train_rows"] == len(train)

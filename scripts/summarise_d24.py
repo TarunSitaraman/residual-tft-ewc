@@ -1,0 +1,119 @@
+"""Markdown summary of the D24 results, read from the results files only (for the run report and docs/RESULTS.md).
+
+Prints, per experiment: provenance (commit, clean tree, library versions), parts run and not run, the D23
+reproduction check, every method's final average test RMSE (main / replicate) with forgetting, the baselines, the
+primary registered tests with the D21 replication verdict, and the shift weights SA-EWC used; then the Spark scaling
+run if present. Nothing is computed that the results files do not contain, except means over the stored runs.
+
+Usage (from the repository root)::
+
+    python scripts/summarise_d24.py                  # results/
+    python scripts/summarise_d24.py --out d24_summary.md
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import make_d24_outputs as O  # noqa: E402
+
+
+def experiment(path: Path) -> list[str]:
+    d = json.loads(path.read_text())
+    env = d["environment"]
+    exp = d["experiment"]
+    h = "1–3" if exp == "e1" else "1–6"
+    out = [f"## {exp.upper()} (horizons {h}) — `{path.name}`", "",
+           f"- Commit `{str(env.get('git_commit'))[:7]}`, clean tree: {not env.get('git_dirty')}; Python {env.get('python')}, "
+           f"numpy {env.get('numpy')}, pandas {env.get('pandas')}, scikit-learn {env.get('scikit-learn')}, "
+           f"torch {env.get('torch')}; profile {d['profile']}.",
+           f"- Parts run: {', '.join(d['parts_run'])}.",
+           f"- Parts not run: {', '.join(d['parts_not_run']) or 'none'}."]
+    rep = d.get("d23_reference_reproduction") or {}
+    if rep.get("checked"):
+        units = "; ".join(f"{u['set']} seed {u['seed']} order {u['order_id']}: {u['recomputed']:.6f} vs "
+                          f"{u['committed']:.6f}" for u in rep["units"])
+        out.append(f"- D23 reproduction check passed ({units}).")
+    else:
+        out.append(f"- D23 reproduction check: not done ({rep.get('reason', 'unknown')}); D23 runs not used.")
+    t = d["tuning"]
+    out.append("- Tuning: " + "; ".join(f"{k}: lr {v['lr']}, lambda {v['ewc_lambda']}" for k, v in t.items()) + ".")
+    out.append(f"- Parameters: {', '.join(f'{k} {v:,}' for k, v in d.get('parameter_counts', {}).items())}.")
+    comp = O.comparison(d)
+    out += ["", "| Method | RMSE main (s.d.) | RMSE replicate (s.d.) | Forgetting (main) | BWT (main) |",
+            "|---|---|---|---|---|"]
+    for r in comp.itertuples():
+        if r.kind == "continual (stream)":
+            name = f"**{r.label}**" if r.method == O.reference(d) else r.label
+            out.append(f"| {name} | {O.fmt(r.rmse_main_mean)} ({O.fmt(r.rmse_main_sd)}) | {O.fmt(r.rmse_replicate_mean)} "
+                       f"({O.fmt(r.rmse_replicate_sd)}) | {O.fmt(r.forgetting_main)} | {O.fmt(r.bwt_main)} |")
+        else:
+            out.append(f"| {r.label} ({r.kind}) | {r.rmse_main_mean:.3f} | | | |")
+    tests = O.tests_table(d)
+    prim = tests[tests["family"] == "primary"]
+    out += ["", "Primary tests (reference minus other; negative favours RC-TFT), D21 replication rule:", "",
+            "| Other | Metric | Diff. main [95 % CI] | p_Holm main | Diff. replicate | p_Holm replicate | Verdict |",
+            "|---|---|---|---|---|---|---|"]
+    for r in prim.itertuples():
+        out.append(f"| {r.other} | {r.metric} | {O.sfmt(r.diff_main)} {r.ci_main} | {O.fmt(r.p_holm_main, 4)} | "
+                   f"{O.sfmt(r.diff_replicate)} | {O.fmt(r.p_holm_replicate, 4)} | {r.verdict} |")
+    fin = tests[(tests["family"] == "final") & (tests["metric"] == "final_avg_error")]
+    out += ["", "Secondary, final error vs every other method (verdicts): " +
+            "; ".join(f"{r.other}: {r.verdict} ({O.sfmt(r.diff_main)} / {O.sfmt(r.diff_replicate)})" for r in fin.itertuples())]
+    if "horizon" in set(tests["family"]):
+        hz = tests[tests["family"] == "horizon"]
+        out += ["", "Per horizon vs linear extrapolation: " +
+                "; ".join(f"{r.metric.replace('rmse_', '')}: {O.sfmt(r.diff_main)} / {O.sfmt(r.diff_replicate)} ({r.verdict})"
+                          for r in hz.itertuples())]
+    runs = pd.DataFrame(d["runs"])
+    sa = runs[runs["method"] == O.reference(d)]
+    if "shift_weights" in sa:
+        w = [x for ws in sa["shift_weights"].dropna() for task in ws for x in task]
+        if w:
+            out += ["", f"SA-EWC shift weights d_jt over all runs and task pairs: median {np.median(w):.3f}, "
+                        f"range {np.min(w):.3f}–{np.max(w):.3f} (n = {len(w)})."]
+    return out + [""]
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--results", type=Path, default=ROOT / "results")
+    ap.add_argument("--out", type=Path)
+    args = ap.parse_args()
+    lines = ["# D24 results summary (generated by scripts/summarise_d24.py)", ""]
+    found = False
+    for exp in ("e1", "e2"):
+        for name in (f"forecasting_d24_{exp}.json", f"forecasting_d24_{exp}_smoke.json"):
+            p = args.results / name
+            if p.exists():
+                lines += experiment(p)
+                found = True
+                break
+    sc = args.results / "d22_spark_scaling.json"
+    if sc.exists():
+        runs = json.loads(sc.read_text())["runs"]
+        lines += ["## Spark scaling", "", "| Threads | Status | Time (s) | Speed-up | Efficiency | Matches pandas |",
+                  "|---|---|---|---|---|---|"]
+        lines += [f"| {r['cores']} | {r['status']} | {r.get('job_seconds', '')} | {r.get('speedup', '')} | "
+                  f"{r.get('efficiency', '')} | {r.get('matches_pandas', '')} |" for r in runs]
+    if not found:
+        lines.append("No D24 results file found.")
+    text = "\n".join(lines) + "\n"
+    if args.out:
+        args.out.write_text(text, encoding="utf-8")
+    sys.stdout.reconfigure(encoding="utf-8")
+    print(text)
+    return 0 if found else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

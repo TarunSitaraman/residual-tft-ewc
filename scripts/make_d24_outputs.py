@@ -68,7 +68,7 @@ def family(method: str) -> str | None:
 
 
 def load(exp: str) -> tuple[dict, str] | None:
-    for name in (f"forecasting_d24_{exp}.json", f"forecasting_d23_{exp}.json"):
+    for name in (f"forecasting_d24_{exp}.json", f"forecasting_d24_{exp}_smoke.json", f"forecasting_d23_{exp}.json"):
         if (RES / name).exists():
             return json.loads((RES / name).read_text()), name
     return None
@@ -101,11 +101,17 @@ def comparison(d: dict) -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values("rmse_main_mean").reset_index(drop=True)
 
 
+def _num(x) -> float:
+    return float("nan") if x is None else float(x)
+
+
 def verdict(main: pd.Series, rep: pd.Series) -> str:
-    dm, dr = main["mean_diff"], rep["mean_diff"]
+    dm, dr = _num(main["mean_diff"]), _num(rep["mean_diff"])
+    if np.isnan(dm) or np.isnan(dr):
+        return "not testable"
     if abs(dm) < EQUIV and abs(dr) < EQUIV:
         return "practically equivalent"
-    if (main["p_holm"] < ALPHA and rep["p_holm"] < ALPHA and np.sign(dm) == np.sign(dr)
+    if (_num(main["p_holm"]) < ALPHA and _num(rep["p_holm"]) < ALPHA and np.sign(dm) == np.sign(dr)
             and abs(dm) >= EQUIV and abs(dr) >= EQUIV):
         return "replicated, " + ("reference better" if dm < 0 else "reference worse")
     return "not replicated"
@@ -119,9 +125,10 @@ def tests_table(d: dict) -> pd.DataFrame:
             continue
         m, r = g[g["set"] == "main"].iloc[0], g[g["set"] == "replicate"].iloc[0]
         rows.append({"family": fam, "metric": metric, "reference": label(reference(d)), "other": label(other),
-                     "diff_main": m["mean_diff"], "ci_main": f"[{m['ci_low']:.3f}, {m['ci_high']:.3f}]",
-                     "p_holm_main": m["p_holm"], "r_main": m["rank_biserial"],
-                     "diff_replicate": r["mean_diff"], "p_holm_replicate": r["p_holm"], "verdict": verdict(m, r)})
+                     "diff_main": _num(m["mean_diff"]), "ci_main": f"[{fmt(_num(m['ci_low']))}, {fmt(_num(m['ci_high']))}]",
+                     "p_holm_main": _num(m["p_holm"]), "r_main": _num(m["rank_biserial"]),
+                     "diff_replicate": _num(r["mean_diff"]), "p_holm_replicate": _num(r["p_holm"]),
+                     "verdict": verdict(m, r)})
     return pd.DataFrame(rows)
 
 
@@ -156,6 +163,10 @@ def fmt(x, nd=3) -> str:
     return "--" if x is None or (isinstance(x, float) and np.isnan(x)) else f"{x:.{nd}f}"
 
 
+def sfmt(x, nd=3) -> str:
+    return "--" if x is None or (isinstance(x, float) and np.isnan(x)) else f"{x:+.{nd}f}"
+
+
 def tables(exp: str, d: dict, src: str) -> dict[str, pd.DataFrame]:
     comp, tst, grp = comparison(d), tests_table(d), per_group(d)
     comp.to_csv(TAB / f"d24_comparison_{exp}.csv", index=False)
@@ -178,8 +189,8 @@ def tables(exp: str, d: dict, src: str) -> dict[str, pd.DataFrame]:
               f"without a spread are single fits. Source: \\texttt{{results/{tex_escape(src)}}}.",
               f"tab:d24-comparison-{exp}", ["Method", "RMSE main", "RMSE replicate", "Forget.", "BWT", "Params"],
               body, "lrrrrr", escape=False)
-    tb = [[r.family, r.metric.replace("final_avg_error", "final error"), r.other, f"{r.diff_main:+.3f}",
-           fmt(r.p_holm_main), f"{r.diff_replicate:+.3f}", fmt(r.p_holm_replicate), r.verdict]
+    tb = [[r.family, r.metric.replace("final_avg_error", "final error"), r.other, sfmt(r.diff_main),
+           fmt(r.p_holm_main), sfmt(r.diff_replicate), fmt(r.p_holm_replicate), r.verdict]
           for r in tst.itertuples()]
     write_tex(PTAB / f"d24_tests_{exp}.tex",
               f"Paired tests, {tex_escape(ref)} minus each other method (pp; negative favours the reference), "
@@ -353,7 +364,17 @@ def fig_spark_scaling() -> Path | None:
     return out
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    import argparse
+    global RES, TAB, FIG, PTAB
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--results", type=Path, default=RES, help="folder with the results JSON files (default results/)")
+    ap.add_argument("--out", type=Path, help="write tables and figures under this folder instead of the repository "
+                                             "(testing; e.g. on smoke output)")
+    args = ap.parse_args(argv)
+    RES = args.results
+    if args.out:
+        TAB, FIG, PTAB = args.out / "tables", args.out / "figures", args.out / "paper_tables"
     for p in (TAB, FIG, PTAB):
         p.mkdir(parents=True, exist_ok=True)
     for exp in ("e1", "e2"):

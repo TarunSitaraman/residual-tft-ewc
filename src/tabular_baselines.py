@@ -7,7 +7,8 @@ with missing indicators, removal of constant columns and standardisation. The ``
 
 - GPR (Takahashi et al. 2023 use bagged GPR; Faraji-Niri et al. 2023 EIS with machine learning): constant x Matern
   (nu = 2.5, one length scale per input) + white noise, normalised target, hyperparameters by marginal likelihood
-  with 3 seeded restarts.
+  with 3 seeded restarts, on a seeded random subsample of at most ``GPR_MAX_ROWS`` training rows (exact-GP cost grows
+  with the cube of the rows; D24 amendment of 12 Oct 2026).
 - Random forest: 500 trees, scikit-learn defaults otherwise, seeded.
 - SVR: RBF kernel on a standardised target, epsilon 0.1; C from ``SVR_C_GRID`` by RMSE on the validation rows,
   then refitted on the training rows.
@@ -24,6 +25,7 @@ from src.forecasting import TARGET
 
 TABULAR_MODELS: tuple[str, ...] = ("gpr", "rf", "svr")
 SVR_C_GRID: tuple[float, ...] = (0.1, 1.0, 10.0, 100.0)
+GPR_MAX_ROWS = 1000
 
 
 def _pipeline(model):
@@ -64,7 +66,8 @@ def _n_inputs(train: pd.DataFrame, features: Sequence[str]) -> int:
 
 
 def fit_predict(name: str, train: pd.DataFrame, val: pd.DataFrame, tests: Mapping[str, pd.DataFrame],
-                features: Sequence[str], arm: str = "direct", seed: int = 0, target: str = TARGET) -> dict:
+                features: Sequence[str], arm: str = "direct", seed: int = 0, target: str = TARGET,
+                gpr_max_rows: int = GPR_MAX_ROWS) -> dict:
     """Fit ``name`` on ``train`` and predict each frame of ``tests`` (forecast of Delta in pp).
 
     ``val`` is used only to choose SVR's C. Returns ``{"pred": {test name: array}, "config": {...}}``.
@@ -84,9 +87,13 @@ def fit_predict(name: str, train: pd.DataFrame, val: pd.DataFrame, tests: Mappin
         best = min(SVR_C_GRID, key=lambda c: (scores[c], c))
         model = make_model("svr", seed, C=best).fit(train[feats], y)
         config.update(C=best, val_rmse_by_C={str(k): v for k, v in scores.items()})
+    elif name == "gpr":
+        rows = np.arange(len(train))
+        if len(train) > gpr_max_rows:
+            rows = np.sort(np.random.default_rng(seed).choice(len(train), size=gpr_max_rows, replace=False))
+        sub = train.iloc[rows]
+        model = make_model("gpr", seed, n_inputs=_n_inputs(sub, feats)).fit(sub[feats], y[rows])
+        config.update(kernel=str(model[-1].kernel_), n_fit_rows=int(len(rows)), n_train_rows=int(len(train)))
     else:
-        model = make_model(name, seed, n_inputs=_n_inputs(train, feats) if name == "gpr" else None)
-        model.fit(train[feats], y)
-        if name == "gpr":
-            config["kernel"] = str(model[-1].kernel_)
+        model = make_model(name, seed).fit(train[feats], y)
     return {"pred": {k: model.predict(v[feats]) + offset(v) for k, v in tests.items()}, "config": config}

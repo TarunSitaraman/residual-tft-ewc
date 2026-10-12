@@ -52,8 +52,10 @@ HORIZONS = run_d23.HORIZONS
 REFERENCE = "tft_residual_saewc"                 # RC-TFT
 FIXED = "tft_residual_ewc"                       # D23: residual TFT + EWC with a fixed lambda (the ablation)
 SEQ = tuple(SEQUENCE_BACKBONES)                  # lstm, tcn, transformer
-PARTS = {"e1": (REFERENCE, *[f"{b}_residual" for b in SEQ], *[f"{b}_direct" for b in SEQ]),
-         "e2": (REFERENCE, *[f"{b}_residual" for b in SEQ])}
+BASELINES = "baselines"                          # deterministic and tabular baselines, one checkpointed part
+PARTS = {"e1": (REFERENCE, *[f"{b}_residual" for b in SEQ], *[f"{b}_direct" for b in SEQ], BASELINES),
+         "e2": (REFERENCE, *[f"{b}_residual" for b in SEQ], BASELINES)}
+GPR_ROWS = {"paper": 1000, "smoke": 200}         # D24 amendment: GPR on at most this many training rows (seeded)
 CL_METRICS = run_d23.CL_METRICS
 
 
@@ -133,6 +135,11 @@ class Runner(run_d23.Runner):
         return self.ckpt.dir / f"done_{part}.json"
 
     def run_part(self, part: str) -> tuple[dict, list[dict]]:
+        if part == BASELINES:
+            self.cached_baselines()
+            self.done_path(part).parent.mkdir(parents=True, exist_ok=True)
+            self.done_path(part).write_text("{}")
+            return {}, []
         tuned = self.tune(part)
         rows = self.evaluate(part, tuned)
         self.done_path(part).parent.mkdir(parents=True, exist_ok=True)
@@ -140,6 +147,11 @@ class Runner(run_d23.Runner):
         return tuned, rows
 
     # -- baselines ------------------------------------------------------------
+    def cached_baselines(self) -> list[dict]:
+        """``baselines`` once per experiment and profile, checkpointed (the ``baselines`` part computes it in the
+        parallel phase of the night run; collection then only reads it)."""
+        return self.ckpt("baselines", self.baselines, {"gpr_max_rows": GPR_ROWS[self.profile]})
+
     def baselines(self) -> list[dict]:
         """D23 baselines plus the D24 tabular ones (direct and residual), each with per-task test RMSE."""
         frame = self.frames["direct"]
@@ -157,7 +169,8 @@ class Runner(run_d23.Runner):
         configs = {}
         for model in TB.TABULAR_MODELS:
             for arm in ("direct", "residual"):
-                out = TB.fit_predict(model, train, val, tests, self.features, arm=arm, seed=0)
+                out = TB.fit_predict(model, train, val, tests, self.features, arm=arm, seed=0,
+                                     gpr_max_rows=GPR_ROWS[self.profile])
                 preds[f"{model}_{arm}"], configs[f"{model}_{arm}"] = out["pred"], out["config"]
         final = pd.concat(tests.values(), ignore_index=True)
         rows = []
@@ -201,7 +214,7 @@ def d23_runs(r: Runner) -> tuple[pd.DataFrame, dict]:
 def collect(r: Runner, parts: list[str], collect_only: bool) -> int:
     tuned, rows, not_run = {}, [], []
     for part in PARTS[r.exp]:
-        if part not in parts:
+        if part not in parts or part == BASELINES:
             continue
         if collect_only and not r.done_path(part).exists():
             not_run.append(part)
@@ -214,7 +227,7 @@ def collect(r: Runner, parts: list[str], collect_only: bool) -> int:
     ref_runs, repro = d23_runs(r)
     keep = [c for c in ref_runs.columns if c in runs.columns or c.startswith("rmse_h")]
     runs = pd.concat([runs, ref_runs[keep]], ignore_index=True)
-    base = pd.DataFrame(r.baselines())
+    base = pd.DataFrame(r.cached_baselines())
     hcols = [f"rmse_h{h}" for h in HORIZONS[r.exp]]
     summary = runs.groupby(["set", "method"])[[*CL_METRICS, "plasticity", *hcols, "train_time_s"]].agg(["mean", "std", "median"])
     summary.columns = ["_".join(c) for c in summary.columns]
