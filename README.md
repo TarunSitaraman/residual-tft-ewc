@@ -218,6 +218,7 @@ Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, ra
 | 10–11 | Health indicators, diagnostic features | Feeds D16 |
 | **12** | **S1 forecasting benchmark** (about 15 min on one CPU thread) | Current |
 | **13** | **S6 forecasting benchmark** (about 1 h) | Current |
+| `colab_review2` | Google Colab demonstration: tests, the Spark pipeline on a checksummed real subset of S6, and the committed result tables and figures | Demo (subset results are not reportable) |
 
 Notebooks 05–09 and 13 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile gives reportable numbers.
 
