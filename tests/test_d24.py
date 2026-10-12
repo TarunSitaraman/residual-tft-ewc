@@ -229,3 +229,15 @@ def test_gpr_subsample_cap():
     train = pd.concat([t.train for t in tasks], ignore_index=True)
     out = TB.fit_predict("gpr", train, train, {"x": tasks[0].test}, p3.SHARED_FEATURES, gpr_max_rows=40)
     assert out["config"]["n_fit_rows"] == 40 < out["config"]["n_train_rows"] == len(train)
+
+
+def test_baselines_only_writes_a_results_file_outside_git_in_smoke(tmp_path):
+    _wheeler_table(tmp_path / "wheeler_checks.csv")
+    env = {**os.environ, "DATA_ROOT": str(tmp_path), "PYTHONPATH": str(ROOT)}
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "run_d24.py"), "--exp", "e1", "--baselines-only",
+                    "--profile", "smoke"], cwd=ROOT, env=env, check=True, capture_output=True, timeout=900)
+    out = json.loads((tmp_path / "cache" / "d24" / "forecasting_d24_baselines_e1_smoke.json").read_text())
+    names = {b["method"] for b in out["baselines"]}
+    assert {"gpr_direct", "gpr_residual", "rf_direct", "rf_residual", "svr_direct", "svr_residual",
+            "linear_extrapolation", "gbm_shared"} <= names
+    assert not (ROOT / "results" / "forecasting_d24_baselines_e1_smoke.json").exists()

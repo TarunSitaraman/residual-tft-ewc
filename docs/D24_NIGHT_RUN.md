@@ -42,6 +42,19 @@ Estimates come from D23's recorded training times (TFT 23–37 s per stream in E
    - for the Spark scaling run: `data/raw/wheeler2025/Cell*/agingdata_50degC/*aging*.csv.*`, `data/s6_ageing_blocks.csv`, Java 17/21 (`JAVA_HOME`)
 5. Close other heavy programs and disable sleep for the night (Settings → System → Power: never sleep when plugged in). Keep the laptop on mains power.
 
+## Optional, before the night: classical-ML baselines (about 1 h)
+
+The GPR, random forest and SVR baselines (with persistence, linear extrapolation, ridge and gradient boosting) can run on their own, before the model parts, and their checkpoint is reused by the night run:
+
+```powershell
+python scripts/run_d24.py --exp e1 --baselines-only
+python scripts/run_d24.py --exp e2 --baselines-only
+python scripts/make_d24_outputs.py
+git add results/forecasting_d24_baselines_e1.json results/forecasting_d24_baselines_e2.json results/tables paper/figures paper/tables
+git commit -m "D24 baselines part: GPR, random forest, SVR and the D23 baselines on the S6 stream"
+git push
+```
+
 ## Start
 
 From the repository root, choose the deadline as the time after which nothing new should start (for example 07:30):

@@ -68,10 +68,22 @@ def family(method: str) -> str | None:
 
 
 def load(exp: str) -> tuple[dict, str] | None:
-    for name in (f"forecasting_d24_{exp}.json", f"forecasting_d24_{exp}_smoke.json", f"forecasting_d23_{exp}.json"):
+    """The full D24 file if present; otherwise the D23 file, with its baselines replaced by the D24 baselines part
+    (``forecasting_d24_baselines_<exp>.json``: the same D23 baselines recomputed plus GPR, random forest and SVR)
+    when that has been written."""
+    for name in (f"forecasting_d24_{exp}.json", f"forecasting_d24_{exp}_smoke.json"):
         if (RES / name).exists():
             return json.loads((RES / name).read_text()), name
-    return None
+    d23 = RES / f"forecasting_d23_{exp}.json"
+    if not d23.exists():
+        return None
+    d, src = json.loads(d23.read_text()), d23.name
+    for name in (f"forecasting_d24_baselines_{exp}.json", f"forecasting_d24_baselines_{exp}_smoke.json"):
+        if (RES / name).exists():
+            d["baselines"] = json.loads((RES / name).read_text())["baselines"]
+            src += f" + {name}"
+            break
+    return d, src
 
 
 def reference(d: dict) -> str:

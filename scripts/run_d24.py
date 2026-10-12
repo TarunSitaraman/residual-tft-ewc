@@ -17,6 +17,7 @@ Usage (from the repository root)::
 
     python scripts/run_d24.py --exp e1 --part tft_residual_saewc   # one part
     python scripts/run_d24.py --exp e1 --collect-only              # results/forecasting_d24_e1.json
+    python scripts/run_d24.py --exp e1 --baselines-only            # baselines alone: results/forecasting_d24_baselines_e1.json
     python scripts/run_d24.py --exp e1 --part lstm_residual --profile smoke   # code check only (not reportable)
     python scripts/run_d24_night.py                                # the whole one-night plan (D24 run plan)
 """
@@ -252,16 +253,38 @@ def collect(r: Runner, parts: list[str], collect_only: bool) -> int:
     return 0
 
 
+def write_baselines(r: Runner) -> int:
+    """The deterministic and tabular baselines alone (the ``baselines`` part, checkpointed and reused by the night
+    run): every one is a single fit on all S6 training rows, so it needs no tuning orders or seeds."""
+    base = r.cached_baselines()
+    r.done_path(BASELINES).parent.mkdir(parents=True, exist_ok=True)
+    r.done_path(BASELINES).write_text("{}")
+    name = f"forecasting_d24_baselines_{r.exp}" + (".json" if r.profile == "paper" else "_smoke.json")
+    out = ROOT / "results" / name if r.profile == "paper" else r.data / "cache" / "d24" / name
+    X.write_results(out, {"profile": r.profile, "decision": "D24 (baselines part)", "experiment": r.exp,
+                          "horizons": list(HORIZONS[r.exp]), "n_samples": len(r.frames["direct"]),
+                          "features": r.features, "gpr_max_rows": GPR_ROWS[r.profile], "baselines": base}, ROOT)
+    for b in sorted(base, key=lambda b: b["final_avg_error"]):
+        print(f"{b['method']:22s} {b['final_avg_error']:.3f}", flush=True)
+    print(f"written {out}", flush=True)
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--exp", choices=tuple(HORIZONS), required=True)
     ap.add_argument("--part", help="one part: " + ", ".join(sorted(set(PARTS["e1"]) | set(PARTS["e2"]))))
     ap.add_argument("--profile", choices=tuple(run_p3.PROFILES), default="paper")
     ap.add_argument("--collect-only", action="store_true", help="use finished parts only; list the others as not run")
+    ap.add_argument("--baselines-only", action="store_true",
+                    help="compute (or read from the checkpoint) the baselines part and write "
+                         "results/forecasting_d24_baselines_<exp>.json, before the model parts have run")
     args = ap.parse_args()
     r = Runner(args.exp, args.profile)
     print(f"D24 {args.exp} ({args.profile}): {len(r.frames['direct'])} S6 samples, horizons {HORIZONS[args.exp]}",
           flush=True)
+    if args.baselines_only:
+        return write_baselines(r)
     if args.part:
         if args.part not in PARTS[args.exp]:
             raise SystemExit(f"part {args.part!r} is not in the D24 plan for {args.exp}: {PARTS[args.exp]}")
