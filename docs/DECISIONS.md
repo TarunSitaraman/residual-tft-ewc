@@ -759,3 +759,4 @@ Parts that do not finish are reported as not run; nothing is shortened silently.
 - **Bagged GPR as in ref 4:** a single GPR with per-input length scales is used; bagging is not part of D24.
 
 ### Run log
+- **12 Oct 2026. Code committed** (`be2f2f5`) after tests on synthetic data only (pytest temporary directories and the session scratch space; never real data): 168 tests pass, including an end-to-end smoke run of `scripts/run_d24.py` (two parts, collection with parts listed as not run) and of the night orchestrator's process pool. No D24 code has been run on S6. Sequence-model sizes: TFT 12,708 parameters; BiLSTM 11,181, TCN 12,205, Transformer 11,905 (within 20 %). Timing on synthetic data of S6 size at full epochs: one EWC stream takes about 25 s for the TFT and 7–9 s for the three baselines, so the plan is expected to take 4–5 h with 8 workers. Runbook: `docs/D24_NIGHT_RUN.md`.
