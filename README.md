@@ -26,7 +26,7 @@ This repository is both a course project and the code behind an IEEE paper. Ever
 13. [Legacy data dictionary](#13-legacy-data-dictionary)
 14. [References](#14-references)
 
-**Where to look next:** `docs/RESULTS.md` (all findings with provenance), `docs/DECISIONS.md` (every protocol decision, D1–D23), `docs/DATA_REPORT.md` (data audit), `docs/EXTERNAL_DATA.md` (sources, licences, hashes), `docs/SPARK_DEMO.md` (Spark demo script), `paper/` (the manuscript).
+**Where to look next:** `docs/WORK_PLAN.md` (what is still to do), `docs/RESULTS.md` (all findings with provenance), `docs/DECISIONS.md` (every protocol decision, D1–D23), `docs/DATA_REPORT.md` (data audit), `docs/EXTERNAL_DATA.md` (sources, licences, hashes), `docs/SPARK_DEMO.md` (Spark demo script), `paper/` (the manuscript).
 
 ---
 
