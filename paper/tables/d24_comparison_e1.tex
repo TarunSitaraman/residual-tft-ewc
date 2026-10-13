@@ -1,6 +1,6 @@
 \begin{table}[t]
   \centering
-  \caption{S6 stream, horizons 1--3: final average test RMSE (pp), mean (s.d.) over 50 runs per seed set (main 0--4 / replicate 5--9); forgetting and backward transfer (BWT, pp) on main seeds. Baselines without a spread are single fits. Source: \texttt{results/forecasting\_d23\_e1.json + forecasting\_d24\_baselines\_e1.json}.}
+  \caption{S6 stream, horizons 1--3: final average test RMSE (pp), mean (s.d.) over 50 runs per seed set (main 0--4 / replicate 5--9); forgetting and backward transfer (BWT, pp) on main seeds. Baselines without a spread are single fits. Source: \texttt{results/forecasting\_d24\_e1.json}.}
   \label{tab:d24-comparison-e1}
   \setlength{\tabcolsep}{3pt}
   \scriptsize
@@ -8,20 +8,33 @@
     \toprule
     Method & RMSE main & RMSE replicate & Forget. & BWT & Params \\
     \midrule
-    \textbf{TFT + EWC, residual} & 0.339 (0.164) & 0.314 (0.067) & 0.100 & 0.040 &  \\
+    BiLSTM + EWC, direct & 0.323 (0.099) & 0.323 (0.085) & 0.053 & 0.023 & 11,181 \\
+    BiLSTM + EWC, residual & 0.328 (0.109) & 0.370 (0.154) & 0.091 & 0.000 & 11,181 \\
+    TFT + EWC, residual & 0.339 (0.164) & 0.314 (0.067) & 0.100 & 0.040 & 12,708 \\
     Linear extrapolation & 0.343 &  &  &  &  \\
-    TFT fine-tuning, residual & 0.347 (0.121) & 0.337 (0.110) & 0.103 & 0.045 &  \\
+    \textbf{RC-TFT (residual TFT + SA-EWC)} & 0.343 (0.108) & 0.321 (0.091) & 0.100 & 0.044 & 12,708 \\
+    BiLSTM fine-tuning, residual & 0.346 (0.130) & 0.349 (0.114) & 0.104 & 0.015 & 11,181 \\
+    TFT fine-tuning, residual & 0.347 (0.121) & 0.337 (0.110) & 0.103 & 0.045 & 12,708 \\
+    Transformer + EWC, residual & 0.360 (0.076) & 0.366 (0.083) & 0.064 & 0.037 & 11,905 \\
     MLP + EWC, residual & 0.374 (0.056) & 0.366 (0.071) & 0.053 & 0.036 &  \\
+    Transformer fine-tuning, residual & 0.377 (0.126) & 0.415 (0.205) & 0.121 & 0.051 & 11,905 \\
     MLP fine-tuning, residual & 0.405 (0.082) & 0.403 (0.084) & 0.082 & 0.060 &  \\
     MLP fine-tuning, direct & 0.413 (0.133) & 0.351 (0.106) & 0.207 & 0.157 &  \\
-    TFT fine-tuning, direct & 0.424 (0.191) & 0.444 (0.207) & 0.151 & 0.008 &  \\
+    TFT fine-tuning, direct & 0.424 (0.191) & 0.444 (0.207) & 0.151 & 0.008 & 12,708 \\
     SVR, residual & 0.429 &  &  &  &  \\
-    Gradient boosting & 0.451 &  &  &  &  \\
-    Random forest, direct & 0.486 &  &  &  &  \\
-    TFT + EWC, direct & 0.504 (0.206) & 0.487 (0.213) & 0.228 & 0.088 &  \\
+    BiLSTM fine-tuning, direct & 0.436 (0.177) & 0.484 (0.228) & 0.220 & 0.166 & 11,181 \\
+    TCN fine-tuning, direct & 0.450 (0.199) & 0.438 (0.177) & 0.235 & 0.154 & 12,205 \\
+    TCN + EWC, direct & 0.461 (0.228) & 0.493 (0.243) & 0.247 & 0.165 & 12,205 \\
+    TCN + EWC, residual & 0.466 (0.256) & 0.408 (0.210) & 0.193 & 0.155 & 12,205 \\
+    Transformer fine-tuning, direct & 0.486 (0.222) & 0.518 (0.219) & 0.250 & 0.143 & 11,905 \\
+    Random forest, direct & 0.487 &  &  &  &  \\
+    Transformer + EWC, direct & 0.497 (0.308) & 0.443 (0.152) & 0.232 & 0.121 & 11,905 \\
+    TCN fine-tuning, residual & 0.503 (0.226) & 0.484 (0.200) & 0.257 & 0.208 & 12,205 \\
+    TFT + EWC, direct & 0.504 (0.206) & 0.487 (0.213) & 0.228 & 0.088 & 12,708 \\
+    Gradient boosting & 0.510 &  &  &  &  \\
     MLP + EWC, direct & 0.519 (0.286) & 0.527 (0.239) & 0.216 & 0.170 &  \\
     SVR, direct & 0.842 &  &  &  &  \\
-    Random forest, residual & 0.973 &  &  &  &  \\
+    Random forest, residual & 0.969 &  &  &  &  \\
     Ridge, usage only & 1.079 &  &  &  &  \\
     Ridge & 1.184 &  &  &  &  \\
     GPR, direct & 1.374 &  &  &  &  \\

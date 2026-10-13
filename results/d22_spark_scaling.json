@@ -1,0 +1,71 @@
+{
+  "generated_utc": "2026-10-13T18:50:20+00:00",
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.5.2",
+    "torch": "2.13.0+cpu",
+    "git_commit": "947b33a3ca15cb25aa34be660e14e884171abceb",
+    "git_dirty": false
+  },
+  "decision": "D24 run plan step 5 (WS2.2)",
+  "limit_blocks": 120,
+  "selection": "spark_ageing_features.py --limit: every k-th block of the sorted file list, first N",
+  "baseline_cores": 1,
+  "note": "job_seconds = Spark map + reduce, from the job's own timer; speed-up relative to the fewest cores run",
+  "runs": [
+    {
+      "cores": 1,
+      "status": "ok",
+      "job_seconds": 1466.6,
+      "process_wall_s": 1504.3,
+      "blocks": 120,
+      "cycles": 12046,
+      "matches_pandas": true,
+      "max_abs_diff": 2.2737367544323206e-13,
+      "engine": "Apache Spark 4.2.0 (PySpark), local[1] on one machine",
+      "speedup": 1.0,
+      "efficiency": 1.0
+    },
+    {
+      "cores": 2,
+      "status": "ok",
+      "job_seconds": 296.7,
+      "process_wall_s": 316.5,
+      "blocks": 120,
+      "cycles": 12046,
+      "matches_pandas": true,
+      "max_abs_diff": 2.2737367544323206e-13,
+      "engine": "Apache Spark 4.2.0 (PySpark), local[2] on one machine",
+      "speedup": 4.943,
+      "efficiency": 2.471
+    },
+    {
+      "cores": 4,
+      "status": "ok",
+      "job_seconds": 172.8,
+      "process_wall_s": 190.5,
+      "blocks": 120,
+      "cycles": 12046,
+      "matches_pandas": true,
+      "max_abs_diff": 2.2737367544323206e-13,
+      "engine": "Apache Spark 4.2.0 (PySpark), local[4] on one machine",
+      "speedup": 8.487,
+      "efficiency": 2.122
+    },
+    {
+      "cores": 6,
+      "status": "ok",
+      "job_seconds": 150.4,
+      "process_wall_s": 163.5,
+      "blocks": 120,
+      "cycles": 12046,
+      "matches_pandas": true,
+      "max_abs_diff": 2.2737367544323206e-13,
+      "engine": "Apache Spark 4.2.0 (PySpark), local[6] on one machine",
+      "speedup": 9.751,
+      "efficiency": 1.625
+    }
+  ]
+}

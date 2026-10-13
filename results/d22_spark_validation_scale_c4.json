@@ -1,0 +1,160 @@
+{
+  "generated_utc": "2026-10-13T18:47:35+00:00",
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.5.2",
+    "torch": "2.13.0+cpu",
+    "git_commit": "947b33a3ca15cb25aa34be660e14e884171abceb",
+    "git_dirty": false
+  },
+  "decision": "D22",
+  "engine": "Apache Spark 4.2.0 (PySpark), local[4] on one machine",
+  "blocks": 120,
+  "cycles": 12046,
+  "seconds": 172.8,
+  "compared_blocks": 120,
+  "criterion": "|spark - pandas| <= 1e-09 * |pandas| + 1e-12, same missing values",
+  "matches_pandas": true,
+  "per_input": {
+    "age_valid_cycles": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_invalid_cycles": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_v_end_charge_mean": {
+      "same_missing": true,
+      "max_abs": 8.43769498715119e-15,
+      "max_rel": 2.3113571118324007e-15,
+      "within_tolerance": true
+    },
+    "age_v_end_charge_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_v_end_charge_slope": {
+      "same_missing": true,
+      "max_abs": 6.158268339717665e-17,
+      "max_rel": 1.0,
+      "within_tolerance": true
+    },
+    "age_cv_seconds_mean": {
+      "same_missing": true,
+      "max_abs": 2.2737367544323206e-13,
+      "max_rel": 1.0850221086937706e-15,
+      "within_tolerance": true
+    },
+    "age_cv_seconds_last": {
+      "same_missing": true,
+      "max_abs": 8.526512829121202e-14,
+      "max_rel": 3.948312661438791e-16,
+      "within_tolerance": true
+    },
+    "age_cv_seconds_slope": {
+      "same_missing": true,
+      "max_abs": 1.2080614286702485e-14,
+      "max_rel": 3.4126483549686044e-13,
+      "within_tolerance": true
+    },
+    "age_cv_end_current_mean": {
+      "same_missing": true,
+      "max_abs": 1.249000902703301e-16,
+      "max_rel": 1.9776825083822117e-15,
+      "within_tolerance": true
+    },
+    "age_cv_end_current_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_cv_end_current_slope": {
+      "same_missing": true,
+      "max_abs": 8.055622141567298e-17,
+      "max_rel": 6.694872190793551e-12,
+      "within_tolerance": true
+    },
+    "age_v_end_discharge_mean": {
+      "same_missing": true,
+      "max_abs": 3.1086244689504383e-15,
+      "max_rel": 9.725939021399536e-16,
+      "within_tolerance": true
+    },
+    "age_v_end_discharge_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_v_end_discharge_slope": {
+      "same_missing": true,
+      "max_abs": 1.2496785290611045e-16,
+      "max_rel": 2.0828759765100864e-11,
+      "within_tolerance": true
+    },
+    "age_relax_after_charge_mean": {
+      "same_missing": true,
+      "max_abs": 1.942890293094024e-16,
+      "max_rel": 4.59525021933776e-15,
+      "within_tolerance": true
+    },
+    "age_relax_after_charge_last": {
+      "same_missing": true,
+      "max_abs": 9.71445146547012e-17,
+      "max_rel": 3.0050581450397968e-15,
+      "within_tolerance": true
+    },
+    "age_relax_after_charge_slope": {
+      "same_missing": true,
+      "max_abs": 8.104411239329146e-17,
+      "max_rel": 7.515411105608972e-12,
+      "within_tolerance": true
+    },
+    "age_relax_after_discharge_mean": {
+      "same_missing": true,
+      "max_abs": 1.8041124150158794e-16,
+      "max_rel": 5.601590178044691e-14,
+      "within_tolerance": true
+    },
+    "age_relax_after_discharge_last": {
+      "same_missing": true,
+      "max_abs": 9.71445146547012e-17,
+      "max_rel": 2.857471751780602e-14,
+      "within_tolerance": true
+    },
+    "age_relax_after_discharge_slope": {
+      "same_missing": true,
+      "max_abs": 1.1163894244811678e-17,
+      "max_rel": 7.336604124458175e-12,
+      "within_tolerance": true
+    },
+    "age_internal_resistance_mean": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_internal_resistance_last": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    },
+    "age_internal_resistance_slope": {
+      "same_missing": true,
+      "max_abs": 0.0,
+      "max_rel": 0.0,
+      "within_tolerance": true
+    }
+  }
+}
