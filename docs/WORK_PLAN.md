@@ -11,6 +11,7 @@ Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan say
 | Compute | One night on the ASUS (`docs/D24_NIGHT_RUN.md`); parts in a fixed priority order, anything unfinished reported as not run. |
 | Licence | Proprietary, all rights reserved, while the repository is private (`LICENSE`). |
 | Paper | Kept long for now; cut later. Results come first. |
+| Next step for the model | **D25** (pre-registered 14 Oct): shrink the learned correction per horizon, add conformal forecast intervals, and pretrain the residual model on the first-life pool; one night on the ASUS (`docs/D25_NIGHT_RUN.md`). Plan: section 6 below. |
 
 | Item | Status |
 |---|---|
@@ -21,6 +22,7 @@ Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan say
 | WS4 shift-adaptive EWC | Done: run 13–14 Oct; null result (practically equivalent to fixed λ) |
 | WS5 tables and figures | Done from the D24 files (`results/tables/d24_*`, `paper/tables/d24_*`, `paper/figures/d24_*`) |
 | WS6 P2 for new models | Not in tonight's budget |
+| D25 calibrated residual TFT + EWC, residual pretraining | Pre-registered and code committed 14 Oct (tested on synthetic data only); night run on the ASUS pending |
 | WS7 paper | D24 added to methods, results, discussion, conclusion and abstract (14 Oct); `paper_single.pdf` rebuilt with tectonic 0.15; **9 pages, one over the 8-page limit** (about half a page of references spills over): cuts still to be chosen |
 
 ## 0. Where we are (audit summary)
@@ -193,3 +195,50 @@ Suggested sequence:
 - At least four literature model families (GPR, LSTM, TCN, Transformer) plus the existing baselines compared to RC-TFT under one protocol, with the main, statistical and per-group tables and the figures listed in WS5.
 - Preprocessing funnel table and Spark scaling figure in the paper.
 - `pytest` passes; `flatten_paper.py --check` passes; zero `\todo`; README, RESULTS and paper agree.
+
+## 6. D25: improving the residual TFT + EWC (14 Oct 2026)
+
+Pre-registration: `docs/DECISIONS.md`, D25. Runbook: `docs/D25_NIGHT_RUN.md`. Code: `src/calibration.py`, `scripts/run_d25.py`, `scripts/run_d25_night.py`, `scripts/summarise_d25.py`, `tests/test_d25.py`.
+
+### 6.1 Where the model stands after D24
+
+| Observation (committed results) | What it implies |
+|---|---|
+| No learned model beats linear extrapolation: 0.343 pp (h = 1–3), 0.485 pp (h = 1–6) | Extrapolation is the bar; the learned part is a small correction on top of it |
+| In E2, extrapolation is better at h = 1–2 (replicated, D23 and D24); the gap closes by h = 5–6 | The correction adds error exactly where the trend is already well determined |
+| EWC keeps the residual TFT's forgetting at about 0.07–0.10 pp; shift-adaptive EWC changed nothing (D24) | Forgetting is no longer the bottleneck; more penalty work cannot move the final error much |
+| 135–225 training samples per S6 task for 12.7k parameters; the 21 Spark ageing inputs made the model worse (D22); a same-size BiLSTM ties it at h = 1–3 (D24) | Data, not architecture, limits the model |
+| P3 pretraining (D21) was tested only with the direct target, where even on the pool the model was worse than extrapolation | Pretraining the residual model is untested |
+| On unseen conditions (P2), gradient boosting beats extrapolation (0.71 vs 1.37 pp on S6) | The strongest case for a learned model is transfer to new conditions (WS6.1) |
+
+### 6.2 What D25 changes, and why
+
+1. **Horizon-wise shrinkage of the correction (Q1).** After each task, one factor per horizon in [0, 1], fitted in closed form on that task's validation rows, scales the learned correction. Where the correction does not help, the factor goes to 0 and the forecast becomes extrapolation, so the model cannot lose there; where it helps, it is kept. No hyperparameter, no change to training, so the raw (D23) and shrunk models come from the same runs and the D23 numbers are reproduced unit by unit as a check.
+2. **Conformal forecast intervals (Q3).** Per horizon, from the same validation rows; extrapolation gets intervals in exactly the same way, so the comparison is fair. Scored with the interval score (width plus a penalty for misses), with coverage and width reported. This is the output a second-life decision needs ("above 80 % SOH in three checks, with 90 % confidence?"), and the one place a learned model can differ from extrapolation in more than the point forecast.
+3. **Pretraining the residual model on the 369-cell pool (Q2).** Tests whether the data shortage can be eased by first-life data now that the model only learns a correction.
+
+### 6.3 What we expect, honestly
+
+- Shrinkage most likely makes the model **as accurate as** extrapolation at every horizon (practically equivalent) rather than better: the D23 per-horizon gaps (E2, main seeds) are positive at every horizon. A replicated win needs the correction to help at some horizons, which pretraining may provide.
+- Pretraining is the change with the largest possible gain and the largest uncertainty: direct-target pretraining did not help in D21.
+- Intervals are the most likely place for a clear result in either direction; if the model's intervals are not better, that is reported too.
+
+### 6.4 What we stop doing
+
+- No further continual-learning penalties or EWC variants on S6 (D24 answered this).
+- No more inputs on S6 (D22 answered this).
+- No more backbone comparisons at the same size (D24 answered this).
+
+Every extra variant tested on the same data weakens the statistics; reviewers notice this.
+
+### 6.5 Steps
+
+| # | Task | Where | Status |
+|---|---|---|---|
+| 6.5.1 | Pre-register D25; code and synthetic-data tests | cloud | Done 14 Oct |
+| 6.5.2 | Night run (pinned environment, 6 workers) | ASUS | Pending |
+| 6.5.3 | Run log; results committed | ASUS | Pending |
+| 6.5.4 | D25 section of `docs/RESULTS.md`; tables and figures (error by horizon with shrinkage, interval score and coverage per task, shrinkage factors) | cloud | After 6.5.3 |
+| 6.5.5 | Paper: one methods paragraph (shrinkage, conformal intervals, residual pretraining), results, limitations | cloud | After 6.5.4 |
+| 6.5.6 | Next (not in D25): P2 for the D25 model and the D24 baselines (WS6.1), the setting where learned models already beat extrapolation | both | To be pre-registered |
+
