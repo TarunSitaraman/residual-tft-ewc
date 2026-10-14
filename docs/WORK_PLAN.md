@@ -2,11 +2,11 @@
 
 Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan says what is still missing for the three deliverables (big-data preprocessing results, the proposed deep-learning model, and a comparison with at least four existing ML/DL models with tables and figures), in what order to do it, and how to tell when each item is done. Rules from `CLAUDE.md` and `AGENTS.md` apply to every item: no fabricated or synthetic data in results, battery groups kept separate, chronological purged splits, protocols written into `docs/DECISIONS.md` before the runs they govern, every reported number traceable to a clean commit.
 
-## Decisions and status (updated 12 Oct 2026)
+## Decisions and status (updated 14 Oct 2026)
 
 | Question | Decision |
 |---|---|
-| Proposed model | **RC-TFT**: residual TFT with **shift-adaptive EWC** (the TFT + EWC hybrid), pre-registered as D24. The D23 fixed-λ model is its ablation. |
+| Proposed model | **RC-TFT**: residual TFT with **shift-adaptive EWC** (the TFT + EWC hybrid), pre-registered as D24. The D23 fixed-λ model is its ablation. **Outcome (14 Oct):** SA-EWC's positive-result criterion was not met (practically equivalent to fixed λ on error and forgetting, E1 and E2), so under D24 the fixed-λ residual TFT + EWC stays the best-supported variant; RC-TFT is reported with its null result (`docs/RESULTS.md`, D24). |
 | Name | *Residual Continual TFT*: R = forecasts the correction to linear extrapolation; C = continual training with shift-adaptive EWC; TFT = the (cited) backbone. |
 | Compute | One night on the ASUS (`docs/D24_NIGHT_RUN.md`); parts in a fixed priority order, anything unfinished reported as not run. |
 | Licence | Proprietary, all rights reserved, while the repository is private (`LICENSE`). |
@@ -16,12 +16,12 @@ Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan say
 |---|---|
 | WS1 docs fixes | Done: README references synced with the bibliography, licence, stub removed, paper `\todo` resolved (`paper_single.pdf` still needs a LaTeX rebuild) |
 | WS2.1 preprocessing table | Done from committed files (`scripts/make_preprocessing_table.py`); per-dataset pool counts are added when run on the data machine |
-| WS2.2 Spark scaling | Code ready (`scripts/run_spark_scaling.py`); runs at the end of the night |
-| WS3 literature baselines | Code and tests done (BiLSTM, TCN, Transformer, GPR, random forest, SVR); runs tonight |
-| WS4 shift-adaptive EWC | Code and tests done (`ShiftAdaptiveEWC`, `tft_saewc`); runs tonight |
-| WS5 tables and figures | Script done (`scripts/make_d24_outputs.py`); currently drawn from the D23 files, switches to D24 automatically |
+| WS2.2 Spark scaling | Run 13–14 Oct (`results/d22_spark_scaling.json`); outputs match pandas, but the 1-thread time looks inflated (super-linear 1 → 2 speed-up), to be explained before reporting |
+| WS3 literature baselines | Done: run 13–14 Oct, all parts finished (`results/forecasting_d24_e1.json`, `..._e2.json`) |
+| WS4 shift-adaptive EWC | Done: run 13–14 Oct; null result (practically equivalent to fixed λ) |
+| WS5 tables and figures | Done from the D24 files (`results/tables/d24_*`, `paper/tables/d24_*`, `paper/figures/d24_*`) |
 | WS6 P2 for new models | Not in tonight's budget |
-| WS7 paper | Later |
+| WS7 paper | D24 added to methods, results, discussion, conclusion and abstract (14 Oct); `paper_single.pdf` needs a LaTeX rebuild |
 
 ## 0. Where we are (audit summary)
 

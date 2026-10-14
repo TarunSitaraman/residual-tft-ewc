@@ -423,3 +423,49 @@ Results files: `results/forecasting_d23_e1.json` (horizons 1–3) and `results/f
 **Tuning.** Residual TFT: lr 0.1 (the grid was extended upward; 0.1 stayed best), λ 100. Residual MLP: lr 0.03, λ 100.
 
 **Reading.** Adding the between-check ageing responses does not help the proposed model: residual TFT + EWC is 0.14–0.19 pp worse with them (replicated), and so are the other TFT and MLP variants and gradient boosting (0.495 against 0.451) compared with the D23 runs on the D21 inputs, except residual MLP fine-tuning, which is slightly better with them (0.398 / 0.354 against 0.405 / 0.403; not a registered comparison). No model beats linear extrapolation. The responses do track health within a cell, but mostly its level, which the SOH history already gives; with 21 extra inputs and 135–225 training samples per task, they add variance (TFT + EWC: mean 0.48 against median 0.40). This is an interpretation, not a tested claim. The Spark pipeline itself is validated and reusable.
+
+## D24: RC-TFT (shift-adaptive EWC) and literature baselines (13–14 Oct 2026)
+
+Results files: `results/forecasting_d24_e1.json` (horizons 1–3) and `results/forecasting_d24_e2.json` (horizons 1–6), run and collected at commit `947b33a` (clean tree, `git_dirty` false), Python 3.12.10, torch 2.13.0+cpu; all 13 parts ran, none failed (run log in `docs/DECISIONS.md`, D24). Protocol fixed in D24 before any run (`be2f2f5`). D23 setting: S6 stream from scratch, D21 shared inputs, 10 orders × seeds 0–4 (main) and 5–9 (replicate), D23 tuning rules. The committed D23 runs (residual and direct TFT and MLP) enter after two recomputed units reproduced (E1 0.464125 and 0.375621 pp, E2 0.480461 and 0.880787 pp, equal to about 1e-14). Reference: RC-TFT. Differences are RC-TFT minus other (pp; negative favours RC-TFT). Tables: `results/tables/d24_*.csv`, `paper/tables/d24_*.tex`; figures `paper/figures/d24_*.png`; summary `scripts/summarise_d24.py`.
+
+**Final average test RMSE (pp), mean, main / replicate; forgetting (pp), main / replicate:**
+
+| Method | E1 error | E1 forgetting | E2 error | E2 forgetting |
+|---|---|---|---|---|
+| **RC-TFT (residual TFT + SA-EWC)** | 0.343 / 0.321 | 0.100 / 0.072 | 0.548 / 0.564 | 0.066 / 0.084 |
+| TFT + EWC, residual (fixed λ, D23) | 0.339 / 0.314 | 0.100 / 0.066 | 0.561 / 0.534 | 0.093 / 0.086 |
+| TFT fine-tuning, residual | 0.347 / 0.337 | 0.103 / 0.086 | 0.673 / 0.612 | 0.282 / 0.220 |
+| BiLSTM + EWC, residual | 0.328 / 0.370 | 0.091 / 0.136 | 0.669 / 0.765 | 0.229 / 0.318 |
+| BiLSTM + EWC, direct | 0.323 / 0.323 | 0.053 / 0.056 | not run | |
+| Transformer + EWC, residual | 0.360 / 0.366 | 0.064 / 0.080 | 0.609 / 0.705 | 0.129 / 0.198 |
+| TCN + EWC, residual | 0.466 / 0.408 | 0.193 / 0.111 | 0.812 / 0.756 | 0.345 / 0.268 |
+| TFT + EWC, direct | 0.504 / 0.487 | 0.228 / 0.217 | 0.802 / 0.835 | 0.135 / 0.166 |
+| Linear extrapolation | 0.343 | | 0.485 | |
+| SVR, residual (single fit on all tasks) | 0.429 | | 0.616 | |
+| Random forest, direct (single fit) | 0.487 | | 0.946 | |
+| Gradient boosting (single fit) | 0.510 | | 0.831 | |
+| GPR, direct (single fit, ≤ 1,000 rows) | 1.374 | | 2.073 | |
+| Persistence | 1.644 | | 2.667 | |
+
+Gradient boosting differs from D23 (0.451 / 0.898 pp) because D24 fits it once inside the `baselines` part on its own preprocessing; both values are from committed files. Parameters: TFT 12,708, BiLSTM 11,181, TCN 12,205, Transformer 11,905. Mean training time per stream: RC-TFT 54 s (E1) and 48 s (E2), fixed-λ TFT + EWC 39 s and 56 s, the three other sequence models 8–30 s.
+
+**Registered primary tests (D21 replication rule):**
+
+| RC-TFT minus … | E1 | E2 |
+|---|---|---|
+| TFT + EWC, residual (fixed λ), final error | +0.004 / +0.007: **practically equivalent** | −0.013 / +0.030: **practically equivalent** |
+| TFT + EWC, residual (fixed λ), forgetting | +0.000 / +0.007: **practically equivalent** | −0.027 / −0.002 (p_Holm 0.080 / 0.92): **practically equivalent** |
+| linear extrapolation, final error | +0.000 / −0.022: **practically equivalent** | +0.063 / +0.079 (0.011 / 0.060): not replicated |
+
+**Secondary (final error).** E1: practically equivalent to BiLSTM + EWC (direct and residual), BiLSTM fine-tuning (residual), Transformer + EWC (residual), MLP + EWC (residual) and TFT fine-tuning (residual); better, replicated, than every direct TCN and Transformer arm, BiLSTM fine-tuning (direct), direct TFT + EWC, MLP + EWC (direct), MLP fine-tuning (residual), TCN fine-tuning (residual) and every tabular baseline (GPR, random forest, SVR, gradient boosting, ridge) and persistence. E2: better, replicated, than both BiLSTM residual arms, both TCN residual arms, all MLP arms, direct TFT + EWC and every tabular baseline except SVR residual (not replicated); against the Transformer residual arms and residual TFT fine-tuning, not replicated. Per horizon against linear extrapolation (E2): h1 +0.209 / +0.179 and h2 +0.115 / +0.113 (replicated, extrapolation better); h3–h4 not replicated; h5–h6 practically equivalent.
+
+**SA-EWC weights.** The shift weights d_jt have median 0.42 (E1) and 0.40 (E2), range 0.05–1.14 (n = 2100 task pairs per experiment), so the penalty did vary with the measured shift. Tuning selected λ₀ = 1 in E1 (as the fixed λ in D23) and 10⁴ in E2 (D23 fixed λ: 1000).
+
+**Reading.**
+1. **The registered positive result for SA-EWC was not obtained.** RC-TFT and the fixed-λ residual TFT + EWC are practically equivalent on final error and forgetting in both experiments. Under the rule fixed in D24, RC-TFT is reported with this outcome and **the fixed-λ residual TFT + EWC stays the best-supported variant**, being the simpler of the two.
+2. **No model beats linear extrapolation.** RC-TFT is level with it at horizons 1–3 and not better at 1–6 (extrapolation better at h = 1–2, replicated), as for the D23 model.
+3. **Against the literature backbones**, the residual TFT is not uniquely good at short horizons: BiLSTM + EWC (direct 0.323, residual 0.328 pp) and Transformer + EWC (residual) are practically equivalent to RC-TFT in E1. Over horizons 1–6 the residual TFT is the most accurate learned model, better than BiLSTM and TCN (replicated); the Transformer comparison is not replicated. Direct BiLSTM was not run in E2 (budget, D24).
+4. **Learned continual models beat the classical regressors.** GPR, random forest, SVR, gradient boosting and ridge, each fitted once on all tasks (not continual learners), are all worse than RC-TFT, replicated, except SVR residual in E2.
+5. **The residual form does not help every backbone** (descriptive; residual and direct arms of the new backbones were not tested against each other). In E1 it lowers the Transformer's error (EWC 0.497 → 0.360 pp) and BiLSTM fine-tuning's (0.436 → 0.346 pp), leaves BiLSTM + EWC unchanged (0.323 direct, 0.328 residual) and does not help the TCN (EWC 0.461 direct, 0.466 residual; fine-tuning 0.450, 0.503).
+
+**Spark scaling** (`results/d22_spark_scaling.json`, 120 blocks): every thread count matches pandas; times 1,467 / 297 / 173 / 150 s at 1 / 2 / 4 / 6 threads. The 1 → 2 thread speed-up (4.9×) is above linear, so the 1-thread run likely includes a one-off cost (JVM start-up or a cold file cache). Not explained; not to be reported as parallel efficiency until it is.
