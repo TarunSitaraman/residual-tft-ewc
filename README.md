@@ -220,6 +220,7 @@ Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, ra
 | **13** | **S6 forecasting benchmark** (about 1 h) | Current |
 | `colab_review2` | **The single Colab notebook for the whole project**: setup, tests, big-data preprocessing results and a live Spark run on a checksummed real subset of S6, the S1/S6 benchmarks (P1–P3, reuse classes), residual TFT + EWC against the neural and conventional models (notebook 14's analysis), D24 status, conclusions | Current (live-subset numbers are a demonstration only) |
 | 14 | Residual TFT + EWC against the conventional baselines (D23 results); merged into `colab_review2` | Current |
+| **15** | **D24 results**: RC-TFT, residual TFT + EWC and the literature baselines (BiLSTM, TCN, Transformer, GPR, random forest, SVR), and how the Spark preprocessing job works (map / cache / reduce, data funnel, validation against pandas, web-UI screenshots, leakage audit, scaling); reads committed files only, runs in seconds | Current |
 
 Notebooks 05–09 and 13 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile gives reportable numbers.
 
@@ -346,7 +347,7 @@ CLAUDE.md, AGENTS.md  project rules (reproducibility, no data in Git, invariants
 PLAN_OF_ACTION.md   original plan;  docs/RESEARCH_PLAN.md  revised research plan
 data/               datasets (git-ignored) + data/README.md (how to obtain them)
 docs/               RESULTS, DECISIONS (D1–D23), DATA_REPORT, EXTERNAL_DATA, REUSE_CATEGORIES, SPARK_DEMO
-notebooks/          01–13 (12 and 13 are the current forecasting benchmarks)
+notebooks/          01–15 (12 and 13 are the forecasting benchmarks; 14 and 15 read the D23 and D24 results)
 src/                library code: data_pipeline, raw_diagnostics, diagnostic_features, health_indicators,
                     forecasting, wheeler, pool, ageing, protocols, experiments, continual_learning,
                     evaluation, reuse, robustness, p3; models/ (MLP, TFT)

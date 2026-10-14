@@ -21,7 +21,7 @@ Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan say
 | WS4 shift-adaptive EWC | Done: run 13–14 Oct; null result (practically equivalent to fixed λ) |
 | WS5 tables and figures | Done from the D24 files (`results/tables/d24_*`, `paper/tables/d24_*`, `paper/figures/d24_*`) |
 | WS6 P2 for new models | Not in tonight's budget |
-| WS7 paper | D24 added to methods, results, discussion, conclusion and abstract (14 Oct); `paper_single.pdf` needs a LaTeX rebuild |
+| WS7 paper | D24 added to methods, results, discussion, conclusion and abstract (14 Oct); `paper_single.pdf` rebuilt with tectonic 0.15; **9 pages, one over the 8-page limit** (about half a page of references spills over): cuts still to be chosen |
 
 ## 0. Where we are (audit summary)
 

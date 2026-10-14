@@ -79,25 +79,34 @@ The S6 stream does not degrade the pool test error (TFT\,+\,EWC: 3.280 to 3.148~
 
 \begin{table}[t]
   \centering
-  \caption{Learned residual on S6 (stream from scratch): final average test RMSE (pp), mean over 50 runs, main / replicate seed sets, and forgetting (pp) for horizons 1--6.}
+  \caption{Learned residual, shift-adaptive EWC and literature baselines on S6 (stream from scratch): final average test RMSE (pp), mean over 50 runs, main / replicate seed sets, and forgetting (pp) for horizons 1--6. Below the line: single fits on all tasks (not continual) and extrapolation.}
   \label{tab:residual}
-  \setlength{\tabcolsep}{3pt}
+  \setlength{\tabcolsep}{2.5pt}
+  \scriptsize
   \begin{tabular}{lccc}
     \toprule
     Method & E1: $h{=}1$--3 & E2: $h{=}1$--6 & Forgetting, E2 \\
     \midrule
     \textbf{TFT\,+\,EWC, residual} & \textbf{0.339 / 0.314} & \textbf{0.561 / 0.534} & \textbf{0.093 / 0.086} \\
+    RC-TFT (residual, SA-EWC) & 0.343 / 0.321 & 0.548 / 0.564 & 0.066 / 0.084 \\
     TFT fine-tuning, residual & 0.347 / 0.337 & 0.673 / 0.612 & 0.282 / 0.220 \\
     TFT\,+\,EWC, direct & 0.504 / 0.487 & 0.802 / 0.835 & 0.135 / 0.166 \\
-    MLP\,+\,EWC, residual & 0.374 / 0.366 & 0.659 / 0.694 & -- \\
+    MLP\,+\,EWC, residual & 0.374 / 0.366 & 0.659 / 0.694 & 0.205 / 0.225 \\
+    BiLSTM\,+\,EWC, residual & 0.328 / 0.370 & 0.669 / 0.765 & 0.229 / 0.318 \\
+    BiLSTM\,+\,EWC, direct & 0.323 / 0.323 & -- & -- \\
+    Transformer\,+\,EWC, residual & 0.360 / 0.366 & 0.609 / 0.705 & 0.129 / 0.198 \\
+    TCN\,+\,EWC, residual & 0.466 / 0.408 & 0.812 / 0.756 & 0.345 / 0.268 \\
     \midrule
     Linear extrapolation & 0.343 & 0.485 & -- \\
     Gradient boosting & 0.451 & 0.898 & -- \\
+    SVR, residual & 0.429 & 0.616 & -- \\
+    Random forest, direct & 0.487 & 0.946 & -- \\
+    GPR, direct & 1.374 & 2.073 & -- \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-Table~\ref{tab:residual} and Fig.~\ref{fig:residual} give the results of the residual form~\eqref{eq:residual}. The criterion fixed in advance for a positive result, residual TFT\,+\,EWC beating linear extrapolation, was \emph{not} met: the two are practically equivalent for horizons 1--3 (differences of $-0.004$ and $-0.029$~pp), and for horizons 1--6 extrapolation is better on average ($+0.076$ and $+0.049$~pp, not replicated). Per horizon, extrapolation is better at $h=1$ and 2 (replicated), and the gap closes without reversing by $h=5$--6. Learning the residual is, however, what makes the TFT competitive: it improves TFT\,+\,EWC over the direct form by 0.17~pp (E1) and 0.24--0.30~pp (E2), and puts it ahead of gradient boosting, all replicated; it is the most accurate learned model on the S6 stream. With horizons 1--6, where the residual TFT forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp and its backward transfer from 0.18/0.14 to 0.03~pp, replicated; its effect on the final error is not. For horizons 1--3, EWC and fine-tuning are practically equivalent.
+Table~\ref{tab:residual} and Fig.~\ref{fig:residual} give the results of the residual form~\eqref{eq:residual}. The criterion fixed in advance for a positive result, residual TFT\,+\,EWC beating linear extrapolation, was \emph{not} met: the two are practically equivalent for horizons 1--3 (differences of $-0.004$ and $-0.029$~pp), and for horizons 1--6 extrapolation is better on average ($+0.076$ and $+0.049$~pp, not replicated). Per horizon, extrapolation is better at $h=1$ and 2 (replicated), and the gap closes without reversing by $h=5$--6. Learning the residual is, however, what makes the TFT competitive: it improves TFT\,+\,EWC over the direct form by 0.17~pp (E1) and 0.24--0.30~pp (E2), and puts it ahead of gradient boosting, all replicated; it is the most accurate of the TFT and MLP variants. With horizons 1--6, where the residual TFT forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp and its backward transfer from 0.18/0.14 to 0.03~pp, replicated; its effect on the final error is not. For horizons 1--3, EWC and fine-tuning are practically equivalent.
 
 \emph{Ageing-cycle inputs.} Adding the 21 Spark-extracted inputs (Section~\ref{sec:spark}) to the residual TFT\,+\,EWC, as specified before the run, makes it worse: 0.480/0.501 against 0.339/0.314~pp, and worse than linear extrapolation, both replicated; gradient boosting also worsens (0.495 against 0.451~pp).
 
@@ -112,30 +121,4 @@ Table~\ref{tab:residual} and Fig.~\ref{fig:residual} give the results of the res
 \subsection{Shift-adaptive EWC and literature baselines}
 \label{sec:res-d24}
 
-\begin{table}[t]
-  \centering
-  \caption{RC-TFT and literature baselines on the S6 stream (from scratch): final average test RMSE (pp), mean over 50 runs, main / replicate seed sets, and forgetting (pp) for horizons 1--6. GPR, random forest, SVR and gradient boosting are single fits on all tasks, not continual learners.}
-  \label{tab:d24}
-  \setlength{\tabcolsep}{2.5pt}
-  \scriptsize
-  \begin{tabular}{lccc}
-    \toprule
-    Method & E1: $h{=}1$--3 & E2: $h{=}1$--6 & Forgetting, E2 \
-    \midrule
-    RC-TFT (residual, SA-EWC) & 0.343 / 0.321 & 0.548 / 0.564 & 0.066 / 0.084 \
-    \textbf{TFT\,+\,EWC, residual} & \textbf{0.339 / 0.314} & \textbf{0.561 / 0.534} & \textbf{0.093 / 0.086} \
-    BiLSTM\,+\,EWC, residual & 0.328 / 0.370 & 0.669 / 0.765 & 0.229 / 0.318 \
-    BiLSTM\,+\,EWC, direct & 0.323 / 0.323 & -- & -- \
-    Transformer\,+\,EWC, residual & 0.360 / 0.366 & 0.609 / 0.705 & 0.129 / 0.198 \
-    TCN\,+\,EWC, residual & 0.466 / 0.408 & 0.812 / 0.756 & 0.345 / 0.268 \
-    \midrule
-    Linear extrapolation & 0.343 & 0.485 & -- \
-    SVR, residual & 0.429 & 0.616 & -- \
-    Random forest, direct & 0.487 & 0.946 & -- \
-    Gradient boosting & 0.510 & 0.831 & -- \
-    GPR, direct & 1.374 & 2.073 & -- \
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Table~\ref{tab:d24} gives the second pre-registered experiment. The criterion for SA-EWC was \emph{not} met: RC-TFT and residual TFT\,+\,EWC with a fixed $\lambda$ are practically equivalent in final error ($+0.004/+0.007$~pp for horizons 1--3, $-0.013/+0.030$~pp for 1--6) and in forgetting ($+0.000/+0.007$ and $-0.027/-0.002$~pp), although the shift weights did vary (median 0.4, range 0.05--1.14). As fixed in advance, the simpler fixed-$\lambda$ model therefore remains the best-supported variant. RC-TFT, like it, is level with linear extrapolation for horizons 1--3 and not better for 1--6 (extrapolation better at $h=1$ and 2, replicated). Against the literature backbones, the residual TFT is not uniquely accurate at short horizons: BiLSTM\,+\,EWC (direct and residual) and the residual Transformer\,+\,EWC are practically equivalent to RC-TFT for horizons 1--3. For horizons 1--6, RC-TFT is better than both residual BiLSTM and both residual TCN arms (replicated); the Transformer differences are not replicated. Every single-fit regressor is worse than RC-TFT, replicated, except the residual SVR for horizons 1--6.
+Table~\ref{tab:residual} also gives the second pre-registered experiment. The criterion for SA-EWC was \emph{not} met: RC-TFT and the fixed-$\lambda$ residual TFT\,+\,EWC are practically equivalent in final error and in forgetting for both horizon sets (differences of at most 0.03~pp), although the shift weights did vary (0.05--1.14). As fixed in advance, the simpler fixed-$\lambda$ model therefore remains the best-supported variant. Like it, RC-TFT is level with extrapolation for horizons 1--3 and not better for 1--6. The residual TFT is not uniquely accurate at short horizons: BiLSTM\,+\,EWC (direct and residual) and the residual Transformer\,+\,EWC are practically equivalent to RC-TFT for horizons 1--3. For horizons 1--6, RC-TFT beats the residual BiLSTM and TCN (replicated; the Transformer difference is not replicated). Every single-fit regressor is worse than RC-TFT, replicated, except the residual SVR for horizons 1--6.
