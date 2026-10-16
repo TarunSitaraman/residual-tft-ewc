@@ -810,3 +810,56 @@ One night on the ASUS (`scripts/run_d25_night.py`, runbook `docs/D25_NIGHT_RUN.m
 ### Run log
 - **14 Oct 2026. Code committed** after tests on synthetic data only (pytest temporary directories and the session scratch space; never real data): `src/calibration.py`, `scripts/run_d25.py`, `scripts/run_d25_night.py`, `scripts/summarise_d25.py`, `tests/test_d25.py`. The raw path of the calibrated stream equals `p3.run_stream` on a synthetic stream (tested), and a smoke run of all ten parts through the orchestrator, both collections and the summary passed. No D25 code has been run on S6 or the pool.
 - **15–16 Oct 2026. Night run completed.** `run_d25_night.py --workers 6 --deadline 07:30` from `main` (`a59debb`, clean tree; uncommitted edits to `notebooks/colab_review2.ipynb` were stashed first, including a kernel-metadata re-save by the editor after the first stash; pre-flight passed), in the pinned environment: Python 3.11.15, numpy 2.4.6, pandas 3.0.6, scikit-learn 1.9.1, torch 2.14.1+cpu (the existing `.venv`, built on the same Python 3.11.15; `py -3.11` does not list that interpreter, so no new venv was created; `pip install -r requirements.txt` found every pin already installed; 180 tests passed, none failed). Started 00:02:47 IST; smoke passed for all 10 parts (00:32:04); paper run 00:32:04–03:33:35 (longest part E2 `pre_tune`, 108 min); collection 03:33:35–03:33:51. No restarts. All 10 parts ran, none failed, none was stopped by the deadline (`parts_not_run` empty in both files, `git_dirty` false). D23 reproduction check passed in E1 and E2 (100 raw scratch units each, max_abs_diff 0.0). The summary step (`summarise_d25.py`) wrote `data/cache/d25/d25_summary.md` and then exited with an error when printing it to the Windows console (`UnicodeEncodeError`, cp1252 cannot encode U+2212); the results files and the summary file are unaffected. Outputs: `results/forecasting_d25_e1.json`, `..._e2.json`.
+
+## D26. Unseen usage conditions (P2) for the residual TFT + EWC, stratified by origin history (pre-registered; DRAFT)
+
+**Status:** DRAFT written 16 Oct 2026 on the instruction of T. Sitaraman, **after** the D25 results, and committed as a draft so it is on record before any D26 code exists. The open questions below are settled in a later commit, recorded in the run log; that commit is the binding pre-registration and must precede any D26 code running on real data. No D26 code exists yet. Results will go to `results/forecasting_d26_e1.json` and `results/forecasting_d26_e2.json`.
+
+**Provenance (must be stated).** Written after every earlier result, including D25 (`docs/RESULTS.md`, D25). The motivation is post hoc:
+- On the S6 continual stream (P1), no learned model beats linear extrapolation (D23–D25); the shrunk residual TFT + EWC is practically equivalent to it at every horizon (D25).
+- On unseen usage conditions (P2, D20, F1 inputs, horizons 1–3), learned models beat extrapolation by a wide margin (gradient boosting 0.710, TFT 0.868, linear extrapolation 1.372 pp). P2 has not been run for any residual model (D23–D25: not in budget).
+- **Known confound in that comparison.** D20 P2 tests every sample of the held-out case, including origins early in a cell's life where the fade rate is missing and linear extrapolation falls back to persistence (ΔSOH = 0). Part of the learned models' P2 advantage may come from these origins. D26 therefore reports and tests the two kinds of origin separately.
+- The D25 conformal intervals, calibrated per task on that task's validation rows, under-cover (0.71–0.82 at nominal 90 %). In P2 the calibration rows come from six conditions pooled, which tests whether the intervals hold on a condition never seen.
+
+The P2 numbers of D20 are known. No P2 quantity for the residual, shrunk or continual models, and no per-stratum P2 result for any method, has been computed.
+
+**Questions.**
+- Q1: On an unseen usage condition, is the shrunk residual TFT + EWC more accurate than linear extrapolation **at origins where extrapolation has a fade rate**?
+- Q2: Is it more accurate than gradient boosting (the best D20 P2 model)?
+- Q3: Do its conformal intervals, calibrated on the other six conditions, reach the nominal coverage on the unseen one, and are they better than extrapolation's?
+
+### Setup (fixed here)
+- **Data, inputs, splits, horizons, label:** as D23–D25: S6 samples (`p3.s6_samples`), the D21 shared inputs, the D18 purged per-cell splits, E1 = horizons 1–3, E2 = horizons 1–6; SOH relative to the first valid check.
+- **Folds:** leave one test case out (seven folds, D20). The held-out case is never used for training, early stopping, tuning, shrinkage or calibration; all its samples are test samples.
+- **Origin strata.** H+ = origins at which the D23 linear-extrapolation baseline has a fade rate, as computed by the committed baseline code (no new definition); H− = the other origins, where it equals persistence. The code records each test sample's stratum. The H+/H− counts per fold are written to the results file (no model results are needed to compute them) and are reported with every result.
+- **Proposed method (continual):** the D23 residual TFT + EWC streamed over the six training cases, then evaluated on the held-out case (zero-shot to a new condition). Orders: for evaluation order *o* (the 10 D23 orders), the fold's stream is order *o* with the held-out case removed; seeds 0–4 (main) and 5–9 (replicate). Each case's training rows are its train and test splits, and its validation split is used for early stopping (the D18 P2 rule). **Hyperparameters: the D23 values (lr 3e-3; λ 1 in E1, 1000 in E2), with no new tuning**, so nothing is selected with D26 data.
+- **Shrinkage and intervals:** the D25 calibrator (`src/calibration.py`, unchanged), updated after each of the six tasks as in D25. The factors and conformal half-widths in force after the sixth task are applied to the held-out case. Linear extrapolation gets conformal intervals from the same rows in the same way.
+- **Run-level metric:** for a matched (order, seed) run, the P2 error is the mean over the seven folds of the held-out test RMSE (pp), computed on all origins, on H+ and on H−. Per-fold values are reported as well.
+- **Comparators** (each fitted per fold on the six training cases, same rows): persistence; linear extrapolation; gradient boosting and ridge on the D21 shared inputs (single fits, as in D23); the joint residual TFT (all six cases at once, D23 lr; upper bound for the continual model, seeds as above); the raw (unshrunk) residual TFT + EWC from the same runs.
+- **Pinned environment** (`requirements.txt`); pre-flight refuses anything else unless `--allow-unpinned` is recorded in the run log.
+
+### Tests (fixed here)
+D25 rules: paired two-sided Wilcoxon over matched (order, seed) runs; against a single-fit baseline, the runs minus its single value; Holm correction within each family and seed set; the D21 replication rule (p_Holm < 0.05 in both seed sets, same sign, |difference| ≥ 0.05 pp in both = replicated; |difference| < 0.05 pp in both = practically equivalent; otherwise not replicated). Differences are a − b; negative favours a. E1 and E2 are separate sets of families.
+- **Primary (one family):** (a) shrunk residual TFT + EWC − linear extrapolation, P2 error on **H+**; (b) the same on **all origins**; (c) shrunk residual TFT + EWC − gradient boosting, P2 error on all origins; (d) shrunk residual TFT + EWC − conformal linear extrapolation, interval score at 90 %, all origins.
+- **Secondary (one family):** (a) and (c) on H−; shrunk − raw; continual − joint residual TFT; interval score at 80 %.
+- **Coverage (descriptive, no test):** mean 90 % and 80 % coverage over runs, per fold and pooled, for the model and for extrapolation. **Coverage is called adequate if the mean 90 % coverage pooled over folds is at least 0.85 in both seed sets**; this threshold is fixed here.
+- **What counts as a positive result:** Q1: (a) replicated in favour of the model. A win on all origins (b) or on H− alone does **not** count for Q1, because on H− extrapolation is persistence. Q2: (c) replicated in favour. Q3: (d) replicated in favour **and** coverage adequate. Practical equivalence is reported as "as accurate as", never "better". Every outcome is reported, including null and negative ones; nothing is re-run to change one.
+- **Power.** The tests are over training randomness (orders, seeds) with the seven conditions fixed. With seven folds, any claim about *new* conditions in general rests on seven conditions from one laboratory; the per-fold results, including the hardest fold, are reported beside every pooled number.
+
+### Compute budget (estimate, to be checked on synthetic data before this entry is committed)
+Per experiment: 7 folds × 10 orders × 10 seeds = 700 continual streams of six tasks (D25 seven-task scratch streams took 41–54 s each), 70 joint fits, and the single-fit baselines. That is roughly 8–10 h of single-process CPU per experiment, about 1.5–2 h with six workers, so about 3.5–4.5 h for E1 and E2 together. One night on the ASUS, six workers, with a runbook `docs/D26_NIGHT_RUN.md` in the D25 format. Parts that do not finish by the deadline are reported as not run.
+
+### Not done, with reasons
+- **Residual pretraining on the pool:** negative or null in D25; not repeated until the pool and S6 share one definition of linear extrapolation.
+- **Direct TFT + EWC in P2:** it would double the compute (beyond one night); residual against direct was answered in P1 (D23, replicated in E1 and E2).
+- **The D24 backbones (BiLSTM, TCN, Transformer) and SA-EWC in P2:** budget; D24 answered the same-size backbone question in P1. Planned only if the residual TFT shows a P2 result worth comparing.
+- **A pooled or cumulative conformal calibrator on the P1 stream:** it would be a fix evaluated on the same stream that showed the under-coverage (D25). Deferred to a decision with its own pre-registration, or to new data.
+- **Reuse-class decisions:** in S6 P1 every test period is in class C3; P2 reuse-class agreement is reported descriptively (accuracy, macro-F1), as in D20, and not tested.
+
+### Open questions for the team (to settle before committing)
+1. Is "no new tuning" acceptable, or should the continual model be tuned on held-out-free folds (nested by fold), at about seven times the tuning cost?
+2. Should the D20 P2 numbers (F1 inputs) be re-stated on the D21 shared inputs for the comparators, so that every P2 number in the paper uses one input set? (D26 as written computes them on the D21 inputs.)
+3. Is the 0.85 coverage threshold for "adequate" the right one?
+
+### Run log
+- **16 Oct 2026. Drafted** after the D25 results and committed as a draft with the D25 section of `docs/RESULTS.md`; open questions not yet settled; no D26 code written or run.
