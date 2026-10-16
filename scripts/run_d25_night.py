@@ -44,6 +44,10 @@ PLAN = [("e2", "pre_tune"), ("e1", "pre_tune"),
         ("e2", "pre_main"), ("e2", "pre_replicate"), ("e1", "pre_main"), ("e1", "pre_replicate")]
 DEPENDS = {"pre_main": "pre_tune", "pre_replicate": "pre_tune"}
 PINNED = ("numpy", "pandas", "scikit-learn", "scipy", "torch")
+# Set by a later decision's orchestrator that reuses this scheduler (run_d26_night.py).
+DECISION = "D25"
+RUNNER = ROOT / "scripts" / "run_d25.py"
+DATA_FILES = ("wheeler_checks.csv", "pool_s7_checks.csv", "pool_s8_checks.csv", "pool_s9_checks.csv")
 
 
 def now() -> str:
@@ -91,7 +95,7 @@ def preflight(allow_dirty: bool, allow_unpinned: bool) -> list[str]:
         problems.append("tracked files differ from the commit; commit or stash first (D9):\n" + status.stdout)
     data = Path(os.environ.get("DATA_ROOT", ROOT / "data"))
     data = data if data.is_absolute() else ROOT / data
-    for f in ("wheeler_checks.csv", "pool_s7_checks.csv", "pool_s8_checks.csv", "pool_s9_checks.csv"):
+    for f in DATA_FILES:
         if not (data / f).exists():
             problems.append(f"{data / f} missing (build_wheeler_features.py / build_pool_tables.py)")
     for f in ("forecasting_d23_e1.json", "forecasting_d23_e2.json"):
@@ -107,7 +111,7 @@ def preflight(allow_dirty: bool, allow_unpinned: bool) -> list[str]:
         say("environment differs from requirements.txt: " + "; ".join(mism))
         if not allow_unpinned:
             problems.append("library versions differ from requirements.txt (use the pinned .venv, or pass "
-                            "--allow-unpinned and record the deviation in the D25 run log)")
+                            f"--allow-unpinned and record the deviation in the {DECISION} run log)")
     return problems
 
 
@@ -138,7 +142,7 @@ def run_parts(jobs: list[tuple[str, str]], profile: str, workers: int, deadline:
                 break
             queue.remove(job)
             log = open(LOGS / f"{profile}_{exp}_{part}.log", "w", encoding="utf-8")
-            cmd = [PY, str(ROOT / "scripts" / "run_d25.py"), "--exp", exp, "--part", part, "--profile", profile]
+            cmd = [PY, str(RUNNER), "--exp", exp, "--part", part, "--profile", profile]
             running[job] = (subprocess.Popen(cmd, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT), log, time.time())
             say(f"{profile}: started {exp} {part} ({len(running)} running, {len(queue)} queued)")
         time.sleep(5 if profile == "smoke" else 30)
