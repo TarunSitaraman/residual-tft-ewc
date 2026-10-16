@@ -14,7 +14,9 @@ Runbook for the one-night D25 run (decision D25 in `docs/DECISIONS.md`, plan in 
 | Collect | D23 reproduction check (all 100 scratch units per experiment), tests, `results/forecasting_d25_e1.json`, `..._e2.json` | a few minutes |
 | Summary | `data/cache/d25/d25_summary.md` | seconds |
 
-Expect about 3.5–4 h in all.
+Expect about 3.5–4 h in all. Measured in the cloud rehearsal (4 workers, 15–16 Oct): scratch parts 16–18 min (E1) and 27 min (E2); `pre_tune` 51 min (E1); pretrained evaluation parts 35 min (E1) and 64–73 min (E2); about 3 h end to end with 6 workers.
+
+Run it on the ASUS, not on other hardware: the reproduction check needs the D23 units to match to 1e-9 pp, which the cloud rehearsal's CPU did not (differences up to 0.015 pp; see the D25 run log).
 
 ## Before starting
 

@@ -236,7 +236,7 @@ Every extra variant tested on the same data weakens the statistics; reviewers no
 | # | Task | Where | Status |
 |---|---|---|---|
 | 6.5.1 | Pre-register D25; code and synthetic-data tests | cloud | Done 14 Oct |
-| 6.5.2 | Night run (pinned environment, 6 workers) | ASUS | Pending |
+| 6.5.2 | Night run (pinned environment, 6 workers) | ASUS | Pending (a cloud rehearsal on 15–16 Oct ran every part but cannot be reported: its CPU does not reproduce D23 to 1e-9 pp) |
 | 6.5.3 | Run log; results committed | ASUS | Pending |
 | 6.5.4 | D25 section of `docs/RESULTS.md`; tables and figures (error by horizon with shrinkage, interval score and coverage per task, shrinkage factors) | cloud | After 6.5.3 |
 | 6.5.5 | Paper: one methods paragraph (shrinkage, conformal intervals, residual pretraining), results, limitations | cloud | After 6.5.4 |
