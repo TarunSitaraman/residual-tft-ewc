@@ -470,3 +470,44 @@ Gradient boosting differs from D23 (0.451 / 0.898 pp) because of the software en
 6. **The residual form does not help every backbone** (descriptive; residual and direct arms of the new backbones were not tested against each other). In E1 it lowers the Transformer's error (EWC 0.497 → 0.360 pp) and BiLSTM fine-tuning's (0.436 → 0.346 pp), leaves BiLSTM + EWC unchanged (0.323 direct, 0.328 residual) and does not help the TCN (EWC 0.461 direct, 0.466 residual; fine-tuning 0.450, 0.503).
 
 **Spark scaling** (`results/d22_spark_scaling.json`, 120 blocks): every thread count matches pandas; times 1,467 / 297 / 173 / 150 s at 1 / 2 / 4 / 6 threads. The 1 → 2 thread speed-up (4.9×) is above linear, so the 1-thread run likely includes a one-off cost (JVM start-up or a cold file cache). Not explained; not to be reported as parallel efficiency until it is.
+
+## D25: horizon-wise shrinkage, conformal intervals and residual pretraining (15–16 Oct 2026)
+
+Results files: `results/forecasting_d25_e1.json` (horizons 1–3) and `results/forecasting_d25_e2.json` (horizons 1–6), run and collected at commit `a59debb` (clean tree, `git_dirty` false) in the pinned environment (Python 3.11.15, numpy 2.4.6, pandas 3.0.6, scikit-learn 1.9.1, torch 2.14.1+cpu); all 10 parts ran, none failed (run log in `docs/DECISIONS.md`, D25). Protocol fixed in D25 before any run (`a59debb`). D23 setting: S6 stream from scratch, D21 shared inputs, 10 orders × seeds 0–4 (main) and 5–9 (replicate). **D23 reproduction:** the raw scratch model of all 100 units per experiment equals the committed D23 unit (max_abs_diff 0.0), so "raw scratch" below *is* the D23 residual TFT + EWC. "Shrunk" = linear extrapolation + α_h × the learned correction, α_h fitted per horizon after each task on that task's validation rows. Differences are a − b (pp; negative favours a). Summary: `scripts/summarise_d25.py`.
+
+**Final average test RMSE (pp), forgetting (pp), interval score and coverage at 90 %; mean, main / replicate:**
+
+| Method | E1 error | E1 forgetting | E1 IS90 | E1 cov90 | E2 error | E2 forgetting | E2 IS90 | E2 cov90 |
+|---|---|---|---|---|---|---|---|---|
+| Residual TFT + EWC, raw (= D23) | 0.339 / 0.314 | 0.100 / 0.066 | – | – | 0.561 / 0.534 | 0.093 / 0.086 | – | – |
+| **Residual TFT + EWC, shrunk** | **0.318 / 0.308** | 0.084 / 0.063 | 1.932 / 1.985 | 0.714 / 0.716 | **0.498 / 0.493** | 0.085 / 0.084 | 3.057 / 3.021 | 0.808 / 0.799 |
+| Pretrained residual TFT + EWC, raw | 0.557 / 0.540 | 0.094 / 0.032 | – | – | 0.541 / 0.593 | 0.077 / 0.093 | – | – |
+| Pretrained residual TFT + EWC, shrunk | 0.422 / 0.415 | 0.104 / 0.093 | 2.553 / 2.358 | 0.773 / 0.805 | 0.500 / 0.525 | 0.069 / 0.080 | 3.029 / 3.095 | 0.810 / 0.815 |
+| Linear extrapolation (conformal intervals) | 0.343 | | 1.910 | 0.924 | 0.485 | | 3.048 | 0.948 |
+| Persistence | 1.644 | | | | 2.667 | | | |
+
+Mean 90 % interval width (pp), main / replicate: shrunk scratch model 0.945 / 0.963 (E1) and 2.124 / 2.010 (E2); conformal extrapolation 1.748 (E1) and 2.931 (E2). At 80 %, coverage is 0.565 / 0.592 (E1) and 0.707 / 0.698 (E2) for the shrunk scratch model against 0.793 (E1) and 0.850 (E2) for extrapolation.
+
+**Registered primary tests (D21 replication rule):**
+
+| Comparison | E1 | E2 |
+|---|---|---|
+| (a) shrunk scratch − linear extrapolation, final error | −0.025 / −0.035 (p_Holm 0.003 / 0.001): **practically equivalent** | +0.013 / +0.008 (1.00 / 0.99): **practically equivalent** |
+| (b) shrunk pretrained − linear extrapolation, final error | +0.079 / +0.072 (< 0.001 / < 0.001): **replicated, extrapolation better** | +0.015 / +0.040 (1.00 / 0.033): **practically equivalent** |
+| (c) raw pretrained − raw scratch (D23), final error | +0.218 / +0.227 (< 0.001 / < 0.001): **replicated, pretraining worse** | −0.020 / +0.059 (1.00 / 0.062): not replicated |
+| (d) shrunk scratch − conformal extrapolation, interval score 90 % | +0.022 / +0.075 (0.86 / 0.55): not replicated | +0.010 / −0.027 (0.79 / 0.39): **practically equivalent** |
+
+**Secondary.** Shrunk − raw, final error: scratch E1 −0.021 / −0.006 (practically equivalent), E2 −0.063 / −0.041 (p_Holm < 0.001 in both, but below 0.05 pp in the replicate: not replicated); pretrained E1 −0.135 / −0.125 (replicated, shrunk better), E2 −0.042 / −0.068 (not replicated). Forgetting: every shrunk − raw and pretrained − scratch comparison is practically equivalent or not replicated. Shrunk pretrained − shrunk scratch: E1 +0.104 / +0.107 (replicated, pretrained worse), E2 practically equivalent. Interval score at 80 %, shrunk scratch − conformal extrapolation: E1 not replicated; **E2 −0.179 / −0.218 (p_Holm 0.033 / 0.023): replicated, model better.** Shrunk pretrained − conformal extrapolation: worse at 90 % and 80 % in E1 (replicated), not replicated or practically equivalent in E2.
+
+**E2, per horizon (shrunk − linear extrapolation, pooled test RMSE after the last step).** Scratch: practically equivalent at every horizon h = 1–6 (largest difference +0.041 pp, h4 main). For comparison, the raw D23 model was worse at h1–h2 (replicated, D23). Pretrained: practically equivalent at h1, h2 and h6, **worse at h3 (+0.055 / +0.052) and h4 (+0.080 / +0.067), replicated**, not replicated at h5. Linear extrapolation's RMSE by horizon: 0.217, 0.354, 0.462, 0.572, 0.744, 0.847 pp.
+
+**Shrinkage factors after the last task** (median over the 100 runs per model): scratch E1 h1–h3 0.93, 1.00, 1.00; scratch E2 0.28, 0.66, 0.86, 1.00, 1.00, 1.00; pretrained E1 0.27, 0.93, 1.00; pretrained E2 0.26, 0.57, 0.82, 1.00, 1.00, 1.00.
+
+**Tuning and pool.** Scratch arm: D23 values (lr 3e-3; λ 1 in E1, 1000 in E2). Pretrained arm: E1 lr 3e-3, λ 10⁵ (λ grid extended upward to 10⁷; best not at the final edge); E2 lr 1e-2, λ 1000 (no extension). Pool: 369 cells; 36,711 samples in E1 (train / validation / test 21,174 / 6,439 / 6,942) and 70,116 in E2 (39,178 / 10,232 / 11,144). Mean training time per S6 stream: scratch 44 / 41 s (E1) and 54 / 52 s (E2); pretrained 20 / 18 s and 31 / 32 s (fine-tuning only; pool pretraining time not recorded in the results files).
+
+**Reading.**
+1. **Q1, no registered positive result.** With shrinkage, the residual TFT + EWC is **as accurate as** linear extrapolation in both experiments (practically equivalent, E1 and E2), not better. Shrinkage removes the D23 model's loss to extrapolation over horizons 1–6 (E2: 0.561 / 0.534 → 0.498 / 0.493 pp; and at h1–h2 the replicated loss of D23 becomes practical equivalence), mainly by scaling the correction down at short horizons (median α 0.28 at h1, 0.66 at h2). Where the correction is kept in full (h4–h6), it does not beat extrapolation either.
+2. **Q2, negative.** Residual pretraining on the first-life pool makes the model worse at horizons 1–3 (+0.22 pp, replicated) and does not help at 1–6 (not replicated). Shrinkage recovers part of the loss (E1: 0.557 → 0.422 pp) by turning the h1 correction down (α 0.27), but the pretrained model stays behind both the scratch model and extrapolation in E1. The pool's linear extrapolation is per day and S6's per cycle (fixed in D25 because the pool has no cycle count), so this result does not separate "first-life data does not transfer" from "the pool's residual target differs from S6's".
+3. **Q3, no registered positive result.** The model's conformal intervals are not better than extrapolation's at 90 % (not replicated in E1, practically equivalent in E2). They are narrower (about 54 % of extrapolation's width in E1, 70 % in E2) and **under-cover**: 0.71–0.82 at nominal 90 % (extrapolation 0.92–0.95). The equal interval scores are a trade of width against misses, not better-calibrated intervals. At 80 % in E2 the model's interval score is better (replicated, secondary family).
+4. **Forgetting** stays at 0.03–0.10 pp for every arm; neither shrinkage nor pretraining changes it (practically equivalent or not replicated).
+5. **Status of the proposed model.** Across D23–D25, no learned model or variant beats linear extrapolation on the S6 continual stream (raw, shrunk, pretrained, SA-EWC, four backbones). The supported claim is equivalence: the shrunk residual TFT + EWC matches extrapolation at every horizon while keeping forgetting at about 0.1 pp. Interpretations 1–3 beyond the registered verdicts are post hoc.
