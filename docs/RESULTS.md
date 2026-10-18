@@ -588,3 +588,56 @@ Mean 90 % width (pp): shrunk model 0.99 (E1) and 2.20 / 2.13 (E2); conformal ext
    - On unseen conditions (P2), it beats extrapolation but neither gradient boosting nor its own joint-trained form, and its intervals under-cover.
 
    Interpretations 2–5 beyond the registered verdicts are post hoc.
+
+## D27: leave-one-condition-out conformal intervals for unseen usage conditions (19 Oct 2026)
+
+Results files: `results/forecasting_d27_e1.json` (horizons 1–3) and `results/forecasting_d27_e2.json` (horizons 1–6), run at commit `494b36f` (clean tree, `git_dirty` false, no override) in the pinned environment (Python 3.11.15, numpy 2.4.6, pandas 3.0.6, scikit-learn 1.9.1, scipy 1.17.1). Protocol fixed in D27 before any code (`cb29730`). **Reproduction checks passed:** the D26 gradient-boosting per-fold RMSE and the D26 extrapolation interval metrics are reproduced exactly (max abs diff 0). Setting as D26: leave one S6 test case out, seven folds.
+
+The calibration rules are:
+- **GBM-LOCO:** gradient boosting (the D26 comparator), with per-horizon split-conformal half-widths from the six training cases, each predicted by a gradient boosting fitted on the other five.
+- **LIN-all:** linear extrapolation, calibrated on every origin of the six training cases.
+- **LIN-val:** extrapolation calibrated on their validation rows only (the D26 rule).
+- **Mondrian:** the same rules with half-widths per (horizon, origin stratum).
+
+The forecasters are deterministic, so there are no seed sets; E1 and E2 are not independent (E2 contains E1's horizons). No half-width was undersized.
+
+**90 % intervals, pooled coverage (H+ / H−), mean interval score (IS90, pp), mean width (pp), share of samples whose interval lies in one reuse class ("decided") and class agreement among them:**
+
+| Rule | E1 cov90 (H+ / H−) | E1 IS90 | E1 width | E1 decided (agreement) | E2 cov90 (H+ / H−) | E2 IS90 | E2 width | E2 decided (agreement) |
+|---|---|---|---|---|---|---|---|---|
+| **GBM-LOCO** | **0.902** (0.910 / 0.750) | **3.22** | 1.57 | 0.92 (0.997) | **0.896** (0.900 / 0.833) | **6.67** | 2.94 | 0.87 (0.994) |
+| GBM-LOCO, Mondrian | 0.905 (0.900 / 0.992) | 3.14 | 1.63 | 0.91 (0.997) | 0.895 (0.893 / 0.929) | 6.63 | 3.03 | 0.86 (0.995) |
+| LIN-all | 0.896 (0.942 / 0.017) | 7.08 | 3.58 | 0.86 (0.970) | 0.893 (0.941 / 0.013) | 11.78 | 6.64 | 0.77 (0.969) |
+| LIN-all, Mondrian | 0.900 (0.899 / 0.917) | 4.84 | 3.19 | 0.86 (0.989) | 0.899 (0.898 / 0.912) | 8.45 | 5.21 | 0.79 (0.992) |
+| LIN-val (D26 rule) | 0.743 (0.782 / 0.000) | 8.48 | 1.51 | 0.94 (0.955) | 0.763 (0.804 / 0.000) | 13.53 | 3.07 | 0.88 (0.948) |
+| *D26 shrunk residual TFT + EWC (validation rows; main / replicate)* | *0.661 / 0.655* | *6.13 / 6.28* | *0.99* | – | *0.682 / 0.671* | *9.96 / 10.35* | *2.20 / 2.13* | – |
+
+At 80 %, pooled coverage is 0.802 (E1) and 0.801 (E2) for GBM-LOCO, 0.805 and 0.804 for LIN-all, and 0.609 and 0.639 for LIN-val.
+
+**90 % coverage per fold, GBM-LOCO:**
+- E1: 0.99, 0.95, 0.94, 0.99, 0.97, 0.93, **0.48** (case7).
+- E2: 0.96, 0.98, 0.94, 0.99, 0.99, 0.94, **0.38** (case7).
+
+LIN-all reaches 0.74 (E1) and 0.71 (E2) on case7, and 0.87–0.96 on the other folds. The IS90 of GBM-LOCO is 1.7–2.2 pp (E1) and 3.1–3.9 pp (E2) on the six other folds, against 11.6 and 26.6 pp on case7.
+
+**Registered results:**
+
+| Question | E1 | E2 | Verdict |
+|---|---|---|---|
+| Q1: GBM-LOCO pooled 90 % coverage ≥ 0.85 | 0.902 | 0.896 | **positive** |
+| Q2: GBM-LOCO − LIN-all, IS90 (Wilcoxon over seven folds) | −3.87 pp, 6/7 folds, p = 0.047 | −5.11 pp, 6/7 folds, p = 0.30 | **not established** (E2 not significant; case7 reverses: +3.6 and +11.0 pp) |
+| Q3 (descriptive): LIN-all against LIN-val, pooled 90 % coverage | 0.896 against 0.743 | 0.893 against 0.763 | the D26 under-coverage of extrapolation is attributed to calibrating on validation-row origins only (reading fixed in D27) |
+
+**Reading.**
+1. **Q1, positive.** Gradient-boosting intervals calibrated by leaving one condition out reach the nominal level when pooled over the seven unseen conditions: 0.90 at 90 % and 0.80 at 80 % in both experiments. This is the first interval rule in the study that holds on unseen conditions.
+2. **The guarantee is pooled, not per condition.** On case7 (100 % depth of discharge, the only condition at that depth) the intervals cover 0.48 (E1) and 0.38 (E2), and its interval score is five to nine times that of any other fold. Conformal calibration over conditions can only be as good as the spread of the training conditions. A condition outside that spread is not covered, and the pooled number hides this.
+3. **Q2, not established.** GBM-LOCO has a better interval score than calibrated extrapolation on six of seven folds in both experiments, by 3–10 pp. The registered test is significant in E1 only, because case7 reverses the sign and has the largest magnitude.
+4. **Q3: which origins are used matters more than the model.** Calibrating extrapolation on every origin of the six training conditions instead of their mid-life validation rows raises its coverage from 0.74–0.76 to 0.89–0.90, with no fitted model involved. Under this reading, the D26 under-coverage of the TFT's intervals comes at least partly from the calibration rows (validation rows only) and not only from the model. The TFT was not run with LOCO calibration (D27 "Not done"), so this is not shown for the TFT itself.
+5. **Strata (secondary).**
+   - Without Mondrian half-widths, extrapolation covers almost none of the H− origins (0.01–0.02), where it is persistence. Per-stratum half-widths fix this (0.91–0.92) and lower its interval score by about 30 %.
+   - Gradient boosting needs this much less: H− coverage is 0.75 (E1) and 0.83 (E2) without Mondrian half-widths, and 0.99 and 0.93 with them.
+6. **Reuse decisions (descriptive).** With GBM-LOCO, 87–92 % of held-out samples have a 90 % interval inside one reuse class, and among those the class agrees with the measured one for 99.4–99.7 % of samples. For the remaining samples the interval flags that the class is uncertain. Calibrated extrapolation decides fewer samples (77–86 %) with lower agreement (0.97).
+7. **Recommended practice from D26–D27** (post hoc, for the paper's discussion):
+   - For a new usage condition, prefer a forecaster fitted on all available conditions.
+   - Calibrate its intervals on conditions held out from fitting, using every origin, with half-widths per origin stratum.
+   - Report coverage per condition, not only pooled.
