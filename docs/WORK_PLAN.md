@@ -11,7 +11,7 @@ Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan say
 | Compute | One night on the ASUS (`docs/D24_NIGHT_RUN.md`); parts in a fixed priority order, anything unfinished reported as not run. |
 | Licence | Proprietary, all rights reserved, while the repository is private (`LICENSE`). |
 | Paper | Kept long for now; cut later. Results come first. |
-| Next step for the model | **D25** (pre-registered 14 Oct): shrink the learned correction per horizon, add conformal forecast intervals, and pretrain the residual model on the first-life pool; one night on the ASUS (`docs/D25_NIGHT_RUN.md`). Plan: section 6 below. |
+| Next step for the model | **D27** (pre-registered 19 Oct): leave-one-condition-out conformal intervals for unseen usage conditions (D26 showed every interval under-covers there); then the paper update with D25–D27. |
 
 | Item | Status |
 |---|---|
@@ -24,6 +24,7 @@ Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan say
 | WS6 P2 for new models | Not in tonight's budget |
 | D25 calibrated residual TFT + EWC, residual pretraining | Run 15–16 Oct, all 10 parts finished (`results/forecasting_d25_e1.json`, `..._e2.json`); no registered positive result: the shrunk model is practically equivalent to linear extrapolation, pretraining is worse (E1) or not replicated (E2), intervals under-cover (`docs/RESULTS.md`, D25) |
 | D26 P2 for the residual TFT + EWC, by origin history | Run 17–18 Oct, all 28 parts finished (`results/forecasting_d26_e1.json`, `..._e2.json`): beats linear extrapolation on H+ origins (Q1, replicated); gradient boosting better (Q2, replicated); joint training better than the continual stream (replicated); intervals under-cover, 0.66–0.68 at 90 % (Q3 not met) (`docs/RESULTS.md`, D26) |
+| D27 intervals for unseen conditions (LOCO conformal) | Pre-registered 19 Oct (`docs/DECISIONS.md`, D27): gradient-boosting intervals calibrated by leaving one condition out, against extrapolation; a few minutes of CPU |
 | WS7 paper | D24 added to methods, results, discussion, conclusion and abstract (14 Oct); `paper_single.pdf` rebuilt with tectonic 0.15; **9 pages, one over the 8-page limit** (about half a page of references spills over): cuts still to be chosen |
 
 ## 0. Where we are (audit summary)
