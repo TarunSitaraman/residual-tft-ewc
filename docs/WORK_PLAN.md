@@ -240,7 +240,7 @@ Every extra variant tested on the same data weakens the statistics; reviewers no
 | 6.5.1 | Pre-register D25; code and synthetic-data tests | cloud | Done 14 Oct |
 | 6.5.2 | Night run (pinned environment, 6 workers) | ASUS | Done 15–16 Oct |
 | 6.5.3 | Run log; results committed | ASUS | Done 16 Oct |
-| 6.5.4 | D25 section of `docs/RESULTS.md`; tables and figures (error by horizon with shrinkage, interval score and coverage per task, shrinkage factors) | cloud | Section done 16 Oct; tables and figures pending |
-| 6.5.5 | Paper: one methods paragraph (shrinkage, conformal intervals, residual pretraining), results, limitations | cloud | After 6.5.4 |
+| 6.5.4 | D25 section of `docs/RESULTS.md`; tables and figures (error by horizon with shrinkage, interval score and coverage per task, shrinkage factors) | cloud | Section done 16 Oct; D25 numbers in the paper text and the D26/D27 tables in the paper (written by hand from the results files) 19 Oct; figures pending |
+| 6.5.5 | Paper: one methods paragraph (shrinkage, conformal intervals, residual pretraining), results, limitations | cloud | Done 19 Oct with D26 and D27 (abstract, contributions, methods, results, discussion, conclusion); paper now 10 pages |
 | 6.5.6 | Next (not in D25): P2 for the D25 model and the D24 baselines (WS6.1), the setting where learned models already beat extrapolation | both | Done as D26 (residual TFT + EWC only; the D24 backbones were not run, D26 "Not done"); run 17–18 Oct, written up 19 Oct |
 

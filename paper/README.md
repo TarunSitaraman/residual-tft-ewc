@@ -1,8 +1,8 @@
 # Paper
 
-IEEE conference paper (`IEEEtran`, 8 pages including references). The team's draft (title, authors, headings, introduction, related work) is merged with the methods, results and discussion written from the implementation and the committed results. The consolidated results are in `docs/RESULTS.md`.
+IEEE conference paper (`IEEEtran`; 10 pages including references since the D25–D27 update of 19 Oct 2026, above the usual 8-page limit, so trimming is a team decision). The team's draft (title, authors, headings, introduction, related work) is merged with the methods, results and discussion written from the implementation and the committed results. The consolidated results are in `docs/RESULTS.md`.
 
-**Quick look:** `paper_single.pdf` is the compiled paper with all figures and tables (8 pages), and `paper_single.tex` is the same paper as one LaTeX file (it needs only `references.bib` and `figures/` beside it). Both are generated; after editing the sources, refresh them from the repository root:
+**Quick look:** `paper_single.pdf` is the compiled paper with all figures and tables (10 pages; the 19 Oct build used Tectonic 0.15.0), and `paper_single.tex` is the same paper as one LaTeX file (it needs only `references.bib` and `figures/` beside it). Both are generated; after editing the sources, refresh them from the repository root:
 
 ```bash
 python scripts/flatten_paper.py                       # rewrites paper_single.tex
