@@ -511,3 +511,80 @@ Mean 90 % interval width (pp), main / replicate: shrunk scratch model 0.945 / 0.
 3. **Q3, no registered positive result.** The model's conformal intervals are not better than extrapolation's at 90 % (not replicated in E1, practically equivalent in E2). They are narrower (about 54 % of extrapolation's width in E1, 70 % in E2) and **under-cover**: 0.71–0.82 at nominal 90 % (extrapolation 0.92–0.95). The equal interval scores are a trade of width against misses, not better-calibrated intervals. At 80 % in E2 the model's interval score is better (replicated, secondary family).
 4. **Forgetting** stays at 0.03–0.10 pp for every arm; neither shrinkage nor pretraining changes it (practically equivalent or not replicated).
 5. **Status of the proposed model.** Across D23–D25, no learned model or variant beats linear extrapolation on the S6 continual stream (raw, shrunk, pretrained, SA-EWC, four backbones). The supported claim is equivalence: the shrunk residual TFT + EWC matches extrapolation at every horizon while keeping forgetting at about 0.1 pp. Interpretations 1–3 beyond the registered verdicts are post hoc.
+
+## D26: unseen usage conditions (P2) for the residual TFT + EWC, by origin history (17–18 Oct 2026)
+
+Results files: `results/forecasting_d26_e1.json` (horizons 1–3) and `results/forecasting_d26_e2.json` (horizons 1–6), run and collected at commit `9866d7a` (clean tree, `git_dirty` false) in the pinned environment (Python 3.11.15, numpy 2.4.6, pandas 3.0.6, scikit-learn 1.9.1, scipy 1.17.1, torch 2.14.1+cpu); all 28 parts ran, none failed, all seven folds are in the tests (run log in `docs/DECISIONS.md`, D26). Protocol fixed in D26 before any run (`ac5bd0a`; amendment and code `7a3d29c`). Setting: leave one S6 test case out (seven folds). The residual TFT + EWC is streamed over the other six cases in each of the 10 D23 orders, seeds 0–4 (main) and 5–9 (replicate), with the D23 learning rate and λ (no new tuning). Shrinkage and 90 % / 80 % conformal intervals are fitted once after the stream on the pooled validation rows of the six training cases. A run's P2 error is the mean over the seven folds of the held-out RMSE. H+ = origins where linear extrapolation has a fade rate; H− = the others, where it equals persistence. Differences are a − b (pp; negative favours a). Summary: `scripts/summarise_d26.py`.
+
+**Disclosure (D26).** The D23 learning rate and λ were tuned on streams that used the validation rows of all seven cases, so each held-out case's validation rows took part in choosing those two values; in P2 they are test samples. The comparators (gradient boosting, ridge) use fixed D18 settings and were not tuned.
+
+**Strata (n / H+ / H−), E1:** case1 279/261/18, case2 282/264/18, case3 231/219/12, case4 387/369/18, case5 363/345/18, case6 576/558/18, case7 291/273/18. E2: 444–1,125 samples per case, 24–36 of them H−.
+
+**P2 error (pp), mean over runs, main / replicate; interval score (IS) and pooled coverage at 90 %:**
+
+| Method | E1 all | E1 H+ | E1 H− | E1 IS90 | E1 cov90 | E2 all | E2 H+ | E2 H− | E2 IS90 | E2 cov90 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Residual TFT + EWC, raw | 0.885 / 0.900 | 0.793 / 0.802 | 1.717 / 1.768 | – | – | 1.595 / 1.623 | 1.464 / 1.485 | 2.805 / 2.845 | – | – |
+| **Residual TFT + EWC, shrunk** | 0.924 / 0.945 | 0.738 / 0.743 | 2.325 / 2.450 | 6.13 / 6.28 | 0.661 / 0.655 | 1.620 / 1.653 | 1.418 / 1.441 | 3.322 / 3.407 | 9.96 / 10.35 | 0.682 / 0.671 |
+| Residual TFT, joint (six cases at once) | 0.568 / 0.577 | 0.538 / 0.550 | 0.891 / 0.870 | – | – | 1.214 / 1.184 | 1.216 / 1.189 | 1.105 / 1.025 | – | – |
+| Gradient boosting (single fit) | 0.535 | 0.508 | 0.789 | | | 1.051 | 1.049 | 0.961 | | |
+| Ridge (single fit) | 0.771 | 0.691 | 1.539 | | | 1.299 | 1.258 | 1.794 | | |
+| Linear extrapolation | 1.372 | 0.860 | 4.609 | 8.48 | 0.743 | 2.300 | 1.620 | 7.022 | 13.53 | 0.763 |
+| Persistence | 2.817 | 2.663 | 4.609 | | | 4.898 | 4.732 | 7.022 | | |
+
+Mean 90 % width (pp): shrunk model 0.99 (E1) and 2.20 / 2.13 (E2); conformal extrapolation 1.51 and 3.07. At 80 %, pooled coverage is 0.535 / 0.528 (E1) and 0.537 / 0.532 (E2) for the shrunk model, against 0.609 and 0.639 for extrapolation. S.d. of the P2 error over the 50 runs of a set: continual model 0.11–0.20 pp, joint model 0.02–0.05 pp.
+
+**Per fold (all origins), pp; TFT columns are main-set means (the replicate set differs by at most 0.06 pp per fold in E1 and 0.12 pp in E2):**
+
+| Fold | Shrunk TFT + EWC, E1 | Joint TFT, E1 | Gradient boosting, E1 | Linear extrapolation, E1 | Shrunk TFT + EWC, E2 | Joint TFT, E2 | Gradient boosting, E2 |
+|---|---|---|---|---|---|---|---|
+| case1 | 0.97 | 0.41 | 0.38 | 1.54 | 1.44 | 0.87 | 0.92 |
+| case2 | 0.95 | 0.43 | 0.35 | 1.67 | 1.55 | 0.87 | 0.62 |
+| case3 | 1.01 | 0.68 | 0.52 | 1.41 | 1.90 | 1.48 | 0.99 |
+| case4 | 0.78 | 0.29 | 0.29 | 1.31 | 1.36 | 0.72 | 0.50 |
+| case5 | 0.70 | 0.40 | 0.32 | 1.25 | 1.20 | 0.85 | 0.51 |
+| case6 | 0.76 | 0.61 | 0.40 | 0.86 | 1.48 | 1.25 | 0.69 |
+| case7 | 1.37 | 1.18 | 1.49 | 1.58 | 2.55 | 2.35 | 3.13 |
+
+90 % coverage per fold (E1, main), shrunk model: 0.66, 0.76, 0.68, 0.78, 0.78, 0.59 and **0.38** (case7). Conformal extrapolation: 0.84, 0.74, 0.72, 0.78, 0.77, 0.84 and **0.40**.
+
+**Registered primary tests (D21 replication rule; p_Holm < 1e-10 in every cell):**
+
+| Comparison | E1 | E2 |
+|---|---|---|
+| (a) shrunk − linear extrapolation, H+ | −0.122 / −0.116: **replicated, model better** | −0.201 / −0.179: **replicated, model better** |
+| (b) shrunk − linear extrapolation, all origins | −0.448 / −0.427: replicated, model better | −0.680 / −0.647: replicated, model better |
+| (c) shrunk − gradient boosting, all origins | +0.389 / +0.410: **replicated, gradient boosting better** | +0.570 / +0.603: **replicated, gradient boosting better** |
+| (d) shrunk − conformal extrapolation, IS90 | −2.35 / −2.20: replicated, model better | −3.57 / −3.18: replicated, model better |
+
+**Registered coverage check:** mean pooled 90 % coverage 0.661 / 0.655 (E1) and 0.682 / 0.671 (E2), below 0.85, so coverage is **not adequate.**
+
+**Secondary tests (replicated unless stated):**
+- H−: shrunk is better than extrapolation (−2.29 / −2.16 E1, −3.70 / −3.62 E2) and worse than gradient boosting (+1.54 / +1.66, +2.36 / +2.45).
+- Shrunk − raw: +0.040 / +0.045 (E1) and +0.025 / +0.030 (E2), **practically equivalent**.
+- **Raw continual − joint residual TFT: +0.317 / +0.323 (E1) and +0.381 / +0.440 (E2), so the continual model is worse.**
+- IS80, shrunk − conformal extrapolation: −1.49 / −1.40 (E1) and −2.02 / −1.86 (E2), model better.
+
+**Reuse classes (descriptive, D20 cut-points).** Agreement with the measured class, mean over runs (macro-F1 in brackets):
+
+| Method | E1 | E2 |
+|---|---|---|
+| Shrunk | 0.95 (0.81) | 0.94 (0.75) |
+| Joint TFT | 0.97 (0.90) | 0.96 (0.86–0.88) |
+| Gradient boosting | 0.975 (0.91) | 0.968 (0.91) |
+| Linear extrapolation | 0.94 (0.75) | 0.92 (0.66) |
+| Persistence | 0.85 (0.64) | 0.78 (0.50) |
+
+**Shrinkage factors** (median over runs and folds, main / replicate): E1 h1–h3 0.59 / 0.59, 0.76 / 0.72, 0.73 / 0.70; E2 h1 0.24 / 0.27, h2 0.55 / 0.63, h3 0.75 / 0.78, h4 0.89 / 0.86, h5–h6 about 1.00. Mean training time per run (seven folds): 240–350 s.
+
+**Reading.**
+1. **Q1, positive (registered).** On an unseen usage condition, the shrunk residual TFT + EWC is more accurate than linear extrapolation at origins where extrapolation has a fade rate, by 0.12 pp (E1) and 0.18–0.20 pp (E2), replicated. This is the first registered comparison in which the proposed model beats extrapolation. It holds under the tuning disclosure above. The tests are over training randomness, with the seven conditions fixed; with seven conditions from one laboratory, this is not a claim about new conditions in general.
+2. **Q2, negative.** Gradient boosting, a single fit on the same shared inputs, is more accurate than the continual model, replicated, by 0.39–0.41 pp (E1) and 0.57–0.60 pp (E2) on all origins, and also on H−. It is better on six of the seven folds; only on case7 (100 % depth of discharge) is the TFT better.
+3. **Continual learning has a large cost here.** The same residual TFT trained jointly on the six cases is 0.32–0.44 pp better than the continual stream (replicated), close to gradient boosting in E1 (0.568 against 0.535 pp, not tested), and four to eight times more stable across runs. In P2 the continual model never sees the new condition, so it pays the stream's order effects (forgetting of earlier cases) without any benefit from adaptation.
+4. **Shrinkage does not help in P2.** Shrunk and raw are practically equivalent. Shrinkage helps on H+ and hurts on H−, where it pulls the forecast towards extrapolation, which there equals persistence.
+5. **Q3, no registered positive result.** The model's interval score is better than conformal extrapolation's (replicated), but coverage is not adequate: 0.66–0.68 at nominal 90 %, and 0.38 on case7. Extrapolation's intervals, which involve no learned model, also under-cover (0.74–0.76). Calibration on the pooled validation rows of six conditions does not transfer to a seventh. Those rows are mid-life origins (60–80 % of each cell's checks) of conditions the model was trained on, while the test covers every origin of a new condition. D26 does not separate which of these two differences causes the under-coverage.
+6. **Status of the proposed model.** Across D23–D26:
+   - On the continual stream (P1), the shrunk residual TFT + EWC is as accurate as extrapolation.
+   - On unseen conditions (P2), it beats extrapolation but neither gradient boosting nor its own joint-trained form, and its intervals under-cover.
+
+   Interpretations 2–5 beyond the registered verdicts are post hoc.

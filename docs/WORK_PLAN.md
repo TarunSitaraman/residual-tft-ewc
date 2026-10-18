@@ -23,7 +23,7 @@ Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan say
 | WS5 tables and figures | Done from the D24 files (`results/tables/d24_*`, `paper/tables/d24_*`, `paper/figures/d24_*`) |
 | WS6 P2 for new models | Not in tonight's budget |
 | D25 calibrated residual TFT + EWC, residual pretraining | Run 15–16 Oct, all 10 parts finished (`results/forecasting_d25_e1.json`, `..._e2.json`); no registered positive result: the shrunk model is practically equivalent to linear extrapolation, pretraining is worse (E1) or not replicated (E2), intervals under-cover (`docs/RESULTS.md`, D25) |
-| D26 P2 for the residual TFT + EWC, by origin history | Pre-registered 17 Oct (`docs/DECISIONS.md`, D26); code, synthetic-data tests and runbook (`docs/D26_NIGHT_RUN.md`) committed 17 Oct; night run on the ASUS pending |
+| D26 P2 for the residual TFT + EWC, by origin history | Run 17–18 Oct, all 28 parts finished (`results/forecasting_d26_e1.json`, `..._e2.json`): beats linear extrapolation on H+ origins (Q1, replicated); gradient boosting better (Q2, replicated); joint training better than the continual stream (replicated); intervals under-cover, 0.66–0.68 at 90 % (Q3 not met) (`docs/RESULTS.md`, D26) |
 | WS7 paper | D24 added to methods, results, discussion, conclusion and abstract (14 Oct); `paper_single.pdf` rebuilt with tectonic 0.15; **9 pages, one over the 8-page limit** (about half a page of references spills over): cuts still to be chosen |
 
 ## 0. Where we are (audit summary)
@@ -241,5 +241,5 @@ Every extra variant tested on the same data weakens the statistics; reviewers no
 | 6.5.3 | Run log; results committed | ASUS | Done 16 Oct |
 | 6.5.4 | D25 section of `docs/RESULTS.md`; tables and figures (error by horizon with shrinkage, interval score and coverage per task, shrinkage factors) | cloud | Section done 16 Oct; tables and figures pending |
 | 6.5.5 | Paper: one methods paragraph (shrinkage, conformal intervals, residual pretraining), results, limitations | cloud | After 6.5.4 |
-| 6.5.6 | Next (not in D25): P2 for the D25 model and the D24 baselines (WS6.1), the setting where learned models already beat extrapolation | both | Pre-registered as D26; code committed 17 Oct; night run pending |
+| 6.5.6 | Next (not in D25): P2 for the D25 model and the D24 baselines (WS6.1), the setting where learned models already beat extrapolation | both | Done as D26 (residual TFT + EWC only; the D24 backbones were not run, D26 "Not done"); run 17–18 Oct, written up 19 Oct |
 
