@@ -131,6 +131,14 @@ All figures are in `results/figures/`; notebooks 11–13 regenerate them.
 | `13_soh_trajectories.png`, `13_ic_curves.png` | S6 SOH trajectories by test case, and incremental capacity |
 | `13_p1_rmse.png`, `13_tft_ewc_matrix.png` | S6 P1 error by method, and the TFT + EWC error matrix (forgetting) |
 
+The D25–D27 figures are in `paper/figures/`, drawn from the committed results files by `scripts/make_d25_d27_figures.py` (shown in section 7 of `notebooks/colab_review2.ipynb`):
+
+| Figure | Content |
+|---|---|
+| `d25_shrinkage.png` | D25, S6 stream: shrinkage factor of the TFT correction per horizon after the last task (main seeds, median and interquartile range over 50 runs), E1 and E2 (in the paper) |
+| `d26_per_condition.png` | D26: test RMSE per held-out S6 condition for linear extrapolation, gradient boosting, the shrunk residual TFT + EWC and the jointly trained residual TFT (main seeds, mean) |
+| `d27_coverage.png` | D27: coverage of 90 % intervals per held-out condition, by forecaster and calibration rows; the TFT from D26 (main seeds, mean) (in the paper, replacing the D27 table) |
+
 ## Open items (team)
 
 - Dataset card for the HF mirror (S2), a compliance issue.
@@ -508,7 +516,7 @@ Mean 90 % interval width (pp), main / replicate: shrunk scratch model 0.945 / 0.
 **Reading.**
 1. **Q1, no registered positive result.** With shrinkage, the residual TFT + EWC is **as accurate as** linear extrapolation in both experiments (practically equivalent, E1 and E2), not better. Shrinkage removes the D23 model's loss to extrapolation over horizons 1–6 (E2: 0.561 / 0.534 → 0.498 / 0.493 pp; and at h1–h2 the replicated loss of D23 becomes practical equivalence), mainly by scaling the correction down at short horizons (median α 0.28 at h1, 0.66 at h2). Where the correction is kept in full (h4–h6), it does not beat extrapolation either.
 2. **Q2, negative.** Residual pretraining on the first-life pool makes the model worse at horizons 1–3 (+0.22 pp, replicated) and does not help at 1–6 (not replicated). Shrinkage recovers part of the loss (E1: 0.557 → 0.422 pp) by turning the h1 correction down (α 0.27), but the pretrained model stays behind both the scratch model and extrapolation in E1. The pool's linear extrapolation is per day and S6's per cycle (fixed in D25 because the pool has no cycle count), so this result does not separate "first-life data does not transfer" from "the pool's residual target differs from S6's".
-3. **Q3, no registered positive result.** The model's conformal intervals are not better than extrapolation's at 90 % (not replicated in E1, practically equivalent in E2). They are narrower (about 54 % of extrapolation's width in E1, 70 % in E2) and **under-cover**: 0.71–0.82 at nominal 90 % (extrapolation 0.92–0.95). The equal interval scores are a trade of width against misses, not better-calibrated intervals. At 80 % in E2 the model's interval score is better (replicated, secondary family).
+3. **Q3, no registered positive result.** The model's conformal intervals are not better than extrapolation's at 90 % (not replicated in E1, practically equivalent in E2). They are narrower (about 54 % of extrapolation's width in E1, 70 % in E2) and **under-cover**: 0.71–0.81 at nominal 90 % (extrapolation 0.92–0.95). The equal interval scores are a trade of width against misses, not better-calibrated intervals. At 80 % in E2 the model's interval score is better (replicated, secondary family).
 4. **Forgetting** stays at 0.03–0.10 pp for every arm; neither shrinkage nor pretraining changes it (practically equivalent or not replicated).
 5. **Status of the proposed model.** Across D23–D25, no learned model or variant beats linear extrapolation on the S6 continual stream (raw, shrunk, pretrained, SA-EWC, four backbones). The supported claim is equivalence: the shrunk residual TFT + EWC matches extrapolation at every horizon while keeping forgetting at about 0.1 pp. Interpretations 1–3 beyond the registered verdicts are post hoc.
 
