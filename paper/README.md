@@ -1,8 +1,8 @@
 # Paper
 
-IEEE conference paper (`IEEEtran`; 10 pages including references since the D25–D27 update of 19 Oct 2026, above the usual 8-page limit, so trimming is a team decision). The team's draft (title, authors, headings, introduction, related work) is merged with the methods, results and discussion written from the implementation and the committed results. The consolidated results are in `docs/RESULTS.md`.
+IEEE conference paper (`IEEEtran`; 8 pages including references, cut to the usual limit on 19 Oct 2026 after the D25–D27 update). To make room, the framework, Spark-pipeline, P3, ablation and D23 per-horizon figures and the literature table were removed (the files stay in `figures/` and the notebooks), the D27 interval table became `figures/d27_coverage.png`, and the text was condensed. The 8 pages were checked with Tectonic (TeX Gyre Termes, metric-compatible with the Times of pdfLaTeX); the last page is full, so check the page count after any edit. The team's draft (title, authors, headings, introduction, related work) is merged with the methods, results and discussion written from the implementation and the committed results. The consolidated results are in `docs/RESULTS.md`.
 
-**Quick look:** `paper_single.pdf` is the compiled paper with all figures and tables (10 pages; the 19 Oct build used Tectonic 0.15.0), and `paper_single.tex` is the same paper as one LaTeX file (it needs only `references.bib` and `figures/` beside it). Both are generated; after editing the sources, refresh them from the repository root:
+**Quick look:** `paper_single.pdf` is the compiled paper with all figures and tables (8 pages; the 19 Oct build used Tectonic 0.15.0), and `paper_single.tex` is the same paper as one LaTeX file (it needs only `references.bib` and `figures/` beside it). Both are generated; after editing the sources, refresh them from the repository root:
 
 ```bash
 python scripts/flatten_paper.py                       # rewrites paper_single.tex
@@ -23,7 +23,7 @@ On Overleaf: upload the contents of this directory (main.tex, references.bib, se
 
 - `sections/methods.tex`: methodology, written from the implementation and `docs/DECISIONS.md` (D11, D12, D14, D16–D21).
 - `sections/results.tex`: results. Every number comes from committed results files produced on clean commits; the sources are listed at the top of the file.
-- `tables/*.tex` and the notebook figures are **generated** by `scripts/make_results_tables.py`; the `d21_*` and `d23_*` figures by `scripts/make_d21_figures.py`; `figures/framework.png` by `scripts/make_framework_figure.py`. Do not edit them by hand. `tables/hyper.tex`, `horizon.tex` and `tests.tex` are generated but not used in the short version.
+- `tables/*.tex` and the notebook figures are **generated** by `scripts/make_results_tables.py`; the `d21_*` and `d23_*` figures by `scripts/make_d21_figures.py`; the `d25_*`, `d26_*` and `d27_*` figures by `scripts/make_d25_d27_figures.py`; `figures/framework.png` by `scripts/make_framework_figure.py`. Do not edit them by hand. `tables/hyper.tex`, `horizon.tex` and `tests.tex` are generated but not used in the short version.
 - `references.bib`: entries with a DOI were checked against Crossref. For refs 3, 6, 7 and 9 no open abstract could be read, so the related work states only what their titles state; extend those descriptions only after reading the full texts.
 - `\todo{...}` marks what the team still has to decide: repository visibility and code licence. The submitted version must contain no `\todo`.
 

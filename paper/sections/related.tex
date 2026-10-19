@@ -7,43 +7,10 @@
 
 \section{Related Work}
 
-The review covers 2022--2026 studies on second-life lithium-ion batteries, SOH estimation, continual learning and reuse assessment (Table~\ref{tab:literature}).
+The review covers 2022--2026 studies on second-life lithium-ion batteries, SOH estimation, continual learning and reuse assessment.
 
-\emph{SOH estimation for second life.} Braco \textit{et al.} estimated the SOH of second-life cells from partial charging under residential and fast-charging-station profiles, with offline RMSE of about 0.6 and 0.8\% and 85\% less testing time than a full capacity test~\cite{ref1}. In a companion study on six reused Nissan Leaf modules they compared 58 health indicators from incremental-capacity analysis, partial charging, constant-current/constant-voltage stages and internal resistance; the best indicator at repurposing reached about 0.2\% RMSE, but the most useful indicators changed as ageing progressed~\cite{ref2}. Faraji-Niri \textit{et al.} accelerated second-life SOH estimation with electrochemical impedance spectroscopy (EIS) and machine learning~\cite{ref3}; EIS is fast and non-destructive but sensitive to temperature, state of charge and equipment. Takahashi \textit{et al.} screened batteries for second life with statistical current and voltage features and bagged Gaussian process regression, with root-mean-squared percent error below 1.48\% in the worst cases~\cite{ref4}. Cui \textit{et al.} tested retired Nissan Leaf cells for more than 15 months under grid-storage-like operation and estimated health online with clustering, with mean absolute percentage error below 2.3\%~\cite{ref5}. Vignesh \textit{et al.} reviewed SOH estimation methods for second-life batteries and their challenges~\cite{ref6}. These studies estimate the \emph{current} SOH of a fixed population; none adapts a model as new, different populations arrive.
+\emph{SOH estimation for second life.} Braco \textit{et al.} estimated the SOH of second-life cells from partial charging under residential and fast-charging-station profiles, with offline RMSE of about 0.6 and 0.8\% and 85\% less testing time than a full capacity test~\cite{ref1}. On reused Nissan Leaf modules they compared 58 health indicators; the best reached about 0.2\% RMSE at repurposing, but the most useful indicators changed as ageing progressed~\cite{ref2}. Faraji-Niri \textit{et al.} accelerated second-life SOH estimation with impedance spectroscopy and machine learning~\cite{ref3}. Takahashi \textit{et al.} screened batteries for second life with statistical current and voltage features and bagged Gaussian process regression, with root-mean-squared percent error below 1.48\% in the worst cases~\cite{ref4}. Cui \textit{et al.} tested retired Nissan Leaf cells for more than 15 months under grid-storage-like operation and estimated health online with clustering, with mean absolute percentage error below 2.3\%~\cite{ref5}. Vignesh \textit{et al.} reviewed SOH estimation methods for second-life batteries and their challenges~\cite{ref6}. These studies estimate the \emph{current} SOH of a fixed population; none adapts a model as new, different populations arrive.
 
-\emph{Continual learning and generalisation.} Lee \textit{et al.} applied bilevel-optimised continual learning to predict the capacity degradation of lithium-ion batteries~\cite{ref7}. Yao \textit{et al.} used progressive neural networks with temporal convolutional networks for online state-of-charge estimation across three public drive-cycle datasets, explicitly addressing catastrophic forgetting and task order~\cite{ref8}; the target, however, is state of charge, not SOH or reuse. Li \textit{et al.} proposed domain-generalised SOH estimation for second-life EV batteries~\cite{ref9}, and Meskine \textit{et al.} compared BiLSTM, TCN and probabilistic TCN-GPR models on sparse, noisy data, where isotonic recalibration substantially reduced the calibration error~\cite{ref10}. Transfer and domain generalisation do not by themselves address a long sequence of tasks with explicit retention.
-
-\begin{table}[t]
-\caption{Summary of Reviewed Literature}
-\label{tab:literature}
-\centering
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{|p{1.45cm}|p{2.45cm}|p{2.6cm}|}
-\hline
-\textbf{Study} & \textbf{Methodology} & \textbf{Main Challenge} \\
-\hline
-Braco 2022 \cite{ref1} & Partial-charge / real-profile SOH & Depends on charging profile \\
-\hline
-Braco 2022 \cite{ref2} & Health-indicator selection & Indicators change with ageing \\
-\hline
-Faraji-Niri 2023 \cite{ref3} & EIS + machine learning & Measurement conditions \\
-\hline
-Takahashi 2023 \cite{ref4} & Features + bagged GPR & Feature/data quality \\
-\hline
-Cui 2024 \cite{ref5} & Online ML + clustering & Limited experimental population \\
-\hline
-Vignesh 2024 \cite{ref6} & SOH methods review & No single adaptive model \\
-\hline
-Lee 2024 \cite{ref7} & Bilevel-optimised CL & Adaptation versus retention \\
-\hline
-Yao 2025 \cite{ref8} & PNN + TCN continual learning & Focused on SOC \\
-\hline
-Li 2025 \cite{ref9} & Domain generalisation & Not continual learning \\
-\hline
-Meskine 2026 \cite{ref10} & BiLSTM/TCN + probabilistic model & Sparse/noisy data \\
-\hline
-\end{tabular}
-\end{table}
+\emph{Continual learning and generalisation.} Lee \textit{et al.} applied bilevel-optimised continual learning to predict the capacity degradation of lithium-ion batteries~\cite{ref7}. Yao \textit{et al.} used progressive neural networks with temporal convolutional networks for online state-of-charge estimation across three drive-cycle datasets, addressing catastrophic forgetting and task order~\cite{ref8}. Li \textit{et al.} proposed domain-generalised SOH estimation for second-life EV batteries~\cite{ref9}, and Meskine \textit{et al.} compared BiLSTM, TCN and probabilistic TCN-GPR models on sparse, noisy data, where isotonic recalibration substantially reduced the calibration error~\cite{ref10}. Transfer and domain generalisation do not by themselves address a long sequence of tasks with explicit retention.
 
 \emph{Research gap.} Second-life SOH estimation, screening, transfer learning and degradation prediction have progressed largely separately; continual learning is rarely combined with heterogeneous second-life SOH forecasting, an explicit reuse decision and an evaluation of forgetting. This work asks whether a continual learner can learn heterogeneous second-life populations in sequence while retaining earlier ones, and whether its forecasts support reuse decisions.
