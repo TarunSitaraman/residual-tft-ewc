@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -76,6 +77,7 @@ def main() -> int:
     if args.out:
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(text, encoding="utf-8")
+    sys.stdout.reconfigure(encoding="utf-8")       # the Windows console code page cannot print "–" or "−"
     print(text)
     return 0
 
