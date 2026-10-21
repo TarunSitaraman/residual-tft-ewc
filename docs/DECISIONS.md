@@ -919,3 +919,53 @@ Per experiment, 7 × (1 + 6) = 49 gradient-boosting fits on at most about 4,000 
 - **19 Oct 2026. Pre-registered** after the D26 results; no D27 code written or run.
 - **19 Oct 2026. Code committed** (`494b36f`) after a test on synthetic data only (pytest temporary directory): `scripts/run_d27.py`, `tests/test_d27.py`. Nothing under `src/` changed. Implementation choices fixed with the code: the S6 frame, features and cases are built as in D26 (`p3.s6_samples`, `p3.SHARED_FEATURES`); each fit uses the row order of the D26 comparator (`FC.leave_one_out_task`, train and test splits then validation split); validation rows for LIN-val come from `FC.assign_split` of each training case, as in D26; the Q2 test is `scipy.stats.wilcoxon(..., method="exact")`, two-sided. Full test suite: 185 passed with a UTF-8 console; without it, the D25 summary test fails on the Windows code page (the known D25 summary console error; no results affected).
 - **19 Oct 2026. Run** on the ASUS from `494b36f` (clean tree; pre-flight passed; no override) in the pinned environment (the existing `.venv`: Python 3.11.15, numpy 2.4.6, pandas 3.0.6, scikit-learn 1.9.1, scipy 1.17.1): `python scripts/run_d27.py --exp e1`, then `--exp e2`, each run once. Reproduction checks passed in both experiments (max abs diff 0: the D26 gradient-boosting per-fold RMSE and the D26 extrapolation interval metrics are reproduced exactly). No half-width was undersized. Outputs: `results/forecasting_d27_e1.json`, `..._e2.json`.
+
+## D28. Continual calibration and refit on an unseen usage condition as its checks arrive (P2) (pre-registered)
+
+**Status:** Written 21 Oct 2026 on the instruction of T. Sitaraman, **after** the D27 results (`docs/RESULTS.md`, D27). This commit is the binding pre-registration; it precedes any D28 code. Code: `scripts/run_d28.py`, `tests/test_d28.py`. Results will go to `results/forecasting_d28_e1.json` and `results/forecasting_d28_e2.json`.
+
+**Provenance (must be stated).** The motivation is post hoc, from D27 and a literature search made after it:
+- Gradient boosting with leave-one-condition-out (LOCO) calibration covers 0.90 pooled over the seven S6 conditions, but only 0.48 (E1) and 0.38 (E2) on case7 (100 % depth of discharge, outside the range of the other conditions); its interval score there is five to nine times that of any other fold. The pooled guarantee hides a population for which neither forecast nor interval can be trusted.
+- In deployment the checks of a new population arrive over time. Online conformal methods keep coverage under distribution shift by updating the interval from the errors observed so far: adaptive conformal inference (Gibbs and Candès, NeurIPS 2021) and its quantile-tracking form (Angelopoulos, Candès and Tibshirani, "Conformal PID control for time series prediction", NeurIPS 2023). The search found no battery application of either.
+- D23–D27 found that continual learning of network weights did not pay off when earlier data can be stored. D28 tests continual updating of what is cheap and cannot forget: the calibration of the interval and a refit of the forecaster with the new population's observed targets.
+
+Known before this pre-registration: every D27 quantity (per fold and pooled) and the D26 point errors of every comparator. **Not computed for any arm below except STATIC:** any online interval, any refit with held-out-case samples.
+
+**Questions.**
+- Q1 (primary): With continual calibration and refit, do 90 % intervals on case7 reach adequate coverage?
+- Q2: Do they hold on every condition, not only pooled?
+- Q3: Does refitting with the new condition's observed targets lower the point error?
+- Q4: Is the interval score better than that of the D27 static intervals?
+
+### Setup (fixed here)
+- **Data, inputs, horizons, label, folds, forecaster:** as D27 (S6 samples, D21 shared inputs, E1 = horizons 1–3, E2 = 1–6, SOH relative to the first valid check; leave one of the seven test cases out; gradient boosting exactly as the D26/D27 comparator, fixed settings, seed 0, deterministic). Every sample of the held-out case is a test sample and is scored, as in D27.
+- **Arrival of the held-out case (no look-ahead).** A sample is *issued* at its origin check time t (`Cycle_Date`) and *matures* at its target check time m = t + `days_to_target`. When a sample is issued, the only held-out-case samples known are those with m ≤ t (their targets observed). Samples are processed in order of issue time; ties keep the frame order.
+- **Arms:**
+  - **STATIC (D27 GBM-LOCO):** the six-case fit and the LOCO half-widths q0_h (per horizon and level). Must reproduce D27.
+  - **TRACK (continual calibration):** centre as STATIC. Per horizon h and level 1 − a, the half-width starts at q0_h; whenever a held-out-case sample of horizon h matures (in order of m, ties in issue order), q_h ← max(0, q_h + η_h (e − a)), where e = 1 if that sample's target lay outside the interval issued for it (quantile tracking, Angelopoulos et al. 2023). Step η_h = c · q0_h.
+  - **REFIT (continual refit):** at issue time t, gradient boosting with the same settings fitted on the six training cases (D27 row order) followed by the held-out-case samples matured by t; refitted whenever that set changes; with none matured, the STATIC forecast. Half-widths static q0_h.
+  - **REFIT+TRACK (proposed):** REFIT centre and TRACK half-widths (errors e measured on the REFIT intervals issued).
+- **Step size c (chosen without the held-out case).** Grid c ∈ {0.01, 0.02, 0.05, 0.1, 0.2, 0.5}. For each fold, each of the six training cases j is treated as a pseudo-held-out case: centre = D27's inner LOCO forecast for j (fitted on the other five training cases), q0 = half-widths from the LOCO residuals of the other five training cases, and TRACK is run over j's samples. The c with the lowest mean 90 % interval score over the six pseudo-folds is used for that fold (ties: smaller c), at both levels and for both TRACK arms.
+- **Metrics:** as D27: per fold coverage, width and interval score at 90 % and 80 %, on all origins, H+ and H−; pooled coverage over the seven folds; RMSE per fold; reuse decision support (share of 90 % intervals within one reuse class, class agreement among them).
+- **Reproduction check (stop condition):** STATIC must reproduce the D27 GBM-LOCO per-fold coverage and interval score at 90 % and 80 %, and the D27 per-fold gradient-boosting RMSE, to 1e-9. If not, no results file is written.
+- **Pinned environment** and a clean tree, as D27.
+
+### Tests (fixed here)
+Deterministic forecasters: requiring a result in both E1 and E2 replaces the seed replication rule (E1 and E2 are not independent; stated with every result). The unit of comparison is the held-out condition (seven folds); two-sided exact Wilcoxon signed-rank tests, smallest attainable p 0.016.
+- **Q1, positive** if the 90 % coverage of REFIT+TRACK on case7 is at least 0.80 in both E1 and E2.
+- **Q2, positive** if REFIT+TRACK reaches pooled 90 % coverage of at least 0.85 and a per-condition minimum of at least 0.80, in both E1 and E2.
+- **Q3, positive** if the per-fold RMSE of REFIT is lower than that of STATIC with p < 0.05 and a mean difference of at least 0.05 pp, in both E1 and E2; negative if the same holds in the other direction; otherwise not established. Case7 RMSE is reported with it.
+- **Q4, positive** if the per-fold 90 % interval score of REFIT+TRACK is lower than that of STATIC with p < 0.05 and a mean difference of at least 0.05 pp, in both E1 and E2; negative and not established as for Q3.
+- **Secondary (descriptive):** TRACK and REFIT alone (attribution), 80 % results, H+/H− strata, the selected c per fold, reuse decision support.
+- Every outcome is reported, including null and negative ones; nothing is re-run to change one.
+
+### Compute
+Per experiment and fold, one gradient-boosting refit per distinct set of matured samples (at most about 200 per case) plus the D27 fits; tens of minutes on one CPU thread in all. Run with `python scripts/run_d28.py --exp e1` and `--exp e2`.
+
+### Not done, with reasons
+- **The TFT models:** not the most accurate P2 model (D26), and an online refit of a continual TFT at every check would take nights; whether continual calibration and refit work is answered by the deterministic forecaster.
+- **Adaptive conformal inference on the quantile level (Gibbs and Candès 2021):** with a few hundred calibration residuals per horizon, a level beyond the sample's range cannot widen the interval further; quantile tracking acts on the half-width directly.
+- **Tuning gradient boosting:** fixed settings, as D27.
+
+### Run log
+- **21 Oct 2026. Pre-registered** after the D27 results; no D28 code written or run.
