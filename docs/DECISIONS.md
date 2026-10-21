@@ -971,3 +971,51 @@ Per experiment and fold, one gradient-boosting refit per distinct set of matured
 - **21 Oct 2026. Pre-registered** after the D27 results; no D28 code written or run.
 - **21 Oct 2026. Code committed** (`161c01f`) after a test on synthetic data only (pytest temporary directory): `scripts/run_d28.py`, `tests/test_d28.py`. Nothing under `src/` changed. Implementation choices fixed with the code: refits use the gradient boosting of `FC._gbm(0)` on the observed shared inputs (tested equal to the D27 comparator on the same rows); matured held-out samples are appended to the D27 fit rows in frame order; maturity is the origin check time plus `days_to_target`. Full test suite: 187 passed.
 - **21 Oct 2026. Run** from `161c01f` (clean tree; pre-flight passed; no override) in the pinned environment: `python scripts/run_d28.py --exp e1`, then `--exp e2`, each run once. Reproduction check passed in both (max abs diff 0). Outputs: `results/forecasting_d28_e1.json`, `..._e2.json`. Results: `docs/RESULTS.md`, D28 (Q1 and Q2 negative, Q3 not established, Q4 positive).
+
+## D29. Physics-structured Bayesian forecaster with a learned residual on unseen usage conditions (P2) (pre-registered)
+
+**Status:** Written 21 Oct 2026 on the instruction of T. Sitaraman, **after** the D28 results (`docs/RESULTS.md`, D28). This commit is the binding pre-registration; it precedes any D29 code. Code: `scripts/run_d29.py`, `tests/test_d29.py`. Results will go to `results/forecasting_d29_e1.json` and `results/forecasting_d29_e2.json`.
+
+**Provenance (must be stated).** Post hoc, from D23–D28 and an inspection of the S6 conditions made after D28:
+- With case7 held out, every training condition runs at 70 % depth of discharge (DoD) and case7 at 100 %, so DoD is constant in training: its effect cannot be learned from S6, and a tree model cannot extrapolate in it. Case7 coverage stayed at 0.38–0.72 in D27–D28.
+- EWC approximates sequential Bayesian updating (Laplace); on a model with few parameters the exact update is cheap and needs no stored data.
+- Inspected before writing: the S6 sample frame (first check at cycle 0 with SOH 100 for every cell; per-condition settings). Not computed: any quantity of the model below.
+
+**Questions.**
+- Q1 (primary): Do the HYBRID-LOCO 90 % intervals cover case7 adequately?
+- Q2: Is HYBRID-LOCO more accurate than the D27 gradient boosting?
+- Q3: Does HYBRID-LOCO have a better 90 % interval score than D28 REFIT+TRACK?
+- Q4 (descriptive): Does the throughput clock matter on case7?
+- Q5 (descriptive): Do the uncalibrated Bayesian intervals cover?
+
+### Setup (fixed here)
+- **Data, horizons, label, folds, arrival:** as D27/D28 (S6 samples, E1 = horizons 1–3, E2 = 1–6, leave one of the seven test cases out; every held-out sample scored).
+- **Clock:** equivalent full cycles E = cycle × DoD (cycle = the check's cycle count; target cycle = origin cycle + `cycles_to_target`). Capacity fade's effect on throughput per cycle is ignored (stated limitation).
+- **Ageing law (mean):** for cell b, SOH(E) = 100 − a_b · E^z, a semi-empirical power law of throughput as used for graphite–LFP cells. The exponent z is shared: chosen on the training conditions by profile least squares over z ∈ {0.30, 0.35, …, 1.50} (each training cell's a fitted by least squares on all its valid checks; total squared error minimised).
+- **Hierarchical prior:** a_b ~ N(μ, τ²) with μ and τ² the mean and variance of the training cells' fitted a; observation noise σ² = pooled residual variance of those fits (n − 1 degrees of freedom per cell).
+- **Sequential Bayesian update:** at an origin of a held-out cell, the posterior of a_b is the conjugate Gaussian update of the prior with that cell's checks at or before the origin cycle (no other held-out data). Forecast Δ̂ = −â (x_t − x_o), x = E^z; predictive variance v = (x_t − x_o)² Var(a) + 2σ².
+- **Arms:**
+  - **PHYS-BAYES:** physics centre, interval ± Φ⁻¹((1 + level)/2) √v (no calibration).
+  - **PHYS-LOCO:** physics centre, per-horizon split-conformal half-widths from leave-one-condition-out residuals of the six training cases (each predicted with z, μ, τ², σ² refitted on the other five), `conformal_halfwidth` unchanged.
+  - **HYBRID-LOCO (proposed):** physics centre plus a gradient boosting (D27 settings, shared inputs, seed 0) fitted on the six training cases to the residual Δ − physics centre; LOCO half-widths as PHYS-LOCO, each inner case predicted by physics and residual model refitted on the other five.
+  - **PHYS-CYC-LOCO (Q4):** as PHYS-LOCO with E = cycle (DoD ignored).
+- **Comparators (read from committed files, per fold):** D27 GBM-LOCO and D28 REFIT+TRACK.
+- **Reproduction check (stop condition):** the D27 gradient boosting, recomputed in the script, must reproduce the D27 per-fold RMSE to 1e-9.
+- **Metrics:** as D27/D28 (coverage, width, interval score at 90 % and 80 %; RMSE; reuse decision support).
+
+### Tests (fixed here)
+Deterministic: a result must hold in both E1 and E2 (not independent; stated). Seven folds, two-sided exact Wilcoxon, smallest p 0.016; a direction needs p < 0.05 and |mean difference| ≥ 0.05 pp.
+- **Q1, positive** if HYBRID-LOCO 90 % coverage on case7 ≥ 0.80 in both E1 and E2.
+- **Q2, positive** if HYBRID-LOCO per-fold RMSE is lower than D27 gradient boosting in both; negative in the other direction; otherwise not established.
+- **Q3, positive** if HYBRID-LOCO per-fold IS90 is lower than D28 REFIT+TRACK in both; negative and not established as Q2.
+- **Q4 (descriptive):** case7 RMSE of PHYS-LOCO against PHYS-CYC-LOCO.
+- **Q5 (descriptive):** pooled and per-fold coverage of PHYS-BAYES.
+- Every outcome is reported; nothing is re-run to change one.
+
+### Not done, with reasons
+- **A DoD prior from the first-life pool (S7–S9):** mapping their protocols onto a DoD stress factor is a separate study; here the throughput clock is the only physical DoD effect.
+- **Refit and tracking on top of HYBRID:** the physics part already updates at every check; combining with D28 is left until HYBRID is known to help.
+- **Foundation models (Chronos-2, TimesFM):** not installed in the pinned environment; a separate decision.
+
+### Run log
+- **21 Oct 2026. Pre-registered** after the D28 results; no D29 code written or run.
