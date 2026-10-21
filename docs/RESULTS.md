@@ -697,3 +697,34 @@ At 80 %, pooled coverage of REFIT+TRACK is 0.809 (E1) and 0.797 (E2).
 |---|---|
 | `d28_per_condition.png` | 90 % coverage and 90 % interval score (log scale) per held-out condition for STATIC, TRACK, REFIT and REFIT+TRACK, E1 and E2 |
 | `d28_case7_timeline.png` | Case7 held out (E1, horizon 1): absolute error of the static and refitted forecasts and the 90 % half-widths of STATIC and REFIT+TRACK over the check dates |
+
+## D29: physics-structured Bayesian forecaster with a learned residual on unseen conditions (21 Oct 2026)
+
+Results files: `results/forecasting_d29_e1.json` (horizons 1–3) and `results/forecasting_d29_e2.json` (horizons 1–6), run at commit `f2fdd73` (clean checkout of that commit, `git_dirty` false, no override; the main working copy had notebook outputs from a local session, so the run used a separate worktree with the same data and environment). Protocol fixed in D29 before any code (`64f85fe`). **Reproduction check passed:** the recomputed D27 gradient boosting reproduces the D27 per-fold RMSE exactly (max abs diff 0). Setting as D27/D28. The fitted exponent z is 0.80–0.85 in every fold.
+
+**90 % intervals, pooled coverage (H+ / H−), mean IS90 (pp), mean width (pp) and mean RMSE over folds (pp); comparators from the committed D27 and D28 files:**
+
+| Arm | E1 cov90 (H+ / H−) | E1 IS90 | E1 width | E1 RMSE | E2 cov90 (H+ / H−) | E2 IS90 | E2 width | E2 RMSE |
+|---|---|---|---|---|---|---|---|---|
+| PHYS-BAYES (uncalibrated) | 0.992 (0.991 / 1.000) | 8.02 | 7.69 | 0.872 | 0.973 (0.972 / 1.000) | 9.27 | 7.74 | 1.391 |
+| PHYS-LOCO | 0.892 (0.907 / 0.608) | 4.22 | 2.31 | 0.872 | 0.894 (0.900 / 0.779) | 6.82 | 3.60 | 1.391 |
+| **HYBRID-LOCO** | 0.898 (0.904 / 0.775) | 3.24 | 1.83 | 0.581 | 0.905 (0.911 / 0.796) | 5.77 | 3.05 | 1.016 |
+| PHYS-CYC-LOCO | 0.893 (0.905 / 0.667) | 4.34 | 2.45 | 0.902 | 0.889 (0.894 / 0.792) | 7.27 | 3.89 | 1.478 |
+| *D27 GBM-LOCO* | *0.902* | *3.22* | *1.57* | *0.535* | *0.896* | *6.67* | *2.94* | *1.051* |
+| *D28 REFIT+TRACK* | *0.914* | *2.29* | *1.35* | *0.458* | *0.902* | *4.74* | *2.46* | *0.898* |
+
+**Case7, 90 %:** HYBRID-LOCO coverage 0.58 (E1) and 0.54 (E2); PHYS-BAYES 0.93 and 0.80 (at a mean width of about 7.7 pp over all folds). Case7 RMSE: HYBRID 1.38 / 2.63 pp, PHYS (throughput clock) 1.79 / 3.11, PHYS-CYC 1.85 / 3.25, D27 gradient boosting 1.49 / 3.13, D28 refit 1.08 / 2.49.
+
+**Registered results:**
+
+| Question | E1 | E2 | Verdict |
+|---|---|---|---|
+| Q1 (primary): HYBRID-LOCO case7 coverage ≥ 0.80 | 0.58 | 0.54 | **negative** |
+| Q2: HYBRID-LOCO − D27 GBM, RMSE | +0.046 pp, 2/7 folds better, p = 0.30 | −0.035 pp, 3/7, p = 1.00 | **not established** |
+| Q3: HYBRID-LOCO − D28 REFIT+TRACK, IS90 | +0.95 pp, 0/7 better, p = 0.016 | +1.03 pp, 1/7, p = 0.031 | **negative** (D28 better) |
+
+**Reading.**
+1. **The proposed physics-structured model does not improve on gradient boosting, and D28 is better than it** (Q2 not established, Q3 negative in both experiments). A single power law of throughput explains SOH far worse than gradient boosting (RMSE 0.87 against 0.54 pp in E1); the learned residual recovers most of the gap (0.58 pp) but not all.
+2. **Case7 is not fixed (Q1 negative).** The throughput clock lowers case7 error only slightly relative to a cycle clock (1.79 against 1.85 pp, 3.11 against 3.25 pp, Q4): counting the extra charge of a 100 % cycle is not enough to describe the faster fade at 100 % DoD. The hybrid improves case7 error over D27 (1.38 against 1.49, 2.63 against 3.13 pp) but less than the D28 refit (1.08, 2.49).
+3. **Uncalibrated Bayesian intervals cover case7 but are uninformative (Q5).** PHYS-BAYES is the only rule in D26–D29 that covers case7 at 0.80 or more (0.93, 0.80), but its intervals are wide everywhere (pooled coverage 0.97–0.99, width about 7.7 pp, IS90 8–9 pp, worse than every calibrated rule). The model's posterior uncertainty does not single out the out-of-range condition.
+4. **Conclusion for the study:** of D23–D29, the best unseen-condition method remains gradient boosting with leave-one-condition-out intervals, refitted and tracked as the new condition's checks arrive (D28). A physical DoD effect would need prior information from data that vary DoD (not done; D29 "Not done").

@@ -1,0 +1,2053 @@
+{
+  "generated_utc": "2026-10-21T11:23:01+00:00",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.1+cpu",
+    "git_commit": "f2fdd731cb8d9022eb3702636db282118c24d5e2",
+    "git_dirty": false
+  },
+  "decision": "D29",
+  "experiment": "e1",
+  "horizons": [
+    1,
+    2,
+    3
+  ],
+  "n_samples": 2409,
+  "features": [
+    "soh_origin",
+    "fade_rate_pp_per_day",
+    "horizon",
+    "days_since_first",
+    "days_to_target",
+    "cycles_since_first",
+    "cycles_to_target",
+    "temp_c",
+    "charge_c_rate",
+    "discharge_c_rate",
+    "dod",
+    "v_charge_max",
+    "cv_charge",
+    "calendar",
+    "rest_soc",
+    "chem_NMC",
+    "chem_NCA",
+    "chem_NMC_NCA",
+    "chem_LFP"
+  ],
+  "folds": [
+    "case1",
+    "case2",
+    "case3",
+    "case4",
+    "case5",
+    "case6",
+    "case7"
+  ],
+  "z_grid": [
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    1.0,
+    1.05,
+    1.1,
+    1.15,
+    1.2,
+    1.25,
+    1.3,
+    1.35,
+    1.4,
+    1.45,
+    1.5
+  ],
+  "overrides": {
+    "allow_dirty": false,
+    "allow_unpinned": false
+  },
+  "reproduction_check": {
+    "abs_diff_per_fold": {
+      "case1": 0.0,
+      "case2": 0.0,
+      "case3": 0.0,
+      "case4": 0.0,
+      "case5": 0.0,
+      "case6": 0.0,
+      "case7": 0.0
+    },
+    "max_abs_diff": 0.0,
+    "passed": true
+  },
+  "questions": {
+    "q1_case7_coverage": 0.5773195876288659,
+    "q1_threshold": 0.8,
+    "q2_rmse_hybrid_vs_d27_gbm": {
+      "mean_diff": 0.04573417890770286,
+      "per_fold": {
+        "case1": 0.059028237452399934,
+        "case2": 0.038408922591152195,
+        "case3": -0.05508593082498803,
+        "case4": 0.08568674330094161,
+        "case5": 0.14054437560940325,
+        "case6": 0.16051777393103772,
+        "case7": -0.1089608697060267
+      },
+      "n_better": 2,
+      "p_value": 0.296875,
+      "verdict": "not established"
+    },
+    "q3_is90_hybrid_vs_d28_refit_track": {
+      "mean_diff": 0.9515714066250632,
+      "per_fold": {
+        "case1": 0.38188648677072834,
+        "case2": 0.3434343833507063,
+        "case3": 0.06877643745938533,
+        "case4": 0.7986493231041025,
+        "case5": 0.6482337780272125,
+        "case6": 1.2159716394930138,
+        "case7": 3.2040477981702944
+      },
+      "n_better": 0,
+      "p_value": 0.015625,
+      "verdict": "negative"
+    },
+    "q4_case7_rmse": {
+      "phys_efc": 1.7919352676110047,
+      "phys_cycles": 1.8464643506570608,
+      "d27_gbm": 1.488624602808895,
+      "d28_refit": 1.0845142462611574
+    },
+    "q5_phys_bayes_coverage": {
+      "pooled": 0.991697799916978,
+      "per_fold": {
+        "case1": 1.0,
+        "case2": 1.0,
+        "case3": 1.0,
+        "case4": 1.0,
+        "case5": 1.0,
+        "case6": 1.0,
+        "case7": 0.9312714776632303
+      }
+    },
+    "comparators_is90": {
+      "d27_gbm_loco": 3.2190299711784354,
+      "d28_refit_track": 2.292620492249969
+    }
+  },
+  "summary": {
+    "phys_bayes": {
+      "90": {
+        "coverage_pooled": 0.991697799916978,
+        "interval_score": 8.015057598959487,
+        "width": 7.685461535177834,
+        "coverage_per_fold": {
+          "case1": 1.0,
+          "case2": 1.0,
+          "case3": 1.0,
+          "case4": 1.0,
+          "case5": 1.0,
+          "case6": 1.0,
+          "case7": 0.9312714776632303
+        },
+        "interval_score_per_fold": {
+          "case1": 8.018369298536214,
+          "case2": 8.168425006534791,
+          "case3": 7.891756570236046,
+          "case4": 8.024270454880273,
+          "case5": 8.113815143349601,
+          "case6": 7.086240055943891,
+          "case7": 8.8025266632356
+        },
+        "decided_share": 0.6621350432431664,
+        "decided_agreement": 1.0,
+        "coverage_pooled_hplus": 0.9912625600698995,
+        "coverage_pooled_hminus": 1.0,
+        "coverage_min": 0.9312714776632303,
+        "coverage_min_case": "case7"
+      },
+      "80": {
+        "coverage_pooled": 0.9846409298464093,
+        "interval_score": 6.26034819126605,
+        "width": 5.987958503392439,
+        "coverage_per_fold": {
+          "case1": 1.0,
+          "case2": 1.0,
+          "case3": 1.0,
+          "case4": 1.0,
+          "case5": 1.0,
+          "case6": 1.0,
+          "case7": 0.872852233676976
+        },
+        "interval_score_per_fold": {
+          "case1": 6.247336273136367,
+          "case2": 6.364248881257546,
+          "case3": 6.148688747598373,
+          "case4": 6.251934029451783,
+          "case5": 6.321700806150786,
+          "case6": 5.521088252910955,
+          "case7": 6.967440348356538
+        },
+        "decided_share": 0.7139703167976782,
+        "decided_agreement": 1.0,
+        "coverage_pooled_hplus": 0.9838357361293141,
+        "coverage_pooled_hminus": 1.0,
+        "coverage_min": 0.872852233676976,
+        "coverage_min_case": "case7"
+      }
+    },
+    "phys_loco": {
+      "90": {
+        "coverage_pooled": 0.892071398920714,
+        "interval_score": 4.221386434169321,
+        "width": 2.307555863896131,
+        "coverage_per_fold": {
+          "case1": 0.9390681003584229,
+          "case2": 0.9326241134751773,
+          "case3": 0.9653679653679653,
+          "case4": 0.9457364341085271,
+          "case5": 0.9752066115702479,
+          "case6": 0.8958333333333334,
+          "case7": 0.5670103092783505
+        },
+        "interval_score_per_fold": {
+          "case1": 2.77070501106211,
+          "case2": 3.0702937194273656,
+          "case3": 2.873346403200118,
+          "case4": 2.625310843748042,
+          "case5": 2.6551832167993337,
+          "case6": 2.924797023000029,
+          "case7": 12.63006882194825
+        },
+        "decided_share": 0.8826165090065164,
+        "decided_agreement": 0.9947661841067309,
+        "coverage_pooled_hplus": 0.9069462647444299,
+        "coverage_pooled_hminus": 0.6083333333333333,
+        "coverage_min": 0.5670103092783505,
+        "coverage_min_case": "case7"
+      },
+      "80": {
+        "coverage_pooled": 0.7828974678289746,
+        "interval_score": 3.12688809112846,
+        "width": 1.7912402695744798,
+        "coverage_per_fold": {
+          "case1": 0.8315412186379928,
+          "case2": 0.8652482269503546,
+          "case3": 0.7835497835497836,
+          "case4": 0.8062015503875969,
+          "case5": 0.8980716253443526,
+          "case6": 0.8038194444444444,
+          "case7": 0.43986254295532645
+        },
+        "interval_score_per_fold": {
+          "case1": 2.324370243339332,
+          "case2": 2.4483688606051928,
+          "case3": 2.3659880779709996,
+          "case4": 2.2714187744228695,
+          "case5": 2.1495374571659975,
+          "case6": 2.428407665111563,
+          "case7": 7.900125559283263
+        },
+        "decided_share": 0.9097999859689615,
+        "decided_agreement": 0.9897649340643949,
+        "coverage_pooled_hplus": 0.8012232415902141,
+        "coverage_pooled_hminus": 0.43333333333333335,
+        "coverage_min": 0.43986254295532645,
+        "coverage_min_case": "case7"
+      }
+    },
+    "hybrid_loco": {
+      "90": {
+        "coverage_pooled": 0.8978829389788294,
+        "interval_score": 3.2441918988750325,
+        "width": 1.8259757511887176,
+        "coverage_per_fold": {
+          "case1": 0.989247311827957,
+          "case2": 0.9716312056737588,
+          "case3": 0.9393939393939394,
+          "case4": 0.9870801033591732,
+          "case5": 0.9338842975206612,
+          "case6": 0.8802083333333334,
+          "case7": 0.5773195876288659
+        },
+        "interval_score_per_fold": {
+          "case1": 2.0111043049515307,
+          "case2": 2.152477236602846,
+          "case3": 2.2286557985320266,
+          "case4": 2.134928004543139,
+          "case5": 2.1095293403485336,
+          "case6": 2.502093690992961,
+          "case7": 9.570554916154189
+        },
+        "decided_share": 0.9081864965369582,
+        "decided_agreement": 0.9947958234790776,
+        "coverage_pooled_hplus": 0.9043250327653998,
+        "coverage_pooled_hminus": 0.775,
+        "coverage_min": 0.5773195876288659,
+        "coverage_min_case": "case7"
+      },
+      "80": {
+        "coverage_pooled": 0.813200498132005,
+        "interval_score": 2.2976951259246863,
+        "width": 1.2322501719234418,
+        "coverage_per_fold": {
+          "case1": 0.8709677419354839,
+          "case2": 0.925531914893617,
+          "case3": 0.8484848484848485,
+          "case4": 0.9405684754521964,
+          "case5": 0.8457300275482094,
+          "case6": 0.7899305555555556,
+          "case7": 0.4570446735395189
+        },
+        "interval_score_per_fold": {
+          "case1": 1.4989078794361856,
+          "case2": 1.5315900506804325,
+          "case3": 1.7164310969088572,
+          "case4": 1.4722754720366176,
+          "case5": 1.6773263677886614,
+          "case6": 2.0192520360203137,
+          "case7": 6.168082978601735
+        },
+        "decided_share": 0.9374716105556742,
+        "decided_agreement": 0.9922107566020392,
+        "coverage_pooled_hplus": 0.8269986893840104,
+        "coverage_pooled_hminus": 0.55,
+        "coverage_min": 0.4570446735395189,
+        "coverage_min_case": "case7"
+      }
+    },
+    "phys_cyc_loco": {
+      "90": {
+        "coverage_pooled": 0.8929016189290162,
+        "interval_score": 4.343987502218678,
+        "width": 2.4456262693110706,
+        "coverage_per_fold": {
+          "case1": 0.931899641577061,
+          "case2": 0.9148936170212766,
+          "case3": 0.9523809523809523,
+          "case4": 0.9767441860465116,
+          "case5": 0.9641873278236914,
+          "case6": 0.9184027777777778,
+          "case7": 0.5360824742268041
+        },
+        "interval_score_per_fold": {
+          "case1": 2.760550825686021,
+          "case2": 3.0342415989424203,
+          "case3": 3.0088051172090955,
+          "case4": 2.746196184863273,
+          "case5": 2.763504414465314,
+          "case6": 2.937347825085042,
+          "case7": 13.15726654927958
+        },
+        "decided_share": 0.877834923350565,
+        "decided_agreement": 0.9935448739928994,
+        "coverage_pooled_hplus": 0.9047619047619048,
+        "coverage_pooled_hminus": 0.6666666666666666,
+        "coverage_min": 0.5360824742268041,
+        "coverage_min_case": "case7"
+      },
+      "80": {
+        "coverage_pooled": 0.7808219178082192,
+        "interval_score": 3.2469719174813116,
+        "width": 1.8778415944789704,
+        "coverage_per_fold": {
+          "case1": 0.8100358422939068,
+          "case2": 0.8297872340425532,
+          "case3": 0.8225108225108225,
+          "case4": 0.8113695090439277,
+          "case5": 0.8953168044077136,
+          "case6": 0.8229166666666666,
+          "case7": 0.4054982817869416
+        },
+        "interval_score_per_fold": {
+          "case1": 2.4122565237470663,
+          "case2": 2.5525774851492216,
+          "case3": 2.4672141350082364,
+          "case4": 2.3349414823588646,
+          "case5": 2.2810918447225697,
+          "case6": 2.437303163328914,
+          "case7": 8.24341878805431
+        },
+        "decided_share": 0.901021996682769,
+        "decided_agreement": 0.9932331708660574,
+        "coverage_pooled_hplus": 0.7924858016601136,
+        "coverage_pooled_hminus": 0.5583333333333333,
+        "coverage_min": 0.4054982817869416,
+        "coverage_min_case": "case7"
+      }
+    }
+  },
+  "per_fold": [
+    {
+      "case": "case1",
+      "n": 279,
+      "rmse_gbm_d27": 0.3838736376019548,
+      "rmse": {
+        "phys_bayes": 0.7311898649937615,
+        "phys_loco": 0.7311898649937615,
+        "hybrid_loco": 0.44290187505435474,
+        "phys_cyc_loco": 0.7710191552274398
+      },
+      "population": {
+        "z": 0.85,
+        "mu": 0.058646328043056084,
+        "tau2": 7.490447808666047e-05,
+        "sigma2": 2.9461833466511536,
+        "kind": "efc",
+        "n_cells": 17
+      },
+      "population_cyc": {
+        "z": 0.85,
+        "mu": 0.046420607032577735,
+        "tau2": 0.00013813139976393284,
+        "sigma2": 2.9461833466511536,
+        "kind": "cyc",
+        "n_cells": 17
+      },
+      "rules": {
+        "phys_bayes": {
+          "90": {
+            "all": {
+              "coverage": 1.0,
+              "width": 8.018369298536214,
+              "interval_score": 8.018369298536214
+            },
+            "n": 279,
+            "covered": 279,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 8.004028893368158,
+              "interval_score": 8.004028893368158,
+              "n": 261,
+              "covered": 261
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 8.22630517347303,
+              "interval_score": 8.22630517347303,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.5806451612903226,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 1.0,
+              "width": 6.247336273136367,
+              "interval_score": 6.247336273136367
+            },
+            "n": 279,
+            "covered": 279,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 6.236163261512392,
+              "interval_score": 6.236163261512392,
+              "n": 261,
+              "covered": 261
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 6.409344941684006,
+              "interval_score": 6.409344941684006,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.6594982078853047,
+            "decided_agreement": 1.0
+          }
+        },
+        "phys_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9390681003584229,
+              "width": 2.388192118802128,
+              "interval_score": 2.77070501106211
+            },
+            "n": 279,
+            "covered": 262,
+            "hplus": {
+              "coverage": 0.9731800766283525,
+              "width": 2.386729313648828,
+              "interval_score": 2.4274390794037464,
+              "n": 261,
+              "covered": 254
+            },
+            "hminus": {
+              "coverage": 0.4444444444444444,
+              "width": 2.409402793524969,
+              "interval_score": 7.74806102010837,
+              "n": 18,
+              "covered": 8
+            },
+            "decided_share": 0.8566308243727598,
+            "decided_agreement": 0.99581589958159
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8315412186379928,
+              "width": 1.8531411832387659,
+              "interval_score": 2.324370243339332
+            },
+            "n": 279,
+            "covered": 232,
+            "hplus": {
+              "coverage": 0.8697318007662835,
+              "width": 1.8519698001796683,
+              "interval_score": 2.054614752131056,
+              "n": 261,
+              "covered": 227
+            },
+            "hminus": {
+              "coverage": 0.2777777777777778,
+              "width": 1.8701262375956824,
+              "interval_score": 6.235824865859332,
+              "n": 18,
+              "covered": 5
+            },
+            "decided_share": 0.8853046594982079,
+            "decided_agreement": 0.9878542510121457
+          }
+        },
+        "hybrid_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.989247311827957,
+              "width": 1.9940210033821317,
+              "interval_score": 2.0111043049515307
+            },
+            "n": 279,
+            "covered": 276,
+            "hplus": {
+              "coverage": 0.9885057471264368,
+              "width": 1.9928920992032622,
+              "interval_score": 2.011153559501586,
+              "n": 261,
+              "covered": 258
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 2.0103901139757365,
+              "interval_score": 2.0103901139757365,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.8745519713261649,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8709677419354839,
+              "width": 1.314434919741647,
+              "interval_score": 1.4989078794361856
+            },
+            "n": 279,
+            "covered": 243,
+            "hplus": {
+              "coverage": 0.8735632183908046,
+              "width": 1.3136676794515185,
+              "interval_score": 1.4965195582980493,
+              "n": 261,
+              "covered": 228
+            },
+            "hminus": {
+              "coverage": 0.8333333333333334,
+              "width": 1.325559903948508,
+              "interval_score": 1.5335385359391611,
+              "n": 18,
+              "covered": 15
+            },
+            "decided_share": 0.9139784946236559,
+            "decided_agreement": 0.996078431372549
+          }
+        },
+        "phys_cyc_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.931899641577061,
+              "width": 2.528597550276825,
+              "interval_score": 2.760550825686021
+            },
+            "n": 279,
+            "covered": 260,
+            "hplus": {
+              "coverage": 0.9540229885057471,
+              "width": 2.5269896277042996,
+              "interval_score": 2.632065125806071,
+              "n": 261,
+              "covered": 249
+            },
+            "hminus": {
+              "coverage": 0.6111111111111112,
+              "width": 2.55191242757844,
+              "interval_score": 4.623593473945294,
+              "n": 18,
+              "covered": 11
+            },
+            "decided_share": 0.8458781362007168,
+            "decided_agreement": 0.9957627118644068
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8100358422939068,
+              "width": 1.9520981422201722,
+              "interval_score": 2.4122565237470663
+            },
+            "n": 279,
+            "covered": 226,
+            "hplus": {
+              "coverage": 0.8352490421455939,
+              "width": 1.95082311286559,
+              "interval_score": 2.284987024385144,
+              "n": 261,
+              "covered": 218
+            },
+            "hminus": {
+              "coverage": 0.4444444444444444,
+              "width": 1.970586067861616,
+              "interval_score": 4.257664264494933,
+              "n": 18,
+              "covered": 8
+            },
+            "decided_share": 0.8781362007168458,
+            "decided_agreement": 0.9959183673469387
+          }
+        }
+      }
+    },
+    {
+      "case": "case2",
+      "n": 282,
+      "rmse_gbm_d27": 0.34543287564248837,
+      "rmse": {
+        "phys_bayes": 0.728174507224856,
+        "phys_loco": 0.728174507224856,
+        "hybrid_loco": 0.38384179823364056,
+        "phys_cyc_loco": 0.764601360523821
+      },
+      "population": {
+        "z": 0.85,
+        "mu": 0.05752572040521336,
+        "tau2": 7.114324718822432e-05,
+        "sigma2": 3.0589567775579014,
+        "kind": "efc",
+        "n_cells": 17
+      },
+      "population_cyc": {
+        "z": 0.85,
+        "mu": 0.045593071001317986,
+        "tau2": 0.00014155275895598918,
+        "sigma2": 3.0589567775579014,
+        "kind": "cyc",
+        "n_cells": 17
+      },
+      "rules": {
+        "phys_bayes": {
+          "90": {
+            "all": {
+              "coverage": 1.0,
+              "width": 8.168425006534791,
+              "interval_score": 8.168425006534791
+            },
+            "n": 282,
+            "covered": 282,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 8.153294435197902,
+              "interval_score": 8.153294435197902,
+              "n": 264,
+              "covered": 264
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 8.390340052809172,
+              "interval_score": 8.390340052809172,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.6524822695035462,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 1.0,
+              "width": 6.364248881257546,
+              "interval_score": 6.364248881257546
+            },
+            "n": 282,
+            "covered": 282,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 6.352460229023296,
+              "interval_score": 6.352460229023296,
+              "n": 264,
+              "covered": 264
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 6.537149114026541,
+              "interval_score": 6.537149114026541,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.7198581560283688,
+            "decided_agreement": 1.0
+          }
+        },
+        "phys_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9326241134751773,
+              "width": 2.3664795664610008,
+              "interval_score": 3.0702937194273656
+            },
+            "n": 282,
+            "covered": 263,
+            "hplus": {
+              "coverage": 0.9696969696969697,
+              "width": 2.365078697351581,
+              "interval_score": 2.5844582036570554,
+              "n": 264,
+              "covered": 256
+            },
+            "hminus": {
+              "coverage": 0.3888888888888889,
+              "width": 2.387025646732495,
+              "interval_score": 10.195881284058576,
+              "n": 18,
+              "covered": 7
+            },
+            "decided_share": 0.8865248226950354,
+            "decided_agreement": 0.984
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8652482269503546,
+              "width": 1.8679600322927339,
+              "interval_score": 2.4483688606051928
+            },
+            "n": 282,
+            "covered": 244,
+            "hplus": {
+              "coverage": 0.8977272727272727,
+              "width": 1.8667884214972792,
+              "interval_score": 2.119199860817353,
+              "n": 264,
+              "covered": 237
+            },
+            "hminus": {
+              "coverage": 0.3888888888888889,
+              "width": 1.88514365729274,
+              "interval_score": 7.2761808574935065,
+              "n": 18,
+              "covered": 7
+            },
+            "decided_share": 0.9042553191489362,
+            "decided_agreement": 0.9803921568627451
+          }
+        },
+        "hybrid_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9716312056737588,
+              "width": 1.8772003391139733,
+              "interval_score": 2.152477236602846
+            },
+            "n": 282,
+            "covered": 274,
+            "hplus": {
+              "coverage": 0.9734848484848485,
+              "width": 1.8761879037741642,
+              "interval_score": 2.154015164051084,
+              "n": 264,
+              "covered": 257
+            },
+            "hminus": {
+              "coverage": 0.9444444444444444,
+              "width": 1.8920493907645068,
+              "interval_score": 2.129920967362024,
+              "n": 18,
+              "covered": 17
+            },
+            "decided_share": 0.9042553191489362,
+            "decided_agreement": 0.9882352941176471
+          },
+          "80": {
+            "all": {
+              "coverage": 0.925531914893617,
+              "width": 1.2464368662937855,
+              "interval_score": 1.5315900506804325
+            },
+            "n": 282,
+            "covered": 261,
+            "hplus": {
+              "coverage": 0.9431818181818182,
+              "width": 1.2457281051423508,
+              "interval_score": 1.5078000936548988,
+              "n": 264,
+              "covered": 249
+            },
+            "hminus": {
+              "coverage": 0.6666666666666666,
+              "width": 1.2568320298481623,
+              "interval_score": 1.8805094203882606,
+              "n": 18,
+              "covered": 12
+            },
+            "decided_share": 0.9468085106382979,
+            "decided_agreement": 0.9887640449438202
+          }
+        },
+        "phys_cyc_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9148936170212766,
+              "width": 2.5199765895031483,
+              "interval_score": 3.0342415989424203
+            },
+            "n": 282,
+            "covered": 258,
+            "hplus": {
+              "coverage": 0.9431818181818182,
+              "width": 2.51841041406608,
+              "interval_score": 2.8085014032715803,
+              "n": 264,
+              "covered": 249
+            },
+            "hminus": {
+              "coverage": 0.5,
+              "width": 2.5429471625801536,
+              "interval_score": 6.3450978021147435,
+              "n": 18,
+              "covered": 9
+            },
+            "decided_share": 0.8865248226950354,
+            "decided_agreement": 0.984
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8297872340425532,
+              "width": 1.9485845805602267,
+              "interval_score": 2.5525774851492216
+            },
+            "n": 282,
+            "covered": 234,
+            "hplus": {
+              "coverage": 0.8522727272727273,
+              "width": 1.9473404090356083,
+              "interval_score": 2.3731023812204493,
+              "n": 264,
+              "covered": 225
+            },
+            "hminus": {
+              "coverage": 0.5,
+              "width": 1.9668324295879518,
+              "interval_score": 5.184879009437877,
+              "n": 18,
+              "covered": 9
+            },
+            "decided_share": 0.8971631205673759,
+            "decided_agreement": 0.9841897233201581
+          }
+        }
+      }
+    },
+    {
+      "case": "case3",
+      "n": 231,
+      "rmse_gbm_d27": 0.5221457033196619,
+      "rmse": {
+        "phys_bayes": 0.7696153160712135,
+        "phys_loco": 0.7696153160712135,
+        "hybrid_loco": 0.4670597724946739,
+        "phys_cyc_loco": 0.7928616773553085
+      },
+      "population": {
+        "z": 0.85,
+        "mu": 0.058660179561366155,
+        "tau2": 7.434128645816697e-05,
+        "sigma2": 2.8601673737692184,
+        "kind": "efc",
+        "n_cells": 18
+      },
+      "population_cyc": {
+        "z": 0.85,
+        "mu": 0.04625794677489006,
+        "tau2": 0.00013257610371655978,
+        "sigma2": 2.8601673737692193,
+        "kind": "cyc",
+        "n_cells": 18
+      },
+      "rules": {
+        "phys_bayes": {
+          "90": {
+            "all": {
+              "coverage": 1.0,
+              "width": 7.891756570236046,
+              "interval_score": 7.891756570236046
+            },
+            "n": 231,
+            "covered": 231,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 7.885010003495436,
+              "interval_score": 7.885010003495436,
+              "n": 219,
+              "covered": 219
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 8.014881413252153,
+              "interval_score": 8.014881413252153,
+              "n": 12,
+              "covered": 12
+            },
+            "decided_share": 0.658008658008658,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 1.0,
+              "width": 6.148688747598373,
+              "interval_score": 6.148688747598373
+            },
+            "n": 231,
+            "covered": 231,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 6.143432308346389,
+              "interval_score": 6.143432308346389,
+              "n": 219,
+              "covered": 219
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 6.2446187639471065,
+              "interval_score": 6.2446187639471065,
+              "n": 12,
+              "covered": 12
+            },
+            "decided_share": 0.6883116883116883,
+            "decided_agreement": 1.0
+          }
+        },
+        "phys_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9653679653679653,
+              "width": 2.4031427100855707,
+              "interval_score": 2.873346403200118
+            },
+            "n": 231,
+            "covered": 223,
+            "hplus": {
+              "coverage": 0.9954337899543378,
+              "width": 2.40221794068556,
+              "interval_score": 2.4215548588491362,
+              "n": 219,
+              "covered": 218
+            },
+            "hminus": {
+              "coverage": 0.4166666666666667,
+              "width": 2.420019751635761,
+              "interval_score": 11.118542087605528,
+              "n": 12,
+              "covered": 5
+            },
+            "decided_share": 0.8614718614718615,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 0.7835497835497836,
+              "width": 1.8426465685956754,
+              "interval_score": 2.3659880779709996
+            },
+            "n": 231,
+            "covered": 181,
+            "hplus": {
+              "coverage": 0.8082191780821918,
+              "width": 1.8418875605269565,
+              "interval_score": 2.069502131612358,
+              "n": 219,
+              "covered": 177
+            },
+            "hminus": {
+              "coverage": 0.3333333333333333,
+              "width": 1.8564984658497974,
+              "interval_score": 7.776856599016219,
+              "n": 12,
+              "covered": 4
+            },
+            "decided_share": 0.9090909090909091,
+            "decided_agreement": 0.9952380952380953
+          }
+        },
+        "hybrid_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9393939393939394,
+              "width": 1.8237487221061421,
+              "interval_score": 2.2286557985320266
+            },
+            "n": 231,
+            "covered": 217,
+            "hplus": {
+              "coverage": 0.954337899543379,
+              "width": 1.823088410332142,
+              "interval_score": 1.9206071328262981,
+              "n": 219,
+              "covered": 209
+            },
+            "hminus": {
+              "coverage": 0.6666666666666666,
+              "width": 1.835799411981638,
+              "interval_score": 7.850543947661575,
+              "n": 12,
+              "covered": 8
+            },
+            "decided_share": 0.9047619047619048,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8484848484848485,
+              "width": 1.2604492764559228,
+              "interval_score": 1.7164310969088572
+            },
+            "n": 231,
+            "covered": 196,
+            "hplus": {
+              "coverage": 0.867579908675799,
+              "width": 1.259939907554607,
+              "interval_score": 1.5212478292739415,
+              "n": 219,
+              "covered": 190
+            },
+            "hminus": {
+              "coverage": 0.5,
+              "width": 1.2697452589049403,
+              "interval_score": 5.278525731246071,
+              "n": 12,
+              "covered": 6
+            },
+            "decided_share": 0.9264069264069265,
+            "decided_agreement": 0.9953271028037384
+          }
+        },
+        "phys_cyc_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9523809523809523,
+              "width": 2.5418316764104554,
+              "interval_score": 3.0088051172090955
+            },
+            "n": 231,
+            "covered": 220,
+            "hplus": {
+              "coverage": 0.9771689497716894,
+              "width": 2.540809662073496,
+              "interval_score": 2.6613285874427115,
+              "n": 219,
+              "covered": 214
+            },
+            "hminus": {
+              "coverage": 0.5,
+              "width": 2.5604834380599653,
+              "interval_score": 9.350251785445623,
+              "n": 12,
+              "covered": 6
+            },
+            "decided_share": 0.8614718614718615,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8225108225108225,
+              "width": 1.9635615334123495,
+              "interval_score": 2.4672141350082364
+            },
+            "n": 231,
+            "covered": 190,
+            "hplus": {
+              "coverage": 0.8447488584474886,
+              "width": 1.9627239150918394,
+              "interval_score": 2.223254851794025,
+              "n": 219,
+              "covered": 185
+            },
+            "hminus": {
+              "coverage": 0.4166666666666667,
+              "width": 1.9788480677616593,
+              "interval_score": 6.919471053667608,
+              "n": 12,
+              "covered": 5
+            },
+            "decided_share": 0.8874458874458875,
+            "decided_agreement": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case": "case4",
+      "n": 387,
+      "rmse_gbm_d27": 0.28964763603478544,
+      "rmse": {
+        "phys_bayes": 0.7149030156668896,
+        "phys_loco": 0.7149030156668896,
+        "hybrid_loco": 0.37533437933572705,
+        "phys_cyc_loco": 0.733808711113244
+      },
+      "population": {
+        "z": 0.85,
+        "mu": 0.058667261579541524,
+        "tau2": 7.558143541538781e-05,
+        "sigma2": 2.957394126053032,
+        "kind": "efc",
+        "n_cells": 17
+      },
+      "population_cyc": {
+        "z": 0.85,
+        "mu": 0.04643606583824563,
+        "tau2": 0.000138398341824998,
+        "sigma2": 2.9573941260530314,
+        "kind": "cyc",
+        "n_cells": 17
+      },
+      "rules": {
+        "phys_bayes": {
+          "90": {
+            "all": {
+              "coverage": 1.0,
+              "width": 8.024270454880273,
+              "interval_score": 8.024270454880273
+            },
+            "n": 387,
+            "covered": 387,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 8.015067273402552,
+              "interval_score": 8.015067273402552,
+              "n": 369,
+              "covered": 369
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 8.212935675173538,
+              "interval_score": 8.212935675173538,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.6795865633074936,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 1.0,
+              "width": 6.251934029451783,
+              "interval_score": 6.251934029451783
+            },
+            "n": 387,
+            "covered": 387,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 6.24476357279989,
+              "interval_score": 6.24476357279989,
+              "n": 369,
+              "covered": 369
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 6.398928390815575,
+              "interval_score": 6.398928390815575,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.7312661498708011,
+            "decided_agreement": 1.0
+          }
+        },
+        "phys_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9457364341085271,
+              "width": 2.431107055537686,
+              "interval_score": 2.625310843748042
+            },
+            "n": 387,
+            "covered": 366,
+            "hplus": {
+              "coverage": 0.9539295392953929,
+              "width": 2.4304029866629295,
+              "interval_score": 2.5833385147648844,
+              "n": 369,
+              "covered": 352
+            },
+            "hminus": {
+              "coverage": 0.7777777777777778,
+              "width": 2.4455404674701873,
+              "interval_score": 3.4857435879027747,
+              "n": 18,
+              "covered": 14
+            },
+            "decided_share": 0.8863049095607235,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8062015503875969,
+              "width": 1.8584543504674984,
+              "interval_score": 2.2714187744228695
+            },
+            "n": 387,
+            "covered": 312,
+            "hplus": {
+              "coverage": 0.8346883468834688,
+              "width": 1.8578446034102662,
+              "interval_score": 2.1993473864547486,
+              "n": 369,
+              "covered": 308
+            },
+            "hminus": {
+              "coverage": 0.2222222222222222,
+              "width": 1.8709541651407535,
+              "interval_score": 3.748882227769349,
+              "n": 18,
+              "covered": 4
+            },
+            "decided_share": 0.9276485788113695,
+            "decided_agreement": 0.9916434540389972
+          }
+        },
+        "hybrid_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9870801033591732,
+              "width": 2.098354881834396,
+              "interval_score": 2.134928004543139
+            },
+            "n": 387,
+            "covered": 382,
+            "hplus": {
+              "coverage": 0.986449864498645,
+              "width": 2.09769240462542,
+              "interval_score": 2.136049582100444,
+              "n": 369,
+              "covered": 364
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 2.111935664618395,
+              "interval_score": 2.111935664618395,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.9121447028423773,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 0.9405684754521964,
+              "width": 1.3674967391227293,
+              "interval_score": 1.4722754720366176
+            },
+            "n": 387,
+            "covered": 364,
+            "hplus": {
+              "coverage": 0.948509485094851,
+              "width": 1.3671266699444773,
+              "interval_score": 1.4629636569463893,
+              "n": 369,
+              "covered": 350
+            },
+            "hminus": {
+              "coverage": 0.7777777777777778,
+              "width": 1.375083157276891,
+              "interval_score": 1.663167681386304,
+              "n": 18,
+              "covered": 14
+            },
+            "decided_share": 0.9431524547803618,
+            "decided_agreement": 1.0
+          }
+        },
+        "phys_cyc_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9767441860465116,
+              "width": 2.628829899508195,
+              "interval_score": 2.746196184863273
+            },
+            "n": 387,
+            "covered": 378,
+            "hplus": {
+              "coverage": 0.975609756097561,
+              "width": 2.6280011380850454,
+              "interval_score": 2.7510926080915903,
+              "n": 369,
+              "covered": 360
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 2.6458195086827647,
+              "interval_score": 2.6458195086827647,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.875968992248062,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8113695090439277,
+              "width": 1.966949809871308,
+              "interval_score": 2.3349414823588646
+            },
+            "n": 387,
+            "covered": 314,
+            "hplus": {
+              "coverage": 0.8157181571815718,
+              "width": 1.9662782757686852,
+              "interval_score": 2.3306073230807685,
+              "n": 369,
+              "covered": 301
+            },
+            "hminus": {
+              "coverage": 0.7222222222222222,
+              "width": 1.9807162589750709,
+              "interval_score": 2.42379174755983,
+              "n": 18,
+              "covered": 13
+            },
+            "decided_share": 0.9121447028423773,
+            "decided_agreement": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case": "case5",
+      "n": 363,
+      "rmse_gbm_d27": 0.3197844634401779,
+      "rmse": {
+        "phys_bayes": 0.65907012860945,
+        "phys_loco": 0.65907012860945,
+        "hybrid_loco": 0.46032883904958116,
+        "phys_cyc_loco": 0.7002236233122097
+      },
+      "population": {
+        "z": 0.85,
+        "mu": 0.05878816964721554,
+        "tau2": 7.76072808042531e-05,
+        "sigma2": 3.022541864408354,
+        "kind": "efc",
+        "n_cells": 17
+      },
+      "population_cyc": {
+        "z": 0.85,
+        "mu": 0.04652535291705125,
+        "tau2": 0.0001389126580913841,
+        "sigma2": 3.022541864408354,
+        "kind": "cyc",
+        "n_cells": 17
+      },
+      "rules": {
+        "phys_bayes": {
+          "90": {
+            "all": {
+              "coverage": 1.0,
+              "width": 8.113815143349601,
+              "interval_score": 8.113815143349601
+            },
+            "n": 363,
+            "covered": 363,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 8.103899070711455,
+              "interval_score": 8.103899070711455,
+              "n": 345,
+              "covered": 345
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 8.303873202247436,
+              "interval_score": 8.303873202247436,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.6584022038567493,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 1.0,
+              "width": 6.321700806150786,
+              "interval_score": 6.321700806150786
+            },
+            "n": 363,
+            "covered": 363,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 6.313974916013665,
+              "interval_score": 6.313974916013665,
+              "n": 345,
+              "covered": 345
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 6.469780367112275,
+              "interval_score": 6.469780367112275,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.7134986225895317,
+            "decided_agreement": 1.0
+          }
+        },
+        "phys_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9752066115702479,
+              "width": 2.442882143586469,
+              "interval_score": 2.6551832167993337
+            },
+            "n": 363,
+            "covered": 354,
+            "hplus": {
+              "coverage": 0.9855072463768116,
+              "width": 2.442024135985281,
+              "interval_score": 2.484375370009144,
+              "n": 345,
+              "covered": 340
+            },
+            "hminus": {
+              "coverage": 0.7777777777777778,
+              "width": 2.459327289275917,
+              "interval_score": 5.929000280277973,
+              "n": 18,
+              "covered": 14
+            },
+            "decided_share": 0.8842975206611571,
+            "decided_agreement": 0.9968847352024922
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8980716253443526,
+              "width": 1.9194492314627276,
+              "interval_score": 2.1495374571659975
+            },
+            "n": 363,
+            "covered": 326,
+            "hplus": {
+              "coverage": 0.9101449275362319,
+              "width": 1.9187262981177988,
+              "interval_score": 2.0392639245164887,
+              "n": 345,
+              "covered": 314
+            },
+            "hminus": {
+              "coverage": 0.6666666666666666,
+              "width": 1.9333054539071948,
+              "interval_score": 4.263113499614914,
+              "n": 18,
+              "covered": 12
+            },
+            "decided_share": 0.90633608815427,
+            "decided_agreement": 0.993920972644377
+          }
+        },
+        "hybrid_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9338842975206612,
+              "width": 1.7993500397494548,
+              "interval_score": 2.1095293403485336
+            },
+            "n": 363,
+            "covered": 339,
+            "hplus": {
+              "coverage": 0.9391304347826087,
+              "width": 1.798744113176905,
+              "interval_score": 2.025704369774241,
+              "n": 345,
+              "covered": 324
+            },
+            "hminus": {
+              "coverage": 0.8333333333333334,
+              "width": 1.8109636323899936,
+              "interval_score": 3.7161746096891415,
+              "n": 18,
+              "covered": 15
+            },
+            "decided_share": 0.9118457300275482,
+            "decided_agreement": 0.9939577039274925
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8457300275482094,
+              "width": 1.2349768957164853,
+              "interval_score": 1.6773263677886614
+            },
+            "n": 363,
+            "covered": 307,
+            "hplus": {
+              "coverage": 0.863768115942029,
+              "width": 1.2345965631929214,
+              "interval_score": 1.5956152490630766,
+              "n": 345,
+              "covered": 298
+            },
+            "hminus": {
+              "coverage": 0.5,
+              "width": 1.2422666024181268,
+              "interval_score": 3.243456143362371,
+              "n": 18,
+              "covered": 9
+            },
+            "decided_share": 0.9338842975206612,
+            "decided_agreement": 0.9852507374631269
+          }
+        },
+        "phys_cyc_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9641873278236914,
+              "width": 2.5898499590885007,
+              "interval_score": 2.763504414465314
+            },
+            "n": 363,
+            "covered": 350,
+            "hplus": {
+              "coverage": 0.9710144927536232,
+              "width": 2.5888912112961573,
+              "interval_score": 2.65682510930285,
+              "n": 345,
+              "covered": 335
+            },
+            "hminus": {
+              "coverage": 0.8333333333333334,
+              "width": 2.608225958441754,
+              "interval_score": 4.808191096745879,
+              "n": 18,
+              "covered": 15
+            },
+            "decided_share": 0.8787878787878788,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8953168044077136,
+              "width": 2.0228327948879326,
+              "interval_score": 2.2810918447225697
+            },
+            "n": 363,
+            "covered": 325,
+            "hplus": {
+              "coverage": 0.9014492753623189,
+              "width": 2.0220481066418055,
+              "interval_score": 2.2090586056704478,
+              "n": 345,
+              "covered": 311
+            },
+            "hminus": {
+              "coverage": 0.7777777777777778,
+              "width": 2.0378726529386992,
+              "interval_score": 3.6617289265549045,
+              "n": 18,
+              "covered": 14
+            },
+            "decided_share": 0.8980716253443526,
+            "decided_agreement": 0.9969325153374233
+          }
+        }
+      }
+    },
+    {
+      "case": "case6",
+      "n": 576,
+      "rmse_gbm_d27": 0.39704881199478326,
+      "rmse": {
+        "phys_bayes": 0.7118174317761016,
+        "phys_loco": 0.7118174317761016,
+        "hybrid_loco": 0.557566585925821,
+        "phys_cyc_loco": 0.7049769478509162
+      },
+      "population": {
+        "z": 0.8,
+        "mu": 0.08859250090769877,
+        "tau2": 9.077896228307914e-05,
+        "sigma2": 2.3122993816747703,
+        "kind": "efc",
+        "n_cells": 17
+      },
+      "population_cyc": {
+        "z": 0.8,
+        "mu": 0.07094187793385084,
+        "tau2": 0.00023060434444295731,
+        "sigma2": 2.31229938167477,
+        "kind": "cyc",
+        "n_cells": 17
+      },
+      "rules": {
+        "phys_bayes": {
+          "90": {
+            "all": {
+              "coverage": 1.0,
+              "width": 7.086240055943891,
+              "interval_score": 7.086240055943891
+            },
+            "n": 576,
+            "covered": 576,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 7.08127147071115,
+              "interval_score": 7.08127147071115,
+              "n": 558,
+              "covered": 558
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 7.240266198158892,
+              "interval_score": 7.240266198158892,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.6979166666666666,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 1.0,
+              "width": 5.521088252910955,
+              "interval_score": 5.521088252910955
+            },
+            "n": 576,
+            "covered": 576,
+            "hplus": {
+              "coverage": 1.0,
+              "width": 5.5172170888880725,
+              "interval_score": 5.5172170888880725,
+              "n": 558,
+              "covered": 558
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 5.641094337620309,
+              "interval_score": 5.641094337620309,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.7465277777777778,
+            "decided_agreement": 1.0
+          }
+        },
+        "phys_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.8958333333333334,
+              "width": 2.1854234472354643,
+              "interval_score": 2.924797023000029
+            },
+            "n": 576,
+            "covered": 516,
+            "hplus": {
+              "coverage": 0.899641577060932,
+              "width": 2.1851423843243856,
+              "interval_score": 2.8902166059166636,
+              "n": 558,
+              "covered": 502
+            },
+            "hminus": {
+              "coverage": 0.7777777777777778,
+              "width": 2.1941363974789008,
+              "interval_score": 3.9967899525843507,
+              "n": 18,
+              "covered": 14
+            },
+            "decided_share": 0.8993055555555556,
+            "decided_agreement": 0.9980694980694981
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8038194444444444,
+              "width": 1.693215913139561,
+              "interval_score": 2.428407665111563
+            },
+            "n": 576,
+            "covered": 463,
+            "hplus": {
+              "coverage": 0.8082437275985663,
+              "width": 1.6929691587869438,
+              "interval_score": 2.402253943891507,
+              "n": 558,
+              "covered": 451
+            },
+            "hminus": {
+              "coverage": 0.6666666666666666,
+              "width": 1.7008652980706864,
+              "interval_score": 3.2391730229332962,
+              "n": 18,
+              "covered": 12
+            },
+            "decided_share": 0.921875,
+            "decided_agreement": 0.9905838041431262
+          }
+        },
+        "hybrid_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.8802083333333334,
+              "width": 1.7233731501784693,
+              "interval_score": 2.502093690992961
+            },
+            "n": 576,
+            "covered": 507,
+            "hplus": {
+              "coverage": 0.8906810035842294,
+              "width": 1.7231698049729096,
+              "interval_score": 2.3593871995585873,
+              "n": 558,
+              "covered": 497
+            },
+            "hminus": {
+              "coverage": 0.5555555555555556,
+              "width": 1.72967685155082,
+              "interval_score": 6.925994925458543,
+              "n": 18,
+              "covered": 10
+            },
+            "decided_share": 0.9253472222222222,
+            "decided_agreement": 0.9962476547842402
+          },
+          "80": {
+            "all": {
+              "coverage": 0.7899305555555556,
+              "width": 1.2074898066349675,
+              "interval_score": 2.0192520360203137
+            },
+            "n": 576,
+            "covered": 455,
+            "hplus": {
+              "coverage": 0.8028673835125448,
+              "width": 1.2073401096116898,
+              "interval_score": 1.917284449643384,
+              "n": 558,
+              "covered": 448
+            },
+            "hminus": {
+              "coverage": 0.3888888888888889,
+              "width": 1.2121304143565854,
+              "interval_score": 5.1802472137051465,
+              "n": 18,
+              "covered": 7
+            },
+            "decided_share": 0.9461805555555556,
+            "decided_agreement": 0.9944954128440368
+          }
+        },
+        "phys_cyc_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.9184027777777778,
+              "width": 2.3746342048257754,
+              "interval_score": 2.937347825085042
+            },
+            "n": 576,
+            "covered": 529,
+            "hplus": {
+              "coverage": 0.9247311827956989,
+              "width": 2.3743185402662697,
+              "interval_score": 2.8638603357388748,
+              "n": 558,
+              "covered": 516
+            },
+            "hminus": {
+              "coverage": 0.7222222222222222,
+              "width": 2.384419806170458,
+              "interval_score": 5.215459994816227,
+              "n": 18,
+              "covered": 13
+            },
+            "decided_share": 0.8993055555555556,
+            "decided_agreement": 0.9942084942084942
+          },
+          "80": {
+            "all": {
+              "coverage": 0.8229166666666666,
+              "width": 1.7870496925764026,
+              "interval_score": 2.437303163328914
+            },
+            "n": 576,
+            "covered": 474,
+            "hplus": {
+              "coverage": 0.8297491039426523,
+              "width": 1.7867739852933215,
+              "interval_score": 2.379045257285882,
+              "n": 558,
+              "covered": 463
+            },
+            "hminus": {
+              "coverage": 0.6111111111111112,
+              "width": 1.7955966183519163,
+              "interval_score": 4.243298250662896,
+              "n": 18,
+              "covered": 11
+            },
+            "decided_share": 0.9166666666666666,
+            "decided_agreement": 0.9943181818181818
+          }
+        }
+      }
+    },
+    {
+      "case": "case7",
+      "n": 291,
+      "rmse_gbm_d27": 1.488624602808895,
+      "rmse": {
+        "phys_bayes": 1.7919352676110047,
+        "phys_loco": 1.7919352676110047,
+        "hybrid_loco": 1.3796637331028683,
+        "phys_cyc_loco": 1.8464643506570608
+      },
+      "population": {
+        "z": 0.8,
+        "mu": 0.08334017807868549,
+        "tau2": 9.089010575873766e-05,
+        "sigma2": 1.9300895305623436,
+        "kind": "efc",
+        "n_cells": 17
+      },
+      "population_cyc": {
+        "z": 0.8,
+        "mu": 0.0626516994840064,
+        "tau2": 5.136573096768878e-05,
+        "sigma2": 1.930089530562343,
+        "kind": "cyc",
+        "n_cells": 17
+      },
+      "rules": {
+        "phys_bayes": {
+          "90": {
+            "all": {
+              "coverage": 0.9312714776632303,
+              "width": 6.495354216764019,
+              "interval_score": 8.8025266632356
+            },
+            "n": 291,
+            "covered": 271,
+            "hplus": {
+              "coverage": 0.9267399267399268,
+              "width": 6.487584675609475,
+              "interval_score": 8.946878382287974,
+              "n": 273,
+              "covered": 253
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 6.613192257607943,
+              "interval_score": 6.613192257607943,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.7079037800687286,
+            "decided_agreement": 1.0
+          },
+          "80": {
+            "all": {
+              "coverage": 0.872852233676976,
+              "width": 5.060712533241254,
+              "interval_score": 6.967440348356538
+            },
+            "n": 291,
+            "covered": 254,
+            "hplus": {
+              "coverage": 0.8644688644688645,
+              "width": 5.054659065949685,
+              "interval_score": 7.087105198545098,
+              "n": 273,
+              "covered": 236
+            },
+            "hminus": {
+              "coverage": 1.0,
+              "width": 5.152523453830052,
+              "interval_score": 5.152523453830052,
+              "n": 18,
+              "covered": 18
+            },
+            "decided_share": 0.738831615120275,
+            "decided_agreement": 1.0
+          }
+        },
+        "phys_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.5670103092783505,
+              "width": 1.9356640055645968,
+              "interval_score": 12.63006882194825
+            },
+            "n": 291,
+            "covered": 165,
+            "hplus": {
+              "coverage": 0.5641025641025641,
+              "width": 1.9345158842441774,
+              "interval_score": 12.961148413247026,
+              "n": 273,
+              "covered": 154
+            },
+            "hminus": {
+              "coverage": 0.6111111111111112,
+              "width": 1.953077178924295,
+              "interval_score": 7.608695020583472,
+              "n": 18,
+              "covered": 11
+            },
+            "decided_share": 0.9037800687285223,
+            "decided_agreement": 0.9885931558935361
+          },
+          "80": {
+            "all": {
+              "coverage": 0.43986254295532645,
+              "width": 1.5038146078243957,
+              "interval_score": 7.900125559283263
+            },
+            "n": 291,
+            "covered": 128,
+            "hplus": {
+              "coverage": 0.43956043956043955,
+              "width": 1.5029112563876865,
+              "interval_score": 8.077569114023083,
+              "n": 273,
+              "covered": 120
+            },
+            "hminus": {
+              "coverage": 0.4444444444444444,
+              "width": 1.5175154379478162,
+              "interval_score": 5.2088983123959895,
+              "n": 18,
+              "covered": 8
+            },
+            "decided_share": 0.9140893470790378,
+            "decided_agreement": 0.9887218045112782
+          }
+        },
+        "hybrid_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.5773195876288659,
+              "width": 1.4657821219564562,
+              "interval_score": 9.570554916154189
+            },
+            "n": 291,
+            "covered": 168,
+            "hplus": {
+              "coverage": 0.5897435897435898,
+              "width": 1.4649564502504364,
+              "interval_score": 9.102486933004734,
+              "n": 273,
+              "covered": 161
+            },
+            "hminus": {
+              "coverage": 0.3888888888888889,
+              "width": 1.4783048094977542,
+              "interval_score": 16.66958599392092,
+              "n": 18,
+              "covered": 7
+            },
+            "decided_share": 0.9243986254295533,
+            "decided_agreement": 0.9851301115241635
+          },
+          "80": {
+            "all": {
+              "coverage": 0.4570446735395189,
+              "width": 0.9944666994985547,
+              "interval_score": 6.168082978601735
+            },
+            "n": 291,
+            "covered": 133,
+            "hplus": {
+              "coverage": 0.47619047619047616,
+              "width": 0.9939219157214647,
+              "interval_score": 5.902494306558458,
+              "n": 273,
+              "covered": 130
+            },
+            "hminus": {
+              "coverage": 0.16666666666666666,
+              "width": 1.0027292534510863,
+              "interval_score": 10.196177837924775,
+              "n": 18,
+              "covered": 3
+            },
+            "decided_share": 0.9518900343642611,
+            "decided_agreement": 0.9855595667870036
+          }
+        },
+        "phys_cyc_loco": {
+          "90": {
+            "all": {
+              "coverage": 0.5360824742268041,
+              "width": 1.9356640055645968,
+              "interval_score": 13.15726654927958
+            },
+            "n": 291,
+            "covered": 156,
+            "hplus": {
+              "coverage": 0.5421245421245421,
+              "width": 1.9345158842441774,
+              "interval_score": 13.539380488429801,
+              "n": 273,
+              "covered": 148
+            },
+            "hminus": {
+              "coverage": 0.4444444444444444,
+              "width": 1.953077178924295,
+              "interval_score": 7.361871805501211,
+              "n": 18,
+              "covered": 8
+            },
+            "decided_share": 0.8969072164948454,
+            "decided_agreement": 0.9808429118773946
+          },
+          "80": {
+            "all": {
+              "coverage": 0.4054982817869416,
+              "width": 1.503814607824399,
+              "interval_score": 8.24341878805431
+            },
+            "n": 291,
+            "covered": 118,
+            "hplus": {
+              "coverage": 0.4065934065934066,
+              "width": 1.5029112563876899,
+              "interval_score": 8.429955920376692,
+              "n": 273,
+              "covered": 111
+            },
+            "hminus": {
+              "coverage": 0.3888888888888889,
+              "width": 1.5175154379478195,
+              "interval_score": 5.414272281164869,
+              "n": 18,
+              "covered": 7
+            },
+            "decided_share": 0.9175257731958762,
+            "decided_agreement": 0.9812734082397003
+          }
+        }
+      }
+    }
+  ]
+}

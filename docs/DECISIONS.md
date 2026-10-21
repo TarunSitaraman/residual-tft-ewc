@@ -1019,3 +1019,5 @@ Deterministic: a result must hold in both E1 and E2 (not independent; stated). S
 
 ### Run log
 - **21 Oct 2026. Pre-registered** after the D28 results; no D29 code written or run.
+- **21 Oct 2026. Code committed** (`f2fdd73`) after a test on synthetic data only: `scripts/run_d29.py`, `tests/test_d29.py`. Nothing under `src/` changed. Implementation choices fixed with the code: a cell's checks are the union of its samples' origins and targets (cycle, SOH); the gradient boosting of the residual is `run_d28.gbm_fit_predict` (the D27 settings).
+- **21 Oct 2026. Run** from `f2fdd73` in a separate clean worktree of that commit (the main working copy held notebook outputs from a local session, which the pre-flight correctly refused), with the same data directory and pinned environment: `python scripts/run_d29.py --exp e1`, then `--exp e2`, each run once (the first attempt in the main working copy stopped at pre-flight and wrote nothing). Reproduction check passed in both (max abs diff 0). Outputs: `results/forecasting_d29_e1.json`, `..._e2.json`. Results: `docs/RESULTS.md`, D29 (Q1 negative, Q2 not established, Q3 negative).
