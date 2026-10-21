@@ -690,3 +690,10 @@ At 80 %, pooled coverage of REFIT+TRACK is 0.809 (E1) and 0.797 (E2).
 3. **Attribution (descriptive).** Refitting does most of the work: REFIT alone lowers IS90 to 2.51 / 5.27 pp and raises case7 coverage to 0.67 / 0.53. Tracking alone narrows the intervals but loses some pooled coverage (0.89 / 0.88). Combined, they give the lowest interval score and the narrowest intervals.
 4. **Q3, not established.** Refitting lowers the mean RMSE (0.535 → 0.458 pp and 1.051 → 0.898 pp), mostly on case7 (−0.40 and −0.64 pp) and case6, but not consistently enough across folds for the registered test.
 5. **Reuse decisions (descriptive).** 92–93 % (E1) and 87–88 % (E2) of held-out samples have a 90 % interval inside one reuse class, with 99.2–99.7 % agreement, as for STATIC, with narrower intervals.
+
+**D28 figures** (`scripts/make_d28_figures.py`; the per-condition figure from the committed results files, the case7 timeline recomputed with `scripts/run_d28.py` and checked against them):
+
+| Figure | Content |
+|---|---|
+| `d28_per_condition.png` | 90 % coverage and 90 % interval score (log scale) per held-out condition for STATIC, TRACK, REFIT and REFIT+TRACK, E1 and E2 |
+| `d28_case7_timeline.png` | Case7 held out (E1, horizon 1): absolute error of the static and refitted forecasts and the 90 % half-widths of STATIC and REFIT+TRACK over the check dates |
