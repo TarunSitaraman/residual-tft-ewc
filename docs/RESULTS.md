@@ -649,3 +649,44 @@ LIN-all reaches 0.74 (E1) and 0.71 (E2) on case7, and 0.87–0.96 on the other f
    - For a new usage condition, prefer a forecaster fitted on all available conditions.
    - Calibrate its intervals on conditions held out from fitting, using every origin, with half-widths per origin stratum.
    - Report coverage per condition, not only pooled.
+
+## D28: continual calibration and refit on an unseen usage condition (21 Oct 2026)
+
+Results files: `results/forecasting_d28_e1.json` (horizons 1–3) and `results/forecasting_d28_e2.json` (horizons 1–6), run at commit `161c01f` (clean tree, `git_dirty` false, no override) in the pinned environment (Python 3.11.15, scikit-learn 1.9.1). Protocol fixed in D28 before any code (`54bd012`). **Reproduction check passed:** the STATIC arm reproduces the D27 GBM-LOCO per-fold coverage, interval score and RMSE exactly (max abs diff 0). Setting as D27: leave one S6 test case out, seven folds; the held-out case arrives over time, and only targets already measured are used.
+
+The arms are:
+- **STATIC:** D27 GBM-LOCO.
+- **TRACK:** quantile tracking of the half-width from the errors observed on the new condition.
+- **REFIT:** gradient boosting refitted with the new condition's measured targets, static half-widths.
+- **REFIT+TRACK (proposed):** both.
+
+Deterministic forecasters: E1 and E2 replace the seed sets and are not independent. Step size c chosen on the training cases only: 0.1–0.2 on six folds, 0.02 (E1) and 0.01 (E2) on case7.
+
+**90 % intervals, pooled coverage (H+ / H−), mean interval score (IS90, pp), mean width (pp), share decided (agreement), and mean RMSE over folds (pp):**
+
+| Arm | E1 cov90 (H+ / H−) | E1 IS90 | E1 width | E1 decided (agr.) | E1 RMSE | E2 cov90 (H+ / H−) | E2 IS90 | E2 width | E2 decided (agr.) | E2 RMSE |
+|---|---|---|---|---|---|---|---|---|---|---|
+| STATIC (D27) | 0.902 (0.910 / 0.750) | 3.22 | 1.57 | 0.92 (0.997) | 0.535 | 0.896 (0.900 / 0.833) | 6.67 | 2.94 | 0.87 (0.994) | 1.051 |
+| TRACK | 0.893 (0.901 / 0.750) | 2.93 | 1.42 | 0.92 (0.997) | 0.535 | 0.878 (0.881 / 0.833) | 6.27 | 2.63 | 0.88 (0.993) | 1.051 |
+| REFIT | 0.935 (0.946 / 0.717) | 2.51 | 1.57 | 0.92 (0.996) | 0.458 | 0.928 (0.933 / 0.842) | 5.27 | 2.94 | 0.87 (0.992) | 0.898 |
+| **REFIT+TRACK** | **0.914** (0.924 / 0.717) | **2.29** | **1.35** | 0.93 (0.996) | 0.458 | **0.902** (0.906 / 0.842) | **4.74** | **2.46** | 0.88 (0.992) | 0.898 |
+
+At 80 %, pooled coverage of REFIT+TRACK is 0.809 (E1) and 0.797 (E2).
+
+**Case7 (100 % depth of discharge), 90 %:** coverage STATIC 0.48 / 0.38 (E1 / E2), TRACK 0.58 / 0.44, REFIT 0.67 / 0.53, REFIT+TRACK 0.72 / 0.58; IS90 11.6 / 26.6 pp (STATIC) against 6.4 / 16.3 pp (REFIT+TRACK); RMSE 1.49 / 3.13 pp against 1.09 / 2.49 pp.
+
+**Registered results:**
+
+| Question | E1 | E2 | Verdict |
+|---|---|---|---|
+| Q1 (primary): REFIT+TRACK case7 coverage ≥ 0.80 | 0.72 | 0.58 | **negative** (improved from 0.48 / 0.38, threshold not reached) |
+| Q2: pooled ≥ 0.85 and every condition ≥ 0.80 | pooled 0.914, min 0.72 (case7) | pooled 0.902, min 0.58 (case7) | **negative** (pooled met; case7 below 0.80; the other six folds 0.93–0.96) |
+| Q3: REFIT − STATIC, RMSE (Wilcoxon over seven folds) | −0.077 pp, 4/7 folds, p = 0.22 | −0.153 pp, 6/7 folds, p = 0.078 | **not established** |
+| Q4: REFIT+TRACK − STATIC, IS90 | −0.93 pp, 6/7 folds, p = 0.047 | −1.93 pp, 7/7 folds, p = 0.016 | **positive** |
+
+**Reading.**
+1. **Q4, positive.** Updating the forecaster and the interval as the new condition's checks arrive lowers the 90 % interval score by 29 % in both experiments (3.22 → 2.29 pp and 6.67 → 4.74 pp), with intervals 14–17 % narrower and pooled coverage kept at 0.90–0.91. This is the first positive registered result for a continual method in the study: what is updated continually is the refit with stored data and the calibration, not network weights under a no-storage constraint.
+2. **Q1 and Q2, negative.** Case7 coverage rises from 0.48 to 0.72 (E1) and 0.38 to 0.58 (E2), the largest change of any fold, but stays below the 0.80 threshold; the selected step on case7 was small (0.01–0.02), because the training cases needed little adaptation. A condition outside the training range is improved, not fixed.
+3. **Attribution (descriptive).** Refitting does most of the work: REFIT alone lowers IS90 to 2.51 / 5.27 pp and raises case7 coverage to 0.67 / 0.53. Tracking alone narrows the intervals but loses some pooled coverage (0.89 / 0.88). Combined, they give the lowest interval score and the narrowest intervals.
+4. **Q3, not established.** Refitting lowers the mean RMSE (0.535 → 0.458 pp and 1.051 → 0.898 pp), mostly on case7 (−0.40 and −0.64 pp) and case6, but not consistently enough across folds for the registered test.
+5. **Reuse decisions (descriptive).** 92–93 % (E1) and 87–88 % (E2) of held-out samples have a 90 % interval inside one reuse class, with 99.2–99.7 % agreement, as for STATIC, with narrower intervals.

@@ -969,3 +969,5 @@ Per experiment and fold, one gradient-boosting refit per distinct set of matured
 
 ### Run log
 - **21 Oct 2026. Pre-registered** after the D27 results; no D28 code written or run.
+- **21 Oct 2026. Code committed** (`161c01f`) after a test on synthetic data only (pytest temporary directory): `scripts/run_d28.py`, `tests/test_d28.py`. Nothing under `src/` changed. Implementation choices fixed with the code: refits use the gradient boosting of `FC._gbm(0)` on the observed shared inputs (tested equal to the D27 comparator on the same rows); matured held-out samples are appended to the D27 fit rows in frame order; maturity is the origin check time plus `days_to_target`. Full test suite: 187 passed.
+- **21 Oct 2026. Run** from `161c01f` (clean tree; pre-flight passed; no override) in the pinned environment: `python scripts/run_d28.py --exp e1`, then `--exp e2`, each run once. Reproduction check passed in both (max abs diff 0). Outputs: `results/forecasting_d28_e1.json`, `..._e2.json`. Results: `docs/RESULTS.md`, D28 (Q1 and Q2 negative, Q3 not established, Q4 positive).
