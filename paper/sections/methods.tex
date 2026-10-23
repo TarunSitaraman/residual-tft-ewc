@@ -117,7 +117,7 @@ The residual and the direct (target $\Delta$) forms are compared on the S6 strea
 \label{sec:tuning}
 \label{sec:metrics}
 
-Hyperparameters are chosen on validation data from tuning orders disjoint from the evaluation orders: the learning rate per backbone (lowest validation plasticity of fine-tuning streams), then replay $B\in\{50,\dots,400\}$ and EWC $\lambda\in\{10^0,\dots,10^5\}$, extended at a grid edge. From P3 on, ten tuning orders and the one-standard-error rule (the smallest grid value within one standard error of the best) are used.
+Hyperparameters are chosen on validation data from tuning orders disjoint from the evaluation orders: the learning rate per backbone ($\{3\cdot10^{-4},\dots,10^{-1}\}$; lowest validation plasticity of fine-tuning streams), then replay $B\in\{50,\dots,400\}$ and EWC $\lambda\in\{10^0,\dots,10^5\}$; a grid whose best value lies at an edge is extended by two values and tuning repeated. From P3 on, ten tuning orders and the one-standard-error rule (the smallest grid value within one standard error of the best) are used.
 
 After each step $i$, every task's test set is evaluated, giving $R_{i,j} = \mathrm{RMSE}(\mathcal{D}^{\mathrm{te}}_{\pi_j}\mid\theta_i)$. Following~\cite{lopezpaz2017gem,chaudhry2018rwalk}, we report the final average error $\tfrac{1}{T}\sum_{j} R_{T,j}$, backward transfer $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - R_{j,j})$ and forgetting $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - \min_{j\le i<T} R_{i,j})$ (positive values mean forgetting), the skill $1-\mathrm{RMSE}/\mathrm{RMSE}_{\mathrm{persistence}}$, and the agreement of the reuse class of the forecast SOH with the measured class (C0 $>95\%$, C1 90--95\%, C2 80--90\%, C3 $\le80\%$, fixed in advance).
 
