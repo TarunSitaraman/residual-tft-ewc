@@ -104,7 +104,7 @@ def regression(res: dict) -> pd.DataFrame:
     S.write_tex(S.PTAB / "d30_regression.tex",
                 "Protocol P2, all regression metrics of the forecast SOH (pp unless stated), mean over held-out groups "
                 "(the RMSE column equals Table~\\ref{tab:p2} for the baselines; MLP and TFT are re-runs on another "
-                f"platform, within {neural:.3f}~pp of it). Bias = mean(forecast $-$ measured): positive values "
+                f"platform, within {neural:.4f}~pp of it). Bias = mean(forecast $-$ measured): positive values "
                 "overestimate SOH. NRMSE = RMSE / range of measured SOH in the group. $R^2$ is on the SOH level, "
                 "$R^2_\\Delta$ on the SOH change since the origin (persistence has $R^2_\\Delta \\le 0$). SOH is relative "
                 "to the first observed check.",
@@ -135,7 +135,28 @@ def classification(res: dict) -> pd.DataFrame:
                 ["Data", "Method", *[h for _, h in CLS_COLS], *[f"EoL {h}" for _, h in EOL_COLS]],
                 _with_rules(body), "ll" + "c" * (len(CLS_COLS) + len(EOL_COLS)), escape=False)
     _prepend(S.PTAB / "d30_classification.tex", src_line(res))
+    if "s6" in res:
+        compact_s6(res, support["S6"])
     return pd.DataFrame(rows)
+
+
+COMPACT_COLS = [("cls_accuracy", "Acc."), ("cls_f1_macro", "F1"), ("cls_mcc", "MCC"), ("cls_kappa_linear", "$\\kappa_w$"),
+                ("eol_f1", "EoL F1"), ("eol_auc_roc", "EoL AUC")]
+
+
+def compact_s6(res: dict, support: list) -> None:
+    """One-column S6 classification table for the main text (the full table stays in the repository)."""
+    pooled = frame(res["s6"], "p2_pooled")
+    body = [[NAMES[m], *[S.fmt(row[c], 3) for c, _ in COMPACT_COLS]] for m, row in pooled.iterrows()]
+    counts = ", ".join(f"{c} {n}" for c, n in zip(CLASS_NAMES, support))
+    S.write_tex(S.PTAB / "d30_classification_s6.tex",
+                "S6, P2: reuse class (C0--C3) and end of first life (EoL, SOH $\\le$ 80) of the forecast SOH, all "
+                "held-out samples pooled, mean over seeds. F1: macro over the measured classes; $\\kappa_w$: "
+                f"linear-weighted. Measured classes: {counts}. All metrics in the repository (D30).",
+                "tab:d30_cls_s6", ["Method", *[h for _, h in COMPACT_COLS]], body, "l" + "c" * len(COMPACT_COLS),
+                escape=False)
+    path = S.PTAB / "d30_classification_s6.tex"
+    path.write_text(src_line({"s6": res["s6"]}) + path.read_text())
 
 
 def _with_rules(body: list) -> list:
