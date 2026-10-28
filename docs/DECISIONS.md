@@ -1021,3 +1021,25 @@ Deterministic: a result must hold in both E1 and E2 (not independent; stated). S
 - **21 Oct 2026. Pre-registered** after the D28 results; no D29 code written or run.
 - **21 Oct 2026. Code committed** (`f2fdd73`) after a test on synthetic data only: `scripts/run_d29.py`, `tests/test_d29.py`. Nothing under `src/` changed. Implementation choices fixed with the code: a cell's checks are the union of its samples' origins and targets (cycle, SOH); the gradient boosting of the residual is `run_d28.gbm_fit_predict` (the D27 settings).
 - **21 Oct 2026. Run** from `f2fdd73` in a separate clean worktree of that commit (the main working copy held notebook outputs from a local session, which the pre-flight correctly refused), with the same data directory and pinned environment: `python scripts/run_d29.py --exp e1`, then `--exp e2`, each run once (the first attempt in the main working copy stopped at pre-flight and wrote nothing). Reproduction check passed in both (max abs diff 0). Outputs: `results/forecasting_d29_e1.json`, `..._e2.json`. Results: `docs/RESULTS.md`, D29 (Q1 negative, Q2 not established, Q3 negative).
+
+## D30. Full regression and classification metric set for the P1/P2 forecasts (supplementary reporting)
+
+**Status:** Written 28 Oct 2026 on the instruction of T. Sitaraman, **after** all results through D29. **Post hoc:** these metrics are added after the RMSE results were known. They are supplementary descriptions of the same predictions, not new hypotheses; no method choice, test or claim in D18–D29 changes because of them, and no D30 metric enters a registered test. Code: `src/metrics.py`, `tests/test_metrics.py`, `scripts/run_d30.py`, `scripts/make_d30_outputs.py`, `notebooks/16_d30_metrics.ipynb`.
+
+### Metrics (fixed here, before any D30 number is computed)
+On the SOH level (relative to the first observed check), error e = forecast SOH − measured SOH, in pp:
+- **Regression:** MSE, RMSE, MAE, MedAE, bias (mean e; positive = SOH overestimated), MAPE (%), NRMSE = RMSE / (max − min of measured SOH over the same samples), R² on SOH, and R²_Δ on the change since the origin (R² of forecast Δ against measured Δ). RMSE and MAE equal the existing `forecast_errors` values (checked in the tests).
+- **Reuse class (D10 cut-points, C0–C3):** accuracy, balanced accuracy, macro precision / recall / specificity / F1 over the classes present in the measured labels (a measured class never forecast has precision 0 in the average), MCC (multi-class), Cohen's κ unweighted and linear-weighted, per-class values, confusion matrix.
+- **Binary end-of-first-life decision** (SOH ≤ 80, i.e. C3, positive): accuracy, balanced accuracy, precision, recall, specificity, F1, MCC, κ, and AUC-ROC with −(forecast SOH) as the score (a ranking measure; no probability model).
+- **Not computed: log loss.** Every forecaster gives point forecasts; converting the D27–D28 interval half-widths into class probabilities would need a distributional assumption that was never tested. Stated as a limitation.
+- Undefined values are NaN (never 0): R² for a constant target, MCC / κ / AUC with one class, precision of a class never forecast (per class), recall of an absent class.
+
+### Scope and aggregation
+- **Forecasts:** those of paper Tables P1 and P2 (notebooks 12, 13; S1 and S6), recomputed with the committed hyperparameter selections (no re-tuning). P2 (all baselines, MLP and TFT, seeds 0–4) and the P1 baselines by default; the P1 continual methods with `--with-p1`.
+- **Stop condition:** the recomputed RMSE per (P2 method, held-out group) and per P1 method must equal the committed values (`results/forecasting.json`, `results/forecasting_wheeler.json`) to 1e-6 pp; otherwise nothing is written.
+- **Regression table:** mean over held-out groups (as Table P2, whose RMSE column it reproduces; `make_d30_outputs.py` checks this), s.d. over groups in the CSV.
+- **Classification table:** all held-out samples pooled, per seed, then mean over seeds. A held-out group mostly covers one or two classes, so per-group class metrics are degenerate; per-group values stay in the results file. Measured class counts are reported with the table. In S1 the measured classes are expected to be nearly all C0, so S1 class metrics are descriptive at most.
+- **Predictions** are written outside Git to `<data>/predictions/d30_<dataset>_p2.csv.gz`, so further metrics need no retraining.
+
+### Run log
+- **28 Oct 2026. Code committed** after unit tests on synthetic data only (every metric checked against scikit-learn). Not run on the real data: the session that wrote the code had no access to the datasets.

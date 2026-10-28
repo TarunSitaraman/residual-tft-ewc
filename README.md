@@ -221,6 +221,7 @@ Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, ra
 | `colab_review2` | **The single Colab notebook for the whole project**: setup, tests, big-data preprocessing results and a live Spark run on a checksummed real subset of S6, the S1/S6 benchmarks (P1–P3, reuse classes), residual TFT + EWC against the neural and conventional models (notebook 14's analysis), D24 status, conclusions | Current (live-subset numbers are a demonstration only) |
 | 14 | Residual TFT + EWC against the conventional baselines (D23 results); merged into `colab_review2` | Current |
 | **15** | **D24 results**: RC-TFT, residual TFT + EWC and the literature baselines (BiLSTM, TCN, Transformer, GPR, random forest, SVR), and how the Spark preprocessing job works (map / cache / reduce, data funnel, validation against pandas, web-UI screenshots, leakage audit, scaling); reads committed files only, runs in seconds | Current |
+| **16** | **D30 full metric set** for the P1/P2 forecasts: regression (MSE, RMSE, MAE, MedAE, bias, MAPE, NRMSE, R², R² of the change), reuse-class and end-of-first-life classification (accuracy, balanced accuracy, precision, recall, specificity, F1, MCC, Cohen's κ, AUC-ROC), confusion matrices, per-group errors; reads `results/forecasting_d30_*.json` (written by `scripts/run_d30.py`) | Current (empty until `run_d30.py` has run) |
 
 Notebooks 05–09 and 13 accept `EXPERIMENT_PROFILE=smoke` for a fast code check; only the default `paper` profile gives reportable numbers.
 
@@ -347,7 +348,7 @@ CLAUDE.md, AGENTS.md  project rules (reproducibility, no data in Git, invariants
 PLAN_OF_ACTION.md   original plan;  docs/RESEARCH_PLAN.md  revised research plan
 data/               datasets (git-ignored) + data/README.md (how to obtain them)
 docs/               RESULTS, DECISIONS (D1–D23), DATA_REPORT, EXTERNAL_DATA, REUSE_CATEGORIES, SPARK_DEMO
-notebooks/          01–15 (12 and 13 are the forecasting benchmarks; 14 and 15 read the D23 and D24 results)
+notebooks/          01–16 (12 and 13 are the forecasting benchmarks; 14, 15 and 16 read the D23, D24 and D30 results)
 src/                library code: data_pipeline, raw_diagnostics, diagnostic_features, health_indicators,
                     forecasting, wheeler, pool, ageing, protocols, experiments, continual_learning,
                     evaluation, reuse, robustness, p3; models/ (MLP, TFT)
@@ -377,6 +378,10 @@ python scripts/fetch_wheeler_characterisation.py && python scripts/build_wheeler
 # Experiments
 jupyter nbconvert --to notebook --execute notebooks/12_forecasting.ipynb --output-dir /tmp/executed
 jupyter nbconvert --to notebook --execute notebooks/13_wheeler_forecasting.ipynb --output-dir /tmp/executed
+
+# D30: full metric set on the P1/P2 forecasts (reproduces the committed RMSE first), then tables and figures
+python scripts/run_d30.py --dataset s1 && python scripts/run_d30.py --dataset s6
+python scripts/make_d30_outputs.py
 
 # Spark job and live platform
 python scripts/spark_ageing_features.py --cores 6 --ui 900     # Spark UI at http://localhost:4040

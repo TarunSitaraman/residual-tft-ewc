@@ -240,7 +240,8 @@ def baseline_predictions(train: pd.DataFrame, tests: Mapping[str, pd.DataFrame],
 
 
 def forecast_errors(frame: pd.DataFrame, pred: np.ndarray) -> dict:
-    """RMSE and MAE of SOH(k+h) in pp, pooled and per horizon."""
+    """RMSE and MAE of SOH(k+h) in pp, pooled and per horizon; with ``soh_origin`` and ``soh_target`` also the D10
+    reuse-class agreement and the D30 metric set (``metrics.flat``)."""
     err = np.asarray(pred, float) - frame[TARGET].to_numpy(float)
     out = {"n": int(len(err)), "RMSE": float(np.sqrt(np.mean(err ** 2))), "MAE": float(np.mean(np.abs(err)))}
     for h in sorted(frame["horizon"].unique()):
@@ -256,6 +257,11 @@ def forecast_errors(frame: pd.DataFrame, pred: np.ndarray) -> dict:
         pred_c = ev.reuse_class(frame["soh_origin"].to_numpy(float) + np.asarray(pred, float))
         out["class_accuracy"] = float(np.mean(true_c == pred_c))
         out["class_macro_f1"] = float(f1_score(true_c, pred_c, average="macro", labels=np.unique(true_c)))
+        # D30: the full regression and classification metric set on the SOH level (keys reg_*, cls_*, eol_*).
+        from src import metrics as M
+
+        soh_origin = frame["soh_origin"].to_numpy(float)
+        out.update(M.flat(frame["soh_target"].to_numpy(float), soh_origin + np.asarray(pred, float), soh_origin))
     return out
 
 
@@ -387,21 +393,33 @@ def run_baselines_p1(samples: pd.DataFrame, sets: Mapping[str, Sequence[str]], c
 
 
 def run_p2(samples: pd.DataFrame, config, sets: Mapping[str, Sequence[str]], columns: Mapping | None = None,
-           checkpoint: "Checkpoint | None" = None) -> pd.DataFrame:
+           checkpoint: "Checkpoint | None" = None, keep_predictions: bool = False):
     """Protocol P2 (leave one battery out): baselines and joint-trained MLP / TFT per held-out battery.
 
     With a single training task, TFT + EWC reduces to the TFT, so the neural
-    rows are the two backbones.
+    rows are the two backbones. With ``keep_predictions`` it returns ``(rows,
+    predictions)``, the second with one row per (method, seed, test sample):
+    group, origin and target identifiers, measured SOH and the forecast SOH.
     """
     from src.continual_learning import Joint, TFTJoint
     from src.experiments import method_settings
 
-    rows = []
+    rows, preds = [], []
+
+    def keep(name, seed, test, pred):
+        if keep_predictions:
+            ids = [c for c in dict.fromkeys((dp.GROUP_COL, "cell", "origin_rpt", "target_rpt", "origin_pos", "target_pos",
+                                             "horizon")) if c in test.columns]
+            preds.append(test[ids].assign(method=name, seed=seed, soh_origin=test["soh_origin"].to_numpy(float),
+                                          soh_target=test["soh_target"].to_numpy(float),
+                                          soh_pred=test["soh_origin"].to_numpy(float) + np.asarray(pred, float)))
+
     for held in _group_order(samples):
         task = leave_one_out_task(samples, held)
         fit = pd.concat([task.train, task.val], ignore_index=True)
         for name, p in baseline_predictions(fit, {"t": task.test}, sets, columns=columns).items():
             rows.append({"method": name, "seed": 0, dp.GROUP_COL: held, **forecast_errors(task.test, p["t"])})
+            keep(name, 0, task.test, p["t"])
         for backbone, cls, name in (("mlp", Joint, "mlp"), ("tft", TFTJoint, "tft")):
             kwargs = method_settings(config, "tft_joint" if backbone == "tft" else "joint")
             features = list(kwargs.pop("features"))
@@ -409,6 +427,10 @@ def run_p2(samples: pd.DataFrame, config, sets: Mapping[str, Sequence[str]], col
             for seed in config.seeds:
                 def unit(cls=cls, features=features, seed=seed, extra=extra, kwargs=kwargs, name=name, task=task, held=held):
                     m = cls(features, seed=seed, **extra, **kwargs).fit_all([task])
-                    return {"method": name, "seed": seed, dp.GROUP_COL: held, **forecast_errors(task.test, m.predict(task.test))}
-                rows.append(_run(checkpoint, f"p2_{name}_{held}_s{seed}", unit, (features, kwargs)))
-    return pd.DataFrame(rows)
+                    pred = m.predict(task.test)
+                    return {"method": name, "seed": seed, dp.GROUP_COL: held, **forecast_errors(task.test, pred)}, pred
+                row, pred = _run(checkpoint, f"p2_{name}_{held}_s{seed}", unit, (features, kwargs))
+                rows.append(row)
+                keep(name, seed, task.test, pred)
+    out = pd.DataFrame(rows)
+    return (out, pd.concat(preds, ignore_index=True)) if keep_predictions else out
