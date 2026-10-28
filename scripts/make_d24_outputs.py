@@ -56,7 +56,7 @@ def label(method: str) -> str:
     if method in BASELINE_NAMES:
         return BASELINE_NAMES[method]
     if method == "tft_residual_saewc":
-        return "RC-TFT (residual TFT + SA-EWC)"
+        return "Residual TFT + SA-EWC"
     backbone, arm, strategy = method.split("_")
     strat = {"ewc": "+ EWC", "finetune": "fine-tuning", "saewc": "+ SA-EWC"}[strategy]
     return f"{FAMILY_NAME[backbone]} {strat}, {arm}"
