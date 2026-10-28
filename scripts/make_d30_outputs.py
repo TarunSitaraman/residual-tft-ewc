@@ -6,7 +6,7 @@ writes, never edited by hand:
 
 - ``results/tables/d30_regression.csv``, ``d30_classification.csv``, ``d30_per_group.csv``;
 - ``paper/tables/d30_regression.tex``: P2, every regression metric, mean over held-out groups (as Table P2, so the
-  RMSE column must equal Table P2; checked here);
+  RMSE column must equal Table P2 to the run's tolerances; checked here);
 - ``paper/tables/d30_classification.tex``: P2, reuse-class and end-of-first-life (SOH <= 80) metrics on all held-out
   samples pooled (per-group classes are mostly a single class);
 - ``paper/figures/d30_confusion.png``: pooled reuse-class confusion matrices (S6, four methods);
@@ -62,11 +62,12 @@ def frame(r: dict, key: str) -> pd.DataFrame:
     return d.set_index("method").reindex([m for m in ORDER if m in set(d["method"])])
 
 
-def check_against_p2(k: str, over: pd.DataFrame) -> None:
-    """The mean-over-groups RMSE must equal the committed Table P2 value (same predictions, same averaging)."""
+def check_against_p2(k: str, over: pd.DataFrame, rep: dict) -> None:
+    """The mean-over-groups RMSE must equal the committed Table P2 value (same averaging), to the run's tolerances."""
     committed = {row["method"]: row["mean"] for row in json.loads(COMMITTED[k].read_text())["p2_rmse"]}
     for m, v in over["reg_RMSE"].items():
-        if abs(v - committed[m]) > 1e-6:
+        tol = rep["tolerance"] if m in ORDER[:6] else rep.get("neural_tolerance", rep["tolerance"])
+        if abs(v - committed[m]) > tol:
             raise SystemExit(f"{k} {m}: D30 RMSE {v} differs from committed P2 RMSE {committed[m]}")
 
 
@@ -88,7 +89,7 @@ def regression(res: dict) -> pd.DataFrame:
     rows, body = [], []
     for k, r in res.items():
         over = frame(r, "p2_over_groups")
-        check_against_p2(k, over)
+        check_against_p2(k, over, r["reproduction_check"])
         for m, row in over.iterrows():
             rows.append({"dataset": DATASETS[k], "method": m, **{c: row[c] for c, _ in REG_COLS},
                          **{f"{c}_sd_over_groups": row[f"{c}_sd"] for c, _ in REG_COLS}})

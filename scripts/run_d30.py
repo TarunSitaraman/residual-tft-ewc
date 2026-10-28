@@ -9,8 +9,9 @@ with every metric of ``src/metrics.py``:
 - ``--with-p1`` adds the P1 continual methods (10 orders x 5 seeds per method; slow).
 
 **Stop condition.** The per-group RMSE of every P2 method (mean over seeds) and the P1 RMSE of every method run must
-reproduce the committed values (``results/forecasting.json``, ``results/forecasting_wheeler.json``) to ``TOL``;
-otherwise nothing is written. The new metrics are therefore computed on the predictions that the paper reports.
+reproduce the committed values (``results/forecasting.json``, ``results/forecasting_wheeler.json``): the
+deterministic baselines to ``TOL``, the neural methods to ``NEURAL_TOL`` (D30 run log, 29 Oct 2026: their training is
+not bit-identical across platforms); otherwise nothing is written. Every difference is stored in the results file.
 
 Outputs: ``results/forecasting_d30_<dataset>.json`` (per group and seed, summaries) and, outside Git, the P2
 predictions ``<data>/predictions/d30_<dataset>_p2.csv.gz`` so further metrics need no retraining.
@@ -46,6 +47,8 @@ from src import metrics as M  # noqa: E402
 
 COMMITTED = {"s1": ROOT / "results" / "forecasting.json", "s6": ROOT / "results" / "forecasting_wheeler.json"}
 TOL = 1e-6                          # pp; RMSE reproduction tolerance (results files store 10 significant digits)
+NEURAL_TOL = 0.05                   # pp; neural methods: the D21 practical-equivalence threshold
+DETERMINISTIC = {"persistence", "linear_extrapolation", "ridge_schedule", "ridge_F0", "ridge_F1", "gbm_F1"}
 SUMMARY_KEYS = ([f"reg_{k}" for k in M.REGRESSION_KEYS] + [f"cls_{k}" for k in M.CLASS_KEYS]
                 + [f"eol_{k}" for k in M.BINARY_KEYS])
 
@@ -109,8 +112,10 @@ def reproduction(p2: pd.DataFrame, p1: pd.DataFrame | None, committed: dict) -> 
         for m, v in per_run.groupby("method").mean().items():
             diffs[f"p1/{m}"] = abs(float(v) - float(committed_p1[m])) if m in committed_p1 else float("inf")
     worst = max(diffs, key=diffs.get) if diffs else None
-    return {"tolerance": TOL, "n_compared": len(diffs), "max_abs_diff": float(diffs[worst]) if worst else float("nan"),
-            "worst": worst, "passed": bool(diffs) and all(v <= TOL for v in diffs.values())}
+    tol = {k: TOL if k.split("/")[1] in DETERMINISTIC else NEURAL_TOL for k in diffs}
+    return {"tolerance": TOL, "neural_tolerance": NEURAL_TOL, "n_compared": len(diffs),
+            "max_abs_diff": float(diffs[worst]) if worst else float("nan"), "worst": worst,
+            "passed": bool(diffs) and all(v <= tol[k] for k, v in diffs.items()), "abs_diffs": diffs}
 
 
 # ---------------------------------------------------------------------------

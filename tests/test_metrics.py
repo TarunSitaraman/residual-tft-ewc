@@ -130,3 +130,19 @@ def test_forecast_errors_adds_d30_keys_without_changing_existing_ones():
     assert out["cls_accuracy"] == pytest.approx(out["class_accuracy"])
     bare = FC.forecast_errors(frame.drop(columns=["soh_origin", "soh_target"]), p - origin)
     assert not any(k.startswith(("reg_", "cls_", "eol_")) for k in bare)
+
+
+def test_d30_reproduction_tolerance_baselines_exact_neural_within_d21_threshold():
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    import run_d30
+    from src import data_pipeline as dp
+
+    committed = {"p2_rmse": [{"method": "ridge_F0", "g": 1.0}, {"method": "tft", "g": 1.0}]}
+    def p2(ridge, tft):
+        return pd.DataFrame({"method": ["ridge_F0", "tft"], dp.GROUP_COL: ["g", "g"], "RMSE": [ridge, tft]})
+    assert run_d30.reproduction(p2(1.0, 1.04), None, committed)["passed"]
+    assert not run_d30.reproduction(p2(1.0, 1.06), None, committed)["passed"]
+    assert not run_d30.reproduction(p2(1.0 + 1e-5, 1.0), None, committed)["passed"]
+    assert run_d30.reproduction(p2(1.0, 1.04), None, committed)["abs_diffs"]["p2/tft/g"] == pytest.approx(0.04)
