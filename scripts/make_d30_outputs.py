@@ -62,13 +62,18 @@ def frame(r: dict, key: str) -> pd.DataFrame:
     return d.set_index("method").reindex([m for m in ORDER if m in set(d["method"])])
 
 
-def check_against_p2(k: str, over: pd.DataFrame, rep: dict) -> None:
-    """The mean-over-groups RMSE must equal the committed Table P2 value (same averaging), to the run's tolerances."""
+def check_against_p2(k: str, over: pd.DataFrame, rep: dict) -> float:
+    """The mean-over-groups RMSE must equal the committed Table P2 value (same averaging), to the run's tolerances.
+    Returns the largest difference of a neural method (re-run; D30 run log)."""
     committed = {row["method"]: row["mean"] for row in json.loads(COMMITTED[k].read_text())["p2_rmse"]}
+    neural = 0.0
     for m, v in over["reg_RMSE"].items():
         tol = rep["tolerance"] if m in ORDER[:6] else rep.get("neural_tolerance", rep["tolerance"])
         if abs(v - committed[m]) > tol:
             raise SystemExit(f"{k} {m}: D30 RMSE {v} differs from committed P2 RMSE {committed[m]}")
+        if m not in ORDER[:6]:
+            neural = max(neural, abs(v - committed[m]))
+    return neural
 
 
 def src_line(res: dict) -> str:
@@ -86,10 +91,10 @@ EOL_COLS = [("eol_precision", "Prec."), ("eol_recall", "Rec."), ("eol_specificit
 
 
 def regression(res: dict) -> pd.DataFrame:
-    rows, body = [], []
+    rows, body, neural = [], [], 0.0
     for k, r in res.items():
         over = frame(r, "p2_over_groups")
-        check_against_p2(k, over, r["reproduction_check"])
+        neural = max(neural, check_against_p2(k, over, r["reproduction_check"]))
         for m, row in over.iterrows():
             rows.append({"dataset": DATASETS[k], "method": m, **{c: row[c] for c, _ in REG_COLS},
                          **{f"{c}_sd_over_groups": row[f"{c}_sd"] for c, _ in REG_COLS}})
@@ -98,7 +103,8 @@ def regression(res: dict) -> pd.DataFrame:
         body.append(None)
     S.write_tex(S.PTAB / "d30_regression.tex",
                 "Protocol P2, all regression metrics of the forecast SOH (pp unless stated), mean over held-out groups "
-                "(the RMSE column equals Table~\\ref{tab:p2}). Bias = mean(forecast $-$ measured): positive values "
+                "(the RMSE column equals Table~\\ref{tab:p2} for the baselines; MLP and TFT are re-runs on another "
+                f"platform, within {neural:.3f}~pp of it). Bias = mean(forecast $-$ measured): positive values "
                 "overestimate SOH. NRMSE = RMSE / range of measured SOH in the group. $R^2$ is on the SOH level, "
                 "$R^2_\\Delta$ on the SOH change since the origin (persistence has $R^2_\\Delta \\le 0$). SOH is relative "
                 "to the first observed check.",
