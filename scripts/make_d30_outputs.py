@@ -139,7 +139,9 @@ def _with_rules(body: list) -> list:
 
 
 def _prepend(path: Path, text: str) -> None:
+    """Add the provenance line, turn separator rows into plain \\midrule and span both columns (wide tables)."""
     content = path.read_text().replace("    \\midrule \\\\\n", "    \\midrule\n")
+    content = content.replace("\\begin{table}[t]", "\\begin{table*}[t]").replace("\\end{table}", "\\end{table*}")
     path.write_text(text + content)
 
 
@@ -156,7 +158,7 @@ def fig_confusion(res: dict) -> Path | None:
         return None
     pooled = pd.DataFrame(res["s6"]["p2_pooled"]).set_index("method")
     methods = [m for m in CONFUSION_METHODS if m in pooled.index]
-    fig, axes = plt.subplots(1, len(methods), figsize=(1.85 * len(methods), 2.3), sharey=True)
+    fig, axes = plt.subplots(1, len(methods), figsize=(1.85 * len(methods), 2.6), sharey=True)
     for ax, m in zip(np.atleast_1d(axes), methods):
         cm = np.asarray(pooled.loc[m, "confusion"], float)
         norm = cm / np.where(cm.sum(axis=1, keepdims=True) > 0, cm.sum(axis=1, keepdims=True), 1)
@@ -173,7 +175,7 @@ def fig_confusion(res: dict) -> Path | None:
     fig.suptitle("S6, P2: reuse-class confusion (counts; shading = row share), seed 0", fontsize=9, x=0.01, ha="left")
     fig.tight_layout()
     out = S.FIG / "d30_confusion.png"
-    fig.savefig(out)
+    fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
     return out
 
@@ -201,7 +203,7 @@ def fig_error_by_group(groups: pd.DataFrame) -> Path:
     fig.legend(loc="lower center", ncol=len(GROUP_METHODS), fontsize=8, bbox_to_anchor=(0.5, -0.02))
     fig.tight_layout(rect=(0, 0.05, 1, 1))
     out = S.FIG / "d30_error_by_group.png"
-    fig.savefig(out)
+    fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
     return out
 
@@ -218,7 +220,7 @@ def main() -> int:
     groups.to_csv(S.TAB / "d30_per_group.csv", index=False)
     written = [fig_confusion(res), fig_error_by_group(groups)]
     for p in [S.PTAB / "d30_regression.tex", S.PTAB / "d30_classification.tex", *[w for w in written if w]]:
-        print("wrote", p.relative_to(ROOT))
+        print("wrote", p.relative_to(ROOT) if p.is_relative_to(ROOT) else p)
     return 0
 
 
