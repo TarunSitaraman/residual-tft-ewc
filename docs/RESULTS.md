@@ -728,3 +728,46 @@ Results files: `results/forecasting_d29_e1.json` (horizons 1–3) and `results/f
 2. **Case7 is not fixed (Q1 negative).** The throughput clock lowers case7 error only slightly relative to a cycle clock (1.79 against 1.85 pp, 3.11 against 3.25 pp, Q4): counting the extra charge of a 100 % cycle is not enough to describe the faster fade at 100 % DoD. The hybrid improves case7 error over D27 (1.38 against 1.49, 2.63 against 3.13 pp) but less than the D28 refit (1.08, 2.49).
 3. **Uncalibrated Bayesian intervals cover case7 but are uninformative (Q5).** PHYS-BAYES is the only rule in D26–D29 that covers case7 at 0.80 or more (0.93, 0.80), but its intervals are wide everywhere (pooled coverage 0.97–0.99, width about 7.7 pp, IS90 8–9 pp, worse than every calibrated rule). The model's posterior uncertainty does not single out the out-of-range condition.
 4. **Conclusion for the study:** of D23–D29, the best unseen-condition method remains gradient boosting with leave-one-condition-out intervals, refitted and tracked as the new condition's checks arrive (D28). A physical DoD effect would need prior information from data that vary DoD (not done; D29 "Not done").
+
+## D30: full regression and classification metric set for P1/P2 (29 Oct 2026)
+
+Results files: `results/forecasting_d30_s1.json` and `results/forecasting_d30_s6.json`, run at commit `cb43efb` (clean checkout, `git_dirty` false, no override; Windows 11, Python 3.11.15, torch 2.14.1+cpu, pinned requirements). **Post hoc and supplementary** (D30): the same P2 forecasts as Table P2 and the P1 baselines, scored with more metrics; no registered test or claim changes. Tables `results/tables/d30_regression.csv`, `d30_classification.csv`, `d30_per_group.csv`; paper tables `paper/tables/d30_regression.tex`, `d30_classification.tex`; figures `paper/figures/d30_confusion.png`, `d30_error_by_group.png` (`scripts/make_d30_outputs.py`). P2 predictions outside Git: `data/predictions/d30_<dataset>_p2.csv.gz`.
+
+**Reproduction check (with the 29 Oct deviation, D30 run log).** Every deterministic baseline reproduces the committed P1 and P2 RMSE to 1e-6 pp on both datasets. The neural methods do not reproduce bit-for-bit across platforms: S1 TFT on w10 −0.009 pp, S6 MLP up to +0.027 pp (case5), S6 TFT case7 +0.0002 pp; all within the 0.05 pp neural tolerance. P2 means over groups: S1 TFT 0.2922 → 0.2907, S6 MLP 0.8205 → 0.8257 pp; no method changes rank. The MLP and TFT rows below therefore describe the re-run, not exactly the Table P2 run. Re-running S1 from an empty cache on this machine gives identical values, so training is deterministic per platform.
+
+**P2, regression, mean over held-out groups (pp):**
+
+| Data | Method | RMSE | MAE | MedAE | Bias | R²_Δ |
+|---|---|---|---|---|---|---|
+| S1 | Persistence | 0.545 | 0.470 | 0.473 | +0.430 | −1.85 |
+| S1 | Linear extrapolation | 0.511 | 0.365 | 0.226 | −0.014 | −1.31 |
+| S1 | Ridge, usage only | 0.301 | 0.206 | 0.133 | −0.038 | 0.18 |
+| S1 | **Gradient boosting, F1** | **0.219** | **0.148** | **0.102** | −0.021 | **0.54** |
+| S1 | MLP | 0.285 | 0.211 | 0.162 | +0.009 | 0.26 |
+| S1 | TFT | 0.291 | 0.210 | 0.149 | +0.027 | 0.22 |
+| S6 | Persistence | 2.817 | 2.451 | 2.225 | +2.451 | −3.16 |
+| S6 | Linear extrapolation | 1.372 | 0.738 | 0.333 | +0.050 | −0.05 |
+| S6 | Ridge, F0 | 0.859 | 0.613 | 0.439 | +0.028 | 0.61 |
+| S6 | **Gradient boosting, F1** | **0.710** | **0.488** | **0.321** | +0.097 | **0.74** |
+| S6 | MLP | 0.826 | 0.608 | 0.444 | +0.220 | 0.66 |
+| S6 | TFT | 0.868 | 0.621 | 0.424 | +0.235 | 0.62 |
+
+**P2, S6, reuse class (C0–C3) and end of first life (SOH ≤ 80), all held-out samples pooled, mean over seeds:**
+
+| Method | Acc. | Bal. acc. | Macro F1 | MCC | κ_w | EoL F1 | EoL MCC | EoL AUC |
+|---|---|---|---|---|---|---|---|---|
+| Persistence | 0.858 | 0.782 | 0.661 | 0.723 | 0.81 | 0.962 | 0.894 | 0.998 |
+| Linear extrapolation | 0.939 | 0.840 | 0.777 | 0.876 | 0.91 | 0.989 | 0.965 | 0.999 |
+| Ridge, F0 | 0.963 | 0.879 | 0.881 | 0.922 | 0.94 | 0.990 | 0.968 | 0.999 |
+| **Gradient boosting, F1** | **0.966** | 0.894 | **0.893** | **0.928** | 0.95 | 0.989 | 0.966 | 0.999 |
+| MLP | 0.962 | 0.863 | 0.871 | 0.921 | 0.94 | 0.989 | 0.966 | 0.999 |
+| TFT | 0.963 | 0.877 | 0.882 | 0.923 | 0.94 | 0.989 | 0.965 | 0.999 |
+
+Measured class counts, S6: C0 52, C1 182, C2 516, C3 1659. S1: all 279 samples are C0, so S1 class metrics are degenerate (accuracy 0.98–1.00 for every method; specificity, MCC and AUC undefined) and are not interpreted.
+
+**Reading.**
+1. **The extra regression metrics agree with RMSE.** Gradient boosting is best on S1 and S6 in RMSE, MAE, MedAE and R²_Δ; MLP and TFT come next; persistence and linear extrapolation are last. R²_Δ shows how much a forecaster adds to persistence: linear extrapolation adds nothing on the unseen battery (S1, −1.31) or condition (S6, −0.05).
+2. **The neural models overestimate SOH on S6** (bias +0.22 and +0.24 pp against +0.10 for gradient boosting), almost all of it on case7 (TFT bias about +1.6 pp; `d30_error_by_group.png`), as in D26–D29.
+3. **Reuse classes, S6:** gradient boosting, ridge F0, MLP and TFT are within 0.004 in accuracy and 0.007 in MCC; all clearly beat linear extrapolation (MCC 0.876) and persistence (0.723). The errors are almost all between neighbouring classes (`d30_confusion.png`); the hardest class is C1 (182 samples).
+4. **End of first life does not separate the methods:** AUC 0.998–0.999 and F1 0.96–0.99 for every method, including persistence. Most S6 samples are far from 80 % SOH (69 % of them already in C3), so this decision is easy here; it is not evidence for any forecaster.
+5. **P1 baselines** (per-task values in the results file) reproduce the committed P1 RMSE exactly; their class metrics are single-class per task and are not interpreted.
