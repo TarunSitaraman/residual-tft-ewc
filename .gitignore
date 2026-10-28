@@ -35,6 +35,8 @@ venv/
 
 # Cache of converted raw diagnostic files (src/raw_diagnostics.py)
 /data/cache/
+# Saved forecasts (scripts/run_d30.py), kept outside Git like the data
+/data/predictions/
 
 # Local Spark artefacts (chosen screenshots are copied to docs/figures/spark)
 /data/spark_screens/
