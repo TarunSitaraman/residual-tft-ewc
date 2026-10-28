@@ -7,7 +7,7 @@ Written 12 Oct 2026 after an audit of the repository at `8b65384`. This plan say
 | Question | Decision |
 |---|---|
 | Proposed model | **RC-TFT**: residual TFT with **shift-adaptive EWC** (the TFT + EWC hybrid), pre-registered as D24. The D23 fixed-λ model is its ablation. **Outcome (14 Oct):** SA-EWC's positive-result criterion was not met (practically equivalent to fixed λ on error and forgetting, E1 and E2), so under D24 the fixed-λ residual TFT + EWC stays the best-supported variant; RC-TFT is reported with its null result (`docs/RESULTS.md`, D24). |
-| Name | *Residual Continual TFT*: R = forecasts the correction to linear extrapolation; C = continual training with shift-adaptive EWC; TFT = the (cited) backbone. |
+| Name | Was *RC-TFT* (Residual Continual TFT). **Renamed 28 Oct 2026 to "residual TFT + SA-EWC"** in the paper and the D24 tables (`63c3f88`); run scripts, code comments and earlier decision records keep RC-TFT as the historical name. |
 | Compute | One night on the ASUS (`docs/D24_NIGHT_RUN.md`); parts in a fixed priority order, anything unfinished reported as not run. |
 | Licence | Proprietary, all rights reserved, while the repository is private (`LICENSE`). |
 | Paper | Kept long for now; cut later. Results come first. |
@@ -244,3 +244,16 @@ Every extra variant tested on the same data weakens the statistics; reviewers no
 | 6.5.5 | Paper: one methods paragraph (shrinkage, conformal intervals, residual pretraining), results, limitations | cloud | Done 19 Oct with D26 and D27 (abstract, contributions, methods, results, discussion, conclusion); paper cut back to 8 pages the same day |
 | 6.5.6 | Next (not in D25): P2 for the D25 model and the D24 baselines (WS6.1), the setting where learned models already beat extrapolation | both | Done as D26 (residual TFT + EWC only; the D24 backbones were not run, D26 "Not done"); run 17–18 Oct, written up 19 Oct |
 
+## 7. Paper status and open items (28 Oct 2026)
+
+Done on 28 Oct (`74cba10`, `63c3f88`):
+
+- Architecture figure of the proposed model, `paper/figures/architecture.png` from `scripts/make_architecture_figure.py` (TFT correction network: window 4, 19 shared inputs, d_model 8, two heads, 12,708 parameters; EWC loss; shrunk residual forecast; conformal interval and reuse class). Included in Methods as `fig:arch`.
+- Abstract reuse-class share corrected to 87–93 % (the D28 refit + track intervals, `docs/RESULTS.md` D28), matching the conclusion; the same sentence added to the D28 paragraph of Results.
+- RC-TFT renamed (see the table above). `paper_single.tex` regenerated.
+
+Open, in order:
+
+1. **Page count.** No LaTeX on the local PC, so the paper has not been compiled since the figure was added. It was a full 8 pages before; the figure (about half a column) probably makes it 9. Compile (Overleaf or `tectonic paper/main.tex`), and if it overflows, trim text rather than drop `fig:arch`. Rebuild `paper/paper_single.pdf` afterwards (stale since 19 Oct).
+2. **Related-work paraphrases.** Crossref was unreachable from the local PC, so these sentences were not compared with the cited abstracts: ref1 ("85 % less testing time than a full capacity test"), ref4 ("root-mean-squared percent error below 1.48 % in the worst cases"), ref5 (15-month test, MAPE below 2.3 %), ref10 ("isotonic recalibration substantially reduced the calibration error"). Check each against the abstract; rephrase anything close to verbatim and keep the numbers exact.
+3. **Team decision, not for an agent:** wording of the IEEE-required disclosure of AI use in the acknowledgments. Repository rules (`CLAUDE.md`) bar agents from writing it into the repository, so the authors add it.
