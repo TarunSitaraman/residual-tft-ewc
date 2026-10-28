@@ -111,9 +111,13 @@ def _from_confusion(cm: np.ndarray) -> dict:
         f1 = np.where((2 * tp + fp + fn) > 0, 2 * tp / (2 * tp + fp + fn), np.nan)
     # Macro averages over the classes that occur in the measured labels (the set sklearn's balanced accuracy uses).
     # A measured class that is never predicted has undefined precision; it counts as 0 in the average (sklearn's
-    # zero_division=0), so a forecaster cannot raise macro precision by never predicting a hard class.
-    def macro(v):
-        return float(np.mean(np.nan_to_num(v[present], nan=0.0))) if present.any() else float("nan")
+    # zero_division=0), so a forecaster cannot raise macro precision by never predicting a hard class. Any other
+    # undefined per-class value (e.g. specificity when every sample is in one class) is left out; all undefined -> NaN.
+    def macro(v, undefined_as_zero=False):
+        v = v[present]
+        if undefined_as_zero:
+            v = np.nan_to_num(v, nan=0.0)
+        return float(np.mean(v[~np.isnan(v)])) if (~np.isnan(v)).any() else float("nan")
     # Matthews correlation coefficient, multi-class form (Gorodkin 2004).
     cov_ytyp = float(tp.sum() * n - actual @ predicted)
     cov_ypyp = float(n ** 2 - predicted @ predicted)
@@ -131,7 +135,7 @@ def _from_confusion(cm: np.ndarray) -> dict:
         "n": int(n), "n_classes_measured": int(present.sum()),
         "accuracy": _nan_div(tp.sum(), n),
         "balanced_accuracy": macro(recall),
-        "precision_macro": macro(precision), "recall_macro": macro(recall),
+        "precision_macro": macro(precision, undefined_as_zero=True), "recall_macro": macro(recall),
         "specificity_macro": macro(specificity), "f1_macro": macro(f1),
         "mcc": float(mcc), **kappas,
         "per_class": {int(c): {"support": int(actual[c]), "precision": float(precision[c]), "recall": float(recall[c]),

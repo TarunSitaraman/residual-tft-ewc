@@ -146,3 +146,13 @@ def test_d30_reproduction_tolerance_baselines_exact_neural_within_d21_threshold(
     assert not run_d30.reproduction(p2(1.0, 1.06), None, committed)["passed"]
     assert not run_d30.reproduction(p2(1.0 + 1e-5, 1.0), None, committed)["passed"]
     assert run_d30.reproduction(p2(1.0, 1.04), None, committed)["abs_diffs"]["p2/tft/g"] == pytest.approx(0.04)
+
+
+def test_macro_specificity_is_nan_not_zero_when_every_sample_is_one_class():
+    m = M.classification_from_confusion([[8, 2, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
+    assert np.isnan(m["specificity_macro"])                  # only C0 measured: TN + FP = 0
+    assert m["recall_macro"] == pytest.approx(0.8)
+    m2 = M.classification_from_confusion([[5, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 3]])
+    assert m2["specificity_macro"] == pytest.approx(1.0)
+    m3 = M.classification_from_confusion([[4, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [2, 0, 0, 0]])
+    assert m3["precision_macro"] == pytest.approx((4 / 6 + 0) / 2)  # C3 never forecast: precision counts as 0
