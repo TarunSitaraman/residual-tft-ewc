@@ -11,7 +11,7 @@ Outputs (never edited by hand):
   replication verdict.
 - ``results/tables/d24_per_group_<exp>.csv`` and ``.tex``: test RMSE of every S6 test case after the last stream step
   (main seeds, mean over runs), as CLAUDE.md requires per-group reporting.
-- ``paper/figures/d24_comparison_<exp>.png``, ``d24_per_group_<exp>.png``, ``d24_forgetting_<exp>.png`` and, for E2,
+- ``paper/figures/d24_comparison_<exp>.png``, ``d24_per_group_<exp>.png`` (residual + EWC arms and baselines only), ``d24_forgetting_<exp>.png`` and, for E2,
   ``d24_horizon_e2.png``; ``spark_scaling.png`` when ``results/d22_spark_scaling.json`` exists.
 
 Colours (validated categorical slots 1-5, adjacent pairs; fixed order, never cycled): TFT blue, MLP orange, BiLSTM
@@ -271,6 +271,9 @@ def fig_comparison(exp: str, d: dict, comp: pd.DataFrame) -> Path:
 
 
 def fig_per_group(exp: str, grp: pd.DataFrame) -> Path:
+    # One arm per method, the same rule for every backbone: the residual + EWC arm of each learned model and each
+    # baseline's residual (or only) form. Fine-tuning, direct and usage-only arms stay in the CSV and .tex tables.
+    grp = grp[~grp.index.str.contains("fine-tuning|, direct|usage only")]
     cases = [c for c in grp.columns if c != "mean"]
     v = grp[cases].to_numpy(float)
     fig, ax = plt.subplots(figsize=(6.6, 0.24 * len(grp) + 1.2))
@@ -286,7 +289,8 @@ def fig_per_group(exp: str, grp: pd.DataFrame) -> Path:
     ax.grid(False)
     cb = fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
     cb.set_label("Test RMSE (pp)")
-    ax.set_title("Per test case after the last stream step (main seeds)", loc="left")
+    ax.set_title("Per test case after the last stream step (main seeds)\n"
+                 "residual + EWC arms and baselines; other arms in the table", loc="left")
     fig.tight_layout()
     out = FIG / f"d24_per_group_{exp}.png"
     fig.savefig(out)
