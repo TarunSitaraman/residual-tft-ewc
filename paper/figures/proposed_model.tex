@@ -1,0 +1,51 @@
+% Proposed model, Residual TFT-EWC (Fig. 2). Drawn in TikZ; notation of Section III.
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[
+      font=\fontsize{6.4}{7.4}\selectfont,
+      blk/.style={draw, thick, rectangle, align=center, text width=2.85cm, minimum height=0.5cm, inner sep=1.5pt},
+      side/.style={draw, thick, rectangle, align=center, text width=3.3cm, minimum height=0.5cm, inner sep=1.5pt},
+      flow/.style={-{Latex[length=1.6mm]}, thick},
+      node distance=0.22cm]
+    % (a) correction network
+    \node[blk, fill=black!6] (x) {input window: 4 latest origins\\ (19 inputs + missing flags)};
+    \node[blk, below=of x] (emb) {per-variable embedding, $d{=}8$};
+    \node[blk, below=of emb] (vsn) {variable selection (GRNs)};
+    \node[blk, below=of vsn] (lstm) {LSTM encoder, gate, norm};
+    \node[blk, below=of lstm] (att) {masked two-head attention};
+    \node[blk, below=of att] (head) {linear head: $g_\theta(\mathbf{x}_{b,k,h})$};
+    \foreach \a/\b in {x/emb, emb/vsn, vsn/lstm, lstm/att, att/head} \draw[flow] (\a) -- (\b);
+    \node[draw, dashed, fit=(x)(head), inner sep=3pt] (tft) {};
+    \node[anchor=south west, inner sep=1pt] at (tft.north west) {(a) TFT};
+
+    % (b) forecast: head -> shrinkage -> sum <- linear extrapolation; sum -> forecast -> interval -> class
+    \node[draw, thick, rectangle, minimum height=0.5cm, inner sep=1.5pt, right=0.6cm of head] (shr) {$\times\,\alpha_h$};
+    \node[draw, thick, circle, inner sep=0.4pt, font=\small, right=0.75cm of shr] (sum) {$+$};
+    \node[side, fill=black!6, anchor=north] (lin) at (sum |- x.north)
+      {linear extrapolation\\ $\hat\Delta^{\mathrm{lin}}=r_{b,k}\,(t_{b,k+h}-t_{b,k})$};
+    \node[anchor=south west, inner sep=1pt] at (lin.north west) {(b) forecast};
+    \node[side, below=0.3cm of sum] (out) {$\hat\Delta=\hat\Delta^{\mathrm{lin}}+\alpha_h\,g_\theta$};
+    \node[side, below=of out] (ci) {interval $\hat\Delta\pm q_h$ (conformal)};
+    \node[side, fill=black!6, below=of ci] (cls) {forecast SOH $\rightarrow$ class C0--C3};
+    \draw[flow] (head) -- (shr);
+    \draw[flow] (shr) -- (sum);
+    \draw[flow] (lin) -- (sum);
+    \draw[flow] (sum) -- (out);
+    \draw[flow] (out) -- (ci);
+    \draw[flow] (ci) -- (cls);
+    \node[align=left, anchor=west, font=\fontsize{6}{7}\selectfont] at ($(lin.south)!0.45!(sum.north)+(0.08,0)$)
+      {$\alpha_h\in[0,1]$ per horizon,\\ fitted on validation rows};
+
+    % (c) training
+    \node[draw, dashed, thick, rectangle, align=left, inner sep=2pt, anchor=north west, text width=3.2cm]
+      (ewc) at ($(tft.south west)+(0,-0.3)$)
+      {(c) training on task $t$: MSE on\\ $\Delta-\hat\Delta^{\mathrm{lin}}$ + EWC penalty
+       $\tfrac{\lambda}{2}\sum_{j<t}\lVert\theta-\theta^*_j\rVert^2_{F_j}$};
+    \draw[flow, dashed] (ewc.north -| head.south) -- (head.south |- tft.south);
+  \end{tikzpicture}
+  \caption{Proposed model, Residual TFT-EWC. (a) The TFT maps a window of the four latest origins of a cell to a
+    correction $g_\theta$. (b) The correction is shrunk per horizon and added to linear
+    extrapolation~\eqref{eq:residual}; conformal intervals give the reuse class. (c) Each task is trained on
+    the correction with the EWC penalty~\eqref{eq:ewc}.}
+  \label{fig:arch}
+\end{figure}

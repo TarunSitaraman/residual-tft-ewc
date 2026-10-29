@@ -10,7 +10,9 @@ The state of health (SOH) describes the present capability of a battery relative
 
 This work combines continual learning, health assessment and second-life reuse assessment. Health is assessed by \emph{forecasting} the SOH one to six capacity checks ahead from everything measured up to the latest check: on the first dataset studied, estimating the current SOH from cycling features was beaten by carrying the last measured SOH forward (\S\ref{sec:methods}), whereas a reuse decision needs the future SOH. The forecast is mapped to reuse-suitability classes.
 
-The contributions are:
+\input{figures/system_architecture}
+
+The contributions are (Fig.~\ref{fig:system}):
 \begin{itemize}
   \item A leakage-controlled benchmark for forecasting the SOH of second-life cells from five public datasets (395 cells after quality rules), with two label artefacts removed: test currents set from the previous capacity, and pulse charge counted in the capacity.
   \item An evaluation of a Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) against fine-tuning, replay, joint training, simple forecasters and the model families of the literature (BiLSTM, TCN, Transformer, GPR, random forest, SVR) under three protocols (a continual stream, unseen groups and first-life pretraining), reporting adaptation, forgetting and retention.

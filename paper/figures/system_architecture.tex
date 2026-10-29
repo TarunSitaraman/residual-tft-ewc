@@ -1,0 +1,47 @@
+% System architecture of the study (Fig. 1). Drawn in TikZ; every number is from Section III.
+\begin{figure*}[t]
+  \centering
+  \begin{tikzpicture}[
+      font=\fontsize{6.4}{7.6}\selectfont,
+      stage/.style={draw, thick, rectangle, align=left, anchor=north west, inner sep=3pt,
+                    text width=2.62cm, minimum height=2.15cm},
+      head/.style={draw, thick, rectangle, fill=black!8, align=center, anchor=south west, inner sep=2pt,
+                   text width=2.62cm, minimum height=0.42cm, text height=1.6ex, text depth=0.4ex,
+                   font=\fontsize{6.8}{7.8}\selectfont\bfseries},
+      flow/.style={-{Latex[length=1.8mm]}, thick}]
+    \foreach \i/\t in {0/Data sources, 1/Preprocessing, 2/Labels and inputs, 3/Protocols,
+                       4/Proposed model, 5/Output and evaluation} {
+      \node[head] (h\i) at (\i*3.0cm, 0) {\t};
+    }
+    \node[stage] (s0) at (h0.south west) {%
+      S1: 6 NMC cells\\ S6: 20 LFP cells,\\ \quad 7 usage conditions\\ S7--S9: 369 first-life\\ \quad cells (pool)\\
+      files checked against\\ \quad records, checksums};
+    \node[stage] (s1) at (h1.south west) {%
+      parse capacity checks\\ validity rules (S6: 843\\ \quad of 847 checks)\\ IC curves, Gaussian\\
+      \quad smoothing, 5--10 mV\\ Spark: $9{\times}10^{8}$ rows\\ \quad $\rightarrow$ block inputs};
+    \node[stage] (s2) at (h2.south west) {%
+      SOH $=100\,C_{b,k}/C_{b,1}$\\ target $\Delta_{b,k,h}$, $h=1$--6\\ fade rate $r_{b,k}$\\
+      inputs F0, F1, shared\\ median imputation,\\ \quad missing flags\\ frozen standardisation};
+    \node[stage] (s3) at (h3.south west) {%
+      purged time splits\\ \quad (cuts at 60, 80\,\%)\\ P1: continual stream\\ P2: unseen cell or\\
+      \quad usage condition\\ P3: pretraining on pool\\ 10 orders $\times$ 5 seeds};
+    \node[stage, very thick] (s4) at (h4.south west) {%
+      Residual TFT-EWC\\ \quad (Fig.~\ref{fig:arch})\\ TFT correction $g_\theta$ to\\ \quad linear extrapolation\\
+      EWC penalty per task\\ shrinkage $\alpha_h$\\ conformal interval $\pm q_h$};
+    \node[stage] (s5) at (h5.south west) {%
+      SOH forecast, interval\\ reuse class C0--C3\\ RMSE, forgetting, BWT\\ interval score, coverage\\
+      Wilcoxon--Holm tests\\ replication rule};
+    \foreach \i [evaluate=\i as \j using int(\i+1)] in {0,...,4} {
+      \draw[flow] (s\i.east) -- (s\j.west);
+    }
+    \node[draw, dashed, rectangle, inner sep=2pt, anchor=north west, align=center, text width=8.65cm]
+      (base) at ($(s3.south west)+(0,-0.22)$)
+      {baselines on the same splits: persistence, linear extrapolation, ridge, gradient boosting, MLP,
+       BiLSTM, TCN, Transformer, GPR, random forest, SVR; fine-tuning, replay, joint training};
+    \draw[flow, dashed] (base.north -| s3.south) -- (s3.south);
+    \draw[flow, dashed] (base.north -| s5.south) -- (s5.south);
+  \end{tikzpicture}
+  \caption{System architecture: from the public archives to the forecast, its interval and the reuse class,
+    with the protocols and baselines used for evaluation.}
+  \label{fig:system}
+\end{figure*}

@@ -87,12 +87,7 @@ Inputs use only information available at the origin. \textbf{F0} contains the SO
 
 Preprocessing (standardisation, median imputation with missing indicators, target scaling) is fitted on the first task and then frozen. The \emph{MLP} has hidden layers of 128 and 64 ReLU units (dropout 0.1). The proposed backbone adapts the Temporal Fusion Transformer (TFT)~\cite{lim2021tft}: a window of the $W{=}4$ most recent origins of the same cell and horizon (inputs only, never labels) passes through per-variable embeddings, variable selection by gated residual networks, an LSTM encoder~\cite{hochreiter1997lstm} and interpretable two-head attention masked to past steps (Fig.~\ref{fig:arch}; $d{=}8$, 12{,}708 parameters with the shared inputs).
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{figures/architecture.png}
-  \caption{Proposed model. (a) The TFT maps a window of the four latest origins of a cell to a correction $g_\theta$. (b) Trained with EWC on each task, the correction is shrunk per horizon and added to linear extrapolation~\eqref{eq:residual}; conformal intervals give the reuse class.}
-  \label{fig:arch}
-\end{figure}
+\input{figures/proposed_model}
 
 \emph{Strategies.} Fine-tuning trains on the current task only (lower bound); experience replay~\cite{rolnick2019replay} stores $B$ samples per finished task; joint training fits all tasks at once (upper bound); and Elastic Weight Consolidation (EWC)~\cite{kirkpatrick2017ewc} adds, for each finished task $j$,
 \begin{equation}
