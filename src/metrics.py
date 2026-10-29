@@ -7,7 +7,7 @@ D30 adds the full metric set, computed on the same predictions:
   and NRMSE, on the SOH level (SOH relative to the first observed check), plus
   R² of the SOH *change*. The level R² is dominated by the spread of SOH between
   groups and origins, so a forecaster that predicts no change already scores
-  high; the change R² measures what a forecaster adds to persistence.
+  high; the change R² compares the forecast change with the mean measured change (persistence scores <= 0).
 - ``classification_metrics``: agreement of the reuse class (D10 cut-points) of
   the forecast and the measured SOH: accuracy, balanced accuracy, macro
   precision / recall / specificity / F1, Matthews correlation coefficient,
