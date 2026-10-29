@@ -44,7 +44,7 @@ Table~\ref{tab:data} lists the five public datasets (all CC~BY~4.0). Every file 
 \subsection{Big-data processing of the ageing cycles}
 \label{sec:spark}
 
-Between checks, every S6 cell logged each ageing cycle at about one sample per second: 827 files, 132~GB raw and $9.0\times10^{8}$ rows. Apache Spark~4.2 (PySpark, local mode) reduces them to block-level inputs: one map task per 100-cycle block derives, for every cycle, a validity flag and seven measured responses (end-of-charge and end-of-discharge voltage, constant-voltage hold time and final current, relaxation after charge and after discharge, internal resistance); Spark SQL groups the cached per-cycle table (82{,}529 cycles) by cell and block into the mean, last value and slope of each response (21 inputs), and each block joins the origin at the check that ends it. Charge, energy and current are excluded because the protocol scales them with the previous capacity (within-cell $r=0.97$--$0.999$ with the previous check's capacity). The run takes 20~min on six cores and matches an independent pandas implementation on all 827 blocks (largest difference $2\times10^{-13}$).
+Between checks, every S6 cell logged each ageing cycle at about one sample per second (827 files, 132~GB, $9.0\times10^{8}$ rows). Apache Spark~4.2 (PySpark, local mode) reduces them to the mean, last value and slope of seven measured responses per 100-cycle block (21 inputs), joined to the check that ends the block; the job, its validation against an independent pandas implementation and the excluded quantities are described in the supplement.
 
 \subsection{State of health and forecasting target}
 \label{sec:soh}
@@ -94,7 +94,7 @@ Preprocessing (standardisation, median imputation with missing indicators, targe
   \frac{\lambda}{2}\sum_{p} F_{j,p}\,\big(\theta_p - \theta^{*}_{j,p}\big)^2,
   \label{eq:ewc}
 \end{equation}
-with $\theta^*_j$ the parameters after task $j$ and $F_j$ the empirical diagonal Fisher information over up to 500 training samples. \emph{TFT\,+\,EWC} is the proposed model. Training uses Adam~\cite{kingma2015adam}, batches of 64, at most 200 epochs and early stopping on the current task's validation RMSE.
+with $\theta^*_j$ the parameters after task $j$ and $F_j$ the empirical diagonal Fisher information over up to 500 training samples. \emph{TFT\,+\,EWC} is the proposed continual learner; trained on the residual~\eqref{eq:residual} below, with shrinkage and intervals, it forms the proposed \emph{Residual TFT-EWC} (Fig.~\ref{fig:arch}). Training uses Adam~\cite{kingma2015adam}, batches of 64, at most 200 epochs and early stopping on the current task's validation RMSE.
 
 \emph{Reference forecasters} are persistence ($\hat\Delta=0$), linear extrapolation $\hat\Delta_{b,k,h} = r_{b,k}(t_{b,k+h}-t_{b,k})$, ridge regression (on planned usage only, F0 or F1) and histogram gradient boosting on F1.
 

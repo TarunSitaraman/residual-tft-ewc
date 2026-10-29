@@ -136,6 +136,28 @@ error per held-out group.
 \end{figure*}
 
 % -----------------------------------------------------------------------------
+\section{Ageing-cycle processing and first-life pretraining}
+
+\emph{Spark job.} Between checks, every S6 cell logged each ageing cycle at about one sample per second: 827 files,
+132~GB raw and $9.0\times10^{8}$ rows. Apache Spark~4.2 (PySpark, local mode) reduces them to block-level inputs: one map
+task per 100-cycle block derives, for every cycle, a validity flag and seven measured responses (end-of-charge and
+end-of-discharge voltage, constant-voltage hold time and final current, relaxation after charge and after discharge,
+internal resistance); Spark SQL groups the cached per-cycle table (82{,}529 cycles) by cell and block into the mean,
+last value and slope of each response (21 inputs), and each block joins the origin at the check that ends it. Charge,
+energy and current are excluded because the protocol scales them with the previous capacity (within-cell
+$r=0.97$--$0.999$ with the previous check's capacity). The run takes 20~min on six cores and matches an independent
+pandas implementation on all 827 blocks (largest difference $2\times10^{-13}$).
+
+\emph{First-life pretraining (P3).} The pool provides 36{,}711 samples, against 2{,}409 in S6, and validation selected
+EWC $\lambda=0.01$ for the pretrained TFT. Under the replication rule, EWC and fine-tuning are practically equivalent for
+the pretrained TFT (differences of 0.015--0.017~pp). The S6 stream does not degrade the pool test error
+(TFT\,+\,EWC: 3.280 to 3.148~pp), but on that split the pretrained models are also less accurate than extrapolation
+(3.001~pp): pretraining does not learn a first-life model worth transferring.
+
+\emph{Attention.} The TFT's attention over the four previous origins is nearly uniform (0.24--0.26 per lag): it makes
+little use of its history.
+
+% -----------------------------------------------------------------------------
 \section{Additional results}
 
 Table~\ref{tab:residual} and Figs.~\ref{fig:d25} and \ref{fig:d27} belong to Sections IV-E to IV-H of the paper and

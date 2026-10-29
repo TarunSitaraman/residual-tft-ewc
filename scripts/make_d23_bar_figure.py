@@ -24,13 +24,15 @@ O = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(O)
 
 REF = "tft_residual_ewc"
+PROPOSED = "Residual TFT-EWC (proposed)"
 
 
 def main() -> int:
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.9))
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.3))
     for ax, exp in zip(axes, ("e1", "e2")):
         data = pd.read_json(ROOT / "results" / f"forecasting_d23_{exp}.json", typ="series").to_dict()
         c = O.comparison(data).sort_values("rmse_main_mean", ascending=False)
+        c.loc[c["method"] == REF, "label"] = PROPOSED
         colours = ["#2a78d6" if m == REF else O.FAMILY_COLOUR.get(O.family(m), O.GREY) if O.family(m) else O.GREY
                    for m in c["method"]]
         bars = ax.barh(c["label"], c["rmse_main_mean"], xerr=c["rmse_main_sd"].fillna(0), color=colours,
@@ -45,7 +47,7 @@ def main() -> int:
         ax.tick_params(labelsize=6.5)
         ax.grid(axis="x", alpha=0.3)
         for lbl in ax.get_yticklabels():
-            if lbl.get_text() == O.label(REF):
+            if lbl.get_text() == PROPOSED:
                 lbl.set_fontweight("bold")
     fig.tight_layout(pad=0.4)
     fig.savefig(ROOT / "paper" / "figures" / "d23_comparison.png", dpi=300)

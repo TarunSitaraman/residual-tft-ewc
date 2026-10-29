@@ -49,9 +49,9 @@ P1 and P2 were re-run in a pinned environment on data rebuilt from the raw archi
 \subsection{First-life pretraining (P3)}
 \label{sec:res-p3}
 
-The pool has 36{,}711 samples (S6: 2{,}409); validation selected EWC $\lambda=0.01$ for the pretrained TFT. Under the replication rule, EWC and fine-tuning are practically equivalent for the pretrained TFT (differences of 0.015--0.017~pp); both backbones are better from scratch on average (TFT 0.401/0.415~pp against 0.509/0.591~pp pretrained with EWC, significant only in the replicate set); and linear extrapolation (0.343~pp) remains the most accurate method. The S6 stream does not degrade the pool test error (TFT\,+\,EWC: 3.280 to 3.148~pp), but there too the pretrained models trail extrapolation (3.001~pp): pretraining learns no first-life model worth transferring.
+Pretraining on the first-life pool (36{,}711 samples, against 2{,}409 in S6) does not help: for the pretrained TFT, EWC and fine-tuning are practically equivalent, both backbones are better from scratch on average (TFT 0.401/0.415~pp against 0.509/0.591~pp pretrained with EWC, significant only in the replicate set), and linear extrapolation (0.343~pp) remains the most accurate method, on S6 and on the pool's own test split (details in the supplement).
 
-\emph{Why the TFT improved.} A post hoc ablation, repeated on the replicate seeds, explains why the TFT from scratch improves from 0.891~pp with the earlier inputs to 0.401~pp with the shared ones: dropping the 17 diagnostic features lowers the error by 0.17--0.35~pp and adding the calendar time between checks by 0.19--0.31~pp, both replicated at both learning rates ($p_{\mathrm{Holm}}\le0.002$). Its attention over the four previous origins is nearly uniform (0.24--0.26 per lag): the TFT makes little use of its history.
+\emph{Why the TFT improved.} A post hoc ablation, repeated on the replicate seeds, explains why the TFT from scratch improves from 0.891 to 0.401~pp with the shared inputs: dropping the 17 diagnostic features (0.17--0.35~pp) and adding the calendar time between checks (0.19--0.31~pp), both replicated ($p_{\mathrm{Holm}}\le0.002$). Its attention over the four previous origins is nearly uniform (0.24--0.26 per lag).
 \label{sec:res-interp}
 
 % -----------------------------------------------------------------------------
