@@ -13,4 +13,30 @@ The review covers 2022--2026 studies on second-life lithium-ion batteries, SOH e
 
 \emph{Continual learning and generalisation.} Lee \textit{et al.} applied bilevel-optimised continual learning to predict the capacity degradation of lithium-ion batteries~\cite{ref7}. Yao \textit{et al.} used progressive neural networks with temporal convolutional networks for online state-of-charge estimation across three drive-cycle datasets, addressing catastrophic forgetting and task order~\cite{ref8}. Li \textit{et al.} proposed domain-generalised SOH estimation for second-life EV batteries~\cite{ref9}, and Meskine \textit{et al.} compared BiLSTM, TCN and probabilistic TCN-GPR models on sparse, noisy data, where isotonic recalibration substantially reduced the calibration error~\cite{ref10}. Transfer and domain generalisation do not by themselves address a long sequence of tasks with explicit retention.
 
+\begin{table}[t]
+  \centering
+  \caption{Approaches of the reviewed studies and of this work. Their errors are not comparable with ours (other
+    cells, targets and SOH definitions).}
+  \label{tab:literature}
+  \scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{p{1.05cm}p{2.75cm}p{2.35cm}cc}
+    \toprule
+    Study & Approach & Predicts & CL & Reuse \\
+    \midrule
+    \cite{ref1} & partial-charge features & current SOH, second life & -- & -- \\
+    \cite{ref2} & 58 health indicators & current SOH, second life & -- & -- \\
+    \cite{ref3} & impedance (EIS) + ML & current SOH, second life & -- & -- \\
+    \cite{ref4} & statistical features, bagged GPR & current SOH, screening & -- & \checkmark \\
+    \cite{ref5} & online ML, clustering & current health, second life & -- & -- \\
+    \cite{ref7} & bilevel-optimised CL & capacity degradation & \checkmark & -- \\
+    \cite{ref8} & PNN + TCN & state of charge & \checkmark & -- \\
+    \cite{ref9} & domain generalisation & current SOH, second life & -- & -- \\
+    \cite{ref10} & BiLSTM, TCN, TCN-GPR & SOH with uncertainty & -- & \checkmark \\
+    \midrule
+    This work & residual TFT + EWC, shrinkage, conformal intervals & SOH 1--6 checks ahead, interval & \checkmark & \checkmark \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \emph{Research gap.} Second-life SOH estimation, screening, transfer learning and degradation prediction have progressed largely separately; continual learning is rarely combined with heterogeneous second-life SOH forecasting, an explicit reuse decision and an evaluation of forgetting. This work asks whether a continual learner can learn heterogeneous second-life populations in sequence while retaining earlier ones, and whether its forecasts support reuse decisions.

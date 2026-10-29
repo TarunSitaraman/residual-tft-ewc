@@ -58,34 +58,18 @@ The pool has 36{,}711 samples (S6: 2{,}409); validation selected EWC $\lambda=0.
 \subsection{Learned residual on linear extrapolation}
 \label{sec:res-residual}
 
-\begin{table}[t]
+\begin{figure*}[t]
   \centering
-  \caption{Learned residual, shift-adaptive EWC and literature baselines on S6 (stream from scratch): final average test RMSE (pp), mean over 50 runs, main / replicate seed sets, and forgetting (pp) for horizons 1--6. Below the line: single fits on all tasks (not continual) and extrapolation.}
-  \label{tab:residual}
-  \setlength{\tabcolsep}{2.5pt}
-  \scriptsize
-  \begin{tabular}{lccc}
-    \toprule
-    Method & E1: $h{=}1$--3 & E2: $h{=}1$--6 & Forgetting, E2 \\
-    \midrule
-    \textbf{TFT\,+\,EWC, residual} & \textbf{0.339 / 0.314} & \textbf{0.561 / 0.534} & \textbf{0.093 / 0.086} \\
-    TFT\,+\,SA-EWC, residual & 0.343 / 0.321 & 0.548 / 0.564 & 0.066 / 0.084 \\
-    TFT fine-tuning, residual & 0.347 / 0.337 & 0.673 / 0.612 & 0.282 / 0.220 \\
-    TFT\,+\,EWC, direct & 0.504 / 0.487 & 0.802 / 0.835 & 0.135 / 0.166 \\
-    MLP\,+\,EWC, residual & 0.374 / 0.366 & 0.659 / 0.694 & 0.205 / 0.225 \\
-    BiLSTM\,+\,EWC, residual & 0.328 / 0.370 & 0.669 / 0.765 & 0.229 / 0.318 \\
-    Transformer\,+\,EWC, residual & 0.360 / 0.366 & 0.609 / 0.705 & 0.129 / 0.198 \\
-    TCN\,+\,EWC, residual & 0.466 / 0.408 & 0.812 / 0.756 & 0.345 / 0.268 \\
-    \midrule
-    Linear extrapolation & 0.343 & 0.485 & -- \\
-    Gradient boosting & 0.451 & 0.898 & -- \\
-    SVR, residual & 0.429 & 0.616 & -- \\
-    GPR, direct & 1.374 & 2.073 & -- \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+  \includegraphics[width=\textwidth]{figures/d23_comparison.png}
+  \caption{S6 continual stream, learned residual (bold, blue: the proposed residual TFT\,+\,EWC) against the
+    direct form, the MLP and single-fit forecasters: final average test RMSE (pp), mean and s.d.\ over the 50 runs of
+    the main seed set; dashed: linear extrapolation. On horizons 1--3 the proposed model is practically equivalent to
+    extrapolation; on 1--6 extrapolation is better. The replicate set, forgetting and the literature backbones
+    are in Table~SIII of the supplement.}
+  \label{fig:d23bar}
+\end{figure*}
 
-For the residual form~\eqref{eq:residual} (Table~\ref{tab:residual}), the pre-registered criterion, residual TFT\,+\,EWC beating linear extrapolation, was \emph{not} met: the two are practically equivalent for horizons 1--3 (differences of $-0.004$ and $-0.029$~pp), and for horizons 1--6 extrapolation is better on average ($+0.076$ and $+0.049$~pp, not replicated). Per horizon, extrapolation is better at $h=1$ and 2 (replicated), and the gap closes without reversing by $h=5$--6. Learning the residual does make the TFT competitive: it improves TFT\,+\,EWC over the direct form by 0.17~pp (E1) and 0.24--0.30~pp (E2) and puts it ahead of gradient boosting, all replicated. For horizons 1--6, where it forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp and its backward transfer from 0.18/0.14 to 0.03~pp, replicated; its effect on the final error is not. For horizons 1--3, EWC and fine-tuning are practically equivalent.
+For the residual form~\eqref{eq:residual} (Fig.~\ref{fig:d23bar}; Table~SIII of the supplement), the pre-registered criterion, residual TFT\,+\,EWC beating linear extrapolation, was \emph{not} met: the two are practically equivalent for horizons 1--3 (differences of $-0.004$ and $-0.029$~pp), and for horizons 1--6 extrapolation is better on average ($+0.076$ and $+0.049$~pp, not replicated). Per horizon, extrapolation is better at $h=1$ and 2 (replicated), and the gap closes without reversing by $h=5$--6. Learning the residual does make the TFT competitive: it improves TFT\,+\,EWC over the direct form by 0.17~pp (E1) and 0.24--0.30~pp (E2) and puts it ahead of gradient boosting, all replicated. For horizons 1--6, where it forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp and its backward transfer from 0.18/0.14 to 0.03~pp, replicated; its effect on the final error is not. For horizons 1--3, EWC and fine-tuning are practically equivalent.
 
 \emph{Ageing-cycle inputs.} The 21 Spark-extracted inputs (Section~\ref{sec:spark}), added as pre-specified, make the residual TFT\,+\,EWC worse: 0.480/0.501 against 0.339/0.314~pp, and worse than linear extrapolation, both replicated.
 
@@ -93,20 +77,15 @@ For the residual form~\eqref{eq:residual} (Table~\ref{tab:residual}), the pre-re
 \subsection{Shift-adaptive EWC and literature baselines}
 \label{sec:res-d24}
 
-The second pre-registered criterion, for SA-EWC (Table~\ref{tab:residual}), was \emph{not} met: the residual TFT with SA-EWC and with fixed $\lambda$ are practically equivalent in final error and forgetting for both horizon sets (differences of at most 0.03~pp), although the shift weights did vary (0.05--1.14), so the simpler fixed $\lambda$ is kept. For horizons 1--3, BiLSTM\,+\,EWC (direct, 0.323~pp, and residual) and the residual Transformer\,+\,EWC are practically equivalent to the residual TFT; for 1--6 it beats the residual BiLSTM and TCN (replicated; not the Transformer). Every single-fit regressor is worse than the residual TFT\,+\,SA-EWC (replicated), except the residual SVR for horizons 1--6.
+The second pre-registered criterion, for SA-EWC (Table~SIII of the supplement), was \emph{not} met: the residual TFT with SA-EWC and with fixed $\lambda$ are practically equivalent in final error and forgetting for both horizon sets (differences of at most 0.03~pp), although the shift weights did vary (0.05--1.14), so the simpler fixed $\lambda$ is kept. For horizons 1--3, BiLSTM\,+\,EWC (direct, 0.323~pp, and residual) and the residual Transformer\,+\,EWC are practically equivalent to the residual TFT; for 1--6 it beats the residual BiLSTM and TCN (replicated; not the Transformer). Every single-fit regressor is worse than the residual TFT\,+\,SA-EWC (replicated), except the residual SVR for horizons 1--6.
 
 % -----------------------------------------------------------------------------
 \subsection{Shrinkage and intervals on the stream}
 \label{sec:res-d25}
 
-Shrinking the correction per horizon makes the residual TFT\,+\,EWC practically equivalent to extrapolation at every horizon (0.318/0.308 against 0.343~pp for horizons 1--3, 0.498/0.493 against 0.485~pp for 1--6), removing its replicated loss at $h=1$--2; the correction is turned down most at $h=1$ (Fig.~\ref{fig:d25}). Again the criterion was not met: it matches extrapolation but does not beat it. Its 90\% intervals are narrower than extrapolation's but under-cover (0.71--0.81, against 0.92--0.95), so the interval scores are equal (practically equivalent or not replicated). Pretraining the residual model on the first-life pool makes it worse for horizons 1--3 (by 0.22~pp, replicated) and does not help for 1--6.
+Shrinking the correction per horizon makes the residual TFT\,+\,EWC practically equivalent to extrapolation at every horizon (0.318/0.308 against 0.343~pp for horizons 1--3, 0.498/0.493 against 0.485~pp for 1--6), removing its replicated loss at $h=1$--2; the correction is turned down most at $h=1$ (Fig.~S7 of the supplement). Again the criterion was not met: it matches extrapolation but does not beat it. Its 90\% intervals are narrower than extrapolation's but under-cover (0.71--0.81, against 0.92--0.95), so the interval scores are equal (practically equivalent or not replicated). Pretraining the residual model on the first-life pool makes it worse for horizons 1--3 (by 0.22~pp, replicated) and does not help for 1--6.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{figures/d25_shrinkage.png}
-  \caption{S6 stream: shrinkage factor $\alpha_h$ of the TFT correction per horizon after the last task (median and interquartile range over 50 runs, seeds 0--4); $\alpha_h=0$ is linear extrapolation.}
-  \label{fig:d25}
-\end{figure}
+
 
 % -----------------------------------------------------------------------------
 \subsection{Residual model on unseen conditions}
@@ -137,13 +116,8 @@ Shrinking the correction per horizon makes the residual TFT\,+\,EWC practically 
 
 In the fourth experiment (Table~\ref{tab:d26}), as registered, the shrunk residual TFT\,+\,EWC beats extrapolation at origins with a fade rate, by 0.12/0.12~pp for horizons 1--3 and 0.20/0.18~pp for 1--6 (replicated): the first comparison in which the proposed model beats extrapolation. Elsewhere extrapolation is persistence and loses by over 2~pp. Gradient boosting, however, beats the TFT by 0.39/0.41~pp and 0.57/0.60~pp (replicated), on six of the seven conditions; only on the 100\% depth-of-discharge condition is the TFT better. The same residual TFT trained jointly on the six conditions beats its continual form by 0.32--0.44~pp (replicated). Shrinkage and the raw correction are practically equivalent here.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{figures/d27_coverage.png}
-  \caption{Unseen S6 conditions: coverage of 90\% conformal intervals per held-out condition, by forecaster and calibration rows. TFT: mean over 50 runs (seeds 0--4). Dotted: nominal level.}
-  \label{fig:d27}
-\end{figure}
 
-\emph{Intervals on unseen conditions.} Intervals (Fig.~\ref{fig:d27}) calibrated on the pooled validation rows of the training conditions under-cover on the held-out one, for the TFT (pooled 0.66--0.68) and for extrapolation (0.74--0.76) alike. Calibrating extrapolation, which has no fitted parameters, on all origins of those conditions instead of their mid-life validation rows restores 0.89--0.90: the calibration rows caused the shortfall, not only the model. With leave-one-condition-out calibration, gradient-boosting intervals reach the registered threshold of 0.85 (0.90 in both horizon sets) with the lowest mean interval scores (3.2 and 6.7~pp, against 7.1 and 11.8~pp for calibrated extrapolation and 6.1--6.3 and 10.0--10.3~pp for the TFT), lower than calibrated extrapolation's on six of seven conditions (significant only for horizons 1--3, $p=0.047$, against $p=0.30$, so not established). Coverage holds over conditions, not for each: on the 100\% depth-of-discharge condition, outside the range of the others, it is 0.48 and 0.38.
+
+\emph{Intervals on unseen conditions.} Intervals (Fig.~S8 of the supplement) calibrated on the pooled validation rows of the training conditions under-cover on the held-out one, for the TFT (pooled 0.66--0.68) and for extrapolation (0.74--0.76) alike. Calibrating extrapolation, which has no fitted parameters, on all origins of those conditions instead of their mid-life validation rows restores 0.89--0.90: the calibration rows caused the shortfall, not only the model. With leave-one-condition-out calibration, gradient-boosting intervals reach the registered threshold of 0.85 (0.90 in both horizon sets) with the lowest mean interval scores (3.2 and 6.7~pp, against 7.1 and 11.8~pp for calibrated extrapolation and 6.1--6.3 and 10.0--10.3~pp for the TFT), lower than calibrated extrapolation's on six of seven conditions (significant only for horizons 1--3, $p=0.047$, against $p=0.30$, so not established). Coverage holds over conditions, not for each: on the 100\% depth-of-discharge condition, outside the range of the others, it is 0.48 and 0.38.
 
 \emph{Refit and tracking.} Refit and tracking lower the mean 90\% interval score by 29\%, from 3.22 to 2.29~pp ($h{=}1$--3; six of seven conditions, $p=0.047$) and from 6.67 to 4.74~pp ($h{=}1$--6; seven of seven, $p=0.016$), with pooled coverage 0.90--0.91. On the 100\% depth-of-discharge condition coverage rises from 0.48/0.38 to 0.72/0.58, short of the registered 0.80. With these intervals, 87--93\% of held-out forecasts lie within one reuse class, 99.2--99.7\% of them correctly.
