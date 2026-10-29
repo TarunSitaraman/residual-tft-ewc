@@ -152,3 +152,16 @@ def test_joint_fit_all_and_sanity_vs_finetune(tasks, features):
     # Loose sanity check: joint training should not forget the first task more than
     # sequential fine-tuning does (margin allows for training noise).
     assert j <= f * 1.1 + 0.25
+
+
+def test_epoch_history_matches_early_stopping(tasks, features):
+    s = cl.make_strategy("ewc", features, **FAST)
+    for t in tasks:
+        s.fit_task(t)
+    assert len(s.epoch_history_) == len(tasks)
+    for hist, best, best_rmse in zip(s.epoch_history_, s.best_epoch_, s.best_val_rmse_):
+        assert 1 <= len(hist) <= FAST["epochs"]
+        assert all(np.isfinite(loss) and np.isfinite(rmse) for loss, rmse in hist)
+        if best >= 0:  # -1: the untrained state was never beaten
+            assert hist[best][1] == pytest.approx(best_rmse)
+            assert len(hist) <= best + 1 + FAST["patience"]

@@ -87,6 +87,8 @@ class Strategy:
         self.training_time_: list[float] = []
         self.best_epoch_: list[int] = []
         self.best_val_rmse_: list[float] = []
+        # Per task: one (mean training loss incl. penalty, validation RMSE in pp) pair per epoch.
+        self.epoch_history_: list[list[tuple[float, float]]] = []
 
     # -- configuration / provenance ---------------------------------------
     def config(self) -> dict:
@@ -179,9 +181,11 @@ class Strategy:
 
         best_rmse, best_state, best_epoch, bad = self._val_rmse(xv, yv), copy.deepcopy(self.model.state_dict()), -1, 0
         n = len(x)
+        history: list[tuple[float, float]] = []
         for epoch in range(self.epochs):
             self.model.train()
             perm = torch.randperm(n, generator=gen)
+            losses = []
             for i in range(0, n, self.batch_size):
                 idx = perm[i:i + self.batch_size]
                 xb, yb = x[idx], y[idx]
@@ -189,7 +193,9 @@ class Strategy:
                 opt.zero_grad()
                 loss.backward()
                 opt.step()
+                losses.append(float(loss.detach()))
             rmse = self._val_rmse(xv, yv)
+            history.append((float(np.mean(losses)), rmse))
             if rmse < best_rmse - 1e-9:
                 best_rmse, best_state, best_epoch, bad = rmse, copy.deepcopy(self.model.state_dict()), epoch, 0
             else:
@@ -200,6 +206,7 @@ class Strategy:
         self.model.eval()
         self.best_epoch_.append(best_epoch)
         self.best_val_rmse_.append(best_rmse)
+        self.epoch_history_.append(history)
 
     @torch.no_grad()
     def _val_rmse(self, xv: torch.Tensor, yv: torch.Tensor) -> float:
