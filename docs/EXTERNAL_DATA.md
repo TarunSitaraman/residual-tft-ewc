@@ -168,7 +168,7 @@ The processing script is **not** in this repository. See `README.md` §1.2 for t
 
 **Where it is.**
 - https://huggingface.co/datasets/TarunSitaraman/second-life-ev-battery-datasets (public).
-- Revision `eb9d95b2fed78fbfd300a09009ab999cc0e6716b`, last modified 2026-09-29T07:44:58Z.
+- Data files as of revision `eb9d95b2fed78fbfd300a09009ab999cc0e6716b` (2026-09-29T07:44:58Z); dataset card added at `040def2f14ccada33bbb31babf88b394780b879b` (2026-10-31).
 - It is a convenience mirror for cloud sessions, not an independent source. The paper cites S1, not the mirror.
 
 **Files as used (SHA-256, local copies in `data/`, git-ignored)**
@@ -185,13 +185,7 @@ The processing script is **not** in this repository. See `README.md` §1.2 for t
 
 The two large files match the Git LFS object IDs of the mirror.
 
-**Open compliance issue.** The mirror has **no dataset card** (`README.md` returns 404). It therefore redistributes CC BY 4.0 data without the required attribution, licence link or indication of changes. Before the paper is submitted, and ideally now, add a dataset card to the mirror that:
-1. names S1 with both citations and the DOI 10.17605/OSF.IO/8JNR5;
-2. states the licence (CC BY 4.0, with a link) and sets `license: cc-by-4.0` in the card metadata;
-3. states that the files are derived from, and are a processed subset of, S1 version 2, and lists the changes (merging, resampling as delivered, RPT capacity extraction, SOH labelling, feature aggregation);
-4. states that the mirror is not endorsed by the original authors.
-
-Alternatively, make the mirror private and point users to OSF.
+**Compliance issue resolved (31 Oct 2026).** The mirror had no dataset card, so it redistributed CC BY 4.0 data without the required attribution. A dataset card was added at revision `040def2f14ccada33bbb31babf88b394780b879b` (2026-10-31T14:24:55Z). It names S1 with both citations and the DOI 10.17605/OSF.IO/8JNR5; states the licence (CC BY 4.0, linked; card metadata `license: cc-by-4.0`); states that the files are a processed subset of S1 version 2 and lists the changes (merging, reduction as delivered, RPT capacity extraction, SOH labelling, as-of join, feature aggregation); states that the mirror is not endorsed by the original authors; and lists the file hashes above and the known issues of `docs/DATA_REPORT.md`. The data files are unchanged; the hashes above still apply.
 
 ---
 
@@ -340,7 +334,7 @@ The mapping of each dataset to the forecasting task (what counts as a capacity c
 - [ ] **Heterogeneity:** narrow "heterogeneous" to first-life charge rate and ageing, plus residential vs commercial duty cycle. All cells are one model and chemistry, from one laboratory.
 - [ ] **Acknowledgements:** thank the Stanford Energy Control Laboratory for making the data public.
 - [ ] **Data availability statement:** the raw data are at doi:10.17605/OSF.IO/8JNR5 under CC BY 4.0. Give the processing code and the commit hash.
-- [ ] **Hugging Face mirror:** fix the dataset card (S2), or remove the mirror, before submission.
+- [x] **Hugging Face mirror:** dataset card added 31 Oct 2026 (S2, revision `040def2`).
 - [x] **Handover version:** version 2, settled by the folders and dates it contains (S1, "Evidence").
 - [x] **Capacity labels:** reproduce `Capacity_Ah` from the raw RPT files. Done: 112/112 RPT capacity rows exact, i.e. 111 RPTs (S1, "Evidence"). The handover capacity includes the pulses; the paper defines capacity as the C/20 discharge capacity with the pulses excluded (D17).
 - [x] **Cui et al. 2024:** a different dataset (8 retired Nissan Leaf LMO cells); cite it as related work (S5).
