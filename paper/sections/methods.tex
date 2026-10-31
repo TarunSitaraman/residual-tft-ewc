@@ -10,7 +10,7 @@
 \section{Methodology}
 \label{sec:methods}
 
-Given everything measured up to a reference performance test (RPT, or capacity check), we forecast the SOH one to three checks ahead (up to six in follow-up experiments); cells or usage conditions arrive as a stream of tasks, and a model must adapt to each without forgetting the earlier ones. The study first aimed to estimate the \emph{current} SOH from cycle-level features, but on the first dataset these carried almost no health information (median within-cell Spearman correlation with SOH 0.09, against $-0.99$ for elapsed time) and learned estimators were worse than persistence (1.78 and 2.37~pp for gradient boosting and ridge, against 0.99~pp). We therefore reframed the task after seeing the data, committing the forecasting protocol before fitting any forecasting model.
+Given everything measured up to a reference performance test (RPT, or capacity check), we forecast the SOH one to three checks ahead (up to six in follow-up experiments); cells or usage conditions arrive as a stream of tasks. The study first aimed to estimate the \emph{current} SOH from cycle-level features, but on the first dataset these carried almost no health information (median within-cell Spearman correlation with SOH 0.09, against $-0.99$ for elapsed time) and learned estimators were worse than persistence (1.78 and 2.37~pp for gradient boosting and ridge, against 0.99~pp). We therefore reframed the task after seeing the data, committing the forecasting protocol before fitting any forecasting model.
 
 % -----------------------------------------------------------------------------
 \subsection{Datasets}

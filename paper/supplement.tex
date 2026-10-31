@@ -160,8 +160,16 @@ little use of its history.
 % -----------------------------------------------------------------------------
 \section{Additional results}
 
-Table~\ref{tab:residual} and Figs.~\ref{fig:d25} and \ref{fig:d27} belong to Sections IV-E to IV-H of the paper and
+Table~\ref{tab:residual} and Figs.~\ref{fig:d25} and \ref{fig:d27} belong to Sections IV-D to IV-G of the paper and
 were moved here for space.
+
+\emph{Reproducibility of the comparisons (Section IV-B).} P1 and P2 were re-run in a pinned environment on data rebuilt from the raw archives. Every baseline, every P2 result and the ranking of methods reproduced; the neural models moved by at most 0.059~pp. On S1, five Holm-corrected comparisons with TFT\,+\,EWC crossed $p=0.05$. On S6, validation selected EWC $\lambda=1000$ instead of 100 (a 0.008~pp tie), and the error advantage of TFT\,+\,EWC over fine-tuning moved from $p_{\mathrm{Holm}}=0.005$ to 0.060, while its reduction of forgetting moved from 0.050 to 0.008. These findings motivated the ten tuning orders, the one-standard-error rule and the replication rule used from P3 on. A D30 re-run of P2 on another platform reproduced every baseline exactly and moved the MLP and TFT by at most 0.027~pp per held-out group: neural training is deterministic per platform, not across platforms.
+
+\emph{Reuse classes in the D30 re-run of P2.} On S6 the learned models assign the measured reuse class to 95--97\% of samples (MCC 0.90--0.93), against 94\% (0.88) for linear extrapolation and 86\% (0.72) for persistence, and all errors but one (persistence) are between neighbouring classes; the end-of-first-life decision does not separate the methods (AUC $\ge$0.998), as 69\% of S6 samples are below 80\%.
+
+\emph{Intervals on unseen conditions.} Intervals (Fig.~\ref{fig:d27}) calibrated on the pooled validation rows of the training conditions under-cover on the held-out one, for the TFT (pooled 0.66--0.68) and for extrapolation (0.74--0.76) alike. Calibrating extrapolation, which has no fitted parameters, on all origins of those conditions instead of their mid-life validation rows restores 0.89--0.90: the calibration rows caused the shortfall, not only the model. With leave-one-condition-out calibration, gradient-boosting intervals reach the registered threshold of 0.85 (0.90 in both horizon sets) with the lowest mean interval scores (3.2 and 6.7~pp, against 7.1 and 11.8~pp for calibrated extrapolation and 6.1--6.3 and 10.0--10.3~pp for the TFT), lower than calibrated extrapolation's on six of seven conditions (significant only for horizons 1--3, $p=0.047$, against $p=0.30$, so not established). Coverage holds over conditions, not for each: on the 100\% depth-of-discharge condition, outside the range of the others, it is 0.48 and 0.38.
+
+The paper's table of errors on unseen conditions (Section IV-G) lists the shrunk residual TFT\,+\,EWC; the raw correction gives 0.88/0.90, 0.79/0.80, 1.59/1.62 and 1.46/1.49~pp in the same columns.
 
 \begin{table}[t]
   \centering

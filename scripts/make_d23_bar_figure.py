@@ -28,7 +28,7 @@ PROPOSED = "Residual TFT-EWC (proposed)"
 
 
 def main() -> int:
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.3))
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.15))
     for ax, exp in zip(axes, ("e1", "e2")):
         data = pd.read_json(ROOT / "results" / f"forecasting_d23_{exp}.json", typ="series").to_dict()
         c = O.comparison(data).sort_values("rmse_main_mean", ascending=False)
