@@ -771,3 +771,21 @@ Measured class counts, S6: C0 52, C1 182, C2 516, C3 1659. S1: all 279 samples a
 3. **Reuse classes, S6:** gradient boosting, ridge F0, MLP and TFT are within 0.004 in accuracy and 0.007 in MCC; all clearly beat linear extrapolation (MCC 0.876) and persistence (0.723). The errors are almost all between neighbouring classes (`d30_confusion.png`); the hardest class is C1 (182 samples).
 4. **End of first life does not separate the methods:** AUC 0.998–0.999 and F1 0.96–0.99 for every method, including persistence. Most S6 samples are far from 80 % SOH (69 % of them already in C3), so this decision is easy here; it is not evidence for any forecaster.
 5. **P1 baselines** (per-task values in the results file) reproduce the committed P1 RMSE exactly; their class metrics are single-class per task and are not interpreted.
+
+## D26 addendum: reuse classes of the proposed model on unseen conditions (31 Oct 2026)
+
+`scripts/run_d26_classes.py` re-ran, unchanged, the D26 E1 units of the shrunk residual TFT + EWC (main seed set, 10 orders × 5 seeds, seven held-out S6 conditions) and the four single-fit comparators, keeping each fold's reuse-class confusion counts. All 378 fold RMSEs reproduce `results/forecasting_d26_e1.json` within 1e-6. Results: `results/forecasting_d26_classes_e1.json` (15248d7); paper outputs from `scripts/make_d26_class_outputs.py` (`paper/tables/d26_classes.tex`, `paper/figures/d26_confusion.png`). All held-out samples pooled per run; proposed model as mean ± s.d. over the 50 runs.
+
+| Method | Acc. | Sens. (macro recall) | Prec. (macro) | Macro-F1 | MCC |
+|---|---|---|---|---|---|
+| Persistence | 0.858 | 0.782 | 0.625 | 0.661 | 0.723 |
+| Linear extrapolation | 0.939 | 0.840 | 0.810 | 0.777 | 0.876 |
+| Ridge (shared inputs) | 0.965 | 0.857 | 0.861 | 0.858 | 0.927 |
+| **Gradient boosting (shared inputs)** | **0.977** | **0.924** | **0.926** | **0.925** | **0.952** |
+| Residual TFT + EWC, shrunk | 0.955 ± 0.005 | 0.880 ± 0.017 | 0.840 ± 0.016 | 0.840 ± 0.021 | 0.906 ± 0.011 |
+
+**Reading.** The classes follow the D26 RMSE ranking: the proposed model beats extrapolation and persistence but not ridge or gradient boosting (run range 0.944–0.968 in accuracy). Every error is between neighbouring classes. Most errors forecast a measured C1 sample as C0 (one class healthier): 65 of 182 for extrapolation, 42 (mean) for the proposed model, 7 for gradient boosting. Post hoc; no criterion was registered for these metrics.
+
+## Training curves of the residual TFT + EWC (29 Oct 2026)
+
+`scripts/run_epoch_curves.py` repeats the committed D23 E1 run (order 0, seed 0, lr 0.003, λ = 1) with per-epoch logging (`epoch_history_` in `src/continual_learning.py`, e55c1d3) and reproduces its final error exactly (0.464125 pp). Early stopping keeps the best validation epoch per task (0-based: 3, 1, 14, 2, none for task 5, which keeps task 4's weights, 85, 29). Output: `results/epoch_curves_d23_e1.json`, `paper/figures/epoch_curves.png` (supplement).
