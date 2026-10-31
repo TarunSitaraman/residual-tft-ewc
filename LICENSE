@@ -1,15 +1,21 @@
 Copyright (c) 2026 Tarun Sitaraman, Sohan Sandeep Krishnan and Darshan D.
 All rights reserved.
 
-This repository is private. Its source code, documentation, figures, result
-files and manuscript drafts (the "Work") are proprietary to the copyright
-holders named above.
+This repository is made publicly available so that the methods, protocols,
+results and manuscript it contains (the "Work") can be read, inspected and
+verified. It is source-available, not open source.
 
-No licence is granted. Without the prior written permission of all copyright
-holders, no part of the Work may be copied, modified, merged, published,
-distributed, sublicensed, sold, or used to train or evaluate any model, except
-that persons given access to this repository by the copyright holders may view
-and run the Work for the purpose of reviewing or contributing to it.
+Permitted without further permission:
+  - viewing and reading the Work;
+  - downloading and running the Work, unmodified, solely to reproduce or
+    verify the results reported in it;
+  - citing the Work and quoting short excerpts with attribution, as in normal
+    scholarly practice (see README, "Citation").
+
+Not permitted without the prior written permission of all copyright holders:
+copying, modifying, merging, publishing, distributing, sublicensing or selling
+the Work or any part of it, using it in other software or publications beyond
+citation and short quotation, or using it to train or evaluate any model.
 
 Third-party material is not covered by this notice and remains under its own
 terms. In particular, the battery datasets used by the Work (see
@@ -24,6 +30,3 @@ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
 PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS
 BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE WORK OR ITS USE.
-
-The copyright holders intend to replace this notice with an open-source licence
-if and when the repository is made public.

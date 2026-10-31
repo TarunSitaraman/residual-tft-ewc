@@ -64,6 +64,29 @@ The fetch resumes per file after an interruption (files already on disk are reus
 
 `readme.txt`, `extractedData.mat` and `Matlab_BasicImportAndDisplay.m` from the dataset must also be in `data/raw/wheeler2025/`. Download them from the repository and check them against the MD5 values in `docs/external_data/metadata/wheeler2025_lfp_dataverse.dataset.json`.
 
+### S6 between-check ageing cycles (Spark workload, D22)
+
+The 827 ageing files (about 132 GB uncompressed) come from the same per-cell zips:
+
+```bash
+python scripts/fetch_wheeler_characterisation.py --kind aging --manifest data/raw/wheeler2025_ageing_manifest.json
+#   parallel: one process per --shard I/N, each with its own --manifest; then merge and check completeness
+python scripts/merge_ageing_manifests.py --expected 827
+python scripts/build_s6_ageing_features.py          # pandas reference: data/s6_ageing_cycles.csv, s6_ageing_blocks.csv
+python scripts/spark_ageing_features.py --cores 6   # Spark job, validated against the pandas output
+```
+
+`--min-free-gb` stops the download before the disk fills. See `docs/SPARK_DEMO.md` for Java and the Windows Hadoop helpers.
+
+## First-life pretraining pool (S7–S9, D21)
+
+```bash
+python scripts/fetch_pool.py               # S7 (KIT), S8 (XJTU), S9 (Tongji); size- and MD5-checked, resumable
+python scripts/build_pool_tables.py        # data/pool_s7_checks.csv, pool_s8_checks.csv, pool_s9_checks.csv
+```
+
+Sources, licences and checksums are registered in `docs/EXTERNAL_DATA.md`; the fetcher downloads nothing that is not listed there.
+
 ## Revised handover package
 
 The revised external handover may provide `ml_ready_dataset.csv` instead of

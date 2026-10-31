@@ -1,7 +1,7 @@
 """Tests for decision D25: horizon-wise shrinkage, conformal intervals, the D25 runner and the night orchestrator.
 
 SYNTHETIC TEST DATA ONLY, built in the tests or in pytest temporary directories (never the repository); it exercises
-code paths and must never be used for reported results (CLAUDE.md).
+code paths and must never be used for reported results (AGENTS.md).
 """
 
 import json

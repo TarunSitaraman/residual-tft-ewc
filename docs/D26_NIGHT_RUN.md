@@ -27,7 +27,7 @@ Expect about 4 h in all (timed on synthetic data of S6 size: one continual unit 
 2. Git identity:
    ```powershell
    git config user.name "Tarun Sitaraman"
-   git config user.email "mfsbyo@gmail.com"
+   git config user.email "<your email>"
    ```
 3. **Pinned environment** (the existing `.venv` is Python 3.11.15 with the pinned versions; it was used for D25):
    ```powershell

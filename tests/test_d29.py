@@ -1,7 +1,7 @@
 """Tests for decision D29: physics-structured Bayesian forecaster with a learned residual (P2).
 
 SYNTHETIC TEST DATA ONLY, built in pytest temporary directories (never the repository); it exercises code paths and
-must never be used for reported results (CLAUDE.md).
+must never be used for reported results (AGENTS.md).
 """
 
 import json

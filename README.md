@@ -1,13 +1,10 @@
-# Continual Learning for Heterogeneous Second-Life EV Batteries
+# Residual TFT-EWC
 
-**Course**: 21CSC314P – Big Data Essentials (Report Review 1)  
-**Faculty**: Dr. Banu Priya Prathaban  
-**Team**:
-- Darshan D – RA2411028010056
-- Sohan Sandeep Krishnan – RA2411028010014
-- Tarun Sitaraman – RA2411028010038
+**Continual learning for state-of-health forecasting and reuse assessment of heterogeneous second-life EV batteries**
 
-This repository is both a course project and the code behind an IEEE paper. Every number in it is meant to be traceable to code and a commit. The sections below explain the project from first principles: the problem, the data, every pipeline stage, the models, how they are evaluated, what Apache Spark does, and what we found.
+Code, pre-registered protocols, results and manuscript of the paper *"Residual TFT-EWC: Continual Learning for State-of-Health Forecasting and Reuse Assessment of Heterogeneous Second-Life EV Batteries"* (IEEE conference paper, in preparation; manuscript in [`paper/`](paper/)).
+
+Every reported number traces to a results file in `results/`, written by code in this repository on a clean commit; every experiment from D18 on was pre-registered in [`docs/DECISIONS.md`](docs/DECISIONS.md) before it ran, and null and negative results are reported alongside positive ones. The sections below explain the work from first principles: the problem, the data, every pipeline stage, the models, how they are evaluated, what Apache Spark does, and what we found.
 
 ## Contents
 
@@ -25,8 +22,9 @@ This repository is both a course project and the code behind an IEEE paper. Ever
 12. [Literature review](#12-literature-review-10-key-papers)
 13. [Legacy data dictionary](#13-legacy-data-dictionary)
 14. [References](#14-references)
+15. [Citation and licence](#15-citation-and-licence)
 
-**Where to look next:** `docs/WORK_PLAN.md` (what is still to do), `docs/D24_NIGHT_RUN.md` (the D24 run: RC-TFT and literature baselines), `docs/RESULTS.md` (all findings with provenance), `docs/DECISIONS.md` (every protocol decision, D1–D24), `docs/DATA_REPORT.md` (data audit), `docs/EXTERNAL_DATA.md` (sources, licences, hashes), `docs/SPARK_DEMO.md` (Spark demo script), `paper/` (the manuscript).
+**Where to look next:** `docs/RESULTS.md` (all findings with provenance), `docs/DECISIONS.md` (every protocol decision and pre-registration, D1–D31), `docs/DATA_REPORT.md` (data audit), `docs/EXTERNAL_DATA.md` (sources, licences, hashes), `docs/SPARK_DEMO.md` (Spark walkthrough), `docs/D24_NIGHT_RUN.md`–`D26_NIGHT_RUN.md` (runbooks for the long runs), `paper/` (the manuscript).
 
 ---
 
@@ -44,15 +42,17 @@ This repository is both a course project and the code behind an IEEE paper. Ever
 | Learning setting | **Continual learning**: groups arrive one at a time; we measure accuracy, forgetting and transfer |
 | Big-data component | An **Apache Spark** job that reduces about 132 GB (902 million rows) of raw ageing data to block-level features |
 | Reuse | Forecast SOH is mapped to four fade classes (C0–C3) |
-| Tooling | 150 tests, pre-registered protocols, a live data-platform web page, and the paper |
+| Uncertainty | Split-conformal forecast intervals, calibrated leave-one-condition-out and updated online as a new condition's checks arrive |
+| Tooling | 204 tests, pre-registered protocols, a live data-platform web page, and the paper |
 
 **Headline findings** (details and caveats in [Section 8](#8-results)):
 
-1. Simple methods are hard to beat. On the large LFP dataset no method beats **linear extrapolation** of the recent fade rate (0.343 pp RMSE); the best learned model is only level with it.
-2. A TFT that learns only the **residual** on top of linear extrapolation is the best learned model and is practically equivalent to extrapolation at horizons 1–3.
+1. **Simple methods are hard to beat on the continual stream.** On the LFP dataset (S6) no learned model beats **linear extrapolation** of the recent fade rate (0.343 pp RMSE). A TFT that learns only the **residual** on top of extrapolation is the best learned model and is practically equivalent to it.
+2. **On unseen usage conditions, gradient boosting is the most accurate method** (0.54 pp, horizons 1–3). The residual TFT + EWC beats extrapolation at origins with a fade rate, but not gradient boosting; the same TFT trained jointly is close to it (0.57 pp). At this data scale the continual constraint costs more than it gives.
 3. **EWC reduces forgetting** of the residual TFT at longer horizons (replicated across two seed sets), but forgetting only matters when the groups differ a lot.
-4. Extra diagnostic features (EIS, pulse resistance, incremental-capacity peaks) describe the *current* SOH well but add little for the *next change*.
-5. Some earlier significance results did not survive a re-run in a different environment, and the repository says so.
+4. **Intervals hold on a new condition only when calibrated on conditions held out from fitting.** Refitting and tracking the interval as the new condition's checks arrive cut the 90 % interval score by 29 %, and 87–93 % of forecasts fall within one reuse class, over 99 % of them correctly. A condition outside the training range (100 % depth of discharge) is improved, not fixed.
+5. Extra diagnostic features (EIS, pulse resistance, incremental-capacity peaks) describe the *current* SOH well but add little for the *next change*.
+6. Some earlier significance results did not survive a re-run on a different platform, and the repository says so.
 
 ---
 
@@ -202,6 +202,7 @@ A sample is (cell, origin check *k*, horizon *h*). Inputs known at the origin: S
 | Joint | Train on all tasks at once (the upper bound, not a continual method) |
 
 - **Residual formulation (D23).** The best-performing variant predicts only the *correction* to linear extrapolation instead of ΔSOH directly. This is what made the TFT competitive.
+- **Later variants (D24–D31).** Shift-adaptive EWC and literature backbones (BiLSTM, TCN, Transformer; GPR, random forest, SVR) (D24); per-horizon shrinkage of the residual correction and conformal intervals (D25); unseen usage conditions (D26); leave-one-condition-out conformal calibration (D27); online refit and quantile tracking on a new condition (D28); a physics-structured Bayesian forecaster with a learned residual (D29); and, pre-registered, online adaptation of the joint residual TFT with EWC on a new condition (D31).
 
 ### 5.6 Reuse assessment (`src/reuse.py`, `docs/REUSE_CATEGORIES.md`)
 Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, rather than training a separate classifier. We report accuracy, macro-F1, linear-weighted kappa and confusion matrices. On S1 all samples stay in C0 and on S6 P1 all test periods are in C3, so classes can only be evaluated meaningfully in P2. The multi-task reuse head originally planned was **not** implemented; its empty stub was removed (12 Oct 2026).
@@ -286,7 +287,9 @@ Run it: `python scripts/spark_ageing_features.py --cores 6 --ui 900` and open `h
 
 **Statistics.** Paired Wilcoxon tests with Holm correction, rank-biserial effect sizes, bootstrap 95 % CIs. From D21, a result counts as **replicated** only if p_Holm < 0.05 in both seed sets, with the same sign and |difference| ≥ 0.05 pp; |difference| < 0.05 pp in both is **practically equivalent**.
 
-**Pre-registration.** Protocols D18, D20, D21, D22 and D23 were written into `docs/DECISIONS.md` before the runs they govern. Deviations and post-hoc analyses are labelled as such.
+**Deterministic comparisons (D27–D29).** Where both forecasters are deterministic, the unit is the held-out condition: two-sided exact Wilcoxon over the seven S6 conditions (smallest attainable p = 0.016), and a result must hold in both horizon sets (E1, E2) instead of both seed sets.
+
+**Pre-registration.** Protocols D18 and D20–D29 and D31 were written into `docs/DECISIONS.md` before the runs they govern; each records its provenance (what was known when it was written), its questions, the tests and what counts as a positive result. Deviations and post-hoc analyses (the D21 ablation, the D30 metric set) are labelled as such.
 
 ---
 
@@ -310,6 +313,21 @@ Full results, provenance and generated tables: `docs/RESULTS.md`.
 
 Residual TFT + EWC and linear extrapolation are practically equivalent under the registered test. With the D20 inputs (including the 17 diagnostics), gradient boosting reaches 0.372 pp.
 
+**Unseen S6 usage condition (P2, seven held-out conditions, D26–D29)**: test RMSE (pp), mean over folds. TFT rows: mean over 50 runs, main / replicate seeds; other rows: single deterministic fits.
+
+| Method | Horizons 1–3 | Horizons 1–6 |
+|---|---|---|
+| Residual TFT + EWC, shrunk (continual, D26) | 0.92 / 0.94 | 1.62 / 1.65 |
+| Residual TFT, joint (D26) | 0.57 / 0.58 | 1.21 / 1.18 |
+| Gradient boosting (D26/D27) | 0.535 | 1.051 |
+| Gradient boosting, refitted online as the new condition's checks arrive (D28) | **0.458** | **0.898** |
+| Physics law + gradient-boosting residual (D29) | 0.581 | 1.016 |
+| Ridge | 0.77 | 1.30 |
+| Linear extrapolation | 1.37 | 2.30 |
+| Persistence | 2.82 | 4.90 |
+
+The registered verdicts: the shrunk residual TFT + EWC beats extrapolation at origins with a fade rate (replicated) but loses to gradient boosting (replicated); leave-one-condition-out intervals for gradient boosting reach the registered pooled coverage (0.90), but not on the 100 % depth-of-discharge condition (0.48 / 0.38); refit and tracking lower the 90 % interval score by 29 % (positive in both horizon sets); the physics-structured model does not improve on gradient boosting. D31 (pre-registered, not yet run) tests whether the joint residual TFT, adapted online with EWC, can match the online-refitted gradient boosting.
+
 **What we learned**
 
 1. **Diagnostics describe the present, not the next change.** IC peak near 4.07 V, pulse and EIS resistances track current SOH (|ρ| 0.83–0.97 within cells) but are weakly associated with the next ΔSOH (median |ρ| ≤ 0.3 for most features; exceptions are EIS Z′ at 3.26 V and q_3.63_3.26, which may follow the temperature schedule).
@@ -319,8 +337,9 @@ Residual TFT + EWC and linear extrapolation are practically equivalent under the
 5. **Pretraining on first-life data did not help** S6 forecasts (P3). The stream did not degrade pool error either.
 6. **Residual learning makes the TFT competitive** (0.17 pp better than direct in horizons 1–3, 0.24–0.30 pp in horizons 1–6, replicated). The registered goal of *beating* linear extrapolation was **not** reached.
 7. **EWC lowers forgetting of the residual TFT** at horizons 1–6 (from 0.28 / 0.22 pp to 0.09 pp, replicated); its effect on final error is not replicated.
-8. **Reuse classes** are only informative in P2 on S6: forecast classes agree with measured classes for 96–97 % of samples (macro-F1 0.87–0.88), against 85 % (0.64) for persistence.
-9. **Reproducibility check.** Re-running in a different environment kept all baselines identical, but several TFT significance statements on S1 and S6 flipped across p = 0.05 (for example the S6 EWC-vs-fine-tuning error difference moved from p_Holm = 0.005 to 0.060). Those comparisons are reported as not robust. See `docs/RESULTS.md`.
+8. **Reuse classes** are only informative in P2 on S6: the proposed model assigns the measured class to 95.5 % of held-out samples, against 93.9 % for extrapolation and 85.8 % for persistence, but ridge (96.5 %) and gradient boosting (97.7 %) do better; every error is between neighbouring classes.
+9. **Intervals.** Calibration rows matter as much as the model: residuals from mid-life validation origins of seen conditions understate the error on a new one (coverage 0.66–0.68 at nominal 90 %), residuals from held-out conditions reproduce it (0.90).
+10. **Reproducibility check.** Re-running in a different environment kept all baselines identical, but several TFT significance statements on S1 and S6 flipped across p = 0.05 (for example the S6 EWC-vs-fine-tuning error difference moved from p_Holm = 0.005 to 0.060). Those comparisons are reported as not robust. See `docs/RESULTS.md`.
 
 Figures are in `results/figures/`, `paper/figures/` and `docs/figures/spark/`.
 
@@ -335,8 +354,10 @@ Figures are in `results/figures/`, `paper/figures/` and `docs/figures/spark/`.
 - **Conditional forecasts.** Forecasts assume the planned usage is known.
 - **Spark is single-machine.** It demonstrates the map-reduce design and validates against pandas; it is not a cluster benchmark.
 - **Some significance statements are not robust** to the numerical environment (Section 8, item 9).
-- **Novelty.** The contribution is an integrated, battery-focused evaluation of forecasting, continual learning and reuse classes. TFT, EWC and reuse classification are not individually novel.
-- **Open team items:** the Hugging Face mirror's dataset card, permission to use the Relyion data, affiliations and author order, and the repository licence.
+- **The proposed model does not beat the strongest baseline.** On unseen conditions gradient boosting is more accurate than the residual TFT + EWC; the paper reports this as such.
+- **Out-of-range conditions.** With the 100 % depth-of-discharge condition held out, every training condition runs at 70 %, so its effect cannot be learned from S6; neither forecasts nor intervals can be trusted there, which pooled coverage hides.
+- **Post-hoc motivation.** Experiments from D23 on were each motivated by the results before them; each was pre-registered before it ran, and its provenance is recorded.
+- **Novelty.** The contribution is an integrated, battery-focused evaluation of forecasting, continual learning, calibrated intervals and reuse classes. TFT, EWC and reuse classification are not individually novel.
 
 ---
 
@@ -344,22 +365,25 @@ Figures are in `results/figures/`, `paper/figures/` and `docs/figures/spark/`.
 
 ```
 README.md           this file
-CLAUDE.md, AGENTS.md  project rules (reproducibility, no data in Git, invariants)
-PLAN_OF_ACTION.md   original plan;  docs/RESEARCH_PLAN.md  revised research plan
+AGENTS.md           project conventions (reproducibility, no data in Git, invariants)
+LICENSE             source-available licence (see Section 15)
 data/               datasets (git-ignored) + data/README.md (how to obtain them)
-docs/               RESULTS, DECISIONS (D1–D23), DATA_REPORT, EXTERNAL_DATA, REUSE_CATEGORIES, SPARK_DEMO
-notebooks/          01–16 (12 and 13 are the forecasting benchmarks; 14, 15 and 16 read the D23, D24 and D30 results)
+docs/               RESULTS, DECISIONS (D1–D31), RESEARCH_PLAN, WORK_PLAN, DATA_REPORT, EXTERNAL_DATA,
+                    REUSE_CATEGORIES, SPARK_DEMO, D24–D26 night-run runbooks
+notebooks/          01–16 (12 and 13 are the forecasting benchmarks; 14, 15 and 16 read the D23, D24 and D30
+                    results; colab_review2 runs the whole project on Google Colab)
 src/                library code: data_pipeline, raw_diagnostics, diagnostic_features, health_indicators,
                     forecasting, wheeler, pool, ageing, protocols, experiments, continual_learning,
-                    evaluation, reuse, robustness, p3; models/ (MLP, TFT)
-scripts/            fetchers, feature builders, experiment runners (run_p3, run_d23, run_ablation_a1),
+                    calibration, metrics, tabular_baselines, evaluation, reuse, robustness, p3;
+                    models/ (MLP, TFT)
+scripts/            fetchers, feature builders, experiment runners (run_p3, run_ablation_a1, run_d23–run_d30),
                     Spark job, platform server, figure and table generators
-tests/              150 pytest tests
+tests/              204 pytest tests (synthetic data in temporary folders only)
 results/            committed result JSON files, generated tables (results/tables) and figures
-paper/              IEEE manuscript, generated tables and figures
+paper/              IEEE manuscript, supplement, generated tables and figures
 ```
 
-Conventions (from `AGENTS.md` and `CLAUDE.md`): datasets and checkpoints stay out of Git; battery-group identity and temporal order are preserved in evaluation; missing temperature is documented, never silently filled; continual-learning evaluation always reports adaptation **and** retention; every reported number traces to code and a clean commit.
+Conventions (from `AGENTS.md`): datasets and checkpoints stay out of Git; battery-group identity and temporal order are preserved in evaluation; missing temperature is documented, never silently filled; continual-learning evaluation always reports adaptation **and** retention; every reported number traces to code and a clean commit.
 
 ---
 
@@ -369,7 +393,7 @@ Conventions (from `AGENTS.md` and `CLAUDE.md`): datasets and checkpoints stay ou
 pip install -r requirements.txt          # Python 3.11; Java 17/21 is needed only for Spark
 export DATA_ROOT=data                    # where the CSVs live (default: data/)
 
-python -m pytest                         # 150 tests
+python -m pytest                         # 204 tests
 
 # Fetch and build data (see data/README.md for sizes, hashes and Windows TLS notes)
 python scripts/fetch_osf_diagnostics.py && python scripts/build_diagnostic_features.py
@@ -378,6 +402,10 @@ python scripts/fetch_wheeler_characterisation.py && python scripts/build_wheeler
 # Experiments
 jupyter nbconvert --to notebook --execute notebooks/12_forecasting.ipynb --output-dir /tmp/executed
 jupyter nbconvert --to notebook --execute notebooks/13_wheeler_forecasting.ipynb --output-dir /tmp/executed
+
+# Unseen-condition experiments (S6, P2): D26 is a long run (see docs/D26_NIGHT_RUN.md); D27-D29 take minutes
+python scripts/run_d26_night.py --workers 6
+for d in d27 d28 d29; do python scripts/run_$d.py --exp e1 && python scripts/run_$d.py --exp e2; done
 
 # D30: full metric set on the P1/P2 forecasts (reproduces the committed RMSE first), then tables and figures
 python scripts/run_d30.py --dataset s1 && python scripts/run_d30.py --dataset s6
@@ -486,3 +514,20 @@ Columns of the handover files (`DATA_DICTIONARY.csv`), used by the superseded cu
 [9] X. Li, Y. Lin, S. Yang, and W. Zhang, “Intelligent domain-generalized second-life EV battery state-of-health estimation,” *Journal of Energy Storage*, vol. 140, 118989, 2025.
 
 [10] S. Meskine, S. Al-Majeed, and H. El Asri, “Reliability Assessment of Second-Life EV Batteries Using Probabilistic Deep Learning Models for State-of-Health Prediction,” *World Electric Vehicle Journal*, vol. 17, 441, 2026.
+
+---
+
+## 15. Citation and licence
+
+**Citation.** If you refer to this work, please cite the manuscript (in preparation; the entry will be updated with the venue once published):
+
+```bibtex
+@unpublished{sitaraman2026residualtftewc,
+  author = {Sitaraman, Tarun and Krishnan, Sohan Sandeep and {Darshan D}},
+  title  = {Residual {TFT-EWC}: Continual Learning for State-of-Health Forecasting and Reuse Assessment of Heterogeneous Second-Life {EV} Batteries},
+  note   = {Manuscript in preparation. Code and data provenance: https://github.com/TarunSitaraman/residual-tft-ewc},
+  year   = {2026}
+}
+```
+
+**Licence.** The code, documentation, results and manuscript are **source-available, all rights reserved** ([`LICENSE`](LICENSE)): you may read them and run the code unmodified to reproduce or verify the reported results, and cite or briefly quote them; any other use needs the copyright holders' written permission. The datasets are not part of this repository and remain under their own licences (CC BY 4.0; see `docs/EXTERNAL_DATA.md`), whose attribution requirements apply.

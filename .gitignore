@@ -43,4 +43,3 @@ venv/
 /data/spark_screens/
 /data/spark_ui_snapshot*.json
 /data/spark-events/
-/.claude-flow/

@@ -1,4 +1,4 @@
-# Project Agent Notes
+# Project Conventions
 
 This repository contains the continual-learning workflow for SOH estimation and second-life suitability assessment of heterogeneous EV batteries.
 
@@ -8,6 +8,8 @@ This repository contains the continual-learning workflow for SOH estimation and 
 - Preserve battery-group identity and temporal ordering in evaluation.
 - Document missing-temperature handling; do not fabricate values silently.
 - Keep generated checkpoints and experiment outputs out of version control.
+- Synthetic data may only test code paths: it stays outside the repository and never feeds reported results.
+- Report metrics per battery group, compare against simple baselines, and describe SOH as relative to the first observed capacity check, not nominal capacity.
 - Forecasting work (D16–D20) uses the C/20 labels in `data/rpt_health_c20.csv` and the features built from the raw archives (`data/README.md`). `ml_training_dataset.csv` is only the input of the superseded current-SOH notebooks 01–09.
 
 ## Invariants

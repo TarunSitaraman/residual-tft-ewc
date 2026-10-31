@@ -1,6 +1,6 @@
 # Reuse categories for relative SOH
 
-Workstream W4. Resolves the open decision in `docs/RESEARCH_PLAN.md` Stage E (E10) and replaces the SOH bands in `PLAN_OF_ACTION.md` §3.2.3 once the team adopts it. Status: **proposal, awaiting team decision** (checklist in §6).
+Workstream W4. Resolves the open decision in `docs/RESEARCH_PLAN.md` Stage E (E10) and replaces the SOH bands in the original project plan (not in the public repository) §3.2.3 once the team adopts it. Status: **proposal, awaiting team decision** (checklist in §6).
 
 ---
 
@@ -23,7 +23,7 @@ Literature thresholds (for example, EV retirement at 70–80 % of original capac
 | **Classes collapse.** Relative SOH stays close to 100 % in this data (D8). | With 80/60/40 bands almost every row falls in one class. Accuracy is then trivially high, macro-F1 is undefined or meaningless, and E10 would say nothing about decision reliability. |
 | **Different starting points are hidden.** Each battery is normalised to its own first RPT. | Two batteries with the same relative SOH can have very different absolute capacities, so one threshold does not mean the same thing for both. |
 
-The 80/60/40 bands in `PLAN_OF_ACTION.md` §3.2.3 applied to `SOH_Percent` should therefore **not** be used, and the application labels ("full EV repurposing", "grid support", ...) must not be attached to relative-SOH classes.
+The 80/60/40 bands in the original project plan (not in the public repository) §3.2.3 applied to `SOH_Percent` should therefore **not** be used, and the application labels ("full EV repurposing", "grid support", ...) must not be attached to relative-SOH classes.
 
 ### 1.1 Provenance finding that changes the options
 
@@ -143,7 +143,7 @@ Implementation: `np.digitize(100 - soh, [5, 10, 20], right=False)` gives 0–3 w
 
 **E10 evaluation protocol**
 
-1. Assign `y = reuse_class(SOH_measured)` and `ŷ = reuse_class(SOH_predicted)` on each test set. Do not train a separate classifier for the primary result. The multi-task reuse head in `PLAN_OF_ACTION.md` may be compared against thresholding the regression output, but it is secondary.
+1. Assign `y = reuse_class(SOH_measured)` and `ŷ = reuse_class(SOH_predicted)` on each test set. Do not train a separate classifier for the primary result. The multi-task reuse head in the original project plan (not in the public repository) may be compared against thresholding the regression output, but it is secondary.
 2. Evaluate at two units:
    - **rows** (cycles);
    - **RPT intervals**: one sample per (battery, RPT) in the test period, using the mean predicted SOH over the interval's rows. This removes the weighting by repeated labels (D4) and is the headline unit.
@@ -170,7 +170,7 @@ Implementation: `np.digitize(100 - soh, [5, 10, 20], right=False)` gives 0–3 w
 
 ## 5. What changes elsewhere, once adopted (not done in this workstream)
 
-- `PLAN_OF_ACTION.md` §3.2.3, §3.3 and §4.1: replace the 80/60/40 bands and the ">75 % category accuracy" target, which is meaningless if classes collapse, with the rule and metrics above.
+- the original project plan (not in the public repository) §3.2.3, §3.3 and §4.1: replace the 80/60/40 bands and the ">75 % category accuracy" target, which is meaningless if classes collapse, with the rule and metrics above.
 - `README.md` §1.1 and §2.5: qualify "heterogeneous" and add the data-origin citation if the provenance is confirmed.
 - `docs/DECISIONS.md`: add a decision entry (D10) recording the adopted rule and sensitivity set.
 

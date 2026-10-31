@@ -1,7 +1,7 @@
 """Tests for decision D26: P2 folds, origin strata, the D26 runner, the summary and the night orchestrator.
 
 SYNTHETIC TEST DATA ONLY, built in pytest temporary directories (never the repository); it exercises code paths and
-must never be used for reported results (CLAUDE.md).
+must never be used for reported results (AGENTS.md).
 """
 
 import json

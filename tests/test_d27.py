@@ -1,7 +1,7 @@
 """Tests for decision D27: leave-one-condition-out conformal intervals (P2).
 
 SYNTHETIC TEST DATA ONLY, built in pytest temporary directories (never the repository); it exercises code paths and
-must never be used for reported results (CLAUDE.md).
+must never be used for reported results (AGENTS.md).
 """
 
 import json

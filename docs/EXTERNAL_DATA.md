@@ -154,7 +154,7 @@ The archive also holds everything below. All of it is covered by the same licenc
 
 ## S2. Project handover and its Hugging Face mirror
 
-**What it is.** Seven CSV files produced within this project (by Darshan D, before this repository's pipeline) from the S1 archive:
+**What it is.** Seven CSV files produced within this project (before this repository's pipeline) from the S1 archive:
 - merged raw cycling data;
 - extracted RPT capacities;
 - SOH labels;
@@ -346,7 +346,7 @@ The mapping of each dataset to the forecasting task (what counts as a capacity c
 - [x] **Cui et al. 2024:** a different dataset (8 retired Nissan Leaf LMO cells); cite it as related work (S5).
 - [ ] **Stanford–Relyion data (S5):** request permission to reuse; no licence is declared.
 - [ ] **Second dataset (S6):** cite both the article and the dataset DOI; state that "second life" there means ageing below 80 % SOH under the same protocol, at 50 °C.
-- [ ] **Comparisons with the literature:** do not compare with numbers from other datasets or SOH definitions without saying so (see `CLAUDE.md`).
+- [ ] **Comparisons with the literature:** do not compare with numbers from other datasets or SOH definitions without saying so (see README, Section 9).
 
 ## 5. Evidence saved in this repository
 

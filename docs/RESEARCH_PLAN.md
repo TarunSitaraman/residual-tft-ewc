@@ -15,7 +15,7 @@ Plan from the validated data pipeline (notebooks 01–04) to a submittable IEEE 
 | RQ3 | Which continual-learning strategy gives the best adaptation–retention trade-off on this data, and at what computational cost? | Replay, EWC and LwF vs. fine-tuning (lower bound) and joint training (upper bound), with training time (E6–E8) |
 | RQ4 | Can predicted SOH be turned into reliable, interpretable reuse categories? | Category agreement and confusion analysis (E10) |
 
-**Claim boundary** (as in `PLAN_OF_ACTION.md` §3.5): the contribution is an integrated, leakage-controlled evaluation of continual learning for heterogeneous second-life batteries — sequential adaptation, retention, temporal label integrity, missing-signal robustness and reuse mapping measured together. No component method (TFT, EWC, replay, LwF) is claimed as new.
+**Claim boundary** (as in the original project plan, §3.5): the contribution is an integrated, leakage-controlled evaluation of continual learning for heterogeneous second-life batteries — sequential adaptation, retention, temporal label integrity, missing-signal robustness and reuse mapping measured together. No component method (TFT, EWC, replay, LwF) is claimed as new.
 
 **Hypotheses** (stated before running, so results can confirm or reject them):
 
@@ -89,7 +89,7 @@ All outcomes are reported as measured, including if the TFT does not improve on 
 
 E10: map predicted SOH to reuse categories and measure agreement with categories from measured SOH (accuracy, macro-F1, confusion matrix), per group and after each continual-learning step.
 
-**Open research decision (before any code):** SOH here is relative to each battery's first RPT, not to nominal capacity (CLAUDE.md), so literature thresholds such as "80 % of nominal" do not transfer directly. Options are analysed in `docs/REUSE_CATEGORIES.md`.
+**Open research decision (before any code):** SOH here is relative to each battery's first RPT, not to nominal capacity (README, Section 9), so literature thresholds such as "80 % of nominal" do not transfer directly. Options are analysed in `docs/REUSE_CATEGORIES.md`.
 
 ### Stage F — robustness
 
@@ -163,7 +163,7 @@ class FineTune, Replay, EWC, LwF(Strategy);  class Joint: fit_all(tasks) ; predi
 
 ## 6. Rules for all workstreams
 
-- Follow `CLAUDE.md` and `AGENTS.md`: no fabricated data, no shuffling of time series, preprocessing fitted on training data only, per-group reporting, provenance recorded.
+- Follow `AGENTS.md`: no fabricated data, no shuffling of time series, preprocessing fitted on training data only, per-group reporting, provenance recorded.
 - Synthetic data is generated only inside tests (temporary directories) and never feeds reported results.
 - Deterministic by default: fixed seeds, `torch.use_deterministic_algorithms(True)`, single-threaded CPU for reference runs.
 - Every experiment writes a small JSON under `results/` with config, seeds, orders, environment and commit.

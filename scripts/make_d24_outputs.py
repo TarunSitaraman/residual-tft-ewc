@@ -10,7 +10,7 @@ Outputs (never edited by hand):
 - ``results/tables/d24_tests_<exp>.csv`` and ``.tex``: the registered paired tests against the reference with the D21
   replication verdict.
 - ``results/tables/d24_per_group_<exp>.csv`` and ``.tex``: test RMSE of every S6 test case after the last stream step
-  (main seeds, mean over runs), as CLAUDE.md requires per-group reporting.
+  (main seeds, mean over runs), as AGENTS.md requires per-group reporting.
 - ``paper/figures/d24_comparison_<exp>.png``, ``d24_per_group_<exp>.png`` (residual + EWC arms and baselines only), ``d24_forgetting_<exp>.png`` and, for E2,
   ``d24_horizon_e2.png``; ``spark_scaling.png`` when ``results/d22_spark_scaling.json`` exists.
 

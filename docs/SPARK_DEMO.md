@@ -27,7 +27,7 @@ presenting.
 - No Hadoop installation is needed for the job itself. The event log and the Spark History Server need Hadoop's
   Windows helpers, which Apache does not ship: `winutils.exe` and `hadoop.dll` from the community repository
   github.com/cdarlint/winutils (folder `hadoop-3.3.6`, the newest available; PySpark 4.2 bundles the Hadoop 3.5.0
-  client), placed in `C:\Users\Tarun\tools\hadoop-3.3.6\bin` and checked against the repository's own file hashes.
+  client), placed in `C:\tools\hadoop-3.3.6\bin` and checked against the repository's own file hashes.
   SHA-256: winutils.exe `496a591eb1e67df2a620f710d529ba6ddfe1c19149e6647cc4e320bb0efd8553`, hadoop.dll
   `d7ab36a68518748cef142be2da5069b4c763c2cd764c1d2e6ac48c7200405be3`. They are used only through `HADOOP_HOME` in the
   launch scripts, not installed system-wide.
@@ -110,7 +110,7 @@ timeline, Storage, Environment, Executors, SQL), without re-running it.
 1. Record a run with the event log (once; outputs are tagged so the D22 files are untouched):
 
    ```powershell
-   $env:HADOOP_HOME = "C:\Users\Tarun\tools\hadoop-3.3.6"
+   $env:HADOOP_HOME = "C:\tools\hadoop-3.3.6"
    .venv\Scripts\python.exe scripts\spark_ageing_features.py --cores 6 --event-log --tag eventlog
    ```
 

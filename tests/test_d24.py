@@ -1,7 +1,7 @@
 """Tests for decision D24: sequence baselines, shift-adaptive EWC (RC-TFT), tabular baselines and the D24 runner.
 
 SYNTHETIC TEST DATA ONLY, built in the tests or in pytest temporary directories (never the repository); it exercises
-code paths and must never be used for reported results (CLAUDE.md).
+code paths and must never be used for reported results (AGENTS.md).
 """
 
 import json

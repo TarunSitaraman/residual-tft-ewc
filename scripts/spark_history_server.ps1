@@ -1,11 +1,11 @@
 # Spark History Server for the D22 Spark runs: browse finished runs in the official Spark UI at http://localhost:18080.
 # Shows runs made with  scripts/spark_ageing_features.py --event-log  (event logs in data/spark-events).
-# Windows needs Hadoop's winutils.exe: here C:\Users\Tarun\tools\hadoop-3.3.6\bin\winutils.exe (from
+# Windows needs Hadoop's winutils.exe: here C:\tools\hadoop-3.3.6\bin\winutils.exe (from
 # github.com/cdarlint/winutils, hadoop-3.3.6; SHA-256 496a591eb1e67df2a620f710d529ba6ddfe1c19149e6647cc4e320bb0efd8553).
 # The server also needs hadoop.dll (same source; SHA-256 d7ab36a68518748cef142be2da5069b4c763c2cd764c1d2e6ac48c7200405be3) in
 # HADOOP_HOME\bin, loaded through java.library.path for this process only. Set HADOOP_HOME to override. Stop with Ctrl+C (or stop the java process).
 $repo = Split-Path -Parent $PSScriptRoot
-if (-not $env:HADOOP_HOME) { $env:HADOOP_HOME = "C:\Users\Tarun\tools\hadoop-3.3.6" }
+if (-not $env:HADOOP_HOME) { $env:HADOOP_HOME = "C:\tools\hadoop-3.3.6" }
 foreach ($f in "winutils.exe", "hadoop.dll") { if (-not (Test-Path (Join-Path $env:HADOOP_HOME "bin\$f"))) { throw "$f not found under HADOOP_HOME=$env:HADOOP_HOME\bin" } }
 $env:SPARK_HOME = Join-Path $repo ".venv\Lib\site-packages\pyspark"
 # spark-class.cmd splits options at spaces and the History Server does not decode %20, so a repository path with spaces

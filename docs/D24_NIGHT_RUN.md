@@ -30,7 +30,7 @@ Estimates come from D23's recorded training times (TFT 23–37 s per stream in E
 2. Git identity (commits must be under the team member's own name):
    ```powershell
    git config user.name "Tarun Sitaraman"
-   git config user.email "mfsbyo@gmail.com"
+   git config user.email "<your email>"
    ```
 3. Environment (Python 3.11, pinned versions):
    ```powershell

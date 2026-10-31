@@ -142,7 +142,7 @@ SOH is constant between RPTs, so one battery's validation or test period often s
 - **MAPE:** reported for comparability with the literature; it is nearly proportional to MAE here because SOH stays close to 100 %.
 - **R²:** reported and interpreted only for pooled results; per-group R² is shown for completeness but not used for conclusions or targets.
 
-Literature error ranges (e.g. RMSE 0.6–1.5 %) come from other datasets and SOH definitions and are context, not targets (see `CLAUDE.md`).
+Literature error ranges (e.g. RMSE 0.6–1.5 %) come from other datasets and SOH definitions and are context, not targets (see README, Section 9).
 
 **Implemented in:** `src/data_pipeline.py` (`regression_metrics`, `metrics_by_group`), `notebooks/04_baseline_model.ipynb` §6.
 

@@ -2,7 +2,7 @@
 
 SYNTHETIC TEST DATA ONLY. The generator below exists to exercise code paths.
 It is created in pytest temporary directories, is never written into the
-repository, and must never be used for reported results (see CLAUDE.md).
+repository, and must never be used for reported results (see AGENTS.md).
 """
 
 from __future__ import annotations

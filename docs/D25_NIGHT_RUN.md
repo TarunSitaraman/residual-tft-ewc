@@ -30,7 +30,7 @@ Run it on the ASUS, not on other hardware: the reproduction check needs the D23 
 2. Git identity (commits under the team member's own name):
    ```powershell
    git config user.name "Tarun Sitaraman"
-   git config user.email "mfsbyo@gmail.com"
+   git config user.email "<your email>"
    ```
 3. **Pinned environment** (the D24 run used Python 3.12 and other library versions; D25 should not):
    ```powershell
