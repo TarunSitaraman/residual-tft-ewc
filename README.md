@@ -204,7 +204,7 @@ A sample is (cell, origin check *k*, horizon *h*). Inputs known at the origin: S
 | Joint | Train on all tasks at once (the upper bound, not a continual method) |
 
 - **Residual formulation (D23).** The best-performing variant predicts only the *correction* to linear extrapolation instead of ΔSOH directly. This is what made the TFT competitive.
-- **Later variants (D24–D31).** Shift-adaptive EWC and literature backbones (BiLSTM, TCN, Transformer; GPR, random forest, SVR) (D24); per-horizon shrinkage of the residual correction and conformal intervals (D25); unseen usage conditions (D26); leave-one-condition-out conformal calibration (D27); online refit and quantile tracking on a new condition (D28); a physics-structured Bayesian forecaster with a learned residual (D29); and, pre-registered, online adaptation of the joint residual TFT with EWC on a new condition (D31).
+- **Later variants (D24–D31).** Shift-adaptive EWC and literature backbones (BiLSTM, TCN, Transformer; GPR, random forest, SVR) (D24); per-horizon shrinkage of the residual correction and conformal intervals (D25); unseen usage conditions (D26); leave-one-condition-out conformal calibration (D27); online refit and quantile tracking on a new condition (D28); a physics-structured Bayesian forecaster with a learned residual (D29); online adaptation of the joint residual TFT with EWC on a new condition (D31); and gradient boosting held to the continual-learning constraint (D32).
 
 ### 5.6 Reuse assessment (`src/reuse.py`, `docs/REUSE_CATEGORIES.md`)
 Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, rather than training a separate classifier. We report accuracy, macro-F1, linear-weighted kappa and confusion matrices. On S1 all samples stay in C0 and on S6 P1 all test periods are in C3, so classes can only be evaluated meaningfully in P2. The multi-task reuse head originally planned was **not** implemented; its empty stub was removed (12 Oct 2026).
@@ -321,6 +321,8 @@ Residual TFT + EWC and linear extrapolation are practically equivalent under the
 |---|---|---|
 | Residual TFT + EWC, shrunk (continual, D26) | 0.92 / 0.94 | 1.62 / 1.65 |
 | Residual TFT, joint (D26) | 0.57 / 0.58 | 1.21 / 1.18 |
+| Joint residual TFT adapted online with EWC (D31) | 0.70 / 0.70 | 1.13 / 1.10 |
+| Gradient boosting, latest condition only (continual constraint, D32) | 0.865 | 1.593 |
 | Gradient boosting (D26/D27) | 0.535 | 1.051 |
 | Gradient boosting, refitted online as the new condition's checks arrive (D28) | **0.458** | **0.898** |
 | Physics law + gradient-boosting residual (D29) | 0.581 | 1.016 |
@@ -328,7 +330,7 @@ Residual TFT + EWC and linear extrapolation are practically equivalent under the
 | Linear extrapolation | 1.37 | 2.30 |
 | Persistence | 2.82 | 4.90 |
 
-The registered verdicts: the shrunk residual TFT + EWC beats extrapolation at origins with a fade rate (replicated) but loses to gradient boosting (replicated); leave-one-condition-out intervals for gradient boosting reach the registered pooled coverage (0.90), but not on the 100 % depth-of-discharge condition (0.48 / 0.38); refit and tracking lower the 90 % interval score by 29 % (positive in both horizon sets); the physics-structured model does not improve on gradient boosting. D31 (pre-registered, not yet run) tests whether the joint residual TFT, adapted online with EWC, can match the online-refitted gradient boosting.
+The registered verdicts: the shrunk residual TFT + EWC beats extrapolation at origins with a fade rate (replicated) but loses to gradient boosting (replicated); leave-one-condition-out intervals for gradient boosting reach the registered pooled coverage (0.90), but not on the 100 % depth-of-discharge condition (0.48 / 0.38); refit and tracking lower the 90 % interval score by 29 % (positive in both horizon sets); the physics-structured model does not improve on gradient boosting. Adapting the joint residual TFT online with EWC (D31) beats plain fine-tuning on the new condition and on forgetting (replicated) but not the online-refitted gradient boosting. Held to the same no-storage constraint as the continual TFT, gradient boosting refitted on the latest condition (D32) is within 0.08 pp of it. Across both settings, the proposed model beats gradient boosting on the continual stream and linear extrapolation on unseen conditions (paper Table III).
 
 **What we learned**
 
@@ -370,7 +372,7 @@ README.md           this file
 AGENTS.md           project conventions (reproducibility, no data in Git, invariants)
 LICENSE             source-available licence (see Section 15)
 data/               datasets (git-ignored) + data/README.md (how to obtain them)
-docs/               RESULTS, DECISIONS (D1–D31), RESEARCH_PLAN, WORK_PLAN, DATA_REPORT, EXTERNAL_DATA,
+docs/               RESULTS, DECISIONS (D1–D32), RESEARCH_PLAN, WORK_PLAN, DATA_REPORT, EXTERNAL_DATA,
                     REUSE_CATEGORIES, SPARK_DEMO, D24–D26 night-run runbooks
 notebooks/          01–16 (12 and 13 are the forecasting benchmarks; 14, 15 and 16 read the D23, D24 and D30
                     results; colab_review2 runs the whole project on Google Colab)

@@ -789,3 +789,68 @@ Measured class counts, S6: C0 52, C1 182, C2 516, C3 1659. S1: all 279 samples a
 ## Training curves of the residual TFT + EWC (29 Oct 2026)
 
 `scripts/run_epoch_curves.py` repeats the committed D23 E1 run (order 0, seed 0, lr 0.003, λ = 1) with per-epoch logging (`epoch_history_` in `src/continual_learning.py`, e55c1d3) and reproduces its final error exactly (0.464125 pp). Early stopping keeps the best validation epoch per task (0-based: 3, 1, 14, 2, none for task 5, which keeps task 4's weights, 85, 29). Output: `results/epoch_curves_d23_e1.json`, `paper/figures/epoch_curves.png` (supplement).
+
+## D31: online adaptation of the joint residual TFT with EWC on an unseen condition (31 Oct – 1 Nov 2026)
+
+Results files: `results/forecasting_d31_e1.json` (horizons 1–3) and `results/forecasting_d31_e2.json` (horizons 1–6), run at commit `10cadea` (clean tree, pinned environment; `scripts/run_d31_night.py --workers 6`, 7.1 h). Protocol fixed in D31 before any code (`ea7a995`). **Stop conditions passed:** JOINT-STATIC reproduces the D26 joint residual TFT per (fold, seed) exactly (max abs diff 0.0); the D28 comparator means match the registered values. Setting: the D26 joint residual TFT (six training conditions) is shipped to the held-out condition and fine-tuned as its checks arrive (D28 arrival rule), from its own weights, without the training conditions' data. E_ft and λ were selected on pseudo-held-out training cases: every fold chose E_ft = 5 (the smaller grid value), and EWC chose the largest λ in 12 of 14 folds, so selection sat at the grid edge towards adapting less (not extended after the fact).
+
+**Held-out RMSE and forgetting RMSE (pp), main set:**
+
+| Arm | E1 held-out | E1 forgetting | E2 held-out | E2 forgetting |
+|---|---|---|---|---|
+| JOINT-STATIC (never updated) | **0.568** | 0.206 | 1.214 | 0.441 |
+| FT-ONLINE (plain fine-tuning) | 0.757 | 0.626 | 1.376 | 1.248 |
+| **EWC-ONLINE (proposed)** | 0.704 | 0.330 | **1.130** | 0.519 |
+| D28 REFIT (gradient boosting, refitted online) | 0.458 | – | 0.898 | – |
+| D28 STATIC (gradient boosting) | 0.535 | – | 1.051 | – |
+
+**Registered results:**
+
+| Question | E1 (main / replicate) | E2 (main / replicate) | Verdict |
+|---|---|---|---|
+| Q1: EWC-ONLINE − D28 REFIT (fold test) | +0.245 / +0.244 (p 0.016 / 0.016, 0 of 7 folds better) | +0.232 / +0.197 (p 0.156 / 0.078) | **not established** (worse in every cell) |
+| Q2: EWC-ONLINE − JOINT-STATIC | +0.136 / +0.126 (p 0.031 / 0.047) | −0.085 / −0.089 (p 0.078 / 0.016; 6 and 7 of 7 folds better) | **not established** (E1 worse, E2 better) |
+| Q3: EWC-ONLINE − FT-ONLINE, held-out | −0.054 / −0.050 | −0.246 / −0.242 | **replicated, EWC better** |
+| Q3: EWC-ONLINE − FT-ONLINE, forgetting | −0.296 / −0.290 | −0.729 / −0.657 | **replicated, EWC better** (all p_Holm < 1e-6) |
+| Q4 (descriptive): EWC-ONLINE − D28 STATIC | +0.168 / +0.167 | +0.079 / +0.044 | – |
+
+**Reading.** When the neural model is updated online on a new condition without its training data, EWC is clearly better than plain fine-tuning, on the new condition and on the old ones (forgetting more than halved), replicated in both horizon sets. Updating the joint model online does not beat refitting gradient boosting (D28), and helps over not updating only for horizons 1–6.
+
+## D32: gradient boosting under the continual-learning constraint on unseen conditions (1 Nov 2026)
+
+Results files: `results/forecasting_d32_e1.json` and `results/forecasting_d32_e2.json`, run at commit `fdcf0d6` (clean tree, pinned environment). Protocol fixed in D32 before any code (`c7e7f00`). **Reproduction checks passed:** gradient boosting on all six training conditions reproduces the D26 comparator per fold exactly; the D26 run values reproduce the D26 summary. Setting: D26 P2 (seven folds, the ten D26 stream orders); the proposed arm is the D26 continual shrunk residual TFT + EWC (not refitted). Gradient boosting is held to the same constraint as the continual model, seeing the six training conditions one at a time without keeping earlier conditions' rows: **GBM-WARM** (warm-started, 200 more trees per condition) and **GBM-LAST** (refitted on the latest condition only). **GBM-ALL** (all six stored) is the D26 comparator.
+
+**P2 error (pp), all origins, mean over folds:**
+
+| Method | E1 (h = 1–3) | E2 (h = 1–6) |
+|---|---|---|
+| Residual TFT + EWC, shrunk (continual, D26) | 0.924 / 0.945 | 1.620 / 1.653 |
+| GBM-WARM (continual) | 2.652 | 3.494 |
+| GBM-LAST (latest condition only) | 0.865 | 1.593 |
+| GBM-ALL (all conditions stored, D26) | **0.535** | **1.051** |
+
+**Registered results (D21 replication rule, 50 runs per seed set):**
+
+| Comparison | E1 | E2 |
+|---|---|---|
+| Q1: shrunk − GBM-WARM | −1.727 / −1.707: **replicated, TFT better** | −1.873 / −1.840: **replicated, TFT better** |
+| Q2: shrunk − GBM-LAST | +0.060 / +0.080 (p_Holm 0.022 / 0.003): **replicated, GBM-LAST better** | +0.027 / +0.060 (0.081 / 0.081): not replicated |
+| Secondary: shrunk − GBM-LAST on H+ | −0.027 / −0.021: practically equivalent | −0.128 / −0.106: not replicated |
+| Secondary: raw − GBM-LAST | practically equivalent | practically equivalent |
+
+**Reading.**
+1. **Q1 is positive but is mostly an artefact (post hoc diagnosis).** With warm start, scikit-learn keeps the bin edges of the first condition, and every usage input (C-rates, depth of discharge, charge voltage, temperature, chemistry) is constant within a condition, so the later trees cannot split on them. GBM-WARM therefore cannot tell the conditions apart; its result is not evidence against continual gradient boosting in general.
+2. **Under the same constraint, the proposed model and gradient boosting are close.** Gradient boosting refitted on the latest condition is 0.06–0.08 pp better for horizons 1–3 (replicated) and level for 1–6 (not replicated); on origins with a fade rate they are practically equivalent (E1).
+3. **Storing every condition's data is what makes gradient boosting best on unseen conditions:** the constraint costs it 0.33 pp (E1) and 0.54 pp (E2).
+
+## Headline comparison (paper Table III, 1 Nov 2026)
+
+`scripts/make_headline_table.py` writes `paper/tables/headline.tex` from the D23, D25, D26 and D32 results. Neither traditional forecaster is reliable in both S6 settings:
+
+| Proposed (shrunk residual TFT + EWC) minus … | Continual stream, h 1–3 | h 1–6 | Unseen condition, h 1–3 | h 1–6 |
+|---|---|---|---|---|
+| linear extrapolation | −0.02 / −0.04 equivalent (D25) | +0.01 / +0.01 equivalent (D25) | −0.45 / −0.43 **better** (D26) | −0.68 / −0.65 **better** (D26) |
+| gradient boosting, all conditions stored | −0.13 / −0.14 **better**¹ | −0.40 / −0.41 **better**¹ | +0.39 / +0.41 worse (D26) | +0.57 / +0.60 worse (D26) |
+| gradient boosting, latest condition only (D32) | – | – | +0.06 / +0.08 worse | +0.03 / +0.06 not replicated |
+
+¹ Registered for the unshrunk model in D23 (−0.112 / −0.138 and −0.337 / −0.365, replicated); for the shrunk model computed post hoc with the same rule, same verdict.
