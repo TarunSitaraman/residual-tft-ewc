@@ -169,7 +169,7 @@ were moved here for space.
 
 \emph{Intervals on unseen conditions.} Intervals (Fig.~\ref{fig:d27}) calibrated on the pooled validation rows of the training conditions under-cover on the held-out one, for the TFT (pooled 0.66--0.68) and for extrapolation (0.74--0.76) alike. Calibrating extrapolation, which has no fitted parameters, on all origins of those conditions instead of their mid-life validation rows restores 0.89--0.90: the calibration rows caused the shortfall, not only the model. With leave-one-condition-out calibration, gradient-boosting intervals reach the registered threshold of 0.85 (0.90 in both horizon sets) with the lowest mean interval scores (3.2 and 6.7~pp, against 7.1 and 11.8~pp for calibrated extrapolation and 6.1--6.3 and 10.0--10.3~pp for the TFT), lower than calibrated extrapolation's on six of seven conditions (significant only for horizons 1--3, $p=0.047$, against $p=0.30$, so not established). Coverage holds over conditions, not for each: on the 100\% depth-of-discharge condition, outside the range of the others, it is 0.48 and 0.38.
 
-The paper's table of errors on unseen conditions (Section IV-G) lists the shrunk residual TFT\,+\,EWC; the raw correction gives 0.88/0.90, 0.79/0.80, 1.59/1.62 and 1.46/1.49~pp in the same columns.
+Table~\ref{tab:d26} lists the shrunk residual TFT\,+\,EWC; the raw correction gives 0.88/0.90, 0.79/0.80, 1.59/1.62 and 1.46/1.49~pp in the same columns.
 
 \begin{table}[t]
   \centering
@@ -197,6 +197,32 @@ The paper's table of errors on unseen conditions (Section IV-G) lists the shrunk
     \bottomrule
   \end{tabular}
 \end{table}
+
+\input{tables/p1}
+
+\begin{table}[t]
+  \centering
+  \caption{Unseen S6 usage condition (P2, seven held-out conditions): test RMSE (pp), mean over folds, on all origins and on origins with a fade rate (H$^+$). TFT rows: mean over 50 runs, main / replicate seed sets; other rows: single deterministic fits.}
+  \label{tab:d26}
+  \setlength{\tabcolsep}{2.5pt}
+  \scriptsize
+  \begin{tabular}{lcccc}
+    \toprule
+    & \multicolumn{2}{c}{E1: $h{=}1$--3} & \multicolumn{2}{c}{E2: $h{=}1$--6} \\
+    Method & all & H$^+$ & all & H$^+$ \\
+    \midrule
+    TFT\,+\,EWC, residual, shrunk & 0.92 / 0.94 & 0.74 / 0.74 & 1.62 / 1.65 & 1.42 / 1.44 \\
+    TFT, residual, joint & 0.57 / 0.58 & 0.54 / 0.55 & 1.21 / 1.18 & 1.22 / 1.19 \\
+    \midrule
+    Gradient boosting & \textbf{0.54} & \textbf{0.51} & \textbf{1.05} & \textbf{1.05} \\
+    Ridge & 0.77 & 0.69 & 1.30 & 1.26 \\
+    Linear extrapolation & 1.37 & 0.86 & 2.30 & 1.62 \\
+    Persistence & 2.82 & 2.66 & 4.90 & 4.73 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\emph{Gradient boosting under the continual constraint (D32).} Table~\ref{tab:p1} is the first P1 benchmark (Section IV-A of the paper). The headline comparison of the paper (its Table~III) adds gradient boosting trained like the proposed model on unseen conditions: the six training conditions arrive one at a time and earlier conditions' data are not kept. Refitted on the latest condition only, it reaches 0.86 and 1.59~pp (horizons 1--3 and 1--6), against 0.92/0.94 and 1.62/1.65~pp for the proposed model (slightly better for 1--3, $+0.06/+0.08$~pp, replicated; not replicated for 1--6) and 0.54 and 1.05~pp with all six conditions stored. Warm-started condition by condition (200 more trees per condition), it reaches 2.65 and 3.49~pp, and the proposed model is better by 1.7--1.9~pp (replicated). This gap is mostly an artefact: scikit-learn keeps the bin edges of the first condition when warm-starting, and every usage input is constant within a condition, so the later trees cannot use them. We therefore do not count it as evidence against continual gradient boosting in general.
 
 \begin{figure}[t]
   \centering
