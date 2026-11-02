@@ -21,13 +21,6 @@ const signed = (x) => (x === null || x === undefined ? "–" : (x > 0 ? "+" : ""
 
 export { el, fmt };
 
-export function renderKpis(root, summary) {
-  root.replaceChildren(...summary.kpis.map((k) => el("div", { class: "fact" },
-    el("span", { class: "k", text: k.label }),
-    el("span", { class: "v" }, fmt(k.value), el("small", { text: k.unit })),
-    el("span", { class: "n", text: k.note }))));
-}
-
 export function renderHeadline(root, sub, summary, state) {
   const setting = SETTING_LABEL[state.setting];
   const rows = summary.headline.filter((r) => r.setting === setting);
@@ -63,7 +56,7 @@ export function renderHeadline(root, sub, summary, state) {
     const b = tests.find((r) => r.method === t && r.protocol === PROTOCOL_LABEL.P2);
     if (!a && !b) continue;
     const cell = (r) => r ? el("td", { class: "r" }, `${signed(r.diff_main)} / ${signed(r.diff_replicate)}`,
-      el("span", { class: "verdict", title: r.post_hoc ? "Post hoc for this model (registered for the unshrunk model, same verdict)" : "Registered test" },
+      el("span", { class: `verdict ${shortVerdict(r.verdict).replace(".", "")}`, title: r.post_hoc ? "Post hoc for this model (registered for the unshrunk model, same verdict)" : "Registered test" },
         shortVerdict(r.verdict) + (r.post_hoc ? "*" : ""))) : el("td", { class: "r", text: "–" });
     body.push(el("tr", {}, el("td", { text: (a || b).label.replace("Proposed vs ", "vs ") }), cell(a), cell(b)));
   }
@@ -76,57 +69,6 @@ export function renderHeadline(root, sub, summary, state) {
 
 function shortVerdict(v) {
   return { "replicated, a better": "better", "replicated, a worse": "worse", "practically equivalent": "equiv.", "not replicated": "n.r." }[v] || v;
-}
-
-export function renderPerGroup(root, title, sub, summary, state, { onSelect, tip }) {
-  title.textContent = state.protocol === "P1" ? "Final error per task, continual stream" : "Error per held-out usage condition";
-  sub.textContent = `S6 · ${PROTOCOL_LABEL[state.protocol]} · ${SETTING_LABEL[state.setting]}`;
-  if (state.dataset !== "S6") {
-    root.replaceChildren(el("p", { class: "notice", text: "Per-group errors for the S1 cells (D30) are in the Forecast accuracy view; this summary covers the S6 conditions." }));
-    return;
-  }
-  const rows = summary.per_group.filter((r) => r.protocol === state.protocol && r.setting === state.setting);
-  const groups = summary.groups.filter((g) => g.dataset === "S6").map((g) => g.group);
-  const methods = METHOD_ORDER.filter((m) => rows.some((r) => r.method === m) && (state.family === "all" || FAMILY[m] === state.family));
-  if (!methods.length) {
-    root.replaceChildren(el("p", { class: "notice", text: `No ${state.family} method in this summary for ${state.protocol}.` }));
-    return;
-  }
-  const at = (m, g) => rows.find((r) => r.method === m && r.group === g);
-  const vals = rows.filter((r) => methods.includes(r.method)).map((r) => r.rmse_mean);
-  const lo = Math.min(...vals), hi = Math.max(...vals);
-  const t = (x) => (hi > lo ? (Math.log(x) - Math.log(lo)) / (Math.log(hi) - Math.log(lo)) : 0);   // log scale: errors span ~10x
-  const bestIn = Object.fromEntries(groups.map((g) => {
-    const xs = methods.map((m) => at(m, g)).filter(Boolean);
-    return [g, xs.length ? xs.reduce((a, b) => (b.rmse_mean < a.rmse_mean ? b : a)).method : null];
-  }));
-  const head = el("tr", {}, el("th", { text: "Method" }), groups.map((g) => el("th", {
-    class: "col" + (state.group === g ? " sel" : ""), scope: "col", text: g, title: `Select ${g}` })));
-  head.querySelectorAll("th.col").forEach((th) => th.addEventListener("click", () => onSelect({ group: th.textContent })));
-  const body = methods.map((m) => el("tr", { class: m === PROPOSED ? "proposed" : null },
-    el("th", { scope: "row", text: (rows.find((r) => r.method === m) || {}).label || m, style: "text-transform:none;letter-spacing:0;font:500 13.5px var(--sans);color:var(--ink)" }),
-    groups.map((g) => {
-      const r = at(m, g);
-      if (!r) return el("td", { class: "cell na", text: "–", title: "Not reported per group" });
-      const td = el("td", {
-        class: "cell" + (state.group === g ? " sel" : ""), tabindex: 0, style: `--t:${t(r.rmse_mean).toFixed(3)}`,
-        "aria-label": `${r.label}, ${g}: ${fmt(r.rmse_mean)} pp`,
-      }, bestIn[g] === m ? el("span", { class: "dot", "aria-hidden": "true", text: "●" }) : null, fmt(r.rmse_mean));
-      const info = () => `<b>${r.label}</b><br>${g}: ${fmt(r.rmse_mean, 3)} pp` +
-        (r.n_runs > 1 ? ` ± ${fmt(r.rmse_sd, 3)} (s.d., ${r.n_runs} runs)` : " (single fit)");
-      td.addEventListener("mouseenter", () => tip.show(td, info()));
-      td.addEventListener("mouseleave", tip.hide);
-      td.addEventListener("focus", () => tip.show(td, info()));
-      td.addEventListener("blur", tip.hide);
-      const pick = () => onSelect({ group: g, method: m });
-      td.addEventListener("click", pick);
-      td.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
-      return td;
-    })));
-  root.replaceChildren(
-    el("table", { class: "heat" }, el("thead", {}, head), el("tbody", {}, body)),
-    el("div", { class: "legend" }, el("span", { text: `${fmt(lo)} pp` }), el("span", { class: "ramp", "aria-hidden": "true" }),
-      el("span", { text: `${fmt(hi)} pp (log scale)` })));
 }
 
 export function renderDetails(root, titleEl, summary, state, selection) {

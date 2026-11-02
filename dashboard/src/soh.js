@@ -1,6 +1,7 @@
 // SOH explorer: SOH trajectories per cell from data/dashboard/fact_soh.csv (built by scripts/export_dashboard_data.py).
 // SOH is relative to each cell's first valid capacity check; S1 and S6 are drawn separately, never on one axis.
 import { el, fmt } from "./views.js";
+import { ticks } from "./charts.js";
 
 const SVG = "http://www.w3.org/2000/svg";
 const CUTS = [[95, "C0 / C1"], [90, "C1 / C2"], [80, "C2 / C3"]];
@@ -65,8 +66,9 @@ export function renderSoh(root, all, { dataset, selected, groupOrder, tip, onSel
   const colour = (u) => `var(--c${(groupOrder.indexOf(rows.find((r) => r.unit === u).group) % 7) + 1})`;
   const sel = units.includes(selected) ? selected : "all";
   const xName = dataset === "S1" ? "RPT number" : "Check cycle";
+  const someTemp = rows.some((r) => !r.tempMissing);   // S6 records no check temperature: no hollow markers then
 
-  const W = Math.max(300, Math.round(root.clientWidth || 640)), H = W < 520 ? 260 : 320;
+  const W = Math.max(300, Math.round(root.clientWidth || Number(root.closest?.("[data-w]")?.dataset.w) || 640)), H = W < 520 ? 260 : 320;
   const m = { l: 46, r: sel === "all" ? 14 : 44, t: 12, b: 38 };
   const xs = rows.map((r) => r.x), ys = rows.map((r) => r.soh);
   const x0 = Math.min(...xs), x1 = Math.max(...xs);
@@ -83,13 +85,13 @@ export function renderSoh(root, all, { dataset, selected, groupOrder, tip, onSel
     svg.append(s("line", { class: "gl", x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v) }),
       s("text", { x: m.l - 6, y: Y(v) + 4, "text-anchor": "end" }, `${v}`));
   }
+  const cutLabels = [];
   for (const [c, name] of CUTS) {
     if (c < y0 || c > y1) continue;
-    svg.append(s("line", { class: "cut", x1: m.l, x2: W - m.r, y1: Y(c), y2: Y(c) }),
-      s("text", { class: "cutlab", x: m.l + 6, y: Y(c) - 5 }, `${c} % · ${name} boundary`));
+    svg.append(s("line", { class: "ref", x1: m.l, x2: W - m.r, y1: Y(c), y2: Y(c) }));
+    cutLabels.push(s("text", { class: "reflab", x: W - m.r - 4, y: Y(c) - 5, "text-anchor": "end" }, `${c} % · ${name}`));
   }
-  const xstep = Math.max(1, Math.ceil((x1 - x0) / (W < 520 ? 6 : 12)));
-  for (let v = x0; v <= x1; v += xstep) svg.append(s("text", { x: X(v), y: H - m.b + 16, "text-anchor": "middle" }, `${v}`));
+  for (const v of ticks(x0, x1, W < 520 ? 5 : 9).filter((v) => Number.isInteger(v))) svg.append(s("text", { x: X(v), y: H - m.b + 16, "text-anchor": "middle" }, `${v}`));
   svg.append(s("line", { class: "ax", x1: m.l, x2: W - m.r, y1: H - m.b, y2: H - m.b }),
     s("text", { x: (m.l + W - m.r) / 2, y: H - 4, "text-anchor": "middle" }, xName),
     s("text", { x: 12, y: (m.t + H - m.b) / 2, transform: `rotate(-90 12 ${(m.t + H - m.b) / 2})`, "text-anchor": "middle" },
@@ -101,15 +103,19 @@ export function renderSoh(root, all, { dataset, selected, groupOrder, tip, onSel
     const g = s("g", { class: "series" + (sel !== "all" && u !== sel ? " dim" : ""), style: `--col:${colour(u)}`,
       "data-unit": u });
     g.append(s("path", { class: "ln", d: pts.map((p, k) => `${k ? "L" : "M"}${X(p.x).toFixed(1)},${Y(p.soh).toFixed(1)}`).join("") }),
-      s("path", { class: "hit", d: pts.map((p, k) => `${k ? "L" : "M"}${X(p.x).toFixed(1)},${Y(p.soh).toFixed(1)}`).join("") }));
-    for (const p of pts) g.append(s("circle", { class: p.tempMissing ? "pt open" : "pt", cx: X(p.x), cy: Y(p.soh), r: 4 }));
+      s("path", { class: "hitline", d: pts.map((p, k) => `${k ? "L" : "M"}${X(p.x).toFixed(1)},${Y(p.soh).toFixed(1)}`).join("") }));
+    if (pts.length <= 25 || u === sel) {
+      for (const p of pts) g.append(s("circle", { class: p.tempMissing && someTemp ? "pt open" : "pt", cx: X(p.x), cy: Y(p.soh), r: 4 }));
+    }
     if (u === sel) {
       const last = pts[pts.length - 1];
-      g.append(s("text", { class: "endlab", x: X(last.x) + 7, y: Y(last.soh) + 4 }, u));
+      g.append(s("text", { class: "lab", x: X(last.x) + 7, y: Y(last.soh) + 4 }, u));
     }
     g.addEventListener("click", () => onSelect(u));
     svg.append(g);
   }
+
+  svg.append(...cutLabels);   // above the lines, so the boundaries stay readable
 
   // Hover layer: crosshair at the nearest check, tooltip with every cell's SOH there.
   const cross = s("line", { class: "cross", y1: m.t, y2: H - m.b, visibility: "hidden" });
@@ -134,14 +140,16 @@ export function renderSoh(root, all, { dataset, selected, groupOrder, tip, onSel
     if (under) onSelect(under.dataset.unit);
   });
 
-  const legend = el("div", { class: "slegend", role: "group", "aria-label": "Cells (select to highlight)" },
+  const legend = el("div", { class: "clegend", role: "group", "aria-label": "Cells (select to highlight)" },
     units.map((u) => {
       const b = el("button", { type: "button", class: "chip", "aria-pressed": String(u === sel), style: `--col:${colour(u)}` },
         el("span", { class: "sw", "aria-hidden": "true" }), u);
       b.addEventListener("click", () => onSelect(u === sel ? "all" : u));
       return b;
     }),
-    el("span", { class: "sub" }, el("span", { class: "ring", "aria-hidden": "true" }), "temperature missing, not filled"));
+    someTemp
+      ? el("span", { class: "chip", style: "--col:var(--muted)" }, el("span", { class: "sw ring", "aria-hidden": "true" }), "temperature missing, not filled")
+      : el("span", { class: "sub", text: "No check temperature is recorded for this dataset (not filled)." }));
 
   const table = el("div", { class: "scroll stable", hidden: true }, el("table", {},
     el("thead", {}, el("tr", {}, ["Cell", xName, "Date", "SOH (%)", "Class", "Temperature"].map((h, k) =>
@@ -149,15 +157,15 @@ export function renderSoh(root, all, { dataset, selected, groupOrder, tip, onSel
     el("tbody", {}, rows.filter((r) => sel === "all" || r.unit === sel).map((r) => el("tr", {},
       el("td", { text: r.unit }), el("td", { text: String(r.x) }), el("td", { text: r.date || "–" }),
       el("td", { class: "r", text: fmt(r.soh, 3) }), el("td", { text: r.cls }), el("td", { text: r.tempSource }))))));
-  const toggle = el("button", { type: "button", class: "ghost", "aria-expanded": "false", text: "Show table" });
+  const toggle = el("button", { type: "button", class: "textbtn", "aria-expanded": "false", text: "Show table" });
   toggle.addEventListener("click", () => {
     table.hidden = !table.hidden;
     toggle.textContent = table.hidden ? "Show table" : "Hide table";
     toggle.setAttribute("aria-expanded", String(!table.hidden));
   });
 
-  root.replaceChildren(legend, el("div", { class: "chartbox" }, svg),
-    el("div", { class: "cardhead" }, el("p", { class: "sub", text:
+  root.replaceChildren(legend, el("div", { class: "chart" }, svg),
+    el("div", { class: "fig-tools" }, el("p", { class: "sub", text:
       `${units.length} cells, ${rows.length} checks. ${dataset === "S1" ? "C/20 discharge capacity of each RPT, pulses excluded (D17)." : "C/25 capacity of each check."}` }), toggle),
     table);
 }

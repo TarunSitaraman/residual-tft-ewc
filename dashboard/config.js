@@ -30,6 +30,9 @@ export const FIELDS = {
 // Where the page reads its data and figures, relative to dashboard/index.html (serve from the repository root).
 export const PATHS = {
   summary: "../results/dashboard/summary.json",
+  // Tidy tables behind the native charts (in Git), and the local, git-ignored tables built from the data folder.
+  data: "../results/dashboard/",
+  local: "../data/dashboard/",
   // Optional, git-ignored: SOH trajectories built from the data folder (scripts/export_dashboard_data.py).
   soh: "../data/dashboard/fact_soh.csv",
   figures: "../paper/figures/",

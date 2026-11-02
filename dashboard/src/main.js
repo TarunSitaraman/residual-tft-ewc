@@ -1,48 +1,29 @@
-// Entry point: state (kept in the URL hash), tabs, filter bar, native views and Tableau embeds with a static fallback.
+// Entry point: state (kept in the URL hash), section rail, filter bar, native views, and optional Tableau embeds.
 import { TABLEAU, PATHS } from "../config.js";
 import { mountViz, applyState } from "./embed.js";
-import { el, renderKpis, renderHeadline, renderPerGroup, renderDetails, renderCaveats } from "./views.js";
+import { el, fmt, renderHeadline, renderDetails, renderCaveats } from "./views.js";
 import { parseCsv, sohRows, renderSoh, unitFacts } from "./soh.js";
+import { renderHeadlineChart, headlineFinding, renderAccuracy, renderContinual, renderReuse, takeaway, card, setLayoutWidth } from "./tabs.js";
 
 const DEFAULTS = { tab: "overview", dataset: "S6", setting: "e1", protocol: "P2", group: "all", family: "all" };
 const KEYS = ["dataset", "setting", "protocol", "group", "family"];
 
-// What each analytical tab shows. Figures are the paper's own (paper/figures), used when no Tableau view is set.
 const TABS = {
-  overview: { title: "Overview" },
-  soh: {
-    title: "SOH explorer",
-    lede: "SOH trajectories of every cell, relative to its first valid capacity check, with the reuse-class bands (C0 above 95 %, C1 90–95 %, C2 80–90 %, C3 at or below 80 %). S1 and S6 are shown separately and never pooled.",
-    figures: [["13_soh_trajectories.png", "S6 SOH trajectories per cell and usage condition (paper figure, static)."],
-      ["preprocessing_s6.png", "S6 preprocessing: from raw checks to labelled samples."]],
-  },
-  accuracy: {
-    title: "Forecast accuracy",
-    lede: "Test RMSE per battery group, by horizon, and skill against persistence. Simple baselines are always shown alongside.",
-    figures: [["d24_per_group_e1.png", "P1 final error per task, all methods (E1)."],
-      ["d24_horizon_e2.png", "Error by horizon (E2, h = 1-6)."],
-      ["d30_error_by_group.png", "D30: error per held-out group, S1 and S6."]],
-  },
-  continual: {
-    title: "Continual learning",
-    lede: "Adaptation (error on the newest task) against retention (error on earlier tasks after later learning), forgetting and backward transfer by arrival order, and EWC against fine-tuning and joint training.",
-    figures: [["d24_forgetting_e1.png", "Forgetting by method (E1)."], ["13_tft_ewc_matrix.png", "TFT + EWC: error on each task after each training step."],
-      ["d24_comparison_e1.png", "Final error against forgetting, all continual methods (E1)."]],
-  },
-  reuse: {
-    title: "Reuse & uncertainty",
-    lede: "Reuse-class confusion of the forecasts, and the coverage of split-conformal intervals on unseen usage conditions. Classes describe capacity fade since the first check, not suitability for an application.",
-    figures: [["d26_confusion.png", "Reuse classes of the proposed model on unseen conditions (D26)."],
-      ["d27_coverage.png", "Coverage of 90 % intervals per held-out condition (D27)."], ["d30_confusion.png", "D30 confusion matrices."]],
-  },
+  overview: { title: "How well a continual model forecasts battery health",
+    deck: "Forecasts of state of health (SOH) at the next capacity checks, from a model that keeps learning as new battery groups arrive. Every number is read from a committed results file and shown beside simple baselines." },
+  soh: { title: "Capacity fade of every cell", deck: "SOH of each cell relative to its own first valid capacity check, with the reuse-class boundaries at 95, 90 and 80 %. S1 and S6 are never drawn on one axis." },
+  accuracy: { title: "Forecast error by group and horizon", deck: "Test error for each battery group, skill against carrying the last SOH forward, and how error grows with the forecast horizon." },
+  continual: { title: "Learning new groups without forgetting old ones", deck: "Groups arrive one after another. A useful model adapts to each new group and keeps its accuracy on the earlier ones." },
+  reuse: { title: "Reuse classes and prediction intervals", deck: "How often a forecast puts a cell in the right reuse class, and whether the prediction intervals hold their stated coverage on unseen usage conditions." },
 };
+const NAMES = { overview: "Overview", soh: "Capacity fade", accuracy: "Forecast error", continual: "Continual learning", reuse: "Reuse and intervals" };
 
 const state = { ...DEFAULTS };
 let summary = null;
 let selection = null;
-let soh = [];   // SOH checks from PATHS.soh (optional; built from the data folder)
+let soh = [];
 const vizzes = {};
-const hasSoh = (dataset) => soh.some((r) => r.dataset === dataset);
+let renderToken = 0;
 
 // ---------- state <-> URL hash ----------
 function readHash() {
@@ -62,11 +43,11 @@ const tipEl = document.getElementById("tip");
 const tip = {
   show(target, html) {
     const r = target.getBoundingClientRect();
-    tipEl.innerHTML = html;
+    tipEl.innerHTML = html;   // composed by the views from committed results and fixed text
     tipEl.hidden = false;
     const w = tipEl.offsetWidth / 2;
     tipEl.style.left = `${Math.min(Math.max(r.left + r.width / 2, w + 8), innerWidth - w - 8)}px`;
-    tipEl.style.top = `${r.top}px`;
+    tipEl.style.top = `${Math.max(r.top, tipEl.offsetHeight + 16)}px`;
   },
   hide() { tipEl.hidden = true; },
 };
@@ -79,25 +60,20 @@ function initTheme() {
   try { t = localStorage.getItem("dash-theme") || "auto"; } catch { /* storage unavailable */ }
   const apply = () => {
     if (t === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.dataset.theme = t;
-    btn.textContent = `Theme: ${t}`;
+    btn.textContent = `${t[0].toUpperCase()}${t.slice(1)} theme`;
   };
   btn.addEventListener("click", () => {
     t = order[(order.indexOf(t) + 1) % order.length];
     try { localStorage.setItem("dash-theme", t); } catch { /* ignore */ }
     apply();
+    update();   // charts read colours through CSS variables; redraw so the canvas-free SVG picks up any computed values
   });
   apply();
 }
 
 // ---------- filters ----------
 const form = document.getElementById("filters");
-function syncForm() {
-  for (const k of KEYS) form.elements[k].value = state[k];
-  const native = state.tab === "overview" || (state.tab === "soh" && soh.length > 0);
-  const tableauOnly = !native && !hasViz(state.tab);
-  // Filters drive the native views and the embedded views; the static figures do not respond to them.
-  for (const k of KEYS) form.elements[k].disabled = tableauOnly;
-}
+function syncForm() { for (const k of KEYS) form.elements[k].value = state[k]; }
 function fillGroups() {
   const sel = form.elements.group;
   const groups = summary.groups.filter((g) => g.dataset === state.dataset);
@@ -120,7 +96,7 @@ document.getElementById("reset").addEventListener("click", () => {
   update();
 });
 
-// ---------- tabs ----------
+// ---------- sections ----------
 const tabButtons = [...document.querySelectorAll('[role="tab"]')];
 function showTab(name, focus = false) {
   state.tab = name;
@@ -131,70 +107,98 @@ function showTab(name, focus = false) {
     if (on && focus) b.focus();
     document.getElementById(b.getAttribute("aria-controls")).hidden = !on;
   }
-  if (name !== "overview") ensureTab(name);
+  const t = TABS[name];
+  document.getElementById("page-title").textContent = t.title;
+  document.getElementById("page-deck").textContent = t.deck;
+  document.title = name === "overview" ? "Residual TFT-EWC results" : `${NAMES[name]}, Residual TFT-EWC results`;
+  ensurePanel(name);
 }
 tabButtons.forEach((b, i) => {
-  b.addEventListener("click", () => {
-    showTab(b.id.slice(2));
-    update();
-    const nav = document.querySelector(".tabs");
-    if (nav.getBoundingClientRect().top <= 1) scrollTo({ top: document.querySelector("header").getBoundingClientRect().bottom + scrollY });
-  });
+  b.addEventListener("click", () => { showTab(b.id.slice(2)); update(); scrollTo({ top: 0 }); });
   b.addEventListener("keydown", (e) => {
-    const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+    const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
     if (!d) return;
     e.preventDefault();
-    const next = tabButtons[(i + d + tabButtons.length) % tabButtons.length];
-    showTab(next.id.slice(2), true);
+    showTab(tabButtons[(i + d + tabButtons.length) % tabButtons.length].id.slice(2), true);
     update();
   });
 });
 
-// ---------- analytical tabs: Tableau view or the paper figures ----------
-const hasViz = (name) => Boolean(TABLEAU.views[name]) && vizzes[name] !== "failed";
-
-function fallback(name, reason) {
-  const t = TABS[name];
-  const why = reason
-    ? `The interactive Tableau view could not be shown (${reason}). These are the paper's static figures and do not follow the filters.`
-    : "The interactive Tableau view for this tab is not published yet (dashboard/config.js). These are the paper's static figures and do not follow the filters.";
-  return [el("p", { class: "notice", text: why }),
-    el("div", { class: "figs" }, t.figures.map(([f, cap]) => el("figure", {},
-      el("img", { src: PATHS.figures + f, alt: cap, loading: "lazy" }), el("figcaption", { text: cap }))))];
-}
-
-function ensureTab(name) {
+// ---------- analytical panels: native views, plus the Tableau view when one is published ----------
+function ensurePanel(name) {
   const panel = document.getElementById(`tab-${name}`);
-  if (panel.dataset.ready) return;
+  if (name === "overview" || panel.dataset.ready) return;
   panel.dataset.ready = "1";
-  const t = TABS[name];
-  const body = el("div", { class: "card" }, el("h2", { text: t.title }), el("p", { class: "sub", text: t.lede }));
-  panel.replaceChildren(body);
-  if (name === "soh") {
-    // Native chart of the trajectories when the data folder has been built; the paper figure stays below.
-    body.append(el("div", { id: "soh-chart", class: "soh" }));
-    if (!TABLEAU.views[name]) {
-      body.append(el("div", { class: "figs" }, TABS.soh.figures.map(([f, cap]) => el("figure", {},
-        el("img", { src: PATHS.figures + f, alt: cap, loading: "lazy" }), el("figcaption", { text: cap })))));
-      return;
-    }
-  }
-  if (!TABLEAU.views[name]) {
-    body.append(...fallback(name));
-    return;
-  }
-  const holder = el("div", { class: "viz", "aria-label": `${t.title} (Tableau)` }, el("p", { class: "sub", style: "padding:16px", text: "Loading the Tableau view…" }));
-  body.append(holder);
+  panel.replaceChildren(el("div", { class: "native", style: "display:contents" }));
+  if (!TABLEAU.views[name]) return;
+  const c = card(`${NAMES[name]} in Tableau`, "The published Tableau Public workbook for this section. It follows the same filters.");
+  const holder = el("div", { class: "viz", "aria-label": `${NAMES[name]} (Tableau)` }, el("p", { class: "sub", style: "padding:16px", text: "Loading the Tableau view…" }));
+  c.body.append(holder);
+  panel.append(c.node);
   mountViz(holder, TABLEAU.views[name], {
     onReady: (viz) => { vizzes[name] = viz; applyState(viz, state); },
-    onFail: (reason) => { vizzes[name] = "failed"; holder.replaceWith(...fallback(name, reason)); syncForm(); },
+    onFail: (reason) => { vizzes[name] = "failed"; holder.replaceWith(el("p", { class: "notice", text: `The Tableau view could not be shown (${reason}). The charts above are complete without it.` })); },
     onMarks: (rows) => {
       if (!rows.length) return;
-      const g = rows[0].Group;
-      selection = { group: g || rows[0][Object.keys(rows[0])[0]], fields: rows[0] };
+      selection = { group: rows[0].Group || rows[0][Object.keys(rows[0])[0]], fields: rows[0] };
       renderSide();
     },
   });
+}
+
+const onSelect = (sel) => { selection = sel; if (sel.group) state.group = sel.group; update(); };
+
+async function renderNative(name) {
+  const host = document.querySelector(`#tab-${name} .native`);
+  if (!host) return;
+  const token = ++renderToken;
+  const ctx = { state: { ...state }, summary, tip, onSelect };
+  const sink = el("div", { style: "display:contents" });
+  setLayoutWidth(document.querySelector(".panels").clientWidth);
+  if (!host.childNodes.length) host.replaceChildren(el("div", { class: "empty", text: "Loading results…" }));
+  try {
+    if (name === "soh") renderSohTab(sink);
+    if (name === "accuracy") await renderAccuracy(sink, ctx);
+    if (name === "continual") await renderContinual(sink, ctx);
+    if (name === "reuse") await renderReuse(sink, ctx);
+  } catch (e) {
+    sink.replaceChildren(el("p", { class: "notice", text: `This view could not be drawn: ${e.message}. Run python scripts/export_dashboard_data.py and serve the page from the repository root.` }));
+  }
+  if (token !== renderToken) return;   // a newer render started while this one loaded data
+  host.replaceChildren(...sink.childNodes);
+}
+
+function sohFinding(rows, dataset) {
+  const units = [...new Set(rows.map((r) => r.unit))];
+  const lastOf = (u) => { const r = rows.filter((x) => x.unit === u); return r.reduce((a, x) => (x.x > a.x ? x : a)); };
+  const lasts = units.map(lastOf);
+  const lo = Math.min(...lasts.map((r) => r.soh)), hi = Math.max(...lasts.map((r) => r.soh));
+  const below80 = lasts.filter((r) => r.soh <= 80).length;
+  return takeaway(`The ${units.length} ${dataset === "S6" ? "LFP cells" : "NMC second-life cells"} end between <b>${fmt(lo, 1)} %</b> and <b>${fmt(hi, 1)} %</b> of their first capacity check; ${below80} of ${units.length} have crossed the 80 % boundary into class C3.`,
+    dataset === "S6" ? `${units.length} cells in ${new Set(rows.map((r) => r.group)).size} usage conditions; colour follows the usage condition.` : "One cell per duty cycle; capacity from the C/20 discharge of each reference performance test.");
+}
+
+function renderSohTab(sink) {
+  const c = card("SOH trajectories", state.dataset === "S6" ? "SOH from the C/25 capacity of each check, against the cycle at which the check was made." : "SOH from the C/20 discharge capacity of each reference performance test (RPT), pulses excluded.", state.dataset);
+  const rows = soh.filter((r) => r.dataset === state.dataset);
+  if (!rows.length) {
+    c.body.append(el("div", { class: "empty", text: soh.length
+      ? `${state.dataset} trajectories are not built in this copy: build the data folder (data/README.md) and run python scripts/export_dashboard_data.py.`
+      : "No SOH trajectories yet: build the data folder (data/README.md) and run python scripts/export_dashboard_data.py." }));
+    sink.append(c.node);
+    return;
+  }
+  sink.append(sohFinding(rows, state.dataset), c.node);
+  const groupOrder = summary.groups.filter((g) => g.dataset === state.dataset).map((g) => g.group);
+  const selected = state.group !== "all" && state.dataset === "S1" ? state.group : (selection?.unit || "all");
+  const draw = () => renderSoh(c.body, soh, { dataset: state.dataset, selected, groupOrder, tip, onSelect: (unit) => {
+    if (unit === "all") { selection = null; state.group = "all"; update(); return; }
+    const row = soh.find((r) => r.unit === unit && r.dataset === state.dataset);
+    selection = { group: row.group, unit, fields: unitFacts(soh, unit) };
+    state.group = row.group;
+    update();
+  } });
+  draw();
 }
 
 // ---------- render ----------
@@ -206,62 +210,36 @@ function renderSide() {
   layout.classList.toggle("with-details", show);
   if (!show) return;
   renderDetails(document.getElementById("details-body"), document.getElementById("details-title"), summary, state, selection);
-  if (selection.fields?.Group && state.group !== selection.fields.Group) {
-    const b = el("button", { type: "button", class: "ghost", text: `Filter every view to ${selection.fields.Group}` });
-    b.addEventListener("click", () => { state.group = selection.fields.Group; update(); });
-    document.getElementById("details-body").append(b);
-  }
 }
 
-function renderSohTab() {
-  const host = document.getElementById("soh-chart");
-  if (!summary || !host || document.getElementById("tab-soh").hidden) return;
-  if (!hasSoh(state.dataset)) {
-    const other = ["S1", "S6"].find((d) => d !== state.dataset && hasSoh(d));
-    const msg = soh.length
-      ? `${state.dataset} trajectories are not built in this copy. ${state.dataset === "S6"
-        ? "Build them on a machine that can reach the S6 archive: python scripts/fetch_wheeler_characterisation.py, python scripts/build_wheeler_features.py, then python scripts/export_dashboard_data.py."
-        : "Build them with python scripts/fetch_osf_diagnostics.py, python scripts/build_diagnostic_features.py, then python scripts/export_dashboard_data.py."}`
-      : "No SOH trajectories yet: build the data folder (data/README.md) and run python scripts/export_dashboard_data.py. The paper figure below shows S6.";
-    const kids = [el("span", { text: msg })];
-    if (other) {
-      const b = el("button", { type: "button", class: "ghost", text: `Show ${other}` });
-      b.addEventListener("click", () => { state.dataset = other; fillGroups(); selection = null; update(); });
-      kids.push(" ", b);
-    }
-    host.replaceChildren(el("p", { class: "notice" }, kids));
-    return;
-  }
-  const groupOrder = summary.groups.filter((g) => g.dataset === state.dataset).map((g) => g.group);
-  const unitOfGroup = state.group !== "all" && state.dataset === "S1" ? state.group : (selection?.unit || "all");
-  renderSoh(host, soh, { dataset: state.dataset, selected: unitOfGroup, groupOrder, tip, onSelect: (unit) => {
-    if (unit === "all") { selection = null; state.group = "all"; update(); return; }
-    const row = soh.find((r) => r.unit === unit && r.dataset === state.dataset);
-    selection = { group: row.group, unit, fields: unitFacts(soh, unit) };
-    state.group = row.group;
-    update();
-  } });
+function renderOverview() {
+  const chart = document.getElementById("headline-chart");
+  const finding = document.getElementById("overview-finding");
+  finding.replaceChildren(headlineFinding(summary, state));
+  document.getElementById("headline-caption").textContent = `Test RMSE of SOH in percentage points on S6, ${state.setting === "e1" ? "1 to 3" : "1 to 6"} checks ahead. Proposed model: mean of 50 runs in each seed set (filled: main, ring: replicate). Baselines are single deterministic fits. Lower is better.`;
+  renderHeadlineChart(chart, summary, state, tip);
+  renderHeadline(document.getElementById("headline"), document.createElement("span"), summary, { ...state, dataset: "S6" });
 }
 
 function update() {
+  if (!summary) return;
   writeHash();
   syncForm();
-  renderHeadline(document.getElementById("headline"), document.getElementById("headline-sub"), summary, state);
-  renderPerGroup(document.getElementById("pergroup"), document.getElementById("pergroup-title"),
-    document.getElementById("pergroup-sub"), summary, state, {
-      tip,
-      onSelect: (s) => { selection = s; if (s.group) state.group = s.group; update(); },
-    });
   renderSide();
-  renderSohTab();   // after the details panel, so the chart is measured at its final width
+  if (state.tab === "overview") renderOverview(); else renderNative(state.tab);
   for (const v of Object.values(vizzes)) if (v && v !== "failed") applyState(v, state);
 }
 
 document.getElementById("details-close").addEventListener("click", () => { selection = null; state.group = "all"; update(); });
 addEventListener("popstate", () => { readHash(); fillGroups(); showTab(state.tab); update(); });
 addEventListener("scroll", tip.hide, { passive: true });
-let resizeTimer = 0;
-addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderSohTab, 150); });
+let resizeTimer = 0, lastW = innerWidth;
+addEventListener("resize", () => {
+  if (innerWidth === lastW) return;
+  lastW = innerWidth;
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(update, 180);
+});
 
 async function start() {
   initTheme();
@@ -272,20 +250,19 @@ async function start() {
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     summary = await res.json();
   } catch (e) {
-    document.getElementById("kpis").replaceChildren(el("div", { class: "fact" }, el("span", { class: "k", text: "No data" }),
-      el("span", { class: "n", text: `Could not read ${PATHS.summary} (${e.message}). Run python scripts/export_dashboard_data.py and serve the page from the repository root.` })));
+    document.getElementById("overview-finding").replaceChildren(el("p", { class: "notice",
+      text: `Could not read ${PATHS.summary} (${e.message}). Run python scripts/export_dashboard_data.py and serve the page from the repository root.` }));
     document.getElementById("provenance").textContent = "No summary loaded.";
     return;
   }
-  renderKpis(document.getElementById("kpis"), summary);
   renderCaveats(document.getElementById("caveats"), summary);
   document.getElementById("provenance").textContent =
-    `Built ${summary.generated_utc.slice(0, 10)} from commit ${String(summary.commit || "unknown").slice(0, 7)} by scripts/export_dashboard_data.py.`;
+    `Built on ${summary.generated_utc.slice(0, 10)} from commit ${String(summary.commit || "unknown").slice(0, 7)} by scripts/export_dashboard_data.py.`;
   fillGroups();
   try {
     const res = await fetch(PATHS.soh);
     if (res.ok) soh = sohRows(parseCsv(await res.text()));
-  } catch { /* optional input: the SOH tab says how to build it */ }
+  } catch { /* optional input: the SOH section says how to build it */ }
   if (state.group !== "all") selection = { group: state.group };
   showTab(state.tab);
   update();
