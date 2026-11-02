@@ -2,7 +2,7 @@
 
 **Continual learning for state-of-health forecasting and reuse assessment of heterogeneous second-life EV batteries**
 
-Code, pre-registered protocols, results and manuscript of the paper *"Residual TFT-EWC: Continual Learning for State-of-Health Forecasting and Reuse Assessment of Heterogeneous Second-Life EV Batteries"* (IEEE conference paper, in preparation; manuscript in [`paper/`](paper/)).
+Code, pre-registered protocols, results and manuscript of the paper *"Residual TFT-EWC: Continual Learning for State-of-Health Forecasting and Reuse Screening of Heterogeneous Second-Life EV Batteries"* (IEEE conference paper, in preparation; manuscript in [`paper/`](paper/)).
 
 **Read the paper:** [paper (PDF, 8 pages)](https://github.com/TarunSitaraman/residual-tft-ewc/raw/main/paper/paper_single.pdf) · [supplement (PDF)](https://github.com/TarunSitaraman/residual-tft-ewc/raw/main/paper/supplement.pdf)
 
@@ -528,7 +528,7 @@ Columns of the handover files (`DATA_DICTIONARY.csv`), used by the superseded cu
 ```bibtex
 @unpublished{sitaraman2026residualtftewc,
   author = {Sitaraman, Tarun and Krishnan, Sohan Sandeep and {Darshan D}},
-  title  = {Residual {TFT-EWC}: Continual Learning for State-of-Health Forecasting and Reuse Assessment of Heterogeneous Second-Life {EV} Batteries},
+  title  = {Residual {TFT-EWC}: Continual Learning for State-of-Health Forecasting and Reuse Screening of Heterogeneous Second-Life {EV} Batteries},
   note   = {Manuscript in preparation. Code and data provenance: https://github.com/TarunSitaraman/residual-tft-ewc},
   year   = {2026}
 }
