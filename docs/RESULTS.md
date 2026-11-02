@@ -32,7 +32,19 @@ Each file records Python and library versions (Python 3.11.15, numpy 2.4.6, pand
   - P2: leave one group out.
 - **Statistics.** Paired Wilcoxon tests with Holm correction, rank-biserial effect sizes and bootstrap 95 % CIs.
 
-## Key findings
+## Headline (current, 2 Nov 2026)
+
+The paper's main result, from the D23–D32 experiments summarised in "Headline comparison" at the end of this file:
+
+- **Of the models compared, the residual TFT + EWC is the only one that stays competitive both on the continual stream and on unseen usage conditions.** Each traditional forecaster falls behind in one of the two settings.
+- **Continual stream (S6, P1).** It is level with linear extrapolation, the strongest baseline (0.32 / 0.31 against 0.34 pp for horizons 1–3; practically equivalent), and 0.13–0.41 pp more accurate than gradient boosting (replicated; post hoc for the shrunk model, registered for the unshrunk one in D23). With EWC its forgetting over horizons 1–6 falls from 0.28 / 0.22 to 0.09 pp (D23, replicated).
+- **Unseen usage conditions (S6, P2).** It is 0.43–0.68 pp more accurate than extrapolation (replicated) and assigns the measured reuse class to 95.5 % of held-out samples (93.9 % for extrapolation). Gradient boosting and the jointly trained TFT are more accurate, mainly because they store every earlier condition's data: under the same no-storage constraint, gradient boosting is within 0.08 pp (D32).
+- **Intervals.** Forecast intervals hold on a new condition when calibrated on conditions held out from fitting (gradient boosting, D27), except for the out-of-range 100 % depth-of-discharge condition; refitting and tracking cut the 90 % interval score by 29 % (D28).
+- **Reuse classes** are capacity-based screening classes relative to each cell's first check, not an application suitability verdict.
+
+## Key findings of the first benchmark (D18–D20)
+
+These findings come from the first forecasting benchmark with the D20 inputs, before the residual formulation (D23) and the later experiments; the headline above supersedes them where they differ.
 
 1. **Label and leakage corrections (S1).** Two artefacts had to be corrected before any model could be trained.
    - The processed capacity label included pulse charge, which shifted some labels by up to 0.09 pp.
@@ -845,7 +857,7 @@ Results files: `results/forecasting_d32_e1.json` and `results/forecasting_d32_e2
 
 ## Headline comparison (paper Table III, 1 Nov 2026)
 
-`scripts/make_headline_table.py` writes `paper/tables/headline.tex` from the D23, D25, D26 and D32 results. Neither traditional forecaster is reliable in both S6 settings:
+`scripts/make_headline_table.py` writes `paper/tables/headline.tex` from the D23, D25, D26 and D32 results. The proposed model is the only one that is reliable in both S6 settings; each traditional forecaster fails in one of them (negative differences favour the proposed model):
 
 | Proposed (shrunk residual TFT + EWC) minus … | Continual stream, h 1–3 | h 1–6 | Unseen condition, h 1–3 | h 1–6 |
 |---|---|---|---|---|
@@ -854,3 +866,8 @@ Results files: `results/forecasting_d32_e1.json` and `results/forecasting_d32_e2
 | gradient boosting, latest condition only (D32) | – | – | +0.06 / +0.08 worse | +0.03 / +0.06 not replicated |
 
 ¹ Registered for the unshrunk model in D23 (−0.112 / −0.138 and −0.337 / −0.365, replicated); for the shrunk model computed post hoc with the same rule, same verdict.
+
+**Reading.**
+1. **Continual stream.** The proposed model is level with linear extrapolation, which no model beats, and clearly ahead of gradient boosting in both horizon sets.
+2. **Unseen conditions.** It is clearly ahead of extrapolation in both horizon sets. Gradient boosting with all six conditions stored is more accurate; held to the same no-storage constraint as the proposed model, gradient boosting is slightly better for horizons 1–3 and not distinguishable for 1–6, so most of its advantage comes from storing earlier data.
+3. **Across settings,** only the proposed model has no weak side: extrapolation degrades on new conditions, and gradient boosting trails on the stream.

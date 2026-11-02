@@ -1,8 +1,8 @@
 # Residual TFT-EWC
 
-**Continual learning for state-of-health forecasting and reuse assessment of heterogeneous second-life EV batteries**
+**Continual learning for state-of-health forecasting and reuse screening of heterogeneous second-life EV batteries**
 
-Code, pre-registered protocols, results and manuscript of the paper *"Residual TFT-EWC: Continual Learning for State-of-Health Forecasting and Reuse Assessment of Heterogeneous Second-Life EV Batteries"* (IEEE conference paper, in preparation; manuscript in [`paper/`](paper/)).
+Code, pre-registered protocols, results and manuscript of the paper *"Residual TFT-EWC: Continual Learning for State-of-Health Forecasting and Reuse Screening of Heterogeneous Second-Life EV Batteries"* (IEEE conference paper, in preparation; manuscript in [`paper/`](paper/)).
 
 **Read the paper:** [paper (PDF, 8 pages)](https://github.com/TarunSitaraman/residual-tft-ewc/raw/main/paper/paper_single.pdf) · [supplement (PDF)](https://github.com/TarunSitaraman/residual-tft-ewc/raw/main/paper/supplement.pdf)
 
@@ -21,7 +21,7 @@ Every reported number traces to a results file in `results/`, written by code in
 9. [Limitations and honest claims](#9-limitations-and-honest-claims)
 10. [Repository map](#10-repository-map)
 11. [Running things](#11-running-things)
-12. [Literature review](#12-literature-review-10-key-papers)
+12. [Literature review](#12-literature-review-11-key-papers)
 13. [Legacy data dictionary](#13-legacy-data-dictionary)
 14. [References](#14-references)
 15. [Citation and licence](#15-citation-and-licence)
@@ -32,7 +32,7 @@ Every reported number traces to a results file in `results/`, written by code in
 
 ## 1. The project in one page
 
-**Question.** Retired electric-vehicle batteries still hold useful capacity and can serve a second life, for example in stationary storage. Before reuse we must know how healthy each one is and how fast it will keep ageing. Batteries differ in history and duty, and new groups keep arriving. Can **one model keep learning from each new battery group without forgetting the earlier ones**, and are its forecasts good enough to support a reuse decision?
+**Question.** Retired electric-vehicle batteries still hold useful capacity and can serve a second life, for example in stationary storage. Before reuse we must know how healthy each one is and how fast it will keep ageing. Batteries differ in history and duty, and new groups keep arriving. Can **one model keep learning from each new battery group without forgetting the earlier ones**, and are its forecasts good enough to support reuse screening?
 
 **What we built.**
 
@@ -43,18 +43,19 @@ Every reported number traces to a results file in `results/`, written by code in
 | Models | Baselines (persistence, linear extrapolation, ridge, gradient boosting), an MLP, and the proposed **Temporal Fusion Transformer (TFT) with Elastic Weight Consolidation (EWC)** |
 | Learning setting | **Continual learning**: groups arrive one at a time; we measure accuracy, forgetting and transfer |
 | Big-data component | An **Apache Spark** job that reduces about 132 GB (902 million rows) of raw ageing data to block-level features |
-| Reuse | Forecast SOH is mapped to four fade classes (C0–C3) |
+| Reuse screening | Forecast SOH is mapped to four capacity-based fade classes (C0–C3), a screening aid rather than an application suitability verdict |
 | Uncertainty | Split-conformal forecast intervals, calibrated leave-one-condition-out and updated online as a new condition's checks arrive |
 | Tooling | 204 tests, pre-registered protocols, a live data-platform web page, and the paper |
 
 **Headline findings** (details and caveats in [Section 8](#8-results)):
 
-1. **Simple methods are hard to beat on the continual stream.** On the LFP dataset (S6) no learned model beats **linear extrapolation** of the recent fade rate (0.343 pp RMSE). A TFT that learns only the **residual** on top of extrapolation is the best learned model and is practically equivalent to it.
-2. **On unseen usage conditions, gradient boosting is the most accurate method** (0.54 pp, horizons 1–3). The residual TFT + EWC beats extrapolation at origins with a fade rate, but not gradient boosting; the same TFT trained jointly is close to it (0.57 pp). At this data scale the continual constraint costs more than it gives.
-3. **EWC reduces forgetting** of the residual TFT at longer horizons (replicated across two seed sets), but forgetting only matters when the groups differ a lot.
-4. **Intervals hold on a new condition only when calibrated on conditions held out from fitting.** Refitting and tracking the interval as the new condition's checks arrive cut the 90 % interval score by 29 %, and 87–93 % of forecasts fall within one reuse class, over 99 % of them correctly. A condition outside the training range (100 % depth of discharge) is improved, not fixed.
-5. Extra diagnostic features (EIS, pulse resistance, incremental-capacity peaks) describe the *current* SOH well but add little for the *next change*.
-6. Some earlier significance results did not survive a re-run on a different platform, and the repository says so.
+1. **Residual TFT-EWC is the only model competitive in both settings.** Each traditional forecaster fails in one of them: linear extrapolation degrades on unseen usage conditions, and gradient boosting trails on the continual stream (paper Table III).
+2. **On the continual stream it is level with the strongest baseline and ahead of gradient boosting.** On the LFP dataset (S6) it matches **linear extrapolation** of the recent fade rate (0.32 against 0.34 pp RMSE, horizons 1–3; practically equivalent), which no model beats, and is 0.13–0.41 pp more accurate than gradient boosting (replicated).
+3. **EWC cuts its forgetting by about two thirds** at longer horizons (from 0.28 / 0.22 to 0.09 pp, replicated across two seed sets).
+4. **On unseen usage conditions it is 0.43–0.68 pp more accurate than extrapolation** (replicated) and assigns the measured fade class to 95.5 % of samples. Gradient boosting (0.54 pp, horizons 1–3) and the same TFT trained jointly (0.57 pp) are more accurate, mainly because they store every earlier condition's data; held to the same no-storage constraint, gradient boosting is within 0.08 pp of the proposed model.
+5. **Intervals hold on a new condition only when calibrated on conditions held out from fitting.** Refitting and tracking the interval as the new condition's checks arrive cut the 90 % interval score by 29 %, and 87–93 % of forecasts fall within one reuse class, over 99 % of them correctly. A condition outside the training range (100 % depth of discharge) is improved, not fixed.
+6. Extra diagnostic features (EIS, pulse resistance, incremental-capacity peaks) describe the *current* SOH well but add little for the *next change*.
+7. Some earlier significance results did not survive a re-run on a different platform, and the repository says so.
 
 ---
 
@@ -206,8 +207,8 @@ A sample is (cell, origin check *k*, horizon *h*). Inputs known at the origin: S
 - **Residual formulation (D23).** The best-performing variant predicts only the *correction* to linear extrapolation instead of ΔSOH directly. This is what made the TFT competitive.
 - **Later variants (D24–D31).** Shift-adaptive EWC and literature backbones (BiLSTM, TCN, Transformer; GPR, random forest, SVR) (D24); per-horizon shrinkage of the residual correction and conformal intervals (D25); unseen usage conditions (D26); leave-one-condition-out conformal calibration (D27); online refit and quantile tracking on a new condition (D28); a physics-structured Bayesian forecaster with a learned residual (D29); online adaptation of the joint residual TFT with EWC on a new condition (D31); and gradient boosting held to the continual-learning constraint (D32).
 
-### 5.6 Reuse assessment (`src/reuse.py`, `docs/REUSE_CATEGORIES.md`)
-Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, rather than training a separate classifier. We report accuracy, macro-F1, linear-weighted kappa and confusion matrices. On S1 all samples stay in C0 and on S6 P1 all test periods are in C3, so classes can only be evaluated meaningfully in P2. The multi-task reuse head originally planned was **not** implemented; its empty stub was removed (12 Oct 2026).
+### 5.6 Reuse screening (`src/reuse.py`, `docs/REUSE_CATEGORIES.md`)
+Forecast SOH is thresholded into C0–C3 using the same rule as measured SOH, rather than training a separate classifier. The classes rest on capacity relative to each cell's first check, so they screen for fade; a reuse decision for an application would also need power capability, safety and absolute capacity. We report accuracy, macro-F1, linear-weighted kappa and confusion matrices. On S1 all samples stay in C0 and on S6 P1 all test periods are in C3, so classes can only be evaluated meaningfully in P2. The multi-task reuse head originally planned was **not** implemented; its empty stub was removed (12 Oct 2026).
 
 ### 5.7 Robustness and audits
 `src/robustness.py` tests missing temperature by removal (D13). `scripts/audit_data.py` writes `results/data_audit.json`. `docs/DATA_REPORT.md` records how the delivered data differ from the handover description.
@@ -330,7 +331,7 @@ Residual TFT + EWC and linear extrapolation are practically equivalent under the
 | Linear extrapolation | 1.37 | 2.30 |
 | Persistence | 2.82 | 4.90 |
 
-The registered verdicts: the shrunk residual TFT + EWC beats extrapolation at origins with a fade rate (replicated) but loses to gradient boosting (replicated); leave-one-condition-out intervals for gradient boosting reach the registered pooled coverage (0.90), but not on the 100 % depth-of-discharge condition (0.48 / 0.38); refit and tracking lower the 90 % interval score by 29 % (positive in both horizon sets); the physics-structured model does not improve on gradient boosting. Adapting the joint residual TFT online with EWC (D31) beats plain fine-tuning on the new condition and on forgetting (replicated) but not the online-refitted gradient boosting. Held to the same no-storage constraint as the continual TFT, gradient boosting refitted on the latest condition (D32) is within 0.08 pp of it. Across both settings, the proposed model beats gradient boosting on the continual stream and linear extrapolation on unseen conditions (paper Table III).
+Across both settings, the proposed model is the only one that stays competitive: it beats gradient boosting on the continual stream and linear extrapolation on unseen conditions (paper Table III). The registered verdicts: the shrunk residual TFT + EWC beats extrapolation at origins with a fade rate (replicated); gradient boosting with all conditions stored is more accurate (replicated); leave-one-condition-out intervals for gradient boosting reach the registered pooled coverage (0.90), but not on the 100 % depth-of-discharge condition (0.48 / 0.38); refit and tracking lower the 90 % interval score by 29 % (positive in both horizon sets); the physics-structured model does not improve on gradient boosting. Adapting the joint residual TFT online with EWC (D31) beats plain fine-tuning on the new condition and on forgetting (replicated) but not the online-refitted gradient boosting. Held to the same no-storage constraint as the continual TFT, gradient boosting refitted on the latest condition (D32) is within 0.08 pp of it, so most of its advantage comes from storing earlier data.
 
 **What we learned**
 
@@ -339,9 +340,9 @@ The registered verdicts: the shrunk residual TFT + EWC beats extrapolation at or
 3. **Forgetting depends on task heterogeneity**: negligible across the S1 cells (0.016–0.040 pp), substantial across S6 usage conditions (0.18–0.46 pp).
 4. **Calendar time is a key input.** On S6, fade per 100 cycles rises with the days those cycles took (within-cell ρ = 0.64, positive in 20/20 cells). Switching from the D20 F1 inputs to the D21 shared inputs improved the TFT by 0.37–0.47 pp; dropping the 17 diagnostics (0.17–0.35 pp) and adding calendar time (0.19–0.31 pp) each replicate on their own (post hoc).
 5. **Pretraining on first-life data did not help** S6 forecasts (P3). The stream did not degrade pool error either.
-6. **Residual learning makes the TFT competitive** (0.17 pp better than direct in horizons 1–3, 0.24–0.30 pp in horizons 1–6, replicated). The registered goal of *beating* linear extrapolation was **not** reached.
+6. **Residual learning makes the TFT competitive** (0.17 pp better than direct in horizons 1–3, 0.24–0.30 pp in horizons 1–6, replicated) and puts it ahead of gradient boosting on the stream. It matches linear extrapolation there; the registered goal of *beating* it on the stream was not reached, but on unseen conditions it does beat it.
 7. **EWC lowers forgetting of the residual TFT** at horizons 1–6 (from 0.28 / 0.22 pp to 0.09 pp, replicated); its effect on final error is not replicated.
-8. **Reuse classes** are only informative in P2 on S6: the proposed model assigns the measured class to 95.5 % of held-out samples, against 93.9 % for extrapolation and 85.8 % for persistence, but ridge (96.5 %) and gradient boosting (97.7 %) do better; every error is between neighbouring classes.
+8. **Reuse classes** are only informative in P2 on S6: the proposed model assigns the measured class to 95.5 % of held-out samples, against 93.9 % for extrapolation and 85.8 % for persistence, and makes fewer risky C1-as-C0 errors than extrapolation (42 against 65 of 182); ridge (96.5 %) and gradient boosting (97.7 %), fitted on all conditions at once, do better. Every error is between neighbouring classes.
 9. **Intervals.** Calibration rows matter as much as the model: residuals from mid-life validation origins of seen conditions understate the error on a new one (coverage 0.66–0.68 at nominal 90 %), residuals from held-out conditions reproduce it (0.90).
 10. **Reproducibility check.** Re-running in a different environment kept all baselines identical, but several TFT significance statements on S1 and S6 flipped across p = 0.05 (for example the S6 EWC-vs-fine-tuning error difference moved from p_Holm = 0.005 to 0.060). Those comparisons are reported as not robust. See `docs/RESULTS.md`.
 
@@ -358,7 +359,7 @@ Figures are in `results/figures/`, `paper/figures/` and `docs/figures/spark/`.
 - **Conditional forecasts.** Forecasts assume the planned usage is known.
 - **Spark is single-machine.** It demonstrates the map-reduce design and validates against pandas; it is not a cluster benchmark.
 - **Some significance statements are not robust** to the numerical environment (Section 8, item 9).
-- **The proposed model does not beat the strongest baseline.** On unseen conditions gradient boosting is more accurate than the residual TFT + EWC; the paper reports this as such.
+- **Gradient boosting with stored data is more accurate on unseen conditions.** The proposed model's strength is that it is competitive in both settings; on unseen conditions, gradient boosting and joint training, which store every earlier condition, are more accurate, and the paper reports this as such.
 - **Out-of-range conditions.** With the 100 % depth-of-discharge condition held out, every training condition runs at 70 %, so its effect cannot be learned from S6; neither forecasts nor intervals can be trusted there, which pooled coverage hides.
 - **Post-hoc motivation.** Experiments from D23 on were each motivated by the results before them; each was pre-registered before it ran, and its provenance is recorded.
 - **Novelty.** The contribution is an integrated, battery-focused evaluation of forecasting, continual learning, calibrated intervals and reuse classes. TFT, EWC and reuse classification are not individually novel.
@@ -426,9 +427,9 @@ The handover CSVs are not in Git. A mirror is at `https://huggingface.co/dataset
 
 ---
 
-## 12. Literature review (10 Key Papers)
+## 12. Literature review (11 Key Papers)
 
-Bibliographic data match `paper/references.bib` (checked against Crossref). For refs 3, 6, 7 and 9 no open abstract could be read, so only what their titles state is given.
+Bibliographic data match `paper/references.bib` (checked against Crossref). For refs 3, 6, 7 and 9 no open abstract could be read, so only what their titles state is given; ref 11 is described from its abstract only (no DOI listed).
 
 | # | Paper (Year) | Methodology | Main Finding | Main Challenge |
 |---|-------------|-------------|--------------|----------------|
@@ -442,6 +443,7 @@ Bibliographic data match `paper/references.bib` (checked against Crossref). For 
 | 8 | Yao (2025) | PNN + TCN continual learning (3 public datasets) | Strong estimation across diverse batteries; reduces need for multiple single-task models | Focuses on SOC, not SOH/reuse |
 | 9 | Li (2025) | Domain generalisation | Domain-generalised second-life SOH estimation (title only; abstract not verified) | Not continual learning |
 | 10 | Meskine (2026) | BiLSTM/TCN + probabilistic model | Reliability calibration improvements; uncertainty-aware SOH | Sparse/noisy measurements; unseen-cell generalization |
+| 11 | Tao (2026) | Pulse features + replay-based continual learning (domain-incremental pulse-test conditions) | Second-life SOH estimation with near-zero forgetting across NMC, LMO and LFP cells (abstract only) | Estimates current SOH; no forecasting or reuse screening |
 
 ### 12.1 Literature Survey Summary
 Key cross-paper themes:
@@ -452,12 +454,12 @@ Key cross-paper themes:
 5. **Accuracy vs computational cost** — complex adaptive methods must balance cost with performance
 
 ### 12.2 Research Gap
-Literature progresses SOH estimation, fast screening, transfer learning, and degradation prediction **separately**. This project **integrates** three areas rarely combined:
-- **Continual learning** methods for heterogeneous retired EV batteries
-- **Adaptive health estimation** across progressive battery groups
-- **Explicit reuse decision framework** with suitability categories
+Literature progresses SOH estimation, fast screening, transfer learning, and degradation prediction **separately**. Continual learning for second-life SOH has so far targeted **estimation** of the current SOH (Tao et al., ACC 2026, replay over pulse-test conditions). This project combines:
+- **Continual learning** for **forecasting** the SOH of heterogeneous retired EV batteries
+- **Measured forgetting and retention**, with comparison against simple forecasters and joint training
+- **Capacity-based reuse screening** with fade categories
 
-The novelty claim is therefore an integrated, battery-focused evaluation framework rather than a claim that TFT, EWC, or reuse classification is individually novel. The work measures the adaptation-retention trade-off, temporal health-label integrity, and practical reuse decisions together on heterogeneous second-life battery groups.
+The novelty claim is therefore an integrated, battery-focused evaluation framework rather than a claim that TFT, EWC, or reuse classification is individually novel. The work measures the adaptation-retention trade-off, temporal health-label integrity, and capacity-based reuse screening together on heterogeneous second-life battery groups.
 
 ---
 
@@ -528,7 +530,7 @@ Columns of the handover files (`DATA_DICTIONARY.csv`), used by the superseded cu
 ```bibtex
 @unpublished{sitaraman2026residualtftewc,
   author = {Sitaraman, Tarun and Krishnan, Sohan Sandeep and {Darshan D}},
-  title  = {Residual {TFT-EWC}: Continual Learning for State-of-Health Forecasting and Reuse Assessment of Heterogeneous Second-Life {EV} Batteries},
+  title  = {Residual {TFT-EWC}: Continual Learning for State-of-Health Forecasting and Reuse Screening of Heterogeneous Second-Life {EV} Batteries},
   note   = {Manuscript in preparation. Code and data provenance: https://github.com/TarunSitaraman/residual-tft-ewc},
   year   = {2026}
 }
