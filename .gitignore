@@ -8,6 +8,8 @@
 !/results/*.json
 # Result tables generated from those JSON files by scripts/make_results_tables.py.
 !/results/tables/
+# D34 condition assignment (registered file name).
+!/results/d34_condition_sets.csv
 /logs/
 *.pt
 *.pickle
