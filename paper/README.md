@@ -2,7 +2,7 @@
 
 IEEE conference paper (`IEEEtran`; 8 pages including references, cut to the usual limit on 19 Oct 2026 after the D25–D27 update). To make room, the framework, Spark-pipeline, P3, ablation and D23 per-horizon figures and the literature table were removed (the files stay in `figures/` and the notebooks), the D27 interval table became `figures/d27_coverage.png`, and the text was condensed. The 8 pages were checked with Tectonic (TeX Gyre Termes, metric-compatible with the Times of pdfLaTeX); the last page is full, so check the page count after any edit. The team's draft (title, authors, headings, introduction, related work) is merged with the methods, results and discussion written from the implementation and the committed results. The consolidated results are in `docs/RESULTS.md`.
 
-**Quick look:** `paper_single.pdf` is the compiled paper with all figures and tables (8 pages; the 19 Oct build used Tectonic 0.15.0), and `paper_single.tex` is the same paper as one LaTeX file (it needs only `references.bib` and `figures/` beside it). Both are generated; after editing the sources, refresh them from the repository root:
+**Quick look:** `paper_single.pdf` is the compiled paper with all figures and tables (8 pages; the 19 Oct build used Tectonic 0.15.0, the 2 Nov build XeLaTeX from TeX Live with TeX Gyre Termes, which reproduces the 19 Oct page count), and `paper_single.tex` is the same paper as one LaTeX file (it needs only `references.bib` and `figures/` beside it). Both are generated; after editing the sources, refresh them from the repository root:
 
 ```bash
 python scripts/flatten_paper.py                       # rewrites paper_single.tex

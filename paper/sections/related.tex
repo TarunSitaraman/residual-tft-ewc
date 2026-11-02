@@ -3,11 +3,14 @@
 % Bibliographic data of all ten studies verified against Crossref (4 Oct 2026). Figures quoted for
 % ref1, ref2, ref4, ref5, ref8 and ref10 were checked against the published abstracts. For ref3, ref6,
 % ref7 and ref9 no open abstract was available, so the text states only what their titles state.
+% tao2026pcl (added 2 Nov 2026): described from its abstract only (Chalmers research record).
 % ============================================================
 
 \section{Related Work}
 
-The review covers 2022--2026 studies (Table~\ref{tab:literature}; review in~\cite{ref6}). Second-life SOH has been estimated from partial charging under residential and fast-charging profiles (RMSE about 0.6 and 0.8\%, 85\% less testing time than a capacity test)~\cite{ref1}, from 58 health indicators of reused Nissan Leaf modules (about 0.2\% RMSE, but the most useful indicators changed with ageing)~\cite{ref2}, from impedance spectra~\cite{ref3}, and with bagged Gaussian process regression for screening (worst-case error below 1.48\%)~\cite{ref4}; retired Leaf cells aged for over 15 months were tracked online with clustering (error below 2.3\%)~\cite{ref5}. These studies estimate the \emph{current} SOH of a fixed population; none adapts a model as new populations arrive. Continual learning has predicted capacity degradation~\cite{ref7} and, with progressive networks and TCNs, the state of charge across drive cycles, addressing forgetting and task order~\cite{ref8}; domain generalisation~\cite{ref9} and probabilistic BiLSTM/TCN models, whose calibration error isotonic recalibration reduced~\cite{ref10}, target second-life SOH but not a long sequence of tasks with explicit retention.
+We review studies from 2022--2026 (Table~\ref{tab:literature}; review in~\cite{ref6}). Second-life studies estimate the \emph{current} SOH of a fixed population from partial charging under residential and fast-charging profiles (RMSE about 0.6 and 0.8\%, with 85\% less testing time than a capacity test)~\cite{ref1}, from 58 health indicators of reused Nissan Leaf modules (about 0.2\% RMSE, though the most useful indicators changed with ageing)~\cite{ref2}, from impedance spectra~\cite{ref3}, with bagged Gaussian process regression for screening (worst-case error below 1.48\%)~\cite{ref4}, and online with clustering for Leaf cells aged over 15 months (error below 2.3\%)~\cite{ref5}. None adapts a model as new populations arrive.
+
+Continual learning has predicted capacity degradation~\cite{ref7} and, with progressive networks and TCNs, the state of charge across drive cycles, addressing forgetting and task order~\cite{ref8}. Closest to our setting, pulse-test conditions have been learned as domain-incremental tasks with a replay buffer to estimate second-life SOH with near-zero forgetting~\cite{tao2026pcl}. Domain generalisation~\cite{ref9} and probabilistic BiLSTM/TCN models with isotonic recalibration~\cite{ref10} target second-life SOH without a task sequence.
 
 \begin{table}[t]
   \centering
@@ -27,6 +30,7 @@ The review covers 2022--2026 studies (Table~\ref{tab:literature}; review in~\cit
     \cite{ref5} & online ML, clustering & current health, second life & -- & -- \\
     \cite{ref7} & bilevel-optimised CL & capacity degradation & \checkmark & -- \\
     \cite{ref8} & PNN + TCN & state of charge & \checkmark & -- \\
+    \cite{tao2026pcl} & pulse features, replay CL & current SOH, second life & \checkmark & -- \\
     \cite{ref9} & domain generalisation & current SOH, second life & -- & -- \\
     \cite{ref10} & BiLSTM, TCN, TCN-GPR & SOH with uncertainty & -- & \checkmark \\
     \midrule
@@ -35,4 +39,4 @@ The review covers 2022--2026 studies (Table~\ref{tab:literature}; review in~\cit
   \end{tabular}
 \end{table}
 
-\emph{Research gap.} Second-life SOH estimation, screening, transfer learning and degradation prediction have progressed largely separately; continual learning is rarely combined with heterogeneous second-life SOH forecasting, an explicit reuse decision and an evaluation of forgetting. This work asks whether a continual learner can learn heterogeneous second-life populations in sequence while retaining earlier ones, and whether its forecasts support reuse decisions.
+\emph{Research gap.} Continual learning for second-life SOH has so far targeted \emph{estimation} of the current SOH~\cite{tao2026pcl}. To our knowledge, it has not been evaluated for \emph{forecasting} across heterogeneous second-life populations with reuse screening, measured forgetting and comparison with simple forecasters and joint training. We ask whether a continual learner can learn such populations in sequence while retaining earlier ones, and whether its forecasts support reuse screening.
