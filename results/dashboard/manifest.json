@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-11-02T05:08:46+00:00",
-  "commit": "43086c3b89361daf9f05834330a9f2bcc442024d",
+  "generated_utc": "2026-11-02T09:08:09+00:00",
+  "commit": "c572164117e67e5ee3db9e7d34550cff375d45b7",
   "row_counts": {
     "dim_group": 13,
     "dim_method": 61,
@@ -14,7 +14,8 @@
     "fact_coverage": 160,
     "fact_horizon": 84,
     "fact_d30_group": 2338,
-    "fact_headline": 28
+    "fact_headline": 28,
+    "fact_soh": 111
   },
   "data_root": "data",
   "sources": {
