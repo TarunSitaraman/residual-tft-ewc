@@ -207,3 +207,10 @@ def test_main_without_data_writes_results_only(results_dir: Path, tmp_path: Path
     assert X.main(["--results", str(results_dir), "--data-root", str(tmp_path / "empty"), "--out-results", str(out_r),
                    "--out-data", str(out_d)]) == 0
     assert (out_r / "summary.json").exists() and not out_d.exists()
+
+
+def test_sha256_ignores_crlf(tmp_path: Path):
+    lf, crlf = tmp_path / "lf.json", tmp_path / "crlf.json"
+    lf.write_bytes(b'{\n  "a": 1\n}\n')
+    crlf.write_bytes(b'{\r\n  "a": 1\r\n}\r\n')
+    assert X.sha256(lf) == X.sha256(crlf)

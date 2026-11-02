@@ -548,7 +548,8 @@ def git_commit() -> str | None:
 
 
 def sha256(p: Path) -> str:
-    return hashlib.sha256(p.read_bytes()).hexdigest()
+    # Hash with LF line endings so a Windows (core.autocrlf) checkout gives the same hash as the Git blob.
+    return hashlib.sha256(p.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
 
 def write(frames: dict[str, pd.DataFrame], out: Path) -> dict[str, int]:
@@ -649,7 +650,7 @@ def main(argv: list[str] | None = None) -> int:
     sources = sorted(p for p in results.glob("forecasting_d[23]*_e*.json")) + sorted((results / "tables").glob("*.csv"))
     manifest = {"generated_utc": summ["generated_utc"], "commit": summ["commit"], "row_counts": {**counts, **dcounts},
                 "data_root": str(data.relative_to(ROOT)) if data.is_relative_to(ROOT) else "external (DATA_ROOT)",
-                "sources": {str(p.relative_to(results.parent)) if p.is_relative_to(results.parent)
+                "sources": {p.relative_to(results.parent).as_posix() if p.is_relative_to(results.parent)
                                                     else str(p): sha256(p) for p in sources}}
     (out_r / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(f"Wrote summary.json and manifest.json to {out_r}")
