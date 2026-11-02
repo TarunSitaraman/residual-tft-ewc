@@ -2,6 +2,7 @@
 import { TABLEAU, PATHS } from "../config.js";
 import { mountViz, applyState } from "./embed.js";
 import { el, renderKpis, renderHeadline, renderPerGroup, renderDetails, renderCaveats } from "./views.js";
+import { parseCsv, sohRows, renderSoh, unitFacts } from "./soh.js";
 
 const DEFAULTS = { tab: "overview", dataset: "S6", setting: "e1", protocol: "P2", group: "all", family: "all" };
 const KEYS = ["dataset", "setting", "protocol", "group", "family"];
@@ -12,7 +13,7 @@ const TABS = {
   soh: {
     title: "SOH explorer",
     lede: "SOH trajectories of every cell, relative to its first valid capacity check, with the reuse-class bands (C0 above 95 %, C1 90–95 %, C2 80–90 %, C3 at or below 80 %). S1 and S6 are shown separately and never pooled.",
-    figures: [["13_soh_trajectories.png", "S6 SOH trajectories per cell and usage condition."],
+    figures: [["13_soh_trajectories.png", "S6 SOH trajectories per cell and usage condition (paper figure, static)."],
       ["preprocessing_s6.png", "S6 preprocessing: from raw checks to labelled samples."]],
   },
   accuracy: {
@@ -39,7 +40,9 @@ const TABS = {
 const state = { ...DEFAULTS };
 let summary = null;
 let selection = null;
+let soh = [];   // SOH checks from PATHS.soh (optional; built from the data folder)
 const vizzes = {};
+const hasSoh = (dataset) => soh.some((r) => r.dataset === dataset);
 
 // ---------- state <-> URL hash ----------
 function readHash() {
@@ -90,7 +93,8 @@ function initTheme() {
 const form = document.getElementById("filters");
 function syncForm() {
   for (const k of KEYS) form.elements[k].value = state[k];
-  const tableauOnly = state.tab !== "overview" && !hasViz(state.tab);
+  const native = state.tab === "overview" || (state.tab === "soh" && soh.length > 0);
+  const tableauOnly = !native && !hasViz(state.tab);
   // Filters drive the native views and the embedded views; the static figures do not respond to them.
   for (const k of KEYS) form.elements[k].disabled = tableauOnly;
 }
@@ -166,6 +170,15 @@ function ensureTab(name) {
   const t = TABS[name];
   const body = el("div", { class: "card" }, el("h2", { text: t.title }), el("p", { class: "sub", text: t.lede }));
   panel.replaceChildren(body);
+  if (name === "soh") {
+    // Native chart of the trajectories when the data folder has been built; the paper figure stays below.
+    body.append(el("div", { id: "soh-chart", class: "soh" }));
+    if (!TABLEAU.views[name]) {
+      body.append(el("div", { class: "figs" }, TABS.soh.figures.map(([f, cap]) => el("figure", {},
+        el("img", { src: PATHS.figures + f, alt: cap, loading: "lazy" }), el("figcaption", { text: cap })))));
+      return;
+    }
+  }
   if (!TABLEAU.views[name]) {
     body.append(...fallback(name));
     return;
@@ -200,6 +213,36 @@ function renderSide() {
   }
 }
 
+function renderSohTab() {
+  const host = document.getElementById("soh-chart");
+  if (!summary || !host || document.getElementById("tab-soh").hidden) return;
+  if (!hasSoh(state.dataset)) {
+    const other = ["S1", "S6"].find((d) => d !== state.dataset && hasSoh(d));
+    const msg = soh.length
+      ? `${state.dataset} trajectories are not built in this copy. ${state.dataset === "S6"
+        ? "Build them on a machine that can reach the S6 archive: python scripts/fetch_wheeler_characterisation.py, python scripts/build_wheeler_features.py, then python scripts/export_dashboard_data.py."
+        : "Build them with python scripts/fetch_osf_diagnostics.py, python scripts/build_diagnostic_features.py, then python scripts/export_dashboard_data.py."}`
+      : "No SOH trajectories yet: build the data folder (data/README.md) and run python scripts/export_dashboard_data.py. The paper figure below shows S6.";
+    const kids = [el("span", { text: msg })];
+    if (other) {
+      const b = el("button", { type: "button", class: "ghost", text: `Show ${other}` });
+      b.addEventListener("click", () => { state.dataset = other; fillGroups(); selection = null; update(); });
+      kids.push(" ", b);
+    }
+    host.replaceChildren(el("p", { class: "notice" }, kids));
+    return;
+  }
+  const groupOrder = summary.groups.filter((g) => g.dataset === state.dataset).map((g) => g.group);
+  const unitOfGroup = state.group !== "all" && state.dataset === "S1" ? state.group : (selection?.unit || "all");
+  renderSoh(host, soh, { dataset: state.dataset, selected: unitOfGroup, groupOrder, tip, onSelect: (unit) => {
+    if (unit === "all") { selection = null; state.group = "all"; update(); return; }
+    const row = soh.find((r) => r.unit === unit && r.dataset === state.dataset);
+    selection = { group: row.group, unit, fields: unitFacts(soh, unit) };
+    state.group = row.group;
+    update();
+  } });
+}
+
 function update() {
   writeHash();
   syncForm();
@@ -210,12 +253,15 @@ function update() {
       onSelect: (s) => { selection = s; if (s.group) state.group = s.group; update(); },
     });
   renderSide();
+  renderSohTab();   // after the details panel, so the chart is measured at its final width
   for (const v of Object.values(vizzes)) if (v && v !== "failed") applyState(v, state);
 }
 
 document.getElementById("details-close").addEventListener("click", () => { selection = null; state.group = "all"; update(); });
 addEventListener("popstate", () => { readHash(); fillGroups(); showTab(state.tab); update(); });
 addEventListener("scroll", tip.hide, { passive: true });
+let resizeTimer = 0;
+addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderSohTab, 150); });
 
 async function start() {
   initTheme();
@@ -236,6 +282,10 @@ async function start() {
   document.getElementById("provenance").textContent =
     `Built ${summary.generated_utc.slice(0, 10)} from commit ${String(summary.commit || "unknown").slice(0, 7)} by scripts/export_dashboard_data.py.`;
   fillGroups();
+  try {
+    const res = await fetch(PATHS.soh);
+    if (res.ok) soh = sohRows(parseCsv(await res.text()));
+  } catch { /* optional input: the SOH tab says how to build it */ }
   if (state.group !== "all") selection = { group: state.group };
   showTab(state.tab);
   update();

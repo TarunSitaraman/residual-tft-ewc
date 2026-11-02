@@ -140,7 +140,7 @@ export function renderDetails(root, titleEl, summary, state, selection) {
       el("dt", { text: "Condition" }), el("dd", { text: g.description })));
   }
   if (selection.fields) {
-    kids.push(el("h3", { text: "Selected mark" }), el("dl", {}, Object.entries(selection.fields).slice(0, 12)
+    kids.push(el("h3", { text: "Selection" }), el("dl", {}, Object.entries(selection.fields).slice(0, 12)
       .flatMap(([k, v]) => [el("dt", { text: k }), el("dd", { text: String(v) })])));
   }
   for (const proto of ["P1", "P2"]) {

@@ -3,7 +3,7 @@
 An interactive view of the project's findings: SOH trajectories, forecast accuracy against baselines, continual-learning adaptation and retention, reuse classes and interval coverage. It has two layers:
 
 - **Tableau Public workbook**: the analytical views, embedded with the Tableau Embedding API v3. Specification: [`tableau/WORKBOOK_SPEC.md`](tableau/WORKBOOK_SPEC.md).
-- **JS page** (`index.html`, `src/`, no build step): tabs, one filter bar that drives every embedded view, a details panel for selected marks, and native views read from `results/dashboard/summary.json` (KPI strip, headline comparison, per-condition error heatmap, caveats). When a tab has no published view, or Tableau cannot be reached, it shows the paper's static figures instead. The page is useful before the workbook exists.
+- **JS page** (`index.html`, `src/`, no build step): tabs, one filter bar that drives every embedded view, a details panel for selected marks, and native views read from `results/dashboard/summary.json` (KPI strip, headline comparison, per-condition error heatmap, caveats). When a tab has no published view, or Tableau cannot be reached, it shows the paper's static figures instead. The SOH explorer tab also draws an interactive chart of the SOH trajectories from `data/dashboard/fact_soh.csv` when that file has been built (git-ignored; the tab says how to build it otherwise). The page is useful before the workbook exists.
 
 The data-platform page (`scripts/platform_server.py`, `docs/spark_dashboard.html`) remains the place for datasets, lineage and Spark runs. This dashboard covers results only.
 
@@ -37,6 +37,7 @@ After export the data are small: about 850 S6 checks, 111 S1 RPTs, 38.5k saved f
 - `src/main.js`: state (kept in the URL hash, so views can be shared and the back button works), tabs, filters, and loading each tab's view or its fallback.
 - `src/embed.js`: loads the Embedding API once, mounts `<tableau-viz>`, applies filters to every worksheet, and reads mark selections.
 - `src/views.js`: the native views and the details panel.
+- `src/soh.js`: the SOH trajectory chart (one line per cell, reuse-class boundaries, hover, legend selection, table view).
 - `styles.css`: the data-platform page's design tokens, with light and dark themes. The theme button cycles auto, light and dark.
 
 Filters: Dataset, Setting (E1 h = 1–3, E2 h = 1–6), Protocol (P1 continual stream, P2 unseen usage condition), Group and Method family. Selecting a heatmap cell or a Tableau mark opens the details panel: the group's condition, every method's error with its seed spread, and a link to the result in `docs/RESULTS.md`.

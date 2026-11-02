@@ -30,6 +30,8 @@ export const FIELDS = {
 // Where the page reads its data and figures, relative to dashboard/index.html (serve from the repository root).
 export const PATHS = {
   summary: "../results/dashboard/summary.json",
+  // Optional, git-ignored: SOH trajectories built from the data folder (scripts/export_dashboard_data.py).
+  soh: "../data/dashboard/fact_soh.csv",
   figures: "../paper/figures/",
   repo: "https://github.com/TarunSitaraman/residual-tft-ewc/blob/main/",
   platform: "../docs/spark_dashboard.html",
