@@ -1162,3 +1162,32 @@ No experiment, protocol or result changes; this note takes no D-number.
 - **Reasons.** After export the data are small: about 850 S6 checks, 111 S1 RPTs, 38.5k saved forecasts and 42k run × task rows. They are public (CC BY 4.0), and the repository is public. Tableau Public is free to publish and runs on Windows and macOS. Its JS API sets filters and reads mark selections without paid capacity. Power BI's JS embedding needs Pro or Embedded capacity and Azure AD, and its free "publish to web" offers no API.
 - **Costs accepted.** Published views are public and use extracts, with no live connection. Workbook authoring is a manual step in Tableau Desktop Public Edition (`dashboard/tableau/WORKBOOK_SPEC.md`).
 - **Data rules carried over.** `scripts/export_dashboard_data.py` only reshapes committed results files and the label tables. SOH stays relative to the first valid check (D17), and reuse classes use `src.evaluation.reuse_class`. Missing temperatures stay empty and are flagged. S1 and S6 are never pooled, and every view shows the baselines next to the learned models. Tables built from the data folder go to `data/dashboard/` (git-ignored). Tables built from results files go to `results/dashboard/`, committed like `results/tables/`.
+
+## D33. Exploratory search for a forecaster better than both linear extrapolation and gradient boosting (exploratory, not reported)
+
+**Status:** Run 2 Nov 2026, after every D23–D32 result, at the request of T. Sitaraman to look for a method that beats both traditional comparators in both S6 settings. **Exploratory only:** nothing here is a reported result, enters the paper, or may be cited as evidence. It is logged so that the number of variants tried is on record (multiplicity) and so that none of them is later run as if it were a fresh, pre-registered idea. Scripts were kept outside the repository (not committed); the inputs are the D26 runner's S6 tables at commit `43086c3`.
+
+**Data used (no test data).**
+- **P1:** fitted on the train split of all seven S6 cases, scored on their validation split only.
+- **P2:** nested leave-one-condition-out inside each of the seven D26 outer folds: for outer case *f* and each inner case *j* ≠ *f*, fit on the other five cases and score on *j*. The outer held-out case was never used. Mean over the 42 (*f*, *j*) pairs.
+
+**Static candidates (RMSE in pp; P1 validation | P2 nested inner):**
+
+| Candidate | E1 (h 1–3) | E2 (h 1–6) |
+|---|---|---|
+| LIN: linear extrapolation | 0.410 \| 1.372 | 0.808 \| 2.300 |
+| GBM: gradient boosting, D26 inputs | 0.391 \| **0.573** | 0.733 \| **1.058** |
+| GBM+: GBM with fade rate and LIN forecast as inputs | 0.417 \| 0.588 | 0.744 \| 1.063 |
+| RGBM: LIN + GBM on the residual | 0.470 \| 0.648 | 0.854 \| 1.093 |
+| RATE: GBM on fade per cycle to target, times span | 0.584 \| 0.696 | 0.961 \| 1.177 |
+| RRATE: LIN + GBM on residual per cycle, times span | 0.559 \| 0.679 | 0.931 \| 1.128 |
+| SWITCH: LIN where a fade rate exists, else GBM | 0.410 \| 0.869 | 0.808 \| 1.598 |
+| AVG: mean of LIN and GBM where a fade rate exists, else GBM | **0.359** \| 0.618 | **0.720** \| 1.098 |
+
+**Online candidates, P2 nested inner, E1 only** (D28 arrival rule; RMSE pp): STATIC GBM 0.573; LIN 1.372; online GBM refit (D28 REFIT) 0.479; refit with the new condition's rows weighted ×5: 0.471; online per-horizon inverse-MSE combination of LIN and the refit: 0.485 (×1) and 0.479 (×5); the combination beat the plain refit in 4 of 7 outer folds. E2 was not run.
+
+**Reading.**
+1. No candidate beats GBM in P2: every combination with LIN or rate target is worse on unseen conditions.
+2. P1 validation is misleading here: GBM beats LIN on validation rows (0.391 vs 0.410) yet loses to it on the P1 test rows (D23/D25), because trees cannot extrapolate into the later life that the test split covers. AVG's P1 validation advantage therefore does not predict a test advantage and was not pursued.
+3. Online, up-weighting and combining add at most 0.008 pp over the D28 refit, below the 0.05 pp equivalence threshold.
+4. Conclusion: with seven usage conditions from one laboratory, P1 rewards trend smoothness and P2 rewards stored cross-condition data; no single method found here wins both. No variant is carried forward to a test-set run. A confirmatory test of a new method requires new data and its own pre-registration before any result on those data is computed.
