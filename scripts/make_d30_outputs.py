@@ -145,14 +145,14 @@ COMPACT_COLS = [("cls_accuracy", "Acc."), ("cls_f1_macro", "F1"), ("cls_mcc", "M
 
 
 def compact_s6(res: dict, support: list) -> None:
-    """One-column S6 classification table for the main text (the full table stays in the repository)."""
+    """One-column S6 classification table for the main text (the full table is in the supplement)."""
     pooled = frame(res["s6"], "p2_pooled")
     body = [[NAMES[m], *[S.fmt(row[c], 3) for c, _ in COMPACT_COLS]] for m, row in pooled.iterrows()]
     counts = ", ".join(f"{c} {n}" for c, n in zip(CLASS_NAMES, support))
     S.write_tex(S.PTAB / "d30_classification_s6.tex",
-                "S6, P2: reuse class (C0--C3) and end of first life (EoL, SOH $\\le$ 80) of the forecast SOH, all "
-                "held-out samples pooled, mean over seeds. F1: macro over the measured classes; $\\kappa_w$: "
-                f"linear-weighted. Measured classes: {counts}. All metrics in the repository (D30).",
+                "S6, P2: reuse class (C0--C3) and end of first life (EoL, SOH $\\le$ 80) of the forecast SOH, "
+                "held-out samples pooled, mean over seeds; F1 macro, $\\kappa_w$ linear-weighted. "
+                "All metrics and class counts: Table~SII of the supplement.",
                 "tab:d30_cls_s6", ["Method", *[h for _, h in COMPACT_COLS]], body, "l" + "c" * len(COMPACT_COLS),
                 escape=False)
     path = S.PTAB / "d30_classification_s6.tex"
