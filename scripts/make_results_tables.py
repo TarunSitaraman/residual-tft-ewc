@@ -193,18 +193,17 @@ def table_p2(res) -> str:
         order = [m for m in ORDER if m in t.index]
         for m in order:
             row = t.loc[m]
-            cls = f"{f(row.get('class_accuracy'), 2)} / {f(row.get('class_macro_f1'), 2)}" if k == "S6" else "--"
-            lines.append(f"{k} & {NAMES[m]} & {row['mean']:.3f} & {row[groups].min():.3f}--{row[groups].max():.3f} & {cls} \\\\")
+            lines.append(f"{k} & {NAMES[m]} & {row['mean']:.3f} & {row[groups].min():.3f}--{row[groups].max():.3f} \\\\")
         if k == "S1":
             lines.append("\\midrule")
     return source(res) + r"""\begin{table}[t]
   \centering
-  \caption{Protocol P2 (unseen battery in S1, unseen usage condition in S6): mean test RMSE (pp) over held-out groups, range over groups, and for S6 reuse-class accuracy / macro-F1 of the forecast SOH.}
+  \caption{Protocol P2 (unseen battery in S1, unseen usage condition in S6): mean test RMSE (pp) over held-out groups, range over groups. Reuse-class metrics of the same forecasts: Table~\ref{tab:d30_cls_s6}.}
   \label{tab:p2}
   \setlength{\tabcolsep}{3pt}
-  \begin{tabular}{llccc}
+  \begin{tabular}{llcc}
     \toprule
-    Data & Method & RMSE & Range & Class acc./F1 \\
+    Data & Method & RMSE & Range \\
     \midrule
 """ + "\n".join("    " + l for l in lines) + r"""
     \bottomrule

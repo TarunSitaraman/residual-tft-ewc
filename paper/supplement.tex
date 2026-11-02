@@ -162,7 +162,7 @@ little use of its history.
 % -----------------------------------------------------------------------------
 \section{Additional results}
 
-Table~\ref{tab:residual} and Figs.~\ref{fig:d25} and \ref{fig:d27} belong to Sections IV-D to IV-G of the paper and
+Tables~\ref{tab:residual} and \ref{tab:d26_classes} and Figs.~\ref{fig:d25} and \ref{fig:d27} belong to Sections IV-D to IV-G of the paper and
 were moved here for space.
 
 \emph{Reproducibility of the comparisons (Section IV-B).} P1 and P2 were re-run in a pinned environment on data rebuilt from the raw archives. Every baseline, every P2 result and the ranking of methods reproduced; the neural models moved by at most 0.059~pp. On S1, five Holm-corrected comparisons with TFT\,+\,EWC crossed $p=0.05$. On S6, validation selected EWC $\lambda=1000$ instead of 100 (a 0.008~pp tie), and the error advantage of TFT\,+\,EWC over fine-tuning moved from $p_{\mathrm{Holm}}=0.005$ to 0.060, while its reduction of forgetting moved from 0.050 to 0.008. These findings motivated the ten tuning orders, the one-standard-error rule and the replication rule used from P3 on. A D30 re-run of P2 on another platform reproduced every baseline exactly and moved the MLP and TFT by at most 0.027~pp per held-out group: neural training is deterministic per platform, not across platforms.
@@ -225,6 +225,8 @@ were moved here for space.
     \bottomrule
   \end{tabular}
 \end{table}
+
+\input{tables/d26_classes}
 
 \emph{Gradient boosting under the continual constraint (D32).} Most of gradient boosting's advantage on unseen conditions comes from storing every training condition. The headline comparison of the paper (its Table~III) therefore also trains gradient boosting like the proposed model: the six training conditions arrive one at a time and earlier conditions' data are not kept. Under this constraint the two are close. Refitted on the latest condition only, gradient boosting reaches 0.86 and 1.59~pp (horizons 1--3 and 1--6), against 0.92/0.94 and 1.62/1.65~pp for the proposed model (slightly better for 1--3, $+0.06/+0.08$~pp, replicated; not distinguishable for 1--6), whereas with all six conditions stored it reaches 0.54 and 1.05~pp. Table~\ref{tab:p1} is the first P1 benchmark (Section IV-A of the paper). Warm-started condition by condition (200 more trees per condition), it reaches 2.65 and 3.49~pp, and the proposed model is better by 1.7--1.9~pp (replicated). This gap is mostly an artefact: scikit-learn keeps the bin edges of the first condition when warm-starting, and every usage input is constant within a condition, so the later trees cannot use them. We therefore do not count it as evidence against continual gradient boosting in general.
 
