@@ -1,0 +1,2339 @@
+dataset,protocol,method,group,metric,value,metric_kind
+S1,P2,gbm_F1,g1,reg_MSE,0.0451216155,regression
+S1,P2,gbm_F1,v4,reg_MSE,0.0744277096,regression
+S1,P2,gbm_F1,v5,reg_MSE,0.0649839529,regression
+S1,P2,gbm_F1,w10,reg_MSE,0.0347811332,regression
+S1,P2,gbm_F1,w8,reg_MSE,0.0893753745,regression
+S1,P2,gbm_F1,w9,reg_MSE,0.0082403517,regression
+S1,P2,linear_extrapolation,g1,reg_MSE,0.3763228099,regression
+S1,P2,linear_extrapolation,v4,reg_MSE,0.1037411249,regression
+S1,P2,linear_extrapolation,v5,reg_MSE,0.5255984032,regression
+S1,P2,linear_extrapolation,w10,reg_MSE,0.1720105196,regression
+S1,P2,linear_extrapolation,w8,reg_MSE,0.4999219509,regression
+S1,P2,linear_extrapolation,w9,reg_MSE,0.0807190424,regression
+S1,P2,mlp,g1,reg_MSE,0.0867698493,regression
+S1,P2,mlp,v4,reg_MSE,0.0799414065,regression
+S1,P2,mlp,v5,reg_MSE,0.1184413474,regression
+S1,P2,mlp,w10,reg_MSE,0.0635217808,regression
+S1,P2,mlp,w8,reg_MSE,0.1522290006,regression
+S1,P2,mlp,w9,reg_MSE,0.0224095472,regression
+S1,P2,persistence,g1,reg_MSE,0.3095519277,regression
+S1,P2,persistence,v4,reg_MSE,0.2562357997,regression
+S1,P2,persistence,v5,reg_MSE,0.4726716164,regression
+S1,P2,persistence,w10,reg_MSE,0.2518248823,regression
+S1,P2,persistence,w8,reg_MSE,0.337195511,regression
+S1,P2,persistence,w9,reg_MSE,0.1904940577,regression
+S1,P2,ridge_F0,g1,reg_MSE,0.1369859135,regression
+S1,P2,ridge_F0,v4,reg_MSE,0.2371649132,regression
+S1,P2,ridge_F0,v5,reg_MSE,0.6066412055,regression
+S1,P2,ridge_F0,w10,reg_MSE,0.0836090806,regression
+S1,P2,ridge_F0,w8,reg_MSE,0.1799419875,regression
+S1,P2,ridge_F0,w9,reg_MSE,0.0248943207,regression
+S1,P2,ridge_F1,g1,reg_MSE,0.1678103296,regression
+S1,P2,ridge_F1,v4,reg_MSE,0.0523540101,regression
+S1,P2,ridge_F1,v5,reg_MSE,0.2271691303,regression
+S1,P2,ridge_F1,w10,reg_MSE,0.068552456,regression
+S1,P2,ridge_F1,w8,reg_MSE,0.1474643307,regression
+S1,P2,ridge_F1,w9,reg_MSE,0.0260312808,regression
+S1,P2,ridge_schedule,g1,reg_MSE,0.0910296476,regression
+S1,P2,ridge_schedule,v4,reg_MSE,0.0759191955,regression
+S1,P2,ridge_schedule,v5,reg_MSE,0.1381406378,regression
+S1,P2,ridge_schedule,w10,reg_MSE,0.0754028243,regression
+S1,P2,ridge_schedule,w8,reg_MSE,0.1676772805,regression
+S1,P2,ridge_schedule,w9,reg_MSE,0.0296983848,regression
+S1,P2,tft,g1,reg_MSE,0.0836321147,regression
+S1,P2,tft,v4,reg_MSE,0.0719535266,regression
+S1,P2,tft,v5,reg_MSE,0.1450947718,regression
+S1,P2,tft,w10,reg_MSE,0.0600869531,regression
+S1,P2,tft,w8,reg_MSE,0.1365389698,regression
+S1,P2,tft,w9,reg_MSE,0.0406021594,regression
+S6,P2,gbm_F1,case1,reg_MSE,0.2111270535,regression
+S6,P2,gbm_F1,case2,reg_MSE,0.3423944337,regression
+S6,P2,gbm_F1,case3,reg_MSE,0.3584600582,regression
+S6,P2,gbm_F1,case4,reg_MSE,0.1874463677,regression
+S6,P2,gbm_F1,case5,reg_MSE,0.1557907522,regression
+S6,P2,gbm_F1,case6,reg_MSE,0.4384565198,regression
+S6,P2,gbm_F1,case7,reg_MSE,3.38347356,regression
+S6,P2,linear_extrapolation,case1,reg_MSE,2.359977463,regression
+S6,P2,linear_extrapolation,case2,reg_MSE,2.784675381,regression
+S6,P2,linear_extrapolation,case3,reg_MSE,1.977900858,regression
+S6,P2,linear_extrapolation,case4,reg_MSE,1.711199574,regression
+S6,P2,linear_extrapolation,case5,reg_MSE,1.565734554,regression
+S6,P2,linear_extrapolation,case6,reg_MSE,0.7326239081,regression
+S6,P2,linear_extrapolation,case7,reg_MSE,2.487971631,regression
+S6,P2,mlp,case1,reg_MSE,0.2301780937,regression
+S6,P2,mlp,case2,reg_MSE,0.5134505266,regression
+S6,P2,mlp,case3,reg_MSE,0.4273464,regression
+S6,P2,mlp,case4,reg_MSE,0.3049542115,regression
+S6,P2,mlp,case5,reg_MSE,0.3288142187,regression
+S6,P2,mlp,case6,reg_MSE,0.3528705679,regression
+S6,P2,mlp,case7,reg_MSE,4.96932237,regression
+S6,P2,persistence,case1,reg_MSE,7.253882503,regression
+S6,P2,persistence,case2,reg_MSE,9.080047102,regression
+S6,P2,persistence,case3,reg_MSE,6.45007679,regression
+S6,P2,persistence,case4,reg_MSE,6.744401863,regression
+S6,P2,persistence,case5,reg_MSE,6.377082329,regression
+S6,P2,persistence,case6,reg_MSE,4.101674868,regression
+S6,P2,persistence,case7,reg_MSE,18.71931818,regression
+S6,P2,ridge_F0,case1,reg_MSE,0.3578701978,regression
+S6,P2,ridge_F0,case2,reg_MSE,0.53977836,regression
+S6,P2,ridge_F0,case3,reg_MSE,0.6655827849,regression
+S6,P2,ridge_F0,case4,reg_MSE,0.3730456493,regression
+S6,P2,ridge_F0,case5,reg_MSE,0.3738110019,regression
+S6,P2,ridge_F0,case6,reg_MSE,0.6531681418,regression
+S6,P2,ridge_F0,case7,reg_MSE,3.372554189,regression
+S6,P2,ridge_F1,case1,reg_MSE,0.3862799941,regression
+S6,P2,ridge_F1,case2,reg_MSE,4.787235993,regression
+S6,P2,ridge_F1,case3,reg_MSE,0.3694548087,regression
+S6,P2,ridge_F1,case4,reg_MSE,0.3461916748,regression
+S6,P2,ridge_F1,case5,reg_MSE,0.3928362877,regression
+S6,P2,ridge_F1,case6,reg_MSE,1.299577133,regression
+S6,P2,ridge_F1,case7,reg_MSE,4.787380465,regression
+S6,P2,ridge_schedule,case1,reg_MSE,0.911409044,regression
+S6,P2,ridge_schedule,case2,reg_MSE,0.900960144,regression
+S6,P2,ridge_schedule,case3,reg_MSE,1.606728407,regression
+S6,P2,ridge_schedule,case4,reg_MSE,0.8095734188,regression
+S6,P2,ridge_schedule,case5,reg_MSE,0.7565791276,regression
+S6,P2,ridge_schedule,case6,reg_MSE,1.026009587,regression
+S6,P2,ridge_schedule,case7,reg_MSE,5.23504376,regression
+S6,P2,tft,case1,reg_MSE,0.3134351894,regression
+S6,P2,tft,case2,reg_MSE,0.5909547303,regression
+S6,P2,tft,case3,reg_MSE,0.3742527368,regression
+S6,P2,tft,case4,reg_MSE,0.3184507389,regression
+S6,P2,tft,case5,reg_MSE,0.3663214265,regression
+S6,P2,tft,case6,reg_MSE,0.3540875636,regression
+S6,P2,tft,case7,reg_MSE,5.736782133,regression
+S1,P2,gbm_F1,g1,reg_RMSE,0.2124184915,regression
+S1,P2,gbm_F1,v4,reg_RMSE,0.2728144234,regression
+S1,P2,gbm_F1,v5,reg_RMSE,0.2549195027,regression
+S1,P2,gbm_F1,w10,reg_RMSE,0.1864970059,regression
+S1,P2,gbm_F1,w8,reg_RMSE,0.2989571449,regression
+S1,P2,gbm_F1,w9,reg_RMSE,0.0907763827,regression
+S1,P2,linear_extrapolation,g1,reg_RMSE,0.6134515547,regression
+S1,P2,linear_extrapolation,v4,reg_RMSE,0.322088691,regression
+S1,P2,linear_extrapolation,v5,reg_RMSE,0.7249816572,regression
+S1,P2,linear_extrapolation,w10,reg_RMSE,0.4147415093,regression
+S1,P2,linear_extrapolation,w8,reg_RMSE,0.70705159,regression
+S1,P2,linear_extrapolation,w9,reg_RMSE,0.2841109684,regression
+S1,P2,mlp,g1,reg_RMSE,0.2936215822,regression
+S1,P2,mlp,v4,reg_RMSE,0.2814771962,regression
+S1,P2,mlp,v5,reg_RMSE,0.3425816786,regression
+S1,P2,mlp,w10,reg_RMSE,0.2515265568,regression
+S1,P2,mlp,w8,reg_RMSE,0.3893872918,regression
+S1,P2,mlp,w9,reg_RMSE,0.14934724,regression
+S1,P2,persistence,g1,reg_RMSE,0.5563739099,regression
+S1,P2,persistence,v4,reg_RMSE,0.506197392,regression
+S1,P2,persistence,v5,reg_RMSE,0.6875111755,regression
+S1,P2,persistence,w10,reg_RMSE,0.5018215642,regression
+S1,P2,persistence,w8,reg_RMSE,0.5806853804,regression
+S1,P2,persistence,w9,reg_RMSE,0.4364562495,regression
+S1,P2,ridge_F0,g1,reg_RMSE,0.3701160811,regression
+S1,P2,ridge_F0,v4,reg_RMSE,0.4869958041,regression
+S1,P2,ridge_F0,v5,reg_RMSE,0.7788717517,regression
+S1,P2,ridge_F0,w10,reg_RMSE,0.2891523485,regression
+S1,P2,ridge_F0,w8,reg_RMSE,0.4241956948,regression
+S1,P2,ridge_F0,w9,reg_RMSE,0.1577793418,regression
+S1,P2,ridge_F1,g1,reg_RMSE,0.4096465911,regression
+S1,P2,ridge_F1,v4,reg_RMSE,0.2288099868,regression
+S1,P2,ridge_F1,v5,reg_RMSE,0.4766226288,regression
+S1,P2,ridge_F1,w10,reg_RMSE,0.2618252394,regression
+S1,P2,ridge_F1,w8,reg_RMSE,0.3840108471,regression
+S1,P2,ridge_F1,w9,reg_RMSE,0.1613421233,regression
+S1,P2,ridge_schedule,g1,reg_RMSE,0.301711199,regression
+S1,P2,ridge_schedule,v4,reg_RMSE,0.2755343817,regression
+S1,P2,ridge_schedule,v5,reg_RMSE,0.3716727563,regression
+S1,P2,ridge_schedule,w10,reg_RMSE,0.274595747,regression
+S1,P2,ridge_schedule,w8,reg_RMSE,0.4094841639,regression
+S1,P2,ridge_schedule,w9,reg_RMSE,0.1723321931,regression
+S1,P2,tft,g1,reg_RMSE,0.2878029852,regression
+S1,P2,tft,v4,reg_RMSE,0.2677609825,regression
+S1,P2,tft,v5,reg_RMSE,0.3773539552,regression
+S1,P2,tft,w10,reg_RMSE,0.2433899983,regression
+S1,P2,tft,w8,reg_RMSE,0.3688532467,regression
+S1,P2,tft,w9,reg_RMSE,0.199112119,regression
+S6,P2,gbm_F1,case1,reg_RMSE,0.4594856402,regression
+S6,P2,gbm_F1,case2,reg_RMSE,0.5851447972,regression
+S6,P2,gbm_F1,case3,reg_RMSE,0.5987153398,regression
+S6,P2,gbm_F1,case4,reg_RMSE,0.4329507682,regression
+S6,P2,gbm_F1,case5,reg_RMSE,0.3947033724,regression
+S6,P2,gbm_F1,case6,reg_RMSE,0.662160494,regression
+S6,P2,gbm_F1,case7,reg_RMSE,1.839422072,regression
+S6,P2,linear_extrapolation,case1,reg_RMSE,1.536221814,regression
+S6,P2,linear_extrapolation,case2,reg_RMSE,1.668734665,regression
+S6,P2,linear_extrapolation,case3,reg_RMSE,1.406378632,regression
+S6,P2,linear_extrapolation,case4,reg_RMSE,1.308128271,regression
+S6,P2,linear_extrapolation,case5,reg_RMSE,1.251293153,regression
+S6,P2,linear_extrapolation,case6,reg_RMSE,0.8559345232,regression
+S6,P2,linear_extrapolation,case7,reg_RMSE,1.577330539,regression
+S6,P2,mlp,case1,reg_RMSE,0.4753914332,regression
+S6,P2,mlp,case2,reg_RMSE,0.7156263178,regression
+S6,P2,mlp,case3,reg_RMSE,0.6515890497,regression
+S6,P2,mlp,case4,reg_RMSE,0.5519308067,regression
+S6,P2,mlp,case5,reg_RMSE,0.5691588716,regression
+S6,P2,mlp,case6,reg_RMSE,0.5909404236,regression
+S6,P2,mlp,case7,reg_RMSE,2.225039072,regression
+S6,P2,persistence,case1,reg_RMSE,2.69330327,regression
+S6,P2,persistence,case2,reg_RMSE,3.01331165,regression
+S6,P2,persistence,case3,reg_RMSE,2.539700138,regression
+S6,P2,persistence,case4,reg_RMSE,2.596998626,regression
+S6,P2,persistence,case5,reg_RMSE,2.525288564,regression
+S6,P2,persistence,case6,reg_RMSE,2.02525921,regression
+S6,P2,persistence,case7,reg_RMSE,4.326582737,regression
+S6,P2,ridge_F0,case1,reg_RMSE,0.598222532,regression
+S6,P2,ridge_F0,case2,reg_RMSE,0.7346961004,regression
+S6,P2,ridge_F0,case3,reg_RMSE,0.8158325716,regression
+S6,P2,ridge_F0,case4,reg_RMSE,0.6107746305,regression
+S6,P2,ridge_F0,case5,reg_RMSE,0.6114008521,regression
+S6,P2,ridge_F0,case6,reg_RMSE,0.8081881846,regression
+S6,P2,ridge_F0,case7,reg_RMSE,1.836451521,regression
+S6,P2,ridge_F1,case1,reg_RMSE,0.6215142751,regression
+S6,P2,ridge_F1,case2,reg_RMSE,2.187975318,regression
+S6,P2,ridge_F1,case3,reg_RMSE,0.6078279433,regression
+S6,P2,ridge_F1,case4,reg_RMSE,0.5883805527,regression
+S6,P2,ridge_F1,case5,reg_RMSE,0.6267665336,regression
+S6,P2,ridge_F1,case6,reg_RMSE,1.139989971,regression
+S6,P2,ridge_F1,case7,reg_RMSE,2.188008333,regression
+S6,P2,ridge_schedule,case1,reg_RMSE,0.9546774555,regression
+S6,P2,ridge_schedule,case2,reg_RMSE,0.9491892035,regression
+S6,P2,ridge_schedule,case3,reg_RMSE,1.26756791,regression
+S6,P2,ridge_schedule,case4,reg_RMSE,0.8997629793,regression
+S6,P2,ridge_schedule,case5,reg_RMSE,0.869815571,regression
+S6,P2,ridge_schedule,case6,reg_RMSE,1.012921313,regression
+S6,P2,ridge_schedule,case7,reg_RMSE,2.288021801,regression
+S6,P2,tft,case1,reg_RMSE,0.5511146012,regression
+S6,P2,tft,case2,reg_RMSE,0.7648415246,regression
+S6,P2,tft,case3,reg_RMSE,0.6112458777,regression
+S6,P2,tft,case4,reg_RMSE,0.5617870005,regression
+S6,P2,tft,case5,reg_RMSE,0.6000655529,regression
+S6,P2,tft,case6,reg_RMSE,0.5941189019,regression
+S6,P2,tft,case7,reg_RMSE,2.390221444,regression
+S1,P2,gbm_F1,g1,reg_MAE,0.1384344945,regression
+S1,P2,gbm_F1,v4,reg_MAE,0.209889225,regression
+S1,P2,gbm_F1,v5,reg_MAE,0.1675083582,regression
+S1,P2,gbm_F1,w10,reg_MAE,0.1257435925,regression
+S1,P2,gbm_F1,w8,reg_MAE,0.1832527515,regression
+S1,P2,gbm_F1,w9,reg_MAE,0.0643517087,regression
+S1,P2,linear_extrapolation,g1,reg_MAE,0.4346361252,regression
+S1,P2,linear_extrapolation,v4,reg_MAE,0.2435645189,regression
+S1,P2,linear_extrapolation,v5,reg_MAE,0.5267922402,regression
+S1,P2,linear_extrapolation,w10,reg_MAE,0.2917805553,regression
+S1,P2,linear_extrapolation,w8,reg_MAE,0.4831838605,regression
+S1,P2,linear_extrapolation,w9,reg_MAE,0.2095229085,regression
+S1,P2,mlp,g1,reg_MAE,0.184467695,regression
+S1,P2,mlp,v4,reg_MAE,0.2337289967,regression
+S1,P2,mlp,v5,reg_MAE,0.2822909861,regression
+S1,P2,mlp,w10,reg_MAE,0.1867817042,regression
+S1,P2,mlp,w8,reg_MAE,0.2651702338,regression
+S1,P2,mlp,w9,reg_MAE,0.1137672542,regression
+S1,P2,persistence,g1,reg_MAE,0.4862279169,regression
+S1,P2,persistence,v4,reg_MAE,0.4372679875,regression
+S1,P2,persistence,v5,reg_MAE,0.598401124,regression
+S1,P2,persistence,w10,reg_MAE,0.4336221918,regression
+S1,P2,persistence,w8,reg_MAE,0.4853415987,regression
+S1,P2,persistence,w9,reg_MAE,0.3782385007,regression
+S1,P2,ridge_F0,g1,reg_MAE,0.290676991,regression
+S1,P2,ridge_F0,v4,reg_MAE,0.4410274019,regression
+S1,P2,ridge_F0,v5,reg_MAE,0.7488347452,regression
+S1,P2,ridge_F0,w10,reg_MAE,0.2149146281,regression
+S1,P2,ridge_F0,w8,reg_MAE,0.3892925154,regression
+S1,P2,ridge_F0,w9,reg_MAE,0.1321446419,regression
+S1,P2,ridge_F1,g1,reg_MAE,0.361494107,regression
+S1,P2,ridge_F1,v4,reg_MAE,0.1364739801,regression
+S1,P2,ridge_F1,v5,reg_MAE,0.4392822521,regression
+S1,P2,ridge_F1,w10,reg_MAE,0.2074894468,regression
+S1,P2,ridge_F1,w8,reg_MAE,0.3349869364,regression
+S1,P2,ridge_F1,w9,reg_MAE,0.1185418396,regression
+S1,P2,ridge_schedule,g1,reg_MAE,0.1898988258,regression
+S1,P2,ridge_schedule,v4,reg_MAE,0.1946006399,regression
+S1,P2,ridge_schedule,v5,reg_MAE,0.265365665,regression
+S1,P2,ridge_schedule,w10,reg_MAE,0.193340474,regression
+S1,P2,ridge_schedule,w8,reg_MAE,0.2501473939,regression
+S1,P2,ridge_schedule,w9,reg_MAE,0.1445268845,regression
+S1,P2,tft,g1,reg_MAE,0.1943579668,regression
+S1,P2,tft,v4,reg_MAE,0.199901354,regression
+S1,P2,tft,v5,reg_MAE,0.2793185623,regression
+S1,P2,tft,w10,reg_MAE,0.1826055455,regression
+S1,P2,tft,w8,reg_MAE,0.2428287564,regression
+S1,P2,tft,w9,reg_MAE,0.160826604,regression
+S6,P2,gbm_F1,case1,reg_MAE,0.3433576014,regression
+S6,P2,gbm_F1,case2,reg_MAE,0.3631739029,regression
+S6,P2,gbm_F1,case3,reg_MAE,0.4395765694,regression
+S6,P2,gbm_F1,case4,reg_MAE,0.2856883777,regression
+S6,P2,gbm_F1,case5,reg_MAE,0.2860983021,regression
+S6,P2,gbm_F1,case6,reg_MAE,0.5037993135,regression
+S6,P2,gbm_F1,case7,reg_MAE,1.194016969,regression
+S6,P2,linear_extrapolation,case1,reg_MAE,0.7093193121,regression
+S6,P2,linear_extrapolation,case2,reg_MAE,0.8355951315,regression
+S6,P2,linear_extrapolation,case3,reg_MAE,0.7689371772,regression
+S6,P2,linear_extrapolation,case4,reg_MAE,0.6622264486,regression
+S6,P2,linear_extrapolation,case5,reg_MAE,0.6491673255,regression
+S6,P2,linear_extrapolation,case6,reg_MAE,0.464320923,regression
+S6,P2,linear_extrapolation,case7,reg_MAE,1.075374959,regression
+S6,P2,mlp,case1,reg_MAE,0.3618356915,regression
+S6,P2,mlp,case2,reg_MAE,0.5107826918,regression
+S6,P2,mlp,case3,reg_MAE,0.4513663293,regression
+S6,P2,mlp,case4,reg_MAE,0.392880201,regression
+S6,P2,mlp,case5,reg_MAE,0.4593619903,regression
+S6,P2,mlp,case6,reg_MAE,0.4487304826,regression
+S6,P2,mlp,case7,reg_MAE,1.631694191,regression
+S6,P2,persistence,case1,reg_MAE,2.344126447,regression
+S6,P2,persistence,case2,reg_MAE,2.64152694,regression
+S6,P2,persistence,case3,reg_MAE,2.215860429,regression
+S6,P2,persistence,case4,reg_MAE,2.275422322,regression
+S6,P2,persistence,case5,reg_MAE,2.223896334,regression
+S6,P2,persistence,case6,reg_MAE,1.754219994,regression
+S6,P2,persistence,case7,reg_MAE,3.700381183,regression
+S6,P2,ridge_F0,case1,reg_MAE,0.4588473301,regression
+S6,P2,ridge_F0,case2,reg_MAE,0.465431586,regression
+S6,P2,ridge_F0,case3,reg_MAE,0.677696436,regression
+S6,P2,ridge_F0,case4,reg_MAE,0.4465156446,regression
+S6,P2,ridge_F0,case5,reg_MAE,0.4773092559,regression
+S6,P2,ridge_F0,case6,reg_MAE,0.5924081288,regression
+S6,P2,ridge_F0,case7,reg_MAE,1.171380569,regression
+S6,P2,ridge_F1,case1,reg_MAE,0.5055303407,regression
+S6,P2,ridge_F1,case2,reg_MAE,1.132098484,regression
+S6,P2,ridge_F1,case3,reg_MAE,0.4511509088,regression
+S6,P2,ridge_F1,case4,reg_MAE,0.4585430814,regression
+S6,P2,ridge_F1,case5,reg_MAE,0.5202552676,regression
+S6,P2,ridge_F1,case6,reg_MAE,0.9554330734,regression
+S6,P2,ridge_F1,case7,reg_MAE,1.220690355,regression
+S6,P2,ridge_schedule,case1,reg_MAE,0.7509563284,regression
+S6,P2,ridge_schedule,case2,reg_MAE,0.5826977899,regression
+S6,P2,ridge_schedule,case3,reg_MAE,1.078224525,regression
+S6,P2,ridge_schedule,case4,reg_MAE,0.5995405278,regression
+S6,P2,ridge_schedule,case5,reg_MAE,0.6574474291,regression
+S6,P2,ridge_schedule,case6,reg_MAE,0.796697159,regression
+S6,P2,ridge_schedule,case7,reg_MAE,1.582111151,regression
+S6,P2,tft,case1,reg_MAE,0.4149937263,regression
+S6,P2,tft,case2,reg_MAE,0.4967560172,regression
+S6,P2,tft,case3,reg_MAE,0.4183970583,regression
+S6,P2,tft,case4,reg_MAE,0.3910578774,regression
+S6,P2,tft,case5,reg_MAE,0.4650105862,regression
+S6,P2,tft,case6,reg_MAE,0.4381550029,regression
+S6,P2,tft,case7,reg_MAE,1.720770974,regression
+S1,P2,gbm_F1,g1,reg_MedAE,0.1041723607,regression
+S1,P2,gbm_F1,v4,reg_MedAE,0.1602524716,regression
+S1,P2,gbm_F1,v5,reg_MedAE,0.0928688073,regression
+S1,P2,gbm_F1,w10,reg_MedAE,0.1023473187,regression
+S1,P2,gbm_F1,w8,reg_MedAE,0.0999791787,regression
+S1,P2,gbm_F1,w9,reg_MedAE,0.0510690185,regression
+S1,P2,linear_extrapolation,g1,reg_MedAE,0.279248157,regression
+S1,P2,linear_extrapolation,v4,reg_MedAE,0.2010696868,regression
+S1,P2,linear_extrapolation,v5,reg_MedAE,0.3008271511,regression
+S1,P2,linear_extrapolation,w10,reg_MedAE,0.1908618687,regression
+S1,P2,linear_extrapolation,w8,reg_MedAE,0.26171095,regression
+S1,P2,linear_extrapolation,w9,reg_MedAE,0.1195900739,regression
+S1,P2,mlp,g1,reg_MedAE,0.1090484922,regression
+S1,P2,mlp,v4,reg_MedAE,0.2113284904,regression
+S1,P2,mlp,v5,reg_MedAE,0.2583897234,regression
+S1,P2,mlp,w10,reg_MedAE,0.1413347235,regression
+S1,P2,mlp,w8,reg_MedAE,0.1676169899,regression
+S1,P2,mlp,w9,reg_MedAE,0.0845652583,regression
+S1,P2,persistence,g1,reg_MedAE,0.468445935,regression
+S1,P2,persistence,v4,reg_MedAE,0.4294139333,regression
+S1,P2,persistence,v5,reg_MedAE,0.5873739495,regression
+S1,P2,persistence,w10,reg_MedAE,0.4603578114,regression
+S1,P2,persistence,w8,reg_MedAE,0.482213568,regression
+S1,P2,persistence,w9,reg_MedAE,0.4077519598,regression
+S1,P2,ridge_F0,g1,reg_MedAE,0.2380597119,regression
+S1,P2,ridge_F0,v4,reg_MedAE,0.4029466285,regression
+S1,P2,ridge_F0,v5,reg_MedAE,0.7891091483,regression
+S1,P2,ridge_F0,w10,reg_MedAE,0.168060306,regression
+S1,P2,ridge_F0,w8,reg_MedAE,0.3861503904,regression
+S1,P2,ridge_F0,w9,reg_MedAE,0.1152760665,regression
+S1,P2,ridge_F1,g1,reg_MedAE,0.3233994746,regression
+S1,P2,ridge_F1,v4,reg_MedAE,0.0716163462,regression
+S1,P2,ridge_F1,v5,reg_MedAE,0.4551696096,regression
+S1,P2,ridge_F1,w10,reg_MedAE,0.1890620006,regression
+S1,P2,ridge_F1,w8,reg_MedAE,0.3075004073,regression
+S1,P2,ridge_F1,w9,reg_MedAE,0.0980717408,regression
+S1,P2,ridge_schedule,g1,reg_MedAE,0.1100827783,regression
+S1,P2,ridge_schedule,v4,reg_MedAE,0.1354825922,regression
+S1,P2,ridge_schedule,v5,reg_MedAE,0.1691158944,regression
+S1,P2,ridge_schedule,w10,reg_MedAE,0.1474468009,regression
+S1,P2,ridge_schedule,w8,reg_MedAE,0.1170009347,regression
+S1,P2,ridge_schedule,w9,reg_MedAE,0.1209373613,regression
+S1,P2,tft,g1,reg_MedAE,0.124823619,regression
+S1,P2,tft,v4,reg_MedAE,0.1501690076,regression
+S1,P2,tft,v5,reg_MedAE,0.1915425771,regression
+S1,P2,tft,w10,reg_MedAE,0.13381388,regression
+S1,P2,tft,w8,reg_MedAE,0.154440437,regression
+S1,P2,tft,w9,reg_MedAE,0.1421183924,regression
+S6,P2,gbm_F1,case1,reg_MedAE,0.2456121722,regression
+S6,P2,gbm_F1,case2,reg_MedAE,0.2194518393,regression
+S6,P2,gbm_F1,case3,reg_MedAE,0.3054635045,regression
+S6,P2,gbm_F1,case4,reg_MedAE,0.1867023133,regression
+S6,P2,gbm_F1,case5,reg_MedAE,0.190367642,regression
+S6,P2,gbm_F1,case6,reg_MedAE,0.3930666632,regression
+S6,P2,gbm_F1,case7,reg_MedAE,0.7050963832,regression
+S6,P2,linear_extrapolation,case1,reg_MedAE,0.249507111,regression
+S6,P2,linear_extrapolation,case2,reg_MedAE,0.3049974674,regression
+S6,P2,linear_extrapolation,case3,reg_MedAE,0.3507949724,regression
+S6,P2,linear_extrapolation,case4,reg_MedAE,0.2449363243,regression
+S6,P2,linear_extrapolation,case5,reg_MedAE,0.2730899892,regression
+S6,P2,linear_extrapolation,case6,reg_MedAE,0.2222749241,regression
+S6,P2,linear_extrapolation,case7,reg_MedAE,0.6868317429,regression
+S6,P2,mlp,case1,reg_MedAE,0.2777000227,regression
+S6,P2,mlp,case2,reg_MedAE,0.3628376774,regression
+S6,P2,mlp,case3,reg_MedAE,0.3029201858,regression
+S6,P2,mlp,case4,reg_MedAE,0.2770766913,regression
+S6,P2,mlp,case5,reg_MedAE,0.3815123157,regression
+S6,P2,mlp,case6,reg_MedAE,0.3437432973,regression
+S6,P2,mlp,case7,reg_MedAE,1.161962037,regression
+S6,P2,persistence,case1,reg_MedAE,2.12554792,regression
+S6,P2,persistence,case2,reg_MedAE,2.465002657,regression
+S6,P2,persistence,case3,reg_MedAE,1.954442201,regression
+S6,P2,persistence,case4,reg_MedAE,2.051026906,regression
+S6,P2,persistence,case5,reg_MedAE,2.134246573,regression
+S6,P2,persistence,case6,reg_MedAE,1.568504322,regression
+S6,P2,persistence,case7,reg_MedAE,3.279618509,regression
+S6,P2,ridge_F0,case1,reg_MedAE,0.3834449447,regression
+S6,P2,ridge_F0,case2,reg_MedAE,0.2577213868,regression
+S6,P2,ridge_F0,case3,reg_MedAE,0.5937842533,regression
+S6,P2,ridge_F0,case4,reg_MedAE,0.3706774957,regression
+S6,P2,ridge_F0,case5,reg_MedAE,0.4067387854,regression
+S6,P2,ridge_F0,case6,reg_MedAE,0.4661900749,regression
+S6,P2,ridge_F0,case7,reg_MedAE,0.5956180874,regression
+S6,P2,ridge_F1,case1,reg_MedAE,0.466652138,regression
+S6,P2,ridge_F1,case2,reg_MedAE,0.4849556893,regression
+S6,P2,ridge_F1,case3,reg_MedAE,0.3373180669,regression
+S6,P2,ridge_F1,case4,reg_MedAE,0.3942156599,regression
+S6,P2,ridge_F1,case5,reg_MedAE,0.4650465574,regression
+S6,P2,ridge_F1,case6,reg_MedAE,0.8686830044,regression
+S6,P2,ridge_F1,case7,reg_MedAE,0.8317175468,regression
+S6,P2,ridge_schedule,case1,reg_MedAE,0.6566820483,regression
+S6,P2,ridge_schedule,case2,reg_MedAE,0.3306093454,regression
+S6,P2,ridge_schedule,case3,reg_MedAE,1.062900585,regression
+S6,P2,ridge_schedule,case4,reg_MedAE,0.3874715639,regression
+S6,P2,ridge_schedule,case5,reg_MedAE,0.5431789537,regression
+S6,P2,ridge_schedule,case6,reg_MedAE,0.6502912593,regression
+S6,P2,ridge_schedule,case7,reg_MedAE,1.06528302,regression
+S6,P2,tft,case1,reg_MedAE,0.3015998513,regression
+S6,P2,tft,case2,reg_MedAE,0.2790466843,regression
+S6,P2,tft,case3,reg_MedAE,0.2641855446,regression
+S6,P2,tft,case4,reg_MedAE,0.2704267227,regression
+S6,P2,tft,case5,reg_MedAE,0.3645000201,regression
+S6,P2,tft,case6,reg_MedAE,0.3061028086,regression
+S6,P2,tft,case7,reg_MedAE,1.182301164,regression
+S1,P2,gbm_F1,g1,reg_Bias,-0.1360958673,regression
+S1,P2,gbm_F1,v4,reg_Bias,-0.0786716486,regression
+S1,P2,gbm_F1,v5,reg_Bias,0.0274497325,regression
+S1,P2,gbm_F1,w10,reg_Bias,0.0841930998,regression
+S1,P2,gbm_F1,w8,reg_Bias,0.0096062187,regression
+S1,P2,gbm_F1,w9,reg_Bias,-0.034087313,regression
+S1,P2,linear_extrapolation,g1,reg_Bias,-0.0174668625,regression
+S1,P2,linear_extrapolation,v4,reg_Bias,0.0017442102,regression
+S1,P2,linear_extrapolation,v5,reg_Bias,-0.0152793422,regression
+S1,P2,linear_extrapolation,w10,reg_Bias,-0.0203802229,regression
+S1,P2,linear_extrapolation,w8,reg_Bias,-0.0145756911,regression
+S1,P2,linear_extrapolation,w9,reg_Bias,-0.0156963648,regression
+S1,P2,mlp,g1,reg_Bias,-0.0989229702,regression
+S1,P2,mlp,v4,reg_Bias,-0.1528460596,regression
+S1,P2,mlp,v5,reg_Bias,0.1718794704,regression
+S1,P2,mlp,w10,reg_Bias,0.0787850522,regression
+S1,P2,mlp,w8,reg_Bias,0.097268776,regression
+S1,P2,mlp,w9,reg_Bias,-0.0415197798,regression
+S1,P2,persistence,g1,reg_Bias,0.4345956339,regression
+S1,P2,persistence,v4,reg_Bias,0.417877212,regression
+S1,P2,persistence,v5,reg_Bias,0.5468599964,regression
+S1,P2,persistence,w10,reg_Bias,0.4100666028,regression
+S1,P2,persistence,w8,reg_Bias,0.3986931306,regression
+S1,P2,persistence,w9,reg_Bias,0.3744605078,regression
+S1,P2,ridge_F0,g1,reg_Bias,-0.290676991,regression
+S1,P2,ridge_F0,v4,reg_Bias,0.4350952767,regression
+S1,P2,ridge_F0,v5,reg_Bias,0.7431255736,regression
+S1,P2,ridge_F0,w10,reg_Bias,0.1786347473,regression
+S1,P2,ridge_F0,w8,reg_Bias,0.2826361678,regression
+S1,P2,ridge_F0,w9,reg_Bias,-0.1178904191,regression
+S1,P2,ridge_F1,g1,reg_Bias,-0.361494107,regression
+S1,P2,ridge_F1,v4,reg_Bias,0.0675806163,regression
+S1,P2,ridge_F1,v5,reg_Bias,0.4248814323,regression
+S1,P2,ridge_F1,w10,reg_Bias,0.1608800964,regression
+S1,P2,ridge_F1,w8,reg_Bias,0.1885565715,regression
+S1,P2,ridge_F1,w9,reg_Bias,-0.0874559487,regression
+S1,P2,ridge_schedule,g1,reg_Bias,-0.0505229831,regression
+S1,P2,ridge_schedule,v4,reg_Bias,-0.0200333942,regression
+S1,P2,ridge_schedule,v5,reg_Bias,0.0890814485,regression
+S1,P2,ridge_schedule,w10,reg_Bias,-0.0282643208,regression
+S1,P2,ridge_schedule,w8,reg_Bias,-0.092371278,regression
+S1,P2,ridge_schedule,w9,reg_Bias,-0.1257455819,regression
+S1,P2,tft,g1,reg_Bias,-0.0145988741,regression
+S1,P2,tft,v4,reg_Bias,-0.028726796,regression
+S1,P2,tft,v5,reg_Bias,0.1172579137,regression
+S1,P2,tft,w10,reg_Bias,0.0509700726,regression
+S1,P2,tft,w8,reg_Bias,0.0395393556,regression
+S1,P2,tft,w9,reg_Bias,4.40635e-05,regression
+S6,P2,gbm_F1,case1,reg_Bias,-0.0691175558,regression
+S6,P2,gbm_F1,case2,reg_Bias,0.157406218,regression
+S6,P2,gbm_F1,case3,reg_Bias,-0.2105249174,regression
+S6,P2,gbm_F1,case4,reg_Bias,0.0447354361,regression
+S6,P2,gbm_F1,case5,reg_Bias,-0.0947922638,regression
+S6,P2,gbm_F1,case6,reg_Bias,-0.2322325956,regression
+S6,P2,gbm_F1,case7,reg_Bias,1.084825632,regression
+S6,P2,linear_extrapolation,case1,reg_Bias,0.1078992041,regression
+S6,P2,linear_extrapolation,case2,reg_Bias,0.1462517894,regression
+S6,P2,linear_extrapolation,case3,reg_Bias,-0.0225457764,regression
+S6,P2,linear_extrapolation,case4,reg_Bias,0.0498557419,regression
+S6,P2,linear_extrapolation,case5,reg_Bias,0.0534114787,regression
+S6,P2,linear_extrapolation,case6,reg_Bias,0.0200003692,regression
+S6,P2,linear_extrapolation,case7,reg_Bias,-0.007334539,regression
+S6,P2,mlp,case1,reg_Bias,-0.2307565568,regression
+S6,P2,mlp,case2,reg_Bias,0.4864912905,regression
+S6,P2,mlp,case3,reg_Bias,0.0306553714,regression
+S6,P2,mlp,case4,reg_Bias,0.2953615384,regression
+S6,P2,mlp,case5,reg_Bias,-0.3734202416,regression
+S6,P2,mlp,case6,reg_Bias,-0.0995968034,regression
+S6,P2,mlp,case7,reg_Bias,1.434074652,regression
+S6,P2,persistence,case1,reg_Bias,2.344126447,regression
+S6,P2,persistence,case2,reg_Bias,2.64152694,regression
+S6,P2,persistence,case3,reg_Bias,2.215860429,regression
+S6,P2,persistence,case4,reg_Bias,2.275422322,regression
+S6,P2,persistence,case5,reg_Bias,2.223896334,regression
+S6,P2,persistence,case6,reg_Bias,1.754219994,regression
+S6,P2,persistence,case7,reg_Bias,3.700381183,regression
+S6,P2,ridge_F0,case1,reg_Bias,-0.2535463714,regression
+S6,P2,ridge_F0,case2,reg_Bias,0.2218854946,regression
+S6,P2,ridge_F0,case3,reg_Bias,-0.4872495822,regression
+S6,P2,ridge_F0,case4,reg_Bias,0.2345565598,regression
+S6,P2,ridge_F0,case5,reg_Bias,-0.2500929205,regression
+S6,P2,ridge_F0,case6,reg_Bias,-0.2540004606,regression
+S6,P2,ridge_F0,case7,reg_Bias,0.9830262835,regression
+S6,P2,ridge_F1,case1,reg_Bias,-0.3824069098,regression
+S6,P2,ridge_F1,case2,reg_Bias,1.015677213,regression
+S6,P2,ridge_F1,case3,reg_Bias,0.1967115017,regression
+S6,P2,ridge_F1,case4,reg_Bias,0.3193691641,regression
+S6,P2,ridge_F1,case5,reg_Bias,-0.3657156485,regression
+S6,P2,ridge_F1,case6,reg_Bias,-0.865490297,regression
+S6,P2,ridge_F1,case7,reg_Bias,0.1722691588,regression
+S6,P2,ridge_schedule,case1,reg_Bias,-0.3486111459,regression
+S6,P2,ridge_schedule,case2,reg_Bias,0.2950459568,regression
+S6,P2,ridge_schedule,case3,reg_Bias,-0.8726323105,regression
+S6,P2,ridge_schedule,case4,reg_Bias,0.2967538853,regression
+S6,P2,ridge_schedule,case5,reg_Bias,-0.3439919474,regression
+S6,P2,ridge_schedule,case6,reg_Bias,-0.5229281252,regression
+S6,P2,ridge_schedule,case7,reg_Bias,1.47557152,regression
+S6,P2,tft,case1,reg_Bias,-0.1483454194,regression
+S6,P2,tft,case2,reg_Bias,0.4109143184,regression
+S6,P2,tft,case3,reg_Bias,0.0612224784,regression
+S6,P2,tft,case4,reg_Bias,0.2803193493,regression
+S6,P2,tft,case5,reg_Bias,-0.3649853287,regression
+S6,P2,tft,case6,reg_Bias,-0.1699530154,regression
+S6,P2,tft,case7,reg_Bias,1.579269386,regression
+S1,P2,gbm_F1,g1,reg_MAPE,0.1418465488,regression
+S1,P2,gbm_F1,v4,reg_MAPE,0.2144978095,regression
+S1,P2,gbm_F1,v5,reg_MAPE,0.1724362776,regression
+S1,P2,gbm_F1,w10,reg_MAPE,0.1291205095,regression
+S1,P2,gbm_F1,w8,reg_MAPE,0.187209697,regression
+S1,P2,gbm_F1,w9,reg_MAPE,0.0653991434,regression
+S1,P2,linear_extrapolation,g1,reg_MAPE,0.4458676506,regression
+S1,P2,linear_extrapolation,v4,reg_MAPE,0.2490668669,regression
+S1,P2,linear_extrapolation,v5,reg_MAPE,0.5450248891,regression
+S1,P2,linear_extrapolation,w10,reg_MAPE,0.2986754968,regression
+S1,P2,linear_extrapolation,w8,reg_MAPE,0.4938493751,regression
+S1,P2,linear_extrapolation,w9,reg_MAPE,0.2127782205,regression
+S1,P2,mlp,g1,reg_MAPE,0.1892030909,regression
+S1,P2,mlp,v4,reg_MAPE,0.2388559933,regression
+S1,P2,mlp,v5,reg_MAPE,0.2914152272,regression
+S1,P2,mlp,w10,reg_MAPE,0.1915931211,regression
+S1,P2,mlp,w8,reg_MAPE,0.2710676755,regression
+S1,P2,mlp,w9,reg_MAPE,0.1156116923,regression
+S1,P2,persistence,g1,reg_MAPE,0.4978331132,regression
+S1,P2,persistence,v4,reg_MAPE,0.4470338238,regression
+S1,P2,persistence,v5,reg_MAPE,0.6175449338,regression
+S1,P2,persistence,w10,reg_MAPE,0.4431967375,regression
+S1,P2,persistence,w8,reg_MAPE,0.4954449634,regression
+S1,P2,persistence,w9,reg_MAPE,0.3842243448,regression
+S1,P2,ridge_F0,g1,reg_MAPE,0.2979489823,regression
+S1,P2,ridge_F0,v4,reg_MAPE,0.4511297787,regression
+S1,P2,ridge_F0,v5,reg_MAPE,0.7742296652,regression
+S1,P2,ridge_F0,w10,reg_MAPE,0.2204881547,regression
+S1,P2,ridge_F0,w8,reg_MAPE,0.3969147139,regression
+S1,P2,ridge_F0,w9,reg_MAPE,0.1341236625,regression
+S1,P2,ridge_F1,g1,reg_MAPE,0.3700468732,regression
+S1,P2,ridge_F1,v4,reg_MAPE,0.1402065905,regression
+S1,P2,ridge_F1,v5,reg_MAPE,0.4545773249,regression
+S1,P2,ridge_F1,w10,reg_MAPE,0.2123072343,regression
+S1,P2,ridge_F1,w8,reg_MAPE,0.3412353345,regression
+S1,P2,ridge_F1,w9,reg_MAPE,0.1209357122,regression
+S1,P2,ridge_schedule,g1,reg_MAPE,0.1951120552,regression
+S1,P2,ridge_schedule,v4,reg_MAPE,0.199976729,regression
+S1,P2,ridge_schedule,v5,reg_MAPE,0.2739015343,regression
+S1,P2,ridge_schedule,w10,reg_MAPE,0.198644054,regression
+S1,P2,ridge_schedule,w8,reg_MAPE,0.2557721978,regression
+S1,P2,ridge_schedule,w9,reg_MAPE,0.1470017925,regression
+S1,P2,tft,g1,reg_MAPE,0.1993558295,regression
+S1,P2,tft,v4,reg_MAPE,0.2048619668,regression
+S1,P2,tft,v5,reg_MAPE,0.2882021497,regression
+S1,P2,tft,w10,reg_MAPE,0.1872360049,regression
+S1,P2,tft,w8,reg_MAPE,0.2481033779,regression
+S1,P2,tft,w9,reg_MAPE,0.1634100761,regression
+S6,P2,gbm_F1,case1,reg_MAPE,0.4497425551,regression
+S6,P2,gbm_F1,case2,reg_MAPE,0.4849810165,regression
+S6,P2,gbm_F1,case3,reg_MAPE,0.5796264371,regression
+S6,P2,gbm_F1,case4,reg_MAPE,0.4112828805,regression
+S6,P2,gbm_F1,case5,reg_MAPE,0.3936585925,regression
+S6,P2,gbm_F1,case6,reg_MAPE,0.7317715139,regression
+S6,P2,gbm_F1,case7,reg_MAPE,1.916231327,regression
+S6,P2,linear_extrapolation,case1,reg_MAPE,0.839429399,regression
+S6,P2,linear_extrapolation,case2,reg_MAPE,1.028390593,regression
+S6,P2,linear_extrapolation,case3,reg_MAPE,0.9462161659,regression
+S6,P2,linear_extrapolation,case4,reg_MAPE,0.8538906776,regression
+S6,P2,linear_extrapolation,case5,reg_MAPE,0.8219792438,regression
+S6,P2,linear_extrapolation,case6,reg_MAPE,0.6619649028,regression
+S6,P2,linear_extrapolation,case7,reg_MAPE,1.660045437,regression
+S6,P2,mlp,case1,reg_MAPE,0.4899505409,regression
+S6,P2,mlp,case2,reg_MAPE,0.6903934534,regression
+S6,P2,mlp,case3,reg_MAPE,0.5970406071,regression
+S6,P2,mlp,case4,reg_MAPE,0.5678303764,regression
+S6,P2,mlp,case5,reg_MAPE,0.6446506191,regression
+S6,P2,mlp,case6,reg_MAPE,0.6477815356,regression
+S6,P2,mlp,case7,reg_MAPE,2.757208623,regression
+S6,P2,persistence,case1,reg_MAPE,3.068099732,regression
+S6,P2,persistence,case2,reg_MAPE,3.616205413,regression
+S6,P2,persistence,case3,reg_MAPE,3.006489014,regression
+S6,P2,persistence,case4,reg_MAPE,3.281065637,regression
+S6,P2,persistence,case5,reg_MAPE,3.09714503,regression
+S6,P2,persistence,case6,reg_MAPE,2.69427303,regression
+S6,P2,persistence,case7,reg_MAPE,6.012392276,regression
+S6,P2,ridge_F0,case1,reg_MAPE,0.5957149047,regression
+S6,P2,ridge_F0,case2,reg_MAPE,0.6083599954,regression
+S6,P2,ridge_F0,case3,reg_MAPE,0.9432732156,regression
+S6,P2,ridge_F0,case4,reg_MAPE,0.6539192098,regression
+S6,P2,ridge_F0,case5,reg_MAPE,0.6762342041,regression
+S6,P2,ridge_F0,case6,reg_MAPE,0.9560447681,regression
+S6,P2,ridge_F0,case7,reg_MAPE,1.819338023,regression
+S6,P2,ridge_F1,case1,reg_MAPE,0.6769510219,regression
+S6,P2,ridge_F1,case2,reg_MAPE,1.665043758,regression
+S6,P2,ridge_F1,case3,reg_MAPE,0.6138870589,regression
+S6,P2,ridge_F1,case4,reg_MAPE,0.6797233706,regression
+S6,P2,ridge_F1,case5,reg_MAPE,0.7530526043,regression
+S6,P2,ridge_F1,case6,reg_MAPE,1.465669217,regression
+S6,P2,ridge_F1,case7,reg_MAPE,2.058462699,regression
+S6,P2,ridge_schedule,case1,reg_MAPE,1.017194408,regression
+S6,P2,ridge_schedule,case2,reg_MAPE,0.7755116918,regression
+S6,P2,ridge_schedule,case3,reg_MAPE,1.618709381,regression
+S6,P2,ridge_schedule,case4,reg_MAPE,0.851177789,regression
+S6,P2,ridge_schedule,case5,reg_MAPE,1.010661843,regression
+S6,P2,ridge_schedule,case6,reg_MAPE,1.337597125,regression
+S6,P2,ridge_schedule,case7,reg_MAPE,2.430820395,regression
+S6,P2,tft,case1,reg_MAPE,0.5565378973,regression
+S6,P2,tft,case2,reg_MAPE,0.6532790237,regression
+S6,P2,tft,case3,reg_MAPE,0.5475232489,regression
+S6,P2,tft,case4,reg_MAPE,0.5559731251,regression
+S6,P2,tft,case5,reg_MAPE,0.6431199609,regression
+S6,P2,tft,case6,reg_MAPE,0.6168368262,regression
+S6,P2,tft,case7,reg_MAPE,2.922911369,regression
+S1,P2,gbm_F1,g1,reg_R2,0.949200576,regression
+S1,P2,gbm_F1,v4,reg_R2,0.9244965564,regression
+S1,P2,gbm_F1,v5,reg_R2,0.9494905284,regression
+S1,P2,gbm_F1,w10,reg_R2,0.964284991,regression
+S1,P2,gbm_F1,w8,reg_R2,0.890837788,regression
+S1,P2,gbm_F1,w9,reg_R2,0.9861999739,regression
+S1,P2,linear_extrapolation,g1,reg_R2,0.5763231933,regression
+S1,P2,linear_extrapolation,v4,reg_R2,0.8947594624,regression
+S1,P2,linear_extrapolation,v5,reg_R2,0.5914730264,regression
+S1,P2,linear_extrapolation,w10,reg_R2,0.8233709862,regression
+S1,P2,linear_extrapolation,w8,reg_R2,0.3894001977,regression
+S1,P2,linear_extrapolation,w9,reg_R2,0.8648207093,regression
+S1,P2,mlp,g1,reg_R2,0.9023116014,regression
+S1,P2,mlp,v4,reg_R2,0.9189031678,regression
+S1,P2,mlp,v5,reg_R2,0.9079401975,regression
+S1,P2,mlp,w10,reg_R2,0.934772655,regression
+S1,P2,mlp,w8,reg_R2,0.8140689811,regression
+S1,P2,mlp,w9,reg_R2,0.9624709782,regression
+S1,P2,persistence,g1,reg_R2,0.6514960859,regression
+S1,P2,persistence,v4,reg_R2,0.7400607199,regression
+S1,P2,persistence,v5,reg_R2,0.6326109368,regression
+S1,P2,persistence,w10,reg_R2,0.7414136023,regression
+S1,P2,persistence,w8,reg_R2,0.5881526866,regression
+S1,P2,persistence,w9,reg_R2,0.6809817009,regression
+S1,P2,ridge_F0,g1,reg_R2,0.8457766767,regression
+S1,P2,ridge_F0,v4,reg_R2,0.7594072456,regression
+S1,P2,ridge_F0,v5,reg_R2,0.5284816425,regression
+S1,P2,ridge_F0,w10,reg_R2,0.9141460098,regression
+S1,P2,ridge_F0,w8,reg_R2,0.7802206089,regression
+S1,P2,ridge_F0,w9,reg_R2,0.9583097555,regression
+S1,P2,ridge_F1,g1,reg_R2,0.811073518,regression
+S1,P2,ridge_F1,v4,reg_R2,0.9468892961,regression
+S1,P2,ridge_F1,v5,reg_R2,0.8234303667,regression
+S1,P2,ridge_F1,w10,reg_R2,0.9296069059,regression
+S1,P2,ridge_F1,w8,reg_R2,0.8198885026,regression
+S1,P2,ridge_F1,w9,reg_R2,0.956405701,regression
+S1,P2,ridge_schedule,g1,reg_R2,0.8975157779,regression
+S1,P2,ridge_schedule,v4,reg_R2,0.9229835134,regression
+S1,P2,ridge_schedule,v5,reg_R2,0.8926287136,regression
+S1,P2,ridge_schedule,w10,reg_R2,0.9225726047,regression
+S1,P2,ridge_schedule,w8,reg_R2,0.7952006025,regression
+S1,P2,ridge_schedule,w9,reg_R2,0.9502644423,regression
+S1,P2,tft,g1,reg_R2,0.9058441679,regression
+S1,P2,tft,v4,reg_R2,0.9270064997,regression
+S1,P2,tft,v5,reg_R2,0.8872235387,regression
+S1,P2,tft,w10,reg_R2,0.9382997081,regression
+S1,P2,tft,w8,reg_R2,0.833232632,regression
+S1,P2,tft,w9,reg_R2,0.9320040111,regression
+S6,P2,gbm_F1,case1,reg_R2,0.997997082,regression
+S6,P2,gbm_F1,case2,reg_R2,0.9975263317,regression
+S6,P2,gbm_F1,case3,reg_R2,0.997655873,regression
+S6,P2,gbm_F1,case4,reg_R2,0.9990920787,regression
+S6,P2,gbm_F1,case5,reg_R2,0.9990893263,regression
+S6,P2,gbm_F1,case6,reg_R2,0.9984701319,regression
+S6,P2,gbm_F1,case7,reg_R2,0.9910823815,regression
+S6,P2,linear_extrapolation,case1,reg_R2,0.9776113898,regression
+S6,P2,linear_extrapolation,case2,reg_R2,0.9798817898,regression
+S6,P2,linear_extrapolation,case3,reg_R2,0.9870656416,regression
+S6,P2,linear_extrapolation,case4,reg_R2,0.9917115781,regression
+S6,P2,linear_extrapolation,case5,reg_R2,0.9908475098,regression
+S6,P2,linear_extrapolation,case6,reg_R2,0.9974437193,regression
+S6,P2,linear_extrapolation,case7,reg_R2,0.9934426023,regression
+S6,P2,mlp,case1,reg_R2,0.9978163488,regression
+S6,P2,mlp,case2,reg_R2,0.9962905171,regression
+S6,P2,mlp,case3,reg_R2,0.9972053951,regression
+S6,P2,mlp,case4,reg_R2,0.9985229139,regression
+S6,P2,mlp,case5,reg_R2,0.9980779188,regression
+S6,P2,mlp,case6,reg_R2,0.9987687595,regression
+S6,P2,mlp,case7,reg_R2,0.9869026549,regression
+S6,P2,persistence,case1,reg_R2,0.9311839413,regression
+S6,P2,persistence,case2,reg_R2,0.9344001467,regression
+S6,P2,persistence,case3,reg_R2,0.9578201281,regression
+S6,P2,persistence,case4,reg_R2,0.967332596,regression
+S6,P2,persistence,case5,reg_R2,0.9627228105,regression
+S6,P2,persistence,case6,reg_R2,0.9856883837,regression
+S6,P2,persistence,case7,reg_R2,0.9506626151,regression
+S6,P2,ridge_F0,case1,reg_R2,0.9966049607,regression
+S6,P2,ridge_F0,case2,reg_R2,0.9961003086,regression
+S6,P2,ridge_F0,case3,reg_R2,0.9956474632,regression
+S6,P2,ridge_F0,case4,reg_R2,0.998193104,regression
+S6,P2,ridge_F0,case5,reg_R2,0.9978148904,regression
+S6,P2,ridge_F0,case6,reg_R2,0.9977209574,regression
+S6,P2,ridge_F0,case7,reg_R2,0.9911111611,regression
+S6,P2,ridge_F1,case1,reg_R2,0.9963354429,regression
+S6,P2,ridge_F1,case2,reg_R2,0.9654140584,regression
+S6,P2,ridge_F1,case3,reg_R2,0.9975839735,regression
+S6,P2,ridge_F1,case4,reg_R2,0.9983231748,regression
+S6,P2,ridge_F1,case5,reg_R2,0.9977036783,regression
+S6,P2,ridge_F1,case6,reg_R2,0.9954654989,regression
+S6,P2,ridge_F1,case7,reg_R2,0.9873821883,regression
+S6,P2,ridge_schedule,case1,reg_R2,0.991353654,regression
+S6,P2,ridge_schedule,case2,reg_R2,0.993490909,regression
+S6,P2,ridge_schedule,case3,reg_R2,0.9894929005,regression
+S6,P2,ridge_schedule,case4,reg_R2,0.9960787239,regression
+S6,P2,ridge_schedule,case5,reg_R2,0.9955774221,regression
+S6,P2,ridge_schedule,case6,reg_R2,0.9964200343,regression
+S6,P2,ridge_schedule,case7,reg_R2,0.986202309,regression
+S6,P2,tft,case1,reg_R2,0.9970265062,regression
+S6,P2,tft,case2,reg_R2,0.995730579,regression
+S6,P2,tft,case3,reg_R2,0.9975525977,regression
+S6,P2,tft,case4,reg_R2,0.9984575417,regression
+S6,P2,tft,case5,reg_R2,0.9978586707,regression
+S6,P2,tft,case6,reg_R2,0.9987645132,regression
+S6,P2,tft,case7,reg_R2,0.9848799072,regression
+S1,P2,gbm_F1,g1,reg_R2_change,0.6261008207,regression
+S1,P2,gbm_F1,v4,reg_R2_change,0.088057042,regression
+S1,P2,gbm_F1,v5,reg_R2_change,0.6257024559,regression
+S1,P2,gbm_F1,w10,reg_R2_change,0.584307116,regression
+S1,P2,gbm_F1,w8,reg_R2_change,0.4985652705,regression
+S1,P2,gbm_F1,w9,reg_R2_change,0.8360891846,regression
+S1,P2,linear_extrapolation,g1,reg_R2_change,-2.118389891,regression
+S1,P2,linear_extrapolation,v4,reg_R2_change,-0.2711124497,regression
+S1,P2,linear_extrapolation,v5,reg_R2_change,-2.027365724,regression
+S1,P2,linear_extrapolation,w10,reg_R2_change,-1.055814242,regression
+S1,P2,linear_extrapolation,w8,reg_R2_change,-1.804779612,regression
+S1,P2,linear_extrapolation,w9,reg_R2_change,-0.6056018729,regression
+S1,P2,mlp,g1,reg_R2_change,0.2809837361,regression
+S1,P2,mlp,v4,reg_R2_change,0.0204991785,regression
+S1,P2,mlp,v5,reg_R2_change,0.3177961097,regression
+S1,P2,mlp,w10,reg_R2_change,0.2408081667,regression
+S1,P2,mlp,w8,reg_R2_change,0.1459290864,regression
+S1,P2,mlp,w9,reg_R2_change,0.5542463099,regression
+S1,P2,persistence,g1,reg_R2_change,-1.565094585,regression
+S1,P2,persistence,v4,reg_R2_change,-2.139589198,regression
+S1,P2,persistence,v5,reg_R2_change,-1.722515597,regression
+S1,P2,persistence,w10,reg_R2_change,-2.009729758,regression
+S1,P2,persistence,w8,reg_R2_change,-0.8918134981,regression
+S1,P2,persistence,w9,reg_R2_change,-2.789163087,regression
+S1,P2,ridge_F0,g1,reg_R2_change,-0.1351304693,regression
+S1,P2,ridge_F0,v4,reg_R2_change,-1.905918691,regression
+S1,P2,ridge_F0,v5,reg_R2_change,-2.494159764,regression
+S1,P2,ridge_F0,w10,reg_R2_change,0.0007312398,regression
+S1,P2,ridge_F0,w8,reg_R2_change,-0.009552825,regression
+S1,P2,ridge_F0,w9,reg_R2_change,0.5048210835,regression
+S1,P2,ridge_F1,g1,reg_R2_change,-0.3905562505,regression
+S1,P2,ridge_F1,v4,reg_R2_change,0.3585202194,regression
+S1,P2,ridge_F1,v5,reg_R2_change,-0.3084591475,regression
+S1,P2,ridge_F1,w10,reg_R2_change,0.18068316,regression
+S1,P2,ridge_F1,w8,reg_R2_change,0.1726609575,regression
+S1,P2,ridge_F1,w9,reg_R2_change,0.4822055377,regression
+S1,P2,ridge_schedule,g1,reg_R2_change,0.2456850197,regression
+S1,P2,ridge_schedule,v4,reg_R2_change,0.0697822612,regression
+S1,P2,ridge_schedule,v5,reg_R2_change,0.2043312358,regression
+S1,P2,ridge_schedule,w10,reg_R2_change,0.0988097684,regression
+S1,P2,ridge_schedule,w8,reg_R2_change,0.0592575163,regression
+S1,P2,ridge_schedule,w9,reg_R2_change,0.4092622905,regression
+S1,P2,tft,g1,reg_R2_change,0.3069844976,regression
+S1,P2,tft,v4,reg_R2_change,0.1183725486,regression
+S1,P2,tft,v5,reg_R2_change,0.1642764969,regression
+S1,P2,tft,w10,reg_R2_change,0.2818601195,regression
+S1,P2,tft,w8,reg_R2_change,0.2339569846,regression
+S1,P2,tft,w9,reg_R2_change,0.1923726884,regression
+S6,P2,gbm_F1,case1,reg_R2_change,0.8799700906,regression
+S6,P2,gbm_F1,case2,reg_R2_change,0.8371398024,regression
+S6,P2,gbm_F1,case3,reg_R2_change,0.7672396758,regression
+S6,P2,gbm_F1,case4,reg_R2_change,0.8803677727,regression
+S6,P2,gbm_F1,case5,reg_R2_change,0.8911594958,regression
+S6,P2,gbm_F1,case6,reg_R2_change,0.5719816001,regression
+S6,P2,gbm_F1,case7,reg_R2_change,0.326872498,regression
+S6,P2,linear_extrapolation,case1,reg_R2_change,-0.3416939057,regression
+S6,P2,linear_extrapolation,case2,reg_R2_change,-0.3245331646,regression
+S6,P2,linear_extrapolation,case3,reg_R2_change,-0.2843183901,regression
+S6,P2,linear_extrapolation,case4,reg_R2_change,-0.0921236779,regression
+S6,P2,linear_extrapolation,case5,reg_R2_change,-0.0938732616,regression
+S6,P2,linear_extrapolation,case6,reg_R2_change,0.2848173109,regression
+S6,P2,linear_extrapolation,case7,reg_R2_change,0.5050287524,regression
+S6,P2,mlp,case1,reg_R2_change,0.8691391971,regression
+S6,P2,mlp,case2,reg_R2_change,0.7557768293,regression
+S6,P2,mlp,case3,reg_R2_change,0.7225094279,regression
+S6,P2,mlp,case4,reg_R2_change,0.8053717872,regression
+S6,P2,mlp,case5,reg_R2_change,0.770279655,regression
+S6,P2,mlp,case6,reg_R2_change,0.6555300491,regression
+S6,P2,mlp,case7,reg_R2_change,0.0113747027,regression
+S6,P2,persistence,case1,reg_R2_change,-3.123975801,regression
+S6,P2,persistence,case2,reg_R2_change,-3.318931967,regression
+S6,P2,persistence,case3,reg_R2_change,-3.188254536,regression
+S6,P2,persistence,case4,reg_R2_change,-3.304419588,regression
+S6,P2,persistence,case5,reg_R2_change,-3.45523785,regression
+S6,P2,persistence,case6,reg_R2_change,-3.004028301,regression
+S6,P2,persistence,case7,reg_R2_change,-2.724127783,regression
+S6,P2,ridge_F0,case1,reg_R2_change,0.7965437081,regression
+S6,P2,ridge_F0,case2,reg_R2_change,0.7432539734,regression
+S6,P2,ridge_F0,case3,reg_R2_change,0.5678144294,regression
+S6,P2,ridge_F0,case4,reg_R2_change,0.7619143947,regression
+S6,P2,ridge_F0,case5,reg_R2_change,0.7388434337,regression
+S6,P2,ridge_F0,case6,reg_R2_change,0.3623815127,regression
+S6,P2,ridge_F0,case7,reg_R2_change,0.3290448599,regression
+S6,P2,ridge_F1,case1,reg_R2_change,0.7803921765,regression
+S6,P2,ridge_F1,case2,reg_R2_change,-1.277052788,regression
+S6,P2,ridge_F1,case3,reg_R2_change,0.7601004098,regression
+S6,P2,ridge_F1,case4,reg_R2_change,0.7790531679,regression
+S6,P2,ridge_F1,case5,reg_R2_change,0.7255517481,regression
+S6,P2,ridge_F1,case6,reg_R2_change,-0.2686387359,regression
+S6,P2,ridge_F1,case7,reg_R2_change,0.0475712617,regression
+S6,P2,ridge_schedule,case1,reg_R2_change,0.4818459163,regression
+S6,P2,ridge_schedule,case2,reg_R2_change,0.571457557,regression
+S6,P2,ridge_schedule,case3,reg_R2_change,-0.0433034763,regression
+S6,P2,ridge_schedule,case4,reg_R2_change,0.4833131606,regression
+S6,P2,ridge_schedule,case5,reg_R2_change,0.4714291283,regression
+S6,P2,ridge_schedule,case6,reg_R2_change,-0.0015838789,regression
+S6,P2,ridge_schedule,case7,reg_R2_change,-0.041489424,regression
+S6,P2,tft,case1,reg_R2_change,0.8218058901,regression
+S6,P2,tft,case2,reg_R2_change,0.7189118903,regression
+S6,P2,tft,case3,reg_R2_change,0.7569849517,regression
+S6,P2,tft,case4,reg_R2_change,0.7967580186,regression
+S6,P2,tft,case5,reg_R2_change,0.7440758955,regression
+S6,P2,tft,case6,reg_R2_change,0.6543420258,regression
+S6,P2,tft,case7,reg_R2_change,-0.1413081138,regression
+S1,P2,gbm_F1,g1,reg_NRMSE,0.0609025764,regression
+S1,P2,gbm_F1,v4,reg_NRMSE,0.0796730619,regression
+S1,P2,gbm_F1,v5,reg_NRMSE,0.0609417352,regression
+S1,P2,gbm_F1,w10,reg_NRMSE,0.0554513284,regression
+S1,P2,gbm_F1,w8,reg_NRMSE,0.0877972782,regression
+S1,P2,gbm_F1,w9,reg_NRMSE,0.0367794921,regression
+S1,P2,linear_extrapolation,g1,reg_NRMSE,0.1758828994,regression
+S1,P2,linear_extrapolation,v4,reg_NRMSE,0.09406318,regression
+S1,P2,linear_extrapolation,v5,reg_NRMSE,0.1733160458,regression
+S1,P2,linear_extrapolation,w10,reg_NRMSE,0.1233154792,regression
+S1,P2,linear_extrapolation,w8,reg_NRMSE,0.2076458322,regression
+S1,P2,linear_extrapolation,w9,reg_NRMSE,0.1151120679,regression
+S1,P2,mlp,g1,reg_NRMSE,0.0841843415,regression
+S1,P2,mlp,v4,reg_NRMSE,0.0822029488,regression
+S1,P2,mlp,v5,reg_NRMSE,0.0818984885,regression
+S1,P2,mlp,w10,reg_NRMSE,0.0747866253,regression
+S1,P2,mlp,w8,reg_NRMSE,0.1143546658,regression
+S1,P2,mlp,w9,reg_NRMSE,0.0605104045,regression
+S1,P2,persistence,g1,reg_NRMSE,0.1595181489,regression
+S1,P2,persistence,v4,reg_NRMSE,0.1478305129,regression
+S1,P2,persistence,v5,reg_NRMSE,0.1643582526,regression
+S1,P2,persistence,w10,reg_NRMSE,0.149207073,regression
+S1,P2,persistence,w8,reg_NRMSE,0.1705347966,regression
+S1,P2,persistence,w9,reg_NRMSE,0.1768371763,regression
+S1,P2,ridge_F0,g1,reg_NRMSE,0.1061161048,regression
+S1,P2,ridge_F0,v4,reg_NRMSE,0.1422228574,regression
+S1,P2,ridge_F0,v5,reg_NRMSE,0.1861991553,regression
+S1,P2,ridge_F0,w10,reg_NRMSE,0.085973937,regression
+S1,P2,ridge_F0,w8,reg_NRMSE,0.1245771445,regression
+S1,P2,ridge_F0,w9,reg_NRMSE,0.0639268044,regression
+S1,P2,ridge_F1,g1,reg_NRMSE,0.1174499105,regression
+S1,P2,ridge_F1,v4,reg_NRMSE,0.0668219518,regression
+S1,P2,ridge_F1,v5,reg_NRMSE,0.113942675,regression
+S1,P2,ridge_F1,w10,reg_NRMSE,0.0778487423,regression
+S1,P2,ridge_F1,w8,reg_NRMSE,0.1127757197,regression
+S1,P2,ridge_F1,w9,reg_NRMSE,0.0653703219,regression
+S1,P2,ridge_schedule,g1,reg_NRMSE,0.0865037183,regression
+S1,P2,ridge_schedule,v4,reg_NRMSE,0.0804674019,regression
+S1,P2,ridge_schedule,v5,reg_NRMSE,0.088853079,regression
+S1,P2,ridge_schedule,w10,reg_NRMSE,0.0816458092,regression
+S1,P2,ridge_schedule,w8,reg_NRMSE,0.1202566845,regression
+S1,P2,ridge_schedule,w9,reg_NRMSE,0.069823123,regression
+S1,P2,tft,g1,reg_NRMSE,0.0825160897,regression
+S1,P2,tft,v4,reg_NRMSE,0.0781972487,regression
+S1,P2,tft,v5,reg_NRMSE,0.0902112415,regression
+S1,P2,tft,w10,reg_NRMSE,0.0723673748,regression
+S1,P2,tft,w8,reg_NRMSE,0.1083242588,regression
+S1,P2,tft,w9,reg_NRMSE,0.0806734351,regression
+S6,P2,gbm_F1,case1,reg_NRMSE,0.0112319757,regression
+S6,P2,gbm_F1,case2,reg_NRMSE,0.0136798948,regression
+S6,P2,gbm_F1,case3,reg_NRMSE,0.0131462081,regression
+S6,P2,gbm_F1,case4,reg_NRMSE,0.0081967197,regression
+S6,P2,gbm_F1,case5,reg_NRMSE,0.0081438269,regression
+S6,P2,gbm_F1,case6,reg_NRMSE,0.0105945545,regression
+S6,P2,gbm_F1,case7,reg_NRMSE,0.0274867097,regression
+S6,P2,linear_extrapolation,case1,reg_NRMSE,0.0375524383,regression
+S6,P2,linear_extrapolation,case2,reg_NRMSE,0.0390127618,regression
+S6,P2,linear_extrapolation,case3,reg_NRMSE,0.0308803615,regression
+S6,P2,linear_extrapolation,case4,reg_NRMSE,0.0247657738,regression
+S6,P2,linear_extrapolation,case5,reg_NRMSE,0.0258176532,regression
+S6,P2,linear_extrapolation,case6,reg_NRMSE,0.0136949351,regression
+S6,P2,linear_extrapolation,case7,reg_NRMSE,0.0235702438,regression
+S6,P2,mlp,case1,reg_NRMSE,0.0116207876,regression
+S6,P2,mlp,case2,reg_NRMSE,0.0167303764,regression
+S6,P2,mlp,case3,reg_NRMSE,0.0143071752,regression
+S6,P2,mlp,case4,reg_NRMSE,0.0104492761,regression
+S6,P2,mlp,case5,reg_NRMSE,0.0117433284,regression
+S6,P2,mlp,case6,reg_NRMSE,0.0094550349,regression
+S6,P2,mlp,case7,reg_NRMSE,0.0332490318,regression
+S6,P2,persistence,case1,reg_NRMSE,0.0658369148,regression
+S6,P2,persistence,case2,reg_NRMSE,0.070447155,regression
+S6,P2,persistence,case3,reg_NRMSE,0.0557651095,regression
+S6,P2,persistence,case4,reg_NRMSE,0.0491669525,regression
+S6,P2,persistence,case5,reg_NRMSE,0.0521037171,regression
+S6,P2,persistence,case6,reg_NRMSE,0.0324041065,regression
+S6,P2,persistence,case7,reg_NRMSE,0.0646526567,regression
+S6,P2,ridge_F0,case1,reg_NRMSE,0.0146233535,regression
+S6,P2,ridge_F0,case2,reg_NRMSE,0.0171762022,regression
+S6,P2,ridge_F0,case3,reg_NRMSE,0.0179135292,regression
+S6,P2,ridge_F0,case4,reg_NRMSE,0.0115633204,regression
+S6,P2,ridge_F0,case5,reg_NRMSE,0.0126148978,regression
+S6,P2,ridge_F0,case6,reg_NRMSE,0.0129309946,regression
+S6,P2,ridge_F0,case7,reg_NRMSE,0.0274423204,regression
+S6,P2,ridge_F1,case1,reg_NRMSE,0.0151927126,regression
+S6,P2,ridge_F1,case2,reg_NRMSE,0.0511519067,regression
+S6,P2,ridge_F1,case3,reg_NRMSE,0.0133462968,regression
+S6,P2,ridge_F1,case4,reg_NRMSE,0.0111393508,regression
+S6,P2,ridge_F1,case5,reg_NRMSE,0.0129319345,regression
+S6,P2,ridge_F1,case6,reg_NRMSE,0.0182398165,regression
+S6,P2,ridge_F1,case7,reg_NRMSE,0.032695677,regression
+S6,P2,ridge_schedule,case1,reg_NRMSE,0.0233367772,regression
+S6,P2,ridge_schedule,case2,reg_NRMSE,0.0221907611,regression
+S6,P2,ridge_schedule,case3,reg_NRMSE,0.0278324446,regression
+S6,P2,ridge_schedule,case4,reg_NRMSE,0.0170345118,regression
+S6,P2,ridge_schedule,case5,reg_NRMSE,0.0179467112,regression
+S6,P2,ridge_schedule,case6,reg_NRMSE,0.0162067206,regression
+S6,P2,ridge_schedule,case7,reg_NRMSE,0.0341901905,regression
+S6,P2,tft,case1,reg_NRMSE,0.0134718156,regression
+S6,P2,tft,case2,reg_NRMSE,0.0178809615,regression
+S6,P2,tft,case3,reg_NRMSE,0.0134213456,regression
+S6,P2,tft,case4,reg_NRMSE,0.0106358758,regression
+S6,P2,tft,case5,reg_NRMSE,0.0123810191,regression
+S6,P2,tft,case6,reg_NRMSE,0.0095058904,regression
+S6,P2,tft,case7,reg_NRMSE,0.0357173723,regression
+S1,P2,gbm_F1,g1,cls_accuracy,1,reuse class
+S1,P2,gbm_F1,v4,cls_accuracy,1,reuse class
+S1,P2,gbm_F1,v5,cls_accuracy,0.9375,reuse class
+S1,P2,gbm_F1,w10,cls_accuracy,1,reuse class
+S1,P2,gbm_F1,w8,cls_accuracy,1,reuse class
+S1,P2,gbm_F1,w9,cls_accuracy,1,reuse class
+S1,P2,linear_extrapolation,g1,cls_accuracy,1,reuse class
+S1,P2,linear_extrapolation,v4,cls_accuracy,1,reuse class
+S1,P2,linear_extrapolation,v5,cls_accuracy,0.8958333333,reuse class
+S1,P2,linear_extrapolation,w10,cls_accuracy,1,reuse class
+S1,P2,linear_extrapolation,w8,cls_accuracy,1,reuse class
+S1,P2,linear_extrapolation,w9,cls_accuracy,1,reuse class
+S1,P2,mlp,g1,cls_accuracy,1,reuse class
+S1,P2,mlp,v4,cls_accuracy,1,reuse class
+S1,P2,mlp,v5,cls_accuracy,0.9958333333,reuse class
+S1,P2,mlp,w10,cls_accuracy,1,reuse class
+S1,P2,mlp,w8,cls_accuracy,1,reuse class
+S1,P2,mlp,w9,cls_accuracy,1,reuse class
+S1,P2,persistence,g1,cls_accuracy,1,reuse class
+S1,P2,persistence,v4,cls_accuracy,1,reuse class
+S1,P2,persistence,v5,cls_accuracy,1,reuse class
+S1,P2,persistence,w10,cls_accuracy,1,reuse class
+S1,P2,persistence,w8,cls_accuracy,1,reuse class
+S1,P2,persistence,w9,cls_accuracy,1,reuse class
+S1,P2,ridge_F0,g1,cls_accuracy,1,reuse class
+S1,P2,ridge_F0,v4,cls_accuracy,1,reuse class
+S1,P2,ridge_F0,v5,cls_accuracy,1,reuse class
+S1,P2,ridge_F0,w10,cls_accuracy,1,reuse class
+S1,P2,ridge_F0,w8,cls_accuracy,1,reuse class
+S1,P2,ridge_F0,w9,cls_accuracy,1,reuse class
+S1,P2,ridge_F1,g1,cls_accuracy,1,reuse class
+S1,P2,ridge_F1,v4,cls_accuracy,1,reuse class
+S1,P2,ridge_F1,v5,cls_accuracy,1,reuse class
+S1,P2,ridge_F1,w10,cls_accuracy,1,reuse class
+S1,P2,ridge_F1,w8,cls_accuracy,1,reuse class
+S1,P2,ridge_F1,w9,cls_accuracy,1,reuse class
+S1,P2,ridge_schedule,g1,cls_accuracy,1,reuse class
+S1,P2,ridge_schedule,v4,cls_accuracy,1,reuse class
+S1,P2,ridge_schedule,v5,cls_accuracy,0.9791666667,reuse class
+S1,P2,ridge_schedule,w10,cls_accuracy,1,reuse class
+S1,P2,ridge_schedule,w8,cls_accuracy,1,reuse class
+S1,P2,ridge_schedule,w9,cls_accuracy,1,reuse class
+S1,P2,tft,g1,cls_accuracy,1,reuse class
+S1,P2,tft,v4,cls_accuracy,1,reuse class
+S1,P2,tft,v5,cls_accuracy,0.9833333333,reuse class
+S1,P2,tft,w10,cls_accuracy,1,reuse class
+S1,P2,tft,w8,cls_accuracy,1,reuse class
+S1,P2,tft,w9,cls_accuracy,1,reuse class
+S6,P2,gbm_F1,case1,cls_accuracy,0.9784946237,reuse class
+S6,P2,gbm_F1,case2,cls_accuracy,0.9468085106,reuse class
+S6,P2,gbm_F1,case3,cls_accuracy,0.974025974,reuse class
+S6,P2,gbm_F1,case4,cls_accuracy,0.9870801034,reuse class
+S6,P2,gbm_F1,case5,cls_accuracy,0.9696969697,reuse class
+S6,P2,gbm_F1,case6,cls_accuracy,0.9565972222,reuse class
+S6,P2,gbm_F1,case7,cls_accuracy,0.9518900344,reuse class
+S6,P2,linear_extrapolation,case1,cls_accuracy,0.9283154122,reuse class
+S6,P2,linear_extrapolation,case2,cls_accuracy,0.9078014184,reuse class
+S6,P2,linear_extrapolation,case3,cls_accuracy,0.9307359307,reuse class
+S6,P2,linear_extrapolation,case4,cls_accuracy,0.9405684755,reuse class
+S6,P2,linear_extrapolation,case5,cls_accuracy,0.9338842975,reuse class
+S6,P2,linear_extrapolation,case6,cls_accuracy,0.9618055556,reuse class
+S6,P2,linear_extrapolation,case7,cls_accuracy,0.9484536082,reuse class
+S6,P2,mlp,case1,cls_accuracy,0.9806451613,reuse class
+S6,P2,mlp,case2,cls_accuracy,0.9340425532,reuse class
+S6,P2,mlp,case3,cls_accuracy,0.9670995671,reuse class
+S6,P2,mlp,case4,cls_accuracy,0.9819121447,reuse class
+S6,P2,mlp,case5,cls_accuracy,0.9669421488,reuse class
+S6,P2,mlp,case6,cls_accuracy,0.959375,reuse class
+S6,P2,mlp,case7,cls_accuracy,0.9436426117,reuse class
+S6,P2,persistence,case1,cls_accuracy,0.8243727599,reuse class
+S6,P2,persistence,case2,cls_accuracy,0.8333333333,reuse class
+S6,P2,persistence,case3,cls_accuracy,0.8484848485,reuse class
+S6,P2,persistence,case4,cls_accuracy,0.8656330749,reuse class
+S6,P2,persistence,case5,cls_accuracy,0.8539944904,reuse class
+S6,P2,persistence,case6,cls_accuracy,0.90625,reuse class
+S6,P2,persistence,case7,cls_accuracy,0.8178694158,reuse class
+S6,P2,ridge_F0,case1,cls_accuracy,0.9713261649,reuse class
+S6,P2,ridge_F0,case2,cls_accuracy,0.9397163121,reuse class
+S6,P2,ridge_F0,case3,cls_accuracy,0.9567099567,reuse class
+S6,P2,ridge_F0,case4,cls_accuracy,0.9819121447,reuse class
+S6,P2,ridge_F0,case5,cls_accuracy,0.9614325069,reuse class
+S6,P2,ridge_F0,case6,cls_accuracy,0.9618055556,reuse class
+S6,P2,ridge_F0,case7,cls_accuracy,0.9587628866,reuse class
+S6,P2,ridge_F1,case1,cls_accuracy,0.9713261649,reuse class
+S6,P2,ridge_F1,case2,cls_accuracy,0.9468085106,reuse class
+S6,P2,ridge_F1,case3,cls_accuracy,0.974025974,reuse class
+S6,P2,ridge_F1,case4,cls_accuracy,0.9870801034,reuse class
+S6,P2,ridge_F1,case5,cls_accuracy,0.9669421488,reuse class
+S6,P2,ridge_F1,case6,cls_accuracy,0.9322916667,reuse class
+S6,P2,ridge_F1,case7,cls_accuracy,0.9484536082,reuse class
+S6,P2,ridge_schedule,case1,cls_accuracy,0.935483871,reuse class
+S6,P2,ridge_schedule,case2,cls_accuracy,0.914893617,reuse class
+S6,P2,ridge_schedule,case3,cls_accuracy,0.9826839827,reuse class
+S6,P2,ridge_schedule,case4,cls_accuracy,0.9689922481,reuse class
+S6,P2,ridge_schedule,case5,cls_accuracy,0.9696969697,reuse class
+S6,P2,ridge_schedule,case6,cls_accuracy,0.96875,reuse class
+S6,P2,ridge_schedule,case7,cls_accuracy,0.9209621993,reuse class
+S6,P2,tft,case1,cls_accuracy,0.9734767025,reuse class
+S6,P2,tft,case2,cls_accuracy,0.9312056738,reuse class
+S6,P2,tft,case3,cls_accuracy,0.9714285714,reuse class
+S6,P2,tft,case4,cls_accuracy,0.9819121447,reuse class
+S6,P2,tft,case5,cls_accuracy,0.9685950413,reuse class
+S6,P2,tft,case6,cls_accuracy,0.9642361111,reuse class
+S6,P2,tft,case7,cls_accuracy,0.9436426117,reuse class
+S1,P2,gbm_F1,g1,cls_balanced_accuracy,1,reuse class
+S1,P2,gbm_F1,v4,cls_balanced_accuracy,1,reuse class
+S1,P2,gbm_F1,v5,cls_balanced_accuracy,0.9375,reuse class
+S1,P2,gbm_F1,w10,cls_balanced_accuracy,1,reuse class
+S1,P2,gbm_F1,w8,cls_balanced_accuracy,1,reuse class
+S1,P2,gbm_F1,w9,cls_balanced_accuracy,1,reuse class
+S1,P2,linear_extrapolation,g1,cls_balanced_accuracy,1,reuse class
+S1,P2,linear_extrapolation,v4,cls_balanced_accuracy,1,reuse class
+S1,P2,linear_extrapolation,v5,cls_balanced_accuracy,0.8958333333,reuse class
+S1,P2,linear_extrapolation,w10,cls_balanced_accuracy,1,reuse class
+S1,P2,linear_extrapolation,w8,cls_balanced_accuracy,1,reuse class
+S1,P2,linear_extrapolation,w9,cls_balanced_accuracy,1,reuse class
+S1,P2,mlp,g1,cls_balanced_accuracy,1,reuse class
+S1,P2,mlp,v4,cls_balanced_accuracy,1,reuse class
+S1,P2,mlp,v5,cls_balanced_accuracy,0.9958333333,reuse class
+S1,P2,mlp,w10,cls_balanced_accuracy,1,reuse class
+S1,P2,mlp,w8,cls_balanced_accuracy,1,reuse class
+S1,P2,mlp,w9,cls_balanced_accuracy,1,reuse class
+S1,P2,persistence,g1,cls_balanced_accuracy,1,reuse class
+S1,P2,persistence,v4,cls_balanced_accuracy,1,reuse class
+S1,P2,persistence,v5,cls_balanced_accuracy,1,reuse class
+S1,P2,persistence,w10,cls_balanced_accuracy,1,reuse class
+S1,P2,persistence,w8,cls_balanced_accuracy,1,reuse class
+S1,P2,persistence,w9,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F0,g1,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F0,v4,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F0,v5,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F0,w10,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F0,w8,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F0,w9,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F1,g1,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F1,v4,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F1,v5,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F1,w10,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F1,w8,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_F1,w9,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_schedule,g1,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_schedule,v4,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_schedule,v5,cls_balanced_accuracy,0.9791666667,reuse class
+S1,P2,ridge_schedule,w10,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_schedule,w8,cls_balanced_accuracy,1,reuse class
+S1,P2,ridge_schedule,w9,cls_balanced_accuracy,1,reuse class
+S1,P2,tft,g1,cls_balanced_accuracy,1,reuse class
+S1,P2,tft,v4,cls_balanced_accuracy,1,reuse class
+S1,P2,tft,v5,cls_balanced_accuracy,0.9833333333,reuse class
+S1,P2,tft,w10,cls_balanced_accuracy,1,reuse class
+S1,P2,tft,w8,cls_balanced_accuracy,1,reuse class
+S1,P2,tft,w9,cls_balanced_accuracy,1,reuse class
+S6,P2,gbm_F1,case1,cls_balanced_accuracy,0.9649270483,reuse class
+S6,P2,gbm_F1,case2,cls_balanced_accuracy,0.9283799534,reuse class
+S6,P2,gbm_F1,case3,cls_balanced_accuracy,0.9570269145,reuse class
+S6,P2,gbm_F1,case4,cls_balanced_accuracy,0.9282407407,reuse class
+S6,P2,gbm_F1,case5,cls_balanced_accuracy,0.9445144725,reuse class
+S6,P2,gbm_F1,case6,cls_balanced_accuracy,0.7852869353,reuse class
+S6,P2,gbm_F1,case7,cls_balanced_accuracy,0.9136642157,reuse class
+S6,P2,linear_extrapolation,case1,cls_balanced_accuracy,0.8074857773,reuse class
+S6,P2,linear_extrapolation,case2,cls_balanced_accuracy,0.8046037296,reuse class
+S6,P2,linear_extrapolation,case3,cls_balanced_accuracy,0.8398712079,reuse class
+S6,P2,linear_extrapolation,case4,cls_balanced_accuracy,0.8106481481,reuse class
+S6,P2,linear_extrapolation,case5,cls_balanced_accuracy,0.8517339982,reuse class
+S6,P2,linear_extrapolation,case6,cls_balanced_accuracy,0.8849857854,reuse class
+S6,P2,linear_extrapolation,case7,cls_balanced_accuracy,0.8702818627,reuse class
+S6,P2,mlp,case1,cls_balanced_accuracy,0.9783670034,reuse class
+S6,P2,mlp,case2,cls_balanced_accuracy,0.9247202797,reuse class
+S6,P2,mlp,case3,cls_balanced_accuracy,0.9127711934,reuse class
+S6,P2,mlp,case4,cls_balanced_accuracy,0.9213888889,reuse class
+S6,P2,mlp,case5,cls_balanced_accuracy,0.8569636015,reuse class
+S6,P2,mlp,case6,cls_balanced_accuracy,0.7899389499,reuse class
+S6,P2,mlp,case7,cls_balanced_accuracy,0.8803063725,reuse class
+S6,P2,persistence,case1,cls_balanced_accuracy,0.7708551028,reuse class
+S6,P2,persistence,case2,cls_balanced_accuracy,0.7712412587,reuse class
+S6,P2,persistence,case3,cls_balanced_accuracy,0.7568673696,reuse class
+S6,P2,persistence,case4,cls_balanced_accuracy,0.7869047619,reuse class
+S6,P2,persistence,case5,cls_balanced_accuracy,0.773301217,reuse class
+S6,P2,persistence,case6,cls_balanced_accuracy,0.8432015745,reuse class
+S6,P2,persistence,case7,cls_balanced_accuracy,0.7071078431,reuse class
+S6,P2,ridge_F0,case1,cls_balanced_accuracy,0.9339225589,reuse class
+S6,P2,ridge_F0,case2,cls_balanced_accuracy,0.8996794872,reuse class
+S6,P2,ridge_F0,case3,cls_balanced_accuracy,0.8581998837,reuse class
+S6,P2,ridge_F0,case4,cls_balanced_accuracy,0.9044312169,reuse class
+S6,P2,ridge_F0,case5,cls_balanced_accuracy,0.8761134051,reuse class
+S6,P2,ridge_F0,case6,cls_balanced_accuracy,0.8215392816,reuse class
+S6,P2,ridge_F0,case7,cls_balanced_accuracy,0.9395220588,reuse class
+S6,P2,ridge_F1,case1,cls_balanced_accuracy,0.9504769921,reuse class
+S6,P2,ridge_F1,case2,cls_balanced_accuracy,0.9471153846,reuse class
+S6,P2,ridge_F1,case3,cls_balanced_accuracy,0.9606629208,reuse class
+S6,P2,ridge_F1,case4,cls_balanced_accuracy,0.9282407407,reuse class
+S6,P2,ridge_F1,case5,cls_balanced_accuracy,0.8187385299,reuse class
+S6,P2,ridge_F1,case6,cls_balanced_accuracy,0.7255799756,reuse class
+S6,P2,ridge_F1,case7,cls_balanced_accuracy,0.8357230392,reuse class
+S6,P2,ridge_schedule,case1,cls_balanced_accuracy,0.8798763497,reuse class
+S6,P2,ridge_schedule,case2,cls_balanced_accuracy,0.8557400932,reuse class
+S6,P2,ridge_schedule,case3,cls_balanced_accuracy,0.9506740196,reuse class
+S6,P2,ridge_schedule,case4,cls_balanced_accuracy,0.9047619048,reuse class
+S6,P2,ridge_schedule,case5,cls_balanced_accuracy,0.9561626662,reuse class
+S6,P2,ridge_schedule,case6,cls_balanced_accuracy,0.9195665446,reuse class
+S6,P2,ridge_schedule,case7,cls_balanced_accuracy,0.8704044118,reuse class
+S6,P2,tft,case1,cls_balanced_accuracy,0.9702029877,reuse class
+S6,P2,tft,case2,cls_balanced_accuracy,0.9197086247,reuse class
+S6,P2,tft,case3,cls_balanced_accuracy,0.93575987,reuse class
+S6,P2,tft,case4,cls_balanced_accuracy,0.945,reuse class
+S6,P2,tft,case5,cls_balanced_accuracy,0.8331240542,reuse class
+S6,P2,tft,case6,cls_balanced_accuracy,0.820989011,reuse class
+S6,P2,tft,case7,cls_balanced_accuracy,0.8954044118,reuse class
+S1,P2,gbm_F1,g1,cls_precision_macro,1,reuse class
+S1,P2,gbm_F1,v4,cls_precision_macro,1,reuse class
+S1,P2,gbm_F1,v5,cls_precision_macro,1,reuse class
+S1,P2,gbm_F1,w10,cls_precision_macro,1,reuse class
+S1,P2,gbm_F1,w8,cls_precision_macro,1,reuse class
+S1,P2,gbm_F1,w9,cls_precision_macro,1,reuse class
+S1,P2,linear_extrapolation,g1,cls_precision_macro,1,reuse class
+S1,P2,linear_extrapolation,v4,cls_precision_macro,1,reuse class
+S1,P2,linear_extrapolation,v5,cls_precision_macro,1,reuse class
+S1,P2,linear_extrapolation,w10,cls_precision_macro,1,reuse class
+S1,P2,linear_extrapolation,w8,cls_precision_macro,1,reuse class
+S1,P2,linear_extrapolation,w9,cls_precision_macro,1,reuse class
+S1,P2,mlp,g1,cls_precision_macro,1,reuse class
+S1,P2,mlp,v4,cls_precision_macro,1,reuse class
+S1,P2,mlp,v5,cls_precision_macro,1,reuse class
+S1,P2,mlp,w10,cls_precision_macro,1,reuse class
+S1,P2,mlp,w8,cls_precision_macro,1,reuse class
+S1,P2,mlp,w9,cls_precision_macro,1,reuse class
+S1,P2,persistence,g1,cls_precision_macro,1,reuse class
+S1,P2,persistence,v4,cls_precision_macro,1,reuse class
+S1,P2,persistence,v5,cls_precision_macro,1,reuse class
+S1,P2,persistence,w10,cls_precision_macro,1,reuse class
+S1,P2,persistence,w8,cls_precision_macro,1,reuse class
+S1,P2,persistence,w9,cls_precision_macro,1,reuse class
+S1,P2,ridge_F0,g1,cls_precision_macro,1,reuse class
+S1,P2,ridge_F0,v4,cls_precision_macro,1,reuse class
+S1,P2,ridge_F0,v5,cls_precision_macro,1,reuse class
+S1,P2,ridge_F0,w10,cls_precision_macro,1,reuse class
+S1,P2,ridge_F0,w8,cls_precision_macro,1,reuse class
+S1,P2,ridge_F0,w9,cls_precision_macro,1,reuse class
+S1,P2,ridge_F1,g1,cls_precision_macro,1,reuse class
+S1,P2,ridge_F1,v4,cls_precision_macro,1,reuse class
+S1,P2,ridge_F1,v5,cls_precision_macro,1,reuse class
+S1,P2,ridge_F1,w10,cls_precision_macro,1,reuse class
+S1,P2,ridge_F1,w8,cls_precision_macro,1,reuse class
+S1,P2,ridge_F1,w9,cls_precision_macro,1,reuse class
+S1,P2,ridge_schedule,g1,cls_precision_macro,1,reuse class
+S1,P2,ridge_schedule,v4,cls_precision_macro,1,reuse class
+S1,P2,ridge_schedule,v5,cls_precision_macro,1,reuse class
+S1,P2,ridge_schedule,w10,cls_precision_macro,1,reuse class
+S1,P2,ridge_schedule,w8,cls_precision_macro,1,reuse class
+S1,P2,ridge_schedule,w9,cls_precision_macro,1,reuse class
+S1,P2,tft,g1,cls_precision_macro,1,reuse class
+S1,P2,tft,v4,cls_precision_macro,1,reuse class
+S1,P2,tft,v5,cls_precision_macro,1,reuse class
+S1,P2,tft,w10,cls_precision_macro,1,reuse class
+S1,P2,tft,w8,cls_precision_macro,1,reuse class
+S1,P2,tft,w9,cls_precision_macro,1,reuse class
+S6,P2,gbm_F1,case1,cls_precision_macro,0.8494318182,reuse class
+S6,P2,gbm_F1,case2,cls_precision_macro,0.7323573017,reuse class
+S6,P2,gbm_F1,case3,cls_precision_macro,0.9502992235,reuse class
+S6,P2,gbm_F1,case4,cls_precision_macro,0.8958333333,reuse class
+S6,P2,gbm_F1,case5,cls_precision_macro,0.9484266994,reuse class
+S6,P2,gbm_F1,case6,cls_precision_macro,0.9257023527,reuse class
+S6,P2,gbm_F1,case7,cls_precision_macro,0.8802801724,reuse class
+S6,P2,linear_extrapolation,case1,cls_precision_macro,0.7325667828,reuse class
+S6,P2,linear_extrapolation,case2,cls_precision_macro,0.6661255411,reuse class
+S6,P2,linear_extrapolation,case3,cls_precision_macro,0.84282391,reuse class
+S6,P2,linear_extrapolation,case4,cls_precision_macro,0.7928486998,reuse class
+S6,P2,linear_extrapolation,case5,cls_precision_macro,0.7932205011,reuse class
+S6,P2,linear_extrapolation,case6,cls_precision_macro,0.8948760791,reuse class
+S6,P2,linear_extrapolation,case7,cls_precision_macro,0.8746883022,reuse class
+S6,P2,mlp,case1,cls_precision_macro,0.9299067835,reuse class
+S6,P2,mlp,case2,cls_precision_macro,0.7093424148,reuse class
+S6,P2,mlp,case3,cls_precision_macro,0.9118650583,reuse class
+S6,P2,mlp,case4,cls_precision_macro,0.858854222,reuse class
+S6,P2,mlp,case5,cls_precision_macro,0.9455055992,reuse class
+S6,P2,mlp,case6,cls_precision_macro,0.9255303844,reuse class
+S6,P2,mlp,case7,cls_precision_macro,0.8825293081,reuse class
+S6,P2,persistence,case1,cls_precision_macro,0.5611111111,reuse class
+S6,P2,persistence,case2,cls_precision_macro,0.5359848485,reuse class
+S6,P2,persistence,case3,cls_precision_macro,0.6180555556,reuse class
+S6,P2,persistence,case4,cls_precision_macro,0.605952381,reuse class
+S6,P2,persistence,case5,cls_precision_macro,0.6104166667,reuse class
+S6,P2,persistence,case6,cls_precision_macro,0.718031968,reuse class
+S6,P2,persistence,case7,cls_precision_macro,0.5928030303,reuse class
+S6,P2,ridge_F0,case1,cls_precision_macro,0.8395127119,reuse class
+S6,P2,ridge_F0,case2,cls_precision_macro,0.7532051282,reuse class
+S6,P2,ridge_F0,case3,cls_precision_macro,0.9058441558,reuse class
+S6,P2,ridge_F0,case4,cls_precision_macro,0.8948863636,reuse class
+S6,P2,ridge_F0,case5,cls_precision_macro,0.9072383666,reuse class
+S6,P2,ridge_F0,case6,cls_precision_macro,0.9308863465,reuse class
+S6,P2,ridge_F0,case7,cls_precision_macro,0.9008766968,reuse class
+S6,P2,ridge_F1,case1,cls_precision_macro,0.8536352692,reuse class
+S6,P2,ridge_F1,case2,cls_precision_macro,0.7740384615,reuse class
+S6,P2,ridge_F1,case3,cls_precision_macro,0.9138194444,reuse class
+S6,P2,ridge_F1,case4,cls_precision_macro,0.8958333333,reuse class
+S6,P2,ridge_F1,case5,cls_precision_macro,0.8808653426,reuse class
+S6,P2,ridge_F1,case6,cls_precision_macro,0.9005710876,reuse class
+S6,P2,ridge_F1,case7,cls_precision_macro,0.899117468,reuse class
+S6,P2,ridge_schedule,case1,cls_precision_macro,0.733997315,reuse class
+S6,P2,ridge_schedule,case2,cls_precision_macro,0.6616637324,reuse class
+S6,P2,ridge_schedule,case3,cls_precision_macro,0.9083333333,reuse class
+S6,P2,ridge_schedule,case4,cls_precision_macro,0.8083333333,reuse class
+S6,P2,ridge_schedule,case5,cls_precision_macro,0.8886103896,reuse class
+S6,P2,ridge_schedule,case6,cls_precision_macro,0.9371054522,reuse class
+S6,P2,ridge_schedule,case7,cls_precision_macro,0.7961401952,reuse class
+S6,P2,tft,case1,cls_precision_macro,0.9356151752,reuse class
+S6,P2,tft,case2,cls_precision_macro,0.7038347841,reuse class
+S6,P2,tft,case3,cls_precision_macro,0.9209978912,reuse class
+S6,P2,tft,case4,cls_precision_macro,0.8939928067,reuse class
+S6,P2,tft,case5,cls_precision_macro,0.9432772256,reuse class
+S6,P2,tft,case6,cls_precision_macro,0.9373113592,reuse class
+S6,P2,tft,case7,cls_precision_macro,0.8846058619,reuse class
+S1,P2,gbm_F1,g1,cls_recall_macro,1,reuse class
+S1,P2,gbm_F1,v4,cls_recall_macro,1,reuse class
+S1,P2,gbm_F1,v5,cls_recall_macro,0.9375,reuse class
+S1,P2,gbm_F1,w10,cls_recall_macro,1,reuse class
+S1,P2,gbm_F1,w8,cls_recall_macro,1,reuse class
+S1,P2,gbm_F1,w9,cls_recall_macro,1,reuse class
+S1,P2,linear_extrapolation,g1,cls_recall_macro,1,reuse class
+S1,P2,linear_extrapolation,v4,cls_recall_macro,1,reuse class
+S1,P2,linear_extrapolation,v5,cls_recall_macro,0.8958333333,reuse class
+S1,P2,linear_extrapolation,w10,cls_recall_macro,1,reuse class
+S1,P2,linear_extrapolation,w8,cls_recall_macro,1,reuse class
+S1,P2,linear_extrapolation,w9,cls_recall_macro,1,reuse class
+S1,P2,mlp,g1,cls_recall_macro,1,reuse class
+S1,P2,mlp,v4,cls_recall_macro,1,reuse class
+S1,P2,mlp,v5,cls_recall_macro,0.9958333333,reuse class
+S1,P2,mlp,w10,cls_recall_macro,1,reuse class
+S1,P2,mlp,w8,cls_recall_macro,1,reuse class
+S1,P2,mlp,w9,cls_recall_macro,1,reuse class
+S1,P2,persistence,g1,cls_recall_macro,1,reuse class
+S1,P2,persistence,v4,cls_recall_macro,1,reuse class
+S1,P2,persistence,v5,cls_recall_macro,1,reuse class
+S1,P2,persistence,w10,cls_recall_macro,1,reuse class
+S1,P2,persistence,w8,cls_recall_macro,1,reuse class
+S1,P2,persistence,w9,cls_recall_macro,1,reuse class
+S1,P2,ridge_F0,g1,cls_recall_macro,1,reuse class
+S1,P2,ridge_F0,v4,cls_recall_macro,1,reuse class
+S1,P2,ridge_F0,v5,cls_recall_macro,1,reuse class
+S1,P2,ridge_F0,w10,cls_recall_macro,1,reuse class
+S1,P2,ridge_F0,w8,cls_recall_macro,1,reuse class
+S1,P2,ridge_F0,w9,cls_recall_macro,1,reuse class
+S1,P2,ridge_F1,g1,cls_recall_macro,1,reuse class
+S1,P2,ridge_F1,v4,cls_recall_macro,1,reuse class
+S1,P2,ridge_F1,v5,cls_recall_macro,1,reuse class
+S1,P2,ridge_F1,w10,cls_recall_macro,1,reuse class
+S1,P2,ridge_F1,w8,cls_recall_macro,1,reuse class
+S1,P2,ridge_F1,w9,cls_recall_macro,1,reuse class
+S1,P2,ridge_schedule,g1,cls_recall_macro,1,reuse class
+S1,P2,ridge_schedule,v4,cls_recall_macro,1,reuse class
+S1,P2,ridge_schedule,v5,cls_recall_macro,0.9791666667,reuse class
+S1,P2,ridge_schedule,w10,cls_recall_macro,1,reuse class
+S1,P2,ridge_schedule,w8,cls_recall_macro,1,reuse class
+S1,P2,ridge_schedule,w9,cls_recall_macro,1,reuse class
+S1,P2,tft,g1,cls_recall_macro,1,reuse class
+S1,P2,tft,v4,cls_recall_macro,1,reuse class
+S1,P2,tft,v5,cls_recall_macro,0.9833333333,reuse class
+S1,P2,tft,w10,cls_recall_macro,1,reuse class
+S1,P2,tft,w8,cls_recall_macro,1,reuse class
+S1,P2,tft,w9,cls_recall_macro,1,reuse class
+S6,P2,gbm_F1,case1,cls_recall_macro,0.9649270483,reuse class
+S6,P2,gbm_F1,case2,cls_recall_macro,0.9283799534,reuse class
+S6,P2,gbm_F1,case3,cls_recall_macro,0.9570269145,reuse class
+S6,P2,gbm_F1,case4,cls_recall_macro,0.9282407407,reuse class
+S6,P2,gbm_F1,case5,cls_recall_macro,0.9445144725,reuse class
+S6,P2,gbm_F1,case6,cls_recall_macro,0.7852869353,reuse class
+S6,P2,gbm_F1,case7,cls_recall_macro,0.9136642157,reuse class
+S6,P2,linear_extrapolation,case1,cls_recall_macro,0.8074857773,reuse class
+S6,P2,linear_extrapolation,case2,cls_recall_macro,0.8046037296,reuse class
+S6,P2,linear_extrapolation,case3,cls_recall_macro,0.8398712079,reuse class
+S6,P2,linear_extrapolation,case4,cls_recall_macro,0.8106481481,reuse class
+S6,P2,linear_extrapolation,case5,cls_recall_macro,0.8517339982,reuse class
+S6,P2,linear_extrapolation,case6,cls_recall_macro,0.8849857854,reuse class
+S6,P2,linear_extrapolation,case7,cls_recall_macro,0.8702818627,reuse class
+S6,P2,mlp,case1,cls_recall_macro,0.9783670034,reuse class
+S6,P2,mlp,case2,cls_recall_macro,0.9247202797,reuse class
+S6,P2,mlp,case3,cls_recall_macro,0.9127711934,reuse class
+S6,P2,mlp,case4,cls_recall_macro,0.9213888889,reuse class
+S6,P2,mlp,case5,cls_recall_macro,0.8569636015,reuse class
+S6,P2,mlp,case6,cls_recall_macro,0.7899389499,reuse class
+S6,P2,mlp,case7,cls_recall_macro,0.8803063725,reuse class
+S6,P2,persistence,case1,cls_recall_macro,0.7708551028,reuse class
+S6,P2,persistence,case2,cls_recall_macro,0.7712412587,reuse class
+S6,P2,persistence,case3,cls_recall_macro,0.7568673696,reuse class
+S6,P2,persistence,case4,cls_recall_macro,0.7869047619,reuse class
+S6,P2,persistence,case5,cls_recall_macro,0.773301217,reuse class
+S6,P2,persistence,case6,cls_recall_macro,0.8432015745,reuse class
+S6,P2,persistence,case7,cls_recall_macro,0.7071078431,reuse class
+S6,P2,ridge_F0,case1,cls_recall_macro,0.9339225589,reuse class
+S6,P2,ridge_F0,case2,cls_recall_macro,0.8996794872,reuse class
+S6,P2,ridge_F0,case3,cls_recall_macro,0.8581998837,reuse class
+S6,P2,ridge_F0,case4,cls_recall_macro,0.9044312169,reuse class
+S6,P2,ridge_F0,case5,cls_recall_macro,0.8761134051,reuse class
+S6,P2,ridge_F0,case6,cls_recall_macro,0.8215392816,reuse class
+S6,P2,ridge_F0,case7,cls_recall_macro,0.9395220588,reuse class
+S6,P2,ridge_F1,case1,cls_recall_macro,0.9504769921,reuse class
+S6,P2,ridge_F1,case2,cls_recall_macro,0.9471153846,reuse class
+S6,P2,ridge_F1,case3,cls_recall_macro,0.9606629208,reuse class
+S6,P2,ridge_F1,case4,cls_recall_macro,0.9282407407,reuse class
+S6,P2,ridge_F1,case5,cls_recall_macro,0.8187385299,reuse class
+S6,P2,ridge_F1,case6,cls_recall_macro,0.7255799756,reuse class
+S6,P2,ridge_F1,case7,cls_recall_macro,0.8357230392,reuse class
+S6,P2,ridge_schedule,case1,cls_recall_macro,0.8798763497,reuse class
+S6,P2,ridge_schedule,case2,cls_recall_macro,0.8557400932,reuse class
+S6,P2,ridge_schedule,case3,cls_recall_macro,0.9506740196,reuse class
+S6,P2,ridge_schedule,case4,cls_recall_macro,0.9047619048,reuse class
+S6,P2,ridge_schedule,case5,cls_recall_macro,0.9561626662,reuse class
+S6,P2,ridge_schedule,case6,cls_recall_macro,0.9195665446,reuse class
+S6,P2,ridge_schedule,case7,cls_recall_macro,0.8704044118,reuse class
+S6,P2,tft,case1,cls_recall_macro,0.9702029877,reuse class
+S6,P2,tft,case2,cls_recall_macro,0.9197086247,reuse class
+S6,P2,tft,case3,cls_recall_macro,0.93575987,reuse class
+S6,P2,tft,case4,cls_recall_macro,0.945,reuse class
+S6,P2,tft,case5,cls_recall_macro,0.8331240542,reuse class
+S6,P2,tft,case6,cls_recall_macro,0.820989011,reuse class
+S6,P2,tft,case7,cls_recall_macro,0.8954044118,reuse class
+S6,P2,gbm_F1,case1,cls_specificity_macro,0.9914875158,reuse class
+S6,P2,gbm_F1,case2,cls_specificity_macro,0.9843194265,reuse class
+S6,P2,gbm_F1,case3,cls_specificity_macro,0.9878411235,reuse class
+S6,P2,gbm_F1,case4,cls_specificity_macro,0.9964732593,reuse class
+S6,P2,gbm_F1,case5,cls_specificity_macro,0.989536534,reuse class
+S6,P2,gbm_F1,case6,cls_specificity_macro,0.9799349655,reuse class
+S6,P2,gbm_F1,case7,cls_specificity_macro,0.9864900658,reuse class
+S6,P2,linear_extrapolation,case1,cls_specificity_macro,0.9774819756,reuse class
+S6,P2,linear_extrapolation,case2,cls_specificity_macro,0.9732588299,reuse class
+S6,P2,linear_extrapolation,case3,cls_specificity_macro,0.9775362672,reuse class
+S6,P2,linear_extrapolation,case4,cls_specificity_macro,0.9832413215,reuse class
+S6,P2,linear_extrapolation,case5,cls_specificity_macro,0.9812174996,reuse class
+S6,P2,linear_extrapolation,case6,cls_specificity_macro,0.9885890743,reuse class
+S6,P2,linear_extrapolation,case7,cls_specificity_macro,0.9835536785,reuse class
+S6,P2,mlp,case1,cls_specificity_macro,0.990001378,reuse class
+S6,P2,mlp,case2,cls_specificity_macro,0.9805888462,reuse class
+S6,P2,mlp,case3,cls_specificity_macro,0.9876881379,reuse class
+S6,P2,mlp,case4,cls_specificity_macro,0.9951302323,reuse class
+S6,P2,mlp,case5,cls_specificity_macro,0.9880287821,reuse class
+S6,P2,mlp,case6,cls_specificity_macro,0.9829169125,reuse class
+S6,P2,mlp,case7,cls_specificity_macro,0.983984291,reuse class
+S6,P2,persistence,case1,cls_specificity_macro,0.9480301477,reuse class
+S6,P2,persistence,case2,cls_specificity_macro,0.9522046173,reuse class
+S6,P2,persistence,case3,cls_specificity_macro,0.9573110801,reuse class
+S6,P2,persistence,case4,cls_specificity_macro,0.9621424917,reuse class
+S6,P2,persistence,case5,cls_specificity_macro,0.9591248263,reuse class
+S6,P2,persistence,case6,cls_specificity_macro,0.9737477218,reuse class
+S6,P2,persistence,case7,cls_specificity_macro,0.9492595307,reuse class
+S6,P2,ridge_F0,case1,cls_specificity_macro,0.9876243091,reuse class
+S6,P2,ridge_F0,case2,cls_specificity_macro,0.9816627125,reuse class
+S6,P2,ridge_F0,case3,cls_specificity_macro,0.9867867425,reuse class
+S6,P2,ridge_F0,case4,cls_specificity_macro,0.9946943906,reuse class
+S6,P2,ridge_F0,case5,cls_specificity_macro,0.9868948667,reuse class
+S6,P2,ridge_F0,case6,cls_specificity_macro,0.9858000564,reuse class
+S6,P2,ridge_F0,case7,cls_specificity_macro,0.9882702479,reuse class
+S6,P2,ridge_F1,case1,cls_specificity_macro,0.9864357474,reuse class
+S6,P2,ridge_F1,case2,cls_specificity_macro,0.983442072,reuse class
+S6,P2,ridge_F1,case3,cls_specificity_macro,0.9925012722,reuse class
+S6,P2,ridge_F1,case4,cls_specificity_macro,0.9964732593,reuse class
+S6,P2,ridge_F1,case5,cls_specificity_macro,0.9902899951,reuse class
+S6,P2,ridge_F1,case6,cls_specificity_macro,0.964357117,reuse class
+S6,P2,ridge_F1,case7,cls_specificity_macro,0.9854001942,reuse class
+S6,P2,ridge_schedule,case1,cls_specificity_macro,0.9757213446,reuse class
+S6,P2,ridge_schedule,case2,cls_specificity_macro,0.9756478161,reuse class
+S6,P2,ridge_schedule,case3,cls_specificity_macro,0.9954835614,reuse class
+S6,P2,ridge_schedule,case4,cls_specificity_macro,0.9920627397,reuse class
+S6,P2,ridge_schedule,case5,cls_specificity_macro,0.9897215572,reuse class
+S6,P2,ridge_schedule,case6,cls_specificity_macro,0.9842483319,reuse class
+S6,P2,ridge_schedule,case7,cls_specificity_macro,0.9779688634,reuse class
+S6,P2,tft,case1,cls_specificity_macro,0.9873543585,reuse class
+S6,P2,tft,case2,cls_specificity_macro,0.9797293696,reuse class
+S6,P2,tft,case3,cls_specificity_macro,0.9902679096,reuse class
+S6,P2,tft,case4,cls_specificity_macro,0.9949596001,reuse class
+S6,P2,tft,case5,cls_specificity_macro,0.9891928914,reuse class
+S6,P2,tft,case6,cls_specificity_macro,0.9839933222,reuse class
+S6,P2,tft,case7,cls_specificity_macro,0.9839103094,reuse class
+S1,P2,gbm_F1,g1,cls_f1_macro,1,reuse class
+S1,P2,gbm_F1,v4,cls_f1_macro,1,reuse class
+S1,P2,gbm_F1,v5,cls_f1_macro,0.9677419355,reuse class
+S1,P2,gbm_F1,w10,cls_f1_macro,1,reuse class
+S1,P2,gbm_F1,w8,cls_f1_macro,1,reuse class
+S1,P2,gbm_F1,w9,cls_f1_macro,1,reuse class
+S1,P2,linear_extrapolation,g1,cls_f1_macro,1,reuse class
+S1,P2,linear_extrapolation,v4,cls_f1_macro,1,reuse class
+S1,P2,linear_extrapolation,v5,cls_f1_macro,0.9450549451,reuse class
+S1,P2,linear_extrapolation,w10,cls_f1_macro,1,reuse class
+S1,P2,linear_extrapolation,w8,cls_f1_macro,1,reuse class
+S1,P2,linear_extrapolation,w9,cls_f1_macro,1,reuse class
+S1,P2,mlp,g1,cls_f1_macro,1,reuse class
+S1,P2,mlp,v4,cls_f1_macro,1,reuse class
+S1,P2,mlp,v5,cls_f1_macro,0.9978947368,reuse class
+S1,P2,mlp,w10,cls_f1_macro,1,reuse class
+S1,P2,mlp,w8,cls_f1_macro,1,reuse class
+S1,P2,mlp,w9,cls_f1_macro,1,reuse class
+S1,P2,persistence,g1,cls_f1_macro,1,reuse class
+S1,P2,persistence,v4,cls_f1_macro,1,reuse class
+S1,P2,persistence,v5,cls_f1_macro,1,reuse class
+S1,P2,persistence,w10,cls_f1_macro,1,reuse class
+S1,P2,persistence,w8,cls_f1_macro,1,reuse class
+S1,P2,persistence,w9,cls_f1_macro,1,reuse class
+S1,P2,ridge_F0,g1,cls_f1_macro,1,reuse class
+S1,P2,ridge_F0,v4,cls_f1_macro,1,reuse class
+S1,P2,ridge_F0,v5,cls_f1_macro,1,reuse class
+S1,P2,ridge_F0,w10,cls_f1_macro,1,reuse class
+S1,P2,ridge_F0,w8,cls_f1_macro,1,reuse class
+S1,P2,ridge_F0,w9,cls_f1_macro,1,reuse class
+S1,P2,ridge_F1,g1,cls_f1_macro,1,reuse class
+S1,P2,ridge_F1,v4,cls_f1_macro,1,reuse class
+S1,P2,ridge_F1,v5,cls_f1_macro,1,reuse class
+S1,P2,ridge_F1,w10,cls_f1_macro,1,reuse class
+S1,P2,ridge_F1,w8,cls_f1_macro,1,reuse class
+S1,P2,ridge_F1,w9,cls_f1_macro,1,reuse class
+S1,P2,ridge_schedule,g1,cls_f1_macro,1,reuse class
+S1,P2,ridge_schedule,v4,cls_f1_macro,1,reuse class
+S1,P2,ridge_schedule,v5,cls_f1_macro,0.9894736842,reuse class
+S1,P2,ridge_schedule,w10,cls_f1_macro,1,reuse class
+S1,P2,ridge_schedule,w8,cls_f1_macro,1,reuse class
+S1,P2,ridge_schedule,w9,cls_f1_macro,1,reuse class
+S1,P2,tft,g1,cls_f1_macro,1,reuse class
+S1,P2,tft,v4,cls_f1_macro,1,reuse class
+S1,P2,tft,v5,cls_f1_macro,0.9915789474,reuse class
+S1,P2,tft,w10,cls_f1_macro,1,reuse class
+S1,P2,tft,w8,cls_f1_macro,1,reuse class
+S1,P2,tft,w9,cls_f1_macro,1,reuse class
+S6,P2,gbm_F1,case1,cls_f1_macro,0.8861817086,reuse class
+S6,P2,gbm_F1,case2,cls_f1_macro,0.7631529437,reuse class
+S6,P2,gbm_F1,case3,cls_f1_macro,0.9516770813,reuse class
+S6,P2,gbm_F1,case4,cls_f1_macro,0.9105210266,reuse class
+S6,P2,gbm_F1,case5,cls_f1_macro,0.9440515643,reuse class
+S6,P2,gbm_F1,case6,cls_f1_macro,0.8233000716,reuse class
+S6,P2,gbm_F1,case7,cls_f1_macro,0.8950704328,reuse class
+S6,P2,linear_extrapolation,case1,cls_f1_macro,0.6493866118,reuse class
+S6,P2,linear_extrapolation,case2,cls_f1_macro,0.612801672,reuse class
+S6,P2,linear_extrapolation,case3,cls_f1_macro,0.7920178017,reuse class
+S6,P2,linear_extrapolation,case4,cls_f1_macro,0.6937213403,reuse class
+S6,P2,linear_extrapolation,case5,cls_f1_macro,0.7667159235,reuse class
+S6,P2,linear_extrapolation,case6,cls_f1_macro,0.8767236945,reuse class
+S6,P2,linear_extrapolation,case7,cls_f1_macro,0.8574162822,reuse class
+S6,P2,mlp,case1,cls_f1_macro,0.9487796448,reuse class
+S6,P2,mlp,case2,cls_f1_macro,0.7574477242,reuse class
+S6,P2,mlp,case3,cls_f1_macro,0.9099345977,reuse class
+S6,P2,mlp,case4,cls_f1_macro,0.8804928185,reuse class
+S6,P2,mlp,case5,cls_f1_macro,0.8850184912,reuse class
+S6,P2,mlp,case6,cls_f1_macro,0.8286115672,reuse class
+S6,P2,mlp,case7,cls_f1_macro,0.8692375471,reuse class
+S6,P2,persistence,case1,cls_f1_macro,0.5814683449,reuse class
+S6,P2,persistence,case2,cls_f1_macro,0.5539276269,reuse class
+S6,P2,persistence,case3,cls_f1_macro,0.6534103641,reuse class
+S6,P2,persistence,case4,cls_f1_macro,0.6374100038,reuse class
+S6,P2,persistence,case5,cls_f1_macro,0.6429517996,reuse class
+S6,P2,persistence,case6,cls_f1_macro,0.7549204136,reuse class
+S6,P2,persistence,case7,cls_f1_macro,0.6238782051,reuse class
+S6,P2,ridge_F0,case1,cls_f1_macro,0.8509051335,reuse class
+S6,P2,ridge_F0,case2,cls_f1_macro,0.7409859877,reuse class
+S6,P2,ridge_F0,case3,cls_f1_macro,0.8720440951,reuse class
+S6,P2,ridge_F0,case4,cls_f1_macro,0.8966942526,reuse class
+S6,P2,ridge_F0,case5,cls_f1_macro,0.8890503077,reuse class
+S6,P2,ridge_F0,case6,cls_f1_macro,0.8621735549,reuse class
+S6,P2,ridge_F0,case7,cls_f1_macro,0.9193478356,reuse class
+S6,P2,ridge_F1,case1,cls_f1_macro,0.8805225629,reuse class
+S6,P2,ridge_F1,case2,cls_f1_macro,0.8009598885,reuse class
+S6,P2,ridge_F1,case3,cls_f1_macro,0.9334376933,reuse class
+S6,P2,ridge_F1,case4,cls_f1_macro,0.9105210266,reuse class
+S6,P2,ridge_F1,case5,cls_f1_macro,0.8383151892,reuse class
+S6,P2,ridge_F1,case6,cls_f1_macro,0.7710908267,reuse class
+S6,P2,ridge_F1,case7,cls_f1_macro,0.8392889289,reuse class
+S6,P2,ridge_schedule,case1,cls_f1_macro,0.7378382035,reuse class
+S6,P2,ridge_schedule,case2,cls_f1_macro,0.6642811131,reuse class
+S6,P2,ridge_schedule,case3,cls_f1_macro,0.922000774,reuse class
+S6,P2,ridge_schedule,case4,cls_f1_macro,0.8094879518,reuse class
+S6,P2,ridge_schedule,case5,cls_f1_macro,0.9107156129,reuse class
+S6,P2,ridge_schedule,case6,cls_f1_macro,0.9214862177,reuse class
+S6,P2,ridge_schedule,case7,cls_f1_macro,0.8239213932,reuse class
+S6,P2,tft,case1,cls_f1_macro,0.9490867956,reuse class
+S6,P2,tft,case2,cls_f1_macro,0.7487498085,reuse class
+S6,P2,tft,case3,cls_f1_macro,0.9269857515,reuse class
+S6,P2,tft,case4,cls_f1_macro,0.9060578876,reuse class
+S6,P2,tft,case5,cls_f1_macro,0.8641838479,reuse class
+S6,P2,tft,case6,cls_f1_macro,0.8584991012,reuse class
+S6,P2,tft,case7,cls_f1_macro,0.8818900355,reuse class
+S6,P2,gbm_F1,case1,cls_mcc,0.9589390986,reuse class
+S6,P2,gbm_F1,case2,cls_mcc,0.8903309844,reuse class
+S6,P2,gbm_F1,case3,cls_mcc,0.9455815974,reuse class
+S6,P2,gbm_F1,case4,cls_mcc,0.9720865197,reuse class
+S6,P2,gbm_F1,case5,cls_mcc,0.9357468449,reuse class
+S6,P2,gbm_F1,case6,cls_mcc,0.9055081343,reuse class
+S6,P2,gbm_F1,case7,cls_mcc,0.9010517445,reuse class
+S6,P2,linear_extrapolation,case1,cls_mcc,0.8666791768,reuse class
+S6,P2,linear_extrapolation,case2,cls_mcc,0.8136250493,reuse class
+S6,P2,linear_extrapolation,case3,cls_mcc,0.8604915646,reuse class
+S6,P2,linear_extrapolation,case4,cls_mcc,0.8759418352,reuse class
+S6,P2,linear_extrapolation,case5,cls_mcc,0.8632571186,reuse class
+S6,P2,linear_extrapolation,case6,cls_mcc,0.9199023702,reuse class
+S6,P2,linear_extrapolation,case7,cls_mcc,0.8931053383,reuse class
+S6,P2,mlp,case1,cls_mcc,0.9630803797,reuse class
+S6,P2,mlp,case2,cls_mcc,0.8649124802,reuse class
+S6,P2,mlp,case3,cls_mcc,0.9317466582,reuse class
+S6,P2,mlp,case4,cls_mcc,0.9610753736,reuse class
+S6,P2,mlp,case5,cls_mcc,0.9287494483,reuse class
+S6,P2,mlp,case6,cls_mcc,0.9117945781,reuse class
+S6,P2,mlp,case7,cls_mcc,0.8860628093,reuse class
+S6,P2,persistence,case1,cls_mcc,0.6913029126,reuse class
+S6,P2,persistence,case2,cls_mcc,0.6756968656,reuse class
+S6,P2,persistence,case3,cls_mcc,0.7081355826,reuse class
+S6,P2,persistence,case4,cls_mcc,0.7312747115,reuse class
+S6,P2,persistence,case5,cls_mcc,0.709307425,reuse class
+S6,P2,persistence,case6,cls_mcc,0.8096693702,reuse class
+S6,P2,persistence,case7,cls_mcc,0.650837102,reuse class
+S6,P2,ridge_F0,case1,cls_mcc,0.9450037725,reuse class
+S6,P2,ridge_F0,case2,cls_mcc,0.8780206068,reuse class
+S6,P2,ridge_F0,case3,cls_mcc,0.911179474,reuse class
+S6,P2,ridge_F0,case4,cls_mcc,0.9610013909,reuse class
+S6,P2,ridge_F0,case5,cls_mcc,0.9181401565,reuse class
+S6,P2,ridge_F0,case6,cls_mcc,0.9176881249,reuse class
+S6,P2,ridge_F0,case7,cls_mcc,0.9156085786,reuse class
+S6,P2,ridge_F1,case1,cls_mcc,0.9449620956,reuse class
+S6,P2,ridge_F1,case2,cls_mcc,0.8939016744,reuse class
+S6,P2,ridge_F1,case3,cls_mcc,0.946754698,reuse class
+S6,P2,ridge_F1,case4,cls_mcc,0.9720865197,reuse class
+S6,P2,ridge_F1,case5,cls_mcc,0.929424543,reuse class
+S6,P2,ridge_F1,case6,cls_mcc,0.8506520064,reuse class
+S6,P2,ridge_F1,case7,cls_mcc,0.8939459509,reuse class
+S6,P2,ridge_schedule,case1,cls_mcc,0.8778555121,reuse class
+S6,P2,ridge_schedule,case2,cls_mcc,0.826990963,reuse class
+S6,P2,ridge_schedule,case3,cls_mcc,0.9640300933,reuse class
+S6,P2,ridge_schedule,case4,cls_mcc,0.9341695142,reuse class
+S6,P2,ridge_schedule,case5,cls_mcc,0.9359914928,reuse class
+S6,P2,ridge_schedule,case6,cls_mcc,0.9324696532,reuse class
+S6,P2,ridge_schedule,case7,cls_mcc,0.8403345689,reuse class
+S6,P2,tft,case1,cls_mcc,0.9492198573,reuse class
+S6,P2,tft,case2,cls_mcc,0.8595462831,reuse class
+S6,P2,tft,case3,cls_mcc,0.9413496497,reuse class
+S6,P2,tft,case4,cls_mcc,0.9611609775,reuse class
+S6,P2,tft,case5,cls_mcc,0.932006211,reuse class
+S6,P2,tft,case6,cls_mcc,0.92234741,reuse class
+S6,P2,tft,case7,cls_mcc,0.8863370072,reuse class
+S1,P2,gbm_F1,v5,cls_kappa,0,reuse class
+S1,P2,linear_extrapolation,v5,cls_kappa,0,reuse class
+S1,P2,mlp,v5,cls_kappa,0,reuse class
+S1,P2,ridge_schedule,v5,cls_kappa,0,reuse class
+S1,P2,tft,v5,cls_kappa,0,reuse class
+S6,P2,gbm_F1,case1,cls_kappa,0.9586544161,reuse class
+S6,P2,gbm_F1,case2,cls_kappa,0.8886490471,reuse class
+S6,P2,gbm_F1,case3,cls_kappa,0.9454695676,reuse class
+S6,P2,gbm_F1,case4,cls_kappa,0.9720654261,reuse class
+S6,P2,gbm_F1,case5,cls_kappa,0.9352752383,reuse class
+S6,P2,gbm_F1,case6,cls_kappa,0.9048694928,reuse class
+S6,P2,gbm_F1,case7,cls_kappa,0.9002936858,reuse class
+S6,P2,linear_extrapolation,case1,cls_kappa,0.8624429927,reuse class
+S6,P2,linear_extrapolation,case2,cls_kappa,0.8080377013,reuse class
+S6,P2,linear_extrapolation,case3,cls_kappa,0.8568440623,reuse class
+S6,P2,linear_extrapolation,case4,cls_kappa,0.8714229997,reuse class
+S6,P2,linear_extrapolation,case5,cls_kappa,0.859531449,reuse class
+S6,P2,linear_extrapolation,case6,cls_kappa,0.9183515676,reuse class
+S6,P2,linear_extrapolation,case7,cls_kappa,0.8914746028,reuse class
+S6,P2,mlp,case1,cls_kappa,0.9625919892,reuse class
+S6,P2,mlp,case2,cls_kappa,0.8629715587,reuse class
+S6,P2,mlp,case3,cls_kappa,0.9313249911,reuse class
+S6,P2,mlp,case4,cls_kappa,0.9609480437,reuse class
+S6,P2,mlp,case5,cls_kappa,0.928291914,reuse class
+S6,P2,mlp,case6,cls_kappa,0.9112389703,reuse class
+S6,P2,mlp,case7,cls_kappa,0.8840338708,reuse class
+S6,P2,persistence,case1,cls_kappa,0.6858108108,reuse class
+S6,P2,persistence,case2,cls_kappa,0.6694845515,reuse class
+S6,P2,persistence,case3,cls_kappa,0.7033245266,reuse class
+S6,P2,persistence,case4,cls_kappa,0.7270507812,reuse class
+S6,P2,persistence,case5,cls_kappa,0.7045245116,reuse class
+S6,P2,persistence,case6,cls_kappa,0.8073578595,reuse class
+S6,P2,persistence,case7,cls_kappa,0.6443199114,reuse class
+S6,P2,ridge_F0,case1,cls_kappa,0.9444485925,reuse class
+S6,P2,ridge_F0,case2,cls_kappa,0.8739581964,reuse class
+S6,P2,ridge_F0,case3,cls_kappa,0.909319306,reuse class
+S6,P2,ridge_F0,case4,cls_kappa,0.9607647187,reuse class
+S6,P2,ridge_F0,case5,cls_kappa,0.9172191364,reuse class
+S6,P2,ridge_F0,case6,cls_kappa,0.9171016996,reuse class
+S6,P2,ridge_F0,case7,cls_kappa,0.9147814628,reuse class
+S6,P2,ridge_F1,case1,cls_kappa,0.9444555047,reuse class
+S6,P2,ridge_F1,case2,cls_kappa,0.8896915013,reuse class
+S6,P2,ridge_F1,case3,cls_kappa,0.9463248393,reuse class
+S6,P2,ridge_F1,case4,cls_kappa,0.9720654261,reuse class
+S6,P2,ridge_F1,case5,cls_kappa,0.9288316696,reuse class
+S6,P2,ridge_F1,case6,cls_kappa,0.8487058776,reuse class
+S6,P2,ridge_F1,case7,cls_kappa,0.8921902786,reuse class
+S6,P2,ridge_schedule,case1,cls_kappa,0.8761223483,reuse class
+S6,P2,ridge_schedule,case2,cls_kappa,0.8239013348,reuse class
+S6,P2,ridge_schedule,case3,cls_kappa,0.9637632848,reuse class
+S6,P2,ridge_schedule,case4,cls_kappa,0.9330314654,reuse class
+S6,P2,ridge_schedule,case5,cls_kappa,0.9352552981,reuse class
+S6,P2,ridge_schedule,case6,cls_kappa,0.9317804974,reuse class
+S6,P2,ridge_schedule,case7,cls_kappa,0.8385205559,reuse class
+S6,P2,tft,case1,cls_kappa,0.9488238107,reuse class
+S6,P2,tft,case2,cls_kappa,0.8573707305,reuse class
+S6,P2,tft,case3,cls_kappa,0.9408290891,reuse class
+S6,P2,tft,case4,cls_kappa,0.9610107027,reuse class
+S6,P2,tft,case5,cls_kappa,0.9316658779,reuse class
+S6,P2,tft,case6,cls_kappa,0.921905124,reuse class
+S6,P2,tft,case7,cls_kappa,0.884367458,reuse class
+S1,P2,gbm_F1,v5,cls_kappa_linear,0,reuse class
+S1,P2,linear_extrapolation,v5,cls_kappa_linear,0,reuse class
+S1,P2,mlp,v5,cls_kappa_linear,0,reuse class
+S1,P2,ridge_schedule,v5,cls_kappa_linear,0,reuse class
+S1,P2,tft,v5,cls_kappa_linear,0,reuse class
+S6,P2,gbm_F1,case1,cls_kappa_linear,0.9670225759,reuse class
+S6,P2,gbm_F1,case2,cls_kappa_linear,0.9121641264,reuse class
+S6,P2,gbm_F1,case3,cls_kappa_linear,0.9615021388,reuse class
+S6,P2,gbm_F1,case4,cls_kappa_linear,0.9787863838,reuse class
+S6,P2,gbm_F1,case5,cls_kappa_linear,0.9529499099,reuse class
+S6,P2,gbm_F1,case6,cls_kappa_linear,0.9299126829,reuse class
+S6,P2,gbm_F1,case7,cls_kappa_linear,0.9374020466,reuse class
+S6,P2,linear_extrapolation,case1,cls_kappa_linear,0.8945817275,reuse class
+S6,P2,linear_extrapolation,case2,cls_kappa_linear,0.8515007899,reuse class
+S6,P2,linear_extrapolation,case3,cls_kappa_linear,0.8997993819,reuse class
+S6,P2,linear_extrapolation,case4,cls_kappa_linear,0.9042934099,reuse class
+S6,P2,linear_extrapolation,case5,cls_kappa_linear,0.900219901,reuse class
+S6,P2,linear_extrapolation,case6,cls_kappa_linear,0.940822102,reuse class
+S6,P2,linear_extrapolation,case7,cls_kappa_linear,0.9319234548,reuse class
+S6,P2,mlp,case1,cls_kappa_linear,0.9699451037,reuse class
+S6,P2,mlp,case2,cls_kappa_linear,0.8925962028,reuse class
+S6,P2,mlp,case3,cls_kappa_linear,0.9512186865,reuse class
+S6,P2,mlp,case4,cls_kappa_linear,0.9705793168,reuse class
+S6,P2,mlp,case5,cls_kappa_linear,0.9467389318,reuse class
+S6,P2,mlp,case6,cls_kappa_linear,0.9344188523,reuse class
+S6,P2,mlp,case7,cls_kappa_linear,0.9251690028,reuse class
+S6,P2,persistence,case1,cls_kappa_linear,0.7677488405,reuse class
+S6,P2,persistence,case2,cls_kappa_linear,0.7581298588,reuse class
+S6,P2,persistence,case3,cls_kappa_linear,0.8056256762,reuse class
+S6,P2,persistence,case4,cls_kappa_linear,0.8082113449,reuse class
+S6,P2,persistence,case5,cls_kappa_linear,0.8025250192,reuse class
+S6,P2,persistence,case6,cls_kappa_linear,0.8693877551,reuse class
+S6,P2,persistence,case7,cls_kappa_linear,0.7878493317,reuse class
+S6,P2,ridge_F0,case1,cls_kappa_linear,0.9553992487,reuse class
+S6,P2,ridge_F0,case2,cls_kappa_linear,0.8989758503,reuse class
+S6,P2,ridge_F0,case3,cls_kappa_linear,0.9340828673,reuse class
+S6,P2,ridge_F0,case4,cls_kappa_linear,0.9698769056,reuse class
+S6,P2,ridge_F0,case5,cls_kappa_linear,0.9386454183,reuse class
+S6,P2,ridge_F0,case6,cls_kappa_linear,0.9386688349,reuse class
+S6,P2,ridge_F0,case7,cls_kappa_linear,0.9463050097,reuse class
+S6,P2,ridge_F1,case1,cls_kappa_linear,0.9555041665,reuse class
+S6,P2,ridge_F1,case2,cls_kappa_linear,0.9111157806,reuse class
+S6,P2,ridge_F1,case3,cls_kappa_linear,0.9623839766,reuse class
+S6,P2,ridge_F1,case4,cls_kappa_linear,0.9787863838,reuse class
+S6,P2,ridge_F1,case5,cls_kappa_linear,0.9470562497,reuse class
+S6,P2,ridge_F1,case6,cls_kappa_linear,0.8882454779,reuse class
+S6,P2,ridge_F1,case7,cls_kappa_linear,0.92913846,reuse class
+S6,P2,ridge_schedule,case1,cls_kappa_linear,0.9047709345,reuse class
+S6,P2,ridge_schedule,case2,cls_kappa_linear,0.8653241533,reuse class
+S6,P2,ridge_schedule,case3,cls_kappa_linear,0.9748926689,reuse class
+S6,P2,ridge_schedule,case4,cls_kappa_linear,0.9510002532,reuse class
+S6,P2,ridge_schedule,case5,cls_kappa_linear,0.9534284281,reuse class
+S6,P2,ridge_schedule,case6,cls_kappa_linear,0.9511491816,reuse class
+S6,P2,ridge_schedule,case7,cls_kappa_linear,0.9014967548,reuse class
+S6,P2,tft,case1,cls_kappa_linear,0.958821029,reuse class
+S6,P2,tft,case2,cls_kappa_linear,0.8883009095,reuse class
+S6,P2,tft,case3,cls_kappa_linear,0.9580754228,reuse class
+S6,P2,tft,case4,cls_kappa_linear,0.9705766666,reuse class
+S6,P2,tft,case5,cls_kappa_linear,0.9491160906,reuse class
+S6,P2,tft,case6,cls_kappa_linear,0.9426762152,reuse class
+S6,P2,tft,case7,cls_kappa_linear,0.9257172556,reuse class
+S1,P2,gbm_F1,g1,eol_accuracy,1,end of life
+S1,P2,gbm_F1,v4,eol_accuracy,1,end of life
+S1,P2,gbm_F1,v5,eol_accuracy,1,end of life
+S1,P2,gbm_F1,w10,eol_accuracy,1,end of life
+S1,P2,gbm_F1,w8,eol_accuracy,1,end of life
+S1,P2,gbm_F1,w9,eol_accuracy,1,end of life
+S1,P2,linear_extrapolation,g1,eol_accuracy,1,end of life
+S1,P2,linear_extrapolation,v4,eol_accuracy,1,end of life
+S1,P2,linear_extrapolation,v5,eol_accuracy,1,end of life
+S1,P2,linear_extrapolation,w10,eol_accuracy,1,end of life
+S1,P2,linear_extrapolation,w8,eol_accuracy,1,end of life
+S1,P2,linear_extrapolation,w9,eol_accuracy,1,end of life
+S1,P2,mlp,g1,eol_accuracy,1,end of life
+S1,P2,mlp,v4,eol_accuracy,1,end of life
+S1,P2,mlp,v5,eol_accuracy,1,end of life
+S1,P2,mlp,w10,eol_accuracy,1,end of life
+S1,P2,mlp,w8,eol_accuracy,1,end of life
+S1,P2,mlp,w9,eol_accuracy,1,end of life
+S1,P2,persistence,g1,eol_accuracy,1,end of life
+S1,P2,persistence,v4,eol_accuracy,1,end of life
+S1,P2,persistence,v5,eol_accuracy,1,end of life
+S1,P2,persistence,w10,eol_accuracy,1,end of life
+S1,P2,persistence,w8,eol_accuracy,1,end of life
+S1,P2,persistence,w9,eol_accuracy,1,end of life
+S1,P2,ridge_F0,g1,eol_accuracy,1,end of life
+S1,P2,ridge_F0,v4,eol_accuracy,1,end of life
+S1,P2,ridge_F0,v5,eol_accuracy,1,end of life
+S1,P2,ridge_F0,w10,eol_accuracy,1,end of life
+S1,P2,ridge_F0,w8,eol_accuracy,1,end of life
+S1,P2,ridge_F0,w9,eol_accuracy,1,end of life
+S1,P2,ridge_F1,g1,eol_accuracy,1,end of life
+S1,P2,ridge_F1,v4,eol_accuracy,1,end of life
+S1,P2,ridge_F1,v5,eol_accuracy,1,end of life
+S1,P2,ridge_F1,w10,eol_accuracy,1,end of life
+S1,P2,ridge_F1,w8,eol_accuracy,1,end of life
+S1,P2,ridge_F1,w9,eol_accuracy,1,end of life
+S1,P2,ridge_schedule,g1,eol_accuracy,1,end of life
+S1,P2,ridge_schedule,v4,eol_accuracy,1,end of life
+S1,P2,ridge_schedule,v5,eol_accuracy,1,end of life
+S1,P2,ridge_schedule,w10,eol_accuracy,1,end of life
+S1,P2,ridge_schedule,w8,eol_accuracy,1,end of life
+S1,P2,ridge_schedule,w9,eol_accuracy,1,end of life
+S1,P2,tft,g1,eol_accuracy,1,end of life
+S1,P2,tft,v4,eol_accuracy,1,end of life
+S1,P2,tft,v5,eol_accuracy,1,end of life
+S1,P2,tft,w10,eol_accuracy,1,end of life
+S1,P2,tft,w8,eol_accuracy,1,end of life
+S1,P2,tft,w9,eol_accuracy,1,end of life
+S6,P2,gbm_F1,case1,eol_accuracy,0.9928315412,end of life
+S6,P2,gbm_F1,case2,eol_accuracy,0.9716312057,end of life
+S6,P2,gbm_F1,case3,eol_accuracy,0.9826839827,end of life
+S6,P2,gbm_F1,case4,eol_accuracy,0.9974160207,end of life
+S6,P2,gbm_F1,case5,eol_accuracy,0.9807162534,end of life
+S6,P2,gbm_F1,case6,eol_accuracy,0.9861111111,end of life
+S6,P2,gbm_F1,case7,eol_accuracy,0.9828178694,end of life
+S6,P2,linear_extrapolation,case1,eol_accuracy,0.9892473118,end of life
+S6,P2,linear_extrapolation,case2,eol_accuracy,0.9645390071,end of life
+S6,P2,linear_extrapolation,case3,eol_accuracy,0.974025974,end of life
+S6,P2,linear_extrapolation,case4,eol_accuracy,0.9948320413,end of life
+S6,P2,linear_extrapolation,case5,eol_accuracy,0.9807162534,end of life
+S6,P2,linear_extrapolation,case6,eol_accuracy,0.9913194444,end of life
+S6,P2,linear_extrapolation,case7,eol_accuracy,0.9862542955,end of life
+S6,P2,mlp,case1,eol_accuracy,0.9878136201,end of life
+S6,P2,mlp,case2,eol_accuracy,0.9673758865,end of life
+S6,P2,mlp,case3,eol_accuracy,0.9835497835,end of life
+S6,P2,mlp,case4,eol_accuracy,0.9968992248,end of life
+S6,P2,mlp,case5,eol_accuracy,0.9867768595,end of life
+S6,P2,mlp,case6,eol_accuracy,0.9902777778,end of life
+S6,P2,mlp,case7,eol_accuracy,0.9745704467,end of life
+S6,P2,persistence,case1,eol_accuracy,0.935483871,end of life
+S6,P2,persistence,case2,eol_accuracy,0.9361702128,end of life
+S6,P2,persistence,case3,eol_accuracy,0.9480519481,end of life
+S6,P2,persistence,case4,eol_accuracy,0.9534883721,end of life
+S6,P2,persistence,case5,eol_accuracy,0.9504132231,end of life
+S6,P2,persistence,case6,eol_accuracy,0.96875,end of life
+S6,P2,persistence,case7,eol_accuracy,0.9381443299,end of life
+S6,P2,ridge_F0,case1,eol_accuracy,0.9892473118,end of life
+S6,P2,ridge_F0,case2,eol_accuracy,0.9645390071,end of life
+S6,P2,ridge_F0,case3,eol_accuracy,0.9913419913,end of life
+S6,P2,ridge_F0,case4,eol_accuracy,0.9974160207,end of life
+S6,P2,ridge_F0,case5,eol_accuracy,0.9807162534,end of life
+S6,P2,ridge_F0,case6,eol_accuracy,0.9930555556,end of life
+S6,P2,ridge_F0,case7,eol_accuracy,0.9793814433,end of life
+S6,P2,ridge_F1,case1,eol_accuracy,0.9856630824,end of life
+S6,P2,ridge_F1,case2,eol_accuracy,0.9574468085,end of life
+S6,P2,ridge_F1,case3,eol_accuracy,0.987012987,end of life
+S6,P2,ridge_F1,case4,eol_accuracy,0.9974160207,end of life
+S6,P2,ridge_F1,case5,eol_accuracy,0.9889807163,end of life
+S6,P2,ridge_F1,case6,eol_accuracy,0.9704861111,end of life
+S6,P2,ridge_F1,case7,eol_accuracy,0.9862542955,end of life
+S6,P2,ridge_schedule,case1,eol_accuracy,0.9784946237,end of life
+S6,P2,ridge_schedule,case2,eol_accuracy,0.9645390071,end of life
+S6,P2,ridge_schedule,case3,eol_accuracy,1,end of life
+S6,P2,ridge_schedule,case4,eol_accuracy,1,end of life
+S6,P2,ridge_schedule,case5,eol_accuracy,0.9807162534,end of life
+S6,P2,ridge_schedule,case6,eol_accuracy,0.9878472222,end of life
+S6,P2,ridge_schedule,case7,eol_accuracy,0.9725085911,end of life
+S6,P2,tft,case1,eol_accuracy,0.9842293907,end of life
+S6,P2,tft,case2,eol_accuracy,0.965248227,end of life
+S6,P2,tft,case3,eol_accuracy,0.9835497835,end of life
+S6,P2,tft,case4,eol_accuracy,0.9953488372,end of life
+S6,P2,tft,case5,eol_accuracy,0.9917355372,end of life
+S6,P2,tft,case6,eol_accuracy,0.9895833333,end of life
+S6,P2,tft,case7,eol_accuracy,0.9725085911,end of life
+S1,P2,gbm_F1,g1,eol_balanced_accuracy,1,end of life
+S1,P2,gbm_F1,v4,eol_balanced_accuracy,1,end of life
+S1,P2,gbm_F1,v5,eol_balanced_accuracy,1,end of life
+S1,P2,gbm_F1,w10,eol_balanced_accuracy,1,end of life
+S1,P2,gbm_F1,w8,eol_balanced_accuracy,1,end of life
+S1,P2,gbm_F1,w9,eol_balanced_accuracy,1,end of life
+S1,P2,linear_extrapolation,g1,eol_balanced_accuracy,1,end of life
+S1,P2,linear_extrapolation,v4,eol_balanced_accuracy,1,end of life
+S1,P2,linear_extrapolation,v5,eol_balanced_accuracy,1,end of life
+S1,P2,linear_extrapolation,w10,eol_balanced_accuracy,1,end of life
+S1,P2,linear_extrapolation,w8,eol_balanced_accuracy,1,end of life
+S1,P2,linear_extrapolation,w9,eol_balanced_accuracy,1,end of life
+S1,P2,mlp,g1,eol_balanced_accuracy,1,end of life
+S1,P2,mlp,v4,eol_balanced_accuracy,1,end of life
+S1,P2,mlp,v5,eol_balanced_accuracy,1,end of life
+S1,P2,mlp,w10,eol_balanced_accuracy,1,end of life
+S1,P2,mlp,w8,eol_balanced_accuracy,1,end of life
+S1,P2,mlp,w9,eol_balanced_accuracy,1,end of life
+S1,P2,persistence,g1,eol_balanced_accuracy,1,end of life
+S1,P2,persistence,v4,eol_balanced_accuracy,1,end of life
+S1,P2,persistence,v5,eol_balanced_accuracy,1,end of life
+S1,P2,persistence,w10,eol_balanced_accuracy,1,end of life
+S1,P2,persistence,w8,eol_balanced_accuracy,1,end of life
+S1,P2,persistence,w9,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F0,g1,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F0,v4,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F0,v5,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F0,w10,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F0,w8,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F0,w9,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F1,g1,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F1,v4,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F1,v5,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F1,w10,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F1,w8,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_F1,w9,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_schedule,g1,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_schedule,v4,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_schedule,v5,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_schedule,w10,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_schedule,w8,eol_balanced_accuracy,1,end of life
+S1,P2,ridge_schedule,w9,eol_balanced_accuracy,1,end of life
+S1,P2,tft,g1,eol_balanced_accuracy,1,end of life
+S1,P2,tft,v4,eol_balanced_accuracy,1,end of life
+S1,P2,tft,v5,eol_balanced_accuracy,1,end of life
+S1,P2,tft,w10,eol_balanced_accuracy,1,end of life
+S1,P2,tft,w8,eol_balanced_accuracy,1,end of life
+S1,P2,tft,w9,eol_balanced_accuracy,1,end of life
+S6,P2,gbm_F1,case1,eol_balanced_accuracy,0.9904761905,end of life
+S6,P2,gbm_F1,case2,eol_balanced_accuracy,0.9794871795,end of life
+S6,P2,gbm_F1,case3,eol_balanced_accuracy,0.9798218029,end of life
+S6,P2,gbm_F1,case4,eol_balanced_accuracy,0.9981481481,end of life
+S6,P2,gbm_F1,case5,eol_balanced_accuracy,0.9836056645,end of life
+S6,P2,gbm_F1,case6,eol_balanced_accuracy,0.9770114943,end of life
+S6,P2,gbm_F1,case7,eol_balanced_accuracy,0.987745098,end of life
+S6,P2,linear_extrapolation,case1,eol_balanced_accuracy,0.9876026273,end of life
+S6,P2,linear_extrapolation,case2,eol_balanced_accuracy,0.9743589744,end of life
+S6,P2,linear_extrapolation,case3,eol_balanced_accuracy,0.9773322851,end of life
+S6,P2,linear_extrapolation,case4,eol_balanced_accuracy,0.9962962963,end of life
+S6,P2,linear_extrapolation,case5,eol_balanced_accuracy,0.9862745098,end of life
+S6,P2,linear_extrapolation,case6,eol_balanced_accuracy,0.9937810945,end of life
+S6,P2,linear_extrapolation,case7,eol_balanced_accuracy,0.9868999324,end of life
+S6,P2,mlp,case1,eol_balanced_accuracy,0.9838095238,end of life
+S6,P2,mlp,case2,eol_balanced_accuracy,0.9764102564,end of life
+S6,P2,mlp,case3,eol_balanced_accuracy,0.983490566,end of life
+S6,P2,mlp,case4,eol_balanced_accuracy,0.9977777778,end of life
+S6,P2,mlp,case5,eol_balanced_accuracy,0.9868518519,end of life
+S6,P2,mlp,case6,eol_balanced_accuracy,0.983908046,end of life
+S6,P2,mlp,case7,eol_balanced_accuracy,0.9818627451,end of life
+S6,P2,persistence,case1,eol_balanced_accuracy,0.9482758621,end of life
+S6,P2,persistence,case2,eol_balanced_accuracy,0.9538461538,end of life
+S6,P2,persistence,case3,eol_balanced_accuracy,0.9622641509,end of life
+S6,P2,persistence,case4,eol_balanced_accuracy,0.9666666667,end of life
+S6,P2,persistence,case5,eol_balanced_accuracy,0.9647058824,end of life
+S6,P2,persistence,case6,eol_balanced_accuracy,0.9776119403,end of life
+S6,P2,persistence,case7,eol_balanced_accuracy,0.9558823529,end of life
+S6,P2,ridge_F0,case1,eol_balanced_accuracy,0.9857142857,end of life
+S6,P2,ridge_F0,case2,eol_balanced_accuracy,0.9743589744,end of life
+S6,P2,ridge_F0,case3,eol_balanced_accuracy,0.9937106918,end of life
+S6,P2,ridge_F0,case4,eol_balanced_accuracy,0.9981481481,end of life
+S6,P2,ridge_F0,case5,eol_balanced_accuracy,0.9836056645,end of life
+S6,P2,ridge_F0,case6,eol_balanced_accuracy,0.9901355293,end of life
+S6,P2,ridge_F0,case7,eol_balanced_accuracy,0.9852941176,end of life
+S6,P2,ridge_F1,case1,eol_balanced_accuracy,0.980952381,end of life
+S6,P2,ridge_F1,case2,eol_balanced_accuracy,0.9692307692,end of life
+S6,P2,ridge_F1,case3,eol_balanced_accuracy,0.9905660377,end of life
+S6,P2,ridge_F1,case4,eol_balanced_accuracy,0.9981481481,end of life
+S6,P2,ridge_F1,case5,eol_balanced_accuracy,0.9921568627,end of life
+S6,P2,ridge_F1,case6,eol_balanced_accuracy,0.9511494253,end of life
+S6,P2,ridge_F1,case7,eol_balanced_accuracy,0.9901960784,end of life
+S6,P2,ridge_schedule,case1,eol_balanced_accuracy,0.973316913,end of life
+S6,P2,ridge_schedule,case2,eol_balanced_accuracy,0.9743589744,end of life
+S6,P2,ridge_schedule,case3,eol_balanced_accuracy,1,end of life
+S6,P2,ridge_schedule,case4,eol_balanced_accuracy,1,end of life
+S6,P2,ridge_schedule,case5,eol_balanced_accuracy,0.9836056645,end of life
+S6,P2,ridge_schedule,case6,eol_balanced_accuracy,0.9798850575,end of life
+S6,P2,ridge_schedule,case7,eol_balanced_accuracy,0.9803921569,end of life
+S6,P2,tft,case1,eol_balanced_accuracy,0.9805582923,end of life
+S6,P2,tft,case2,eol_balanced_accuracy,0.9748717949,end of life
+S6,P2,tft,case3,eol_balanced_accuracy,0.9857704403,end of life
+S6,P2,tft,case4,eol_balanced_accuracy,0.9966666667,end of life
+S6,P2,tft,case5,eol_balanced_accuracy,0.9914488017,end of life
+S6,P2,tft,case6,eol_balanced_accuracy,0.9827586207,end of life
+S6,P2,tft,case7,eol_balanced_accuracy,0.9803921569,end of life
+S6,P2,gbm_F1,case1,eol_precision,0.9886363636,end of life
+S6,P2,gbm_F1,case2,eol_precision,1,end of life
+S6,P2,gbm_F1,case3,eol_precision,0.9874213836,end of life
+S6,P2,gbm_F1,case4,eol_precision,1,end of life
+S6,P2,gbm_F1,case5,eol_precision,0.996,end of life
+S6,P2,gbm_F1,case6,eol_precision,0.9804878049,end of life
+S6,P2,gbm_F1,case7,eol_precision,1,end of life
+S6,P2,linear_extrapolation,case1,eol_precision,0.9885714286,end of life
+S6,P2,linear_extrapolation,case2,eol_precision,1,end of life
+S6,P2,linear_extrapolation,case3,eol_precision,0.9935483871,end of life
+S6,P2,linear_extrapolation,case4,eol_precision,1,end of life
+S6,P2,linear_extrapolation,case5,eol_precision,1,end of life
+S6,P2,linear_extrapolation,case6,eol_precision,1,end of life
+S6,P2,linear_extrapolation,case7,eol_precision,0.995049505,end of life
+S6,P2,mlp,case1,eol_precision,0.9808919561,end of life
+S6,P2,mlp,case2,eol_precision,1,end of life
+S6,P2,mlp,case3,eol_precision,0.9924528302,end of life
+S6,P2,mlp,case4,eol_precision,1,end of life
+S6,P2,mlp,case5,eol_precision,0.9945250269,end of life
+S6,P2,mlp,case6,eol_precision,0.9863119816,end of life
+S6,P2,mlp,case7,eol_precision,1,end of life
+S6,P2,persistence,case1,eol_precision,1,end of life
+S6,P2,persistence,case2,eol_precision,1,end of life
+S6,P2,persistence,case3,eol_precision,1,end of life
+S6,P2,persistence,case4,eol_precision,1,end of life
+S6,P2,persistence,case5,eol_precision,1,end of life
+S6,P2,persistence,case6,eol_precision,1,end of life
+S6,P2,persistence,case7,eol_precision,1,end of life
+S6,P2,ridge_F0,case1,eol_precision,0.9830508475,end of life
+S6,P2,ridge_F0,case2,eol_precision,1,end of life
+S6,P2,ridge_F0,case3,eol_precision,1,end of life
+S6,P2,ridge_F0,case4,eol_precision,1,end of life
+S6,P2,ridge_F0,case5,eol_precision,0.996,end of life
+S6,P2,ridge_F0,case6,eol_precision,0.9925742574,end of life
+S6,P2,ridge_F0,case7,eol_precision,1,end of life
+S6,P2,ridge_F1,case1,eol_precision,0.9775280899,end of life
+S6,P2,ridge_F1,case2,eol_precision,1,end of life
+S6,P2,ridge_F1,case3,eol_precision,1,end of life
+S6,P2,ridge_F1,case4,eol_precision,1,end of life
+S6,P2,ridge_F1,case5,eol_precision,1,end of life
+S6,P2,ridge_F1,case6,eol_precision,0.9594272076,end of life
+S6,P2,ridge_F1,case7,eol_precision,1,end of life
+S6,P2,ridge_schedule,case1,eol_precision,0.9719101124,end of life
+S6,P2,ridge_schedule,case2,eol_precision,1,end of life
+S6,P2,ridge_schedule,case3,eol_precision,1,end of life
+S6,P2,ridge_schedule,case4,eol_precision,1,end of life
+S6,P2,ridge_schedule,case5,eol_precision,0.996,end of life
+S6,P2,ridge_schedule,case6,eol_precision,0.9828850856,end of life
+S6,P2,ridge_schedule,case7,eol_precision,1,end of life
+S6,P2,tft,case1,eol_precision,0.9796787661,end of life
+S6,P2,tft,case2,eol_precision,1,end of life
+S6,P2,tft,case3,eol_precision,0.9962024302,end of life
+S6,P2,tft,case4,eol_precision,1,end of life
+S6,P2,tft,case5,eol_precision,0.9960967422,end of life
+S6,P2,tft,case6,eol_precision,0.9853225474,end of life
+S6,P2,tft,case7,eol_precision,1,end of life
+S6,P2,gbm_F1,case1,eol_recall,1,end of life
+S6,P2,gbm_F1,case2,eol_recall,0.958974359,end of life
+S6,P2,gbm_F1,case3,eol_recall,0.9874213836,end of life
+S6,P2,gbm_F1,case4,eol_recall,0.9962962963,end of life
+S6,P2,gbm_F1,case5,eol_recall,0.9764705882,end of life
+S6,P2,gbm_F1,case6,eol_recall,1,end of life
+S6,P2,gbm_F1,case7,eol_recall,0.9754901961,end of life
+S6,P2,linear_extrapolation,case1,eol_recall,0.9942528736,end of life
+S6,P2,linear_extrapolation,case2,eol_recall,0.9487179487,end of life
+S6,P2,linear_extrapolation,case3,eol_recall,0.9685534591,end of life
+S6,P2,linear_extrapolation,case4,eol_recall,0.9925925926,end of life
+S6,P2,linear_extrapolation,case5,eol_recall,0.9725490196,end of life
+S6,P2,linear_extrapolation,case6,eol_recall,0.9875621891,end of life
+S6,P2,linear_extrapolation,case7,eol_recall,0.9852941176,end of life
+S6,P2,mlp,case1,eol_recall,1,end of life
+S6,P2,mlp,case2,eol_recall,0.9528205128,end of life
+S6,P2,mlp,case3,eol_recall,0.9836477987,end of life
+S6,P2,mlp,case4,eol_recall,0.9955555556,end of life
+S6,P2,mlp,case5,eol_recall,0.9866666667,end of life
+S6,P2,mlp,case6,eol_recall,1,end of life
+S6,P2,mlp,case7,eol_recall,0.9637254902,end of life
+S6,P2,persistence,case1,eol_recall,0.8965517241,end of life
+S6,P2,persistence,case2,eol_recall,0.9076923077,end of life
+S6,P2,persistence,case3,eol_recall,0.9245283019,end of life
+S6,P2,persistence,case4,eol_recall,0.9333333333,end of life
+S6,P2,persistence,case5,eol_recall,0.9294117647,end of life
+S6,P2,persistence,case6,eol_recall,0.9552238806,end of life
+S6,P2,persistence,case7,eol_recall,0.9117647059,end of life
+S6,P2,ridge_F0,case1,eol_recall,1,end of life
+S6,P2,ridge_F0,case2,eol_recall,0.9487179487,end of life
+S6,P2,ridge_F0,case3,eol_recall,0.9874213836,end of life
+S6,P2,ridge_F0,case4,eol_recall,0.9962962963,end of life
+S6,P2,ridge_F0,case5,eol_recall,0.9764705882,end of life
+S6,P2,ridge_F0,case6,eol_recall,0.9975124378,end of life
+S6,P2,ridge_F0,case7,eol_recall,0.9705882353,end of life
+S6,P2,ridge_F1,case1,eol_recall,1,end of life
+S6,P2,ridge_F1,case2,eol_recall,0.9384615385,end of life
+S6,P2,ridge_F1,case3,eol_recall,0.9811320755,end of life
+S6,P2,ridge_F1,case4,eol_recall,0.9962962963,end of life
+S6,P2,ridge_F1,case5,eol_recall,0.9843137255,end of life
+S6,P2,ridge_F1,case6,eol_recall,1,end of life
+S6,P2,ridge_F1,case7,eol_recall,0.9803921569,end of life
+S6,P2,ridge_schedule,case1,eol_recall,0.9942528736,end of life
+S6,P2,ridge_schedule,case2,eol_recall,0.9487179487,end of life
+S6,P2,ridge_schedule,case3,eol_recall,1,end of life
+S6,P2,ridge_schedule,case4,eol_recall,1,end of life
+S6,P2,ridge_schedule,case5,eol_recall,0.9764705882,end of life
+S6,P2,ridge_schedule,case6,eol_recall,1,end of life
+S6,P2,ridge_schedule,case7,eol_recall,0.9607843137,end of life
+S6,P2,tft,case1,eol_recall,0.9954022989,end of life
+S6,P2,tft,case2,eol_recall,0.9497435897,end of life
+S6,P2,tft,case3,eol_recall,0.9798742138,end of life
+S6,P2,tft,case4,eol_recall,0.9933333333,end of life
+S6,P2,tft,case5,eol_recall,0.9921568627,end of life
+S6,P2,tft,case6,eol_recall,1,end of life
+S6,P2,tft,case7,eol_recall,0.9607843137,end of life
+S1,P2,gbm_F1,g1,eol_specificity,1,end of life
+S1,P2,gbm_F1,v4,eol_specificity,1,end of life
+S1,P2,gbm_F1,v5,eol_specificity,1,end of life
+S1,P2,gbm_F1,w10,eol_specificity,1,end of life
+S1,P2,gbm_F1,w8,eol_specificity,1,end of life
+S1,P2,gbm_F1,w9,eol_specificity,1,end of life
+S1,P2,linear_extrapolation,g1,eol_specificity,1,end of life
+S1,P2,linear_extrapolation,v4,eol_specificity,1,end of life
+S1,P2,linear_extrapolation,v5,eol_specificity,1,end of life
+S1,P2,linear_extrapolation,w10,eol_specificity,1,end of life
+S1,P2,linear_extrapolation,w8,eol_specificity,1,end of life
+S1,P2,linear_extrapolation,w9,eol_specificity,1,end of life
+S1,P2,mlp,g1,eol_specificity,1,end of life
+S1,P2,mlp,v4,eol_specificity,1,end of life
+S1,P2,mlp,v5,eol_specificity,1,end of life
+S1,P2,mlp,w10,eol_specificity,1,end of life
+S1,P2,mlp,w8,eol_specificity,1,end of life
+S1,P2,mlp,w9,eol_specificity,1,end of life
+S1,P2,persistence,g1,eol_specificity,1,end of life
+S1,P2,persistence,v4,eol_specificity,1,end of life
+S1,P2,persistence,v5,eol_specificity,1,end of life
+S1,P2,persistence,w10,eol_specificity,1,end of life
+S1,P2,persistence,w8,eol_specificity,1,end of life
+S1,P2,persistence,w9,eol_specificity,1,end of life
+S1,P2,ridge_F0,g1,eol_specificity,1,end of life
+S1,P2,ridge_F0,v4,eol_specificity,1,end of life
+S1,P2,ridge_F0,v5,eol_specificity,1,end of life
+S1,P2,ridge_F0,w10,eol_specificity,1,end of life
+S1,P2,ridge_F0,w8,eol_specificity,1,end of life
+S1,P2,ridge_F0,w9,eol_specificity,1,end of life
+S1,P2,ridge_F1,g1,eol_specificity,1,end of life
+S1,P2,ridge_F1,v4,eol_specificity,1,end of life
+S1,P2,ridge_F1,v5,eol_specificity,1,end of life
+S1,P2,ridge_F1,w10,eol_specificity,1,end of life
+S1,P2,ridge_F1,w8,eol_specificity,1,end of life
+S1,P2,ridge_F1,w9,eol_specificity,1,end of life
+S1,P2,ridge_schedule,g1,eol_specificity,1,end of life
+S1,P2,ridge_schedule,v4,eol_specificity,1,end of life
+S1,P2,ridge_schedule,v5,eol_specificity,1,end of life
+S1,P2,ridge_schedule,w10,eol_specificity,1,end of life
+S1,P2,ridge_schedule,w8,eol_specificity,1,end of life
+S1,P2,ridge_schedule,w9,eol_specificity,1,end of life
+S1,P2,tft,g1,eol_specificity,1,end of life
+S1,P2,tft,v4,eol_specificity,1,end of life
+S1,P2,tft,v5,eol_specificity,1,end of life
+S1,P2,tft,w10,eol_specificity,1,end of life
+S1,P2,tft,w8,eol_specificity,1,end of life
+S1,P2,tft,w9,eol_specificity,1,end of life
+S6,P2,gbm_F1,case1,eol_specificity,0.980952381,end of life
+S6,P2,gbm_F1,case2,eol_specificity,1,end of life
+S6,P2,gbm_F1,case3,eol_specificity,0.9722222222,end of life
+S6,P2,gbm_F1,case4,eol_specificity,1,end of life
+S6,P2,gbm_F1,case5,eol_specificity,0.9907407407,end of life
+S6,P2,gbm_F1,case6,eol_specificity,0.9540229885,end of life
+S6,P2,gbm_F1,case7,eol_specificity,1,end of life
+S6,P2,linear_extrapolation,case1,eol_specificity,0.980952381,end of life
+S6,P2,linear_extrapolation,case2,eol_specificity,1,end of life
+S6,P2,linear_extrapolation,case3,eol_specificity,0.9861111111,end of life
+S6,P2,linear_extrapolation,case4,eol_specificity,1,end of life
+S6,P2,linear_extrapolation,case5,eol_specificity,1,end of life
+S6,P2,linear_extrapolation,case6,eol_specificity,1,end of life
+S6,P2,linear_extrapolation,case7,eol_specificity,0.9885057471,end of life
+S6,P2,mlp,case1,eol_specificity,0.9676190476,end of life
+S6,P2,mlp,case2,eol_specificity,1,end of life
+S6,P2,mlp,case3,eol_specificity,0.9833333333,end of life
+S6,P2,mlp,case4,eol_specificity,1,end of life
+S6,P2,mlp,case5,eol_specificity,0.987037037,end of life
+S6,P2,mlp,case6,eol_specificity,0.967816092,end of life
+S6,P2,mlp,case7,eol_specificity,1,end of life
+S6,P2,persistence,case1,eol_specificity,1,end of life
+S6,P2,persistence,case2,eol_specificity,1,end of life
+S6,P2,persistence,case3,eol_specificity,1,end of life
+S6,P2,persistence,case4,eol_specificity,1,end of life
+S6,P2,persistence,case5,eol_specificity,1,end of life
+S6,P2,persistence,case6,eol_specificity,1,end of life
+S6,P2,persistence,case7,eol_specificity,1,end of life
+S6,P2,ridge_F0,case1,eol_specificity,0.9714285714,end of life
+S6,P2,ridge_F0,case2,eol_specificity,1,end of life
+S6,P2,ridge_F0,case3,eol_specificity,1,end of life
+S6,P2,ridge_F0,case4,eol_specificity,1,end of life
+S6,P2,ridge_F0,case5,eol_specificity,0.9907407407,end of life
+S6,P2,ridge_F0,case6,eol_specificity,0.9827586207,end of life
+S6,P2,ridge_F0,case7,eol_specificity,1,end of life
+S6,P2,ridge_F1,case1,eol_specificity,0.9619047619,end of life
+S6,P2,ridge_F1,case2,eol_specificity,1,end of life
+S6,P2,ridge_F1,case3,eol_specificity,1,end of life
+S6,P2,ridge_F1,case4,eol_specificity,1,end of life
+S6,P2,ridge_F1,case5,eol_specificity,1,end of life
+S6,P2,ridge_F1,case6,eol_specificity,0.9022988506,end of life
+S6,P2,ridge_F1,case7,eol_specificity,1,end of life
+S6,P2,ridge_schedule,case1,eol_specificity,0.9523809524,end of life
+S6,P2,ridge_schedule,case2,eol_specificity,1,end of life
+S6,P2,ridge_schedule,case3,eol_specificity,1,end of life
+S6,P2,ridge_schedule,case4,eol_specificity,1,end of life
+S6,P2,ridge_schedule,case5,eol_specificity,0.9907407407,end of life
+S6,P2,ridge_schedule,case6,eol_specificity,0.9597701149,end of life
+S6,P2,ridge_schedule,case7,eol_specificity,1,end of life
+S6,P2,tft,case1,eol_specificity,0.9657142857,end of life
+S6,P2,tft,case2,eol_specificity,1,end of life
+S6,P2,tft,case3,eol_specificity,0.9916666667,end of life
+S6,P2,tft,case4,eol_specificity,1,end of life
+S6,P2,tft,case5,eol_specificity,0.9907407407,end of life
+S6,P2,tft,case6,eol_specificity,0.9655172414,end of life
+S6,P2,tft,case7,eol_specificity,1,end of life
+S6,P2,gbm_F1,case1,eol_f1,0.9942857143,end of life
+S6,P2,gbm_F1,case2,eol_f1,0.9790575916,end of life
+S6,P2,gbm_F1,case3,eol_f1,0.9874213836,end of life
+S6,P2,gbm_F1,case4,eol_f1,0.9981447124,end of life
+S6,P2,gbm_F1,case5,eol_f1,0.9861386139,end of life
+S6,P2,gbm_F1,case6,eol_f1,0.9901477833,end of life
+S6,P2,gbm_F1,case7,eol_f1,0.9875930521,end of life
+S6,P2,linear_extrapolation,case1,eol_f1,0.9914040115,end of life
+S6,P2,linear_extrapolation,case2,eol_f1,0.9736842105,end of life
+S6,P2,linear_extrapolation,case3,eol_f1,0.9808917197,end of life
+S6,P2,linear_extrapolation,case4,eol_f1,0.9962825279,end of life
+S6,P2,linear_extrapolation,case5,eol_f1,0.986083499,end of life
+S6,P2,linear_extrapolation,case6,eol_f1,0.9937421777,end of life
+S6,P2,linear_extrapolation,case7,eol_f1,0.9901477833,end of life
+S6,P2,mlp,case1,eol_f1,0.9903392167,end of life
+S6,P2,mlp,case2,eol_f1,0.9758363836,end of life
+S6,P2,mlp,case3,eol_f1,0.9879921192,end of life
+S6,P2,mlp,case4,eol_f1,0.9977708961,end of life
+S6,P2,mlp,case5,eol_f1,0.9905446265,end of life
+S6,P2,mlp,case6,eol_f1,0.9930960492,end of life
+S6,P2,mlp,case7,eol_f1,0.9815185726,end of life
+S6,P2,persistence,case1,eol_f1,0.9454545455,end of life
+S6,P2,persistence,case2,eol_f1,0.9516129032,end of life
+S6,P2,persistence,case3,eol_f1,0.9607843137,end of life
+S6,P2,persistence,case4,eol_f1,0.9655172414,end of life
+S6,P2,persistence,case5,eol_f1,0.9634146341,end of life
+S6,P2,persistence,case6,eol_f1,0.9770992366,end of life
+S6,P2,persistence,case7,eol_f1,0.9538461538,end of life
+S6,P2,ridge_F0,case1,eol_f1,0.9914529915,end of life
+S6,P2,ridge_F0,case2,eol_f1,0.9736842105,end of life
+S6,P2,ridge_F0,case3,eol_f1,0.9936708861,end of life
+S6,P2,ridge_F0,case4,eol_f1,0.9981447124,end of life
+S6,P2,ridge_F0,case5,eol_f1,0.9861386139,end of life
+S6,P2,ridge_F0,case6,eol_f1,0.9950372208,end of life
+S6,P2,ridge_F0,case7,eol_f1,0.9850746269,end of life
+S6,P2,ridge_F1,case1,eol_f1,0.9886363636,end of life
+S6,P2,ridge_F1,case2,eol_f1,0.9682539683,end of life
+S6,P2,ridge_F1,case3,eol_f1,0.9904761905,end of life
+S6,P2,ridge_F1,case4,eol_f1,0.9981447124,end of life
+S6,P2,ridge_F1,case5,eol_f1,0.9920948617,end of life
+S6,P2,ridge_F1,case6,eol_f1,0.9792935445,end of life
+S6,P2,ridge_F1,case7,eol_f1,0.9900990099,end of life
+S6,P2,ridge_schedule,case1,eol_f1,0.9829545455,end of life
+S6,P2,ridge_schedule,case2,eol_f1,0.9736842105,end of life
+S6,P2,ridge_schedule,case3,eol_f1,1,end of life
+S6,P2,ridge_schedule,case4,eol_f1,1,end of life
+S6,P2,ridge_schedule,case5,eol_f1,0.9861386139,end of life
+S6,P2,ridge_schedule,case6,eol_f1,0.9913686806,end of life
+S6,P2,ridge_schedule,case7,eol_f1,0.98,end of life
+S6,P2,tft,case1,eol_f1,0.9874609281,end of life
+S6,P2,tft,case2,eol_f1,0.974220116,end of life
+S6,P2,tft,case3,eol_f1,0.9879238238,end of life
+S6,P2,tft,case4,eol_f1,0.9966549648,end of life
+S6,P2,tft,case5,eol_f1,0.9941106374,end of life
+S6,P2,tft,case6,eol_f1,0.9925998567,end of life
+S6,P2,tft,case7,eol_f1,0.979992369,end of life
+S6,P2,gbm_F1,case1,eol_mcc,0.9847868779,end of life
+S6,P2,gbm_F1,case2,eol_mcc,0.9371331941,end of life
+S6,P2,gbm_F1,case3,eol_mcc,0.9596436059,end of life
+S6,P2,gbm_F1,case4,eol_mcc,0.9939079974,end of life
+S6,P2,gbm_F1,case5,eol_mcc,0.954979649,end of life
+S6,P2,gbm_F1,case6,eol_mcc,0.9671648804,end of life
+S6,P2,gbm_F1,case7,eol_mcc,0.9604553215,end of life
+S6,P2,linear_extrapolation,case1,eol_mcc,0.9770788494,end of life
+S6,P2,linear_extrapolation,case2,eol_mcc,0.9224489008,end of life
+S6,P2,linear_extrapolation,case3,eol_mcc,0.9411155956,end of life
+S6,P2,linear_extrapolation,case4,eol_mcc,0.9878817562,end of life
+S6,P2,linear_extrapolation,case5,eol_mcc,0.9556936662,end of life
+S6,P2,linear_extrapolation,case6,eol_mcc,0.9797839828,end of life
+S6,P2,linear_extrapolation,case7,eol_mcc,0.9675507009,end of life
+S6,P2,mlp,case1,eol_mcc,0.9742290257,end of life
+S6,P2,mlp,case2,eol_mcc,0.9283036209,end of life
+S6,P2,mlp,case3,eol_mcc,0.9621526553,end of life
+S6,P2,mlp,case4,eol_mcc,0.9927159014,end of life
+S6,P2,mlp,case5,eol_mcc,0.9688291339,end of life
+S6,P2,mlp,case6,eol_mcc,0.9770071719,end of life
+S6,P2,mlp,case7,eol_mcc,0.9425037007,end of life
+S6,P2,persistence,case1,eol_mcc,0.8748422902,end of life
+S6,P2,persistence,case2,eol_mcc,0.8672300226,end of life
+S6,P2,persistence,case3,eol_mcc,0.8901981971,end of life
+S6,P2,persistence,case4,eol_mcc,0.8993825042,end of life
+S6,P2,persistence,case5,eol_mcc,0.8925461643,end of life
+S6,P2,persistence,case6,eol_mcc,0.9304147687,end of life
+S6,P2,persistence,case7,eol_mcc,0.8691732767,end of life
+S6,P2,ridge_F0,case1,eol_mcc,0.9772224314,end of life
+S6,P2,ridge_F0,case2,eol_mcc,0.9224489008,end of life
+S6,P2,ridge_F0,case3,eol_mcc,0.9801705562,end of life
+S6,P2,ridge_F0,case4,eol_mcc,0.9939079974,end of life
+S6,P2,ridge_F0,case5,eol_mcc,0.954979649,end of life
+S6,P2,ridge_F0,case6,eol_mcc,0.9835103292,end of life
+S6,P2,ridge_F0,case7,eol_mcc,0.9528744091,end of life
+S6,P2,ridge_F1,case1,eol_mcc,0.9696849615,end of life
+S6,P2,ridge_F1,case2,eol_mcc,0.9081346952,end of life
+S6,P2,ridge_F1,case3,eol_mcc,0.9705085226,end of life
+S6,P2,ridge_F1,case4,eol_mcc,0.9939079974,end of life
+S6,P2,ridge_F1,case5,eol_mcc,0.9742482558,end of life
+S6,P2,ridge_F1,case6,eol_mcc,0.9304246701,end of life
+S6,P2,ridge_F1,case7,eol_mcc,0.9681415166,end of life
+S6,P2,ridge_schedule,case1,eol_mcc,0.9542905092,end of life
+S6,P2,ridge_schedule,case2,eol_mcc,0.9224489008,end of life
+S6,P2,ridge_schedule,case3,eol_mcc,1,end of life
+S6,P2,ridge_schedule,case4,eol_mcc,1,end of life
+S6,P2,ridge_schedule,case5,eol_mcc,0.954979649,end of life
+S6,P2,ridge_schedule,case6,eol_mcc,0.9712588386,end of life
+S6,P2,ridge_schedule,case7,eol_mcc,0.9380171432,end of life
+S6,P2,tft,case1,eol_mcc,0.9665038657,end of life
+S6,P2,tft,case2,eol_mcc,0.9239263316,end of life
+S6,P2,tft,case3,eol_mcc,0.9626665812,end of life
+S6,P2,tft,case4,eol_mcc,0.9890870044,end of life
+S6,P2,tft,case5,eol_mcc,0.9803486238,end of life
+S6,P2,tft,case6,eol_mcc,0.9753624641,end of life
+S6,P2,tft,case7,eol_mcc,0.9380758986,end of life
+S6,P2,gbm_F1,case1,eol_kappa,0.9846711719,end of life
+S6,P2,gbm_F1,case2,eol_kappa,0.9351612347,end of life
+S6,P2,gbm_F1,case3,eol_kappa,0.9596436059,end of life
+S6,P2,gbm_F1,case4,eol_kappa,0.9938894415,end of life
+S6,P2,gbm_F1,case5,eol_kappa,0.9544746036,end of life
+S6,P2,gbm_F1,case6,eol_kappa,0.9666261081,end of life
+S6,P2,gbm_F1,case7,eol_kappa,0.9596740667,end of life
+S6,P2,linear_extrapolation,case1,eol_kappa,0.9770502591,end of life
+S6,P2,linear_extrapolation,case2,eol_kappa,0.9194515853,end of life
+S6,P2,linear_extrapolation,case3,eol_kappa,0.9403717088,end of life
+S6,P2,linear_extrapolation,case4,eol_kappa,0.9878083357,end of life
+S6,P2,linear_extrapolation,case5,eol_kappa,0.9547131476,end of life
+S6,P2,linear_extrapolation,case6,eol_kappa,0.9795796818,end of life
+S6,P2,linear_extrapolation,case7,eol_kappa,0.9674223342,end of life
+S6,P2,mlp,case1,eol_kappa,0.9738446599,end of life
+S6,P2,mlp,case2,eol_kappa,0.9257257227,end of life
+S6,P2,mlp,case3,eol_kappa,0.9618799719,end of life
+S6,P2,mlp,case4,eol_kappa,0.9926791109,end of life
+S6,P2,mlp,case5,eol_kappa,0.9685596745,end of life
+S6,P2,mlp,case6,eol_kappa,0.976670621,end of life
+S6,P2,mlp,case7,eol_kappa,0.9408147236,end of life
+S6,P2,persistence,case1,eol_kappa,0.8670795617,end of life
+S6,P2,persistence,case2,eol_kappa,0.8585047667,end of life
+S6,P2,persistence,case3,eol_kappa,0.8842105263,end of life
+S6,P2,persistence,case4,eol_kappa,0.8943488943,end of life
+S6,P2,persistence,case5,eol_kappa,0.8868101029,end of life
+S6,P2,persistence,case6,eol_kappa,0.928,end of life
+S6,P2,persistence,case7,eol_kappa,0.860698899,end of life
+S6,P2,ridge_F0,case1,eol_kappa,0.9769630914,end of life
+S6,P2,ridge_F0,case2,eol_kappa,0.9194515853,end of life
+S6,P2,ridge_F0,case3,eol_kappa,0.9799739922,end of life
+S6,P2,ridge_F0,case4,eol_kappa,0.9938894415,end of life
+S6,P2,ridge_F0,case5,eol_kappa,0.9544746036,end of life
+S6,P2,ridge_F0,case6,eol_kappa,0.9834767642,end of life
+S6,P2,ridge_F0,case7,eol_kappa,0.9517652909,end of life
+S6,P2,ridge_F1,case1,eol_kappa,0.9692256784,end of life
+S6,P2,ridge_F1,case2,eol_kappa,0.9039345938,end of life
+S6,P2,ridge_F1,case3,eol_kappa,0.9700738438,end of life
+S6,P2,ridge_F1,case4,eol_kappa,0.9938894415,end of life
+S6,P2,ridge_F1,case5,eol_kappa,0.9739167924,end of life
+S6,P2,ridge_F1,case6,eol_kappa,0.9280105867,end of life
+S6,P2,ridge_F1,case7,eol_kappa,0.967634301,end of life
+S6,P2,ridge_schedule,case1,eol_kappa,0.9538385175,end of life
+S6,P2,ridge_schedule,case2,eol_kappa,0.9194515853,end of life
+S6,P2,ridge_schedule,case3,eol_kappa,1,end of life
+S6,P2,ridge_schedule,case4,eol_kappa,1,end of life
+S6,P2,ridge_schedule,case5,eol_kappa,0.9544746036,end of life
+S6,P2,ridge_schedule,case6,eol_kappa,0.970845987,end of life
+S6,P2,ridge_schedule,case7,eol_kappa,0.9361001318,end of life
+S6,P2,tft,case1,eol_kappa,0.9662181124,end of life
+S6,P2,tft,case2,eol_kappa,0.9210273217,end of life
+S6,P2,tft,case3,eol_kappa,0.9621359259,end of life
+S6,P2,tft,case4,eol_kappa,0.9890245569,end of life
+S6,P2,tft,case5,eol_kappa,0.9802598661,end of life
+S6,P2,tft,case6,eol_kappa,0.9750188145,end of life
+S6,P2,tft,case7,eol_kappa,0.93613022,end of life
+S6,P2,gbm_F1,case1,eol_auc_roc,0.9996715928,end of life
+S6,P2,gbm_F1,case2,eol_auc_roc,0.9993516062,end of life
+S6,P2,gbm_F1,case3,eol_auc_roc,0.9992138365,end of life
+S6,P2,gbm_F1,case4,eol_auc_roc,0.9999683444,end of life
+S6,P2,gbm_F1,case5,eol_auc_roc,0.9992011619,end of life
+S6,P2,gbm_F1,case6,eol_auc_roc,0.9998141477,end of life
+S6,P2,gbm_F1,case7,eol_auc_roc,0.9991548343,end of life
+S6,P2,linear_extrapolation,case1,eol_auc_roc,0.9998905309,end of life
+S6,P2,linear_extrapolation,case2,eol_auc_roc,0.9989979369,end of life
+S6,P2,linear_extrapolation,case3,eol_auc_roc,0.998777079,end of life
+S6,P2,linear_extrapolation,case4,eol_auc_roc,1,end of life
+S6,P2,linear_extrapolation,case5,eol_auc_roc,0.9991285403,end of life
+S6,P2,linear_extrapolation,case6,eol_auc_roc,1,end of life
+S6,P2,linear_extrapolation,case7,eol_auc_roc,0.9997746225,end of life
+S6,P2,mlp,case1,eol_auc_roc,0.9999124247,end of life
+S6,P2,mlp,case2,eol_auc_roc,0.9993987622,end of life
+S6,P2,mlp,case3,eol_auc_roc,0.9993710692,end of life
+S6,P2,mlp,case4,eol_auc_roc,1,end of life
+S6,P2,mlp,case5,eol_auc_roc,0.9996877269,end of life
+S6,P2,mlp,case6,eol_auc_roc,0.9999513925,end of life
+S6,P2,mlp,case7,eol_auc_roc,0.9991097588,end of life
+S6,P2,persistence,case1,eol_auc_roc,0.997865353,end of life
+S6,P2,persistence,case2,eol_auc_roc,0.9978779841,end of life
+S6,P2,persistence,case3,eol_auc_roc,0.998951782,end of life
+S6,P2,persistence,case4,eol_auc_roc,0.9991452991,end of life
+S6,P2,persistence,case5,eol_auc_roc,0.9982570806,end of life
+S6,P2,persistence,case6,eol_auc_roc,0.999613999,end of life
+S6,P2,persistence,case7,eol_auc_roc,0.9976335362,end of life
+S6,P2,ridge_F0,case1,eol_auc_roc,0.9995621237,end of life
+S6,P2,ridge_F0,case2,eol_auc_roc,0.9991158267,end of life
+S6,P2,ridge_F0,case3,eol_auc_roc,0.9999126485,end of life
+S6,P2,ridge_F0,case4,eol_auc_roc,1,end of life
+S6,P2,ridge_F0,case5,eol_auc_roc,0.999382716,end of life
+S6,P2,ridge_F0,case6,eol_auc_roc,0.999828444,end of life
+S6,P2,ridge_F0,case7,eol_auc_roc,0.9992111787,end of life
+S6,P2,ridge_F1,case1,eol_auc_roc,1,end of life
+S6,P2,ridge_F1,case2,eol_auc_roc,0.9985263778,end of life
+S6,P2,ridge_F1,case3,eol_auc_roc,1,end of life
+S6,P2,ridge_F1,case4,eol_auc_roc,1,end of life
+S6,P2,ridge_F1,case5,eol_auc_roc,0.9997821351,end of life
+S6,P2,ridge_F1,case6,eol_auc_roc,0.999742666,end of life
+S6,P2,ridge_F1,case7,eol_auc_roc,0.9991548343,end of life
+S6,P2,ridge_schedule,case1,eol_auc_roc,0.9992337165,end of life
+S6,P2,ridge_schedule,case2,eol_auc_roc,0.9992926614,end of life
+S6,P2,ridge_schedule,case3,eol_auc_roc,1,end of life
+S6,P2,ridge_schedule,case4,eol_auc_roc,1,end of life
+S6,P2,ridge_schedule,case5,eol_auc_roc,0.9993100944,end of life
+S6,P2,ridge_schedule,case6,eol_auc_roc,0.9997998513,end of life
+S6,P2,ridge_schedule,case7,eol_auc_roc,0.9990421456,end of life
+S6,P2,tft,case1,eol_auc_roc,0.9996825397,end of life
+S6,P2,tft,case2,eol_auc_roc,0.9992808724,end of life
+S6,P2,tft,case3,eol_auc_roc,0.9994234801,end of life
+S6,P2,tft,case4,eol_auc_roc,0.9999936689,end of life
+S6,P2,tft,case5,eol_auc_roc,0.9998402324,end of life
+S6,P2,tft,case6,eol_auc_roc,0.9998856293,end of life
+S6,P2,tft,case7,eol_auc_roc,0.9990308767,end of life

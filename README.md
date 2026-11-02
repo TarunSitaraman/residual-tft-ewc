@@ -45,7 +45,7 @@ Every reported number traces to a results file in `results/`, written by code in
 | Big-data component | An **Apache Spark** job that reduces about 132 GB (902 million rows) of raw ageing data to block-level features |
 | Reuse screening | Forecast SOH is mapped to four capacity-based fade classes (C0–C3), a screening aid rather than an application suitability verdict |
 | Uncertainty | Split-conformal forecast intervals, calibrated leave-one-condition-out and updated online as a new condition's checks arrive |
-| Tooling | 204 tests, pre-registered protocols, a live data-platform web page, and the paper |
+| Tooling | 212 tests, pre-registered protocols, a live data-platform web page, a results dashboard, and the paper |
 
 **Headline findings** (details and caveats in [Section 8](#8-results)):
 
@@ -232,7 +232,10 @@ Notebooks 05–09 and 13 accept `EXPERIMENT_PROFILE=smoke` for a fast code check
 ### 5.9 Live data platform (`scripts/platform_server.py`)
 A local web server (default `http://localhost:8050`) that rebuilds a single page whenever a results file, table, manifest or Spark snapshot changes. Tabs: Overview, Datasets (catalogue and lineage), Tables, Raw files, Pipelines, Runs, Results, Spark run, Ageing explorer and Paper. Tables, Raw files, Results and Paper form a read-only **data browser** over every table, raw S6 file preview, results JSON and paper figure. A status bar shows running Spark jobs, the History Server and pipeline scripts. It serves only catalogued files, checks the `Host` header against DNS rebinding, and cannot change anything. `--lan` serves it on the local network. A static snapshot is `docs/spark_dashboard.html`.
 
-### 5.10 Paper (`paper/`)
+### 5.10 Results dashboard (`dashboard/`)
+An interactive view of the findings, with two layers. A **Tableau Public** workbook holds the analytical views: SOH explorer, forecast accuracy per group and horizon, continual-learning adaptation and retention, and reuse classes and interval coverage. A static **JS page** (`dashboard/index.html`, no build step) embeds them with the Tableau Embedding API v3. The page's single filter bar (dataset, setting, protocol, group, method family) drives every embedded view, and selecting a mark opens a details panel. The page's own views read `results/dashboard/summary.json`: the headline KPIs, the paper's Table III and a per-condition error heatmap. Until a Tableau view is published, its tab shows the paper's figures instead. `scripts/export_dashboard_data.py` writes the tidy tables from the committed results files to `results/dashboard/`, and the SOH trajectories and saved forecasts from the data folder to `data/dashboard/` (git-ignored). Tableau Public was chosen over Power BI: the data are small and public, Tableau Public is free to publish, and its JS API can drive filters without paid capacity. See `dashboard/README.md` and `dashboard/tableau/WORKBOOK_SPEC.md`.
+
+### 5.11 Paper (`paper/`)
 IEEE conference paper (8 pages). Tables and figures are generated from committed results files: `scripts/make_results_tables.py` writes the D18/D20 tables and refuses results written from a dirty tree; `scripts/make_d21_figures.py` draws the D21/D23 figures. The D21–D23 sections of `docs/RESULTS.md` are written by hand from their results files.
 
 ---
@@ -382,9 +385,10 @@ src/                library code: data_pipeline, raw_diagnostics, diagnostic_fea
                     calibration, metrics, tabular_baselines, evaluation, reuse, robustness, p3;
                     models/ (MLP, TFT)
 scripts/            fetchers, feature builders, experiment runners (run_p3, run_ablation_a1, run_d23–run_d30),
-                    Spark job, platform server, figure and table generators
-tests/              204 pytest tests (synthetic data in temporary folders only)
-results/            committed result JSON files, generated tables (results/tables) and figures
+                    Spark job, platform server, dashboard export, figure and table generators
+dashboard/          results dashboard: JS page and the Tableau Public workbook specification
+tests/              212 pytest tests (synthetic data in temporary folders only)
+results/            committed result JSON files, generated tables (results/tables, results/dashboard) and figures
 paper/              IEEE manuscript, supplement, generated tables and figures
 ```
 
@@ -398,7 +402,7 @@ Conventions (from `AGENTS.md`): datasets and checkpoints stay out of Git; batter
 pip install -r requirements.txt          # Python 3.11; Java 17/21 is needed only for Spark
 export DATA_ROOT=data                    # where the CSVs live (default: data/)
 
-python -m pytest                         # 204 tests
+python -m pytest                         # 212 tests
 
 # Fetch and build data (see data/README.md for sizes, hashes and Windows TLS notes)
 python scripts/fetch_osf_diagnostics.py && python scripts/build_diagnostic_features.py
@@ -419,6 +423,10 @@ python scripts/make_d30_outputs.py
 # Spark job and live platform
 python scripts/spark_ageing_features.py --cores 6 --ui 900     # Spark UI at http://localhost:4040
 python scripts/platform_server.py                               # data platform at http://localhost:8050
+
+# Results dashboard (dashboard/README.md)
+python scripts/export_dashboard_data.py                         # tidy tables for Tableau + summary.json
+python -m http.server 8000                                      # then open http://localhost:8000/dashboard/
 ```
 
 The handover CSVs are not in Git. A mirror is at `https://huggingface.co/datasets/TarunSitaraman/second-life-ev-battery-datasets`; `data/README.md` explains how to provide them.

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Residual TFT-EWC Results</title>
+<meta name="description" content="Interactive results of continual-learning SOH forecasting and reuse assessment for heterogeneous second-life EV batteries.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script type="module" src="src/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header>
+    <div class="topline">
+      <div class="eyebrow">Second-life EV batteries · results dashboard</div>
+      <div class="topactions">
+        <a class="link" id="platform-link" href="#">Data platform ↗</a>
+        <button type="button" class="ghost" id="theme" aria-label="Switch colour theme">Theme: auto</button>
+      </div>
+    </div>
+    <h1>Residual TFT-EWC: what the results say</h1>
+    <p class="lede">Forecasts of state of health (SOH) at the next 1–6 capacity checks, a model that keeps learning as new battery groups arrive, and the reuse classes that follow from them. Every number comes from a committed results file, and simple baselines are always shown next to it.</p>
+    <div class="strip" id="kpis" aria-live="polite"><div class="fact"><span class="k">Loading</span><span class="v">…</span></div></div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Dashboard views">
+    <button role="tab" id="t-overview" aria-controls="tab-overview" aria-selected="true">Overview</button>
+    <button role="tab" id="t-soh" aria-controls="tab-soh" aria-selected="false" tabindex="-1">SOH explorer</button>
+    <button role="tab" id="t-accuracy" aria-controls="tab-accuracy" aria-selected="false" tabindex="-1">Forecast accuracy</button>
+    <button role="tab" id="t-continual" aria-controls="tab-continual" aria-selected="false" tabindex="-1">Continual learning</button>
+    <button role="tab" id="t-reuse" aria-controls="tab-reuse" aria-selected="false" tabindex="-1">Reuse &amp; uncertainty</button>
+  </nav>
+
+  <form class="filters" id="filters" aria-label="Filters applied to every view" onsubmit="return false">
+    <label>Dataset<select name="dataset">
+      <option value="S6">S6 · LFP, 7 usage conditions</option>
+      <option value="S1">S1 · NMC, 6 second-life cells</option>
+    </select></label>
+    <label>Setting<select name="setting">
+      <option value="e1">E1 · horizons 1–3</option>
+      <option value="e2">E2 · horizons 1–6</option>
+    </select></label>
+    <label>Protocol<select name="protocol">
+      <option value="P2">P2 · unseen usage condition</option>
+      <option value="P1">P1 · continual stream</option>
+    </select></label>
+    <label>Group<select name="group"><option value="all">All groups</option></select></label>
+    <label>Method family<select name="family">
+      <option value="all">All families</option>
+      <option>TFT</option><option>GBM</option><option>Baseline</option>
+      <option>MLP</option><option>BiLSTM</option><option>TCN</option><option>Transformer</option>
+    </select></label>
+    <button type="button" class="ghost" id="reset">Reset</button>
+  </form>
+
+  <main id="main" class="layout">
+    <div class="panels">
+      <section class="tab" id="tab-overview" role="tabpanel" aria-labelledby="t-overview">
+        <div class="card">
+          <div class="cardhead"><h2>Headline comparison</h2><span class="sub" id="headline-sub"></span></div>
+          <p class="sub">Test RMSE of SOH in percentage points (pp). Proposed model: mean of 50 runs, main / replicate seed sets. Baselines are single deterministic fits. Lower is better.</p>
+          <div class="scroll" id="headline"></div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><h2 id="pergroup-title">Error per usage condition</h2><span class="sub" id="pergroup-sub"></span></div>
+          <p class="sub">RMSE (pp) per group. Darker cells mean larger error, and ● marks the lowest error in each column. Click a cell to see the details.</p>
+          <div class="scroll" id="pergroup"></div>
+        </div>
+        <div class="card">
+          <h2>Read these with every number</h2>
+          <ul class="caveats" id="caveats"></ul>
+        </div>
+      </section>
+      <section class="tab" id="tab-soh" role="tabpanel" aria-labelledby="t-soh" hidden></section>
+      <section class="tab" id="tab-accuracy" role="tabpanel" aria-labelledby="t-accuracy" hidden></section>
+      <section class="tab" id="tab-continual" role="tabpanel" aria-labelledby="t-continual" hidden></section>
+      <section class="tab" id="tab-reuse" role="tabpanel" aria-labelledby="t-reuse" hidden></section>
+    </div>
+
+    <aside class="details" id="details" aria-label="Details" hidden>
+      <div class="cardhead"><h2 id="details-title">Details</h2>
+        <button type="button" class="ghost icon" id="details-close" aria-label="Close details">✕</button></div>
+      <div id="details-body"></div>
+    </aside>
+  </main>
+
+  <footer>
+    <span id="provenance">Reading results…</span>
+    <span>Data: Moy et al. 2024 (S1, CC BY 4.0) and Wheeler et al. 2025 (S6, CC BY 4.0). SOH is relative to each cell's first valid capacity check.</span>
+  </footer>
+</div>
+<div class="tip" id="tip" role="tooltip" hidden></div>
+</body>
+</html>

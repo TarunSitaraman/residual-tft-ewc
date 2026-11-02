@@ -1,0 +1,62 @@
+method,label,family,kind,is_proposed
+ewc,MLP + EWC,MLP,continual,False
+ewc_online,"Residual TFT + EWC, online",TFT,online adaptation,False
+finetune,MLP fine-tuning,MLP,continual,False
+ft_online,"Residual TFT, online fine-tuning",TFT,online adaptation,False
+gbm_F1,"Gradient boosting, F1",GBM,tabular baseline,False
+gbm_all,"Gradient boosting, all conditions stored",GBM,tabular baseline,False
+gbm_last,"Gradient boosting, latest condition only",GBM,tabular baseline,False
+gbm_loco,GBM-LOCO intervals,GBM,interval calibration,False
+gbm_loco_mondrian,"GBM-LOCO intervals, Mondrian",GBM,interval calibration,False
+gbm_shared,Gradient boosting,GBM,tabular baseline,False
+gbm_warm,"Gradient boosting, warm-started",GBM,tabular baseline,False
+gpr_direct,"GPR, direct",Baseline,tabular baseline,False
+gpr_residual,"GPR, residual",Baseline,tabular baseline,False
+joint,MLP joint,MLP,joint (upper bound),False
+joint_static,"Residual TFT, joint (static)",TFT,joint (upper bound),False
+lin_all,LIN-all intervals,Baseline,interval calibration,False
+lin_all_mondrian,"LIN-all intervals, Mondrian",Baseline,interval calibration,False
+lin_val,LIN-val intervals (D26 rule),Baseline,interval calibration,False
+linear_extrapolation,Linear extrapolation,Baseline,deterministic,False
+linear_extrapolation_conformal,Linear extrapolation (conformal),Baseline,deterministic,False
+lstm_direct_ewc,"BiLSTM + EWC, direct",BiLSTM,continual,False
+lstm_direct_finetune,"BiLSTM fine-tuning, direct",BiLSTM,continual,False
+lstm_residual_ewc,"BiLSTM + EWC, residual",BiLSTM,continual,False
+lstm_residual_finetune,"BiLSTM fine-tuning, residual",BiLSTM,continual,False
+mlp,MLP,MLP,continual,False
+mlp_direct_ewc,"MLP + EWC, direct",MLP,continual,False
+mlp_direct_finetune,"MLP fine-tuning, direct",MLP,continual,False
+mlp_residual_ewc,"MLP + EWC, residual",MLP,continual,False
+mlp_residual_finetune,"MLP fine-tuning, residual",MLP,continual,False
+persistence,Persistence,Baseline,deterministic,False
+replay,MLP replay,MLP,continual,False
+rf_direct,"Random forest, direct",Baseline,tabular baseline,False
+rf_residual,"Random forest, residual",Baseline,tabular baseline,False
+ridge_F0,"Ridge, F0",Baseline,tabular baseline,False
+ridge_F1,"Ridge, F1",Baseline,tabular baseline,False
+ridge_schedule,"Ridge, usage only",Baseline,tabular baseline,False
+ridge_shared,Ridge,Baseline,tabular baseline,False
+svr_direct,"SVR, direct",Baseline,tabular baseline,False
+svr_residual,"SVR, residual",Baseline,tabular baseline,False
+tcn_direct_ewc,"TCN + EWC, direct",TCN,continual,False
+tcn_direct_finetune,"TCN fine-tuning, direct",TCN,continual,False
+tcn_residual_ewc,"TCN + EWC, residual",TCN,continual,False
+tcn_residual_finetune,"TCN fine-tuning, residual",TCN,continual,False
+tft,TFT,TFT,continual,False
+tft_direct_ewc,"TFT + EWC, direct",TFT,continual,False
+tft_direct_finetune,"TFT fine-tuning, direct",TFT,continual,False
+tft_ewc,TFT + EWC,TFT,continual,False
+tft_ewc_F0,"TFT + EWC, F0",TFT,continual,False
+tft_finetune,TFT fine-tuning,TFT,continual,False
+tft_joint,TFT joint,TFT,joint (upper bound),False
+tft_pre_residual_ewc,"Residual TFT + EWC, pretrained",TFT,continual,False
+tft_pre_residual_ewc_shrunk,"Residual TFT-EWC, pretrained",TFT,continual,False
+tft_residual_ewc,"TFT + EWC, residual",TFT,continual,False
+tft_residual_ewc_shrunk,Residual TFT-EWC (proposed),TFT,continual,True
+tft_residual_finetune,"TFT fine-tuning, residual",TFT,continual,False
+tft_residual_joint,"Residual TFT, joint",TFT,joint (upper bound),False
+tft_residual_saewc,Residual TFT + SA-EWC,TFT,continual,False
+transformer_direct_ewc,"Transformer + EWC, direct",Transformer,continual,False
+transformer_direct_finetune,"Transformer fine-tuning, direct",Transformer,continual,False
+transformer_residual_ewc,"Transformer + EWC, residual",Transformer,continual,False
+transformer_residual_finetune,"Transformer fine-tuning, residual",Transformer,continual,False

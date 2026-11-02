@@ -1,0 +1,14 @@
+dataset,group,group_order,chemistry,unit,description,charge_mode,v_max,charge_c_rate,discharge,dod
+S1,g1,0,NMC (LG M50T),cell,"Second-life cell g1, grid duty cycle",,,,,
+S1,v4,1,NMC (LG M50T),cell,"Second-life cell v4, grid duty cycle",,,,,
+S1,v5,2,NMC (LG M50T),cell,"Second-life cell v5, grid duty cycle",,,,,
+S1,w8,3,NMC (LG M50T),cell,"Second-life cell w8, grid duty cycle",,,,,
+S1,w9,4,NMC (LG M50T),cell,"Second-life cell w9, grid duty cycle",,,,,
+S1,w10,5,NMC (LG M50T),cell,"Second-life cell w10, grid duty cycle",,,,,
+S6,case1,0,LFP (A123),usage condition,"CC-CV to 3.65 V at 0.33C, WLTP discharge, 70% DoD, 50 degC",CC-CV,3.65,0.3333333333,WLTP,0.7
+S6,case2,1,LFP (A123),usage condition,"CC-CV to 3.55 V at 0.33C, WLTP discharge, 70% DoD, 50 degC",CC-CV,3.55,0.3333333333,WLTP,0.7
+S6,case3,2,LFP (A123),usage condition,"CC to 3.65 V at 0.33C, WLTP discharge, 70% DoD, 50 degC",CC,3.65,0.3333333333,WLTP,0.7
+S6,case4,3,LFP (A123),usage condition,"CC-CV to 3.65 V at 2C, WLTP discharge, 70% DoD, 50 degC",CC-CV,3.65,2,WLTP,0.7
+S6,case5,4,LFP (A123),usage condition,"CC-CV to 3.55 V at 2C, WLTP discharge, 70% DoD, 50 degC",CC-CV,3.55,2,WLTP,0.7
+S6,case6,5,LFP (A123),usage condition,"CC-CV to 3.65 V at 2C, CC 2C discharge, 70% DoD, 50 degC",CC-CV,3.65,2,CC 2C,0.7
+S6,case7,6,LFP (A123),usage condition,"CC to 3.65 V at 0.33C, WLTP discharge, 100% DoD, 50 degC",CC,3.65,0.3333333333,WLTP,1

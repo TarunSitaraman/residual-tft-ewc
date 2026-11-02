@@ -1,0 +1,69 @@
+experiment,setting,family,a,b,metric,diff_main,diff_replicate,p_holm_main,p_holm_replicate,verdict
+D25,e1,primary,tft_residual_ewc_shrunk,linear_extrapolation,final_avg_error,-0.02456207751,-0.03516993462,0.002969294689,0.001017333156,practically equivalent
+D25,e1,primary,tft_pre_residual_ewc_shrunk,linear_extrapolation,final_avg_error,0.07902968465,0.0720510784,3.765107312e-07,2.876081005e-05,"replicated, a worse"
+D25,e1,primary,tft_pre_residual_ewc,tft_residual_ewc,final_avg_error,0.217671288,0.2266076823,1.62299969e-08,1.235633817e-11,"replicated, a worse"
+D25,e1,primary,tft_residual_ewc_shrunk,linear_extrapolation_conformal,is90,0.02204763814,0.07489835166,0.8632650227,0.5462652589,not replicated
+D25,e1,secondary,tft_residual_ewc_shrunk,tft_residual_ewc,final_avg_error,-0.02096460612,-0.006024390132,2.048909664e-08,1.28056854e-08,practically equivalent
+D25,e1,secondary,tft_residual_ewc_shrunk,tft_residual_ewc,forgetting,-0.01566501263,-0.002520579576,0.009456192714,0.4853208325,practically equivalent
+D25,e1,secondary,tft_pre_residual_ewc_shrunk,tft_pre_residual_ewc,final_avg_error,-0.1350441319,-0.1254110594,1.215028078e-12,1.598721155e-14,"replicated, a better"
+D25,e1,secondary,tft_pre_residual_ewc_shrunk,tft_pre_residual_ewc,forgetting,0.0100346031,0.06089596808,0.6238785549,0.0001384138479,not replicated
+D25,e1,secondary,tft_pre_residual_ewc,tft_residual_ewc,forgetting,-0.005716178971,-0.03327508891,1,0.02214222481,practically equivalent
+D25,e1,secondary,tft_pre_residual_ewc_shrunk,tft_residual_ewc_shrunk,final_avg_error,0.1035917622,0.107221013,4.697030729e-07,2.536288655e-07,"replicated, a worse"
+D25,e1,secondary,tft_pre_residual_ewc_shrunk,linear_extrapolation_conformal,is90,0.6434966492,0.4487685417,0.0001274242591,0.0006642120975,"replicated, a worse"
+D25,e1,secondary,tft_residual_ewc_shrunk,linear_extrapolation_conformal,is80,-0.08329036868,-0.09883447982,1,0.4853208325,not replicated
+D25,e1,secondary,tft_pre_residual_ewc_shrunk,linear_extrapolation_conformal,is80,0.3638380873,0.2370040421,0.0002871495195,0.004802681268,"replicated, a worse"
+D25,e2,primary,tft_residual_ewc_shrunk,linear_extrapolation,final_avg_error,0.0130527499,0.008385229754,1,0.9921357867,practically equivalent
+D25,e2,primary,tft_pre_residual_ewc_shrunk,linear_extrapolation,final_avg_error,0.01468865814,0.04043412664,1,0.03333345548,practically equivalent
+D25,e2,primary,tft_pre_residual_ewc,tft_residual_ewc,final_avg_error,-0.01990542527,0.05918326957,1,0.06199760001,not replicated
+D25,e2,primary,tft_residual_ewc_shrunk,linear_extrapolation_conformal,is90,0.00951502259,-0.02707707339,0.7905398732,0.3886939058,practically equivalent
+D25,e2,secondary,tft_residual_ewc_shrunk,tft_residual_ewc,final_avg_error,-0.06314727121,-0.0405318682,8.526512829e-14,2.842170943e-14,not replicated
+D25,e2,secondary,tft_residual_ewc_shrunk,tft_residual_ewc,forgetting,-0.007827633969,-0.002295803224,1,1,practically equivalent
+D25,e2,secondary,tft_pre_residual_ewc_shrunk,tft_pre_residual_ewc,final_avg_error,-0.0416059377,-0.06766624089,1.598721155e-14,1.598721155e-14,not replicated
+D25,e2,secondary,tft_pre_residual_ewc_shrunk,tft_pre_residual_ewc,forgetting,-0.007906830435,-0.01292262618,1,1,practically equivalent
+D25,e2,secondary,tft_pre_residual_ewc,tft_residual_ewc,forgetting,-0.01554759962,0.007098518888,1,1,practically equivalent
+D25,e2,secondary,tft_pre_residual_ewc_shrunk,tft_residual_ewc_shrunk,final_avg_error,0.001635908241,0.03204889689,1,0.4533724014,practically equivalent
+D25,e2,secondary,tft_pre_residual_ewc_shrunk,linear_extrapolation_conformal,is90,-0.01894694205,0.04660121521,0.829433994,1,practically equivalent
+D25,e2,secondary,tft_residual_ewc_shrunk,linear_extrapolation_conformal,is80,-0.1789688336,-0.2178156286,0.0334769373,0.02324887946,"replicated, a better"
+D25,e2,secondary,tft_pre_residual_ewc_shrunk,linear_extrapolation_conformal,is80,-0.2004026864,-0.133816015,0.008975692846,0.4533724014,not replicated
+D25,e2,horizon_scratch,tft_residual_ewc_shrunk,linear_extrapolation,rmse_h1,0.010795818,0.02613549265,0.5979180984,0.01405787556,practically equivalent
+D25,e2,horizon_scratch,tft_residual_ewc_shrunk,linear_extrapolation,rmse_h2,0.01141690616,0.02976473156,1,0.2131304462,practically equivalent
+D25,e2,horizon_scratch,tft_residual_ewc_shrunk,linear_extrapolation,rmse_h3,0.01232927036,0.008381284064,1,0.9482409279,practically equivalent
+D25,e2,horizon_scratch,tft_residual_ewc_shrunk,linear_extrapolation,rmse_h4,0.04110980672,0.004881109796,0.9707950288,0.7658073827,practically equivalent
+D25,e2,horizon_scratch,tft_residual_ewc_shrunk,linear_extrapolation,rmse_h5,0.02030123764,-0.01825163718,1,0.1181903373,practically equivalent
+D25,e2,horizon_scratch,tft_residual_ewc_shrunk,linear_extrapolation,rmse_h6,0.008312173435,-0.03287785845,1,0.1181903373,practically equivalent
+D25,e2,horizon_pre,tft_pre_residual_ewc_shrunk,linear_extrapolation,rmse_h1,0.01519587176,0.01438402576,0.009089800619,0.2484665734,practically equivalent
+D25,e2,horizon_pre,tft_pre_residual_ewc_shrunk,linear_extrapolation,rmse_h2,0.034607579,0.03609075041,0.1061704587,0.1780686966,practically equivalent
+D25,e2,horizon_pre,tft_pre_residual_ewc_shrunk,linear_extrapolation,rmse_h3,0.05541978168,0.05223855333,0.00467081592,0.0003224744802,"replicated, a worse"
+D25,e2,horizon_pre,tft_pre_residual_ewc_shrunk,linear_extrapolation,rmse_h4,0.0798253329,0.06746780288,0.02863238333,0.001154374926,"replicated, a worse"
+D25,e2,horizon_pre,tft_pre_residual_ewc_shrunk,linear_extrapolation,rmse_h5,0.04449331381,0.05109293312,0.8824555767,0.1560621021,not replicated
+D25,e2,horizon_pre,tft_pre_residual_ewc_shrunk,linear_extrapolation,rmse_h6,-0.001064311395,0.02093510651,0.1061704587,0.6806447468,practically equivalent
+D26,e1,primary,tft_residual_ewc_shrunk,linear_extrapolation,p2_error_hplus,-0.1220520475,-0.1163370718,1.019273554e-11,3.40367734e-11,"replicated, a better"
+D26,e1,primary,tft_residual_ewc_shrunk,linear_extrapolation,p2_error,-0.4476341591,-0.4270608039,7.105427358e-15,7.105427358e-15,"replicated, a better"
+D26,e1,primary,tft_residual_ewc_shrunk,gbm_shared,p2_error,0.3891463934,0.4097197486,7.105427358e-15,7.105427358e-15,"replicated, a worse"
+D26,e1,primary,tft_residual_ewc_shrunk,linear_extrapolation_conformal,is90,-2.35025296,-2.196425784,7.105427358e-15,1.065814104e-14,"replicated, a better"
+D26,e1,secondary,tft_residual_ewc_shrunk,linear_extrapolation,p2_error_hminus,-2.284625774,-2.158884527,8.881784197e-15,8.881784197e-15,"replicated, a better"
+D26,e1,secondary,tft_residual_ewc_shrunk,gbm_shared,p2_error_hminus,1.535509507,1.661250754,8.881784197e-15,8.881784197e-15,"replicated, a worse"
+D26,e1,secondary,tft_residual_ewc_shrunk,tft_residual_ewc,p2_error,0.03965467018,0.04511988211,5.36725477e-06,2.828307458e-05,practically equivalent
+D26,e1,secondary,tft_residual_ewc,tft_residual_joint,p2_error,0.3169216207,0.3229132446,8.881784197e-15,8.881784197e-15,"replicated, a worse"
+D26,e1,secondary,tft_residual_ewc_shrunk,linear_extrapolation_conformal,is80,-1.485026322,-1.396331473,8.881784197e-15,8.881784197e-15,"replicated, a better"
+D26,e2,primary,tft_residual_ewc_shrunk,linear_extrapolation,p2_error_hplus,-0.2013815724,-0.179307336,9.769962617e-14,6.616929227e-12,"replicated, a better"
+D26,e2,primary,tft_residual_ewc_shrunk,linear_extrapolation,p2_error,-0.679555832,-0.6466635015,7.105427358e-15,7.105427358e-15,"replicated, a better"
+D26,e2,primary,tft_residual_ewc_shrunk,gbm_shared,p2_error,0.5698089038,0.6027012343,7.105427358e-15,7.105427358e-15,"replicated, a worse"
+D26,e2,primary,tft_residual_ewc_shrunk,linear_extrapolation_conformal,is90,-3.571478086,-3.182583305,7.105427358e-15,1.065814104e-14,"replicated, a better"
+D26,e2,secondary,tft_residual_ewc_shrunk,linear_extrapolation,p2_error_hminus,-3.700427389,-3.615215823,8.881784197e-15,8.881784197e-15,"replicated, a better"
+D26,e2,secondary,tft_residual_ewc_shrunk,gbm_shared,p2_error_hminus,2.360622328,2.445833894,8.881784197e-15,8.881784197e-15,"replicated, a worse"
+D26,e2,secondary,tft_residual_ewc_shrunk,tft_residual_ewc,p2_error,0.02537377327,0.02991769476,2.515663949e-06,3.382351215e-06,practically equivalent
+D26,e2,secondary,tft_residual_ewc,tft_residual_joint,p2_error,0.3806052709,0.4395839849,1.065814104e-14,8.881784197e-15,"replicated, a worse"
+D26,e2,secondary,tft_residual_ewc_shrunk,linear_extrapolation_conformal,is80,-2.018907609,-1.8575187,1.065814104e-14,8.881784197e-15,"replicated, a better"
+D32,e1,primary,tft_residual_ewc_shrunk,gbm_warm,p2_error,-1.727141357,-1.706568002,3.552713679e-15,3.552713679e-15,"replicated, a better"
+D32,e1,primary,tft_residual_ewc_shrunk,gbm_last,p2_error,0.059502459,0.0800758142,0.02237794256,0.00261412391,"replicated, a worse"
+D32,e1,secondary,tft_residual_ewc_shrunk,gbm_warm,p2_error_hplus,-1.908176722,-1.902461746,7.105427358e-15,7.105427358e-15,"replicated, a better"
+D32,e1,secondary,tft_residual_ewc_shrunk,gbm_last,p2_error_hplus,-0.02719052475,-0.02147554904,0.2147520115,0.1902666787,practically equivalent
+D32,e1,secondary,tft_residual_ewc,gbm_warm,p2_error,-1.766796027,-1.751687884,7.105427358e-15,7.105427358e-15,"replicated, a better"
+D32,e1,secondary,tft_residual_ewc,gbm_last,p2_error,0.01984778882,0.03495593209,0.2147520115,0.1902666787,practically equivalent
+D32,e2,primary,tft_residual_ewc_shrunk,gbm_warm,p2_error,-1.873160466,-1.840268136,3.552713679e-15,3.552713679e-15,"replicated, a better"
+D32,e2,primary,tft_residual_ewc_shrunk,gbm_last,p2_error,0.02714607889,0.06003840937,0.08054833435,0.08054833435,not replicated
+D32,e2,secondary,tft_residual_ewc_shrunk,gbm_warm,p2_error_hplus,-2.096406326,-2.074332089,7.105427358e-15,7.105427358e-15,"replicated, a better"
+D32,e2,secondary,tft_residual_ewc_shrunk,gbm_last,p2_error_hplus,-0.1277729995,-0.1056987631,0.1876839042,0.1629322574,not replicated
+D32,e2,secondary,tft_residual_ewc,gbm_warm,p2_error,-1.89853424,-1.870185831,7.105427358e-15,7.105427358e-15,"replicated, a better"
+D32,e2,secondary,tft_residual_ewc,gbm_last,p2_error,0.001772305621,0.03012071461,0.1752015049,0.1543918463,practically equivalent

@@ -1,0 +1,85 @@
+dataset,method,label,rmse_pp,horizon
+S1,persistence,Persistence,0.4899097754,1
+S1,linear_extrapolation,Linear extrapolation,0.6463878257,1
+S1,ridge_schedule,"Ridge, usage only",0.4006071774,1
+S1,ridge_F0,"Ridge, F0",0.6566045221,1
+S1,ridge_F1,"Ridge, F1",0.4781179878,1
+S1,gbm_F1,"Gradient boosting, F1",0.4688816038,1
+S1,finetune,MLP fine-tuning,0.5113944446,1
+S1,replay,MLP replay,0.5010563126,1
+S1,ewc,MLP + EWC,0.5127758561,1
+S1,joint,MLP joint (upper bound),0.528953187,1
+S1,tft_finetune,TFT fine-tuning,0.4621238019,1
+S1,tft_ewc,TFT + EWC,0.4588020101,1
+S1,tft_ewc_F0,"TFT + EWC, F0",0.4627010754,1
+S1,tft_joint,TFT joint (upper bound),0.4754907848,1
+S6,persistence,Persistence,0.8032147528,1
+S6,linear_extrapolation,Linear extrapolation,0.2090049177,1
+S6,ridge_schedule,"Ridge, usage only",0.7155305418,1
+S6,ridge_F0,"Ridge, F0",0.3518159963,1
+S6,ridge_F1,"Ridge, F1",0.6641932405,1
+S6,gbm_F1,"Gradient boosting, F1",0.2701239817,1
+S6,finetune,MLP fine-tuning,0.4767686182,1
+S6,replay,MLP replay,0.495104933,1
+S6,ewc,MLP + EWC,0.4546625151,1
+S6,joint,MLP joint (upper bound),0.2730166334,1
+S6,tft_finetune,TFT fine-tuning,0.5880593443,1
+S6,tft_ewc,TFT + EWC,0.5317952295,1
+S6,tft_ewc_F0,"TFT + EWC, F0",0.4591786293,1
+S6,tft_joint,TFT joint (upper bound),0.2807601251,1
+S1,persistence,Persistence,0.6467810972,2
+S1,linear_extrapolation,Linear extrapolation,0.6671023077,2
+S1,ridge_schedule,"Ridge, usage only",0.479975541,2
+S1,ridge_F0,"Ridge, F0",0.6110888504,2
+S1,ridge_F1,"Ridge, F1",0.4394561199,2
+S1,gbm_F1,"Gradient boosting, F1",0.4440997159,2
+S1,finetune,MLP fine-tuning,0.4534610966,2
+S1,replay,MLP replay,0.4283578777,2
+S1,ewc,MLP + EWC,0.4601040417,2
+S1,joint,MLP joint (upper bound),0.4509751835,2
+S1,tft_finetune,TFT fine-tuning,0.4518278354,2
+S1,tft_ewc,TFT + EWC,0.4499527423,2
+S1,tft_ewc_F0,"TFT + EWC, F0",0.4594046805,2
+S1,tft_joint,TFT joint (upper bound),0.430872785,2
+S6,persistence,Persistence,1.583830802,2
+S6,linear_extrapolation,Linear extrapolation,0.347488205,2
+S6,ridge_schedule,"Ridge, usage only",1.243223375,2
+S6,ridge_F0,"Ridge, F0",0.7267100394,2
+S6,ridge_F1,"Ridge, F1",0.4059826107,2
+S6,gbm_F1,"Gradient boosting, F1",0.3449729191,2
+S6,finetune,MLP fine-tuning,0.4559054002,2
+S6,replay,MLP replay,0.5252837448,2
+S6,ewc,MLP + EWC,0.4681116945,2
+S6,joint,MLP joint (upper bound),0.3475964558,2
+S6,tft_finetune,TFT fine-tuning,0.8849404444,2
+S6,tft_ewc,TFT + EWC,0.6170345741,2
+S6,tft_ewc_F0,"TFT + EWC, F0",0.5621192537,2
+S6,tft_joint,TFT joint (upper bound),0.4392351647,2
+S1,persistence,Persistence,0.8262772031,3
+S1,linear_extrapolation,Linear extrapolation,0.9025573102,3
+S1,ridge_schedule,"Ridge, usage only",0.4883252796,3
+S1,ridge_F0,"Ridge, F0",0.7514181032,3
+S1,ridge_F1,"Ridge, F1",0.5722062843,3
+S1,gbm_F1,"Gradient boosting, F1",0.4583960222,3
+S1,finetune,MLP fine-tuning,0.477046476,3
+S1,replay,MLP replay,0.4577341908,3
+S1,ewc,MLP + EWC,0.4908309973,3
+S1,joint,MLP joint (upper bound),0.486686904,3
+S1,tft_finetune,TFT fine-tuning,0.4748980136,3
+S1,tft_ewc,TFT + EWC,0.4653379026,3
+S1,tft_ewc_F0,"TFT + EWC, F0",0.4843903755,3
+S1,tft_joint,TFT joint (upper bound),0.4209730991,3
+S6,persistence,Persistence,2.383163792,3
+S6,linear_extrapolation,Linear extrapolation,0.4590130213,3
+S6,ridge_schedule,"Ridge, usage only",1.745502101,3
+S6,ridge_F0,"Ridge, F0",1.17890812,3
+S6,ridge_F1,"Ridge, F1",0.6580537241,3
+S6,gbm_F1,"Gradient boosting, F1",0.4959079776,3
+S6,finetune,MLP fine-tuning,0.6009879135,3
+S6,replay,MLP replay,0.7139710642,3
+S6,ewc,MLP + EWC,0.636442854,3
+S6,joint,MLP joint (upper bound),0.5828943978,3
+S6,tft_finetune,TFT fine-tuning,1.11530136,3
+S6,tft_ewc,TFT + EWC,0.834694399,3
+S6,tft_ewc_F0,"TFT + EWC, F0",0.7965084341,3
+S6,tft_joint,TFT joint (upper bound),0.5410760666,3
