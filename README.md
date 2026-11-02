@@ -45,7 +45,7 @@ Every reported number traces to a results file in `results/`, written by code in
 | Big-data component | An **Apache Spark** job that reduces about 132 GB (902 million rows) of raw ageing data to block-level features |
 | Reuse screening | Forecast SOH is mapped to four capacity-based fade classes (C0–C3), a screening aid rather than an application suitability verdict |
 | Uncertainty | Split-conformal forecast intervals, calibrated leave-one-condition-out and updated online as a new condition's checks arrive |
-| Tooling | 212 tests, pre-registered protocols, a live data-platform web page, a results dashboard, and the paper |
+| Tooling | 218 tests, pre-registered protocols, a live data-platform web page, a results dashboard, and the paper |
 
 **Headline findings** (details and caveats in [Section 8](#8-results)):
 
@@ -387,7 +387,7 @@ src/                library code: data_pipeline, raw_diagnostics, diagnostic_fea
 scripts/            fetchers, feature builders, experiment runners (run_p3, run_ablation_a1, run_d23–run_d30),
                     Spark job, platform server, dashboard export, figure and table generators
 dashboard/          results dashboard: JS page and the Tableau Public workbook specification
-tests/              212 pytest tests (synthetic data in temporary folders only)
+tests/              218 pytest tests (synthetic data in temporary folders only)
 results/            committed result JSON files, generated tables (results/tables, results/dashboard) and figures
 paper/              IEEE manuscript, supplement, generated tables and figures
 ```
@@ -402,7 +402,7 @@ Conventions (from `AGENTS.md`): datasets and checkpoints stay out of Git; batter
 pip install -r requirements.txt          # Python 3.11; Java 17/21 is needed only for Spark
 export DATA_ROOT=data                    # where the CSVs live (default: data/)
 
-python -m pytest                         # 212 tests
+python -m pytest                         # 218 tests
 
 # Fetch and build data (see data/README.md for sizes, hashes and Windows TLS notes)
 python scripts/fetch_osf_diagnostics.py && python scripts/build_diagnostic_features.py
