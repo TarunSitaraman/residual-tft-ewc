@@ -18,9 +18,14 @@ After export the data are small: about 850 S6 checks, 111 S1 RPTs, 38.5k saved f
    python scripts/export_dashboard_data.py
    ```
    This writes `results/dashboard/*.csv`, `summary.json` and `manifest.json` (source hashes, commit, row counts). With the data folder present (`data/README.md`), it also writes `data/dashboard/fact_soh.csv` and `fact_predictions.csv`. Without the data folder, those two are skipped with a message. Re-run after any new results file.
-2. **Author the workbook** in Tableau Desktop Public Edition, following `tableau/WORKBOOK_SPEC.md`, and publish it to Tableau Public.
-3. **Configure** the five dashboard URLs in `config.js` (`TABLEAU.views`).
-4. **Serve** the page from the repository root, because it reads `../results/dashboard/` and `../paper/figures/`:
+2. **Build the Tableau kit**:
+   ```bash
+   python scripts/build_tableau_workbook.py
+   ```
+   This writes `data/dashboard/tableau/` (git-ignored). It contains `tableau_source.xlsx`, one self-contained, pre-filtered sheet per view with the filter fields already named as the page expects, and `residual_tft_ewc.twb`, a generated starter workbook with the data sources, calculated fields, 12 worksheets and the five named dashboards. It also writes `AUTHORING.md`. Views whose inputs are missing (SOH, forecasts) get empty placeholder sheets; re-run after building the data.
+3. **Author and publish** in Tableau Desktop Public Edition. The `.twb` is generated and has never been opened by Tableau before you open it, so check every view against `tableau/WORKBOOK_SPEC.md` and fix what Tableau reports. Then save it to Tableau Public. `AUTHORING.md` lists the steps.
+4. **Configure** the five dashboard URLs in `config.js` (`TABLEAU.views`).
+5. **Serve** the page from the repository root, because it reads `../results/dashboard/` and `../paper/figures/`:
    ```bash
    python -m http.server 8000
    ```

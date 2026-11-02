@@ -9,6 +9,8 @@ Inputs come from `python scripts/export_dashboard_data.py`:
 | `results/dashboard/` | `dim_group`, `dim_method`, `fact_stream_run`, `fact_stream_task`, `fact_stream_baseline`, `fact_unseen_run`, `fact_unseen_fold`, `fact_tests`, `fact_verdicts`, `fact_coverage`, `fact_horizon`, `fact_d30_group`, `fact_headline` (CSV) | yes |
 | `data/dashboard/` | `fact_soh`, `fact_predictions` (CSV, built from the data folder) | no |
 
+**Starting point:** `python scripts/build_tableau_workbook.py` writes `data/dashboard/tableau/tableau_source.xlsx`, with one self-contained, pre-filtered sheet per view, and `residual_tft_ewc.twb`, a starter workbook that implements §1–§3 as generated XML. Open the `.twb` and correct it against this spec rather than building from scratch. It was generated without Tableau, so expect to fix sorts, mark sizes and colours.
+
 Use **extracts** (Tableau Public has no live connections). Commit the `.twb` to `dashboard/tableau/residual_tft_ewc.twb` once it exists. Keep the `.twbx` and its extract out of Git, like the data.
 
 ## 1. Contract with the JS page
@@ -26,7 +28,7 @@ Use **extracts** (Tableau Public has no live connections). Commit the `.twb` to 
 | Field | `Group` | rename `group`; values `g1`…`w10`, `case1`…`case7` (and `all` for pooled rows) |
 | Field | `Method Family` | `family` from `dim_method`, joined on `method` |
 
-The page calls `applyFilterAsync(<field>, [value], "replace")` on every worksheet of the active dashboard, or `clearFilterAsync` when "All" is chosen. A worksheet without the field is skipped. A parameter with the same name is set too. When a mark is selected, the page reads its fields, and a `Group` field opens the details panel. **Keep `Group` on the Detail shelf of every mark-level worksheet.**
+The page calls `applyFilterAsync(<field>, [value], "replace")` on every worksheet of the active dashboard, or `clearFilterAsync` when "All" is chosen. A worksheet without the field is skipped. A parameter with the same name is set too. When a mark is selected, the page reads its fields, and a `Group` field opens the details panel. **Every per-group view keeps `Group` in the view, on a shelf or on Detail.** The per-group views are the error heatmap, D30 RMSE, SOH trajectories, backward-transfer heatmap, interval coverage and parity plot. Method-level summaries (headline, horizon, adaptation vs retention, forgetting by arrival, confusion matrix) aggregate over groups and must not be split by `Group`.
 
 Publish each dashboard with "Show sheets as tabs" off. Copy each dashboard's share URL (`https://public.tableau.com/views/<Workbook>/<Dashboard>`) into `dashboard/config.js`.
 
@@ -78,6 +80,6 @@ Family colour order (fixed, never cycled; taken from `scripts/make_d24_outputs.p
 
 - [ ] Title and caption on every dashboard: "SOH relative to each cell's first valid capacity check".
 - [ ] Attribution text on every dashboard: Moy et al. 2024 (S1, CC BY 4.0); Wheeler et al. 2025 (S6, CC BY 4.0); list of changes in `docs/EXTERNAL_DATA.md`.
-- [ ] Field names of §1 present; `Group` on Detail of every mark-level sheet.
+- [ ] Field names of §1 present; `Group` in every per-group view.
 - [ ] Dashboard size "Automatic" (or a range of 800–1400 px wide) so the embed fills the page.
 - [ ] URLs pasted into `dashboard/config.js`, then the page checked (dashboard/README.md, "Verify").
