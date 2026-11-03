@@ -36,6 +36,6 @@ export const PATHS = {
   // Optional, git-ignored: SOH trajectories built from the data folder (scripts/export_dashboard_data.py).
   soh: "../data/dashboard/fact_soh.csv",
   figures: "../paper/figures/",
-  repo: "https://github.com/TarunSitaraman/residual-tft-ewc/blob/main/",
+  repo: "https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries/blob/main/",
   platform: "../docs/spark_dashboard.html",
 };
