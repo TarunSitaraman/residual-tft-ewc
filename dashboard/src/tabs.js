@@ -2,14 +2,14 @@
 // dot plot on the Overview. Data: results/dashboard/*.csv (in Git) and data/dashboard/fact_predictions.csv (local).
 // Every view follows the filter bar; S1 and S6 are never pooled.
 import { PATHS } from "../config.js";
-import { el, fmt } from "./views.js";
+import { el, fmt, groupInfo } from "./views.js";
 import { parseCsv } from "./soh.js";
 import { lineChart, dotRows, scatter, matrix, legend, tableView, seqFill, divFill, rampLegend, SEQ_GRADIENT, DIV_GRADIENT } from "./charts.js";
 
 export const PROPOSED = "tft_residual_ewc_shrunk";
 const SETTING_LABEL = { e1: "E1 (h = 1-3)", e2: "E2 (h = 1-6)" };
 const PROTOCOL_LABEL = { P1: "Continual stream (P1)", P2: "Unseen usage condition (P2)" };
-const ACCENT = "var(--accent)", NEUTRAL = "var(--neutral)";
+const ACCENT = "var(--c1)", NEUTRAL = "var(--neutral)";
 
 // ---------- data ----------
 const cache = {};
@@ -90,7 +90,7 @@ export function renderHeadlineChart(root, summary, state, tip) {
         const isBest = Math.abs((r.rmse_main + r.rmse_replicate) / 2 - best) < 0.005;
         const t = `${b(r.label)}<br>${PROTOCOL_LABEL[p]}, ${SETTING_LABEL[state.setting]}`;
         return {
-          label: `${r.label.replace(" (proposed)", "")}${isBest ? "  ●" : ""}`, emph: isP,
+          label: `${r.method === "gbm_shared" && p === "P2" ? "Gradient boosting, all conditions stored" : r.label.replace(" (proposed)", "")}${isBest ? "  ●" : ""}`, emph: isP,
           range: isP ? [Math.min(r.rmse_main, r.rmse_replicate), Math.max(r.rmse_main, r.rmse_replicate)] : null,
           marks: isP
             ? [{ v: r.rmse_replicate, color: col, open: true, r: 7.5, tip: `${t}<br>Replicate seed set: ${fmt(r.rmse_replicate, 3)} pp (50 runs)` },
@@ -111,16 +111,55 @@ export function renderHeadlineChart(root, summary, state, tip) {
 const VERDICT_PHRASE = { "practically equivalent": "level with", "replicated, a better": "ahead of", "replicated, a worse": "behind",
   "not replicated": "not distinguishable from" };
 
+const STATUS = { "practically equivalent": ["level", "Practically equivalent"], "replicated, a better": ["better", "Better, replicated"],
+  "replicated, a worse": ["worse", "Worse, replicated"], "not replicated": ["level", "Not distinguishable"] };
+
+const signed = (d) => `${d > 0 ? "+" : "−"}${fmt(Math.abs(d))}`;
+function kpi(k, v, unit, note, verdict) {
+  const [cls, word] = STATUS[verdict] || ["level", verdict];
+  return el("div", { class: "kpi" }, el("span", { class: "k", text: k }),
+    el("span", { class: "v" }, v, el("small", { text: unit })), el("span", { class: "n", text: note }),
+    verdict ? el("span", { class: `st ${cls}`, text: word }) : null);
+}
+
+/** Headline numbers: where the proposed model stands against the baselines that work without stored data, with the
+ *  registered verdicts. The comparison with gradient boosting that stores every condition is stated in kpiNote. */
+export function renderKpis(root, summary, state) {
+  const rows = summary.headline.filter((r) => r.setting === SETTING_LABEL[state.setting]);
+  const get = (m, p) => rows.find((r) => r.method === m && r.protocol === PROTOCOL_LABEL[p]);
+  const p1 = get(PROPOSED, "P1"), p2 = get(PROPOSED, "P2"), lin1 = get("linear_extrapolation", "P1"), gbm1 = get("gbm_shared", "P1"),
+    lin2 = get("linear_extrapolation", "P2");
+  const v = (m, p) => get(`vs ${m}`, p) || {};
+  const tiles = [
+    p1 && lin1 && kpi("Continual stream, test error", fmt(p1.rmse_main), "pp",
+      `Level with linear extrapolation (${fmt(lin1.rmse_main)} pp), the strongest baseline on the stream.`, v("linear_extrapolation", "P1").verdict),
+    p1 && gbm1 && kpi("Against gradient boosting on the stream", signed(v("gbm_shared", "P1").diff_main), "pp",
+      `${fmt(p1.rmse_main)} against ${fmt(gbm1.rmse_main)} pp test RMSE.`, v("gbm_shared", "P1").verdict),
+    p2 && lin2 && kpi("Unseen usage condition, against extrapolation", signed(v("linear_extrapolation", "P2").diff_main), "pp",
+      `${fmt(p2.rmse_main)} against ${fmt(lin2.rmse_main)} pp on conditions never seen in training.`, v("linear_extrapolation", "P2").verdict),
+    kpi("Forgetting with EWC, horizons 1-6", "0.09", "pp", "Down from 0.28 / 0.22 pp without EWC (study D23).", "replicated, a better")];
+  root.replaceChildren(...tiles.filter(Boolean));
+}
+
+/** One sentence that puts the strongest unseen-condition comparator in context. */
+export function kpiNote(summary, state) {
+  const rows = summary.headline.filter((r) => r.setting === SETTING_LABEL[state.setting] && r.protocol === PROTOCOL_LABEL.P2);
+  const g = (m) => rows.find((r) => r.method === m);
+  const all = g("gbm_shared"), last = g("gbm_last");
+  if (!all || !last) return "";
+  return `Gradient boosting that stores every earlier condition's data reaches ${fmt(all.rmse_main)} pp on unseen conditions; held to the same no-storage rule as the proposed model it reaches ${fmt(last.rmse_main)} pp (studies D26 and D32).`;
+}
+
 export function headlineFinding(summary, state) {
   const rows = summary.headline.filter((r) => r.setting === SETTING_LABEL[state.setting]);
   const get = (m, p) => rows.find((r) => r.method === m && r.protocol === PROTOCOL_LABEL[p]);
   const pp = (r) => (r ? `${fmt(r.rmse_main)} pp` : "–");
   const vs = (m, p) => VERDICT_PHRASE[get(`vs ${m}`, p)?.verdict] || "compared with";
   const h = state.setting === "e1" ? "1 to 3 checks ahead" : "1 to 6 checks ahead";
-  return takeaway(
-    `On the continual stream the proposed model is ${vs("linear_extrapolation", "P1")} linear extrapolation (${b(pp(get(PROPOSED, "P1")))} against ${pp(get("linear_extrapolation", "P1"))}) and ${vs("gbm_shared", "P1")} gradient boosting (${pp(get("gbm_shared", "P1"))}). ` +
-    `On unseen usage conditions it is ${vs("linear_extrapolation", "P2")} linear extrapolation (${b(pp(get(PROPOSED, "P2")))} against ${pp(get("linear_extrapolation", "P2"))}) and ${vs("gbm_shared", "P2")} gradient boosting (${pp(get("gbm_shared", "P2"))}).`,
-    `S6, ${h}, main seed set. Verdicts need significance after Holm correction in both seed sets and a difference of at least 0.05 pp.`);
+  return takeaway(`The residual TFT with EWC is the only model compared that has no weak side across the two settings (test RMSE of SOH, ${h}). ` +
+    `On the continual stream it is ${vs("linear_extrapolation", "P1")} linear extrapolation (${b(pp(get(PROPOSED, "P1")))} against ${pp(get("linear_extrapolation", "P1"))}) and ${vs("gbm_shared", "P1")} gradient boosting (${pp(get("gbm_shared", "P1"))}). ` +
+    `On unseen usage conditions it is ${vs("linear_extrapolation", "P2")} linear extrapolation (${b(pp(get(PROPOSED, "P2")))} against ${pp(get("linear_extrapolation", "P2"))}). ${kpiNote(summary, state)}`,
+    "S6, main seed set. A verdict needs significance after Holm correction in both seed sets and a difference of at least 0.05 pp.");
 }
 
 // ---------- Forecast accuracy ----------
@@ -135,6 +174,7 @@ export async function renderAccuracy(panel, ctx) {
   const label = Object.fromEntries(methods.map((m) => [m.method, m.label]));
   const groups = summary.groups.filter((g) => g.dataset === state.dataset).map((g) => g.group);
   const keep = (m, fam = family[m]) => state.family === "all" || fam === state.family;
+  const gl = (g) => { const i = groupInfo(summary, g); return state.dataset === "S6" ? `${i.name} (${i.desc})` : i.name; };
 
   // Per-group matrix: S6 from the headline studies (per protocol), S1 from D30 (leave-one-cell-out).
   let rows, cell, tag, sub;
@@ -144,7 +184,7 @@ export async function renderAccuracy(panel, ctx) {
     rows = ms.map((m) => ({ key: m, label: pg.find((r) => r.method === m).label, emph: m === PROPOSED }));
     cell = (r, c) => {
       const x = pg.find((q) => q.method === r.key && q.group === c.key);
-      return x && { v: x.rmse_mean, tip: `${b(x.label)}<br>${c.key}: ${fmt(x.rmse_mean, 3)} pp` + (x.n_runs > 1 ? ` ± ${fmt(x.rmse_sd, 3)} (s.d., ${x.n_runs} runs)` : " (single fit)") };
+      return x && { v: x.rmse_mean, tip: `${b(x.label)}<br>${esc(gl(c.key))}: ${fmt(x.rmse_mean, 3)} pp` + (x.n_runs > 1 ? ` ± ${fmt(x.rmse_sd, 3)} (s.d., ${x.n_runs} runs)` : " (single fit)") };
     };
     tag = `S6 · ${state.protocol} · ${state.setting.toUpperCase()}`;
     sub = state.protocol === "P1" ? "Final error on each task after the whole stream." : "Error on each usage condition when it is held out entirely.";
@@ -154,7 +194,7 @@ export async function renderAccuracy(panel, ctx) {
     rows = ms.map((m) => ({ key: m, label: label[m] || m, emph: m === "tft" }));
     cell = (r, c) => {
       const x = rm.find((q) => q.method === r.key && q.group === c.key);
-      return x && { v: num(x.value), tip: `${b(label[r.key] || r.key)}<br>${c.key}: ${fmt(num(x.value), 3)} pp (D30)` };
+      return x && { v: num(x.value), tip: `${b(label[r.key] || r.key)}<br>${esc(gl(c.key))}: ${fmt(num(x.value), 3)} pp (D30)` };
     };
     tag = "S1 · D30 · leave one cell out";
     sub = "S1 (six NMC second-life cells): each cell held out in turn (study D30, h = 1-3).";
@@ -165,7 +205,7 @@ export async function renderAccuracy(panel, ctx) {
 
   const heat = card(state.dataset === "S6" && state.protocol === "P1" ? "Final error per task" : "Error per held-out group", sub, tag);
   if (rows.length) {
-    matrix(heat.body, { rows, cols: groups.map((g) => ({ key: g, label: g })), cell, fill: (v) => seqFill(t(v)), best: "min", tip,
+    matrix(heat.body, { rows, cols: groups.map((g) => { const i = groupInfo(summary, g); return { key: g, label: i.name, sub: state.dataset === "S6" ? i.desc : null }; }), cell, fill: (v) => seqFill(t(v)), best: "min", tip,
       selCol: state.group, onCell: (r, c) => onSelect({ group: c.key, method: r?.key }) });
     heat.setFoot(rampLegend(`${fmt(lo)} pp`, `${fmt(hi)} pp`, SEQ_GRADIENT, "log scale; ● lowest error per column; click a cell for details"));
   } else heat.body.append(empty(`No ${state.family} method in this view.`));
@@ -204,7 +244,7 @@ export async function renderAccuracy(panel, ctx) {
   const best = skills[0];
   const colMean = groups.map((g) => ({ g, v: mean(rows.map((r) => cell(r, { key: g })?.v).filter((v) => v > 0)) })).filter((c) => c.v);
   const hard = colMean.reduce((a, c) => (c.v > a.v ? c : a), colMean[0] || {}), easy = colMean.reduce((a, c) => (c.v < a.v ? c : a), colMean[0] || {});
-  const spread = hard.g ? `Averaged over the methods shown, the hardest group (${hard.g}, ${fmt(hard.v)} pp) has ${fmt(hard.v / easy.v, 1)} times the error of the easiest (${easy.g}, ${fmt(easy.v)} pp).` : "";
+  const spread = hard.g ? `Averaged over the methods shown, the hardest group (${esc(groupInfo(summary, hard.g).name)}, ${fmt(hard.v)} pp) has ${fmt(hard.v / easy.v, 1)} times the error of the easiest (${esc(groupInfo(summary, easy.g).name)}, ${fmt(easy.v)} pp).` : "";
   const find = state.dataset === "S6"
     ? takeaway(`Across the seven LFP usage conditions, ${b(best ? best.label.replace(" (proposed)", "") : "–")} has the highest skill against persistence (${best ? fmt(best.v) : "–"}). ${spread}`,
       `Colour runs on a log scale because errors span ${fmt(hi / lo, 0)} times from best to worst.`)
@@ -283,9 +323,10 @@ export async function renderContinual(panel, ctx) {
   const groups = summary.groups.filter((g) => g.dataset === "S6").map((g) => g.group);
   const cellMap = groupMean(btr, (r) => `${r.group}|${r.arrival_pos}`, (r) => num(r.backward_transfer));
   const lim = Math.max(...[...cellMap.values()].map(Math.abs), 0.01);
-  matrix(bt.body, { tip, corner: "Task", rows: groups.map((g) => ({ key: g, label: g, emph: g === state.group })),
+  const nm = (g) => { const i = groupInfo(summary, g); return `${i.short}: ${i.desc}`; };
+  matrix(bt.body, { tip, corner: "Task (usage condition)", rows: groups.map((g) => ({ key: g, label: nm(g), emph: g === state.group })),
     cols: [1, 2, 3, 4, 5, 6].map((p) => ({ key: p, label: `Position ${p}` })),
-    cell: (r, c) => { const v = cellMap.get(`${r.key}|${c.key}`); return v === undefined ? null : { v, tip: `${b(r.key)} arriving at position ${c.key}<br>Error change ${v > 0 ? "+" : ""}${fmt(v, 3)} pp` }; },
+    cell: (r, c) => { const v = cellMap.get(`${r.key}|${c.key}`); return v === undefined ? null : { v, tip: `${b(r.label)} arriving at position ${c.key}<br>Error change ${v > 0 ? "+" : ""}${fmt(v, 3)} pp` }; },
     fill: (v) => divFill(v / lim), fmtV: (v) => (v > 0 ? "+" : "") + v.toFixed(2),
     onCell: (r) => r && onSelect({ group: r.key }) });
   bt.setFoot(rampLegend(`−${fmt(lim)} pp`, `+${fmt(lim)} pp`, DIV_GRADIENT, "grey is no change; a task arriving last has nothing after it"));
@@ -345,7 +386,7 @@ export async function renderReuse(panel, ctx) {
       points: seed0.map((r) => ({ x: num(r.soh_target), y: num(r.soh_pred), color: state.group === "all" || r.group === state.group ? ACCENT : "var(--neutral-soft)" }))
         .sort((a) => (a.color === ACCENT ? 1 : -1)) });
     const rmse = Math.sqrt(mean(seed0.map((r) => num(r.error_pp) ** 2)));
-    par.setFoot(el("span", { class: "sub", text: `${seed0.length} forecasts, RMSE ${fmt(rmse, 3)} pp.${state.group !== "all" ? ` ${state.group} highlighted.` : " Pick a group to highlight it."}` }));
+    par.setFoot(el("span", { class: "sub", text: `${seed0.length} forecasts, RMSE ${fmt(rmse, 3)} pp.${state.group !== "all" ? ` ${groupInfo(summary, state.group).name} highlighted.` : " Pick a group to highlight it."}` }));
   }
 
   // Interval coverage per group (S6, D27).
@@ -355,11 +396,12 @@ export async function renderReuse(panel, ctx) {
     const c9 = cov.filter((r) => r.setting === state.setting && num(r.level) === 0.9);
     const groups = summary.groups.filter((g) => g.dataset === "S6").map((g) => g.group);
     const rules = RULES.filter(([m]) => state.family === "all" || (state.family === "GBM") === m.startsWith("gbm"));
-    dotRows(cv.body, { tip, labelW: 120, x: { label: "Coverage", min: 0.4, max: 1, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0.9, label: "target 0.90" }],
+    const nm = (g) => { const i = groupInfo(summary, g); return `${i.short}: ${i.desc}`; };
+    dotRows(cv.body, { tip, labelW: 290, x: { label: "Coverage", min: 0.4, max: 1, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0.9, label: "target 0.90" }],
       onRow: (r) => r.key !== "all" && onSelect({ group: r.key }),
-      rows: ["all", ...groups].map((g) => ({ key: g, label: g === "all" ? "All conditions" : g, emph: g === state.group || (g === "all" && state.group === "all"),
+      rows: ["all", ...groups].map((g) => ({ key: g, label: g === "all" ? "All conditions" : nm(g), emph: g === state.group || (g === "all" && state.group === "all"),
         marks: rules.map(([m, color]) => { const r = c9.find((q) => q.method === m && q.group === g); return r && { v: num(r.coverage), color,
-          tip: `${b(label[m] || m)}<br>${g}: coverage ${fmt(num(r.coverage), 3)}${r.width ? `, mean width ${fmt(num(r.width))} pp` : ""}` }; }).filter(Boolean) })) });
+          tip: `${b(label[m] || m)}<br>${esc(g === "all" ? "All conditions" : nm(g))}: coverage ${fmt(num(r.coverage), 3)}${r.width ? `, mean width ${fmt(num(r.width))} pp` : ""}` }; }).filter(Boolean) })) });
     cv.setFoot(legend(rules.map(([m, color]) => ({ label: label[m] || m, color, kind: "dot" }))));
   }
 

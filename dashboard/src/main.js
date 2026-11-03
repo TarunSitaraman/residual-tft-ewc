@@ -1,11 +1,13 @@
 // Entry point: state (kept in the URL hash), section rail, filter bar, native views, and optional Tableau embeds.
 import { TABLEAU, PATHS } from "../config.js";
 import { mountViz, applyState } from "./embed.js";
-import { el, fmt, renderHeadline, renderDetails, renderCaveats } from "./views.js";
+import { el, fmt, groupInfo, renderHeadline, renderDetails, renderCaveats } from "./views.js";
 import { parseCsv, sohRows, renderSoh, unitFacts } from "./soh.js";
-import { renderHeadlineChart, headlineFinding, renderAccuracy, renderContinual, renderReuse, takeaway, card, setLayoutWidth } from "./tabs.js";
+import { renderPage, PAGE_TITLES } from "./pages.js";
+import { renderExplorer } from "./explorer.js";
+import { renderHeadlineChart, headlineFinding, renderKpis, renderAccuracy, renderContinual, renderReuse, takeaway, card, setLayoutWidth } from "./tabs.js";
 
-const DEFAULTS = { tab: "overview", dataset: "S6", setting: "e1", protocol: "P2", group: "all", family: "all" };
+const DEFAULTS = { page: "home", tab: "overview", dataset: "S6", setting: "e1", protocol: "P2", group: "all", family: "all" };
 const KEYS = ["dataset", "setting", "protocol", "group", "family"];
 
 const TABS = {
@@ -26,14 +28,23 @@ const vizzes = {};
 let renderToken = 0;
 
 // ---------- state <-> URL hash ----------
+let section = "";   // a section of a content page to scroll to (not part of the saved state)
+/** Read the hash into the state; false for a plain in-page anchor such as the skip link. */
 function readHash() {
-  const p = new URLSearchParams(location.hash.slice(1));
+  const raw = location.hash.slice(1);
+  if (raw && !raw.includes("=")) return false;
+  const p = new URLSearchParams(raw);
   for (const k of Object.keys(DEFAULTS)) state[k] = p.get(k) || DEFAULTS[k];
+  if (!p.get("page") && p.get("tab")) state.page = "dashboard";   // links from before the site had pages
+  if (!PAGE_TITLES[state.page]) state.page = DEFAULTS.page;
   if (!TABS[state.tab]) state.tab = DEFAULTS.tab;
+  section = p.get("sec") || "";
+  return true;
 }
 function writeHash() {
   const p = new URLSearchParams();
-  for (const k of Object.keys(DEFAULTS)) if (state[k] !== DEFAULTS[k]) p.set(k, state[k]);
+  const keys = state.page === "dashboard" ? Object.keys(DEFAULTS) : ["page"];
+  for (const k of keys) if (state[k] !== DEFAULTS[k] || k === "page") p.set(k, state[k]);
   const h = p.toString();
   if (h !== location.hash.slice(1)) history.pushState(null, "", h ? `#${h}` : location.pathname + location.search);
 }
@@ -73,12 +84,23 @@ function initTheme() {
 
 // ---------- filters ----------
 const form = document.getElementById("filters");
-function syncForm() { for (const k of KEYS) form.elements[k].value = state[k]; }
+// Filters each section reads; the others are greyed out so nobody expects them to change the figures.
+const APPLIES = { overview: ["setting", "family"], soh: ["dataset", "group"], accuracy: KEYS,
+  continual: ["setting", "group", "family"], reuse: ["dataset", "setting", "group", "family"] };
+function syncForm() {
+  for (const k of KEYS) {
+    const sel = form.elements[k], on = APPLIES[state.tab].includes(k);
+    sel.value = state[k];
+    sel.disabled = !on;
+    sel.closest("label").classList.toggle("off", !on);
+    sel.closest("label").title = on ? "" : "This section does not use this filter.";
+  }
+}
 function fillGroups() {
   const sel = form.elements.group;
   const groups = summary.groups.filter((g) => g.dataset === state.dataset);
   sel.replaceChildren(el("option", { value: "all", text: "All groups" }),
-    ...groups.map((g) => el("option", { value: g.group, text: `${g.group} · ${g.dataset === "S6" ? g.description.split(",")[0] : g.chemistry}` })));
+    ...groups.map((g) => { const i = groupInfo(summary, g.group); return el("option", { value: g.group, text: g.dataset === "S6" ? `${i.name}: ${i.desc}` : i.name }); }));
   if (state.group !== "all" && !groups.some((g) => g.group === state.group)) state.group = "all";
   sel.value = state.group;
 }
@@ -110,7 +132,7 @@ function showTab(name, focus = false) {
   const t = TABS[name];
   document.getElementById("page-title").textContent = t.title;
   document.getElementById("page-deck").textContent = t.deck;
-  document.title = name === "overview" ? "Residual TFT-EWC results" : `${NAMES[name]}, Residual TFT-EWC results`;
+  document.title = `Dashboard: ${NAMES[name]}, Residual TFT-EWC`;
   ensurePanel(name);
 }
 tabButtons.forEach((b, i) => {
@@ -191,7 +213,7 @@ function renderSohTab(sink) {
   sink.append(sohFinding(rows, state.dataset), c.node);
   const groupOrder = summary.groups.filter((g) => g.dataset === state.dataset).map((g) => g.group);
   const selected = state.group !== "all" && state.dataset === "S1" ? state.group : (selection?.unit || "all");
-  const draw = () => renderSoh(c.body, soh, { dataset: state.dataset, selected, groupOrder, tip, onSelect: (unit) => {
+  const draw = () => renderSoh(c.body, soh, { dataset: state.dataset, selected, groupOrder, groupName: (g) => groupInfo(summary, g), tip, onSelect: (unit) => {
     if (unit === "all") { selection = null; state.group = "all"; update(); return; }
     const row = soh.find((r) => r.unit === unit && r.dataset === state.dataset);
     selection = { group: row.group, unit, fields: unitFacts(soh, unit) };
@@ -216,6 +238,7 @@ function renderOverview() {
   const chart = document.getElementById("headline-chart");
   const finding = document.getElementById("overview-finding");
   finding.replaceChildren(headlineFinding(summary, state));
+  renderKpis(document.getElementById("kpis"), summary, state);
   document.getElementById("headline-caption").textContent = `Test RMSE of SOH in percentage points on S6, ${state.setting === "e1" ? "1 to 3" : "1 to 6"} checks ahead. Proposed model: mean of 50 runs in each seed set (filled: main, ring: replicate). Baselines are single deterministic fits. Lower is better.`;
   renderHeadlineChart(chart, summary, state, tip);
   renderHeadline(document.getElementById("headline"), document.createElement("span"), summary, { ...state, dataset: "S6" });
@@ -224,6 +247,7 @@ function renderOverview() {
 function update() {
   if (!summary) return;
   writeHash();
+  if (state.page !== "dashboard") return;
   syncForm();
   renderSide();
   if (state.tab === "overview") renderOverview(); else renderNative(state.tab);
@@ -231,7 +255,32 @@ function update() {
 }
 
 document.getElementById("details-close").addEventListener("click", () => { selection = null; state.group = "all"; update(); });
-addEventListener("popstate", () => { readHash(); fillGroups(); showTab(state.tab); update(); });
+// ---------- site pages ----------
+const sitePage = document.getElementById("site-page");
+async function route() {
+  if (!readHash()) return;
+  for (const a of document.querySelectorAll(".site-nav a")) {
+    if (a.dataset.page === state.page) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  }
+  const dash = state.page === "dashboard";
+  for (const id of ["dashbar", "filters", "dash-page"]) document.getElementById(id).hidden = !dash;
+  sitePage.hidden = dash;
+  if (dash) {
+    fillGroups();
+    if (state.group !== "all") selection = { group: state.group };
+    showTab(state.tab);
+    update();
+    return;
+  }
+  document.title = state.page === "home" ? "Residual TFT-EWC" : `${PAGE_TITLES[state.page]}, Residual TFT-EWC`;
+  try {
+    if (state.page === "explorer") { await renderExplorer(sitePage); scrollTo({ top: 0 }); }
+    else await renderPage(state.page, sitePage, { summary, state: { ...state } }, section);
+  } catch (e) {
+    sitePage.replaceChildren(el("p", { class: "notice", text: `This page could not be drawn: ${e.message}.` }));
+  }
+}
+addEventListener("hashchange", route);
 addEventListener("scroll", tip.hide, { passive: true });
 let resizeTimer = 0, lastW = innerWidth;
 addEventListener("resize", () => {
@@ -258,14 +307,11 @@ async function start() {
   renderCaveats(document.getElementById("caveats"), summary);
   document.getElementById("provenance").textContent =
     `Built on ${summary.generated_utc.slice(0, 10)} from commit ${String(summary.commit || "unknown").slice(0, 7)} by scripts/export_dashboard_data.py.`;
-  fillGroups();
   try {
     const res = await fetch(PATHS.soh);
     if (res.ok) soh = sohRows(parseCsv(await res.text()));
   } catch { /* optional input: the SOH section says how to build it */ }
-  if (state.group !== "all") selection = { group: state.group };
-  showTab(state.tab);
-  update();
+  route();
 }
 
 start();

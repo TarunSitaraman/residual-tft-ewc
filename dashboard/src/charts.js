@@ -239,7 +239,7 @@ export function matrix(root, { rows, cols, cell, fill, fmtV = fmt, best = null, 
     for (const r of rows) { const v = cell(r, c)?.v; if (v !== null && v !== undefined && v < bv) { bv = v; bk = r.key; } }
     bestIn[c.key] = bk;
   }
-  const head = el("tr", {}, el("th", { text: corner }), cols.map((c) => el("th", { class: "col" + (selCol === c.key ? " sel" : ""), scope: "col", text: c.label })));
+  const head = el("tr", {}, el("th", { text: corner }), cols.map((c) => el("th", { class: "col" + (selCol === c.key ? " sel" : ""), scope: "col" }, c.label, c.sub ? el("span", { class: "colsub", text: c.sub }) : null)));
   if (onCell) head.querySelectorAll("th.col").forEach((th, i) => th.addEventListener("click", () => onCell(null, cols[i])));
   const body = rows.map((r) => el("tr", { class: r.emph ? "proposed" : null }, el("th", { scope: "row", text: r.label }),
     cols.map((c) => {
