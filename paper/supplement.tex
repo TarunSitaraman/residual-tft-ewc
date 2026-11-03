@@ -162,7 +162,7 @@ little use of its history.
 % -----------------------------------------------------------------------------
 \section{Additional results}
 
-Tables~\ref{tab:residual} and \ref{tab:d26_classes} and Figs.~\ref{fig:d25} and \ref{fig:d27} belong to Sections IV-D to IV-G of the paper and
+Tables~\ref{tab:residual} and \ref{tab:d26_classes} and Figs.~\ref{fig:d25}, \ref{fig:d27} and \ref{fig:d26cm} belong to Sections IV-D to IV-G of the paper and
 were moved here for space.
 
 \emph{Reproducibility of the comparisons (Section IV-B).} P1 and P2 were re-run in a pinned environment on data rebuilt from the raw archives. Every baseline, every P2 result and the ranking of methods reproduced; the neural models moved by at most 0.059~pp. On S1, five Holm-corrected comparisons with TFT\,+\,EWC crossed $p=0.05$. On S6, validation selected EWC $\lambda=1000$ instead of 100 (a 0.008~pp tie), and the error advantage of TFT\,+\,EWC over fine-tuning moved from $p_{\mathrm{Holm}}=0.005$ to 0.060, while its reduction of forgetting moved from 0.050 to 0.008. These findings motivated the ten tuning orders, the one-standard-error rule and the replication rule used from P3 on. A D30 re-run of P2 on another platform reproduced every baseline exactly and moved the MLP and TFT by at most 0.027~pp per held-out group: neural training is deterministic per platform, not across platforms.
@@ -242,6 +242,13 @@ were moved here for space.
   \includegraphics[width=\columnwidth]{figures/d27_coverage.png}
   \caption{Unseen S6 conditions: coverage of 90\% conformal intervals per held-out condition, by forecaster and calibration rows. TFT: mean over 50 runs (seeds 0--4). Dotted: nominal level.}
   \label{fig:d27}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/d26_confusion.png}
+  \caption{Reuse-class confusion on unseen S6 conditions (Table~\ref{tab:d26_classes}): sample counts (proposed model: mean over 50 runs); shading: share of the measured class. scripts/make\_d26\_class\_outputs.py.}
+  \label{fig:d26cm}
 \end{figure}
 
 \end{document}
