@@ -4,7 +4,7 @@
 
 Code, pre-registered protocols, results and manuscript of the paper *"Residual TFT-EWC: Continual Learning for State-of-Health Forecasting and Reuse Screening of Heterogeneous Second-Life EV Batteries"* (IEEE conference paper, in preparation; manuscript in [`paper/`](paper/)).
 
-**Read the paper:** [paper (PDF, 8 pages)](https://github.com/TarunSitaraman/residual-tft-ewc/raw/main/paper/paper_single.pdf) · [supplement (PDF)](https://github.com/TarunSitaraman/residual-tft-ewc/raw/main/paper/supplement.pdf)
+**Read the paper:** [paper (PDF, 8 pages)](https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries/raw/main/paper/paper_single.pdf) · [supplement (PDF)](https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries/raw/main/paper/supplement.pdf)
 
 Every reported number traces to a results file in `results/`, written by code in this repository on a clean commit; every experiment from D18 on was pre-registered in [`docs/DECISIONS.md`](docs/DECISIONS.md) before it ran, and null and negative results are reported alongside positive ones. The sections below explain the work from first principles: the problem, the data, every pipeline stage, the models, how they are evaluated, what Apache Spark does, and what we found.
 
@@ -540,7 +540,7 @@ Columns of the handover files (`DATA_DICTIONARY.csv`), used by the superseded cu
 @unpublished{sitaraman2026residualtftewc,
   author = {Sitaraman, Tarun and Krishnan, Sohan Sandeep and {Darshan D}},
   title  = {Residual {TFT-EWC}: Continual Learning for State-of-Health Forecasting and Reuse Screening of Heterogeneous Second-Life {EV} Batteries},
-  note   = {Manuscript in preparation. Code and data provenance: https://github.com/TarunSitaraman/residual-tft-ewc},
+  note   = {Manuscript in preparation. Code and data provenance: https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries},
   year   = {2026}
 }
 ```
