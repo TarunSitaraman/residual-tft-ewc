@@ -59,7 +59,7 @@ export function unitFacts(rows, unit) {
  * Draw the trajectories of `dataset` into `root`. `groupOrder` fixes the colour of each group (never re-coloured by
  * filters); `selected` is a unit or "all"; `onSelect(unit)` is called from the legend and the lines.
  */
-export function renderSoh(root, all, { dataset, selected, groupOrder, tip, onSelect }) {
+export function renderSoh(root, all, { dataset, selected, groupOrder, groupName, tip, onSelect }) {
   const rows = all.filter((r) => r.dataset === dataset);
   const units = [...new Set(rows.map((r) => r.unit))].sort((a, b) =>
     groupOrder.indexOf(rows.find((r) => r.unit === a).group) - groupOrder.indexOf(rows.find((r) => r.unit === b).group) || a.localeCompare(b));
@@ -68,7 +68,7 @@ export function renderSoh(root, all, { dataset, selected, groupOrder, tip, onSel
   const xName = dataset === "S1" ? "RPT number" : "Check cycle";
   const someTemp = rows.some((r) => !r.tempMissing);   // S6 records no check temperature: no hollow markers then
 
-  const W = Math.max(300, Math.round(root.clientWidth || Number(root.closest?.("[data-w]")?.dataset.w) || 640)), H = W < 520 ? 260 : 320;
+  const W = Math.max(300, Math.round(root.clientWidth || Number(root.closest?.("[data-w]")?.dataset.w) || 640)), H = W < 520 ? 260 : Math.min(460, Math.round(W * 0.4));
   const m = { l: 46, r: sel === "all" ? 14 : 44, t: 12, b: 38 };
   const xs = rows.map((r) => r.x), ys = rows.map((r) => r.soh);
   const x0 = Math.min(...xs), x1 = Math.max(...xs);
@@ -140,13 +140,23 @@ export function renderSoh(root, all, { dataset, selected, groupOrder, tip, onSel
     if (under) onSelect(under.dataset.unit);
   });
 
-  const legend = el("div", { class: "clegend", role: "group", "aria-label": "Cells (select to highlight)" },
-    units.map((u) => {
-      const b = el("button", { type: "button", class: "chip", "aria-pressed": String(u === sel), style: `--col:${colour(u)}` },
-        el("span", { class: "sw", "aria-hidden": "true" }), u);
-      b.addEventListener("click", () => onSelect(u === sel ? "all" : u));
-      return b;
-    }),
+  const chip = (u, text) => {
+    const b = el("button", { type: "button", class: "chip", "aria-pressed": String(u === sel), style: `--col:${colour(u)}` },
+      dataset === "S6" ? null : el("span", { class: "sw", "aria-hidden": "true" }), text);
+    b.addEventListener("click", () => onSelect(u === sel ? "all" : u));
+    return b;
+  };
+  // S6: one row per usage condition (the colour), with its cells as buttons. S1: one cell per group, flat.
+  const keys = dataset === "S6"
+    ? el("div", { class: "lgroups" }, groupOrder.filter((g) => rows.some((r) => r.group === g)).map((g) => {
+      const info = groupName ? groupName(g) : { name: g, desc: "" };
+      const cells = units.filter((u) => rows.find((r) => r.unit === u).group === g);
+      return el("div", { class: "lgroup", style: `--col:${colour(cells[0])}` },
+        el("span", { class: "gname", title: info.desc }, el("span", { class: "sw", "aria-hidden": "true" }), info.name),
+        el("span", { class: "gdesc", text: info.desc }), cells.map((u) => chip(u, u)));
+    }))
+    : units.map((u) => chip(u, u));
+  const legend = el("div", { class: "clegend", role: "group", "aria-label": "Cells (select to highlight)" }, keys,
     someTemp
       ? el("span", { class: "chip", style: "--col:var(--muted)" }, el("span", { class: "sw ring", "aria-hidden": "true" }), "temperature missing, not filled")
       : el("span", { class: "sub", text: "No check temperature is recorded for this dataset (not filled)." }));

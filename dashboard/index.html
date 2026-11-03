@@ -7,7 +7,7 @@
 <meta name="description" content="Interactive results of continual-learning SOH forecasting and reuse assessment for heterogeneous second-life EV batteries.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
 <script type="module" src="src/main.js"></script>
 </head>
@@ -15,13 +15,17 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar">
   <div class="bar-in">
-    <a class="wordmark" href="#" aria-label="Residual TFT-EWC results, overview">Residual TFT-EWC <span>results</span></a>
-    <nav class="tabs" role="tablist" aria-label="Sections">
-      <button role="tab" id="t-overview" aria-controls="tab-overview" aria-selected="true">Overview</button>
-      <button role="tab" id="t-soh" aria-controls="tab-soh" aria-selected="false" tabindex="-1">Capacity fade</button>
-      <button role="tab" id="t-accuracy" aria-controls="tab-accuracy" aria-selected="false" tabindex="-1">Forecast error</button>
-      <button role="tab" id="t-continual" aria-controls="tab-continual" aria-selected="false" tabindex="-1">Continual learning</button>
-      <button role="tab" id="t-reuse" aria-controls="tab-reuse" aria-selected="false" tabindex="-1">Reuse and intervals</button>
+    <a class="wordmark" href="#page=home" aria-label="Residual TFT-EWC, home">Residual TFT-EWC <span>second-life battery health</span></a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="#page=home" data-page="home">Home</a>
+      <a href="#page=project" data-page="project">Project</a>
+      <a href="#page=data" data-page="data">Data</a>
+      <a href="#page=methods" data-page="methods">Methods</a>
+      <a href="#page=studies" data-page="studies">Studies</a>
+      <a href="#page=results" data-page="results">Results</a>
+      <a href="#page=dashboard" data-page="dashboard">Dashboard</a>
+      <a href="#page=explorer" data-page="explorer">Data explorer</a>
+      <a href="#page=tableau" data-page="tableau">Tableau</a>
     </nav>
     <div class="bar-end">
       <a id="platform-link" href="#">Data platform</a>
@@ -29,6 +33,19 @@
     </div>
   </div>
 </header>
+
+<div class="dashbar" id="dashbar">
+  <div class="dashbar-in">
+    <span class="dashbar-name">Dashboard</span>
+    <nav class="tabs" role="tablist" aria-label="Dashboard panes">
+      <button role="tab" id="t-overview" aria-controls="tab-overview" aria-selected="true">Overview</button>
+      <button role="tab" id="t-soh" aria-controls="tab-soh" aria-selected="false" tabindex="-1">Capacity fade</button>
+      <button role="tab" id="t-accuracy" aria-controls="tab-accuracy" aria-selected="false" tabindex="-1">Forecast error</button>
+      <button role="tab" id="t-continual" aria-controls="tab-continual" aria-selected="false" tabindex="-1">Continual learning</button>
+      <button role="tab" id="t-reuse" aria-controls="tab-reuse" aria-selected="false" tabindex="-1">Reuse and intervals</button>
+    </nav>
+  </div>
+</div>
 
 <form class="filters" id="filters" aria-label="Filters applied to every figure" onsubmit="return false">
   <div class="filters-in">
@@ -54,7 +71,9 @@
   </div>
 </form>
 
-<div class="page">
+<div class="page site" id="site-page" hidden></div>
+
+<div class="page" id="dash-page">
   <header class="pagehead">
     <h1 id="page-title">How well a continual model forecasts battery health</h1>
     <p class="deck" id="page-deck">Forecasts of state of health at the next capacity checks, from a model that keeps learning as new battery groups arrive.</p>
@@ -63,8 +82,10 @@
   <main id="main" class="layout">
     <div class="panels">
       <section class="tab" id="tab-overview" role="tabpanel" aria-labelledby="t-overview">
+        <div class="kpis" id="kpis" aria-label="Headline results"></div>
         <div id="overview-finding"></div>
-        <figure class="fig hero">
+        <figure class="fig">
+          <div class="fig-head"><h2>Test error against the baselines</h2></div>
           <div class="fig-body" id="headline-chart"></div>
           <figcaption id="headline-caption">Test RMSE of SOH in percentage points. Proposed model: mean of 50 runs in each seed set. Baselines are single deterministic fits. Lower is better.</figcaption>
           <details class="more"><summary>Show the table with significance verdicts</summary><div class="scroll" id="headline"></div></details>
@@ -87,6 +108,9 @@
     </aside>
   </main>
 
+</div>
+
+<div class="page foot-wrap">
   <footer class="foot">
     <p id="provenance">Reading results…</p>
     <p>Data: Moy et al. 2024 (S1) and Wheeler et al. 2025 (S6), both CC BY 4.0. SOH is relative to each cell's first valid capacity check, not to nominal capacity.</p>

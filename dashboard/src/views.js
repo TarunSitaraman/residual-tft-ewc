@@ -21,6 +21,21 @@ const signed = (x) => (x === null || x === undefined ? "–" : (x > 0 ? "+" : ""
 
 export { el, fmt };
 
+/**
+ * Readable name of a battery group. S6 conditions are numbered in dataset order and described by what differs
+ * between them (charge mode, voltage, rate, and discharge or depth of discharge where they differ from the rest).
+ */
+export function groupInfo(summary, group) {
+  const g = summary?.groups.find((x) => x.group === group);
+  if (!g) return { name: String(group), short: String(group), desc: "" };
+  if (g.dataset !== "S6") return { name: `Cell ${g.group}`, short: g.group, desc: "NMC second-life cell" };
+  const n = Number(g.group_order) + 1;
+  let desc = `${g.charge_mode} ${g.v_max} V, ${Number(Number(g.charge_c_rate).toFixed(2))}C`;
+  if (g.discharge !== "WLTP") desc += `, ${g.discharge} discharge`;
+  if (Number(g.dod) !== 0.7) desc += `, ${Math.round(Number(g.dod) * 100)} % DoD`;
+  return { name: `Condition ${n}`, short: `Cond. ${n}`, desc };
+}
+
 export function renderHeadline(root, sub, summary, state) {
   const setting = SETTING_LABEL[state.setting];
   const rows = summary.headline.filter((r) => r.setting === setting);
@@ -73,7 +88,7 @@ function shortVerdict(v) {
 
 export function renderDetails(root, titleEl, summary, state, selection) {
   const g = summary.groups.find((x) => x.group === selection.group);
-  titleEl.textContent = selection.group;
+  titleEl.textContent = groupInfo(summary, selection.group).name;
   const kids = [];
   if (g) {
     kids.push(el("dl", {},
