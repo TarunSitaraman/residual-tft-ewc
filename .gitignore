@@ -10,6 +10,7 @@
 !/results/tables/
 # D34 condition assignment (registered file name).
 !/results/d34_condition_sets.csv
+!/results/d36_condition_sets.csv
 /logs/
 *.pt
 *.pickle

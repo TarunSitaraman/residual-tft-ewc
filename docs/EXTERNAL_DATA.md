@@ -309,6 +309,20 @@ Its C/25 characterisation matches S1's C/20 capacity test, so the capacity label
 
 The mapping of each dataset to the forecasting task (what counts as a capacity check, which temperature, which cycles) is fixed in D21 before any model is trained on these data.
 
+## S10. Multi-stage ageing study of Samsung INR21700-50E cells (Stroebl et al., 2024)
+
+**Citation (cite both the article and the dataset).**
+- **Data article:** F. Stroebl, R. Petersohn, B. Schricker, F. Schaeufl, O. Bohlen and H. Palm, "A multi-stage lithium-ion battery aging dataset using various experimental design methodologies," *Scientific Data*, vol. 11, 2024, doi:[10.1038/s41597-024-03859-z](https://doi.org/10.1038/s41597-024-03859-z) (PMC11412976); article licence CC BY 4.0.
+- **Dataset:** "Multi-Stage Lithium Ion Battery Aging Study," figshare, version 1, published 6 Aug 2024, doi:[10.6084/m9.figshare.25975315](https://doi.org/10.6084/m9.figshare.25975315); licence **CC BY 4.0** (figshare record).
+
+**What it contains (article, `experiments_meta.csv`).** 279 cells in two stages and 71 test points (conditions): stage 1 has 11 calendar and 25 cyclic test points, stage 2 has 11 calendar and 24 cyclic; each test point was run in one of three laboratories. Factors: ambient temperature (10, 23, 35, 45 degC), maximum SOC, depth of discharge, charge and discharge C-rates. Check-ups (CU, extended exCU) at 23 degC during ageing, entry (ET) and final (AT) tests at 10, 45 and 23 degC. Test-point names repeat across stages with different settings, so a condition is (stage, test point). First-life cells; no second-life claim rests on S10.
+
+**Downloaded (4 Nov 2026).** `scripts/fetch_stroebl.py` downloaded every per-cell zip, checked its MD5 against the figshare record (10 mismatches on first transfer, each re-downloaded until it matched), kept the 23 degC check-ups and all `*_meta.txt` files gzip-compressed in `data/raw/stroebl2024/` (git-ignored, 3.5 GB), and deleted the zips. `docs/external_data/metadata/stroebl2024_manifest.json` lists each zip's id, MD5 and entries, and the SHA-256 of each kept file.
+
+**Check table (D36).** `scripts/build_stroebl_checks.py` writes `data/pool_s10_checks.csv` (label rules in D36 and the script). 2,766 check-ups in 279 cells; invalid: 20 for surface temperature outside 18-28 degC at the start of the capacity discharge (5 sensor readings of about -55 degC, 15 between 28.0 and 31.6 degC), 13 with metadata dates out of order (3 cells), 3 without a capacity block, 3 without a usable date (2 malformed dates, 1 missing meta file). Kept: 2,587 check-ups of 211 cells with at least five, all 71 conditions; 66 calendar cells have only the entry and final test by design and are not used. SOH 79.4-100.5 %; reference capacities 4.767-4.920 Ah.
+
+**Use:** decision D36.
+
 ## Candidates screened, not used
 
 | ID | Dataset | Result |
