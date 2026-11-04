@@ -85,7 +85,7 @@ def condition_table(checks: pd.DataFrame) -> pd.DataFrame:
 
 
 def assign_sets(conds: pd.DataFrame, n_tuning: int = N_TUNING, n_folds: int = N_FOLDS,
-                seed: int = SET_SEED) -> pd.DataFrame:
+                seed: int = SET_SEED, keys: tuple[str, ...] = ("age_type", "age_temp")) -> pd.DataFrame:
     """Tuning conditions: n_tuning drawn per ageing type in proportion to its count (largest remainder). Test
     conditions: sorted by (type, temperature, random key) and dealt round-robin into n_folds (stratified)."""
     rng = np.random.default_rng(seed)
@@ -98,7 +98,7 @@ def assign_sets(conds: pd.DataFrame, n_tuning: int = N_TUNING, n_folds: int = N_
     for t, n in k.items():
         idx = out[out["age_type"] == t].sort_values("u").index[:n]
         out.loc[idx, "set"] = "tuning"
-    test = out[out["set"] == "test"].sort_values(["age_type", "age_temp", "u"])
+    test = out[out["set"] == "test"].sort_values([*keys, "u"])
     out.loc[test.index, "fold"] = np.arange(len(test)) % n_folds
     return out.drop(columns="u")
 
@@ -106,19 +106,41 @@ def assign_sets(conds: pd.DataFrame, n_tuning: int = N_TUNING, n_folds: int = N_
 # -- runner -----------------------------------------------------------------------------------------------------------
 
 class Runner:
+    """D34 on S7. A later decision on another dataset (D36) subclasses it and overrides the class attributes and the
+    data hooks (``read_checks``, ``samples``, ``make_sets``, ``unit_scores``); D34's own behaviour is unchanged."""
+    NAME, DECISION, CHECKS = "d34", "D34", "pool_s7_checks.csv"
+    CONT = {RAW: "raw", SHR: "shrunk"}                  # continual methods: name -> key in a continual unit
+    PRIMARY, SECONDARY = PRIMARY, SECONDARY
+    DESC_KEYS = ("age_type", "age_temp")
+
     def __init__(self, exp: str, profile: str) -> None:
         self.cfg, self.exp, self.profile = PROFILES[profile], exp, profile
         self.data = run_d25.data_dir()
-        checks = dp.read_dataset(self.data / "pool_s7_checks.csv").assign(
-            check_time=lambda t: pd.to_datetime(t["check_time"]))
-        s = p3.harmonised_samples(checks, "S7", HORIZONS[exp])
+        checks = self.read_checks()
+        s, self.features = self.samples(checks, HORIZONS[exp])
         s["Battery_ID"] = s["condition"]                                       # task = condition
         s["lin_forecast"] = np.nan_to_num(s["fade_rate_pp_per_day"].to_numpy(float) * s["days_to_target"].to_numpy(float))
         self.direct, self.res = s.reset_index(drop=True), p3.residual_target(s).reset_index(drop=True)
-        self.features = list(p3.SHARED_FEATURES)
-        self.sets = assign_sets(condition_table(checks))
+        self.sets = self.make_sets(checks)
         self.tuning = list(self.sets.loc[self.sets["set"] == "tuning", "condition"])
-        self.ckpt = FC.Checkpoint(self.data / "cache" / "d34", [FC.Checkpoint.frame_hash(self.direct), exp, profile])
+        self.ckpt = FC.Checkpoint(self.data / "cache" / self.NAME, [FC.Checkpoint.frame_hash(self.direct), exp, profile])
+
+    # -- dataset hooks --
+    @classmethod
+    def read_checks(cls) -> pd.DataFrame:
+        return dp.read_dataset(run_d25.data_dir() / cls.CHECKS).assign(check_time=lambda t: pd.to_datetime(t["check_time"]))
+
+    @staticmethod
+    def samples(checks: pd.DataFrame, horizons) -> tuple[pd.DataFrame, list[str]]:
+        return p3.harmonised_samples(checks, "S7", horizons), list(p3.SHARED_FEATURES)
+
+    @staticmethod
+    def make_sets(checks: pd.DataFrame) -> pd.DataFrame:
+        return assign_sets(condition_table(checks))
+
+    @staticmethod
+    def unit_scores(frame, direct, raw, shr, hp) -> dict:
+        return {"raw": run_d26.scores(frame, direct, raw, hp), "shrunk": run_d26.scores(frame, direct, shr, hp)}
 
     # -- data --
     def fold_conditions(self, k: int) -> tuple[list[str], list[str]]:
@@ -209,8 +231,7 @@ class Runner:
                     m = interval_metrics(y, shr, q, lv)
                     iv[str(round(lv * 100))] = {"n": int(len(y)), "covered": int(np.sum(np.abs(y - shr) <= q)),
                                                 "interval_score": m["interval_score"], "width": m["width"]}
-                out[c] = {"raw": run_d26.scores(frame, direct, raw, hp), "shrunk": run_d26.scores(frame, direct, shr, hp),
-                          "intervals": iv}
+                out[c] = {**self.unit_scores(frame, direct, raw, shr, hp), "intervals": iv}
             return {"conditions": out, "alpha": dict(cal.alpha_), "train_time_s": float(np.sum(s.training_time_))}
         return self.ckpt(f"cont_f{k}_o{oid}_s{seed}", fit, {"lr": lr, "lam": lam})
 
@@ -284,8 +305,7 @@ def condition_values(r: Runner, parts: dict, singles: dict, folds: list[int]) ->
             held, _ = r.fold_conditions(k)
             units = list(out["continual"].values())
             for c in held:
-                for method, scs in ((RAW, [u["conditions"][c]["raw"] for u in units]),
-                                    (SHR, [u["conditions"][c]["shrunk"] for u in units]),
+                for method, scs in (*((m, [u["conditions"][c][key] for u in units]) for m, key in r.CONT.items()),
                                     (JOINT, [j[c] for j in out["joint"].values()]),
                                     (LAST, [o[c] for o in singles[k][LAST].values()]),
                                     *((m, [singles[k][m][c]]) for m in (ALL, LIN, PERS, RIDGE))):
@@ -302,14 +322,15 @@ def condition_values(r: Runner, parts: dict, singles: dict, folds: list[int]) ->
                     rows.append(row)
     v = pd.DataFrame(rows)
     meta = r.sets.set_index("condition")
-    v["age_type"] = v["condition"].map(meta["age_type"]).map(TYPES)
-    v["age_temp"] = v["condition"].map(meta["age_temp"])
+    for key in r.DESC_KEYS:
+        v[key] = v["condition"].map(meta[key])
+    v["age_type"] = v["age_type"].map(TYPES)
     return v
 
 
-def run_tests(v: pd.DataFrame) -> tuple[list[dict], list[dict]]:
+def run_tests(v: pd.DataFrame, primary=PRIMARY, secondary=SECONDARY) -> tuple[list[dict], list[dict]]:
     rows = []
-    for fam, comps in {"primary": PRIMARY, "secondary": SECONDARY}.items():
+    for fam, comps in {"primary": primary, "secondary": secondary}.items():
         for s in SETS:
             g = v[v["set"] == s]
             got = []
@@ -333,7 +354,7 @@ def run_tests(v: pd.DataFrame) -> tuple[list[dict], list[dict]]:
     return rows, verdicts
 
 
-def descriptive(v: pd.DataFrame, hcols: list[str]) -> dict:
+def descriptive(v: pd.DataFrame, hcols: list[str], keys=("age_type", "age_temp")) -> dict:
     by = lambda keys: (v.groupby(["set", "method", *keys])[["rmse", "rmse_hplus"]].mean().reset_index()
                        .to_dict("records"))
     shr = v[v["method"] == SHR]
@@ -346,7 +367,7 @@ def descriptive(v: pd.DataFrame, hcols: list[str]) -> dict:
              .to_dict("records"))
     return {"mean_over_conditions": v.groupby(["set", "method"])[["rmse", "rmse_hplus", "rmse_hminus", *hcols]]
             .mean().reset_index().to_dict("records"),
-            "by_age_type": by(["age_type"]), "by_age_temp": by(["age_temp"]), "worst_condition": worst,
+            **{f"by_{k}": by([k]) for k in keys}, "worst_condition": worst,
             "coverage": cov, "coverage_check": {"threshold": COVERAGE_ADEQUATE, "adequate": bool(
                 set(cov) == set(SETS) and all(c["90"]["pooled"] >= COVERAGE_ADEQUATE for c in cov.values()))}}
 
@@ -363,21 +384,21 @@ def collect(r: Runner, collect_only: bool) -> int:
         raise SystemExit("no fold has finished in both seed sets; nothing to collect")
     singles = {k: r.single_fits(k) for k in folds}
     v = condition_values(r, parts, singles, folds)
-    tests, verdicts = run_tests(v)
+    tests, verdicts = run_tests(v, r.PRIMARY, r.SECONDARY)
     hcols = [f"rmse_h{h}" for h in HORIZONS[r.exp]]
     strata = {}
     for c in r.sets["condition"]:
         hp = r.held(c)[2]
         strata[c] = {"n": int(len(hp)), "hplus": int(hp.sum())}
-    name = f"forecasting_d34_{r.exp}" + (".json" if r.profile == "paper" else "_smoke.json")
-    out = ROOT / "results" / name if r.profile == "paper" else r.data / "cache" / "d34" / name
+    name = f"forecasting_{r.NAME}_{r.exp}" + (".json" if r.profile == "paper" else "_smoke.json")
+    out = ROOT / "results" / name if r.profile == "paper" else r.data / "cache" / r.NAME / name
     X.write_results(out, {
-        "decision": "D34", "profile": r.profile, "experiment": r.exp, "horizons": list(HORIZONS[r.exp]),
+        "decision": r.DECISION, "profile": r.profile, "experiment": r.exp, "horizons": list(HORIZONS[r.exp]),
         "parts_not_run": not_run, "folds_in_tests": folds, "n_samples": len(r.direct), "features": r.features,
         "condition_sets": r.sets.to_dict("records"), "strata_counts": strata,
         "orders": {k: [list(o) for o in r.orders(k)] for k in folds},
         "tuning": {k: parts[f"main_f{k}"]["tuning"] for k in folds}, "settings": r.cfg,
-        "condition_values": v.to_dict("records"), "descriptive": descriptive(v, hcols),
+        "condition_values": v.to_dict("records"), "descriptive": descriptive(v, hcols, r.DESC_KEYS),
         "tests": tests, "verdicts": verdicts}, ROOT)
     print(v.groupby(["set", "method"])[["rmse", "rmse_hplus"]].mean().round(3).to_string(), flush=True)
     for x in verdicts:
@@ -387,10 +408,9 @@ def collect(r: Runner, collect_only: bool) -> int:
     return 0
 
 
-def write_sets() -> int:
-    data = run_d25.data_dir()
-    sets = assign_sets(condition_table(dp.read_dataset(data / "pool_s7_checks.csv")))
-    out = ROOT / "results" / "d34_condition_sets.csv"
+def write_sets(cls=Runner) -> int:
+    sets = cls.make_sets(cls.read_checks())
+    out = ROOT / "results" / f"{cls.NAME}_condition_sets.csv"
     sets.to_csv(out, index=False)
     print(sets.groupby(["set", "fold", "age_type"]).size().to_string(), f"\nwritten {out}", flush=True)
     return 0
@@ -398,13 +418,13 @@ def write_sets() -> int:
 
 def check_sets(r: Runner) -> None:
     """The paper run must use exactly the committed assignment."""
-    f = ROOT / "results" / "d34_condition_sets.csv"
+    f = ROOT / "results" / f"{r.NAME}_condition_sets.csv"
     if r.profile == "paper" and not (f.exists() and pd.read_csv(f)[["condition", "set", "fold"]]
                                      .equals(r.sets[["condition", "set", "fold"]].reset_index(drop=True))):
         raise SystemExit(f"{f} missing or different from the computed assignment; run --write-sets and commit it")
 
 
-def main() -> int:
+def main(cls=Runner) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--exp", choices=tuple(HORIZONS))
     ap.add_argument("--part", choices=PARTS)
@@ -413,12 +433,12 @@ def main() -> int:
     ap.add_argument("--write-sets", action="store_true")
     a = ap.parse_args()
     if a.write_sets:
-        return write_sets()
+        return write_sets(cls)
     if not a.exp:
         ap.error("--exp is required")
-    r = Runner(a.exp, a.profile)
+    r = cls(a.exp, a.profile)
     check_sets(r)
-    print(f"D34 {a.exp} ({a.profile}): {len(r.direct)} S7 samples, {len(r.sets)} conditions", flush=True)
+    print(f"{cls.DECISION} {a.exp} ({a.profile}): {len(r.direct)} samples, {len(r.sets)} conditions", flush=True)
     if a.part:
         r.run_part(a.part)
         return 0
