@@ -871,3 +871,34 @@ Results files: `results/forecasting_d32_e1.json` and `results/forecasting_d32_e2
 1. **Continual stream.** The proposed model is level with linear extrapolation, which no model beats, and clearly ahead of gradient boosting in both horizon sets.
 2. **Unseen conditions.** It is clearly ahead of extrapolation in both horizon sets. Gradient boosting with all six conditions stored is more accurate; held to the same no-storage constraint as the proposed model, gradient boosting is slightly better for horizons 1–3 and not distinguishable for 1–6, so most of its advantage comes from storing earlier data.
 3. **Across settings,** only the proposed model has no weak side: extrapolation degrades on new conditions, and gradient boosting trails on the stream.
+
+## D34 and D36: many unseen usage conditions under the continual constraint (4 Nov 2026)
+
+Results files: `results/forecasting_d34_e1.json`, `..._e2.json` (S7, 60 test conditions; collected at `474f74f`, kept as tag `d34-collection`) and `results/forecasting_d36_e1.json`, `..._e2.json` (S10, Stroebl et al. 2024, 64 test conditions; `ea9f605`). Both pre-registered (D34, D36), clean trees, pinned environment; run logs in `docs/DECISIONS.md`. Unit of analysis: the held-out condition (Wilcoxon over conditions, Holm, D21 rule; positive only if replicated for horizons 1–3 and 1–6). Proposed model: shrunk at every origin (D34); shrunk only at H+ origins, raw at H− (D36, rule fixed after the D34 results). Paper table: `scripts/make_many_conditions_table.py` writes `paper/tables/many_conditions.tex` (Table V).
+
+**Mean RMSE over held-out conditions (pp), main / replicate:**
+
+| Method | S7 E1 | S7 E2 | S10 E1 | S10 E2 |
+|---|---|---|---|---|
+| Proposed (continual) | 5.201 / 5.184 | 7.489 / 7.481 | 1.040 / 1.038 | 1.542 / 1.552 |
+| Linear extrapolation | 5.313 | 7.896 | 1.215 | 1.900 |
+| GBM-LAST (latest condition only) | 6.501 | 8.398 | 1.883 | 2.382 |
+| GBM-ALL (all conditions stored) | **3.845** | **5.117** | 1.388 | 4.773 |
+| Joint residual TFT (all stored) | 4.123 / 4.328 | 5.790 / 6.182 | **0.813 / 0.807** | **0.961 / 1.009** |
+
+**Registered primary results (proposed minus comparator, main / replicate):**
+
+| Comparison | S7 E1 | S7 E2 | S10 E1 | S10 E2 |
+|---|---|---|---|---|
+| − GBM-LAST | −1.300 / −1.317 **better** | −0.909 / −0.917 not replicated | −0.842 / −0.845 **better** (64/64) | −0.840 / −0.830 **better** (64/64) |
+| − extrapolation, H+ | −0.010 / −0.000 equivalent | −0.072 / −0.080 not replicated | −0.065 / −0.061 **better** | −0.190 / −0.147 not replicated |
+| − GBM-ALL | +1.355 / +1.338 worse | +2.372 / +2.365 worse | −0.348 / −0.350 "better"¹ | −3.231 / −3.221 not replicated |
+
+¹ The registered rule takes the direction from the mean; the median (+0.174 / +0.154) and 52 / 51 of 64 conditions favour GBM-ALL, whose mean is raised by a few calendar conditions where it fails (up to 9.6 pp in E1, 17 pp in E2). Not counted as a win.
+
+**Reading.**
+1. **On S10 the proposed model beats gradient boosting held to the same continual constraint on every one of the 64 conditions, for both horizon sets** (Q1 positive): the first registered question against a traditional forecaster answered in its favour in both experiments. On S7 the same comparison replicates for horizons 1–3 only.
+2. **Against extrapolation** it is better over all origins on both datasets (replicated), but at H+ origins only for S10 horizons 1–3.
+3. **Storing all data still wins on most conditions:** GBM-ALL on S7 and on most S10 cyclic conditions, and the joint residual TFT overall on S10.
+4. **Shrinkage at H− origins hurt on S7** (+0.41 to +0.77 pp against raw); shrinking only at H+ is practically equivalent to shrinking everywhere on S10.
+5. **Caveats:** both tests are post hoc in motivation (to find a setting where the model wins); both datasets are first-life cells; tuning chose small EWC strengths in most folds; 90 % intervals under-cover (pooled 0.43–0.74).

@@ -16,11 +16,11 @@ We forecast the SOH one to three checks ahead (up to six in later experiments) f
 \subsection{Datasets}
 \label{sec:data}
 
-Table~\ref{tab:data} lists the five public datasets (all CC~BY~4.0). Every file is checked against its repository record or checksums, and our parsing of the raw files exactly reproduces the processed S1 RPT capacities and the authors' capacities of all 843 S6 checks.
+Table~\ref{tab:data} lists the six public datasets (all CC~BY~4.0). Every file is checked against its repository record or checksums, and our parsing of the raw files exactly reproduces the processed S1 RPT capacities and the authors' capacities of all 843 S6 checks.
 
 \begin{table}[t]
   \centering
-  \caption{Datasets. S1 and S6 form the continual-learning streams; S7--S9 form the first-life pretraining pool.}
+  \caption{Datasets. S1 and S6 form the continual-learning streams; S7--S9 form the first-life pretraining pool; S7 and S10 give the many-condition tests.}
   \label{tab:data}
   \scriptsize
   \setlength{\tabcolsep}{2.5pt}
@@ -33,13 +33,14 @@ Table~\ref{tab:data} lists the five public datasets (all CC~BY~4.0). Every file 
     S7~\cite{luh2024agingdata,luh2024agingdatav2} & 195 of 228 NMC/C+SiO cells, calendar, cyclic and WLTP ageing, 0--40~$^\circ$C & check-up capacity & 10{,}251 \\
     S8~\cite{wang2024pinn,wang2024pinndata} & 55 NCM cells, six charge/discharge protocols & capacity cycles & 9{,}699 \\
     S9~\cite{zhu2022relaxation,zhu2022relaxationdata} & 119 of 130 NCA, NCM and blended cells, 25--45~$^\circ$C & capacity cycles & 16{,}761 \\
+    S10~\cite{stroebl2024agingdata,stroebl2024agingdatafig} & 211 of 279 NMC 21700 cells, 71 calendar and cyclic conditions, 10--45~$^\circ$C & check-up capacity & 6{,}495 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \emph{S1} contains six LG~Chem INR21700-M50T cells that spent 23 months under an EV driving profile~\cite{pozzato2022firstlife} and then about 27 months on peak-shaving duty cycles~\cite{moy2023dutycycles}; each RPT is a C/20 discharge interrupted by C/2 pulses, with impedance spectroscopy (EIS) from the fifth RPT~\cite{moy2024secondlife}. Data-quality findings are handled by fixed rules (e.g.\ RPT~2, run at about 20~$^\circ$C, is dropped).
 
-\emph{S6} was chosen by criteria fixed before the search (licence, a series of capacity checks, ageing past the end of first life, and the variety that S1 lacks). Its cells were checked every 100 cycles and end at 32--64\% SOH; here ``second life'' means further ageing below 80\% SOH under the same test. A check is used only if its C/25 discharge starts from full charge and reaches the cut-off voltage (843 of 847). From the first-life sets \emph{S7--S9} we keep cells with at least five valid checks (369 cells, 36{,}711 samples).
+\emph{S6} was chosen by criteria fixed before the search (licence, a series of capacity checks, ageing past the end of first life, and the variety that S1 lacks). Its cells were checked every 100 cycles and end at 32--64\% SOH; here ``second life'' means further ageing below 80\% SOH under the same test. A check is used only if its C/25 discharge starts from full charge and reaches the cut-off voltage (843 of 847). From the first-life sets \emph{S7--S9} we keep cells with at least five valid checks (369 cells, 36{,}711 samples). \emph{S10} uses the discharge capacity of each 23~$^\circ$C check-up (2{,}587 of 2{,}766 kept).
 
 \subsection{Big-data processing of the ageing cycles}
 \label{sec:spark}
@@ -105,11 +106,13 @@ where $\theta^*_j$ are the parameters after task $j$ and $F_j$ is the empirical 
 \end{equation}
 The residual and the direct (target $\Delta$) forms are compared on the S6 stream with the P3 shared inputs, from scratch, for horizons 1--3 (E1) and 1--6 (E2).
 
-\emph{Shift-adaptive EWC and literature backbones.} A second registered experiment lets the EWC strength follow how far the data shift between groups (shift-adaptive EWC, SA-EWC): when task $t$ starts, the penalty~\eqref{eq:ewc} of each finished task $j$ is multiplied by $d_{j,t}=\big((\lVert\mu_t-\mu_j\rVert^2+\lVert\sigma_t-\sigma_j\rVert^2)/D\big)^{1/2}$, the per-dimension 2-Wasserstein distance between diagonal Gaussians fitted to the two tasks' preprocessed training inputs, with $\lambda_0$ tuned like $\lambda$. BiLSTM~\cite{ref10}, TCN~\cite{ref8,ref10} and Transformer-encoder continual learners (TFT input window, within 20\% of its parameters) and GPR~\cite{ref3,ref4}, random forest and SVR fitted once are run in residual and direct form.
+\emph{Shift-adaptive EWC and literature backbones.} A second registered experiment scales each finished task's EWC penalty by the input shift between tasks (SA-EWC) and compares BiLSTM~\cite{ref10}, TCN~\cite{ref8,ref10} and Transformer continual learners and GPR~\cite{ref3,ref4}, random forest and SVR fitted once (definitions in the supplement).
 
 \emph{Shrinkage and forecast intervals.} A third registered experiment calibrates the residual model after training, without changing its weights. For each horizon $h$, the learned correction is scaled back towards extrapolation by $\alpha_h=\min\!\big(1,\max(0,\sum p\,y/\sum p^2)\big)$, with $p$ the predicted and $y$ the observed correction on calibration rows. A split-conformal interval~\cite{lei2018conformal} $\hat\Delta\pm q_h$ takes as $q_h$ the $\lceil (n+1)(1-a)\rceil$-th smallest of the $n$ absolute calibration errors at horizon $h$. Intervals at level $1-a$ (90\% and 80\%) are scored by coverage, width and the interval score~\cite{gneiting2007scoring} $2q_h + \tfrac{2}{a}\max(|\Delta-\hat\Delta|-q_h,0)$ (pp; lower is better). On the stream both are refitted after each task on its validation rows; extrapolation gets intervals the same way.
 
-\emph{Unseen conditions.} A fourth experiment repeats P2 on S6 for the shrunk residual TFT\,+\,EWC, streamed over the six training conditions in the ten evaluation orders with the P1 tuned values; shrinkage and intervals are fitted once on their pooled validation rows. Origins with a fade rate (H$^+$) and without one (H$^-$, a cell's first two checks, where extrapolation equals persistence) are reported separately. A fifth experiment calibrates intervals by leaving one condition out: each training condition is predicted by a model fitted on the other five, the absolute errors at all its origins, pooled over the six, give $q_h$ (per horizon, optionally per stratum), and the interval is centred on the forecast of the model fitted on all six. This is the cross-validation interval of~\cite{barber2021jackknife} with conditions as folds; unlike CV+, it has no finite-sample guarantee, so we measure coverage on held-out conditions. The forecaster is gradient boosting, the most accurate in P2; as it is deterministic, it must replicate across both horizon sets instead of seed sets. In a sixth experiment the held-out condition arrives over time: as each target is measured, gradient boosting is refitted with it and the half-width moves by $c\,q_h(e-a)$, with $e=1$ for a miss (quantile tracking~\cite{angelopoulos2023pid}; $c$ chosen on the training conditions).
+\emph{Unseen conditions.} A fourth experiment repeats P2 on S6 for the shrunk residual TFT\,+\,EWC, streamed over the six training conditions in the ten evaluation orders with the P1 tuned values; shrinkage and intervals are fitted once on their pooled validation rows. Origins with a fade rate (H$^+$) and without one (H$^-$, a cell's first two checks, where extrapolation equals persistence) are reported separately. A fifth experiment calibrates gradient-boosting intervals by leaving one condition out: each training condition is predicted by a model fitted on the other five, and their pooled absolute errors give $q_h$ (the cross-validation interval of~\cite{barber2021jackknife} with conditions as folds; without a finite-sample guarantee, coverage is measured on held-out conditions, and as the forecaster is deterministic, results must replicate across both horizon sets).
+
+\emph{Many unseen conditions.} Two further registered experiments repeat P2 on S7 (67 conditions) and S10 (71): seven conditions tune the hyperparameters and the rest (60, 64) form five test folds. The residual TFT\,+\,EWC is streamed over each fold's training conditions and compared, by Wilcoxon tests over held-out conditions, with gradient boosting refitted on each stream's last condition, gradient boosting on all conditions and extrapolation; a question counts only if replicated for horizons 1--3 and 1--6. S7 shrinks at every origin, S10 only at H$^+$, a rule fixed after the S7 results.
 
 \subsection{Hyperparameters, metrics and statistics}
 \label{sec:tuning}
@@ -125,4 +128,4 @@ Means carry 95\% bootstrap intervals~\cite{efron1993bootstrap}. Methods are comp
 \subsection{Implementation and availability}
 \label{sec:repro}
 
-The pipeline uses Python~3.11, NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTorch~2.14.1 (P1 and P2 were first run on an Intel Xeon with an unrecorded PyTorch version and re-run on an Intel Core~5~210H), with one CPU thread and seeded, deterministic algorithms. Every result file records configuration, seeds, library versions and the Git commit, and unit tests cover input causality, split purging and label exclusion. The datasets are at doi:10.17605/OSF.IO/8JNR5 (S1), 10.57745/OLBXKT (S6), 10.35097/1969 (S7), 10.5281/zenodo.10963339 (S8) and 10.5281/zenodo.6405084 (S9). Code, decision log, pre-registrations and results: \url{https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries}.
+The pipeline uses Python~3.11, NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTorch~2.14.1 (P1 and P2 were first run on an Intel Xeon with an unrecorded PyTorch version and re-run on an Intel Core~5~210H), with one CPU thread and seeded, deterministic algorithms. Every result file records configuration, seeds, library versions and the Git commit, and unit tests cover input causality, split purging and label exclusion. The datasets are at doi:10.17605/OSF.IO/8JNR5 (S1), 10.57745/OLBXKT (S6), 10.35097/1969 (S7), 10.5281/zenodo.10963339 (S8), 10.5281/zenodo.6405084 (S9) and 10.6084/m9.figshare.25975315 (S10). Code, decision log, pre-registrations and results: \url{https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries}.
