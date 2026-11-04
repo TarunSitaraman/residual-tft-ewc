@@ -21,7 +21,14 @@
 
 \input{tables/headline}
 
-\emph{Summary.} The proposed model is the only one that does well in both settings (Table~\ref{tab:headline}; pairs such as 0.32/0.31 give the main and replicate seed sets), while each traditional forecaster fails in one of them. With groups arriving in sequence, the proposed model has the lowest error for horizons 1--3, level with linear extrapolation, and is 0.13--0.41~pp more accurate than gradient boosting (replicated; not planned in advance for the shrunk model). On an unseen condition, extrapolation falls behind and the proposed model is 0.43--0.68~pp more accurate (replicated); gradient boosting, which sees every condition's data at once, is best there. Under our model's rule (one condition at a time, no earlier data kept), gradient boosting refitted on the latest condition is slightly more accurate for horizons 1--3 (0.06/0.08~pp, replicated) and indistinguishable for 1--6 (supplement).
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/overview.png}
+  \caption{S6. (a) Stream (P1) against unseen-condition (P2) error, horizons 1--3 and 1--6, for methods that keep no earlier data; hollow grey: gradient boosting with all conditions stored; persistence (1.6--4.9~pp) off scale. (b) Largest shortfall against the best of these in either setting. (c) Stream error by design step (dots: replicate seeds; lines: extrapolation). (d) Forgetting, horizons 1--6. GB on the stream: post hoc. Per-backbone errors: Fig.~S10, Table~SIII.}
+  \label{fig:overview}
+\end{figure*}
+
+\emph{Summary.} The proposed model is the only one that does well in both settings (Table~\ref{tab:headline}; pairs such as 0.32/0.31 give the main and replicate seed sets), while each traditional forecaster fails in one of them. With groups arriving in sequence, the proposed model has the lowest error for horizons 1--3, level with linear extrapolation, and is 0.13--0.41~pp more accurate than gradient boosting (replicated; not planned in advance for the shrunk model). On an unseen condition, extrapolation falls behind and the proposed model is 0.43--0.68~pp more accurate (replicated); gradient boosting, which sees every condition's data at once, is best there. Under our model's rule (one condition at a time, no earlier data kept), gradient boosting refitted on the latest condition is slightly more accurate for horizons 1--3 (0.06/0.08~pp, replicated) and indistinguishable for 1--6 (supplement). On the stream, however, gradient boosting refitted on the newest condition forgets (0.17--0.34~pp) and is 0.24--0.46~pp less accurate than the proposed model (replicated, post hoc). Among methods that keep no earlier data, only the proposed model is within 0.07~pp of the best in both settings (Fig.~\ref{fig:overview}a,b).
 
 \emph{Data.} The S1 diagnostics follow the current SOH closely (median within-cell $\rho=0.97$ for the main incremental-capacity peak) but say little about the change to the next RPT (median $|\rho|\le0.3$). Every S1 sample stays in class C0, while all S6 cells pass from C0 to C3.
 
@@ -37,9 +44,7 @@
 \subsection{Unseen cell or usage condition (P2)}
 \label{sec:res-p2}
 
-\input{tables/p2}
-
-Gradient boosting is best on both datasets (Table~\ref{tab:p2}). On S6 the 100\% depth-of-discharge condition is the hardest for every method except extrapolation. With six or seven held-out groups, no difference from the TFT survives Holm correction.
+Gradient boosting is best on both datasets (Table~SVII of the supplement). On S6 the 100\% depth-of-discharge condition is the hardest for every method except extrapolation. With six or seven held-out groups, no difference from the TFT survives Holm correction.
 
 Gradient boosting also has the lowest MAE (0.15 and 0.49~pp on S1 and S6) and the largest $R^2_\Delta$ (0.54, 0.74), while extrapolation predicts the change no better than its average ($-1.31$, $-0.05$). On S6 the plain $R^2$ is at least 0.95 for every method, persistence included, so it does not tell them apart, and the MLP and TFT overestimate SOH (bias $+0.22$, $+0.24$~pp), the optimistic side for reuse. The S6 reuse classes give the same ranking (Table~\ref{tab:d30_cls_s6}; MCC 0.93 for gradient boosting, 0.72 for persistence).
 
@@ -60,16 +65,7 @@ Pretraining on the first-life pool (36{,}711 samples, against 2{,}409 in S6) doe
 \subsection{Learned residual on linear extrapolation}
 \label{sec:res-residual}
 
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=\textwidth]{figures/d23_comparison.png}
-  \caption{S6 continual stream: final average test RMSE (pp), mean and s.d.\ over the 50 runs of the main seed
-    set; bold, blue: the proposed residual TFT-EWC; dashed: linear extrapolation. Replicate set, forgetting and
-    literature backbones: Table~SIII of the supplement.}
-  \label{fig:d23bar}
-\end{figure*}
-
-Learning the residual~\eqref{eq:residual} (Fig.~\ref{fig:d23bar}; Table~SIII of the supplement) did \emph{not} meet the criterion registered in advance, beating linear extrapolation. The two are practically equivalent for horizons 1--3; for 1--6 extrapolation is slightly better on average (not replicated) and better at $h=1$--2 (replicated), and the gap closes by $h=5$--6. The residual form does make the TFT competitive: it is 0.17~pp (E1) and 0.24--0.30~pp (E2) more accurate than the direct form and ahead of gradient boosting, all replicated. Over horizons 1--6, where it forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp (replicated); its effect on the final error does not replicate. For horizons 1--3, EWC and fine-tuning are practically equivalent. \emph{Ageing-cycle inputs.} The 21 inputs extracted with Spark (Section~\ref{sec:spark}), added as planned, make the residual TFT\,+\,EWC worse: 0.480/0.501 against 0.339/0.314~pp, and worse than linear extrapolation, both replicated.
+Learning the residual~\eqref{eq:residual} (Fig.~\ref{fig:overview}c; Table~SIII of the supplement) did \emph{not} meet the criterion registered in advance, beating linear extrapolation. The two are practically equivalent for horizons 1--3; for 1--6 extrapolation is slightly better on average (not replicated) and better at $h=1$--2 (replicated), and the gap closes by $h=5$--6. The residual form does make the TFT competitive: it is 0.17~pp (E1) and 0.24--0.30~pp (E2) more accurate than the direct form and ahead of gradient boosting, all replicated. Over horizons 1--6, where it forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp (replicated); its effect on the final error does not replicate. For horizons 1--3, EWC and fine-tuning are practically equivalent. \emph{Ageing-cycle inputs.} The 21 inputs extracted with Spark (Section~\ref{sec:spark}), added as planned, make the residual TFT\,+\,EWC worse: 0.480/0.501 against 0.339/0.314~pp, and worse than linear extrapolation, both replicated.
 
 % -----------------------------------------------------------------------------
 \subsection{Shift-adaptive EWC and literature baselines}
