@@ -290,8 +290,9 @@ def condition_values(r: Runner, parts: dict, singles: dict, folds: list[int]) ->
                                     (LAST, [o[c] for o in singles[k][LAST].values()]),
                                     *((m, [singles[k][m][c]]) for m in (ALL, LIN, PERS, RIDGE))):
                     row = {"set": s, "method": method, "condition": c, "fold": k, "n_runs": len(scs)}
-                    row.update({m: float(np.nanmean([x[m] for x in scs])) if any(np.isfinite(x[m]) for x in scs)
-                                else np.nan for m in keep})
+                    # A condition may have no sample at a long horizon (short series): that metric is missing.
+                    vals = {m: [x.get(m, np.nan) for x in scs] for m in keep}
+                    row.update({m: float(np.nanmean(x)) if np.isfinite(x).any() else np.nan for m, x in vals.items()})
                     if method == SHR:
                         for lv in ("90", "80"):
                             iv = [u["conditions"][c]["intervals"][lv] for u in units]
