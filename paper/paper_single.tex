@@ -81,7 +81,7 @@ Chennai, India
 % ============================================================
 
 \begin{abstract}
-Batteries retired from electric vehicles can often be reused, for example as stationary storage, yet a model that judges their health on one group of batteries may fail on the next. Continual learning aims to let a model learn each new group as it arrives without forgetting the earlier ones. We propose Residual TFT-EWC, a Temporal Fusion Transformer trained with Elastic Weight Consolidation (EWC) that does not forecast the state of health (SOH) from scratch but learns a scaled-down correction to a straight-line extrapolation of the recent fade. We use it to forecast the SOH of lithium-ion cells one to six capacity checks ahead, on 395 cells from five public datasets, with experiments registered in advance and every claimed difference repeated on a second set of random seeds. When usage conditions differ, models forget earlier groups by up to 0.46 percentage points (pp). Of all models compared, Residual TFT-EWC is the only one that does well both when groups arrive one after another and on usage conditions it has never seen. In the first setting it matches linear extrapolation, the strongest baseline, is 0.13--0.41~pp more accurate than gradient boosting, and EWC cuts its forgetting by about two thirds. On unseen conditions it is 0.43--0.68~pp more accurate than extrapolation and puts 95.5\% of samples in their measured capacity-based health class. Gradient boosting and a TFT trained on all data at once do better there, mainly because they keep every earlier condition's data; denied that data, gradient boosting is within 0.08~pp of our model. Forecast intervals reach their stated coverage on a new condition only when calibrated on conditions left out of training, and not for a condition outside the training range.
+Batteries retired from electric vehicles can often be reused, for example as stationary storage, yet a model that judges their health on one group of batteries may fail on the next. Continual learning aims to let a model learn each new group as it arrives without forgetting the earlier ones. We propose Residual TFT-EWC, a Temporal Fusion Transformer trained with Elastic Weight Consolidation (EWC) that does not forecast the state of health (SOH) from scratch but learns a scaled-down correction to a straight-line extrapolation of the recent fade. We use it to forecast the SOH of lithium-ion cells one to six capacity checks ahead, on 395 cells from five public datasets, with experiments registered in advance and every claimed difference repeated on a second set of random seeds. When usage conditions differ, models forget earlier groups by up to 0.46 percentage points (pp). Of all models compared, Residual TFT-EWC is the only one that does well both when groups arrive one after another and on usage conditions it has never seen. In the first setting it matches linear extrapolation, the strongest baseline, is 0.13--0.41~pp more accurate than gradient boosting, and EWC cuts its forgetting by about two thirds. On unseen conditions it is 0.43--0.68~pp more accurate than extrapolation and puts 95.5\% of samples in their measured capacity-based health class. Gradient boosting and a TFT trained on all data at once do better there, mainly because they keep every earlier condition's data; denied that data, gradient boosting comes within 0.08~pp of our model there but forgets on the stream, where it is 0.24--0.46~pp less accurate. Forecast intervals reach their stated coverage on a new condition only when calibrated on conditions left out of training, and not for a condition outside the training range.
 \end{abstract}
 
 % ============================================================
@@ -156,7 +156,7 @@ Our contributions are as follows (Fig.~\ref{fig:system}):
 \begin{itemize}
   \item A benchmark for forecasting the SOH of second-life cells from five public datasets (395 cells after quality checks), built so that no future information reaches the inputs. Two label flaws are removed: test currents set from the previous capacity, and pulse charge counted as capacity.
   \item A comparison of a Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) with fine-tuning, replay, training on all data at once, simple forecasters and the model types of earlier work (BiLSTM, TCN, Transformer, GPR, random forest, SVR) in three settings: groups arriving in sequence, groups never seen in training, and pretraining on first-life data. We report how well each method adapts and how much it forgets.
-  \item Residual TFT-EWC, which corrects linear extrapolation instead of replacing it. It is the only model that does well in both settings: it matches extrapolation on the stream, where EWC cuts its forgetting by about two thirds, and outperforms it on unseen usage conditions (replicated).
+  \item Residual TFT-EWC, which corrects linear extrapolation instead of replacing it. Among methods that keep no earlier data, it is the only one close to the best in both settings: it matches extrapolation on the stream, where EWC cuts its forgetting by about two thirds, outperforms it on unseen usage conditions, and beats gradient boosting refitted on each new condition on the stream (replicated).
   \item Forecast intervals for unseen usage conditions: calibrated on the training conditions they are too narrow, while calibrating on conditions left out of training restores the stated coverage, except outside the training range.
   \item A reproducibility check: several significance results on these small datasets changed with the computing platform, so our main results must pass a replication rule.
 \end{itemize}
@@ -404,7 +404,7 @@ The pipeline uses Python~3.11, NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTor
 \section{Results}
 \label{sec:results}
 
-% Generated by scripts/make_headline_table.py from results/forecasting_d23/d25/d26/d32_e*.json
+% Generated by scripts/make_headline_table.py from results/forecasting_d23/d25/d26/d32/d35_e*.json
 \begin{table*}[t]
   \centering
   \caption{The proposed model against the two strongest traditional forecasters on S6, in both settings. Top:
@@ -413,7 +413,8 @@ The pipeline uses Python~3.11, NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTor
     verdict of the replication rule (better/worse: significant after Holm in both seed sets, same sign, at least
     0.05~pp; equiv.: below 0.05~pp in both; n.r.: not replicated). $^\ast$Post hoc for the shrunk model; registered
     for the unshrunk model (D23), with the same verdict. $^\dagger$Under the continual constraint of the proposed
-    model (conditions one at a time, earlier data not kept); P2 only (D32).}
+    model (conditions one at a time, earlier data not kept): refitted on the newest condition (P2: D32; P1: D35,
+    residual target, the more accurate of its two forms). $^\ddagger$Post hoc (D35).}
   \label{tab:headline}
   \setlength{\tabcolsep}{4pt}
   \footnotesize
@@ -426,18 +427,25 @@ The pipeline uses Python~3.11, NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTor
     \textbf{Residual TFT-EWC} (proposed) & \textbf{0.32/0.31} & 0.50/0.49 & 0.92/0.94 & 1.62/1.65 \\
     Linear extrapolation & 0.34 & \textbf{0.48} & 1.37 & 2.30 \\
     Gradient boosting, all conditions stored & 0.45 & 0.90 & \textbf{0.54} & \textbf{1.05} \\
-    Gradient boosting, latest condition only$^\dagger$ & -- & -- & 0.86 & 1.59 \\
+    Gradient boosting, latest condition only$^\dagger$ & 0.56 & 0.96 & 0.86 & 1.59 \\
     Persistence & 1.64 & 2.67 & 2.82 & 4.90 \\
     \midrule
     \multicolumn{5}{l}{\emph{Proposed minus baseline, verdict}} \\
     vs.\ linear extrapolation & $-0.02$/$-0.04$ equiv. & $+0.01$/$+0.01$ equiv. & $-0.45$/$-0.43$ better & $-0.68$/$-0.65$ better \\
     vs.\ gradient boosting, all stored & $-0.13$/$-0.14$ better$^\ast$ & $-0.40$/$-0.41$ better$^\ast$ & $+0.39$/$+0.41$ worse & $+0.57$/$+0.60$ worse \\
-    vs.\ gradient boosting, latest only$^\dagger$ & -- & -- & $+0.06$/$+0.08$ worse & $+0.03$/$+0.06$ n.r. \\
+    vs.\ gradient boosting, latest only$^\dagger$ & $-0.24$/$-0.25$ better$^\ddagger$ & $-0.46$/$-0.46$ better$^\ddagger$ & $+0.06$/$+0.08$ worse & $+0.03$/$+0.06$ n.r. \\
     \bottomrule
   \end{tabular}
 \end{table*}
 
-\emph{Summary.} The proposed model is the only one that does well in both settings (Table~\ref{tab:headline}; pairs such as 0.32/0.31 give the main and replicate seed sets), while each traditional forecaster fails in one of them. With groups arriving in sequence, the proposed model has the lowest error for horizons 1--3, level with linear extrapolation, and is 0.13--0.41~pp more accurate than gradient boosting (replicated; not planned in advance for the shrunk model). On an unseen condition, extrapolation falls behind and the proposed model is 0.43--0.68~pp more accurate (replicated); gradient boosting, which sees every condition's data at once, is best there. Under our model's rule (one condition at a time, no earlier data kept), gradient boosting refitted on the latest condition is slightly more accurate for horizons 1--3 (0.06/0.08~pp, replicated) and indistinguishable for 1--6 (supplement).
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/overview.png}
+  \caption{S6. (a) Stream (P1) against unseen-condition (P2) error, horizons 1--3 and 1--6, for methods that keep no earlier data; hollow grey: gradient boosting with all conditions stored; persistence (1.6--4.9~pp) off scale. (b) Largest shortfall against the best of these in either setting. (c) Stream error by design step (dots: replicate seeds; lines: extrapolation). (d) Forgetting, horizons 1--6. GB on the stream: post hoc. Per-backbone errors: Fig.~S10, Table~SIII.}
+  \label{fig:overview}
+\end{figure*}
+
+\emph{Summary.} The proposed model is the only one that does well in both settings (Table~\ref{tab:headline}; pairs such as 0.32/0.31 give the main and replicate seed sets), while each traditional forecaster fails in one of them. With groups arriving in sequence, the proposed model has the lowest error for horizons 1--3, level with linear extrapolation, and is 0.13--0.41~pp more accurate than gradient boosting (replicated; not planned in advance for the shrunk model). On an unseen condition, extrapolation falls behind and the proposed model is 0.43--0.68~pp more accurate (replicated); gradient boosting, which sees every condition's data at once, is best there. Under our model's rule (one condition at a time, no earlier data kept), gradient boosting refitted on the latest condition is slightly more accurate for horizons 1--3 (0.06/0.08~pp, replicated) and indistinguishable for 1--6 (supplement). On the stream, however, gradient boosting refitted on the newest condition forgets (0.17--0.34~pp) and is 0.24--0.46~pp less accurate than the proposed model (replicated, post hoc). Among methods that keep no earlier data, only the proposed model is within 0.07~pp of the best in both settings (Fig.~\ref{fig:overview}a,b).
 
 \emph{Data.} The S1 diagnostics follow the current SOH closely (median within-cell $\rho=0.97$ for the main incremental-capacity peak) but say little about the change to the next RPT (median $|\rho|\le0.3$). Every S1 sample stays in class C0, while all S6 cells pass from C0 to C3.
 
@@ -453,38 +461,7 @@ The pipeline uses Python~3.11, NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTor
 \subsection{Unseen cell or usage condition (P2)}
 \label{sec:res-p2}
 
-% Generated by scripts/make_results_tables.py from results/forecasting.json (commit d710cad), results/forecasting_wheeler.json (commit 53ab76f)
-\begin{table}[t]
-  \centering
-  \caption{Protocol P2 (unseen battery in S1, unseen usage condition in S6): mean test RMSE (pp) over held-out groups, range over groups. Reuse-class metrics of the same forecasts: Table~\ref{tab:d30_cls_s6}.}
-  \label{tab:p2}
-  \setlength{\tabcolsep}{3pt}
-  \begin{tabular}{llcc}
-    \toprule
-    Data & Method & RMSE & Range \\
-    \midrule
-    S1 & Persistence & 0.545 & 0.436--0.688 \\
-    S1 & Linear extrapolation & 0.511 & 0.284--0.725 \\
-    S1 & Ridge, usage only & 0.301 & 0.172--0.409 \\
-    S1 & Ridge, F0 & 0.418 & 0.158--0.779 \\
-    S1 & Ridge, F1 & 0.320 & 0.161--0.477 \\
-    S1 & Gradient boosting, F1 & 0.219 & 0.091--0.299 \\
-    S1 & MLP & 0.285 & 0.149--0.389 \\
-    S1 & TFT & 0.292 & 0.199--0.377 \\
-    \midrule
-    S6 & Persistence & 2.817 & 2.025--4.327 \\
-    S6 & Linear extrapolation & 1.372 & 0.856--1.669 \\
-    S6 & Ridge, usage only & 1.177 & 0.870--2.288 \\
-    S6 & Ridge, F0 & 0.859 & 0.598--1.836 \\
-    S6 & Ridge, F1 & 1.137 & 0.588--2.188 \\
-    S6 & Gradient boosting, F1 & 0.710 & 0.395--1.839 \\
-    S6 & MLP & 0.821 & 0.476--2.225 \\
-    S6 & TFT & 0.868 & 0.551--2.390 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Gradient boosting is best on both datasets (Table~\ref{tab:p2}). On S6 the 100\% depth-of-discharge condition is the hardest for every method except extrapolation. With six or seven held-out groups, no difference from the TFT survives Holm correction.
+Gradient boosting is best on both datasets (Table~SVII of the supplement). On S6 the 100\% depth-of-discharge condition is the hardest for every method except extrapolation. With six or seven held-out groups, no difference from the TFT survives Holm correction.
 
 Gradient boosting also has the lowest MAE (0.15 and 0.49~pp on S1 and S6) and the largest $R^2_\Delta$ (0.54, 0.74), while extrapolation predicts the change no better than its average ($-1.31$, $-0.05$). On S6 the plain $R^2$ is at least 0.95 for every method, persistence included, so it does not tell them apart, and the MLP and TFT overestimate SOH (bias $+0.22$, $+0.24$~pp), the optimistic side for reuse. The S6 reuse classes give the same ranking (Table~\ref{tab:d30_cls_s6}; MCC 0.93 for gradient boosting, 0.72 for persistence).
 
@@ -526,16 +503,7 @@ Pretraining on the first-life pool (36{,}711 samples, against 2{,}409 in S6) doe
 \subsection{Learned residual on linear extrapolation}
 \label{sec:res-residual}
 
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=\textwidth]{figures/d23_comparison.png}
-  \caption{S6 continual stream: final average test RMSE (pp), mean and s.d.\ over the 50 runs of the main seed
-    set; bold, blue: the proposed residual TFT-EWC; dashed: linear extrapolation. Replicate set, forgetting and
-    literature backbones: Table~SIII of the supplement.}
-  \label{fig:d23bar}
-\end{figure*}
-
-Learning the residual~\eqref{eq:residual} (Fig.~\ref{fig:d23bar}; Table~SIII of the supplement) did \emph{not} meet the criterion registered in advance, beating linear extrapolation. The two are practically equivalent for horizons 1--3; for 1--6 extrapolation is slightly better on average (not replicated) and better at $h=1$--2 (replicated), and the gap closes by $h=5$--6. The residual form does make the TFT competitive: it is 0.17~pp (E1) and 0.24--0.30~pp (E2) more accurate than the direct form and ahead of gradient boosting, all replicated. Over horizons 1--6, where it forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp (replicated); its effect on the final error does not replicate. For horizons 1--3, EWC and fine-tuning are practically equivalent. \emph{Ageing-cycle inputs.} The 21 inputs extracted with Spark (Section~\ref{sec:spark}), added as planned, make the residual TFT\,+\,EWC worse: 0.480/0.501 against 0.339/0.314~pp, and worse than linear extrapolation, both replicated.
+Learning the residual~\eqref{eq:residual} (Fig.~\ref{fig:overview}c; Table~SIII of the supplement) did \emph{not} meet the criterion registered in advance, beating linear extrapolation. The two are practically equivalent for horizons 1--3; for 1--6 extrapolation is slightly better on average (not replicated) and better at $h=1$--2 (replicated), and the gap closes by $h=5$--6. The residual form does make the TFT competitive: it is 0.17~pp (E1) and 0.24--0.30~pp (E2) more accurate than the direct form and ahead of gradient boosting, all replicated. Over horizons 1--6, where it forgets more, EWC lowers its forgetting from 0.28/0.22 to 0.09~pp (replicated); its effect on the final error does not replicate. For horizons 1--3, EWC and fine-tuning are practically equivalent. \emph{Ageing-cycle inputs.} The 21 inputs extracted with Spark (Section~\ref{sec:spark}), added as planned, make the residual TFT\,+\,EWC worse: 0.480/0.501 against 0.339/0.314~pp, and worse than linear extrapolation, both replicated.
 
 % -----------------------------------------------------------------------------
 \subsection{Shift-adaptive EWC and literature baselines}
@@ -569,18 +537,18 @@ The capacity-based classes give the same ranking (Table~SVI and Fig.~S9 of the s
 \section{Discussion}
 \label{sec:discussion}
 
-\emph{Where the proposed model is strongest.} Extrapolation is accurate when groups arrive in sequence but falls behind on new conditions; gradient boosting is accurate on new conditions but trails in the sequence; Residual TFT-EWC is competitive in both. In the sequence, EWC protects earlier groups when there is something to protect (S6, not S1), cutting forgetting over six horizons by about two thirds. Matching extrapolation is itself hard: fade is smooth and the groups are small (21--27 and 135--225 training samples per task in S1 and S6). On unseen conditions, most of the remaining gap to gradient boosting and to joint training (0.32--0.44~pp) comes from storing earlier data, not from the model: denied that data, gradient boosting is within 0.08~pp. Where earlier data cannot be kept, for privacy, ownership or volume reasons, continual learning is the natural choice; in our small datasets storing every group was still cheap.
+\emph{Where the proposed model is strongest.} Extrapolation is accurate when groups arrive in sequence but falls behind on new conditions; gradient boosting is accurate on new conditions but trails in the sequence; Residual TFT-EWC is competitive in both. In the sequence, EWC protects earlier groups when there is something to protect (S6, not S1), cutting forgetting over six horizons by about two thirds. Matching extrapolation is itself hard: fade is smooth and the groups are small (21--27 and 135--225 training samples per task in S1 and S6). On unseen conditions, most of the remaining gap to gradient boosting and to joint training (0.32--0.44~pp) comes from storing earlier data, not from the model: denied that data, gradient boosting is within 0.08~pp there, but on the stream it forgets and falls 0.24--0.46~pp behind. Where earlier data cannot be kept, for privacy, ownership or volume reasons, continual learning is the natural choice; in our small datasets storing every group was still cheap.
 
 \emph{What drives its accuracy.} Building on the best simple forecaster mattered most. The ablation points to the inputs, not the architecture: diagnostic features hurt the TFT and the calendar time between checks helped, which fits the data: at 50~$^\circ$C, all 20 S6 cells lose more capacity per cycle when checks are further apart. For intervals, the choice of calibration data mattered as much as the model: only errors on conditions left out of training reflect the error on a new one.
 
 \emph{Reproducibility and reuse.} Because significance changed across platforms (Section~\ref{sec:res-repro}), we recommend claiming only differences that replicate and exceed a practical threshold. The reuse classes are a screening aid, not a verdict on suitability: they rest on relative capacity alone, while reuse also depends on power capability, safety, absolute capacity and cost. For a group unlike any seen before, such as the 100\% depth-of-discharge condition, neither the forecasts nor the intervals can be trusted, and pooled coverage hides this.
 
-\emph{Limitations.} We changed the task to forecasting after inspecting the first dataset. The second-life datasets are small; S6 is aged at 50~$^\circ$C and its ``second life'' continues the same test; SOH is relative to each cell's first valid measurement; and forecasts assume the planned usage is known. The ablation and every later experiment were decided after the main results (all but the ablation registered before being run). The models fitted once see all tasks at the same time, and the direct literature models were run for horizons 1--3 only. The TFT settings for unseen conditions were tuned on validation rows of all seven S6 conditions, all from one laboratory. Leave-one-condition-out intervals cover only gradient boosting and extrapolation.
+\emph{Limitations.} We changed the task to forecasting after inspecting the first dataset. The second-life datasets are small; S6 is aged at 50~$^\circ$C and its ``second life'' continues the same test; SOH is relative to each cell's first valid measurement; and forecasts assume the planned usage is known. The ablation and every later experiment were decided after the main results (all but the ablation registered before being run). The models fitted once see all tasks at the same time, and the direct literature models were run for horizons 1--3 only. The TFT settings for unseen conditions were tuned on validation rows of all seven S6 conditions, all from one laboratory. Leave-one-condition-out intervals cover only gradient boosting and extrapolation, and the stream test of gradient boosting refitted on the newest condition was added after the results.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-We proposed Residual TFT-EWC, a continual learner that forecasts the SOH of second-life cells by learning a scaled-down correction to linear extrapolation. Of the models compared, it is the only one that holds up across settings: with groups arriving in sequence it matches extrapolation, beats gradient boosting and forgets far less with EWC, and on unseen usage conditions it beats extrapolation. Gradient boosting and joint training are more accurate on unseen conditions mainly because they keep every earlier condition's data; without it, gradient boosting is within 0.08~pp. Forecast intervals held on unseen conditions only when calibrated on conditions left out of training, and not outside the training range; refitting and adjusting the width as new checks arrive cut the interval score by 29\%. Future work should test the approach where earlier data cannot be stored and groups are larger, and add power and safety criteria to the screening.
+We proposed Residual TFT-EWC, a continual learner that forecasts the SOH of second-life cells by learning a scaled-down correction to linear extrapolation. Of the models compared, it is the only one that holds up across settings: with groups arriving in sequence it matches extrapolation, beats gradient boosting and forgets far less with EWC, and on unseen usage conditions it beats extrapolation. Gradient boosting and joint training are more accurate on unseen conditions mainly because they keep every earlier condition's data; without it, gradient boosting is within 0.08~pp on unseen conditions but 0.24--0.46~pp worse on the stream. Forecast intervals held on unseen conditions only when calibrated on conditions left out of training, and not outside the training range; refitting and adjusting the width as new checks arrive cut the interval score by 29\%. Future work should test the approach where earlier data cannot be stored and groups are larger, and add power and safety criteria to the screening.
 
 % ============================================================
 % REFERENCES
