@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-11-02T13:33:28+00:00",
-  "commit": "34abee0ba9b69a73869b64f89c4e6e0c2b627eb0",
+  "generated_utc": "2026-11-05T05:42:02+00:00",
+  "commit": "ece390210243c98df9314e3bceb3c1db7e19ee20",
   "kpis": [
     {
       "id": "p1_lin",
@@ -37,7 +37,7 @@
   ],
   "counts": {
     "dim_group": 13,
-    "dim_method": 61,
+    "dim_method": 65,
     "fact_stream_run": 6200,
     "fact_stream_task": 42000,
     "fact_stream_baseline": 218,
@@ -45,10 +45,10 @@
     "fact_unseen_fold": 4634,
     "fact_tests": 536,
     "fact_verdicts": 68,
-    "fact_coverage": 160,
+    "fact_coverage": 288,
     "fact_horizon": 84,
     "fact_d30_group": 2338,
-    "fact_headline": 28,
+    "fact_headline": 32,
     "fact_soh": 958,
     "fact_predictions": 43008
   },
@@ -263,6 +263,18 @@
     {
       "protocol": "Continual stream (P1)",
       "setting": "E1 (h = 1-3)",
+      "method": "gbm_last",
+      "label": "Gradient boosting, latest condition only",
+      "rmse_main": 0.5614587604,
+      "rmse_replicate": 0.5614587604,
+      "diff_main": null,
+      "diff_replicate": null,
+      "verdict": null,
+      "post_hoc": null
+    },
+    {
+      "protocol": "Continual stream (P1)",
+      "setting": "E1 (h = 1-3)",
       "method": "persistence",
       "label": "Persistence",
       "rmse_main": 1.6440579121,
@@ -295,6 +307,18 @@
       "diff_replicate": -0.1437278432,
       "verdict": "replicated, a better",
       "post_hoc": true
+    },
+    {
+      "protocol": "Continual stream (P1)",
+      "setting": "E1 (h = 1-3)",
+      "method": "vs gbm_last",
+      "label": "Proposed vs Gradient boosting, latest condition only",
+      "rmse_main": null,
+      "rmse_replicate": null,
+      "diff_main": -0.2433226211,
+      "diff_replicate": -0.2539304782,
+      "verdict": "replicated, a better",
+      "post_hoc": false
     },
     {
       "protocol": "Unseen usage condition (P2)",
@@ -431,6 +455,18 @@
     {
       "protocol": "Continual stream (P1)",
       "setting": "E2 (h = 1-6)",
+      "method": "gbm_last",
+      "label": "Gradient boosting, latest condition only",
+      "rmse_main": 0.9557525856,
+      "rmse_replicate": 0.9557525856,
+      "diff_main": null,
+      "diff_replicate": null,
+      "verdict": null,
+      "post_hoc": null
+    },
+    {
+      "protocol": "Continual stream (P1)",
+      "setting": "E2 (h = 1-6)",
       "method": "persistence",
       "label": "Persistence",
       "rmse_main": 2.6667614918,
@@ -463,6 +499,18 @@
       "diff_replicate": -0.4051633579,
       "verdict": "replicated, a better",
       "post_hoc": true
+    },
+    {
+      "protocol": "Continual stream (P1)",
+      "setting": "E2 (h = 1-6)",
+      "method": "vs gbm_last",
+      "label": "Proposed vs Gradient boosting, latest condition only",
+      "rmse_main": null,
+      "rmse_replicate": null,
+      "diff_main": -0.457875735,
+      "diff_replicate": -0.4625432551,
+      "verdict": "replicated, a better",
+      "post_hoc": false
     },
     {
       "protocol": "Unseen usage condition (P2)",
