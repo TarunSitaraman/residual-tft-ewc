@@ -1,4 +1,8 @@
 method,label,family,kind,is_proposed
+d28_refit_static,Refit,GBM,interval calibration,False
+d28_refit_track,Refit + tracking,GBM,interval calibration,False
+d28_static,Static (D27 GBM-LOCO),GBM,interval calibration,False
+d28_track,Tracking,GBM,interval calibration,False
 ewc,MLP + EWC,MLP,continual,False
 ewc_online,"Residual TFT + EWC, online",TFT,online adaptation,False
 finetune,MLP fine-tuning,MLP,continual,False

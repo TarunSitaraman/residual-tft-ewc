@@ -78,8 +78,12 @@ SPECIAL_NAMES = {
     "gbm_loco": "GBM-LOCO intervals", "gbm_loco_mondrian": "GBM-LOCO intervals, Mondrian",
     "lin_all": "LIN-all intervals", "lin_all_mondrian": "LIN-all intervals, Mondrian",
     "lin_val": "LIN-val intervals (D26 rule)",
+    # D28 interval updates on the new condition (docs/RESULTS.md, D28)
+    "d28_static": "Static (D27 GBM-LOCO)", "d28_track": "Tracking", "d28_refit_static": "Refit",
+    "d28_refit_track": "Refit + tracking",
 }
-D27_RULES = ("gbm_loco", "gbm_loco_mondrian", "lin_all", "lin_all_mondrian", "lin_val")
+D28_ARMS = {"static": "d28_static", "track": "d28_track", "refit": "d28_refit_static", "refit_track": "d28_refit_track"}
+D27_RULES = ("gbm_loco", "gbm_loco_mondrian", "lin_all", "lin_all_mondrian", "lin_val", *D28_ARMS.values())
 LEGACY_MLP = ("finetune", "replay", "ewc", "joint", "mlp")
 FAMILY_NAME = {"tft": "TFT", "mlp": "MLP", "lstm": "BiLSTM", "tcn": "TCN", "transformer": "Transformer"}
 STRATEGY = {"ewc": "+ EWC", "finetune": "fine-tuning", "saewc": "+ SA-EWC", "joint": "joint"}
@@ -122,7 +126,7 @@ def method_label(m: str) -> str:
 
 def method_family(m: str) -> str:
     if m in D27_RULES:
-        return "GBM" if m.startswith("gbm") else "Baseline"
+        return "GBM" if m.startswith(("gbm", "d28")) else "Baseline"
     if m in BASELINE_NAMES:
         return "GBM" if m.startswith("gbm") or m == "d28_refit" else "Baseline"
     if m in ("joint_static", "ft_online", "ewc_online") or m.startswith("tft"):
@@ -289,14 +293,15 @@ def verdicts_table(d: dict, experiment: str, setting: str) -> pd.DataFrame:
 
 
 # ---------- other committed tables ----------
-def coverage_table(d: dict, setting: str) -> pd.DataFrame:
-    """D27 split-conformal intervals: pooled and per-condition coverage, interval score and width."""
+def coverage_table(d: dict, setting: str, experiment: str = "D27", names: dict | None = None) -> pd.DataFrame:
+    """Split-conformal intervals (D27 rules, D28 arms): pooled and per-condition coverage, interval score and width."""
     rows = []
     for method, levels in (d.get("summary") or {}).items():
         for level, s in (levels or {}).items():
             if not isinstance(s, dict):
                 continue
-            common = {"experiment": "D27", "setting": setting, "method": method, "level": num(level) / 100}
+            common = {"experiment": experiment, "setting": setting, "method": (names or {}).get(method, method),
+                      "level": num(level) / 100}
             rows.append({**common, "group": "all", "coverage": num(s.get("coverage_pooled")),
                          "interval_score": num(s.get("interval_score")), "width": num(s.get("width")),
                          "decided_share": num(s.get("decided_share"))})
@@ -591,6 +596,9 @@ def build_results(results: Path) -> dict[str, pd.DataFrame]:
         d = load_json(results, f"forecasting_d27_{e}")
         if d is not None:
             cov.append(coverage_table(d, e))
+        d = load_json(results, f"forecasting_d28_{e}")
+        if d is not None:
+            cov.append(coverage_table(d, e, "D28", D28_ARMS))
 
     cat = lambda xs: pd.concat([x for x in xs if len(x)], ignore_index=True) if any(len(x) for x in xs) else pd.DataFrame()  # noqa: E731
     frames = {"fact_stream_run": cat(s_runs), "fact_stream_task": cat(s_tasks), "fact_stream_baseline": cat(s_base),

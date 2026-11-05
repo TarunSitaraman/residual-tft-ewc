@@ -302,6 +302,30 @@ export async function renderContinual(panel, ctx) {
   else fg.body.append(empty(`${fam} was not run on the stream in this setting.`));
   if (!FAMILY_PREFIX[state.family] && state.family !== "all") fg.setFoot(el("span", { class: "sub", text: `${state.family} has no continual variants; showing TFT.` }));
 
+  // What EWC changes: forgetting with and without EWC (D23), for the residual and direct targets.
+  const d23 = run.filter((r) => r.experiment === "D23" && r.setting === state.setting);
+  const ew = card("What EWC changes", "Mean forgetting per run with EWC (filled) and with plain fine-tuning (ring), for the residual target and for forecasting SOH directly. Main seed set; the replicate is in the tooltip.", `S6 · P1 · D23 · ${state.setting.toUpperCase()}`);
+  const fgMean = (m, set) => mean(d23.filter((r) => r.method === m && r.seed_set === set).map((r) => num(r.forgetting)).filter((v) => v !== null));
+  const ewRows = [["tft", "residual", "TFT, residual"], ["tft", "direct", "TFT, direct"], ["mlp", "residual", "MLP, residual"], ["mlp", "direct", "MLP, direct"]]
+    .filter(([f]) => state.family === "all" || FAMILY_PREFIX[state.family] === f);
+  const ewcGain = {};
+  if (!d23.length || !ewRows.length) ew.body.append(empty(d23.length ? `${state.family} was not part of the EWC study (D23); it compared TFT and MLP.` : "No D23 runs in this setting."));
+  else {
+    dotRows(ew.body, { tip, labelW: 170, x: { label: "Forgetting (pp)", min: 0, fmt: (v) => v.toFixed(2) },
+      rows: ewRows.map(([f, t, lab]) => {
+        const isP = f === "tft" && t === "residual";
+        const mk = (strat) => {
+          const m = `${f}_${t}_${strat}`, v = fgMean(m, "main"), vr = fgMean(m, "replicate");
+          return v === null ? null : { v, color: isP ? ACCENT : NEUTRAL, open: strat === "finetune", r: 6,
+            tip: `${b(label[m] || m)}<br>Forgetting ${fmt(v, 3)} pp (main), ${fmt(vr, 3)} pp (replicate)` };
+        };
+        const e = mk("ewc"), ft = mk("finetune");
+        if (e && ft) ewcGain[`${f}_${t}`] = [e.v, ft.v];
+        return { label: lab, emph: isP, range: e && ft ? [Math.min(e.v, ft.v), Math.max(e.v, ft.v)] : null, marks: [ft, e].filter(Boolean) };
+      }) });
+    ew.setFoot(legend([{ label: "With EWC", color: NEUTRAL, kind: "dot" }, { label: "Fine-tuning, no protection", color: NEUTRAL, kind: "ring" }]));
+  }
+
   // Seed spread of the D25 finalists against the baselines.
   const d25r = run.filter((r) => r.experiment === "D25" && r.setting === state.setting);
   const nRuns = d25r.filter((r) => r.method === PROPOSED && r.seed_set === "main").length;
@@ -335,16 +359,22 @@ export async function renderContinual(panel, ctx) {
   const head = summary.headline.filter((r) => r.setting === SETTING_LABEL[state.setting] && r.protocol === PROTOCOL_LABEL.P1);
   const hP = head.find((r) => r.method === PROPOSED), hL = head.find((r) => r.method === "linear_extrapolation");
   const verdict = VERDICT_PHRASE[head.find((r) => r.method === "vs linear_extrapolation")?.verdict] || "compared with";
+  const g = ewcGain.tft_residual;
+  const ewcLine = !g ? "" : g[1] - g[0] > 0.05
+    ? ` Without EWC the same model forgets ${b(`${fmt(g[1], 2)} pp`)} instead of ${fmt(g[0], 2)} pp (D23).`
+    : ` Over these horizons EWC makes little difference to its forgetting (${fmt(g[0], 2)} against ${fmt(g[1], 2)} pp without it, D23); the gain appears over horizons 1-6.`;
   panel.replaceChildren(takeaway(
-    `With the residual target and EWC, the proposed TFT's error on a task grows by ${b(`${fmt(pP ? pP.y - pP.x : null, 3)} pp`)} on average between learning it and the end of the stream, and its final error is ${verdict} linear extrapolation (${fmt(hP?.rmse_main)} against ${fmt(hL?.rmse_main)} pp).`,
+    `With the residual target and EWC, the proposed TFT's error on a task grows by ${b(`${fmt(pP ? pP.y - pP.x : null, 3)} pp`)} on average between learning it and the end of the stream, and its final error is ${verdict} linear extrapolation (${fmt(hP?.rmse_main)} against ${fmt(hL?.rmse_main)} pp).${ewcLine}`,
     "Adaptation and retention are reported together because a model can look accurate on new data while forgetting the old."),
-  ar.node, fg.node, sp.node, bt.node);
+  ar.node, fg.node, ew.node, sp.node, bt.node);
 }
 
 // ---------- Reuse & uncertainty ----------
 const CLASSES = ["C0 stable", "C1 moderate fade", "C2 substantial fade", "C3 severe fade"];
 const PRED_METHOD = { all: "tft", TFT: "tft", MLP: "mlp", GBM: "gbm_F1", Baseline: "linear_extrapolation" };
 const RULES = [["gbm_loco", "var(--c1)"], ["lin_all", "var(--c2)"], ["lin_val", "var(--c3)"]];
+// D28 arms; the static arm is the D27 GBM-LOCO rule and keeps its colour.
+const ARMS = [["d28_static", "var(--c1)"], ["d28_track", "var(--c4)"], ["d28_refit_static", "var(--c7)"], ["d28_refit_track", "var(--c5)"]];
 
 export async function renderReuse(panel, ctx) {
   const { state, tip, onSelect, summary } = ctx;
@@ -405,11 +435,45 @@ export async function renderReuse(panel, ctx) {
     cv.setFoot(legend(rules.map(([m, color]) => ({ label: label[m] || m, color, kind: "dot" }))));
   }
 
+  // Updating the intervals as the new condition's checks arrive (D28, gradient boosting only).
+  const tag28 = `S6 · P2 · D28 · ${state.setting.toUpperCase()}`;
+  const up = card("Updating the intervals as checks arrive", "Coverage of 90 % intervals per held-out condition when the half-width tracks the errors seen so far, the forecaster is refitted with the new condition's measured checks, or both.", tag28, "wide");
+  const pool = card("Pooled 90 % intervals", "All seven held-out conditions together. Interval score: width plus a penalty for each miss, lower is better.", tag28, "narrow");
+  const d28 = cov.filter((r) => r.experiment === "D28" && r.setting === state.setting && num(r.level) === 0.9);
+  let isGain = null;
+  const noD28 = state.dataset !== "S6" ? "The interval study (D28) is on S6."
+    : !["all", "GBM"].includes(state.family) ? "D28 updates gradient-boosting intervals only; set the family to All or GBM."
+    : !d28.length ? "No D28 results in this setting." : null;
+  if (noD28) { up.body.append(empty(noD28)); pool.body.append(empty(noD28)); }
+  else {
+    const groups = summary.groups.filter((g) => g.dataset === "S6").map((g) => g.group);
+    const nm = (g) => { if (g === "all") return "All conditions"; const i = groupInfo(summary, g); return `${i.short}: ${i.desc}`; };
+    const get = (m, g) => d28.find((q) => q.method === m && q.group === g);
+    dotRows(up.body, { tip, labelW: 290, x: { label: "Coverage", min: 0.4, max: 1, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0.9, label: "target 0.90" }],
+      onRow: (r) => r.key !== "all" && onSelect({ group: r.key }),
+      rows: ["all", ...groups].map((g) => ({ key: g, label: nm(g), emph: g === state.group || (g === "all" && state.group === "all"),
+        marks: ARMS.map(([m, color]) => {
+          const r = get(m, g);
+          return r && { v: num(r.coverage), color, r: m === "d28_refit_track" ? 6.5 : 5,
+            tip: `${b(label[m] || m)}<br>${esc(nm(g))}: coverage ${fmt(num(r.coverage), 3)}, interval score ${fmt(num(r.interval_score), 2)} pp` };
+        }).filter(Boolean) })) });
+    up.setFoot(legend(ARMS.map(([m, color]) => ({ label: label[m] || m, color, kind: "dot" }))));
+    const st = get("d28_static", "all"), rt = get("d28_refit_track", "all");
+    if (st && rt) isGain = 1 - num(rt.interval_score) / num(st.interval_score);
+    const head = ["Arm", "Coverage", "Score (pp)", "Width (pp)"].map((h, i) => el("th", { class: i ? "num" : "", scope: "col", text: h }));
+    const body = ARMS.map(([m]) => get(m, "all") && el("tr", {},
+      el("th", { scope: "row", text: label[m] || m }),
+      ...["coverage", "interval_score", "width"].map((k, i) => el("td", { class: "num", text: fmt(num(get(m, "all")[k]), i ? 2 : 3) })))).filter(Boolean);
+    pool.body.append(el("div", { class: "scroll" }, el("table", { class: "stbl" }, el("thead", {}, el("tr", {}, ...head)), el("tbody", {}, ...body))));
+    if (isGain !== null) pool.setFoot(el("span", { class: "sub", text: `Refit + tracking lowers the interval score by ${fmt(100 * isGain, 0)} % against the static intervals, with pooled coverage kept near 0.90. Condition 7 (100 % depth of discharge) stays below 0.80.` }));
+  }
+  const d28Line = isGain !== null ? ` Updating them as the new condition's checks arrive lowers the interval score by ${b(`${fmt(100 * isGain, 0)} %`)} (D28).` : "";
+
   kids.push(takeaway(
     acc !== null
-      ? `${esc(label[pm] || pm)} forecasts (D30) land in the right reuse class ${b(`${fmt(100 * acc, 0)} %`)} of the time and within one class ${b(`${fmt(100 * within, 0)} %`)}. Leave-one-condition-out conformal intervals around gradient boosting hold their 90 % coverage overall; the D26 rule (LIN-val) under-covers.`
-      : "Leave-one-condition-out conformal intervals around gradient boosting hold their 90 % coverage overall; the D26 rule (LIN-val) under-covers.",
-    "Reuse classes describe capacity fade since the first check, not suitability for a particular application."),
-  conf.node, par.node, cv.node);
+      ? `${esc(label[pm] || pm)} forecasts (D30) land in the right reuse class ${b(`${fmt(100 * acc, 0)} %`)} of the time and within one class ${b(`${fmt(100 * within, 0)} %`)}. Leave-one-condition-out conformal intervals around gradient boosting hold their 90 % coverage overall; the D26 rule (LIN-val) under-covers.${d28Line}`
+      : `Leave-one-condition-out conformal intervals around gradient boosting hold their 90 % coverage overall; the D26 rule (LIN-val) under-covers.${d28Line}`,
+    "Reuse classes describe capacity fade since the first check, not suitability for a particular application. No interval rule reaches 0.80 coverage on condition 7, the one condition outside the training range."),
+  conf.node, par.node, cv.node, up.node, pool.node);
   panel.replaceChildren(...kids);
 }
