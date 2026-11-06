@@ -45,7 +45,8 @@ def preprocessing(table: pd.DataFrame) -> None:
     checks = W.list_checks(ROOT / "data" / W.RAW_SUBDIR)
     cell = checks[checks["cell"] == CELL].reset_index(drop=True)
     picks = cell.iloc[[0, len(cell) // 2, len(cell) - 1]]
-    fig, ax = plt.subplots(1, 3, figsize=(7.2, 2.5))
+    plt.rcParams.update({"font.family": "DejaVu Serif", "axes.spines.top": False, "axes.spines.right": False})
+    fig, ax = plt.subplots(1, 3, figsize=(7.16, 2.0))
     first = None
     for (_, row), c in zip(picks.iterrows(), ("tab:blue", "tab:orange", "tab:red")):
         d = W._step(W.read_check(row["path"]), C25_DISCHARGE_STEP, discharge=True)
