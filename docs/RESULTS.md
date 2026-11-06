@@ -855,7 +855,7 @@ Results files: `results/forecasting_d32_e1.json` and `results/forecasting_d32_e2
 2. **Under the same constraint, the proposed model and gradient boosting are close.** Gradient boosting refitted on the latest condition is 0.06–0.08 pp better for horizons 1–3 (replicated) and level for 1–6 (not replicated); on origins with a fade rate they are practically equivalent (E1).
 3. **Storing every condition's data is what makes gradient boosting best on unseen conditions:** the constraint costs it 0.33 pp (E1) and 0.54 pp (E2).
 
-## Headline comparison (paper Table III, 1 Nov 2026)
+## Headline comparison (paper Table IV, 1 Nov 2026)
 
 `scripts/make_headline_table.py` writes `paper/tables/headline.tex` from the D23, D25, D26 and D32 results. The proposed model is the only one that is reliable in both S6 settings; each traditional forecaster fails in one of them (negative differences favour the proposed model):
 

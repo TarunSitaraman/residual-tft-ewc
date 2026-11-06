@@ -7,10 +7,10 @@
 % The full protocol, feature lists and data-quality rules are in the repository.
 % =============================================================================
 
-\section{Methodology}
+\section{The Residual TFT-EWC Approach}
 \label{sec:methods}
 
-We forecast the SOH one to three checks ahead (up to six in later experiments) from everything measured up to a reference performance test (RPT), i.e.\ a capacity check, with cells or usage conditions arriving one after another as tasks. The study first set out to estimate the \emph{current} SOH. On the first dataset, however, cycle-level features carried almost no health information (median within-cell Spearman correlation with SOH 0.09, against $-0.99$ for elapsed time), and learned estimators did worse than persistence, which simply repeats the last measured SOH (1.78 and 2.37~pp for gradient boosting and ridge, against 0.99~pp). We therefore changed the task after seeing the data, fixing the forecasting protocol before fitting any forecaster.
+We forecast the SOH one to three checks ahead (up to six in later experiments) from everything measured up to a reference performance test (RPT), i.e.\ a capacity check, with cells or usage conditions arriving as tasks. We first tried to estimate the \emph{current} SOH, but on the first dataset cycle-level features carried almost no health information (median within-cell Spearman correlation with SOH 0.09, against $-0.99$ for elapsed time) and learned estimators lost to persistence, which repeats the last measured SOH (1.78 and 2.37~pp for gradient boosting and ridge, against 0.99~pp). We therefore switched to forecasting after seeing the data, fixing the protocol before fitting any forecaster.
 
 % -----------------------------------------------------------------------------
 \subsection{Datasets}
@@ -38,9 +38,16 @@ Table~\ref{tab:data} lists the six public datasets (all CC~BY~4.0). Every file i
   \end{tabular}
 \end{table}
 
-\emph{S1} contains six LG~Chem INR21700-M50T cells that spent 23 months under an EV driving profile~\cite{pozzato2022firstlife} and then about 27 months on peak-shaving duty cycles~\cite{moy2023dutycycles}; each RPT is a C/20 discharge interrupted by C/2 pulses, with impedance spectroscopy (EIS) from the fifth RPT~\cite{moy2024secondlife}. Data-quality findings are handled by fixed rules (e.g.\ RPT~2, run at about 20~$^\circ$C, is dropped).
+\emph{S1} contains six LG~Chem INR21700-M50T cells that spent 23 months under an EV driving profile~\cite{pozzato2022firstlife} and then about 27 months on peak-shaving duty cycles~\cite{moy2023dutycycles}; each RPT is a C/20 discharge interrupted by C/2 pulses, with impedance spectroscopy (EIS) from the fifth RPT~\cite{moy2024secondlife}. RPT~2, run at about 20~$^\circ$C, is dropped.
 
-\emph{S6} was chosen by criteria fixed before the search (licence, a series of capacity checks, ageing past the end of first life, and the variety that S1 lacks). Its cells were checked every 100 cycles and end at 32--64\% SOH; here ``second life'' means further ageing below 80\% SOH under the same test. A check is used only if its C/25 discharge starts from full charge and reaches the cut-off voltage (843 of 847). From the first-life sets \emph{S7--S9} we keep cells with at least five valid checks (369 cells, 36{,}711 samples). \emph{S10} uses the discharge capacity of each 23~$^\circ$C check-up (2{,}587 of 2{,}766 kept).
+\emph{S6} was chosen by criteria fixed before the search (licence, a series of capacity checks, ageing past the end of first life, and the variety that S1 lacks). Its cells were checked every 100 cycles and end at 32--64\% SOH; here ``second life'' means further ageing below 80\% SOH under the same test. A check is used only if its C/25 discharge starts from full charge and reaches the cut-off voltage (843 of 847; Fig.~\ref{fig:prep}). From the first-life sets \emph{S7--S9} we keep cells with at least five valid checks (369 cells, 36{,}711 samples). \emph{S10} uses the discharge capacity of each 23~$^\circ$C check-up (2{,}587 of 2{,}766 kept).
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/preprocessing_s6.png}
+  \caption{Preprocessing of S6. (a) C/25 discharge of one cell at three ages. (b) Incremental capacity at the first check, before and after Gaussian smoothing (5~mV), the source of the peak inputs. (c) SOH~\eqref{eq:soh} of the 20 cells over the 843 valid checks (crosses: the four excluded; dotted: 80\%).}
+  \label{fig:prep}
+\end{figure*}
 
 \subsection{Big-data processing of the ageing cycles}
 \label{sec:spark}
@@ -57,20 +64,20 @@ For cell $b$ with check capacities $C_{b,1}, C_{b,2},\dots$ in time order,
   \mathrm{SOH}_{b,k} = 100\,C_{b,k}/C_{b,1}\;\%,
   \label{eq:soh}
 \end{equation}
-relative to the first valid measurement, not to the rated capacity. In S1 the capacity is the charge of the C/20 steps only~\cite[Eq.~(1)]{moy2024secondlife}; the processed tables also counted the pulse charge, shifting some labels by up to 0.09~pp.
+the capacity-ratio definition~\cite{ref6,birkl2017}, here relative to the first valid measurement, not to the rated capacity. In S1 the capacity is the charge of the C/20 steps only~\cite[Eq.~(1)]{moy2024secondlife}; the processed tables also counted the pulse charge, shifting some labels by up to 0.09~pp.
 
 A sample is a triple (cell $b$, origin $k$, horizon $h\in\{1,2,3\}$): a forecast made at check $k$ for check $k+h$, about one to three months ahead in S1 and 100--300 cycles in S6. The target is
 \begin{equation}
   \Delta_{b,k,h} = \mathrm{SOH}_{b,k+h} - \mathrm{SOH}_{b,k},
   \label{eq:target}
 \end{equation}
-so an error in $\Delta$ is the same as the error in the future SOH. Errors are root-mean-square errors (RMSE) in SOH percentage points (pp). The fade rate $r_{b,k}$ is the least-squares slope of SOH against time $t$ (days or cycles) over the last three valid checks,
+the multi-horizon target of~\cite{lim2021tft}, so an error in $\Delta$ is the same as the error in the future SOH. Errors are root-mean-square errors (RMSE) in SOH percentage points (pp). The fade rate $r_{b,k}$ is the ordinary least-squares slope~\cite{hastie2009elements} of SOH against time $t$ (days or cycles) over the last three valid checks,
 \begin{equation}
   r_{b,k} = \frac{\sum_{i=k-2}^{k} (t_{b,i}-\bar t)(\mathrm{SOH}_{b,i}-\overline{\mathrm{SOH}})}{\sum_{i=k-2}^{k} (t_{b,i}-\bar t)^2}.
   \label{eq:fade}
 \end{equation}
 
-Inputs use only what is known at the origin. \textbf{F0} contains the SOH history ($\mathrm{SOH}_{b,k}$, time or cycles since the first check, $r_{b,k}$), fixed descriptors (S1: duty cycle and first-life history~\cite{moy2024secondlife}; S6: test conditions) and the \emph{planned} usage until the target (S1: days at each temperature set point and at rest; S6: cycles), so forecasts assume the planned usage is known. \textbf{F1} adds diagnostics measured at the origin: 47 in S1 (pulse resistances, incremental-capacity and EIS features) and 17 in S6 (plateau charges, incremental-capacity peaks, hysteresis, a resistance proxy). No test current is used as an input: in S1 the RPT and monthly currents were set from the previous capacity, so they would give away the label. Missing values are filled in from training data and flagged.
+Inputs use only what is known at the origin. \textbf{F0} contains the SOH history ($\mathrm{SOH}_{b,k}$, time or cycles since the first check, $r_{b,k}$), fixed descriptors (S1: duty cycle and first-life history~\cite{moy2024secondlife}; S6: test conditions) and the \emph{planned} usage until the target (S1: days at each temperature set point and at rest; S6: cycles), so forecasts assume the planned usage is known. \textbf{F1} adds diagnostics measured at the origin: 47 in S1 (pulse resistances, incremental-capacity and EIS features) and 17 in S6 (plateau charges, incremental-capacity peaks, hysteresis, a resistance proxy). Test currents are excluded: in S1 they were set from the previous capacity and would give away the label. Missing values are filled from training data and flagged.
 
 \subsection{Splits and protocols}
 \label{sec:protocols}
@@ -95,35 +102,50 @@ Preprocessing (standardisation, median imputation with missing indicators, targe
   \frac{\lambda}{2}\sum_{p} F_{j,p}\,\big(\theta_p - \theta^{*}_{j,p}\big)^2,
   \label{eq:ewc}
 \end{equation}
-where $\theta^*_j$ are the parameters after task $j$ and $F_j$ is the empirical diagonal Fisher information over up to 500 training samples. \emph{TFT\,+\,EWC} is the proposed continual learner; trained on the residual~\eqref{eq:residual} below, with shrinkage and intervals, it becomes the proposed \emph{Residual TFT-EWC} (Fig.~\ref{fig:arch}). Training uses Adam~\cite{kingma2015adam}, batches of 64, at most 200 epochs and early stopping on the current task's validation RMSE.
+the penalty of~\cite[Eq.~(3)]{kirkpatrick2017ewc}, where $\theta^*_j$ are the parameters after task $j$ and $F_j$ is the empirical diagonal Fisher information over up to 500 training samples. \emph{TFT\,+\,EWC} is the proposed continual learner; trained on the residual~\eqref{eq:residual} below, with shrinkage and intervals, it becomes the proposed \emph{Residual TFT-EWC} (Fig.~\ref{fig:arch}). Training uses Adam~\cite{kingma2015adam}, batches of 64, at most 200 epochs and early stopping on the current task's validation RMSE.
 
 \emph{Reference forecasters} are persistence ($\hat\Delta=0$), linear extrapolation of the fade rate, $\hat\Delta_{b,k,h} = r_{b,k}(t_{b,k+h}-t_{b,k})$, ridge regression (on planned usage only, F0 or F1) and histogram gradient boosting on F1.
 
 \emph{Learned residual.} Because linear extrapolation proved hardest to beat, a follow-up experiment, registered in advance, trains the continual learners to correct it rather than replace it. With $\hat\Delta^{\mathrm{lin}}_{b,k,h}$ the extrapolation above (zero when $r_{b,k}$ is missing), the model $g_\theta$ learns $\Delta_{b,k,h}-\hat\Delta^{\mathrm{lin}}_{b,k,h}$ and the forecast is
 \begin{equation}
-  \hat\Delta_{b,k,h} = \hat\Delta^{\mathrm{lin}}_{b,k,h} + g_\theta(\mathbf{x}_{b,k,h}).
+  \hat\Delta_{b,k,h} = \hat\Delta^{\mathrm{lin}}_{b,k,h} + g_\theta(\mathbf{x}_{b,k,h}),
   \label{eq:residual}
 \end{equation}
-The residual and the direct (target $\Delta$) forms are compared on the S6 stream with the P3 shared inputs, from scratch, for horizons 1--3 (E1) and 1--6 (E2).
+a residual hybrid of a simple and a learned forecaster, as in~\cite{zhang2003hybrid}.
 
-\emph{Shift-adaptive EWC and literature backbones.} A second registered experiment scales each finished task's EWC penalty by the input shift between tasks (SA-EWC) and compares BiLSTM~\cite{ref10}, TCN~\cite{ref8,ref10} and Transformer continual learners and GPR~\cite{ref3,ref4}, random forest and SVR fitted once (definitions in the supplement).
+\emph{Shrinkage and intervals.} After training, without changing the weights, the correction is scaled back per horizon by $\alpha_h=\min\!\big(1,\max(0,\sum p\,y/\sum p^2)\big)$, the least-squares slope through the origin~\cite{hastie2009elements} of the observed ($y$) on the predicted ($p$) correction on calibration rows. A split-conformal interval~\cite{lei2018conformal} $\hat\Delta\pm q_h$ takes as $q_h$ the $\lceil (n+1)(1-a)\rceil$-th smallest of the $n$ absolute calibration errors at horizon $h$. Intervals at level $1-a$ (90\% and 80\%) are scored by coverage, width and the interval score $2q_h + \tfrac{2}{a}\max(|\Delta-\hat\Delta|-q_h,0)$~\cite{gneiting2007scoring} (pp; lower is better). On the stream both are refitted after each task on its validation rows; extrapolation gets intervals the same way.
 
-\emph{Shrinkage and forecast intervals.} A third registered experiment calibrates the residual model after training, without changing its weights. For each horizon $h$, the learned correction is scaled back towards extrapolation by $\alpha_h=\min\!\big(1,\max(0,\sum p\,y/\sum p^2)\big)$, with $p$ the predicted and $y$ the observed correction on calibration rows. A split-conformal interval~\cite{lei2018conformal} $\hat\Delta\pm q_h$ takes as $q_h$ the $\lceil (n+1)(1-a)\rceil$-th smallest of the $n$ absolute calibration errors at horizon $h$. Intervals at level $1-a$ (90\% and 80\%) are scored by coverage, width and the interval score~\cite{gneiting2007scoring} $2q_h + \tfrac{2}{a}\max(|\Delta-\hat\Delta|-q_h,0)$ (pp; lower is better). On the stream both are refitted after each task on its validation rows; extrapolation gets intervals the same way.
+\emph{Registered experiments.} Each follow-up experiment was registered before it was run (Table~\ref{tab:exps}). Origins with a fade rate (H$^+$) and without one (H$^-$, a cell's first two checks, where extrapolation equals persistence) are reported separately. Horizons are 1--3 (E1) and 1--6 (E2); a question counts only if it replicates in both.
 
-\emph{Unseen conditions.} A fourth experiment repeats P2 on S6 for the shrunk residual TFT\,+\,EWC, streamed over the six training conditions in the ten evaluation orders with the P1 tuned values; shrinkage and intervals are fitted once on their pooled validation rows. Origins with a fade rate (H$^+$) and without one (H$^-$, a cell's first two checks, where extrapolation equals persistence) are reported separately. A fifth experiment calibrates gradient-boosting intervals by leaving one condition out: each training condition is predicted by a model fitted on the other five, and their pooled absolute errors give $q_h$ (the cross-validation interval of~\cite{barber2021jackknife} with conditions as folds; without a finite-sample guarantee, coverage is measured on held-out conditions, and as the forecaster is deterministic, results must replicate across both horizon sets).
-
-\emph{Many unseen conditions.} Two further registered experiments repeat P2 on S7 (67 conditions) and S10 (71): seven conditions tune the hyperparameters and the rest (60, 64) form five test folds. The residual TFT\,+\,EWC is streamed over each fold's training conditions and compared, by Wilcoxon tests over held-out conditions, with gradient boosting refitted on each stream's last condition, gradient boosting on all conditions and extrapolation; a question counts only if replicated for horizons 1--3 and 1--6. S7 shrinks at every origin, S10 only at H$^+$, a rule fixed after the S7 results.
+\begin{table}[t]
+  \centering
+  \caption{Registered follow-up experiments (all after P1--P3).}
+  \label{tab:exps}
+  \scriptsize
+  \setlength{\tabcolsep}{2pt}
+  \begin{tabular}{p{1.25cm}p{3.35cm}p{3.6cm}}
+    \toprule
+    Experiment & Setting & Question \\
+    \midrule
+    Residual & S6 stream, P3 inputs, from scratch & residual vs.\ direct target; beats extrapolation? \\
+    SA-EWC & S6 stream & EWC penalty scaled by the input shift vs.\ fixed $\lambda$; BiLSTM~\cite{ref10}, TCN~\cite{ref8,ref10}, Transformer, GPR~\cite{ref3,ref4}, random forest, SVR (supplement) \\
+    Shrinkage, intervals & S6 stream & shrunk residual model vs.\ extrapolation; interval coverage \\
+    Unseen conditions & S6, P2; six training conditions streamed in the ten orders; shrinkage and intervals fitted once on pooled validation rows & beats extrapolation at H$^+$; vs.\ gradient boosting and joint TFT \\
+    GB intervals & S6, P2; each training condition predicted by a model fitted on the other five (cross-validation interval~\cite{barber2021jackknife}, conditions as folds) & coverage on held-out conditions (no finite-sample guarantee) \\
+    Many conditions & S7 (67 conditions), S10 (71); seven tune, the rest (60, 64) form five test folds & beats GB refitted on the stream's last condition, GB on all conditions, extrapolation (Wilcoxon over held-out conditions); S7 shrinks at every origin, S10 only at H$^+$ (rule fixed after S7) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection{Hyperparameters, metrics and statistics}
 \label{sec:tuning}
 \label{sec:metrics}
 
-Hyperparameters are chosen on validation data from tuning orders disjoint from the evaluation orders: the learning rate per backbone ($3\cdot10^{-4}$ to $10^{-1}$), then replay $B$ (50--400) and EWC $\lambda$ ($10^0$--$10^5$), extending any grid whose best value lies at an edge. From P3 on, ten tuning orders and the one-standard-error rule (the smallest grid value within one standard error of the best) are used.
+\emph{Tuning.} Hyperparameters are tuned on validation data from orders never used for evaluation, in two steps: first the learning rate of each backbone ($3\cdot10^{-4}$--$10^{-1}$), then the replay buffer $B$ (50--400) and the EWC strength $\lambda$ ($10^0$--$10^5$). A grid is extended if its best value lies on an edge. From P3 on, ten tuning orders are used, and the smallest value within one standard error of the best is kept.
 
-After each step $i$, every task's test set is evaluated, giving $R_{i,j} = \mathrm{RMSE}(\mathcal{D}^{\mathrm{te}}_{\pi_j}\mid\theta_i)$. Following~\cite{lopezpaz2017gem,chaudhry2018rwalk}, we report the final average error $\tfrac{1}{T}\sum_{j} R_{T,j}$, backward transfer $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - R_{j,j})$ and forgetting $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - \min_{j\le i<T} R_{i,j})$ (positive values mean forgetting), the skill $1-\mathrm{RMSE}/\mathrm{RMSE}_{\mathrm{persistence}}$, and the agreement of the reuse class of the forecast SOH with the measured class (C0 $>95\%$, C1 90--95\%, C2 80--90\%, C3 $\le80\%$, fixed in advance). The classes screen for capacity fade relative to the first valid check; they do not by themselves show suitability for an application.
+\emph{Metrics.} After training step $i$, every task $j$ is tested, giving the error matrix $R_{i,j} = \mathrm{RMSE}(\mathcal{D}^{\mathrm{te}}_{\pi_j}\mid\theta_i)$. As in~\cite{lopezpaz2017gem,chaudhry2018rwalk}, we report the final average error $\tfrac{1}{T}\sum_{j} R_{T,j}$, backward transfer $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - R_{j,j})$ and forgetting $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - \min_{j\le i<T} R_{i,j})$ (positive means forgetting), and the skill $1-\mathrm{RMSE}/\mathrm{RMSE}_{\mathrm{persistence}}$, a relative error against the naive forecast~\cite{hyndman2006}. The forecast SOH is also placed in a reuse class fixed in advance (C0 $>95\%$, C1 90--95\%, C2 80--90\%, C3 $\le80\%$) and compared with the measured class. The classes screen capacity fade relative to the first valid check; alone, they do not show suitability for an application. P2 adds standard error and class metrics (MAE, bias, MAPE, $R^2$, $R^2_\Delta$ of the change, ${\le}0$ for persistence; balanced accuracy, F1, MCC, Cohen's $\kappa_w$, AUC of SOH${\le}80\%$; full list in supplement Tables SI--SII).
 
-P2 also reports MSE, MAE, MedAE, bias, MAPE, NRMSE and $R^2$ (and $R^2_\Delta$ of the change, ${\le}0$ for persistence); for the reuse class, accuracy, balanced accuracy, macro precision, recall, specificity and F1, MCC, Cohen's $\kappa$ and $\kappa_w$; and the AUC of SOH${\le}80\%$ (Tables SI--SII of the supplement). Point forecasts admit no log loss.
-Means carry 95\% bootstrap intervals~\cite{efron1993bootstrap}. Methods are compared by two-sided Wilcoxon signed-rank tests~\cite{wilcoxon1945} on matched runs or held-out groups, with rank-biserial effect sizes~\cite{kerby2014rankbiserial} and Holm correction~\cite{holm1979}. A difference $d$ is \emph{replicated} only if it is significant in the main seed set (0--4) and in a replicate set (5--9), with the same sign and $|d|\ge 0.05$~pp in both; $|d|<0.05$~pp in both means practically equivalent. The threshold is about half the label shift caused by the pulse-charge definition.
+\emph{Statistics.} Means carry 95\% bootstrap intervals~\cite{efron1993bootstrap}. Methods are compared by two-sided Wilcoxon signed-rank tests~\cite{wilcoxon1945} on matched runs or held-out groups, with rank-biserial effect sizes~\cite{kerby2014rankbiserial} and Holm correction~\cite{holm1979}. A difference $d$ counts as \emph{replicated} only if, in both the main seed set (0--4) and a replicate set (5--9), it is significant, has the same sign and $|d|\ge 0.05$~pp. If $|d|<0.05$~pp in both, the methods are practically equivalent. This threshold is about half the label shift caused by the pulse-charge definition.
 
 \subsection{Implementation and availability}
 \label{sec:repro}
