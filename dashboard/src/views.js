@@ -71,7 +71,7 @@ export function renderHeadline(root, sub, summary, state) {
     const b = tests.find((r) => r.method === t && r.protocol === PROTOCOL_LABEL.P2);
     if (!a && !b) continue;
     const cell = (r) => r ? el("td", { class: "r" }, `${signed(r.diff_main)} / ${signed(r.diff_replicate)}`,
-      el("span", { class: `verdict ${shortVerdict(r.verdict).replace(".", "")}`, title: r.post_hoc ? "Post hoc for this model (registered for the unshrunk model, same verdict)" : "Registered test" },
+      el("span", { class: `verdict ${shortVerdict(r.verdict).replace(".", "")}`, title: !r.post_hoc ? "Registered test" : r.method === "vs gbm_last" ? "Post hoc comparison (D35, not pre-registered)" : "Post hoc for this model (registered for the unshrunk model, same verdict)" },
         shortVerdict(r.verdict) + (r.post_hoc ? "*" : ""))) : el("td", { class: "r", text: "–" });
     body.push(el("tr", {}, el("td", { text: (a || b).label.replace("Proposed vs ", "vs ") }), cell(a), cell(b)));
   }

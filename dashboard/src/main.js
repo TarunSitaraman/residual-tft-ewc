@@ -5,6 +5,7 @@ import { el, fmt, groupInfo, renderHeadline, renderDetails, renderCaveats } from
 import { parseCsv, sohRows, renderSoh, unitFacts } from "./soh.js";
 import { renderPage, PAGE_TITLES } from "./pages.js";
 import { renderExplorer } from "./explorer.js";
+import { renderMany, renderEvidence } from "./evidence.js";
 import { renderHeadlineChart, headlineFinding, renderKpis, renderAccuracy, renderContinual, renderReuse, takeaway, card, setLayoutWidth } from "./tabs.js";
 
 const DEFAULTS = { page: "home", tab: "overview", dataset: "S6", setting: "e1", protocol: "P2", group: "all", family: "all" };
@@ -17,8 +18,10 @@ const TABS = {
   accuracy: { title: "Forecast error by group and horizon", deck: "Test error for each battery group, skill against carrying the last SOH forward, and how error grows with the forecast horizon." },
   continual: { title: "Learning new groups without forgetting old ones", deck: "Groups arrive one after another. A useful model adapts to each new group and keeps its accuracy on the earlier ones." },
   reuse: { title: "Reuse classes and prediction intervals", deck: "How often a forecast puts a cell in the right reuse class, and whether the prediction intervals hold their stated coverage on unseen usage conditions." },
+  many: { title: "124 unseen usage conditions, one at a time", deck: "Two first-life datasets with many ageing conditions (S7: 60, S10: 64). Every condition is held out in turn, so each point is a separate test of the model on conditions it has never seen." },
+  evidence: { title: "Every registered result", deck: "Each comparison fixed before its study ran, with its outcome in both seed sets. Results against the proposed model are listed with the ones for it." },
 };
-const NAMES = { overview: "Overview", soh: "Capacity fade", accuracy: "Forecast error", continual: "Continual learning", reuse: "Reuse and intervals" };
+const NAMES = { overview: "Overview", soh: "Capacity fade", accuracy: "Forecast error", continual: "Continual learning", reuse: "Reuse and intervals", many: "Many conditions", evidence: "Registered results" };
 
 const state = { ...DEFAULTS };
 let summary = null;
@@ -86,7 +89,8 @@ function initTheme() {
 const form = document.getElementById("filters");
 // Filters each section reads; the others are greyed out so nobody expects them to change the figures.
 const APPLIES = { overview: ["setting", "family"], soh: ["dataset", "group"], accuracy: KEYS,
-  continual: ["setting", "group", "family"], reuse: ["dataset", "setting", "group", "family"] };
+  continual: ["setting", "group", "family"], reuse: ["dataset", "setting", "group", "family"],
+  many: ["setting"], evidence: ["setting"] };
 function syncForm() {
   for (const k of KEYS) {
     const sel = form.elements[k], on = APPLIES[state.tab].includes(k);
@@ -183,6 +187,8 @@ async function renderNative(name) {
     if (name === "accuracy") await renderAccuracy(sink, ctx);
     if (name === "continual") await renderContinual(sink, ctx);
     if (name === "reuse") await renderReuse(sink, ctx);
+    if (name === "many") await renderMany(sink, ctx);
+    if (name === "evidence") await renderEvidence(sink, ctx);
   } catch (e) {
     sink.replaceChildren(el("p", { class: "notice", text: `This view could not be drawn: ${e.message}. Run python scripts/export_dashboard_data.py and serve the page from the repository root.` }));
   }

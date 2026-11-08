@@ -67,6 +67,7 @@ BASELINE_NAMES = {
 }
 SPECIAL_NAMES = {
     "tft_residual_saewc": "Residual TFT + SA-EWC", "tft_residual_ewc_shrunk": "Residual TFT-EWC (proposed)",
+    "tft_residual_ewc_selective": "Residual TFT-EWC, shrunk at H+ only (D36 proposed)",
     "tft_pre_residual_ewc": "Residual TFT + EWC, pretrained", "tft_pre_residual_ewc_shrunk": "Residual TFT-EWC, pretrained",
     "tft_residual_joint": "Residual TFT, joint", "joint_static": "Residual TFT, joint (static)",
     "ft_online": "Residual TFT, online fine-tuning", "ewc_online": "Residual TFT + EWC, online",
@@ -292,6 +293,20 @@ def verdicts_table(d: dict, experiment: str, setting: str) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+MANY = (("d34", "S7"), ("d36", "S10"))   # many-condition tests (docs/RESULTS.md, D34 and D36)
+MANY_COLS = ("rmse", "rmse_hplus", "rmse_hminus", "cov90", "is90")
+
+
+def many_condition_table(d: dict, experiment: str, dataset: str, setting: str) -> pd.DataFrame:
+    """D34/D36: one row per held-out condition, method and seed set (mean over that condition's runs)."""
+    rows = [{"dataset": dataset, "protocol": "P2", "experiment": experiment.upper(), "setting": setting,
+             "seed_set": r.get("set"), "method": r.get("method"), "condition": r.get("condition"),
+             "fold": r.get("fold"), "age_type": r.get("age_type"), "age_temp": num(r.get("age_temp")),
+             "stage": r.get("stage"), "lab": r.get("lab"), **{c: num(r.get(c)) for c in MANY_COLS}}
+            for r in d.get("condition_values", [])]
+    return pd.DataFrame(rows)
+
+
 # ---------- other committed tables ----------
 def coverage_table(d: dict, setting: str, experiment: str = "D27", names: dict | None = None) -> pd.DataFrame:
     """Split-conformal intervals (D27 rules, D28 arms): pooled and per-condition coverage, interval score and width."""
@@ -394,7 +409,7 @@ def headline_table(results: Path = ROOT / "results") -> pd.DataFrame:
                 rows.append({"protocol": proto[p], "setting": SETTINGS[e], "method": f"vs {lab}",
                              "label": f"Proposed vs {method_label(lab)}", "diff_main": num(t["diff"][0]),
                              "diff_replicate": num(t["diff"][1]), "verdict": t["verdict"],
-                             "post_hoc": bool(t.get("post_hoc", False))})
+                             "post_hoc": bool(t.get("post_hoc", False)) or (p == "p1" and k == "v_gbm_last")})   # D35 is post hoc
     return pd.DataFrame(rows)
 
 
@@ -592,6 +607,16 @@ def build_results(results: Path) -> dict[str, pd.DataFrame]:
                 u_runs.append(r), u_folds.append(f)
             tests.append(tests_table(d, exp, e))
             verdicts.append(verdicts_table(d, exp, e))
+    many = []
+    for (exp, dataset), e in ((m, e) for m in MANY for e in SETTINGS):
+        d = load_json(results, f"forecasting_{exp}_{e}")
+        if d is not None:
+            many.append(many_condition_table(d, exp, dataset, e))
+            verdicts.append(verdicts_table(d, exp, e).assign(dataset=dataset))
+    for e in SETTINGS:
+        d = load_json(results, f"forecasting_d35_{e}")
+        if d is not None:
+            verdicts.append(verdicts_table(d, "d35", e))
     for e in SETTINGS:
         d = load_json(results, f"forecasting_d27_{e}")
         if d is not None:
@@ -603,7 +628,7 @@ def build_results(results: Path) -> dict[str, pd.DataFrame]:
     cat = lambda xs: pd.concat([x for x in xs if len(x)], ignore_index=True) if any(len(x) for x in xs) else pd.DataFrame()  # noqa: E731
     frames = {"fact_stream_run": cat(s_runs), "fact_stream_task": cat(s_tasks), "fact_stream_baseline": cat(s_base),
               "fact_unseen_run": cat(u_runs), "fact_unseen_fold": cat(u_folds), "fact_tests": cat(tests),
-              "fact_verdicts": cat(verdicts), "fact_coverage": cat(cov), "fact_horizon": horizon_table(tables),
+              "fact_verdicts": cat(verdicts), "fact_many_condition": cat(many), "fact_coverage": cat(cov), "fact_horizon": horizon_table(tables),
               "fact_d30_group": d30_group_table(tables), "fact_headline": headline_table(results)}
     methods = set()
     for df in frames.values():

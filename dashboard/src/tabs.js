@@ -477,3 +477,6 @@ export async function renderReuse(panel, ctx) {
   conf.node, par.node, cv.node, up.node, pool.node);
   panel.replaceChildren(...kids);
 }
+
+// Shared with evidence.js.
+export { empty, esc, b, num, mean, NEUTRAL };
