@@ -29,7 +29,7 @@ function home(root, ctx) {
   const kpis = el("div", { class: "kpis" });
   renderKpis(kpis, summary, state);
   const panes = [["project", "Project", "The question, the contributions, the terms used throughout and the limitations."],
-    ["studies", "Studies", "Every experiment from D32 back to the first benchmark, newest first, with its verdicts."],
+    ["studies", "Studies", "Every experiment from D36 back to the first benchmark, newest first, with its verdicts."],
     ["results", "Results", "The paper's result tables, what was learned, and every registered verdict."],
     ["dashboard", "Dashboard", "Interactive figures: capacity fade, forecast error, continual learning, reuse classes and intervals."],
     ["data", "Data", "The public datasets, the usage conditions, the integrity rules and the Spark pipeline."],

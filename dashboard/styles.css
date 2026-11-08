@@ -411,3 +411,12 @@ table.stbl th[scope="row"] { font: 400 13.5px var(--sans); color: var(--ink); wh
 @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
 table.stbl th[scope="row"] { border-bottom: 1px solid var(--rule-soft); }
 .latest { margin-top: 18px; }
+
+/* ---------- Many conditions: comparator switch ---------- */
+.seg-row { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.seg { display: flex; flex-wrap: wrap; border: 1px solid var(--rule); background: var(--surface); }
+.seg button { font: 500 13px/1 var(--sans); padding: 8px 12px; border: 0; border-right: 1px solid var(--rule); background: none; color: var(--ink-2); cursor: pointer; }
+.seg button:last-child { border-right: 0; }
+.seg button:hover { color: var(--ink); background: var(--surface-2); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }

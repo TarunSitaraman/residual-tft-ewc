@@ -56,6 +56,7 @@ tft_joint,TFT joint,TFT,joint (upper bound),False
 tft_pre_residual_ewc,"Residual TFT + EWC, pretrained",TFT,continual,False
 tft_pre_residual_ewc_shrunk,"Residual TFT-EWC, pretrained",TFT,continual,False
 tft_residual_ewc,"TFT + EWC, residual",TFT,continual,False
+tft_residual_ewc_selective,"Residual TFT-EWC, shrunk at H+ only (D36 proposed)",TFT,continual,False
 tft_residual_ewc_shrunk,Residual TFT-EWC (proposed),TFT,continual,True
 tft_residual_finetune,"TFT fine-tuning, residual",TFT,continual,False
 tft_residual_joint,"Residual TFT, joint",TFT,joint (upper bound),False

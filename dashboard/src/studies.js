@@ -1,4 +1,4 @@
-// Studies page: every experiment from D32 back to the first benchmark, newest first.
+// Studies page: every experiment from D36 back to the first benchmark, newest first.
 // Text and numbers are condensed from docs/RESULTS.md (verdicts as registered in docs/DECISIONS.md); E1 = horizons 1-3,
 // E2 = horizons 1-6; two values a / b are the main and replicate seed sets. Update this file when RESULTS.md changes.
 import { el } from "./views.js";
@@ -6,6 +6,30 @@ import { el } from "./views.js";
 // tone: good = the registered result favours the proposed model or the hypothesis; bad = against it; level = equivalent;
 // open = not established or descriptive only.
 export const STUDIES = [
+  { id: "D36", date: "4 Nov 2026", kind: "Pre-registered (post hoc in motivation)", title: "64 unseen conditions on a second many-condition dataset (S10)",
+    q: "On a new dataset with many usage conditions, does the continual model beat gradient boosting held to the same no-storage rule, condition by condition?",
+    setup: "S10 (Stroebl et al. 2024, NMC 21700 cells, calendar and cyclic ageing, 10-45 °C), 64 held-out conditions. The D34 protocol, with the learned correction shrunk only where extrapolation has a fade rate (H+ origins); this rule was fixed after the D34 results.",
+    head: ["Method, mean RMSE over conditions (pp)", "E1", "E2"],
+    rows: [["Proposed (continual)", "1.040 / 1.038", "1.542 / 1.552"], ["Linear extrapolation", "1.215", "1.900"], ["GBM-LAST (latest condition only)", "1.883", "2.382"],
+      ["GBM-ALL (all conditions stored)", "1.388", "4.773"], ["Joint residual TFT (all stored)", "0.813 / 0.807", "0.961 / 1.009"]],
+    verdicts: [["Better than GBM-LAST on all 64 conditions, both horizon sets, replicated", "good"], ["Better than extrapolation at H+ origins in E1, replicated; E2 not replicated", "open"],
+      ["Against GBM-ALL: mean favours the model, but 52 of 64 conditions favour GBM-ALL; not counted as a win", "bad"]],
+    reading: "The first registered question against a traditional forecaster answered for the model in both experiments. Storing all data still wins on most conditions: GBM-ALL on most cyclic conditions, and the joint TFT overall." },
+  { id: "D35", date: "3-4 Nov 2026", kind: "Post hoc", title: "Gradient boosting under the continual constraint on the S6 stream",
+    q: "On the continual stream, how does gradient boosting do when, like the proposed model, it may only learn from the newest condition?",
+    setup: "Continual stream (P1). Gradient boosting refitted on the newest task only (GBM-LAST), predicting SOH directly or the correction to extrapolation; D32 pairing over 50 runs per seed set. Written after the result was seen; run with Python 3.12 instead of the pinned 3.11.",
+    head: ["Method, final average error (pp)", "E1", "E2"],
+    rows: [["Proposed (shrunk residual TFT + EWC)", "0.318 / 0.308", "0.498 / 0.493"], ["GBM-LAST, residual", "0.561", "0.956"], ["GBM-LAST, direct", "0.912", "1.599"]],
+    verdicts: [["Proposed better than both GBM-LAST arms in E1 and E2, replicated (post hoc)", "good"]],
+    reading: "Under the no-storage rule gradient boosting forgets on the stream (0.17-0.88 pp). Of the methods that keep no earlier data, only the proposed model is within 0.07 pp of the best in both settings." },
+  { id: "D34", date: "4 Nov 2026", kind: "Pre-registered (post hoc in motivation)", title: "60 unseen conditions on the first-life pool (S7)",
+    q: "With many held-out conditions as the unit of analysis, is the continual model better than gradient boosting held to the same no-storage rule?",
+    setup: "S7 (KIT, NMC/C+SiO cells, calendar, cyclic and WLTP ageing, 0-40 °C), 60 held-out conditions; Wilcoxon over conditions with Holm correction. Learned correction shrunk at every origin.",
+    head: ["Method, mean RMSE over conditions (pp)", "E1", "E2"],
+    rows: [["Proposed (continual)", "5.201 / 5.184", "7.489 / 7.481"], ["Linear extrapolation", "5.313", "7.896"], ["GBM-LAST (latest condition only)", "6.501", "8.398"],
+      ["GBM-ALL (all conditions stored)", "3.845", "5.117"], ["Joint residual TFT (all stored)", "4.123 / 4.328", "5.790 / 6.182"]],
+    verdicts: [["Better than GBM-LAST in E1, replicated; E2 not replicated", "good"], ["Level with extrapolation at H+ origins (E1)", "level"], ["Worse than GBM-ALL, replicated", "bad"]],
+    reading: "Against the continual gradient-boosting baseline the model wins over horizons 1-3 only. Shrinking at H− origins hurt (+0.41 to +0.77 pp), which led to the D36 rule." },
   { id: "D32", date: "1 Nov 2026", kind: "Pre-registered", title: "Gradient boosting held to the continual-learning constraint",
     q: "Does gradient boosting keep its advantage on unseen usage conditions when it, like the proposed model, may not keep earlier conditions' data?",
     setup: "Unseen-condition protocol (P2), seven folds. Gradient boosting sees the six training conditions one at a time: warm-started (GBM-WARM) or refitted on the latest condition only (GBM-LAST). GBM-ALL, which stores all six, is the D26 comparator.",
@@ -102,9 +126,7 @@ export const STUDIES = [
     reading: "Two artefacts were corrected before any model was trained. The best forecasters beat persistence on both datasets, but not every method does." },
 ];
 
-const AFTER = [["D35", "Gradient boosting under the continual constraint on the S6 stream", "Post hoc; results being finalised."],
-  ["D34", "Unseen conditions on the KIT first-life pool (S7)", "Pre-registered; code committed, not yet run."],
-  ["D33", "Exploratory search for a better forecaster", "Exploratory; not reported and not evidence."]];
+const AFTER = [["D33", "Exploratory search for a better forecaster", "Exploratory; not reported and not evidence."]];
 
 const TONE_WORD = { good: "For", bad: "Against", level: "Level", open: "Open" };
 
@@ -125,8 +147,8 @@ function card(s) {
 export function renderStudies(root) {
   root.replaceChildren(
     el("header", { class: "pagehead" }, el("h1", { text: "Studies" }),
-      el("p", { class: "deck", text: "Every experiment from D32 back to the first benchmark, newest first. Each was fixed in docs/DECISIONS.md before it ran unless marked otherwise; null and negative results are listed with the positive ones." })),
-    el("section", { class: "sect after" }, el("h2", { text: "After D32" }),
+      el("p", { class: "deck", text: "Every experiment from D36 back to the first benchmark, newest first. Each was fixed in docs/DECISIONS.md before it ran unless marked otherwise; null and negative results are listed with the positive ones." })),
+    el("section", { class: "sect after" }, el("h2", { text: "After D36" }),
       el("ul", { class: "after-list" }, AFTER.map(([id, t, s]) => el("li", {}, el("b", { text: id }), el("span", { text: t }), el("small", { text: s }))))),
     el("nav", { class: "study-index", "aria-label": "Studies" }, STUDIES.map((s) => el("a", { href: `#page=studies&sec=study-${s.id}`, "data-sec": `study-${s.id}`, text: s.id }))),
     el("div", { class: "studies" }, STUDIES.map(card)),
