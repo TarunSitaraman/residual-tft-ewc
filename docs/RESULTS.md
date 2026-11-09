@@ -855,7 +855,7 @@ Results files: `results/forecasting_d32_e1.json` and `results/forecasting_d32_e2
 2. **Under the same constraint, the proposed model and gradient boosting are close.** Gradient boosting refitted on the latest condition is 0.06–0.08 pp better for horizons 1–3 (replicated) and level for 1–6 (not replicated); on origins with a fade rate they are practically equivalent (E1).
 3. **Storing every condition's data is what makes gradient boosting best on unseen conditions:** the constraint costs it 0.33 pp (E1) and 0.54 pp (E2).
 
-## Headline comparison (paper Table IV, 1 Nov 2026)
+## Headline comparison (paper Table V, 1 Nov 2026)
 
 `scripts/make_headline_table.py` writes `paper/tables/headline.tex` from the D23, D25, D26 and D32 results. The proposed model is the only one that is reliable in both S6 settings; each traditional forecaster fails in one of them (negative differences favour the proposed model):
 
@@ -874,7 +874,7 @@ Results files: `results/forecasting_d32_e1.json` and `results/forecasting_d32_e2
 
 ## D34 and D36: many unseen usage conditions under the continual constraint (4 Nov 2026)
 
-Results files: `results/forecasting_d34_e1.json`, `..._e2.json` (S7, 60 test conditions; collected at `474f74f`, kept as tag `d34-collection`) and `results/forecasting_d36_e1.json`, `..._e2.json` (S10, Stroebl et al. 2024, 64 test conditions; `ea9f605`). Both pre-registered (D34, D36), clean trees, pinned environment; run logs in `docs/DECISIONS.md`. Unit of analysis: the held-out condition (Wilcoxon over conditions, Holm, D21 rule; positive only if replicated for horizons 1–3 and 1–6). Proposed model: shrunk at every origin (D34); shrunk only at H+ origins, raw at H− (D36, rule fixed after the D34 results). Paper table: `scripts/make_many_conditions_table.py` writes `paper/tables/many_conditions.tex` (Table V).
+Results files: `results/forecasting_d34_e1.json`, `..._e2.json` (S7, 60 test conditions; collected at `474f74f`, kept as tag `d34-collection`) and `results/forecasting_d36_e1.json`, `..._e2.json` (S10, Stroebl et al. 2024, 64 test conditions; `ea9f605`). Both pre-registered (D34, D36), clean trees, pinned environment; run logs in `docs/DECISIONS.md`. Unit of analysis: the held-out condition (Wilcoxon over conditions, Holm, D21 rule; positive only if replicated for horizons 1–3 and 1–6). Proposed model: shrunk at every origin (D34); shrunk only at H+ origins, raw at H− (D36, rule fixed after the D34 results). Paper table: `scripts/make_many_conditions_table.py` writes `paper/tables/many_conditions.tex` (Table VII).
 
 **Mean RMSE over held-out conditions (pp), main / replicate:**
 

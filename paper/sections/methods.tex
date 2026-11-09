@@ -143,10 +143,10 @@ a residual hybrid of a simple and a learned forecaster, as in~\cite{zhang2003hyb
 
 \emph{Tuning.} Hyperparameters are tuned on validation data from orders never used for evaluation, in two steps: first the learning rate of each backbone ($3\cdot10^{-4}$--$10^{-1}$), then the replay buffer $B$ (50--400) and the EWC strength $\lambda$ ($10^0$--$10^5$). A grid is extended if its best value lies on an edge. From P3 on, ten tuning orders are used, and the smallest value within one standard error of the best is kept.
 
-\emph{Metrics.} After training step $i$, every task $j$ is tested, giving the error matrix $R_{i,j} = \mathrm{RMSE}(\mathcal{D}^{\mathrm{te}}_{\pi_j}\mid\theta_i)$~\cite{lopezpaz2017gem}. Table~\ref{tab:metrics} lists the metrics and their sources; positive BWT and forgetting mean forgetting. P2 adds standard error and class metrics, e.g.\ MAE, $R^2$, $R^2_\Delta$ of the change (${\le}0$ for persistence), MCC, Cohen's $\kappa_w$ and the AUC of SOH${\le}80\%$ (supplement Tables SI--SII).
+\emph{Metrics.} After training step $i$, every task $j$ is tested, giving the error matrix $R_{i,j} = \mathrm{RMSE}(\mathcal{D}^{\mathrm{te}}_{\pi_j}\mid\theta_i)$~\cite{lopezpaz2017gem} over $T$ tasks. Table~\ref{tab:metrics} lists the metrics and their sources; positive BWT and forgetting mean forgetting. P2 adds standard error and class metrics, e.g.\ MAE, $R^2$, $R^2_\Delta$ of the change (${\le}0$ for persistence), MCC, Cohen's $\kappa_w$ and the AUC of SOH${\le}80\%$ (supplement Tables SI--SII).
 
 \begin{table}[t]
-  \caption{Evaluation metrics ($R_{i,j}$: RMSE on task $j$ after step $i$ of $T$; BWT: backward transfer; pers.: persistence)}
+  \caption{Evaluation metrics (BWT: backward transfer)}
   \label{tab:metrics}
   \centering
   \footnotesize
@@ -158,7 +158,7 @@ a residual hybrid of a simple and a learned forecaster, as in~\cite{zhang2003hyb
     Average error & $\tfrac{1}{T}\sum_{j} R_{T,j}$ & \cite{lopezpaz2017gem} \\
     BWT & $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - R_{j,j})$ & \cite{lopezpaz2017gem} \\
     Forgetting & $\tfrac{1}{T-1}\sum_{j<T} \big(R_{T,j} - \min_{j\le i<T} R_{i,j}\big)$ & \cite{chaudhry2018rwalk} \\
-    Skill & $1-\mathrm{RMSE}/\mathrm{RMSE}_{\mathrm{pers.}}$ & \cite{hyndman2006} \\
+    Skill & $1-\mathrm{RMSE}/\mathrm{RMSE}_{\mathrm{persist.}}$ & \cite{hyndman2006} \\
     Coverage & share of $\Delta$ inside $\hat\Delta\pm q_h$ & \cite{lei2018conformal} \\
     Interval score & $2q_h + \tfrac{2}{a}\max(|\Delta-\hat\Delta|-q_h,0)$ & \cite{gneiting2007scoring} \\
     Reuse class & C0 $>$95, C1 90--95, C2 80--90, C3 $\le$80\,\% & ours \\
