@@ -387,7 +387,7 @@ src/                library code: data_pipeline, raw_diagnostics, diagnostic_fea
 scripts/            fetchers, feature builders, experiment runners (run_p3, run_ablation_a1, run_d23–run_d30),
                     Spark job, platform server, dashboard export, figure and table generators
 dashboard/          results dashboard: JS page and the Tableau Public workbook specification
-tests/              222 pytest tests (synthetic data in temporary folders only)
+tests/              245 pytest tests (synthetic data in temporary folders only)
 results/            committed result JSON files, generated tables (results/tables, results/dashboard) and figures
 paper/              IEEE manuscript, supplement, generated tables and figures
 ```
@@ -402,7 +402,7 @@ Conventions (from `AGENTS.md`): datasets and checkpoints stay out of Git; batter
 pip install -r requirements.txt          # Python 3.11; Java 17/21 is needed only for Spark
 export DATA_ROOT=data                    # where the CSVs live (default: data/)
 
-python -m pytest                         # 222 tests
+python -m pytest                         # 245 tests
 
 # Fetch and build data (see data/README.md for sizes, hashes and Windows TLS notes)
 python scripts/fetch_osf_diagnostics.py && python scripts/build_diagnostic_features.py
