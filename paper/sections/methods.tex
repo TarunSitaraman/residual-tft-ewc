@@ -10,7 +10,7 @@
 \section{The Residual TFT-EWC Approach}
 \label{sec:methods}
 
-We forecast the SOH one to three checks ahead (up to six in later experiments) from everything measured up to a reference performance test (RPT), i.e.\ a capacity check, with cells or usage conditions arriving as tasks. We first tried to estimate the \emph{current} SOH, but on the first dataset cycle-level features carried almost no health information (median within-cell Spearman correlation with SOH 0.09, against $-0.99$ for elapsed time) and learned estimators lost to persistence, which repeats the last measured SOH (1.78 and 2.37~pp for gradient boosting and ridge, against 0.99~pp). We therefore switched to forecasting after seeing the data, fixing the protocol before fitting any forecaster.
+We forecast the SOH one to three checks ahead (up to six in later experiments) from everything measured up to a reference performance test (RPT), i.e.\ a capacity check, with cells or usage conditions arriving as tasks. Estimating the \emph{current} SOH failed on the first dataset: cycle-level features carried almost no health information (median within-cell Spearman correlation with SOH 0.09, against $-0.99$ for elapsed time), and gradient boosting and ridge (1.78, 2.37~pp) lost to persistence, which repeats the last measured SOH (0.99~pp). We therefore switched to forecasting after seeing the data, fixing the protocol before fitting any forecaster.
 
 % -----------------------------------------------------------------------------
 \subsection{Datasets}
@@ -113,7 +113,7 @@ the penalty of~\cite[Eq.~(3)]{kirkpatrick2017ewc}, where $\theta^*_j$ are the pa
 \end{equation}
 a residual hybrid of a simple and a learned forecaster, as in~\cite{zhang2003hybrid}.
 
-\emph{Shrinkage and intervals.} After training, without changing the weights, the correction is scaled back per horizon by $\alpha_h=\min\!\big(1,\max(0,\sum p\,y/\sum p^2)\big)$, the least-squares slope through the origin~\cite{hastie2009elements} of the observed ($y$) on the predicted ($p$) correction on calibration rows. A split-conformal interval~\cite{lei2018conformal} $\hat\Delta\pm q_h$ takes as $q_h$ the $\lceil (n+1)(1-a)\rceil$-th smallest of the $n$ absolute calibration errors at horizon $h$. Intervals at level $1-a$ (90\% and 80\%) are scored by coverage, width and the interval score $2q_h + \tfrac{2}{a}\max(|\Delta-\hat\Delta|-q_h,0)$~\cite{gneiting2007scoring} (pp; lower is better). On the stream both are refitted after each task on its validation rows; extrapolation gets intervals the same way.
+\emph{Shrinkage and intervals.} After training, without changing the weights, the correction is scaled back per horizon by $\alpha_h=\min\!\big(1,\max(0,\sum p\,y/\sum p^2)\big)$, the least-squares slope through the origin~\cite{hastie2009elements} of the observed ($y$) on the predicted ($p$) correction on calibration rows. A split-conformal interval~\cite{lei2018conformal} $\hat\Delta\pm q_h$ takes as $q_h$ the $\lceil (n+1)(1-a)\rceil$-th smallest of the $n$ absolute calibration errors at horizon $h$. Intervals at level $1-a$ (90\% and 80\%) are scored by coverage, width and the interval score (Table~\ref{tab:metrics}; pp, lower is better). On the stream both are refitted after each task on its validation rows; extrapolation gets intervals the same way.
 
 \emph{Registered experiments.} Each follow-up experiment was registered before it was run (Table~\ref{tab:exps}). Origins with a fade rate (H$^+$) and without one (H$^-$, a cell's first two checks, where extrapolation equals persistence) are reported separately. Horizons are 1--3 (E1) and 1--6 (E2); a question counts only if it replicates in both.
 
@@ -143,7 +143,28 @@ a residual hybrid of a simple and a learned forecaster, as in~\cite{zhang2003hyb
 
 \emph{Tuning.} Hyperparameters are tuned on validation data from orders never used for evaluation, in two steps: first the learning rate of each backbone ($3\cdot10^{-4}$--$10^{-1}$), then the replay buffer $B$ (50--400) and the EWC strength $\lambda$ ($10^0$--$10^5$). A grid is extended if its best value lies on an edge. From P3 on, ten tuning orders are used, and the smallest value within one standard error of the best is kept.
 
-\emph{Metrics.} After training step $i$, every task $j$ is tested, giving the error matrix $R_{i,j} = \mathrm{RMSE}(\mathcal{D}^{\mathrm{te}}_{\pi_j}\mid\theta_i)$. As in~\cite{lopezpaz2017gem,chaudhry2018rwalk}, we report the final average error $\tfrac{1}{T}\sum_{j} R_{T,j}$, backward transfer $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - R_{j,j})$ and forgetting $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - \min_{j\le i<T} R_{i,j})$ (positive means forgetting), and the skill $1-\mathrm{RMSE}/\mathrm{RMSE}_{\mathrm{persistence}}$, a relative error against the naive forecast~\cite{hyndman2006}. The forecast SOH is also placed in a reuse class fixed in advance (C0 $>95\%$, C1 90--95\%, C2 80--90\%, C3 $\le80\%$) and compared with the measured class. The classes screen capacity fade relative to the first valid check; alone, they do not show suitability for an application. P2 adds standard error and class metrics (MAE, bias, MAPE, $R^2$, $R^2_\Delta$ of the change, ${\le}0$ for persistence; balanced accuracy, F1, MCC, Cohen's $\kappa_w$, AUC of SOH${\le}80\%$; full list in supplement Tables SI--SII).
+\emph{Metrics.} After training step $i$, every task $j$ is tested, giving the error matrix $R_{i,j} = \mathrm{RMSE}(\mathcal{D}^{\mathrm{te}}_{\pi_j}\mid\theta_i)$~\cite{lopezpaz2017gem}. Table~\ref{tab:metrics} lists the metrics and their sources; positive BWT and forgetting mean forgetting. P2 adds standard error and class metrics, e.g.\ MAE, $R^2$, $R^2_\Delta$ of the change (${\le}0$ for persistence), MCC, Cohen's $\kappa_w$ and the AUC of SOH${\le}80\%$ (supplement Tables SI--SII).
+
+\begin{table}[t]
+  \caption{Evaluation metrics ($R_{i,j}$: RMSE on task $j$ after step $i$ of $T$; BWT: backward transfer; pers.: persistence)}
+  \label{tab:metrics}
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Metric & Definition & Source \\
+    \midrule
+    Average error & $\tfrac{1}{T}\sum_{j} R_{T,j}$ & \cite{lopezpaz2017gem} \\
+    BWT & $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - R_{j,j})$ & \cite{lopezpaz2017gem} \\
+    Forgetting & $\tfrac{1}{T-1}\sum_{j<T} \big(R_{T,j} - \min_{j\le i<T} R_{i,j}\big)$ & \cite{chaudhry2018rwalk} \\
+    Skill & $1-\mathrm{RMSE}/\mathrm{RMSE}_{\mathrm{pers.}}$ & \cite{hyndman2006} \\
+    Coverage & share of $\Delta$ inside $\hat\Delta\pm q_h$ & \cite{lei2018conformal} \\
+    Interval score & $2q_h + \tfrac{2}{a}\max(|\Delta-\hat\Delta|-q_h,0)$ & \cite{gneiting2007scoring} \\
+    Reuse class & C0 $>$95, C1 90--95, C2 80--90, C3 $\le$80\,\% & ours \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \emph{Statistics.} Means carry 95\% bootstrap intervals~\cite{efron1993bootstrap}. Methods are compared by two-sided Wilcoxon signed-rank tests~\cite{wilcoxon1945} on matched runs or held-out groups, with rank-biserial effect sizes~\cite{kerby2014rankbiserial} and Holm correction~\cite{holm1979}. A difference $d$ counts as \emph{replicated} only if, in both the main seed set (0--4) and a replicate set (5--9), it is significant, has the same sign and $|d|\ge 0.05$~pp. If $|d|<0.05$~pp in both, the methods are practically equivalent. This threshold is about half the label shift caused by the pulse-charge definition.
 
