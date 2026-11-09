@@ -7,6 +7,7 @@ temporary directory; nothing is written into the repository or used for reported
 from __future__ import annotations
 
 import sys
+import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -49,7 +50,9 @@ def test_sheets_use_contract_names_and_join_dims(exported):
     assert set(tables["Headline"]["Setting"]) <= {"e1", "e2"}
     soh = tables["SOH"]
     assert set(soh["Dataset"]) == {"S1", "S6"} and soh.groupby("unit")["Dataset"].nunique().max() == 1
-    assert soh["valid"].all()   # invalid checks (no label) are not drawn
+    # Invalid checks are kept (drawn as hollow points, off the line) with `valid` as a real boolean.
+    assert soh["valid"].dtype == bool
+    assert {"D30Metrics", "StreamRuns", "Verdicts"} <= set(tables)
 
 
 def test_missing_data_folder_gives_placeholders(results_dir: Path, tmp_path: Path):  # noqa: F811
@@ -84,7 +87,43 @@ def test_main_writes_kit_and_twb_contract(exported, tmp_path: Path, monkeypatch)
     for name, w in sheets.items():
         text = ET.tostring(w, encoding="unicode")
         assert ("[none:Group:nk]" in text) == (name in per_group), name
-    # Each Excel source points at the written workbook file.
-    files = {c.get("filename") for c in root.iter("connection") if c.get("class") == "excel-direct"}
-    assert files == {str((kit / "tableau_source.xlsx").resolve())}
+    # Every data source reads the bundled extract (Tableau Public saves extracts only, error 3C242D89),
+    # by a relative path that resolves both beside the .twb and inside the .twbx.
+    hyper = [c for c in root.iter("connection") if c.get("class") == "hyper"]
+    assert hyper and {c.get("dbname") for c in hyper} == {T.HYPER_REL}
+    assert not [c for c in root.iter("connection") if c.get("class") == "excel-direct"]
+    with zipfile.ZipFile(kit / "residual_tft_ewc.twbx") as z:
+        assert set(z.namelist()) == {"residual_tft_ewc.twb", T.HYPER_REL}
+    # The extract holds every sheet with all its rows.
+    from tableauhyperapi import Connection, HyperProcess, TableName, Telemetry
+    with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU, parameters={"log_dir": str(tmp_path)}) as hp, \
+            Connection(hp.endpoint, str(kit / T.HYPER_REL)) as con:
+        for name in xl.sheet_names:
+            n = con.execute_scalar_query(f"SELECT COUNT(*) FROM {TableName('Extract', name)}")
+            assert n == len(xl.parse(name)), name
     assert (kit / "AUTHORING.md").exists()
+    # Elements Tableau's schema rejected when the workbook was first opened (error D2E8DA72).
+    assert root.get("source-build")
+    assert not list(root.iter("simple-id")) and not list(root.iter("computed-sort"))
+    assert all(w.find("cards") is not None or w.find("viewpoints") is not None for w in root.iter("window"))
+    # Each dashboard window has a viewpoint for every sheet it places (error 2805CF18 otherwise).
+    for d in root.iter("dashboard"):
+        w = next(w for w in root.iter("window") if w.get("name") == d.get("name"))
+        assert {v.get("name") for v in w.iter("viewpoint")} == {z.get("name") for z in d.iter("zone") if z.get("name")}
+    # Text tables fit the dashboard width; on Overview the heatmap is taller than each table.
+    text = {v["name"] for v in T._views(CONTRACT) if v["mark"] == "Text"}
+    for vp in root.iter("viewpoint"):
+        assert vp.find("zoom").get("type") == ("fit-width" if vp.get("name") in text else "entire-view")
+    ov = {z.get("name"): int(z.get("h")) for d in root.iter("dashboard") if d.get("name") == "Overview"
+          for z in d.iter("zone") if z.get("name")}
+    assert ov["Error heatmap"] > ov["Headline table"]
+    # Every spec view has a worksheet (WORKBOOK_SPEC.md §3).
+    assert {"Verdict strip", "D30 metric per group", "Seed spread", "Within one class"} <= set(sheets)
+    # The D30 view picks its metric with a parameter, shown on the Forecast accuracy dashboard.
+    params = [d for d in root.iter("datasource") if d.get("name") == "Parameters" and d.get("hasconnection")]
+    assert len(params) == 1 and params[0].find("column/members") is not None
+    fa = next(d for d in root.iter("dashboard") if d.get("name") == "Forecast accuracy")
+    assert any(z.get("type-v2") == "paramctrl" for z in fa.iter("zone"))
+    # Calculated fields used by a worksheet carry their formula in its dependencies.
+    soh_ws = ET.tostring(sheets["SOH trajectories"], encoding="unicode")
+    assert "IF [valid] THEN [soh_pct] END" in soh_ws

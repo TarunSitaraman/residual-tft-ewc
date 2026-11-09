@@ -17,3 +17,4 @@ certifi==2026.07.22
 pyspark==4.2.0
 psutil==7.2.2
 py4j==0.10.9.9
+tableauhyperapi==0.0.26963
