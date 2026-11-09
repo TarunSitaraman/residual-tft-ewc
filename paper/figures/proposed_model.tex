@@ -36,16 +36,10 @@
     \node[align=left, anchor=west, font=\fontsize{6}{7}\selectfont] at ($(lin.south)!0.45!(sum.north)+(0.08,0)$)
       {$\alpha_h\in[0,1]$ per horizon,\\ fitted on validation rows};
 
-    % (c) training
-    \node[draw, dashed, thick, rectangle, align=left, inner sep=2pt, anchor=north west, text width=3.2cm]
-      (ewc) at ($(tft.south west)+(0,-0.3)$)
-      {(c) training on task $t$: MSE on\\ $\Delta-\hat\Delta^{\mathrm{lin}}$ + EWC penalty
-       $\tfrac{\lambda}{2}\sum_{j<t}\lVert\theta-\theta^*_j\rVert^2_{F_j}$};
-    \draw[flow, dashed] (ewc.north -| head.south) -- (head.south |- tft.south);
   \end{tikzpicture}
   \caption{Proposed model, Residual TFT-EWC. (a) The TFT maps a window of the four latest origins of a cell to a
     correction $g_\theta$. (b) The correction is shrunk per horizon and added to linear
-    extrapolation~\eqref{eq:residual}; conformal intervals give the reuse class. (c) Each task is trained on
-    the correction with the EWC penalty~\eqref{eq:ewc}.}
+    extrapolation~\eqref{eq:residual}; conformal intervals give the reuse class. Each task is trained on
+    the correction with the EWC penalty~\eqref{eq:ewc} (Fig.~\ref{fig:system}b).}
   \label{fig:arch}
 \end{figure}
