@@ -139,7 +139,7 @@ export function lineChart(root, { series, x, y, refs = [], tip, height, ariaLabe
 
 /**
  * Dot rows: one row per item, marks along a shared x-axis.
- * rows: [{label, emph, marks: [{v, color, open, r, jitter, tip}], range?: [lo, hi]}]; x: {label, min, max, fmt};
+ * rows: [{label, emph, marks: [{v, color, open, r, jitter, tip}], range?: [lo, hi], ranges?: [{lo, hi, jitter}]}]; x: {label, min, max, fmt};
  * refs: [{x, label}]. Used for the headline dot plot, coverage per group and seed spread.
  */
 export function dotRows(root, { rows, x, refs = [], tip, rowH = 34, labelW, ariaLabel, onRow }) {
@@ -147,7 +147,7 @@ export function dotRows(root, { rows, x, refs = [], tip, rowH = 34, labelW, aria
   const lw = labelW ?? Math.min(240, Math.max(110, W * 0.3));
   const m = { l: lw, r: 22, t: refs.some((r) => r.label) ? 24 : 8, b: 44 };
   const H = m.t + m.b + rows.length * rowH;
-  const vals = rows.flatMap((r) => r.marks.map((k) => k.v)).concat(refs.map((r) => r.x));
+  const vals = rows.flatMap((r) => r.marks.map((k) => k.v).concat((r.ranges || []).map((q) => q.hi))).concat(refs.map((r) => r.x));
   const xt = ticks(x.min ?? 0, Math.max(x.max ?? 0, ...vals) > (x.max ?? -Infinity) ? niceMax(Math.max(...vals)) : x.max, W < 520 ? 4 : 6);
   const x0 = Math.min(xt[0], x.min ?? xt[0]), x1 = Math.max(xt[xt.length - 1], ...vals);
   const X = (v) => m.l + ((v - x0) / (x1 - x0 || 1)) * (W - m.l - m.r);
@@ -176,6 +176,10 @@ export function dotRows(root, { rows, x, refs = [], tip, rowH = 34, labelW, aria
   rows.forEach((r, i) => {
     const cy = m.t + i * rowH + rowH / 2;
     if (r.range) svg.append(s("line", { class: "whisk", x1: X(r.range[0]), x2: X(r.range[1]), y1: cy, y2: cy }));
+    for (const q of r.ranges || []) {   // several intervals in one row, offset like jittered marks
+      const yy = cy + (q.jitter || 0) * (rowH * 0.32);
+      svg.append(s("line", { class: "whisk", x1: X(q.lo), x2: X(q.hi), y1: yy, y2: yy }));
+    }
     for (const k of r.marks) {
       const yy = cy + (k.jitter || 0) * (rowH * 0.32);
       const g = s("g", { class: "mark", style: `--col:${k.color}` },
