@@ -1419,3 +1419,16 @@ To be timed on synthetic data of S10 size before any real run (as D34). S10 has 
 
 ### Run log
 - **9 Nov 2026. Drafted** after D37. No D38 code written or run; no data file opened in this session (the session has no datasets).
+- **9 Nov 2026. Code committed** after tests on synthetic data only (pytest temporary directories and the session scratch space; never real data): `scripts/run_d38.py`, `scripts/run_d38_night.py`, `tests/test_d38.py` (10 tests), runbook `docs/D38_NIGHT_RUN.md` with the prompts for the data machine; nothing under `src/` changed. **Checks on synthetic data:** the a0 arm equals the D36 continual unit exactly (raw, shrunk and SEL RMSE per held-out condition, largest absolute difference 0.0), so the reproduction check should be exact on the machine that ran D36; with a base results file present, the recomputed GBM-ALL, GBM-LAST, linear extrapolation, persistence and ridge agree with it to 0.0. **Implementation choices fixed with the code:**
+  - The replay batch has the size of the current batch (fewer if fewer rows are stored) and is drawn anew at every step with a generator seeded per condition; which rows are stored depends only on (seed, position of the condition in the stream).
+  - "Second half of the stream" is the 0-based positions from ⌊T/2⌋ on, T being the number of training conditions.
+  - A flagged horizon (fewer than 30 calibration rows) takes its half-widths from the rows it has.
+  - Per held-out condition, an ensemble method's value is the RMSE of the ensemble forecast averaged over the five orders; its coverage pools the samples of the five orders.
+  - GBM-ER is fitted on the last condition's training rows plus the stored training and validation rows of the earlier conditions (seed 0).
+  - The joint residual TFT is read from the committed D34 / D36 `condition_values` (not refitted).
+  - The folds in the tests are those where r32 finished in both seed sets; another arm enters only if it finished for all of them; comparisons that need a missing arm are listed under `tests_not_run`.
+  - The a0 arm also gives SEL on S7 and a calibrated a0 ensemble (`tft_residual_ewc_ens_cal`); both are descriptive only.
+  - Collection stops if the reproduction check fails; `--record-mismatch` writes the results anyway and is a deviation to log here.
+  - The stream code of `run_d38.py` enters the checkpoint key (as `src/` does); the collection code does not.
+  - Smoke profile: 2 orders, 2 seeds per set, 2 tuning runs, 2 epochs.
+- **9 Nov 2026. Compute check and amendment to "Compute" (before any real-data run).** On synthetic data of S10 size (71 conditions, 3 cells, 9–17 check-ups; paper profile; one stream over 51 conditions, cloud session): a0 0.98 min (E1) and 1.13 min (E2), r32 0.73 and 0.87 min, r8 0.60 and 0.87 min. The entry's assumption that a replay stream costs about twice a plain stream was wrong: it costs no more than the EWC stream, whose penalty sums one term per learned condition. D38 has 525 streams per experiment on S10, as D36 had (5.5 h real time with six workers), so about 5–7 h is expected for S10, below the 14 h threshold: **the fallback does not apply and r8 is run.** No D38 code has been run on real data.
