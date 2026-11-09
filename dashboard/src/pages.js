@@ -144,9 +144,9 @@ function tableau(root) {
   const views = Object.entries(TABLEAU.views);
   const live = views.filter(([, u]) => u).length;
   const flow = [["Export", "scripts/export_dashboard_data.py writes tidy CSVs (results/dashboard/, in Git; data/dashboard/, local) plus summary.json and manifest.json with source hashes and the commit."],
-    ["Build the kit", "scripts/build_tableau_workbook.py writes tableau_source.xlsx (one pre-filtered sheet per view, filter fields already named), a starter residual_tft_ewc.twb (data sources, calculated fields, 12 worksheets, 5 dashboards) and AUTHORING.md."],
-    ["Author", "Open the .twb in Tableau Desktop Public Edition, check each view against WORKBOOK_SPEC.md and fix what Tableau reports. The .twb was generated without Tableau."],
-    ["Publish", "Save to Tableau Public as an extract (Tableau Public has no live connections). Each of the five dashboards gets a public URL."],
+    ["Build the kit", "scripts/build_tableau_workbook.py writes tableau_source.xlsx (one pre-filtered sheet per view, filter fields already named), a starter residual_tft_ewc.twb (data sources, calculated fields, D30 metric parameter, 15 worksheets, 5 dashboards), the extract Data/tableau_source.hyper, a packaged residual_tft_ewc.twbx to open directly, and AUTHORING.md."],
+    ["Author", "Open the .twbx in Tableau Desktop Public Edition, check each view against WORKBOOK_SPEC.md and fix what Tableau reports. The .twb was generated without Tableau."],
+    ["Publish", "Save to Tableau Public. The sources are already extracts (Tableau Public has no live connections). Each of the five dashboards gets a public URL."],
     ["Configure", "Paste the five URLs into dashboard/config.js (TABLEAU.views)."],
     ["Embed", "This site loads the Tableau Embedding API v3 and mounts a <tableau-viz> under the native figures of the matching dashboard pane."]];
   const runtime = [["Loading", "The API script (tableau.embedding.3.latest.min.js from public.tableau.com) is loaded once, only when a pane has a URL."],
