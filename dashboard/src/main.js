@@ -18,7 +18,7 @@ const TABS = {
   accuracy: { title: "Forecast error by group and horizon", deck: "Test error for each battery group, skill against carrying the last SOH forward, and how error grows with the forecast horizon." },
   continual: { title: "Learning new groups without forgetting old ones", deck: "Groups arrive one after another. A useful model adapts to each new group and keeps its accuracy on the earlier ones." },
   reuse: { title: "Reuse classes and prediction intervals", deck: "How often a forecast puts a cell in the right reuse class, and whether the prediction intervals hold their stated coverage on unseen usage conditions." },
-  many: { title: "124 unseen usage conditions, one at a time", deck: "Two first-life datasets with many ageing conditions (S7: 60, S10: 64). Every condition is held out in turn, so each point is a separate test of the model on conditions it has never seen." },
+  many: { title: "131 unseen usage conditions, one at a time", deck: "The seven S6 conditions, then two first-life datasets with many ageing conditions (S7: 60, S10: 64). Every condition is held out in turn, so each point is a separate test of the model on conditions it has never seen." },
   evidence: { title: "Every registered result", deck: "Each comparison fixed before its study ran, with its outcome in both seed sets. Results against the proposed model are listed with the ones for it." },
 };
 const NAMES = { overview: "Overview", soh: "Capacity fade", accuracy: "Forecast error", continual: "Continual learning", reuse: "Reuse and intervals", many: "Many conditions", evidence: "Registered results" };
