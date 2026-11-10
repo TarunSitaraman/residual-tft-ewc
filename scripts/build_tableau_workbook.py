@@ -24,6 +24,7 @@ Nothing is recomputed: rows are filtered, joined and renamed only.
 from __future__ import annotations
 
 import argparse
+import copy
 import os
 import re
 import sys
@@ -306,7 +307,7 @@ def _calcs(sheet: str) -> list[tuple[str, str, str]]:
     return []
 
 
-def _parameters(parent: ET.Element, metrics: list[str]) -> None:
+def _parameters(parent: ET.Element, metrics: list[str]) -> ET.Element:
     """The D30 metric parameter (WORKBOOK_SPEC.md §3.3), default reg_RMSE."""
     ds = ET.SubElement(parent, "datasource", hasconnection="false", inline="true", name="Parameters", version="18.1")
     default = "reg_RMSE" if "reg_RMSE" in metrics else metrics[0]
@@ -317,6 +318,7 @@ def _parameters(parent: ET.Element, metrics: list[str]) -> None:
     members = ET.SubElement(col, "members")
     for m in metrics:
         ET.SubElement(members, "member", value=f'"{m}"')
+    return col
 
 
 def _datasource(parent: ET.Element, sheet: str, df: pd.DataFrame, f: dict[str, str]) -> None:
@@ -351,7 +353,7 @@ def _shelf(refs: list[Ref], ds: str) -> str:
     return parts[0] if len(parts) == 1 else "(" + " / ".join(parts) + ")"
 
 
-def _worksheet(parent: ET.Element, v: dict, df: pd.DataFrame, f: dict[str, str]) -> None:
+def _worksheet(parent: ET.Element, v: dict, df: pd.DataFrame, f: dict[str, str], param: ET.Element) -> None:
     ds = _ds_name(v["sheet"])
     ws = ET.SubElement(parent, "worksheet", name=v["name"])
     table = ET.SubElement(ws, "table")
@@ -359,14 +361,15 @@ def _worksheet(parent: ET.Element, v: dict, df: pd.DataFrame, f: dict[str, str])
     calcs = {cap: (dt, formula) for cap, dt, formula in _calcs(v["sheet"])}
     refs = v["rows"] + v["cols"] + list(v["enc"].values())
     uses_param = any(D30_PARAM in calcs[r.field][1] for r in refs if r.field in calcs)
+    # The data source comes first: Tableau takes the first one as the sheet's primary source, and the
+    # connection-less Parameters source there gives "the worksheet does not have a valid data source".
     dsl = ET.SubElement(view, "datasources")
-    if uses_param:
-        ET.SubElement(dsl, "datasource", name="Parameters")
     ET.SubElement(dsl, "datasource", caption=v["sheet"], name=ds)
     if uses_param:
+        ET.SubElement(dsl, "datasource", name="Parameters")
+        # The full parameter definition (value, calculation, members), as Tableau writes it.
         pdeps = ET.SubElement(view, "datasource-dependencies", datasource="Parameters")
-        ET.SubElement(pdeps, "column", caption="D30 metric", datatype="string", name="[Parameter 1]",
-                      role="measure", type="nominal")
+        pdeps.append(copy.deepcopy(param))
     deps = ET.SubElement(view, "datasource-dependencies", datasource=ds)
     if v.get("sort_group"):
         refs.append(Ref("Group Order", "integer", "sum", discrete=False))
@@ -450,12 +453,12 @@ def build_twb(tables: dict[str, pd.DataFrame], f: dict[str, str]) -> ET.ElementT
     views = _views(f)
     dss = ET.SubElement(wb, "datasources")
     d30 = tables.get("D30Metrics", pd.DataFrame())
-    _parameters(dss, sorted(d30["metric"].dropna().unique()) if "metric" in d30 and len(d30) else ["reg_RMSE"])
+    param = _parameters(dss, sorted(d30["metric"].dropna().unique()) if "metric" in d30 and len(d30) else ["reg_RMSE"])
     for sheet in dict.fromkeys(v["sheet"] for v in views):
         _datasource(dss, sheet, tables[sheet], f)
     wss = ET.SubElement(wb, "worksheets")
     for v in views:
-        _worksheet(wss, v, tables[v["sheet"]], f)
+        _worksheet(wss, v, tables[v["sheet"]], f, param)
     dbs = ET.SubElement(wb, "dashboards")
     text_sheets = {v["name"] for v in views if v["mark"] == "Text"}
     for name in DASHBOARDS:

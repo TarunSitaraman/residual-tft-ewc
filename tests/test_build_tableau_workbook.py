@@ -122,6 +122,12 @@ def test_main_writes_kit_and_twb_contract(exported, tmp_path: Path, monkeypatch)
     # The D30 view picks its metric with a parameter, shown on the Forecast accuracy dashboard.
     params = [d for d in root.iter("datasource") if d.get("name") == "Parameters" and d.get("hasconnection")]
     assert len(params) == 1 and params[0].find("column/members") is not None
+    # Its sheet lists the data source before Parameters (else Tableau drops it: "no valid data source"),
+    # and depends on the full parameter definition.
+    d30_view = sheets["D30 metric per group"].find("table/view")
+    assert [d.get("name") for d in d30_view.find("datasources")] == [T._ds_name("D30Metrics"), "Parameters"]
+    pdep = next(d for d in d30_view.findall("datasource-dependencies") if d.get("datasource") == "Parameters")
+    assert pdep.find("column/members") is not None and pdep.find("column/calculation") is not None
     fa = next(d for d in root.iter("dashboard") if d.get("name") == "Forecast accuracy")
     assert any(z.get("type-v2") == "paramctrl" for z in fa.iter("zone"))
     # Calculated fields used by a worksheet carry their formula in its dependencies.
