@@ -4,6 +4,7 @@ import { PATHS, TABLEAU } from "../config.js";
 import { el, fmt, groupInfo } from "./views.js";
 import { renderKpis, kpiNote, load } from "./tabs.js";
 import * as C from "./content.js";
+import { mountViz } from "./embed.js";
 import { renderStudies, STUDIES } from "./studies.js";
 
 // ---------- building blocks ----------
@@ -148,9 +149,9 @@ function tableau(root) {
     ["Author", "Open the .twbx in Tableau Desktop Public Edition, check each view against WORKBOOK_SPEC.md and fix what Tableau reports. The .twb was generated without Tableau."],
     ["Publish", "Save to Tableau Public. The sources are already extracts (Tableau Public has no live connections). Each of the five dashboards gets a public URL."],
     ["Configure", "Paste the five URLs into dashboard/config.js (TABLEAU.views)."],
-    ["Embed", "This site loads the Tableau Embedding API v3 and mounts a <tableau-viz> under the native figures of the matching dashboard pane."]];
+    ["Embed", "This site loads the Tableau Embedding API v3 and mounts a <tableau-viz> under the native figures of the matching dashboard pane; this page shows all five in full."]];
   const runtime = [["Loading", "The API script (tableau.embedding.3.latest.min.js from public.tableau.com) is loaded once, only when a pane has a URL."],
-    ["Mounting", "A <tableau-viz> element with the view URL, toolbar at the bottom, tabs hidden, full width and 640 px high."],
+    ["Mounting", `A <tableau-viz> element with the view URL, toolbar at the bottom, tabs hidden and full width. Once interactive, the frame takes the dashboard's own height so the whole dashboard shows (${TABLEAU.heightPx} px for dashboards sized Automatic).`],
     ["Readiness", `The view must fire firstinteractive within ${TABLEAU.timeoutS} s; otherwise a notice replaces it and the native figures stand alone.`],
     ["Filters out", "On every filter change the site calls applyFilterAsync(field, [value], \"replace\") on each worksheet of the dashboard, or clearFilterAsync for \"All\". Worksheets without the field are skipped; parameters with the same name are set too."],
     ["Selections in", "markselectionchanged events are read with getMarksAsync; a selected mark's Group opens the details panel, the same panel the native heatmap cells open."],
@@ -159,6 +160,15 @@ function tableau(root) {
     pageHead("Tableau implementation", "The dashboard's analytical views have two layers: native figures drawn by this site from the exported tables, and a Tableau Public workbook embedded under them. The site is complete without the workbook."),
     section("status", "Current status", live ? `${live} of ${views.length} dashboards are published and embedded.` : "No dashboard is published yet: every pane shows the native figures only. The workbook kit is generated, but it has not been opened in Tableau Desktop, which is not installed on the machine that built it.",
       table(["Dashboard pane", "Tableau dashboard", "View URL"], C.TABLEAU_CONTRACT.dashboards.map(([name, key]) => [key, name, TABLEAU.views[key] || "not published"]))),
+    ...(live ? [section("workbook", "The workbook", "Every published dashboard in full, unfiltered. The dashboard panes show the same views under their native figures, following the page filters.",
+      ...C.TABLEAU_CONTRACT.dashboards.filter(([, key]) => TABLEAU.views[key]).map(([name, key]) => {
+        const holder = el("div", { class: "viz", "aria-label": `${name} (Tableau)` }, el("p", { class: "sub", text: `Loading ${name}…` }));
+        mountViz(holder, TABLEAU.views[key], {
+          onReady: () => {}, onMarks: () => {},
+          onFail: (reason) => holder.replaceChildren(el("p", { class: "notice", text: `${name} could not be shown (${reason}).` })),
+        });
+        return el("div", {}, el("h3", { text: name }), holder);
+      }))] : []),
     section("flow", "How a Tableau view gets onto this site", null, el("ol", { class: "steps" }, flow.map(([t, d]) => el("li", {}, el("b", { text: t }), el("span", { text: d }))))),
     section("runtime", "What happens in the browser", "Implemented in dashboard/src/embed.js and main.js.", defs(runtime)),
     section("contract", "Contract between the site and the workbook", "The site relies only on these names; everything else in the workbook is free. Every per-group worksheet keeps Group in the view so selections can be read.",

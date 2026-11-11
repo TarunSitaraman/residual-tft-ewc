@@ -28,6 +28,17 @@ async function marksAsRows(event) {
   return rows;
 }
 
+// Show the whole dashboard: size the frame to the dashboard's own fixed (or maximum) height plus the toolbar.
+// Dashboards sized "Automatic" have no height of their own and keep TABLEAU.heightPx.
+const TOOLBAR_PX = 30;
+function fitHeight(viz) {
+  try {
+    const s = viz.workbook.activeSheet.size;
+    const h = (s.maxSize || s.minSize)?.height;
+    if (h > 0) viz.setAttribute("height", `${h + TOOLBAR_PX}px`);
+  } catch { /* size not readable: keep the default height */ }
+}
+
 /**
  * Mount a Tableau Public view in `container`.
  * Calls onReady(viz) when it is interactive, onFail(reason) if the API or the view does not load in time,
@@ -45,13 +56,14 @@ export async function mountViz(container, url, { onReady, onFail, onMarks }) {
   viz.setAttribute("toolbar", "bottom");
   viz.setAttribute("hide-tabs", "");
   viz.setAttribute("width", "100%");
-  viz.setAttribute("height", "640px");
+  viz.setAttribute("height", `${TABLEAU.heightPx}px`);
   let done = false;
   const timer = setTimeout(() => { if (!done) { done = true; onFail("the view did not respond in time"); } }, TABLEAU.timeoutS * 1000);
   viz.addEventListener("firstinteractive", () => {
     if (done) return;
     done = true;
     clearTimeout(timer);
+    fitHeight(viz);
     onReady(viz);
   });
   viz.addEventListener("markselectionchanged", async (ev) => {
