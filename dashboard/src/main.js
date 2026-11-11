@@ -153,9 +153,10 @@ tabButtons.forEach((b, i) => {
 // ---------- analytical panels: native views, plus the Tableau view when one is published ----------
 function ensurePanel(name) {
   const panel = document.getElementById(`tab-${name}`);
-  if (name === "overview" || panel.dataset.ready) return;
+  if (!panel || panel.dataset.ready) return;
   panel.dataset.ready = "1";
-  panel.replaceChildren(el("div", { class: "native", style: "display:contents" }));
+  // Overview's native content is static markup in index.html; the other panes are drawn into a .native host.
+  if (name !== "overview") panel.replaceChildren(el("div", { class: "native", style: "display:contents" }));
   if (!TABLEAU.views[name]) return;
   const c = card(`${NAMES[name]} in Tableau`, "The published Tableau Public workbook for this section. It follows the same filters.");
   const holder = el("div", { class: "viz", "aria-label": `${NAMES[name]} (Tableau)` }, el("p", { class: "sub", style: "padding:16px", text: "Loading the Tableau view…" }));

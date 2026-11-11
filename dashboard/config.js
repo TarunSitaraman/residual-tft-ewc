@@ -9,6 +9,8 @@ export const TABLEAU = {
   scriptUrl: "https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js",
   // Seconds to wait for a view to become interactive before falling back to the static figures.
   timeoutS: 25,
+  // Frame height before the view reports its size, and for dashboards sized "Automatic".
+  heightPx: 900,
   views: {
     overview: "",
     soh: "",
