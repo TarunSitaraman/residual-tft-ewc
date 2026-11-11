@@ -72,7 +72,7 @@ def test_main_writes_kit_and_twb_contract(exported, tmp_path: Path, monkeypatch)
         (data_root / "dashboard" / p.name).write_bytes(p.read_bytes())
     kit = tmp_path / "kit"
     assert T.main(["--results-out", str(out_r), "--data-root", str(data_root), "--out", str(kit)]) == 0
-    xl = pd.ExcelFile(kit / "tableau_source.xlsx")
+    xl = pd.ExcelFile(kit / T.XLSX_REL)
     assert {"Headline", "GroupError", "StreamTasks", "SOH", "Predictions"} <= set(xl.sheet_names)
     root = ET.parse(kit / "residual_tft_ewc.twb").getroot()
     assert [d.get("name") for d in root.iter("dashboard")] == list(T.DASHBOARDS)
@@ -87,20 +87,26 @@ def test_main_writes_kit_and_twb_contract(exported, tmp_path: Path, monkeypatch)
     for name, w in sheets.items():
         text = ET.tostring(w, encoding="unicode")
         assert ("[none:Group:nk]" in text) == (name in per_group), name
-    # Every data source reads the bundled extract (Tableau Public saves extracts only, error 3C242D89),
-    # by a relative path that resolves both beside the .twb and inside the .twbx.
-    hyper = [c for c in root.iter("connection") if c.get("class") == "hyper"]
-    assert hyper and {c.get("dbname") for c in hyper} == {T.HYPER_REL}
-    assert not [c for c in root.iter("connection") if c.get("class") == "excel-direct"]
+    # Every data source is an Excel sheet with an enabled extract of its own, as Tableau saves one: Tableau Public
+    # publishes extracts only (error 3C242D89) and its server rejects direct .hyper connections. Paths are relative,
+    # so they resolve both beside the .twb and inside the .twbx.
+    used = {d.get("caption") for d in root.find("datasources") if d.get("name") != "Parameters"}
+    for d in root.find("datasources"):
+        if d.get("name") == "Parameters":
+            continue
+        live = d.find("connection/named-connections/named-connection/connection")
+        assert live.get("class") == "excel-direct" and live.get("filename") == T.XLSX_REL
+        assert list(d)[-1].tag == "extract" and d.find("extract").get("enabled") == "true"
+        assert d.find("extract/connection").get("dbname") == T.hyper_rel(d.get("caption"))
     with zipfile.ZipFile(kit / "residual_tft_ewc.twbx") as z:
-        assert set(z.namelist()) == {"residual_tft_ewc.twb", T.HYPER_REL}
-    # The extract holds every sheet with all its rows.
+        assert set(z.namelist()) == {"residual_tft_ewc.twb", T.XLSX_REL} | {T.hyper_rel(s) for s in used}
+    # Each extract holds all the rows of its sheet.
     from tableauhyperapi import Connection, HyperProcess, TableName, Telemetry
-    with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU, parameters={"log_dir": str(tmp_path)}) as hp, \
-            Connection(hp.endpoint, str(kit / T.HYPER_REL)) as con:
-        for name in xl.sheet_names:
-            n = con.execute_scalar_query(f"SELECT COUNT(*) FROM {TableName('Extract', name)}")
-            assert n == len(xl.parse(name)), name
+    with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU, parameters={"log_dir": str(tmp_path)}) as hp:
+        for name in used:
+            with Connection(hp.endpoint, str(kit / T.hyper_rel(name))) as con:
+                n = con.execute_scalar_query(f"SELECT COUNT(*) FROM {TableName('Extract', 'Extract')}")
+                assert n == len(xl.parse(name)), name
     assert (kit / "AUTHORING.md").exists()
     # Elements Tableau's schema rejected when the workbook was first opened (error D2E8DA72).
     assert root.get("source-build")

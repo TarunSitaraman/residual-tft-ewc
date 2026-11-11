@@ -9,7 +9,7 @@ Inputs come from `python scripts/export_dashboard_data.py`:
 | `results/dashboard/` | `dim_group`, `dim_method`, `fact_stream_run`, `fact_stream_task`, `fact_stream_baseline`, `fact_unseen_run`, `fact_unseen_fold`, `fact_tests`, `fact_verdicts`, `fact_coverage`, `fact_horizon`, `fact_d30_group`, `fact_headline` (CSV) | yes |
 | `data/dashboard/` | `fact_soh`, `fact_predictions` (CSV, built from the data folder) | no |
 
-**Starting point:** `python scripts/build_tableau_workbook.py` writes `data/dashboard/tableau/tableau_source.xlsx`, with one self-contained, pre-filtered sheet per view, and `residual_tft_ewc.twb`, a starter workbook that implements §1–§3 as generated XML. Open the `.twb` and correct it against this spec rather than building from scratch. It was generated without Tableau, so expect to fix sorts, mark sizes and colours.
+**Starting point:** `python scripts/build_tableau_workbook.py` writes `data/dashboard/tableau/Data/tableau_source.xlsx`, with one self-contained, pre-filtered sheet per view, and `residual_tft_ewc.twb`, a starter workbook that implements §1–§3 as generated XML. Open the `.twb` and correct it against this spec rather than building from scratch. It was generated without Tableau, so expect to fix sorts, mark sizes and colours.
 
 Use **extracts** (Tableau Public has no live connections). Commit the `.twb` to `dashboard/tableau/residual_tft_ewc.twb` once it exists. Keep the `.twbx` and its extract out of Git, like the data.
 
