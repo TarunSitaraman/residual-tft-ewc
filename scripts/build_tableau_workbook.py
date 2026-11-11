@@ -8,7 +8,8 @@ the data folder):
   order and description joined in) and already filtered to what its view shows, so the workbook needs no joins,
   relationships or data-source filters. The filter fields carry the names the JS page drives
   (``dashboard/config.js`` FIELDS): Dataset, Setting, Protocol, Group, Method Family.
-- ``Data/tableau_source.hyper``: the same tables as a Tableau extract (Tableau Public saves extracts only).
+- ``Data/tableau_source.xlsx`` and per-source ``Data/<Sheet>.hyper``: the extracted Excel source and per-source extracts
+  (Tableau Public saves extracts only).
 - ``residual_tft_ewc.twb`` and the packaged ``residual_tft_ewc.twbx``: a STARTER workbook. One extract data source
   per sheet, the calculated fields and aliases
   of dashboard/tableau/WORKBOOK_SPEC.md, one worksheet per view and the five dashboards named as the page expects.
@@ -27,6 +28,7 @@ import argparse
 import copy
 import os
 import re
+import shutil
 import sys
 import tempfile
 import xml.etree.ElementTree as ET
@@ -157,7 +159,12 @@ def write_xlsx(tables: dict[str, pd.DataFrame], path: Path) -> None:
             df.to_excel(xw, sheet_name=name, index=False)
 
 
-HYPER_REL = "Data/tableau_source.hyper"   # relative to the .twb, and the path inside the .twbx
+XLSX_REL = "Data/tableau_source.xlsx"   # relative to the .twb, and the path inside the .twbx
+
+
+def extract_rel(sheet: str) -> str:
+    """Extract path relative to the .twb, and path inside the .twbx."""
+    return f"Data/{sheet}.hyper"
 
 
 def _sqltype(s: pd.Series):
@@ -165,32 +172,37 @@ def _sqltype(s: pd.Series):
     return {"boolean": SqlType.bool, "integer": SqlType.big_int, "real": SqlType.double}.get(_dtype(s), SqlType.text)()
 
 
-def write_hyper(tables: dict[str, pd.DataFrame], path: Path) -> None:
-    """The extract Tableau Public requires: one table per view in schema Extract, same columns and types."""
+def write_hyper(tables: dict[str, pd.DataFrame], out_dir: Path) -> dict[str, Path]:
+    """Write one .hyper extract per sheet in schema Extract, table Extract."""
     from tableauhyperapi import (NULLABLE, Connection, CreateMode, HyperProcess, Inserter, TableDefinition,
                                  TableName, Telemetry)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    # Hyper writes hyperd.log to log_dir (default: the working directory, i.e. the repository root).
-    with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU, parameters={"log_dir": tempfile.gettempdir()}) as hp, \
-            Connection(hp.endpoint, str(path), CreateMode.CREATE_AND_REPLACE) as con:
-        con.catalog.create_schema("Extract")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    paths: dict[str, Path] = {}
+    with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU, parameters={"log_dir": tempfile.gettempdir()}) as hp:
         for name, df in tables.items():
-            td = TableDefinition(TableName("Extract", name),
-                                 [TableDefinition.Column(str(c), _sqltype(df[c]), NULLABLE) for c in df.columns])
-            con.catalog.create_table(td)
-            text = [_dtype(df[c]) == "string" for c in df.columns]
-            with Inserter(con, td) as ins:
-                ins.add_rows([None if pd.isna(v) else str(v) if t else v.item() if hasattr(v, "item") else v
-                              for v, t in zip(row, text)] for row in df.itertuples(index=False))
-                ins.execute()
+            p = out_dir / f"{name}.hyper"
+            paths[name] = p
+            with Connection(hp.endpoint, str(p), CreateMode.CREATE_AND_REPLACE) as con:
+                con.catalog.create_schema("Extract")
+                td = TableDefinition(TableName("Extract", "Extract"),
+                                     [TableDefinition.Column(str(c), _sqltype(df[c]), NULLABLE) for c in df.columns])
+                con.catalog.create_table(td)
+                text = [_dtype(df[c]) == "string" for c in df.columns]
+                with Inserter(con, td) as ins:
+                    ins.add_rows([None if pd.isna(v) else str(v) if t else v.item() if hasattr(v, "item") else v
+                                  for v, t in zip(row, text)] for row in df.itertuples(index=False))
+                    ins.execute()
+    return paths
 
 
-def write_twbx(twb: Path, hyper: Path, path: Path) -> None:
-    """Packaged workbook: the .twb plus its extract, opened directly in Tableau (File > Open)."""
+def write_twbx(twb: Path, xlsx: Path, hypers: dict[str, Path], path: Path) -> None:
+    """Packaged workbook: the .twb plus bundled Excel source and per-source extracts."""
     import zipfile
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         z.write(twb, twb.name)
-        z.write(hyper, HYPER_REL)
+        z.write(xlsx, XLSX_REL)
+        for name, h in hypers.items():
+            z.write(h, extract_rel(name))
 
 
 # ---------- the starter workbook ----------
@@ -322,15 +334,41 @@ def _parameters(parent: ET.Element, metrics: list[str]) -> ET.Element:
 
 
 def _datasource(parent: ET.Element, sheet: str, df: pd.DataFrame, f: dict[str, str]) -> None:
-    """A data source on the bundled Hyper extract (Tableau Public saves extracts only)."""
+    """An extracted Excel data source (federated excel-direct connection with an enabled extract)."""
     ds = ET.SubElement(parent, "datasource", caption=sheet, inline="true", name=_ds_name(sheet), version="18.1")
     conn = ET.SubElement(ds, "connection", {"class": "federated"})
     named = ET.SubElement(ET.SubElement(conn, "named-connections"), "named-connection",
-                          caption="tableau_source", name="hyper.source")
-    ET.SubElement(named, "connection", {"authentication": "auth-none", "author-locale": "en_US", "class": "hyper",
-                                        "dbname": HYPER_REL, "default-settings": "yes", "schema": "Extract",
-                                        "sslmode": "", "tablename": sheet, "username": "tableau_internal_user"})
-    ET.SubElement(conn, "relation", connection="hyper.source", name=sheet, table=f"[Extract].[{sheet}]", type="table")
+                          caption="tableau_source", name="excel-direct.source")
+    ET.SubElement(named, "connection", {
+        "class": "excel-direct",
+        "cleaning": "no",
+        "compat": "no",
+        "dataRefreshTime": "",
+        "filename": XLSX_REL,
+        "interpretationMode": "0",
+        "password": "",
+        "server": "",
+        "validate": "no",
+    })
+    rel = ET.SubElement(conn, "relation", connection="excel-direct.source", name=sheet,
+                        table=f"[{sheet}$]", type="table")
+    cols_elem = ET.SubElement(rel, "columns", header="yes")
+    for i, c in enumerate(df.columns):
+        ET.SubElement(cols_elem, "column", datatype=_dtype(df[c]), name=str(c), ordinal=str(i))
+    ext = ET.SubElement(conn, "extract", count="-1", enabled="true", units="records")
+    hyper_conn = ET.SubElement(ext, "connection", {
+        "access_mode": "readonly",
+        "authentication": "auth-none",
+        "author-locale": "en_US",
+        "class": "hyper",
+        "dbname": extract_rel(sheet),
+        "default-settings": "yes",
+        "schema": "Extract",
+        "sslmode": "",
+        "tablename": "Extract",
+        "username": "tableau_internal_user",
+    })
+    ET.SubElement(hyper_conn, "relation", name="Extract", table="[Extract].[Extract]", type="table")
     ET.SubElement(ds, "aliases", enabled="yes")
     if f["setting"] in df:
         col = ET.SubElement(ds, "column", datatype="string", name=f"[{f['setting']}]", role="dimension", type="nominal")
@@ -483,9 +521,9 @@ def build_twb(tables: dict[str, pd.DataFrame], f: dict[str, str]) -> ET.ElementT
 
 AUTHORING = """# Tableau authoring steps (on Windows or macOS)
 
-Files in this folder: `residual_tft_ewc.twbx` (open this: the workbook with its extract packaged in),
-`residual_tft_ewc.twb` + `Data/tableau_source.hyper` (the same, unpacked) and `tableau_source.xlsx` (the same rows
-as Excel, for inspection only; the workbook does not read it).
+Files in this folder: `residual_tft_ewc.twbx` (open this: the workbook with its bundled Excel source and extracts
+packaged in), `residual_tft_ewc.twb` + `Data/` (the same, unpacked: `Data/tableau_source.xlsx` and per-source `.hyper`
+extracts) and `tableau_source.xlsx` (the same rows as Excel, for inspection only; the workbook reads the bundled copy).
 
 1. Install Tableau Desktop Public Edition (free) and sign in to Tableau Public.
 2. File > Open `residual_tft_ewc.twbx`. Its data sources are already extracts, as Tableau Public requires.
@@ -528,15 +566,18 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(f"no export in {args.results_out}: run scripts/export_dashboard_data.py first")
     xlsx = (out / "tableau_source.xlsx").resolve()
     write_xlsx(tables, xlsx)
-    hyper, twb = out / HYPER_REL, out / "residual_tft_ewc.twb"
-    write_hyper(tables, hyper)
+    bundled_xlsx = out / XLSX_REL
+    bundled_xlsx.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(xlsx, bundled_xlsx)
+    hypers = write_hyper(tables, out / "Data")
+    twb = out / "residual_tft_ewc.twb"
     build_twb(tables, f).write(twb, encoding="utf-8", xml_declaration=True)
-    write_twbx(twb, hyper, out / "residual_tft_ewc.twbx")
+    write_twbx(twb, bundled_xlsx, hypers, out / "residual_tft_ewc.twbx")
     (out / "AUTHORING.md").write_text(AUTHORING, encoding="utf-8")
     for name, df in tables.items():
         note = "" if len(df) else "  (empty placeholder: build the data folder and re-run the export)"
         print(f"  {name}: {len(df):,} rows{note}")
-    print(f"Wrote tableau_source.xlsx, Data/tableau_source.hyper, residual_tft_ewc.twb/.twbx (starter: open and check in Tableau) and AUTHORING.md "
+    print(f"Wrote tableau_source.xlsx, {XLSX_REL}, Data/*.hyper, residual_tft_ewc.twb/.twbx (starter: open and check in Tableau) and AUTHORING.md "
           f"to {out}")
     return 0
 

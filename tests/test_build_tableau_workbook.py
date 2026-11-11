@@ -87,20 +87,37 @@ def test_main_writes_kit_and_twb_contract(exported, tmp_path: Path, monkeypatch)
     for name, w in sheets.items():
         text = ET.tostring(w, encoding="unicode")
         assert ("[none:Group:nk]" in text) == (name in per_group), name
-    # Every data source reads the bundled extract (Tableau Public saves extracts only, error 3C242D89),
-    # by a relative path that resolves both beside the .twb and inside the .twbx.
-    hyper = [c for c in root.iter("connection") if c.get("class") == "hyper"]
-    assert hyper and {c.get("dbname") for c in hyper} == {T.HYPER_REL}
-    assert not [c for c in root.iter("connection") if c.get("class") == "excel-direct"]
+    # Every data source has an enabled extract and an excel-direct connection to the bundled xlsx
+    for sheet_name in xl.sheet_names:
+        ds = next(d for d in root.iter("datasource") if d.get("name") == T._ds_name(sheet_name))
+        conn = ds.find("connection")
+        assert conn is not None and conn.get("class") == "federated"
+        named_conn = conn.find("named-connections/named-connection/connection")
+        assert named_conn is not None and named_conn.get("class") == "excel-direct"
+        assert named_conn.get("filename") == T.XLSX_REL
+        rel = conn.find("relation")
+        assert rel is not None and rel.get("table") == f"[{sheet_name}$]"
+        cols = rel.findall("columns/column")
+        assert [c.get("name") for c in cols] == list(xl.parse(sheet_name).columns)
+        ext = conn.find("extract")
+        assert ext is not None and ext.get("enabled") == "true"
+        hconn = ext.find("connection")
+        assert hconn is not None and hconn.get("class") == "hyper"
+        assert hconn.get("dbname") == T.extract_rel(sheet_name)
+        assert hconn.get("schema") == "Extract" and hconn.get("tablename") == "Extract"
+        hrel = hconn.find("relation")
+        assert hrel is not None and hrel.get("table") == "[Extract].[Extract]"
+    # The .twbx holds the xlsx and one .hyper per source
     with zipfile.ZipFile(kit / "residual_tft_ewc.twbx") as z:
-        assert set(z.namelist()) == {"residual_tft_ewc.twb", T.HYPER_REL}
-    # The extract holds every sheet with all its rows.
+        expected_files = {"residual_tft_ewc.twb", T.XLSX_REL} | {T.extract_rel(name) for name in xl.sheet_names}
+        assert set(z.namelist()) == expected_files
+    # Each extract's row count equals its sheet
     from tableauhyperapi import Connection, HyperProcess, TableName, Telemetry
-    with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU, parameters={"log_dir": str(tmp_path)}) as hp, \
-            Connection(hp.endpoint, str(kit / T.HYPER_REL)) as con:
+    with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU, parameters={"log_dir": str(tmp_path)}) as hp:
         for name in xl.sheet_names:
-            n = con.execute_scalar_query(f"SELECT COUNT(*) FROM {TableName('Extract', name)}")
-            assert n == len(xl.parse(name)), name
+            with Connection(hp.endpoint, str(kit / T.extract_rel(name))) as con:
+                n = con.execute_scalar_query(f"SELECT COUNT(*) FROM {TableName('Extract', 'Extract')}")
+                assert n == len(xl.parse(name)), name
     assert (kit / "AUTHORING.md").exists()
     # Elements Tableau's schema rejected when the workbook was first opened (error D2E8DA72).
     assert root.get("source-build")
