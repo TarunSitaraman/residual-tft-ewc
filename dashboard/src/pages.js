@@ -141,6 +141,30 @@ async function results(root, ctx) {
   }
 }
 
+// The published dashboards, one at a time behind a switcher: with four or five live views on one page the later
+// ones never became interactive.
+function workbookViews() {
+  const items = C.TABLEAU_CONTRACT.dashboards.filter(([, key]) => TABLEAU.views[key]);
+  const holder = el("div", { class: "viz" });
+  const buttons = items.map(([name, key]) => {
+    const b = el("button", { type: "button", role: "tab", text: name });
+    b.addEventListener("click", () => show(name, key));
+    return b;
+  });
+  function show(name, key) {
+    buttons.forEach((b) => { const on = b.textContent === name; b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1; });
+    holder.setAttribute("aria-label", `${name} (Tableau)`);
+    holder.replaceChildren(el("p", { class: "sub", style: "padding:16px", text: `Loading ${name}…` }));
+    mountViz(holder, TABLEAU.views[key], {
+      onReady: () => {}, onMarks: () => {},
+      onFail: (reason) => holder.replaceChildren(el("p", { class: "notice", text: `${name} could not be shown (${reason}).` })),
+    });
+  }
+  if (items.length) show(...items[0]);
+  return [el("div", { class: "dashbar" }, el("nav", { class: "tabs", role: "tablist", "aria-label": "Tableau dashboards",
+    style: "min-height:40px" }, buttons)), holder];
+}
+
 function tableau(root) {
   const views = Object.entries(TABLEAU.views);
   const live = views.filter(([, u]) => u).length;
@@ -160,15 +184,8 @@ function tableau(root) {
     pageHead("Tableau implementation", "The dashboard's analytical views have two layers: native figures drawn by this site from the exported tables, and a Tableau Public workbook embedded under them. The site is complete without the workbook."),
     section("status", "Current status", live ? `${live} of ${views.length} dashboards are published and embedded.` : "No dashboard is published yet: every pane shows the native figures only. The workbook kit is generated, but it has not been opened in Tableau Desktop, which is not installed on the machine that built it.",
       table(["Dashboard pane", "Tableau dashboard", "View URL"], C.TABLEAU_CONTRACT.dashboards.map(([name, key]) => [key, name, TABLEAU.views[key] || "not published"]))),
-    ...(live ? [section("workbook", "The workbook", "Every published dashboard in full, unfiltered. The dashboard panes show the same views under their native figures, following the page filters.",
-      ...C.TABLEAU_CONTRACT.dashboards.filter(([, key]) => TABLEAU.views[key]).map(([name, key]) => {
-        const holder = el("div", { class: "viz", "aria-label": `${name} (Tableau)` }, el("p", { class: "sub", text: `Loading ${name}…` }));
-        mountViz(holder, TABLEAU.views[key], {
-          onReady: () => {}, onMarks: () => {},
-          onFail: (reason) => holder.replaceChildren(el("p", { class: "notice", text: `${name} could not be shown (${reason}).` })),
-        });
-        return el("div", {}, el("h3", { text: name }), holder);
-      }))] : []),
+    ...(live ? [section("workbook", "The workbook", "The published dashboards in full and unfiltered, one at a time. The dashboard panes show the same views under their native figures, following the page filters.",
+      ...workbookViews())] : []),
     section("flow", "How a Tableau view gets onto this site", null, el("ol", { class: "steps" }, flow.map(([t, d]) => el("li", {}, el("b", { text: t }), el("span", { text: d }))))),
     section("runtime", "What happens in the browser", "Implemented in dashboard/src/embed.js and main.js.", defs(runtime)),
     section("contract", "Contract between the site and the workbook", "The site relies only on these names; everything else in the workbook is free. Every per-group worksheet keeps Group in the view so selections can be read.",

@@ -8,15 +8,15 @@ export const TABLEAU = {
   // browser bundle.
   scriptUrl: "https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js",
   // Seconds to wait for a view to become interactive before falling back to the static figures.
-  timeoutS: 25,
+  timeoutS: 60,
   // Frame height before the view reports its size, and for dashboards sized "Automatic".
   heightPx: 900,
   views: {
-    overview: "",
-    soh: "",
-    accuracy: "",
-    continual: "",
-    reuse: "",
+    overview: "https://public.tableau.com/views/residual_tft_ewc/Overview",
+    soh: "https://public.tableau.com/views/residual_tft_ewc/SOHexplorer",
+    accuracy: "https://public.tableau.com/views/residual_tft_ewc/Forecastaccuracy",
+    continual: "https://public.tableau.com/views/residual_tft_ewc/Continuallearning",
+    reuse: "https://public.tableau.com/views/residual_tft_ewc/Reuseuncertainty",
   },
 };
 
@@ -27,6 +27,12 @@ export const FIELDS = {
   protocol: "Protocol",
   group: "Group",
   family: "Method Family",
+};
+
+// Values the workbook shows under an alias. Tableau filters match the alias, so a code filters to nothing.
+// Same mapping as SETTINGS in scripts/export_dashboard_data.py.
+export const ALIASES = {
+  setting: { e1: "E1 (h = 1-3)", e2: "E2 (h = 1-6)" },
 };
 
 // Where the page reads its data and figures, relative to dashboard/index.html (serve from the repository root).

@@ -1,5 +1,5 @@
 // Tableau Embedding API v3 wrapper: load the API once, mount a <tableau-viz>, push filters, report mark selections.
-import { TABLEAU, FIELDS } from "../config.js";
+import { TABLEAU, FIELDS, ALIASES } from "../config.js";
 
 let apiPromise = null;
 
@@ -81,7 +81,7 @@ export async function applyState(viz, state) {
   const jobs = [];
   for (const ws of sheets) {
     for (const [key, field] of Object.entries(FIELDS)) {
-      const v = state[key];
+      const v = ALIASES[key]?.[state[key]] ?? state[key];
       const job = v === "all" ? ws.clearFilterAsync(field) : ws.applyFilterAsync(field, [v], "replace");
       jobs.push(job.catch(() => null));
     }
