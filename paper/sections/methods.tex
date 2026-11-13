@@ -104,7 +104,7 @@ Preprocessing (standardisation, median imputation with missing indicators, targe
 \end{equation}
 the penalty of~\cite[Eq.~(3)]{kirkpatrick2017ewc}, where $\theta^*_j$ are the parameters after task $j$ and $F_j$ is the empirical diagonal Fisher information over up to 500 training samples. \emph{TFT\,+\,EWC} is the proposed continual learner; trained on the residual~\eqref{eq:residual} below, with shrinkage and intervals, it becomes the proposed \emph{Residual TFT-EWC} (Fig.~\ref{fig:arch}). Training uses Adam~\cite{kingma2015adam}, batches of 64, at most 200 epochs and early stopping on the current task's validation RMSE.
 
-\emph{Reference forecasters} are persistence ($\hat\Delta=0$), linear extrapolation of the fade rate, $\hat\Delta_{b,k,h} = r_{b,k}(t_{b,k+h}-t_{b,k})$, ridge regression (on planned usage only, F0 or F1) and histogram gradient boosting on F1.
+\emph{Reference forecasters} are persistence ($\hat\Delta=0$, the na\"ive forecast of~\cite{hyndman2006}), linear extrapolation of the least-squares fade rate~\eqref{eq:fade}~\cite{hastie2009elements}, $\hat\Delta_{b,k,h} = r_{b,k}(t_{b,k+h}-t_{b,k})$, ridge regression~\cite{hastie2009elements} (on planned usage only, F0 or F1) and histogram gradient boosting~\cite{friedman2001} on F1.
 
 \emph{Learned residual.} Because linear extrapolation proved hardest to beat, a follow-up experiment, registered in advance, trains the continual learners to correct it rather than replace it. With $\hat\Delta^{\mathrm{lin}}_{b,k,h}$ the extrapolation above (zero when $r_{b,k}$ is missing), the model $g_\theta$ learns $\Delta_{b,k,h}-\hat\Delta^{\mathrm{lin}}_{b,k,h}$ and the forecast is
 \begin{equation}

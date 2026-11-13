@@ -44,32 +44,51 @@ and Reuse Screening of Heterogeneous Second-Life EV Batteries
 % AUTHORS
 % ============================================================
 
+% Two authors per row: \linebreakand closes the first row of author blocks.
+\makeatletter
+\newcommand{\linebreakand}{%
+  \end{@IEEEauthorhalign}
+  \hfill\mbox{}\par
+  \mbox{}\hfill\begin{@IEEEauthorhalign}
+}
+\makeatother
+
 \author{
 \IEEEauthorblockN{Tarun Sitaraman}
 \IEEEauthorblockA{
-\textit{Department of Networking and}\\
-\textit{Communications}\\
-\textit{SRM Institute of Science}\\
-\textit{and Technology}\\
-Chennai, India
+\textit{Department of Networking and Communications}\\
+\textit{School of Computing}\\
+\textit{SRM Institute of Science \& Technology}\\
+Kattankulathur, Chennai, India -- 603203\\
+ts6437@srmist.edu.in
 }
 \and
 \IEEEauthorblockN{Sohan Sandeep Krishnan}
 \IEEEauthorblockA{
-\textit{Department of Networking and}\\
-\textit{Communications}\\
-\textit{SRM Institute of Science}\\
-\textit{and Technology}\\
-Chennai, India
+\textit{Department of Networking and Communications}\\
+\textit{School of Computing}\\
+\textit{SRM Institute of Science \& Technology}\\
+Kattankulathur, Chennai, India -- 603203\\
+--
 }
-\and
+\linebreakand
 \IEEEauthorblockN{Darshan D}
 \IEEEauthorblockA{
-\textit{Department of Networking and}\\
-\textit{Communications}\\
-\textit{SRM Institute of Science}\\
-\textit{and Technology}\\
-Chennai, India
+\textit{Department of Networking and Communications}\\
+\textit{School of Computing}\\
+\textit{SRM Institute of Science \& Technology}\\
+Kattankulathur, Chennai, India -- 603203\\
+--
+}
+\and
+\IEEEauthorblockN{Dr.\ Banu Priya Prathaban*}
+\IEEEauthorblockA{
+\textit{Department of Networking and Communications}\\
+\textit{School of Computing}\\
+\textit{SRM Institute of Science \& Technology}\\
+Kattankulathur, Chennai, India -- 603203\\
+banuprip2@srmist.edu.in\\
+*Corresponding author
 }
 }
 

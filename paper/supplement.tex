@@ -28,8 +28,10 @@
 
 \title{Supplementary Material:\\ Residual TFT-EWC: Continual Learning for State-of-Health Forecasting
 and Reuse Screening of Heterogeneous Second-Life EV Batteries}
-\author{\IEEEauthorblockN{Tarun Sitaraman, Sohan Sandeep Krishnan, Darshan D}
-\IEEEauthorblockA{SRM Institute of Science and Technology, Chennai, India}}
+\author{\IEEEauthorblockN{Tarun Sitaraman, Sohan Sandeep Krishnan, Darshan D, Banu Priya Prathaban*}
+\IEEEauthorblockA{Department of Networking and Communications, School of Computing\\
+SRM Institute of Science \& Technology, Kattankulathur, Chennai, India -- 603203\\
+*Corresponding author: banuprip2@srmist.edu.in}}
 \maketitle
 
 This supplement gives the preprocessing, the input correlations, the training curves and the full classification and
@@ -42,23 +44,23 @@ usage conditions (Table~\ref{tab:d26}), while each traditional forecaster falls 
 % -----------------------------------------------------------------------------
 \section{Preprocessing}
 
-Preprocessing is the same for every model and uses no label information beyond the SOH history at the origin.
-\begin{enumerate}
-  \item \emph{Parsing and verification.} Raw files are verified against their repository record or checksums. Our
-    parsing reproduces the processed S1 RPT capacities and the authors' capacities of all 843 S6 checks exactly.
-  \item \emph{Validity rules.} An S6 check is used only if its C/25 discharge starts from full charge and reaches the
-    cut-off; 4 of 847 checks fail (Fig.~\ref{fig:prep}c). In S1, RPT~2 (run at about 20~$^\circ$C) is dropped.
-  \item \emph{Noise reduction.} Incremental-capacity curves $-\mathrm{d}Q/\mathrm{d}V$ are computed on a 1~mV (S6) or 2~mV (S1)
-    voltage grid after a Gaussian filter of the charge (5~mV in S6, 10~mV in S1); without it, differentiation amplifies the
-    measurement noise (Fig.~\ref{fig:prep}b). Peak positions and heights are taken from the smoothed curve; in S6 a
-    peak at the edge of its window is set to missing. This is the only filtering; no other denoising or outlier
-    removal is applied.
-  \item \emph{Ageing cycles.} Apache Spark reduces $9.0\times10^{8}$ per-second rows of the S6 ageing cycles to block
-    inputs (mean, last value and slope of seven responses per 100-cycle block).
-  \item \emph{Inputs and scaling.} Features never observed are dropped (e.g.\ the second IC window in S6). Missing
-    values are imputed with the training median and flagged; inputs are standardised. Imputation, scaling and
-    target scaling are fitted on the first task and then frozen.
-\end{enumerate}
+Preprocessing is the same for every model and uses no label information beyond the SOH history at the origin. It
+begins by verifying the raw files against their repository record or checksums; our parsing reproduces the processed S1
+RPT capacities and the authors' capacities of all 843 S6 checks exactly. Validity rules then remove unusable checks: an
+S6 check is used only if its C/25 discharge starts from full charge and reaches the cut-off, which 4 of 847 checks fail
+(Fig.~\ref{fig:prep}c), and in S1 RPT~2 (run at about 20~$^\circ$C) is dropped.
+
+Noise is reduced only where differentiation would amplify it. Incremental-capacity curves $-\mathrm{d}Q/\mathrm{d}V$ are
+computed on a 1~mV (S6) or 2~mV (S1) voltage grid after a Gaussian filter of the charge (5~mV in S6, 10~mV in S1);
+without this filter the measurement noise dominates the curve (Fig.~\ref{fig:prep}b). Peak positions and heights are
+taken from the smoothed curve, and in S6 a peak at the edge of its window is set to missing. This is the only
+filtering; no other denoising or outlier removal is applied.
+
+The ageing cycles and the model inputs are prepared last. Apache Spark reduces $9.0\times10^{8}$ per-second rows of the
+S6 ageing cycles to block inputs (mean, last value and slope of seven responses per 100-cycle block). Features never
+observed are dropped (e.g.\ the second IC window in S6), missing values are imputed with the training median and
+flagged, and inputs are standardised. Imputation, scaling and target scaling are fitted on the first task and then
+frozen.
 
 \begin{figure*}[t]
   \centering
