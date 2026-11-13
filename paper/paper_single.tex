@@ -45,32 +45,51 @@ and Reuse Screening of Heterogeneous Second-Life EV Batteries
 % AUTHORS
 % ============================================================
 
+% Two authors per row: \linebreakand closes the first row of author blocks.
+\makeatletter
+\newcommand{\linebreakand}{%
+  \end{@IEEEauthorhalign}
+  \hfill\mbox{}\par
+  \mbox{}\hfill\begin{@IEEEauthorhalign}
+}
+\makeatother
+
 \author{
 \IEEEauthorblockN{Tarun Sitaraman}
 \IEEEauthorblockA{
-\textit{Department of Networking and}\\
-\textit{Communications}\\
-\textit{SRM Institute of Science}\\
-\textit{and Technology}\\
-Chennai, India
+\textit{Department of Networking and Communications}\\
+\textit{School of Computing}\\
+\textit{SRM Institute of Science \& Technology}\\
+Kattankulathur, Chennai, India -- 603203\\
+ts6437@srmist.edu.in
 }
 \and
 \IEEEauthorblockN{Sohan Sandeep Krishnan}
 \IEEEauthorblockA{
-\textit{Department of Networking and}\\
-\textit{Communications}\\
-\textit{SRM Institute of Science}\\
-\textit{and Technology}\\
-Chennai, India
+\textit{Department of Networking and Communications}\\
+\textit{School of Computing}\\
+\textit{SRM Institute of Science \& Technology}\\
+Kattankulathur, Chennai, India -- 603203\\
+--
 }
-\and
+\linebreakand
 \IEEEauthorblockN{Darshan D}
 \IEEEauthorblockA{
-\textit{Department of Networking and}\\
-\textit{Communications}\\
-\textit{SRM Institute of Science}\\
-\textit{and Technology}\\
-Chennai, India
+\textit{Department of Networking and Communications}\\
+\textit{School of Computing}\\
+\textit{SRM Institute of Science \& Technology}\\
+Kattankulathur, Chennai, India -- 603203\\
+--
+}
+\and
+\IEEEauthorblockN{Dr.\ Banu Priya Prathaban*}
+\IEEEauthorblockA{
+\textit{Department of Networking and Communications}\\
+\textit{School of Computing}\\
+\textit{SRM Institute of Science \& Technology}\\
+Kattankulathur, Chennai, India -- 603203\\
+banuprip2@srmist.edu.in\\
+*Corresponding author
 }
 }
 
@@ -163,13 +182,7 @@ This work brings together continual learning, health forecasting and a first scr
   \label{fig:system}
 \end{figure*}
 
-Our contributions are as follows (Fig.~\ref{fig:system}):
-\begin{itemize}
-  \item A benchmark for forecasting the SOH of second-life cells from six public datasets (606 cells after quality checks), built so that no future information reaches the inputs. Two label flaws are removed: test currents set from the previous capacity, and pulse charge counted as capacity.
-  \item A comparison of a Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) with fine-tuning, replay, joint training, simple forecasters and the model types of earlier work for groups arriving in sequence, unseen groups and first-life pretraining, reporting adaptation and forgetting.
-  \item Residual TFT-EWC, which corrects linear extrapolation instead of replacing it. Among methods that keep no earlier data, it is the only one close to the best in both settings: it matches extrapolation on the stream, where EWC cuts its forgetting by about two thirds, outperforms it on unseen usage conditions, and beats gradient boosting refitted on each new condition on the stream (replicated).
-  \item Forecast intervals for unseen conditions, which reach the stated coverage only when calibrated on conditions left out of training and within the training range, and a reproducibility check: significance on these small datasets changed with the computing platform, so our main results must pass a replication rule.
-\end{itemize}
+Fig.~\ref{fig:system} summarises the approach, and the paper makes four contributions. First, we build a benchmark for forecasting the SOH of second-life cells from six public datasets (606 cells after quality checks) so that no future information reaches the inputs, and we remove two label flaws: test currents set from the previous capacity, and pulse charge counted as capacity. Second, we compare a Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) with fine-tuning, replay, joint training, simple forecasters and the model types of earlier work when groups arrive in sequence, when groups are unseen and after first-life pretraining, reporting both adaptation and forgetting. Third, we propose Residual TFT-EWC, which corrects linear extrapolation instead of replacing it. Among methods that keep no earlier data, it is the only one close to the best in both settings: it matches extrapolation on the stream, where EWC cuts its forgetting by about two thirds, outperforms it on unseen usage conditions, and beats gradient boosting refitted on each new condition on the stream (replicated). Finally, we give forecast intervals for unseen conditions, which reach the stated coverage only when calibrated on conditions left out of training and within the training range, and a reproducibility check: because significance on these small datasets changed with the computing platform, our main results must pass a replication rule.
 
 % ============================================================
 % II. RELATED WORK  (team draft, condensed to the IEEE conference length)
@@ -364,7 +377,7 @@ Preprocessing (standardisation, median imputation with missing indicators, targe
 \end{equation}
 the penalty of~\cite[Eq.~(3)]{kirkpatrick2017ewc}, where $\theta^*_j$ are the parameters after task $j$ and $F_j$ is the empirical diagonal Fisher information over up to 500 training samples. \emph{TFT\,+\,EWC} is the proposed continual learner; trained on the residual~\eqref{eq:residual} below, with shrinkage and intervals, it becomes the proposed \emph{Residual TFT-EWC} (Fig.~\ref{fig:arch}). Training uses Adam~\cite{kingma2015adam}, batches of 64, at most 200 epochs and early stopping on the current task's validation RMSE.
 
-\emph{Reference forecasters} are persistence ($\hat\Delta=0$), linear extrapolation of the fade rate, $\hat\Delta_{b,k,h} = r_{b,k}(t_{b,k+h}-t_{b,k})$, ridge regression (on planned usage only, F0 or F1) and histogram gradient boosting on F1.
+\emph{Reference forecasters} are persistence ($\hat\Delta=0$, the na\"ive forecast of~\cite{hyndman2006}), linear extrapolation of the least-squares fade rate~\eqref{eq:fade}~\cite{hastie2009elements}, $\hat\Delta_{b,k,h} = r_{b,k}(t_{b,k+h}-t_{b,k})$, ridge regression~\cite{hastie2009elements} (on planned usage only, F0 or F1) and histogram gradient boosting~\cite{friedman2001} on F1.
 
 \emph{Learned residual.} Because linear extrapolation proved hardest to beat, a follow-up experiment, registered in advance, trains the continual learners to correct it rather than replace it. With $\hat\Delta^{\mathrm{lin}}_{b,k,h}$ the extrapolation above (zero when $r_{b,k}$ is missing), the model $g_\theta$ learns $\Delta_{b,k,h}-\hat\Delta^{\mathrm{lin}}_{b,k,h}$ and the forecast is
 \begin{equation}
