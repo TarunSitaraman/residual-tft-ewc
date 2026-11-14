@@ -13,11 +13,13 @@ const ACCENT = "var(--c1)";
 const QUESTION = { Q1: "V2 − GBM-ALL (all conditions stored)", Q2: "V2 − GBM-ER32 (the same 32 stored rows)", Q3: "V2 − linear extrapolation, H+ origins",
   Q4: "V2 − earlier proposed model (S7 shrunk, S10 SEL)", Q5: "90 % coverage of V2 at least 0.85" };
 // Readable names for method ids that dim_method does not label yet. Unknown ids are shown as they are.
-const LABEL = { v2: "V2: replay ensemble, calibrated", r32_ensemble: "Replay ensemble (R32), uncalibrated", r32_single: "Replay, single model (R32)",
-  r8_ensemble_cal: "Replay ensemble (R8), calibrated", a0_single: "EWC model, single (A0)", a0_ensemble: "EWC model, ensemble (A0)",
-  sel: "Earlier proposed model (SEL)", shrunk: "Earlier proposed model (shrunk)", tft_residual_joint: "Joint residual TFT (all stored)",
+// Keys are the method ids written by scripts/export_dashboard_data.py (D38_IDS).
+const LABEL = { v2: "V2: replay ensemble, calibrated", r32_ens: "Replay ensemble (R32), uncalibrated", r32_single: "Replay, single model (R32)",
+  r8_ens_cal: "Replay ensemble (R8), calibrated", r8_ens: "Replay ensemble (R8), uncalibrated", r8_single: "Replay, single model (R8)",
+  a0_single: "EWC model, single (A0)", a0_ens: "EWC model, ensemble (A0)", a0_ens_cal: "EWC model, ensemble (A0), calibrated",
+  sel: "Earlier proposed model (SEL)", shrunk: "Earlier proposed model (shrunk)", joint: "Joint residual TFT (all stored)",
   gbm_all: "GBM-ALL (all stored)", gbm_er32: "GBM-ER32 (32 stored rows)", gbm_er8: "GBM-ER8 (8 stored rows)", gbm_last: "GBM-LAST (latest only)",
-  linear_extrapolation: "Linear extrapolation", ridge: "Ridge", ridge_shared: "Ridge", persistence: "Persistence" };
+  linear: "Linear extrapolation", ridge: "Ridge", persistence: "Persistence" };
 const isV2 = (m) => /^v2$|(^|_)v2(_|$)/i.test(m);
 const signed = (x, d = 2) => (x === null || Number.isNaN(x) ? "–" : `${x > 0 ? "+" : x < 0 ? "−" : ""}${fmt(Math.abs(x), d)}`);
 const CAPTION = "Development test, not confirmatory: the S10 and S7 conditions had already been tested with the earlier model (D36, D34) and read " +
@@ -101,7 +103,7 @@ let stat = "mean";   // mean or median RMSE over conditions; kept across redraws
 
 function methodPanels(rows, labels, state, tip) {
   const ex = state.setting.toUpperCase();
-  const nm = (m) => labels[m] || LABEL[m] || m;
+  const nm = (m) => LABEL[m] || labels[m] || m;   // D38 ids first: dim_method's "joint" is the MLP, not the joint residual TFT
   const seg = el("div", { class: "seg", role: "group", "aria-label": "Statistic over conditions" },
     [["mean", "Mean over conditions"], ["median", "Median over conditions"]].map(([k, t]) => el("button", { type: "button", "aria-pressed": String(k === stat), "data-k": k, text: t })));
   const cards = DATASETS.map((ds) => {
