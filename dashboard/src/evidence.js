@@ -5,11 +5,11 @@ import { dotRows, scatter, matrix, legend, tableView, seqFill, divFill, rampLege
 import { load, card, takeaway, empty, esc, b, num, mean, NEUTRAL } from "./tabs.js";
 
 // ---------- Many conditions ----------
-const SETS = [["S7", "tft_residual_ewc_shrunk", "var(--c7)", "S7: 60 KIT conditions"], ["S10", "tft_residual_ewc_selective", "var(--c6)", "S10: 64 Stroebl conditions"]];
+const SETS = [["S7", "tft_residual_ewc_shrunk", "var(--c2)", "S7: 60 KIT conditions"], ["S10", "tft_residual_ewc_selective", "var(--c6)", "S10: 64 Stroebl conditions"]];
 const COMPARE = [["gbm_last", "Gradient boosting, latest condition only", false], ["linear_extrapolation", "Linear extrapolation", false],
   ["ridge_shared", "Ridge", false], ["persistence", "Persistence", false],
   ["gbm_all", "Gradient boosting, all conditions stored", true], ["tft_residual_joint", "Joint residual TFT, all conditions stored", true]];
-const AGE = { calendar: ["Calendar", "var(--c4)"], cyclic: ["Cyclic", "var(--c2)"], wltp: ["WLTP drive cycle", "var(--c5)"] };
+const AGE = { calendar: ["Calendar", "var(--c4)"], cyclic: ["Cyclic", "var(--c8)"], wltp: ["WLTP drive cycle", "var(--c5)"] };
 let compareTo = "gbm_last";   // the comparator of the paired views; kept across redraws
 
 /** Per dataset: condition -> {proposed, comparator rows}, main seed set (baselines are deterministic). */
@@ -29,7 +29,7 @@ const S6_METHODS = [["tft_residual_ewc_shrunk", "D26", "Proposed (continual, no 
 
 function s6Card(folds, ctx) {
   const { state, tip, summary } = ctx;
-  const c = card("S6: the seven original conditions", "Each row holds one S6 condition out. Dots are each method's mean RMSE on that condition; the line spans the proposed model's runs (5 seeds × 10 stream orders). GBM-LAST is averaged over the 10 stream orders; the other comparators are deterministic.", `S6 · P2 · D26 and D32 · ${state.setting.toUpperCase()} · main seeds`);
+  const c = card("S6: the seven original conditions", "Each row holds one S6 condition out. Dots are each method's mean RMSE on that condition; the line spans the proposed model's runs (5 seeds × 10 stream orders). GBM-LAST is averaged over the 10 stream orders; the other comparators are deterministic. Lower is better.", `S6 · P2 · D26 and D32 · ${state.setting.toUpperCase()} · main seeds`);
   const rows = folds.filter((r) => r.setting === state.setting && r.dataset === "S6" && (r.seed_set === "main" || !r.seed_set));
   const name = (g) => groupInfo(summary, g);
   const groups = [...new Set(rows.map((r) => r.group))].sort((a, z) => name(a).name.localeCompare(name(z).name, undefined, { numeric: true }));
@@ -44,7 +44,8 @@ function s6Card(folds, ctx) {
       marks: S6_METHODS.filter(([m]) => means[m] !== null).map(([m, , lab, color]) => ({ v: means[m], color, r: m === P ? 6 : 4.5,
         tip: `${b(info.name)} (${esc(info.desc)})<br>${esc(lab)}: ${fmt(means[m], 3)} pp${m === P ? `<br>Runs ${fmt(Math.min(...runs), 2)} to ${fmt(Math.max(...runs), 2)} pp (n = ${runs.length})` : ""}` })) };
   });
-  dotRows(c.body, { tip, rows: out, labelW: Math.min(300, innerWidth * 0.42), x: { label: "RMSE on the held-out condition (pp)", min: 0, fmt: (v) => v.toFixed(1) } });
+  dotRows(c.body, { tip, rows: out, labelW: Math.min(300, innerWidth * 0.42), x: { label: "RMSE on the held-out condition (pp of SOH)", min: 0, fmt: (v) => v.toFixed(1) } });
+  c.setTitle(`S6: the proposed model's mean error is below GBM-LAST's on ${wins} of ${groups.length} conditions`);
   c.setFoot(legend(S6_METHODS.map(([, , label, color]) => ({ label, color, kind: "dot" }))),
     el("span", { class: "sub", text: `Proposed mean below GBM-LAST on ${wins} of ${groups.length} conditions (descriptive; the registered D32 test is on the Registered results tab).` }));
   return c.node;
@@ -61,18 +62,20 @@ export async function renderMany(panel, ctx) {
   const meanDiff = (ds, m) => mean(data[ds].filter((x) => x[m] !== undefined).map((x) => x.proposed - x[m]));
 
   // 1. Win rate against every comparator, both datasets.
-  const wr = card("How often the continual model is more accurate", "Share of held-out conditions on which the proposed model's RMSE is lower than the comparator's. Comparators below the line may store every earlier condition's data; the proposed model may not.", `S7 and S10 · P2 · D34 and D36 · ${state.setting.toUpperCase()} · main seeds`);
+  const wr = card("How often the continual model is more accurate", "Share of held-out conditions on which the proposed model's RMSE is lower than the comparator's. Comparators marked ↓ may store every earlier condition's data; the proposed model may not. Higher is better for the proposed model; 50 % is a tie.", `S7 and S10 · P2 · D34 and D36 · ${state.setting.toUpperCase()} · main seeds`);
   dotRows(wr.body, { tip, labelW: Math.min(300, innerWidth * 0.42), x: { label: "Share of conditions where the proposed model is better", min: 0, max: 1, fmt: (v) => `${Math.round(v * 100)} %` },
     refs: [{ x: 0.5, label: "half" }],
     rows: COMPARE.map(([m, lab, stores]) => ({ label: stores ? `${lab} ↓` : lab, emph: m === compareTo,
       marks: SETS.map(([ds, , color]) => { const s = share(ds, m); return s && { v: s[0] / s[1], color, r: 6,
         tip: `${b(ds)} against ${esc(lab)}<br>Better on ${s[0]} of ${s[1]} conditions<br>Mean difference ${fmt(meanDiff(ds, m), 3)} pp (negative favours the model)` }; }).filter(Boolean) })) });
+  const sl10 = share("S10", "gbm_last"), sl7 = share("S7", "gbm_last");
+  if (sl10 && sl7) wr.setTitle(`Against GBM-LAST the continual model is more accurate on ${sl10[0]} of ${sl10[1]} S10 and ${sl7[0]} of ${sl7[1]} S7 conditions`);
   wr.setFoot(legend(SETS.map(([, , color, lab]) => ({ label: lab, color, kind: "dot" }))), el("span", { class: "sub", text: "↓ stores all earlier data." }));
 
   // 2. Paired scatter per dataset against the chosen comparator (log axes: S7 errors span two decades).
   const seg = el("div", { class: "seg", role: "group", "aria-label": "Comparator" }, COMPARE.map(([m, lab]) =>
     el("button", { type: "button", "aria-pressed": String(m === compareTo), text: lab.replace("Gradient boosting", "GBM").replace(", all conditions stored", ", all stored") })));
-  const pairs = SETS.map(([ds]) => card(`${ds}: every held-out condition`, "Each point is one held-out condition. Below the diagonal the proposed model is more accurate. Both axes on a log scale.", tag(ds), "half"));
+  const pairs = SETS.map(([ds]) => card(`${ds}: every held-out condition`, "Each point is one held-out condition, RMSE in pp of SOH. Below the diagonal the proposed model is more accurate (lower is better). Both axes on a log scale.", tag(ds), "half"));
   const heat = card("Where the comparator wins", "Mean of proposed minus comparator RMSE over the conditions in each cell, by ageing type and temperature. Blue: the proposed model is more accurate; red: the comparator is.", `S7 and S10 · P2 · ${state.setting.toUpperCase()} · main seeds`);
   const lg = (v) => Math.log10(Math.max(v, 0.05)), tick = (v) => { const x = 10 ** v; return x < 1 ? x.toFixed(1) : x.toFixed(0); };
 
@@ -83,9 +86,10 @@ export async function renderMany(panel, ctx) {
       const pts = data[ds].filter((c) => c[compareTo] !== undefined);
       const s = share(ds, compareTo);
       scatter(pairs[i].body, { tip, diag: "equal error", square: true,
-        x: { label: `${lab} RMSE (pp)`, fmt: tick }, y: { label: "Proposed model RMSE (pp)", fmt: tick },
+        x: { label: `${lab} RMSE (pp of SOH)`, fmt: tick }, y: { label: "Proposed model RMSE (pp of SOH)", fmt: tick },
         points: pts.map((c) => ({ x: lg(c[compareTo]), y: lg(c.proposed), color: (AGE[c.age] || ["", NEUTRAL])[1], r: 4.5,
           tip: `${b(c.condition)}: ${esc((AGE[c.age] || [c.age])[0])}, ${fmt(c.temp, 0)} °C${c.lab ? `, ${esc(c.lab)}` : ""}<br>Proposed ${fmt(c.proposed, 3)} pp, comparator ${fmt(c[compareTo], 3)} pp` })) });
+      if (s) pairs[i].setTitle(`${ds}: the proposed model is more accurate than ${lab.toLowerCase()} on ${s[0]} of ${s[1]} conditions`);
       pairs[i].setFoot(legend(Object.values(AGE).filter(([n]) => pts.some((c) => (AGE[c.age] || [])[0] === n)).map(([n, color]) => ({ label: n, color, kind: "dot" }))),
         el("span", { class: "sub", text: s ? `Better on ${s[0]} of ${s[1]}; mean difference ${fmt(meanDiff(ds, compareTo), 2)} pp.` : "" }));
     });
@@ -103,6 +107,10 @@ export async function renderMany(panel, ctx) {
     matrix(heat.body, { tip, corner: "Dataset, ageing", rows, cols,
       cell: (r, c) => { const v = cells.get(`${r.key}|${c.key}`); return v ? { v: mean(v), tip: `${b(r.label)} at ${c.label}<br>${v.length} condition${v.length > 1 ? "s" : ""}, mean difference ${fmt(mean(v), 3)} pp` } : null; },
       fill: (v) => divFill(v / lim), fmtV: (v) => (v > 0 ? "+" : "") + v.toFixed(2) });
+    let top = null;
+    for (const [k, v] of cells) { const m = mean(v); if (m > 0 && (!top || m > top.m)) top = { k, m }; }
+    if (top) { const [d, a, t] = top.k.split("|"); heat.setTitle(`${lab} gains most on ${d} ${a === "wltp" ? "WLTP" : a} ageing at ${fmt(Number(t), 0)} °C (+${fmt(top.m, 2)} pp)`); }
+    else heat.setTitle(`The proposed model is ahead of ${lab.toLowerCase()} in every ageing-type and temperature cell`);
     heat.setFoot(rampLegend(`−${fmt(lim)} pp`, `+${fmt(lim)} pp`, DIV_GRADIENT, `against ${lab.toLowerCase()}`));
   }
   seg.addEventListener("click", (e) => { const i = [...seg.children].indexOf(e.target); if (i >= 0) { compareTo = COMPARE[i][0]; draw(); } });
@@ -135,7 +143,7 @@ export async function renderEvidence(panel, ctx) {
 
   const fp = card("Every registered primary comparison", "Each row is one registered question: model a minus model b, in pp (interval score for the 90 % rows). Filled: main seed set; ring: replicate. Left of zero favours a. Colour gives the verdict under the replication rule.", `All datasets · ${state.setting.toUpperCase()}`);
   const lo = Math.min(0, ...rows.flatMap((v) => [num(v.diff_main), num(v.diff_replicate)]));
-  dotRows(fp.body, { tip, labelW: Math.min(430, innerWidth * 0.5), rowH: 30, x: { label: "Difference a − b (pp)", min: Math.floor(lo * 2) / 2, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0, label: "no difference" }],
+  dotRows(fp.body, { tip, labelW: Math.min(430, innerWidth * 0.5), rowH: 30, x: { label: "Difference a − b (pp of SOH)", min: Math.floor(lo * 2) / 2, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0, label: "no difference" }],
     rows: rows.map((v) => {
       const [word, color] = TONE[v.verdict];
       const t = `${b(`${v.experiment}, ${ds(v)}`)}: ${esc(short(v.a))} − ${esc(short(v.b))}, ${esc(METRIC[v.metric] || v.metric)}<br>Main ${fmt(num(v.diff_main), 3)} pp (p_Holm ${num(v.p_holm_main)?.toExponential(1)}), replicate ${fmt(num(v.diff_replicate), 3)} pp<br>${esc(word)}${v.experiment === "D35" ? " (post hoc)" : ""}`;
@@ -143,6 +151,7 @@ export async function renderEvidence(panel, ctx) {
         range: [Math.min(num(v.diff_main), num(v.diff_replicate)), Math.max(num(v.diff_main), num(v.diff_replicate))],
         marks: [{ v: num(v.diff_replicate), color, open: true, r: 6.5, tip: t }, { v: num(v.diff_main), color, r: 4, tip: t }] };   // ring under the dot
     }) });
+  fp.setTitle(`${rows.filter((v) => v.verdict === "replicated, a better").length} of ${rows.length} registered primary comparisons favour model a`);
   fp.setFoot(legend(Object.values(TONE).map(([w, color]) => ({ label: w, color, kind: "dot" }))));
 
   // Bootstrap confidence intervals of the primary tests (S6 studies). Interval-score tests are in another unit and stay in the table.
@@ -157,7 +166,7 @@ export async function renderEvidence(panel, ctx) {
   const ciRows = [...keyed.values()].filter((r) => r.main && r.replicate && !OFF_SCALE.has(r.t.b)).sort((p, q) => q.t.experiment.localeCompare(p.t.experiment));
   const ci = card("How large, and how sure", "Mean paired difference a − b with its 95 % bootstrap interval: main seed set above (filled), replicate below (ring). The replication rule needs both intervals clear of zero, on the same side, and a difference of at least 0.05 pp.", `S6 studies with intervals · ${state.setting.toUpperCase()}`);
   const ciLo = Math.min(0, ...ciRows.flatMap((r) => [num(r.main.ci_low), num(r.replicate.ci_low)]));
-  dotRows(ci.body, { tip, labelW: Math.min(470, innerWidth * 0.5), rowH: 30, x: { label: "Difference a − b with 95 % interval (pp)", min: Math.floor(ciLo * 4) / 4, fmt: (v) => v.toFixed(2) }, refs: [{ x: 0, label: "no difference" }],
+  dotRows(ci.body, { tip, labelW: Math.min(470, innerWidth * 0.5), rowH: 30, x: { label: "Difference a − b with 95 % interval (pp of SOH)", min: Math.floor(ciLo * 4) / 4, fmt: (v) => v.toFixed(2) }, refs: [{ x: 0, label: "no difference" }],
     rows: ciRows.map(({ t, main, replicate }) => {
       const verdict = verdictOf(t), color = TONE[verdict] ? TONE[verdict][1] : NEUTRAL;
       const line = (r, set) => `${set}: ${fmt(num(r.mean_diff), 3)} pp [${fmt(num(r.ci_low), 3)}, ${fmt(num(r.ci_high), 3)}], n = ${r.n}, p_Holm ${num(r.p_holm)?.toExponential(1)}, r = ${fmt(num(r.rank_biserial), 2)}`;
@@ -166,6 +175,8 @@ export async function renderEvidence(panel, ctx) {
         ranges: [{ lo: num(main.ci_low), hi: num(main.ci_high), jitter: -0.5 }, { lo: num(replicate.ci_low), hi: num(replicate.ci_high), jitter: 0.5 }],
         marks: [{ v: num(main.mean_diff), color, r: 4, jitter: -0.5, tip: tt }, { v: num(replicate.mean_diff), color, open: true, r: 4, jitter: 0.5, tip: tt }] };
     }) });
+  const clear = ciRows.filter(({ main, replicate }) => [main, replicate].every((r) => num(r.ci_low) > 0) || [main, replicate].every((r) => num(r.ci_high) < 0)).length;
+  ci.setTitle(`${clear} of ${ciRows.length} effects have both 95 % intervals clear of zero on the same side`);
   ci.setFoot(legend(Object.values(TONE).map(([w, color]) => ({ label: w, color, kind: "dot" }))),
     el("span", { class: "sub", text: "Not drawn: D32 against warm-started gradient boosting (about −1.7 pp, replicated; a warm-start artefact, see D32), D34-D36 (tested over conditions, no bootstrap interval), D31 and the interval-score tests. All are in the table below." }));
 
@@ -180,6 +191,7 @@ export async function renderEvidence(panel, ctx) {
     cell: (r, c) => ({ v: count(r.key, c.key), tip: `${b(r.label)}: ${count(r.key, c.key)} ${esc(TONE[c.key][0].toLowerCase())}` }),
     fill: (v) => seqFill(v / maxN), fmtV: (v) => String(v) });
 
+  tally.setTitle(`${all.length} registered verdicts across ${exps.length} studies`);
   const n = (k) => rows.filter((v) => v.verdict === k).length;
   const table = tableView([{ key: "experiment", label: "Study" }, { key: "dataset", label: "Data", fmt: (_, v) => ds(v) }, { key: "family", label: "Question" },
     { key: "a", label: "a", fmt: short }, { key: "b", label: "b", fmt: short }, { key: "metric", label: "Metric", fmt: (m) => METRIC[m] || m },
