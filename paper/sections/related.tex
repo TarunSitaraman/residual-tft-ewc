@@ -8,35 +8,8 @@
 
 \section{Related Work}
 
-We review studies from 2022--2026 (Table~\ref{tab:literature}; a broader review is~\cite{ref6}). Second-life studies estimate the \emph{current} SOH of a fixed set of batteries, from partial charging~\cite{ref1}, health indicators~\cite{ref2}, impedance spectra~\cite{ref3}, statistical features with bagged GPR~\cite{ref4} or online clustering~\cite{ref5}, with reported errors up to about 2.3\% on their own data. None updates its model as new groups arrive.
+We review studies from 2022--2026 (a broader review is~\cite{ref6}). Second-life studies estimate the \emph{current} SOH of a fixed set of batteries, from partial charging~\cite{ref1}, health indicators~\cite{ref2}, impedance spectra~\cite{ref3}, statistical features with bagged GPR~\cite{ref4} or online clustering~\cite{ref5}, with reported errors up to about 2.3\% on their own data. None updates its model as new groups arrive.
 
 Continual learning has been used to predict capacity loss~\cite{ref7} and, with progressive networks and TCNs, the state of charge across drive cycles, with attention to forgetting and task order~\cite{ref8}. Closest to our setting, pulse-test conditions have been learned one after another, with a replay buffer, to estimate second-life SOH with almost no forgetting~\cite{tao2026pcl}. Domain generalisation~\cite{ref9} and probabilistic BiLSTM/TCN models with isotonic recalibration~\cite{ref10} also target second-life SOH, but without a sequence of tasks.
-
-\begin{table}[t]
-  \centering
-  \caption{Approaches of the reviewed studies and of this work. Their errors are not comparable with ours (other
-    cells, targets and SOH definitions).}
-  \label{tab:literature}
-  \scriptsize
-  \setlength{\tabcolsep}{2.5pt}
-  \begin{tabular}{p{1.05cm}p{2.75cm}p{2.35cm}cc}
-    \toprule
-    Study & Approach & Predicts & CL & Reuse \\
-    \midrule
-    \cite{ref1} & partial-charge features & current SOH, second life & -- & -- \\
-    \cite{ref2} & 58 health indicators & current SOH, second life & -- & -- \\
-    \cite{ref3} & impedance (EIS) + ML & current SOH, second life & -- & -- \\
-    \cite{ref4} & statistical features, bagged GPR & current SOH, screening & -- & \checkmark \\
-    \cite{ref5} & online ML, clustering & current health, second life & -- & -- \\
-    \cite{ref7} & bilevel-optimised CL & capacity degradation & \checkmark & -- \\
-    \cite{ref8} & PNN + TCN & state of charge & \checkmark & -- \\
-    \cite{tao2026pcl} & pulse features, replay CL & current SOH, second life & \checkmark & -- \\
-    \cite{ref9} & domain generalisation & current SOH, second life & -- & -- \\
-    \cite{ref10} & BiLSTM, TCN, TCN-GPR & SOH with uncertainty & -- & \checkmark \\
-    \midrule
-    This work & residual TFT + EWC, shrinkage, conformal intervals & SOH 1--6 checks ahead, interval & \checkmark & \checkmark \\
-    \bottomrule
-  \end{tabular}
-\end{table}
 
 \emph{Research gap.} So far, continual learning for second-life SOH has \emph{estimated} the current SOH~\cite{tao2026pcl}. To our knowledge, it has not been tested for \emph{forecasting} across different groups of second-life batteries, together with reuse screening, a measure of forgetting, and a comparison with simple forecasters and with training on all data at once. We ask whether a continual learner can learn such groups one after another without losing the earlier ones, and whether its forecasts support reuse screening.

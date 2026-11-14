@@ -238,7 +238,7 @@ were moved here for space.
 
 \emph{Refit and tracking (Section IV-F of the paper).} In the sixth experiment on unseen conditions the held-out condition arrives over time: as each target is measured, gradient boosting is refitted with it and the half-width moves by $c\,q_h(e-a)$, with $e=1$ for a miss (quantile tracking; $c$ chosen on the training conditions). Refitting gradient boosting as each check of the held-out condition arrives, and adjusting the interval half-width after every hit or miss, lowers its mean 90\% interval score by 29\%: from 3.22 to 2.29~pp for $h{=}1$--3 (lower on six of seven conditions, $p=0.047$) and from 6.67 to 4.74~pp for $h{=}1$--6 (seven of seven, $p=0.016$), with pooled coverage 0.90--0.91. On the 100\% depth-of-discharge condition coverage rises from 0.48/0.38 to 0.72/0.58, still short of the registered 0.80. Of the held-out intervals, 87--93\% then lie within one reuse class, and 99.2--99.7\% of those name the right class.
 
-\emph{Gradient boosting under the continual constraint (D32).} Most of gradient boosting's advantage on unseen conditions comes from storing every training condition. The headline comparison of the paper (its Table~III) therefore also trains gradient boosting like the proposed model: the six training conditions arrive one at a time and earlier conditions' data are not kept. Under this constraint the two are close. Refitted on the latest condition only, gradient boosting reaches 0.86 and 1.59~pp (horizons 1--3 and 1--6), against 0.92/0.94 and 1.62/1.65~pp for the proposed model (slightly better for 1--3, $+0.06/+0.08$~pp, replicated; not distinguishable for 1--6), whereas with all six conditions stored it reaches 0.54 and 1.05~pp. Table~\ref{tab:p1} is the first P1 benchmark (Section IV-A of the paper). Warm-started condition by condition (200 more trees per condition), it reaches 2.65 and 3.49~pp, and the proposed model is better by 1.7--1.9~pp (replicated). This gap is mostly an artefact: scikit-learn keeps the bin edges of the first condition when warm-starting, and every usage input is constant within a condition, so the later trees cannot use them. We therefore do not count it as evidence against continual gradient boosting in general.
+\emph{Gradient boosting under the continual constraint (D32).} Most of gradient boosting's advantage on unseen conditions comes from storing every training condition. The headline comparison of the paper (its Table~IV) therefore also trains gradient boosting like the proposed model: the six training conditions arrive one at a time and earlier conditions' data are not kept. Under this constraint the two are close. Refitted on the latest condition only, gradient boosting reaches 0.86 and 1.59~pp (horizons 1--3 and 1--6), against 0.92/0.94 and 1.62/1.65~pp for the proposed model (slightly better for 1--3, $+0.06/+0.08$~pp, replicated; not distinguishable for 1--6), whereas with all six conditions stored it reaches 0.54 and 1.05~pp. Table~\ref{tab:p1} is the first P1 benchmark (Section IV-A of the paper). Warm-started condition by condition (200 more trees per condition), it reaches 2.65 and 3.49~pp, and the proposed model is better by 1.7--1.9~pp (replicated). This gap is mostly an artefact: scikit-learn keeps the bin edges of the first condition when warm-starting, and every usage input is constant within a condition, so the later trees cannot use them. We therefore do not count it as evidence against continual gradient boosting in general.
 
 \begin{figure}[t]
   \centering
@@ -271,11 +271,20 @@ were moved here for space.
 \input{tables/p2}
 
 % -----------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/many_conditions.png}
+  \caption{Per-condition error on S7 and S10 (horizons 1--3, main seeds; Section IV-G and Table VI of the paper). Points below the diagonal favour the proposed model.}
+  \label{fig:many}
+\end{figure}
+
 \section{Replay ensemble V2 on S7 and S10 (D38)}
 
-This section gives the full results of the bounded-memory variant V2 (Section IV-H and Table VIII of the paper),
+This section gives the full results of the bounded-memory variant V2 (Section IV-H of the paper),
 written from \texttt{results/forecasting\_d38\_s10\_e1.json}, \texttt{\_s10\_e2}, \texttt{\_s7\_e1} and \texttt{\_s7\_e2}
 and the D38 entry of \texttt{docs/DECISIONS.md}.
+
+\emph{Method.} V2 changes the residual TFT in three ways: (i) experience replay replaces EWC: 32 training and 8 validation rows of each finished condition are kept (second arm: 8 and 2), each mini-batch loss adds the squared error on an equally large batch of stored rows, and early stopping also uses the stored validation rows; (ii) the forecast is the mean of the three models of a seed set; (iii) $\alpha_h$ and the half-widths are fitted, per horizon and for H$^+$ and H$^-$ separately, on the forecasts the ensemble made for each condition of the second half of the stream before training on it. Seeds are 0--2 (main) and 5--7 (replicate). Q1--Q4 are tested with the Wilcoxon signed-rank test over held-out conditions, Holm correction and the replication rule; a win also needs the median difference and most conditions to favour V2 in both seed sets.
 
 \emph{Provenance.} D38 was registered after every earlier result and after the S7 and S10 test results had been read per
 condition; its protocol was fixed, and its open defaults accepted, before any D38 code ran on real data. Its test

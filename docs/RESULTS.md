@@ -874,7 +874,7 @@ Results files: `results/forecasting_d32_e1.json` and `results/forecasting_d32_e2
 
 ## D34 and D36: many unseen usage conditions under the continual constraint (4 Nov 2026)
 
-Results files: `results/forecasting_d34_e1.json`, `..._e2.json` (S7, 60 test conditions; collected at `474f74f`, kept as tag `d34-collection`) and `results/forecasting_d36_e1.json`, `..._e2.json` (S10, Stroebl et al. 2024, 64 test conditions; `ea9f605`). Both pre-registered (D34, D36), clean trees, pinned environment; run logs in `docs/DECISIONS.md`. Unit of analysis: the held-out condition (Wilcoxon over conditions, Holm, D21 rule; positive only if replicated for horizons 1–3 and 1–6). Proposed model: shrunk at every origin (D34); shrunk only at H+ origins, raw at H− (D36, rule fixed after the D34 results). Paper table: `scripts/make_many_conditions_table.py` writes `paper/tables/many_conditions.tex` (Table VII).
+Results files: `results/forecasting_d34_e1.json`, `..._e2.json` (S7, 60 test conditions; collected at `474f74f`, kept as tag `d34-collection`) and `results/forecasting_d36_e1.json`, `..._e2.json` (S10, Stroebl et al. 2024, 64 test conditions; `ea9f605`). Both pre-registered (D34, D36), clean trees, pinned environment; run logs in `docs/DECISIONS.md`. Unit of analysis: the held-out condition (Wilcoxon over conditions, Holm, D21 rule; positive only if replicated for horizons 1–3 and 1–6). Proposed model: shrunk at every origin (D34); shrunk only at H+ origins, raw at H− (D36, rule fixed after the D34 results). Paper table: `scripts/make_many_conditions_table.py` writes `paper/tables/many_conditions.tex` (Table VI).
 
 **Mean RMSE over held-out conditions (pp), main / replicate:**
 
