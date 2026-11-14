@@ -25,14 +25,32 @@ const toc = (items) => el("nav", { class: "toc", "aria-label": "On this page" },
 let currentPage = "home";
 
 // ---------- pages ----------
+// Plain-language summary for a reader new to the project. Its claims match the hero sentence, FINDINGS and the D38
+// reading in docs/DECISIONS.md; keep them in step.
+const PLAIN = "Batteries retired from electric vehicles can serve a second life, for example in stationary storage, but each has aged " +
+  "differently and new groups keep arriving. This project forecasts a battery's state of health (SOH: its capacity relative to its own " +
+  "first measured capacity check, not to its nominal rating) one to six capacity checks ahead, with a model that learns one battery group " +
+  "at a time instead of being retrained on all the data. The model is a Temporal Fusion Transformer (TFT) that corrects simple linear " +
+  "extrapolation, protected against forgetting by Elastic Weight Consolidation (EWC), and it is always shown beside simple baselines. " +
+  "Headline finding: on the main LFP dataset (S6) it is level with linear extrapolation on the continual stream and ahead of it on usage " +
+  "conditions never seen in training, but gradient boosting that stores every earlier condition's data is more accurate on unseen " +
+  "conditions. Later development tests on two first-life datasets are mixed: a replay-ensemble variant (D38) is ahead of gradient boosting " +
+  "on average on S10, mostly because of conditions where gradient boosting fails, and behind it on most S7 conditions.";
+const GUIDE = [
+  ["What is being claimed?", "Home, headline numbers", "#page=home&sec=findings", "Each tile states one comparison, its unit and the registered verdict. The findings list below says what the study found, including the negative results."],
+  ["How accurate is the model?", "Dashboard › Overview", "#page=dashboard", "Test error (RMSE, pp of SOH; lower is better) of the proposed model beside persistence, linear extrapolation and gradient boosting, on the stream and on unseen conditions."],
+  ["Does it keep what it learned?", "Dashboard › Continual learning", "#page=dashboard&tab=continual", "Adaptation, retention and forgetting as groups arrive one after another, with and without EWC."],
+  ["Does it hold on new conditions and datasets?", "Dashboard › Many conditions and Replay ensemble (D38)", "#page=dashboard&tab=many", "Every held-out condition of S6, S7 and S10, and the D38 verdict grid. S7 and S10 are first-life datasets, reported separately."],
+  ["Which claims are supported?", "Studies and Registered results", "#page=studies", "Each experiment's question, set-up and verdicts, newest first. A result counts only if it replicates in both seed sets."]];
+
 function home(root, ctx) {
   const { summary, state } = ctx;
   const kpis = el("div", { class: "kpis" });
   renderKpis(kpis, summary, state);
   const panes = [["project", "Project", "The question, the contributions, the terms used throughout and the limitations."],
-    ["studies", "Studies", "Every experiment from D36 back to the first benchmark, newest first, with its verdicts."],
+    ["studies", "Studies", "Every experiment from D38 back to the first benchmark, newest first, with its verdicts."],
     ["results", "Results", "The paper's result tables, what was learned, and every registered verdict."],
-    ["dashboard", "Dashboard", "Interactive figures: capacity fade, forecast error, continual learning, reuse classes and intervals."],
+    ["dashboard", "Dashboard", "Interactive figures: capacity fade, forecast error, continual learning, reuse classes and intervals, many conditions and the D38 replay ensemble."],
     ["data", "Data", "The public datasets, the usage conditions, the integrity rules and the Spark pipeline."],
     ["methods", "Methods", "Pipeline, forecasting task, models, continual-learning strategies, protocols and statistics."],
     ["explorer", "Data explorer", "Every exported table behind the figures, with a preview and a download."],
@@ -47,6 +65,12 @@ function home(root, ctx) {
         el("a", { class: "btn primary", href: "#page=dashboard", text: "Open the dashboard" }),
         el("a", { class: "btn", href: "#page=studies", text: "Browse the studies" }),
         el("a", { class: "btn", href: C.PROJECT.links.paper, target: "_blank", rel: "noopener", text: "Read the paper (PDF)" }))),
+    section("plain", "In plain words", null, el("p", { class: "plain", text: PLAIN })),
+    section("guide", "How to read this site", "Five questions a reader usually has, and where each is answered. Every chart states its unit (pp of SOH) and whether lower or higher is better.",
+      el("ol", { class: "steps guide" }, GUIDE.map(([q, where, href, d]) => el("li", {}, el("b", { text: q }),
+        el("a", { href, text: where }), el("span", { text: d })))),
+      el("p", { class: "sub" }, "Unfamiliar term (SOH, RPT, pp, EWC, replay, H+, coverage, replicated)? ",
+        el("a", { href: "#glossary", "data-glossary": "", text: "Open the glossary" }), "; it is also in the top bar on every page.")),
     el("section", { class: "headline", "aria-label": "Headline numbers" }, kpis,
       el("p", { class: "kpi-note", text: `Test RMSE of SOH in percentage points on S6 (seven LFP usage conditions), ${h} checks ahead, main seed set of 50 runs; read live from the committed results. ${kpiNote(summary, state)}` })),
     section("latest", "Latest studies", "Each study was fixed in writing before it ran; negative results are reported with the positive ones.",

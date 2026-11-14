@@ -62,7 +62,10 @@ export function card(title, caption, scope, cls = "") {
   const cap = [caption, scope ? `${scope.replace(/ · /g, ", ")}.` : null].filter(Boolean).join(" ");
   const node = el("figure", { class: `fig ${cls}` }, el("div", { class: "fig-head" }, el("h2", { text: title })), body, foot,
     cap ? el("figcaption", { text: cap }) : null);
-  return { node, body, foot, setFoot(...kids) { foot.hidden = !kids.length; foot.replaceChildren(...kids); } };
+  const h2 = node.querySelector("h2");
+  return { node, body, foot, setFoot(...kids) { foot.hidden = !kids.length; foot.replaceChildren(...kids); },
+    /** Replace the descriptive title with the chart's takeaway once the data behind it is known. */
+    setTitle(t) { if (t) h2.textContent = t; } };
 }
 const notice = (text) => el("p", { class: "notice", text });
 const empty = (text) => el("div", { class: "empty", text });
@@ -82,7 +85,7 @@ export function renderHeadlineChart(root, summary, state, tip) {
     const best = Math.min(...items.map((r) => (r.rmse_main + r.rmse_replicate) / 2));
     const panel = el("div", { class: "panel" }, el("h3", { text: PROTOCOL_LABEL[p] }), host);
     panel._draw = () => dotRows(host, {
-      tip, x: { label: "Test RMSE (pp)", min: 0, max, fmt: (v) => v.toFixed(1) }, labelW: 200, rowH: 36,
+      tip, x: { label: "Test RMSE (pp of SOH)", min: 0, max, fmt: (v) => v.toFixed(1) }, labelW: 200, rowH: 36,
       rows: items.map((r) => {
         const isP = r.method === PROPOSED;
         const dim = state.family !== "all" && HEAD_FAMILY[r.method] !== state.family;
@@ -106,6 +109,15 @@ export function renderHeadlineChart(root, summary, state, tip) {
       { label: "Baseline, single fit", color: NEUTRAL, kind: "dot" }]),
     el("p", { class: "sub", text: "● after a name marks the lowest error in that panel." }));
   panels.forEach((p) => p._draw());
+}
+
+/** Title of the Overview chart: where the proposed model stands, in the registered verdicts' words. */
+export function headlineTitle(summary, state) {
+  const rows = summary.headline.filter((r) => r.setting === SETTING_LABEL[state.setting]);
+  const vs = (m, p) => VERDICT_PHRASE[rows.find((r) => r.method === `vs ${m}` && r.protocol === PROTOCOL_LABEL[p])?.verdict];
+  const a = vs("linear_extrapolation", "P1"), c = vs("linear_extrapolation", "P2"), g = vs("gbm_shared", "P2");
+  if (!a || !c) return "Test error against the baselines";
+  return `The proposed model is ${a} linear extrapolation on the stream, and ${c} it on unseen conditions${g ? `; it is ${g} gradient boosting that stores all data there` : ""}`;
 }
 
 const VERDICT_PHRASE = { "practically equivalent": "level with", "replicated, a better": "ahead of", "replicated, a worse": "behind",
@@ -211,14 +223,14 @@ export async function renderAccuracy(panel, ctx) {
   } else heat.body.append(empty(`No ${state.family} method in this view.`));
 
   // Skill against persistence, averaged over groups.
-  const skill = card("Skill against persistence", "1 − RMSE / persistence RMSE, mean over groups. Positive means better than carrying the last SOH forward.", tag, "half");
+  const skill = card("Skill against persistence", "1 − RMSE / persistence RMSE, mean over groups. Higher is better; above 0 means better than carrying the last SOH forward.", tag, "half");
   const base = (g) => cell({ key: "persistence" }, { key: g })?.v;
   const skills = rows.filter((r) => r.key !== "persistence").map((r) => {
     const per = groups.map((g) => { const v = cell(r, { key: g })?.v, p = base(g); return v && p ? 1 - v / p : null; }).filter((v) => v !== null);
     return { ...r, v: mean(per), lo: Math.min(...per), hi: Math.max(...per), n: per.length };
   }).filter((r) => r.v !== null).sort((a, b2) => b2.v - a.v);
   if (skills.length) {
-    dotRows(skill.body, { tip, x: { label: "Skill vs persistence (mean over groups)", min: Math.min(0, ...skills.map((r) => r.lo)), max: 1, fmt: (v) => v.toFixed(1) },
+    dotRows(skill.body, { tip, x: { label: "Skill against persistence (1 − RMSE ratio, unitless)", min: Math.min(0, ...skills.map((r) => r.lo)), max: 1, fmt: (v) => v.toFixed(1) },
       refs: [{ x: 0, label: "persistence" }], labelW: 190,
       rows: skills.map((r) => ({ label: r.label.replace(" (proposed)", ""), emph: r.emph, range: [r.lo, r.hi],
         marks: [{ v: r.v, color: r.emph ? ACCENT : NEUTRAL, tip: `${b(r.label)}<br>Skill ${fmt(r.v)} (range ${fmt(r.lo)} to ${fmt(r.hi)} over ${r.n} groups)` }] })) });
@@ -226,14 +238,14 @@ export async function renderAccuracy(panel, ctx) {
   } else skill.body.append(empty("Persistence is not in this view."));
 
   // Error by horizon (D30).
-  const hz = card("Error by forecast horizon", "Pooled test RMSE at each horizon, leave-one-group-out study D30 (h = 1-3).", state.dataset, "half");
+  const hz = card("Error by forecast horizon", "Pooled test RMSE at each horizon, pp of SOH, leave-one-group-out study D30 (h = 1-3). Lower is better.", state.dataset, "half");
   const hrows = horizon.filter((r) => r.dataset === state.dataset);
   const series = HORIZON_SERIES.filter(([m, , fam]) => keep(m, fam) && hrows.some((r) => r.method === m)).map(([m, color]) => ({
     key: m, color, emph: m === "tft_ewc", label: hrows.find((r) => r.method === m).label,
     points: hrows.filter((r) => r.method === m).map((r) => ({ x: num(r.horizon), y: num(r.rmse_pp) })) }));
   if (series.length) {
     lineChart(hz.body, { series, tip, x: { label: "Horizon (capacity checks ahead)", ticks: [1, 2, 3], min: 1, max: 3 },
-      y: { label: "RMSE (pp)", min: 0, fmt: (v) => v.toFixed(1), tipFmt: (v) => `${v.toFixed(3)} pp` } });
+      y: { label: "RMSE (pp of SOH)", min: 0, fmt: (v) => v.toFixed(1), tipFmt: (v) => `${v.toFixed(3)} pp` } });
     if (series.length > 4) hz.body.prepend(legend(series.map((sr) => ({ label: sr.label, color: sr.color }))));
     const tv = tableView([{ key: "label", label: "Method" }, { key: "horizon", label: "h", right: true }, { key: "rmse_pp", label: "RMSE (pp)", right: true, fmt: (v) => fmt(num(v), 3) }],
       hrows.filter((r) => series.some((sr) => sr.key === r.method)));
@@ -242,9 +254,13 @@ export async function renderAccuracy(panel, ctx) {
   } else hz.body.append(empty(`No ${state.family} method in the horizon study.`));
 
   const best = skills[0];
+  if (best) skill.setTitle(`${best.label.replace(" (proposed)", "")} has the highest skill against persistence (${fmt(best.v)})`);
+  if (series.length && series.every((sr) => { const p = [...sr.points].sort((a, z) => a.x - z.x); return p.length > 1 && p[p.length - 1].y > p[0].y; }))
+    hz.setTitle("Error grows with the forecast horizon for every method shown");
   const colMean = groups.map((g) => ({ g, v: mean(rows.map((r) => cell(r, { key: g })?.v).filter((v) => v > 0)) })).filter((c) => c.v);
   const hard = colMean.reduce((a, c) => (c.v > a.v ? c : a), colMean[0] || {}), easy = colMean.reduce((a, c) => (c.v < a.v ? c : a), colMean[0] || {});
   const spread = hard.g ? `Averaged over the methods shown, the hardest group (${esc(groupInfo(summary, hard.g).name)}, ${fmt(hard.v)} pp) has ${fmt(hard.v / easy.v, 1)} times the error of the easiest (${esc(groupInfo(summary, easy.g).name)}, ${fmt(easy.v)} pp).` : "";
+  if (hard.g && easy.g && hard.g !== easy.g) heat.setTitle(`Averaged over the methods shown, ${groupInfo(summary, hard.g).name} has ${fmt(hard.v / easy.v, 1)} times the error of ${groupInfo(summary, easy.g).name}`);
   const find = state.dataset === "S6"
     ? takeaway(`Across the seven LFP usage conditions, ${b(best ? best.label.replace(" (proposed)", "") : "–")} has the highest skill against persistence (${best ? fmt(best.v) : "–"}). ${spread}`,
       `Colour runs on a log scale because errors span ${fmt(hi / lo, 0)} times from best to worst.`)
@@ -271,14 +287,14 @@ export async function renderContinual(panel, ctx) {
   const d24 = task.filter((r) => r.experiment === "D24" && r.setting === state.setting && r.seed_set === "main");
 
   // Adaptation vs retention.
-  const ar = card("Adaptation against retention", "Each point is one model: mean error on a task right after learning it (adaptation) against the error on that task after the whole stream (retention). Points above the line forgot.", tag, "wide");
+  const ar = card("Adaptation against retention", "Each point is one model: mean error on a task right after learning it (adaptation) against the error on that task after the whole stream (retention). Points above the line forgot. Lower is better on both axes.", tag, "wide");
   const diag = groupMean(d24, (r) => r.method, (r) => num(r.diagonal_error));
   const fin = groupMean(d24, (r) => r.method, (r) => num(r.final_error));
   const d25 = task.filter((r) => r.experiment === "D25" && r.setting === state.setting && r.seed_set === "main" && r.method === PROPOSED);
   const pts = [...diag.keys()].map((m) => ({ m, x: diag.get(m), y: fin.get(m) }));
   if (d25.length) pts.push({ m: PROPOSED, x: mean(d25.map((r) => num(r.diagonal_error))), y: mean(d25.map((r) => num(r.final_error))) });
-  scatter(ar.body, { tip, diag: "no forgetting", x: { label: "Adaptation: error on the newest task (pp)", fmt: (v) => v.toFixed(2) },
-    y: { label: "Retention: final error (pp)", fmt: (v) => v.toFixed(2) },
+  scatter(ar.body, { tip, diag: "no forgetting", x: { label: "Adaptation: error on the newest task (pp of SOH)", fmt: (v) => v.toFixed(2) },
+    y: { label: "Retention: final error (pp of SOH)", fmt: (v) => v.toFixed(2) },
     points: pts.map(({ m, x, y }) => {
       const isP = m === PROPOSED, inFam = state.family === "all" || famOf[m] === state.family;
       const color = isP || m === "tft_residual_ewc" ? ACCENT : inFam ? NEUTRAL : "var(--neutral-soft)";
@@ -291,27 +307,27 @@ export async function renderContinual(panel, ctx) {
   // Forgetting by arrival position for one family.
   const fam = FAMILY_PREFIX[state.family] ? state.family : "TFT";
   const pre = FAMILY_PREFIX[fam];
-  const fg = card("Forgetting by arrival order", `${fam}: how much the error on a task grows by the end of the stream, by when the task arrived. Later tasks have less time to be forgotten.`, `${fam} · D24 · ${state.setting.toUpperCase()}`, "narrow");
+  const fg = card("Forgetting by arrival order", `${fam}: how much the error on a task grows by the end of the stream, by when the task arrived. Later tasks have less time to be forgotten. Lower is better.`, `${fam} · D24 · ${state.setting.toUpperCase()}`, "narrow");
   const series = Object.entries(STRATEGY).map(([k, [lab, color]]) => {
     const rows = d24.filter((r) => r.method === `${pre}_${k}`);
     const by = groupMean(rows, (r) => num(r.arrival_pos), (r) => num(r.forgetting));
     return { key: k, label: lab, color, emph: k === "residual_ewc", points: [...by].filter(([x]) => x < 7).map(([x, y]) => ({ x, y })) };
   }).filter((sr) => sr.points.length);
   if (series.length) lineChart(fg.body, { series, tip, x: { label: "Arrival position of the task", min: 1, max: 6, ticks: [1, 2, 3, 4, 5, 6] },
-    y: { label: "Forgetting (pp)", min: 0, fmt: (v) => v.toFixed(2), tipFmt: (v) => `${v.toFixed(3)} pp` } });
+    y: { label: "Forgetting (pp of SOH)", min: 0, fmt: (v) => v.toFixed(2), tipFmt: (v) => `${v.toFixed(3)} pp` } });
   else fg.body.append(empty(`${fam} was not run on the stream in this setting.`));
   if (!FAMILY_PREFIX[state.family] && state.family !== "all") fg.setFoot(el("span", { class: "sub", text: `${state.family} has no continual variants; showing TFT.` }));
 
   // What EWC changes: forgetting with and without EWC (D23), for the residual and direct targets.
   const d23 = run.filter((r) => r.experiment === "D23" && r.setting === state.setting);
-  const ew = card("What EWC changes", "Mean forgetting per run with EWC (filled) and with plain fine-tuning (ring), for the residual target and for forecasting SOH directly. Main seed set; the replicate is in the tooltip.", `S6 · P1 · D23 · ${state.setting.toUpperCase()}`);
+  const ew = card("What EWC changes", "Mean forgetting per run with EWC (filled) and with plain fine-tuning (ring), for the residual target and for forecasting SOH directly. Main seed set; the replicate is in the tooltip. Lower is better.", `S6 · P1 · D23 · ${state.setting.toUpperCase()}`);
   const fgMean = (m, set) => mean(d23.filter((r) => r.method === m && r.seed_set === set).map((r) => num(r.forgetting)).filter((v) => v !== null));
   const ewRows = [["tft", "residual", "TFT, residual"], ["tft", "direct", "TFT, direct"], ["mlp", "residual", "MLP, residual"], ["mlp", "direct", "MLP, direct"]]
     .filter(([f]) => state.family === "all" || FAMILY_PREFIX[state.family] === f);
   const ewcGain = {};
   if (!d23.length || !ewRows.length) ew.body.append(empty(d23.length ? `${state.family} was not part of the EWC study (D23); it compared TFT and MLP.` : "No D23 runs in this setting."));
   else {
-    dotRows(ew.body, { tip, labelW: 170, x: { label: "Forgetting (pp)", min: 0, fmt: (v) => v.toFixed(2) },
+    dotRows(ew.body, { tip, labelW: 170, x: { label: "Forgetting (pp of SOH)", min: 0, fmt: (v) => v.toFixed(2) },
       rows: ewRows.map(([f, t, lab]) => {
         const isP = f === "tft" && t === "residual";
         const mk = (strat) => {
@@ -329,12 +345,12 @@ export async function renderContinual(panel, ctx) {
   // Seed spread of the D25 finalists against the baselines.
   const d25r = run.filter((r) => r.experiment === "D25" && r.setting === state.setting);
   const nRuns = d25r.filter((r) => r.method === PROPOSED && r.seed_set === "main").length;
-  const sp = card("Run-to-run spread", `Final average error of every run (${nRuns} runs per seed set: seeds × task orders). Vertical lines: deterministic baselines.`, `S6 · P1 · D25 · ${state.setting.toUpperCase()}`);
+  const sp = card("Run-to-run spread", `Final average error of every run (${nRuns} runs per seed set: seeds × task orders). Vertical lines: deterministic baselines. Lower is better.`, `S6 · P1 · D25 · ${state.setting.toUpperCase()}`);
   const order = [PROPOSED, "tft_residual_ewc", "tft_pre_residual_ewc_shrunk", "tft_pre_residual_ewc"].filter((m) => d25r.some((r) => r.method === m));
   const bl = base.filter((r) => r.experiment === "D24" && r.setting === state.setting && r.group === "all");
   const ref = (m, lab) => { const r = bl.find((q) => q.method === m); return r ? [{ x: num(r.final_error), label: lab }] : []; };
   let k = 0;
-  dotRows(sp.body, { tip, rowH: 46, labelW: 230, x: { label: "Final average error (pp)", min: 0, fmt: (v) => v.toFixed(1) },
+  dotRows(sp.body, { tip, rowH: 46, labelW: 230, x: { label: "Final average RMSE (pp of SOH)", min: 0, fmt: (v) => v.toFixed(1) },
     refs: [...ref("linear_extrapolation", "linear extrap."), ...ref("gbm_shared", "gradient boosting")],
     rows: order.map((m) => ({ label: label[m] || m, emph: m === PROPOSED,
       marks: d25r.filter((r) => r.method === m).map((r) => ({ v: num(r.final_avg_error), color: m === PROPOSED ? ACCENT : NEUTRAL, open: r.seed_set === "replicate", r: 4,
@@ -356,6 +372,14 @@ export async function renderContinual(panel, ctx) {
   bt.setFoot(rampLegend(`−${fmt(lim)} pp`, `+${fmt(lim)} pp`, DIV_GRADIENT, "grey is no change; a task arriving last has nothing after it"));
 
   const pP = pts.find((p) => p.m === PROPOSED);
+  if (pP) ar.setTitle(`The proposed model forgets ${fmt(pP.y - pP.x, 3)} pp on average between learning a task and the end of the stream`);
+  const fgm = series.map((sr) => ({ sr, v: mean(sr.points.map((q) => q.y)) })).sort((a, z) => a.v - z.v);
+  if (fgm.length > 1) fg.setTitle(`${fam}: mean forgetting runs from ${fmt(fgm[0].v, 3)} pp (${fgm[0].sr.label}) to ${fmt(fgm[fgm.length - 1].v, 3)} pp (${fgm[fgm.length - 1].sr.label})`);
+  if (ewcGain.tft_residual) ew.setTitle(`With EWC the residual TFT forgets ${fmt(ewcGain.tft_residual[0], 3)} pp, against ${fmt(ewcGain.tft_residual[1], 3)} pp with plain fine-tuning`);
+  const pr = d25r.filter((r) => r.method === PROPOSED).map((r) => num(r.final_avg_error)).filter((v) => v !== null);
+  if (pr.length) sp.setTitle(`All ${pr.length} runs of the proposed model end between ${fmt(Math.min(...pr))} and ${fmt(Math.max(...pr))} pp`);
+  const btv = [...cellMap.values()];
+  if (btv.length) bt.setTitle(`${btv.filter((v) => Math.abs(v) < 0.05).length} of ${btv.length} task and position cells change by less than 0.05 pp`);
   const head = summary.headline.filter((r) => r.setting === SETTING_LABEL[state.setting] && r.protocol === PROTOCOL_LABEL.P1);
   const hP = head.find((r) => r.method === PROPOSED), hL = head.find((r) => r.method === "linear_extrapolation");
   const verdict = VERDICT_PHRASE[head.find((r) => r.method === "vs linear_extrapolation")?.verdict] || "compared with";
@@ -372,9 +396,10 @@ export async function renderContinual(panel, ctx) {
 // ---------- Reuse & uncertainty ----------
 const CLASSES = ["C0 stable", "C1 moderate fade", "C2 substantial fade", "C3 severe fade"];
 const PRED_METHOD = { all: "tft", TFT: "tft", MLP: "mlp", GBM: "gbm_F1", Baseline: "linear_extrapolation" };
-const RULES = [["gbm_loco", "var(--c1)"], ["lin_all", "var(--c2)"], ["lin_val", "var(--c3)"]];
+// Method colours as on every other tab: gradient boosting purple, linear extrapolation amber; the proposed-model blue is not reused.
+const RULES = [["gbm_loco", "var(--c7)"], ["lin_all", "var(--c4)"], ["lin_val", "var(--c8)"]];
 // D28 arms; the static arm is the D27 GBM-LOCO rule and keeps its colour.
-const ARMS = [["d28_static", "var(--c1)"], ["d28_track", "var(--c4)"], ["d28_refit_static", "var(--c7)"], ["d28_refit_track", "var(--c5)"]];
+const ARMS = [["d28_static", "var(--c7)"], ["d28_track", "var(--c2)"], ["d28_refit_static", "var(--c6)"], ["d28_refit_track", "var(--c5)"]];
 
 export async function renderReuse(panel, ctx) {
   const { state, tip, onSelect, summary } = ctx;
@@ -410,34 +435,40 @@ export async function renderReuse(panel, ctx) {
       const n = count.get(`${CLASSES[i]}|${CLASSES[j]}`) || 0, f = seqFill(n / (rowTot[CLASSES[i]] || 1));
       td.style.setProperty("--bg", f.bg); td.style.setProperty("--fg", f.fg);
     }));
+    conf.setTitle(`${fmt(100 * acc, 0)} % of forecasts land in the measured reuse class`);
     conf.setFoot(el("span", { class: "sub", text: `Exact class ${fmt(100 * acc, 1)} %, within one class ${fmt(100 * within, 1)} % (${seed0.length} forecasts). C0 > 95 %, C1 90-95 %, C2 80-90 %, C3 ≤ 80 % SOH.` }));
     scatter(par.body, { tip, diag: true, square: true,
       x: { label: "Measured SOH (%)", min: Math.floor(Math.min(...seed0.map((r) => num(r.soh_target))) / 10) * 10, max: 100, fmt: (v) => v.toFixed(0) }, y: { label: "Forecast SOH (%)", fmt: (v) => v.toFixed(0) },
       points: seed0.map((r) => ({ x: num(r.soh_target), y: num(r.soh_pred), color: state.group === "all" || r.group === state.group ? ACCENT : "var(--neutral-soft)" }))
         .sort((a) => (a.color === ACCENT ? 1 : -1)) });
     const rmse = Math.sqrt(mean(seed0.map((r) => num(r.error_pp) ** 2)));
+    par.setTitle(`Forecasts follow measured SOH with an RMSE of ${fmt(rmse, 2)} pp`);
     par.setFoot(el("span", { class: "sub", text: `${seed0.length} forecasts, RMSE ${fmt(rmse, 3)} pp.${state.group !== "all" ? ` ${groupInfo(summary, state.group).name} highlighted.` : " Pick a group to highlight it."}` }));
   }
 
   // Interval coverage per group (S6, D27).
-  const cv = card("Coverage of 90 % prediction intervals", "Share of measured SOH values inside the interval, per held-out usage condition. Target 0.90.", `S6 · P2 · D27 · ${state.setting.toUpperCase()}`);
+  const cv = card("Coverage of 90 % prediction intervals", "Share of measured SOH values inside the interval, per held-out usage condition. Closest to the target 0.90 is best; below it the interval is too narrow.", `S6 · P2 · D27 · ${state.setting.toUpperCase()}`);
   if (state.dataset !== "S6") cv.body.append(empty("The interval study (D27) is on S6."));
   else {
     const c9 = cov.filter((r) => r.setting === state.setting && num(r.level) === 0.9);
     const groups = summary.groups.filter((g) => g.dataset === "S6").map((g) => g.group);
     const rules = RULES.filter(([m]) => state.family === "all" || (state.family === "GBM") === m.startsWith("gbm"));
     const nm = (g) => { const i = groupInfo(summary, g); return `${i.short}: ${i.desc}`; };
-    dotRows(cv.body, { tip, labelW: 290, x: { label: "Coverage", min: 0.4, max: 1, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0.9, label: "target 0.90" }],
+    dotRows(cv.body, { tip, labelW: 290, x: { label: "Coverage of the 90 % interval (share of measured SOH inside)", min: 0.4, max: 1, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0.9, label: "target 0.90" }],
       onRow: (r) => r.key !== "all" && onSelect({ group: r.key }),
       rows: ["all", ...groups].map((g) => ({ key: g, label: g === "all" ? "All conditions" : nm(g), emph: g === state.group || (g === "all" && state.group === "all"),
         marks: rules.map(([m, color]) => { const r = c9.find((q) => q.method === m && q.group === g); return r && { v: num(r.coverage), color,
           tip: `${b(label[m] || m)}<br>${esc(g === "all" ? "All conditions" : nm(g))}: coverage ${fmt(num(r.coverage), 3)}${r.width ? `, mean width ${fmt(num(r.width))} pp` : ""}` }; }).filter(Boolean) })) });
+    const pooled = rules.map(([m]) => ({ m, v: num(c9.find((q) => q.method === m && q.group === "all")?.coverage) })).filter((x) => x.v !== null)
+      .sort((a, z) => Math.abs(a.v - 0.9) - Math.abs(z.v - 0.9));
+    const worst = Math.min(...c9.filter((q) => rules.some(([m]) => m === q.method) && q.group !== "all").map((q) => num(q.coverage)));
+    if (pooled.length) cv.setTitle(`${label[pooled[0].m] || pooled[0].m} comes closest to 0.90 overall (${fmt(pooled[0].v, 2)}); the worst condition is covered at ${fmt(worst, 2)}`);
     cv.setFoot(legend(rules.map(([m, color]) => ({ label: label[m] || m, color, kind: "dot" }))));
   }
 
   // Updating the intervals as the new condition's checks arrive (D28, gradient boosting only).
   const tag28 = `S6 · P2 · D28 · ${state.setting.toUpperCase()}`;
-  const up = card("Updating the intervals as checks arrive", "Coverage of 90 % intervals per held-out condition when the half-width tracks the errors seen so far, the forecaster is refitted with the new condition's measured checks, or both.", tag28, "wide");
+  const up = card("Updating the intervals as checks arrive", "Coverage of 90 % intervals per held-out condition when the half-width tracks the errors seen so far, the forecaster is refitted with the new condition's measured checks, or both. Closest to the target 0.90 is best.", tag28, "wide");
   const pool = card("Pooled 90 % intervals", "All seven held-out conditions together. Interval score: width plus a penalty for each miss, lower is better.", tag28, "narrow");
   const d28 = cov.filter((r) => r.experiment === "D28" && r.setting === state.setting && num(r.level) === 0.9);
   let isGain = null;
@@ -449,7 +480,7 @@ export async function renderReuse(panel, ctx) {
     const groups = summary.groups.filter((g) => g.dataset === "S6").map((g) => g.group);
     const nm = (g) => { if (g === "all") return "All conditions"; const i = groupInfo(summary, g); return `${i.short}: ${i.desc}`; };
     const get = (m, g) => d28.find((q) => q.method === m && q.group === g);
-    dotRows(up.body, { tip, labelW: 290, x: { label: "Coverage", min: 0.4, max: 1, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0.9, label: "target 0.90" }],
+    dotRows(up.body, { tip, labelW: 290, x: { label: "Coverage of the 90 % interval (share of measured SOH inside)", min: 0.4, max: 1, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0.9, label: "target 0.90" }],
       onRow: (r) => r.key !== "all" && onSelect({ group: r.key }),
       rows: ["all", ...groups].map((g) => ({ key: g, label: nm(g), emph: g === state.group || (g === "all" && state.group === "all"),
         marks: ARMS.map(([m, color]) => {
@@ -460,6 +491,10 @@ export async function renderReuse(panel, ctx) {
     up.setFoot(legend(ARMS.map(([m, color]) => ({ label: label[m] || m, color, kind: "dot" }))));
     const st = get("d28_static", "all"), rt = get("d28_refit_track", "all");
     if (st && rt) isGain = 1 - num(rt.interval_score) / num(st.interval_score);
+    const worstOf = (m) => Math.min(...groups.map((g) => num(get(m, g)?.coverage)).filter((v) => v !== null));
+    const w0 = worstOf("d28_static"), w1 = worstOf("d28_refit_track");
+    if (Number.isFinite(w0) && Number.isFinite(w1)) up.setTitle(`Refit + tracking ${w1 > w0 ? "raises" : "changes"} the worst condition's coverage from ${fmt(w0, 2)} to ${fmt(w1, 2)}`);
+    if (isGain !== null) pool.setTitle(`Refit + tracking lowers the 90 % interval score by ${fmt(100 * isGain, 0)} %`);
     const head = ["Arm", "Coverage", "Score (pp)", "Width (pp)"].map((h, i) => el("th", { class: i ? "num" : "", scope: "col", text: h }));
     const body = ARMS.map(([m]) => get(m, "all") && el("tr", {},
       el("th", { scope: "row", text: label[m] || m }),

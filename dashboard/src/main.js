@@ -6,7 +6,9 @@ import { parseCsv, sohRows, renderSoh, unitFacts } from "./soh.js";
 import { renderPage, PAGE_TITLES } from "./pages.js";
 import { renderExplorer } from "./explorer.js";
 import { renderMany, renderEvidence } from "./evidence.js";
-import { renderHeadlineChart, headlineFinding, renderKpis, renderAccuracy, renderContinual, renderReuse, takeaway, card, setLayoutWidth } from "./tabs.js";
+import { renderD38 } from "./d38.js";
+import { GLOSSARY } from "./content.js";
+import { renderHeadlineChart, headlineFinding, renderKpis, renderAccuracy, renderContinual, renderReuse, takeaway, card, setLayoutWidth, headlineTitle } from "./tabs.js";
 
 const DEFAULTS = { page: "home", tab: "overview", dataset: "S6", setting: "e1", protocol: "P2", group: "all", family: "all" };
 const KEYS = ["dataset", "setting", "protocol", "group", "family"];
@@ -19,9 +21,10 @@ const TABS = {
   continual: { title: "Learning new groups without forgetting old ones", deck: "Groups arrive one after another. A useful model adapts to each new group and keeps its accuracy on the earlier ones." },
   reuse: { title: "Reuse classes and prediction intervals", deck: "How often a forecast puts a cell in the right reuse class, and whether the prediction intervals hold their stated coverage on unseen usage conditions." },
   many: { title: "131 unseen usage conditions, one at a time", deck: "The seven S6 conditions, then two first-life datasets with many ageing conditions (S7: 60, S10: 64). Every condition is held out in turn, so each point is a separate test of the model on conditions it has never seen." },
+  d38: { title: "Replay ensemble on 124 unseen conditions (D38)", deck: "The residual TFT with a small replay memory, a three-seed ensemble and predict-before-training calibration, tested on the S10 and S7 conditions already used in D36 and D34. A development test with a protocol fixed in advance, not a confirmatory one." },
   evidence: { title: "Every registered result", deck: "Each comparison fixed before its study ran, with its outcome in both seed sets. Results against the proposed model are listed with the ones for it." },
 };
-const NAMES = { overview: "Overview", soh: "Capacity fade", accuracy: "Forecast error", continual: "Continual learning", reuse: "Reuse and intervals", many: "Many conditions", evidence: "Registered results" };
+const NAMES = { overview: "Overview", soh: "Capacity fade", accuracy: "Forecast error", continual: "Continual learning", reuse: "Reuse and intervals", many: "Many conditions", d38: "Replay ensemble (D38)", evidence: "Registered results" };
 
 const state = { ...DEFAULTS };
 let summary = null;
@@ -85,12 +88,22 @@ function initTheme() {
   apply();
 }
 
+// ---------- glossary ----------
+function initGlossary() {
+  const dlg = document.getElementById("glossary");
+  document.getElementById("glossary-body").replaceChildren(...GLOSSARY.flatMap(([k, v]) => [el("dt", { text: k }), el("dd", { text: v })]));
+  document.getElementById("glossary-open").addEventListener("click", () => dlg.showModal());
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });   // a click on the backdrop closes it
+  // Any link or button with data-glossary opens it too (the reading guide on Home).
+  document.addEventListener("click", (e) => { if (e.target.closest?.("[data-glossary]")) { e.preventDefault(); dlg.showModal(); } });
+}
+
 // ---------- filters ----------
 const form = document.getElementById("filters");
 // Filters each section reads; the others are greyed out so nobody expects them to change the figures.
 const APPLIES = { overview: ["setting", "family"], soh: ["dataset", "group"], accuracy: KEYS,
   continual: ["setting", "group", "family"], reuse: ["dataset", "setting", "group", "family"],
-  many: ["setting"], evidence: ["setting"] };
+  many: ["setting"], d38: ["setting"], evidence: ["setting"] };
 function syncForm() {
   for (const k of KEYS) {
     const sel = form.elements[k], on = APPLIES[state.tab].includes(k);
@@ -131,6 +144,10 @@ function showTab(name, focus = false) {
     b.setAttribute("aria-selected", on);
     b.tabIndex = on ? 0 : -1;
     if (on && focus) b.focus();
+    if (on) {   // keep the current pane visible in the tab row, which scrolls sideways on narrow screens
+      const list = b.parentElement;
+      if (b.offsetLeft < list.scrollLeft || b.offsetLeft + b.offsetWidth > list.scrollLeft + list.clientWidth) list.scrollLeft = b.offsetLeft - 16;
+    }
     document.getElementById(b.getAttribute("aria-controls")).hidden = !on;
   }
   const t = TABS[name];
@@ -189,6 +206,7 @@ async function renderNative(name) {
     if (name === "continual") await renderContinual(sink, ctx);
     if (name === "reuse") await renderReuse(sink, ctx);
     if (name === "many") await renderMany(sink, ctx);
+    if (name === "d38") await renderD38(sink, ctx);
     if (name === "evidence") await renderEvidence(sink, ctx);
   } catch (e) {
     sink.replaceChildren(el("p", { class: "notice", text: `This view could not be drawn: ${e.message}. Run python scripts/export_dashboard_data.py and serve the page from the repository root.` }));
@@ -245,8 +263,9 @@ function renderOverview() {
   const chart = document.getElementById("headline-chart");
   const finding = document.getElementById("overview-finding");
   finding.replaceChildren(headlineFinding(summary, state));
+  document.getElementById("headline-title").textContent = headlineTitle(summary, state);
   renderKpis(document.getElementById("kpis"), summary, state);
-  document.getElementById("headline-caption").textContent = `Test RMSE of SOH in percentage points on S6, ${state.setting === "e1" ? "1 to 3" : "1 to 6"} checks ahead. Proposed model: mean of 50 runs in each seed set (filled: main, ring: replicate). Baselines are single deterministic fits. Lower is better.`;
+  document.getElementById("headline-caption").textContent = `Test RMSE of SOH in percentage points on S6, ${state.setting === "e1" ? "1 to 3" : "1 to 6"} checks ahead. Proposed model: mean of 50 runs in each seed set (filled: main, ring: replicate). Baselines are single deterministic fits. Lower is better; ● marks the lowest error in each panel.`;
   renderHeadlineChart(chart, summary, state, tip);
   renderHeadline(document.getElementById("headline"), document.createElement("span"), summary, { ...state, dataset: "S6" });
 }
@@ -299,6 +318,7 @@ addEventListener("resize", () => {
 
 async function start() {
   initTheme();
+  initGlossary();
   document.getElementById("platform-link").href = PATHS.platform;
   readHash();
   try {

@@ -43,19 +43,28 @@ export const CONTRIBUTIONS = [
 ];
 
 export const GLOSSARY = [
-  ["Cell / battery group", "One physical cell (S1) or one usage condition (S6). Groups are the unit never mixed across train and test."],
-  ["RPT / check", "A slow, standardised capacity test done every few weeks. Its discharge capacity is the trusted health measurement. S6 calls it a check."],
-  ["SOH", "Capacity / capacity at the cell's first valid check × 100. Relative to the first measurement, not to the nominal rating."],
+  ["SOH", "State of health: capacity / capacity at the cell's first valid check × 100. Relative to the first measured capacity, not to the nominal rating, so it is not comparable with literature values on nominal capacity."],
+  ["RPT / check", "Reference performance test: a slow, standardised capacity test done every few weeks. Its discharge capacity is the trusted health measurement. S6 calls it a check."],
   ["pp", "Percentage points of SOH, the unit of every error. An RMSE of 0.4 pp means forecasts are off by about 0.4 SOH points."],
-  ["Forecasting task", "From origin check k, predict the SOH change to check k + h, for h = 1-3 (E1) or 1-6 (E2)."],
+  ["RMSE", "Root mean squared error of the forecast SOH against the measured SOH, in pp. Lower is better."],
+  ["Cell / battery group", "One physical cell (S1) or one usage condition (S6, S7, S10). Groups are the unit never mixed across train and test."],
+  ["Forecasting task", "From origin check k, predict the SOH change to check k + h."],
+  ["E1 / E2", "The two horizon sets: E1 forecasts 1-3 checks ahead, E2 forecasts 1-6 checks ahead."],
+  ["P1 / P2", "P1, continual stream: groups arrive one at a time and each is tested on its later checks. P2, unseen usage condition: a whole condition is held out of training and only tested."],
+  ["H+ / H−", "Forecast origins where linear extrapolation has a fade rate to continue (H+) and where it has none (H−)."],
   ["Persistence", "Predict no change. The baseline every forecaster must beat."],
   ["Linear extrapolation", "Continue the recent fade rate."],
+  ["GBM", "Gradient-boosted trees (gradient boosting). GBM-ALL stores the data of every earlier condition; GBM-LAST is refitted on the latest condition only; GBM-ER is fitted on the latest condition plus the same few stored rows a replay model keeps (D38)."],
   ["Continual learning", "Train on tasks in sequence and never revisit old data (except by explicit replay)."],
   ["Catastrophic forgetting", "After learning a new task the model gets worse on an old one."],
-  ["EWC", "Elastic Weight Consolidation: a penalty that keeps the weights that mattered for earlier tasks from moving, weighted by each finished task's Fisher information."],
+  ["EWC", "Elastic Weight Consolidation: a penalty that keeps the weights that mattered for earlier tasks from moving, weighted by each finished task's Fisher information. Stores no earlier data."],
+  ["Replay", "Experience replay: keep a small number of rows from each earlier condition (D38: 32 training and 8 validation rows) and mix them into training on later ones. Unlike EWC, it stores some earlier data."],
   ["TFT", "Temporal Fusion Transformer: gated residual networks, variable selection, an LSTM encoder and interpretable attention. Input: the last four checks of one cell."],
   ["Residual target", "The TFT predicts only a correction to linear extrapolation, shrunk per horizon."],
   ["Adaptation / retention / backward transfer", "Error on the newest task; error on older tasks after later learning; how learning a later task changes old-task error."],
+  ["Coverage", "Share of measured SOH values that fall inside the forecast interval. A 90 % interval should cover about 0.90; the registered threshold for adequate is 0.85."],
+  ["Seed sets", "Every learned model is run with two independent sets of random seeds, main and replicate. A result counts only if it holds in both."],
+  ["Replicated", "p_Holm < 0.05 (paired Wilcoxon test, Holm-corrected) in both seed sets, with the same sign and a difference of at least 0.05 pp. Below 0.05 pp in both is practically equivalent; anything else is not replicated."],
   ["Reuse classes", "From fade F = 100 - SOH: C0 < 5 pp, C1 5-10, C2 10-20, C3 ≥ 20 pp. They describe capacity change, not suitability for an application."],
 ];
 
@@ -184,6 +193,8 @@ export const TABLES = [
   ["fact_coverage", "results", "Prediction-interval coverage, interval score and width per calibration rule and held-out condition."],
   ["fact_horizon", "results", "Pooled RMSE at each forecast horizon (study D30)."],
   ["fact_d30_group", "results", "Study D30 metrics per method and group (RMSE, MAE, class metrics)."],
+  ["fact_d38_verdicts", "results", "Study D38 (replay ensemble, S10 and S7): each primary question per dataset, horizon set and seed set, with mean and median difference, conditions favouring the model, p_Holm, verdict and registered answer."],
+  ["fact_d38_method", "results", "Study D38: mean and median RMSE over the held-out conditions and interval coverage per method, dataset, horizon set and seed set."],
   ["fact_soh", "local", "SOH trajectory of every cell: one row per capacity check, with capacity, reference capacity, temperature source and reuse class. Built from the local data folder."],
   ["fact_predictions", "local", "Every saved D30 forecast: origin and target check, horizon, measured and forecast SOH, error and reuse classes. Built from the local data folder."],
 ];
