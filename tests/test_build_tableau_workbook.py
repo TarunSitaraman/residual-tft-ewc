@@ -197,12 +197,15 @@ def test_d38_export_schema_and_run_log_values():
     assert vt.loc[vt["question"] != "Q5", "coverage_90"].isna().all()
     # Method table: V2 S10 E1 main mean 0.782, median 0.333, coverage 0.911 / 0.820; S7 E1 GBM-ALL 3.845, no coverage.
     m = mt.set_index(["dataset", "experiment", "seed_set", "method"])
-    v2 = m.loc[("s10", "E1", "main", X.D38_NAMES[X.D38_V2])]
+    v2 = m.loc[("s10", "E1", "main", "v2")]
     assert [round(v2[c], 3) for c in ("mean_rmse_pp", "median_rmse_pp", "coverage_90", "coverage_80")] == \
         [0.782, 0.333, 0.911, 0.820]
-    g = m.loc[("s7", "E1", "main", X.D38_NAMES["gbm_all"])]
+    g = m.loc[("s7", "E1", "main", "gbm_all")]
     assert round(g["mean_rmse_pp"], 3) == 3.845 and np.isnan(g["coverage_90"]) and np.isnan(g["coverage_80"])
-    assert set(mt["method"]) <= set(X.D38_NAMES.values())
+    # Short ids agreed with the web dashboard; every id has a readable label for the workbook.
+    assert set(mt["method"]) == set(X.D38_IDS.values()) == set(X.D38_LABELS)
+    assert {"v2", "sel", "shrunk", "gbm_all", "gbm_er32", "gbm_er8", "gbm_last", "linear", "ridge", "persistence",
+            "joint", "r32_ens", "r32_single", "r8_ens_cal", "a0_single", "a0_ens"} <= set(mt["method"])
 
 
 def test_d38_export_writes_csvs_and_counts(results_with_d38: Path, tmp_path: Path):
@@ -216,8 +219,8 @@ def test_d38_export_writes_csvs_and_counts(results_with_d38: Path, tmp_path: Pat
     for name, df in (("fact_d38_verdicts", v), ("fact_d38_method", m)):
         assert manifest["row_counts"][name] == summary["counts"][name] == len(df)
     assert set(D38_FILES) <= {Path(p).name for p in manifest["sources"]}
-    # The readable D38 names are not method keys: dim_method is unchanged by D38.
-    assert not set(pd.read_csv(out_r / "dim_method.csv")["method"]) & set(X.D38_NAMES.values())
+    # dim_method is unchanged by D38 (no D38-only ids such as v2 are added to it).
+    assert "v2" not in set(pd.read_csv(out_r / "dim_method.csv")["method"])
 
 
 def test_d38_sheets_placeholder_without_results(exported):
@@ -256,6 +259,10 @@ def test_d38_sources_sheets_and_dashboard(results_with_d38: Path, tmp_path: Path
     assert vw.find("table/panes/pane/encodings/color").get("column").endswith("[none:answer:nk]")
     assert "ISNULL([mean_diff_pp])" in ET.tostring(vw, encoding="unicode")
     assert "[avg:mean_rmse_pp:qk]" in mw.find("table/cols").text
+    assert "[none:Method Label:nk]" in mw.find("table/rows").text
+    dm = tables["D38Methods"]
+    assert (dm.loc[dm["method"] == "v2", "Method Label"] == X.D38_LABELS["v2"]).all()
+    assert (dm["Method Label"] != dm["method"]).all()   # every id has a readable label
     # The dashboard places both sheets, each under a plain-language caption, with the S7/S10 attribution.
     db = next(d for d in root.iter("dashboard") if d.get("name") == "D38 replay ensemble")
     assert [z.get("name") for z in db.iter("zone") if z.get("name")] == ["D38 verdicts by question",
