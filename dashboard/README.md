@@ -4,20 +4,20 @@ A single-page site about the project with the results dashboard at its centre. T
 
 | Page | Content |
 |---|---|
-| Home | The question, headline numbers read live from `summary.json` (proposed model against the best baseline, with the registered verdict), the findings and a map of the site |
+| Home | A plain-language summary with the headline finding, a five-step guide to which page answers which question, headline numbers read live from `summary.json` (proposed model against the best baseline, with the registered verdict), the findings and a map of the site |
 | Project | Question, contributions, framework and architecture figures (`paper/figures/`), terms, limitations, team, citation and licence |
 | Data | Sources, every battery group (from `dim_group`), integrity rules and the Spark pipeline |
 | Methods | Pipeline, baselines, neural models and strategies, protocols, statistics and reuse screening |
-| Studies | Every experiment from D32 back to the first benchmark, newest first: question, set-up, key numbers, registered verdicts and reading (condensed from `docs/RESULTS.md`) |
+| Studies | Every experiment from D38 back to the first benchmark, newest first: question, set-up, key numbers, registered verdicts and reading (condensed from `docs/RESULTS.md`) |
 | Results | The paper's result tables, what was learned, and every registered verdict (`fact_verdicts`) |
-| Dashboard | Five panes of interactive figures with one filter strip (below) |
+| Dashboard | Eight panes of interactive figures with one filter strip (below) |
 | Data explorer | Every exported table: description, row count, columns, a filterable preview of 200 rows, a download link, and the source files with their hashes (`manifest.json`) |
 | Tableau | How the Tableau Public workbook is built, published and driven by the site, and which views are live |
 
 Fixed text is in `src/content.js`, condensed from the repository README, the paper and `tableau/WORKBOOK_SPEC.md`; keep it in step with them. Numbers that change with new results are read from the exported files. The dashboard has two layers:
 
 - **Tableau Public workbook**: the analytical views, embedded with the Tableau Embedding API v3. Specification: [`tableau/WORKBOOK_SPEC.md`](tableau/WORKBOOK_SPEC.md).
-- **JS page** (`index.html`, `src/`, no build step): five panes under the Dashboard page, one filter strip, a details panel, and native SVG charts on every pane, each with a caption that states its scope, drawn from `results/dashboard/summary.json` and the CSVs in `results/dashboard/`. Each section opens with a one-sentence finding computed from the data (the verdict wording comes from the stored replication verdicts). The SOH trajectories (`data/dashboard/fact_soh.csv`) and the reuse-class confusion and parity plots (`data/dashboard/fact_predictions.csv`) need the local data folder; without it those cards say how to build them. When a section has a published Tableau view, it is embedded below the native charts and follows the same filters. The page is complete without the workbook.
+- **JS page** (`index.html`, `src/`, no build step): eight panes under the Dashboard page, one filter strip, a details panel, and native SVG charts on every pane, each with a title that states its takeaway (computed from the data), axis labels in pp of SOH, and a caption that states its scope and whether lower or higher is better, drawn from `results/dashboard/summary.json` and the CSVs in `results/dashboard/`. Each section opens with a one-sentence finding computed from the data (the verdict wording comes from the stored replication verdicts). The SOH trajectories (`data/dashboard/fact_soh.csv`) and the reuse-class confusion and parity plots (`data/dashboard/fact_predictions.csv`) need the local data folder; without it those cards say how to build them. When a section has a published Tableau view, it is embedded below the native charts and follows the same filters. The page is complete without the workbook.
 
 The data-platform page (`scripts/platform_server.py`, `docs/spark_dashboard.html`) remains the place for datasets, lineage and Spark runs. This dashboard covers results only.
 
@@ -52,11 +52,13 @@ After export the data are small: about 850 S6 checks, 111 S1 RPTs, 38.5k saved f
 - `src/pages.js`, `src/content.js`: the project pages and their text.
 - `src/studies.js`: the Studies page and its entries; update it when `docs/RESULTS.md` gains a study.
 - `src/explorer.js`: the data explorer.
+- `src/d38.js`: the Replay ensemble (D38) pane: the verdict grid (Q1-Q5 by S10/S7 and E1/E2) and the method RMSE comparison, from `fact_d38_verdicts.csv` and `fact_d38_method.csv`. Until the export lists those tables in `manifest.json`, the pane says the data are not yet exported.
 - `src/tabs.js`: the Overview headline chart and finding, and the Forecast accuracy, Continual learning and Reuse & uncertainty sections.
 - `src/charts.js`: chart primitives (line chart, dot rows, scatter, matrix, table view) following the validated reference palette: categorical colours in fixed order, one-hue sequential blue, blue-grey-red diverging.
 - `src/embed.js`: loads the Embedding API once, mounts `<tableau-viz>`, applies filters to every worksheet, and reads mark selections.
 - `src/views.js`: readable group names (`groupInfo`), the headline table with verdicts, caveats and the details panel.
 - `src/soh.js`: the SOH trajectory chart (one line per cell, reuse-class boundaries, hover, legend selection, table view).
+- The Glossary button in the top bar opens a dialog with the terms in `GLOSSARY` (`src/content.js`), the same list as on the Project page.
 - `styles.css`: design tokens for light and dark themes (each selected, not inverted); the theme button in the top bar cycles auto, light and dark.
 
 Filters: Dataset, Setting (E1 h = 1–3, E2 h = 1–6), Protocol (P1 continual stream, P2 unseen usage condition), Group and Method family. Selecting a heatmap cell or a Tableau mark opens the details panel: the group's condition, every method's error with its seed spread, and a link to the result in `docs/RESULTS.md`.
