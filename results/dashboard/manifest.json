@@ -19,7 +19,7 @@
     "fact_d38_verdicts": 40,
     "fact_d38_method": 152
   },
-  "data_root": "external (DATA_ROOT)",
+  "data_root": "data",
   "sources": {
     "results/forecasting_d22_e1_f2.json": "8f477cc8f0cb717d9f57a5af8427251234f23dc7c09cf54d6a19b16981de64ee",
     "results/forecasting_d23_e1.json": "213d8ffc655f417ab3a5721a25801a5f5c0e72d96000318726fef05689d3ba8e",
