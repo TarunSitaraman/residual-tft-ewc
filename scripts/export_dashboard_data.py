@@ -329,6 +329,16 @@ D38_NAMES = {
     "gbm_er8": "GBM-ER8 (8 stored rows per condition)", "gbm_last": "GBM-LAST (latest condition only)",
     "linear_extrapolation": "Linear extrapolation", "persistence": "Persistence", "ridge_shared": "Ridge",
 }
+#: Short method ids written to fact_d38_method (the web dashboard's ids); labels: D38_LABELS[id].
+D38_IDS = {
+    "tft_residual_er32_ens_cal": "v2", "tft_residual_ewc_selective": "sel", "tft_residual_ewc_shrunk": "shrunk",
+    "gbm_all": "gbm_all", "gbm_er32": "gbm_er32", "gbm_er8": "gbm_er8", "gbm_last": "gbm_last",
+    "linear_extrapolation": "linear", "ridge_shared": "ridge", "persistence": "persistence",
+    "tft_residual_joint": "joint", "tft_residual_er32_ens": "r32_ens", "tft_residual_er32": "r32_single",
+    "tft_residual_er8_ens_cal": "r8_ens_cal", "tft_residual_er8_ens": "r8_ens", "tft_residual_er8": "r8_single",
+    "tft_residual_ewc": "a0_single", "tft_residual_ewc_ens": "a0_ens", "tft_residual_ewc_ens_cal": "a0_ens_cal",
+}
+D38_LABELS = {D38_IDS[m]: label for m, label in D38_NAMES.items()}
 D38_SHORT = {"gbm_all": "GBM-ALL", "gbm_er32": "GBM-ER32", "linear_extrapolation": "linear extrapolation (H+)",
              "tft_residual_ewc_selective": "SEL (D36 model)", "tft_residual_ewc_shrunk": "shrunk TFT-EWC (D34 model)"}
 D38_VERDICT_COLS = ("dataset", "experiment", "seed_set", "question", "comparison", "mean_diff_pp", "median_diff_pp",
@@ -377,7 +387,7 @@ def d38_tables(results: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
             for r in desc.get("mean_over_conditions", []):
                 c = (cov.get(r["method"]) or {}).get(r["set"]) or {}
                 methods.append({"dataset": ds, "experiment": e.upper(), "seed_set": r["set"],
-                                "method": D38_NAMES.get(r["method"], r["method"]), "mean_rmse_pp": num(r.get("rmse")),
+                                "method": D38_IDS.get(r["method"], r["method"]), "mean_rmse_pp": num(r.get("rmse")),
                                 "median_rmse_pp": num(med.get((r["set"], r["method"]))),
                                 "coverage_90": num((c.get("90") or {}).get("pooled")),
                                 "coverage_80": num((c.get("80") or {}).get("pooled"))})

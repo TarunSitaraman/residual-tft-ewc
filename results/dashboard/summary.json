@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-11-14T06:20:03+00:00",
-  "commit": "5967f9e4c4b19038389c9ad2af3de68a8f7a3e6f",
+  "generated_utc": "2026-11-14T07:40:11+00:00",
+  "commit": "ebd8947f0976736d15c8fa70299d163994ef20e4",
   "kpis": [
     {
       "id": "p1_lin",
@@ -51,9 +51,7 @@
     "fact_d30_group": 2338,
     "fact_headline": 32,
     "fact_d38_verdicts": 40,
-    "fact_d38_method": 152,
-    "fact_soh": 958,
-    "fact_predictions": 43008
+    "fact_d38_method": 152
   },
   "groups": [
     {

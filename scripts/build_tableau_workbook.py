@@ -149,6 +149,8 @@ def sheets(results_out: Path, data_out: Path, f: dict[str, str]) -> dict[str, pd
                               ("fact_d38_method", "D38Methods", X.D38_METHOD_COLS)):
         t = R(name)
         t = t.assign(dataset=t["dataset"].str.upper()) if len(t) else pd.DataFrame(columns=list(cols))
+        if "method" in t:   # short ids in the export; the readable label beside them
+            t["Method Label"] = t["method"].map(X.D38_LABELS).fillna(t["method"])
         out[sheet] = t.rename(columns={"dataset": f["dataset"]})   # empty: the export's columns, as a placeholder
 
     soh = _read(data_out, "fact_soh")
@@ -313,7 +315,7 @@ def _views(f: dict[str, str]) -> list[dict]:
                     "both seed sets. Q5 shows V2's pooled 90% interval coverage (adequate at 0.85 or more). Colour "
                     "is the registered answer: positive = V2 better (Q5: coverage adequate) in both seed sets and "
                     "in both E1 (1-3 check-ups ahead) and E2 (1-6 ahead)."},
-        {"name": "D38 RMSE by method", "sheet": "D38Methods", "rows": [s(D), s("method")],
+        {"name": "D38 RMSE by method", "sheet": "D38Methods", "rows": [s(D), s("Method Label")],
          "cols": [s("experiment"), avg("mean_rmse_pp")], "mark": "Circle",
          "enc": {"color": s("seed_set"), "tooltip": avg("median_rmse_pp")},
          "title": "Forecast error of every method: mean RMSE over the test conditions (pp of SOH)",
