@@ -100,7 +100,7 @@ banuprip2@srmist.edu.in\\
 % ============================================================
 
 \begin{abstract}
-Batteries retired from electric vehicles can often be reused as stationary storage, yet a model that judges their health on one group of batteries may fail on the next. Continual learning lets a model learn each new group without forgetting the earlier ones. We propose Residual TFT-EWC, a Temporal Fusion Transformer trained with Elastic Weight Consolidation (EWC) that learns a scaled-down correction to a straight-line extrapolation of the recent fade instead of forecasting the state of health (SOH) from scratch. We forecast the SOH of lithium-ion cells one to six capacity checks ahead on 606 cells from six public datasets, with experiments registered in advance and every claimed difference repeated on a second set of random seeds. Residual TFT-EWC is the only model compared that does well both when groups arrive one after another and on unseen usage conditions. In sequence it matches linear extrapolation, the strongest baseline, is 0.13--0.41 percentage points (pp) more accurate than gradient boosting, and EWC cuts its forgetting by about two thirds. On unseen conditions it is 0.43--0.68~pp more accurate than extrapolation and puts 95.5\% of samples in their measured capacity-based health class. Gradient boosting and a jointly trained TFT do better there because they keep every earlier condition's data; denied it, gradient boosting comes within 0.08~pp on unseen conditions but forgets on the stream, where it is 0.24--0.46~pp less accurate, and over 60--64 unseen conditions of two further datasets it is 0.8--1.3~pp less accurate. Forecast intervals reach their stated coverage on a new condition only when calibrated on conditions left out of training.
+Batteries retired from electric vehicles can often be reused as stationary storage, yet a model that judges their health on one group of batteries may fail on the next. Continual learning lets a model learn each new group without forgetting the earlier ones. We propose Residual TFT-EWC, a Temporal Fusion Transformer trained with Elastic Weight Consolidation (EWC) that learns a scaled-down correction to a straight-line extrapolation of the recent fade instead of forecasting the state of health (SOH) from scratch. We forecast the SOH of lithium-ion cells one to six capacity checks ahead on 606 cells from six public datasets, with experiments registered in advance and every claimed difference repeated on a second set of random seeds. Residual TFT-EWC is the only model compared that does well both when groups arrive one after another and on unseen usage conditions. In sequence it matches linear extrapolation, the strongest baseline, is 0.13--0.41 percentage points (pp) more accurate than gradient boosting, and EWC cuts its forgetting by about two thirds. On unseen conditions it is 0.43--0.68~pp more accurate than extrapolation and puts 95.5\% of samples in their measured capacity-based health class. Gradient boosting and a jointly trained TFT do better there because they keep every earlier condition's data; denied it, gradient boosting comes within 0.08~pp on unseen conditions but forgets on the stream, where it is 0.24--0.46~pp less accurate, and over 60--64 unseen conditions of two further datasets it is 0.8--1.3~pp less accurate. Forecast intervals reach their stated coverage on a new condition only when calibrated on conditions left out of training. A post hoc variant with replay of 32 stored rows per condition, a three-seed ensemble and calibration on forecasts made before training shows no replicated difference from the joint TFT on those conditions, with 90\% coverage of 0.89--0.91, and beats gradient boosting with all data stored on one dataset, mainly where boosting fails, but not on the other.
 \end{abstract}
 
 % ============================================================
@@ -182,7 +182,7 @@ This work brings together continual learning, health forecasting and a first scr
   \label{fig:system}
 \end{figure*}
 
-Fig.~\ref{fig:system} summarises the approach, and the paper makes four contributions. First, we build a benchmark for forecasting the SOH of second-life cells from six public datasets (606 cells after quality checks) so that no future information reaches the inputs, and we remove two label flaws: test currents set from the previous capacity, and pulse charge counted as capacity. Second, we compare a Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) with fine-tuning, replay, joint training, simple forecasters and the model types of earlier work when groups arrive in sequence, when groups are unseen and after first-life pretraining, reporting both adaptation and forgetting. Third, we propose Residual TFT-EWC, which corrects linear extrapolation instead of replacing it. Among methods that keep no earlier data, it is the only one close to the best in both settings: it matches extrapolation on the stream, where EWC cuts its forgetting by about two thirds, outperforms it on unseen usage conditions, and beats gradient boosting refitted on each new condition on the stream (replicated). Finally, we give forecast intervals for unseen conditions, which reach the stated coverage only when calibrated on conditions left out of training and within the training range, and a reproducibility check: because significance on these small datasets changed with the computing platform, our main results must pass a replication rule.
+Fig.~\ref{fig:system} summarises the approach, and the paper makes four contributions. First, we build a benchmark for forecasting the SOH of second-life cells from six public datasets (606 cells after quality checks) so that no future information reaches the inputs, and we remove two label flaws: test currents set from the previous capacity, and pulse charge counted as capacity. Second, we compare a Temporal Fusion Transformer with Elastic Weight Consolidation (TFT\,+\,EWC) with fine-tuning, replay, joint training, simple forecasters and the model types of earlier work when groups arrive in sequence, when groups are unseen and after first-life pretraining, reporting both adaptation and forgetting. Third, we propose Residual TFT-EWC, which corrects linear extrapolation instead of replacing it. Among methods that keep no earlier data, it is the only one close to the best in both settings: it matches extrapolation on the stream, where EWC cuts its forgetting by about two thirds, outperforms it on unseen usage conditions, and beats gradient boosting refitted on each new condition on the stream (replicated). Keeping 40 rows per condition, a post hoc replay variant shows no replicated difference from joint training on two many-condition datasets; gradient boosting with all data stored stays better on one. Finally, we give forecast intervals for unseen conditions, which reach the stated coverage only when calibrated on conditions left out of training and within the training range, and a reproducibility check: because significance on these small datasets changed with the computing platform, our main results must pass a replication rule.
 
 % ============================================================
 % II. RELATED WORK  (team draft, condensed to the IEEE conference length)
@@ -410,6 +410,8 @@ a residual hybrid of a simple and a learned forecaster, as in~\cite{zhang2003hyb
   \end{tabular}
 \end{table}
 
+\emph{Bounded-memory variant (V2).} A last experiment, registered after the S7 and S10 test results had been read per condition (a development test, not a confirmatory one), changes the residual TFT in three ways: (i) experience replay replaces EWC: 32 training and 8 validation rows of each finished condition are kept (second arm: 8 and 2), each mini-batch loss adds the squared error on an equally large batch of stored rows, and early stopping also uses the stored validation rows; (ii) the forecast is the mean of the three models of a seed set; (iii) $\alpha_h$ and the half-widths are fitted, per horizon and for H$^+$ and H$^-$ separately, on the forecasts the ensemble made for each condition of the second half of the stream before training on it. Folds, orders and horizon sets are those of the many-condition tests, with seeds 0--2 (main) and 5--7 (replicate); only the learning rate is tuned. The registered questions are whether V2 is more accurate than gradient boosting with all conditions stored (Q1), than gradient boosting on the newest condition plus V2's stored rows (GB-ER32, Q2), than extrapolation at H$^+$ (Q3) and than the earlier model of Table~\ref{tab:many} (Q4) (Wilcoxon over held-out conditions, Holm correction, replication rule; a win also needs the median difference and most conditions to favour V2 in both seed sets), and whether its pooled 90\% coverage reaches 0.85 (Q5); each must hold for horizons 1--3 and 1--6.
+
 \subsection{Hyperparameters, metrics and statistics}
 \label{sec:tuning}
 \label{sec:metrics}
@@ -459,7 +461,9 @@ The pipeline uses Python~3.11, NumPy~2.4, pandas~3.0, scikit-learn~1.9 and PyTor
 % results/forecasting_d27_e*.json (494b36f), D28 and D29 from results/forecasting_d28_e*.json (161c01f) and
 % results/forecasting_d29_e*.json (f2fdd73), D32 from results/forecasting_d32_e*.json (fdcf0d6),
 % D35 from results/forecasting_d35_e*.json (5fddf96/b8c71f4), D34 from results/forecasting_d34_e*.json (474f74f),
-% D36 from results/forecasting_d36_e*.json (ea9f605); table many_conditions by scripts/make_many_conditions_table.py,
+% D36 from results/forecasting_d36_e*.json (ea9f605); D38 from results/forecasting_d38_s10_e*.json
+% (a093b37, clean tree) and results/forecasting_d38_s7_e*.json (code at e9e66b2; git_dirty true, only paper/
+% differed, see docs/DECISIONS.md D38 run log), table d38 written from those files by hand; table many_conditions by scripts/make_many_conditions_table.py,
 % summarised in docs/RESULTS.md. Table headline is generated by scripts/make_headline_table.py; table d26
 % (now in the supplement) is written from those files by hand. Other tables are generated by
 % scripts/make_results_tables.py; figures by
@@ -630,6 +634,44 @@ On unseen conditions (Table~\ref{tab:headline}; Table~SV of the supplement), the
 
 Under the continual constraint, the proposed model beats gradient boosting refitted on the latest condition (Table~\ref{tab:many}, Fig.~\ref{fig:many}): on S7 for horizons 1--3 only (1.30--1.32~pp; for 1--6 not replicated, $p_{\mathrm{Holm}}=0.10$), and on S10, shrinking only at H$^+$ origins, on all 64 conditions for both horizon sets (0.83--0.85~pp, $p_{\mathrm{Holm}}<10^{-10}$), its first registered win over a traditional forecaster. Gradient boosting with every condition stored remains better on most conditions (Fig.~\ref{fig:many}b); its higher S10 mean comes from a few calendar conditions where it fails (up to 17~pp), so the S10 verdict for horizons 1--3 is not counted as a win.
 
+% -----------------------------------------------------------------------------
+\subsection{Bounded memory: the replay ensemble V2 (S7, S10)}
+\label{sec:res-d38}
+
+\begin{table}[t]
+  \centering
+  \caption{V2 (replay of 32 rows per condition, three-seed ensemble, predict-before-training calibration) on the
+    unseen conditions of Table~\ref{tab:many}; post hoc development test. Top: mean test RMSE over conditions (pp),
+    main/replicate seeds (GB: one deterministic fit); earlier model: shrunk at H$^+$ only (S10), at every origin
+    (S7); joint TFT: committed D34/D36 values. Bottom: V2 minus comparator (pp, main set; replicate within
+    0.08~pp), verdict, and Q5. Every verdict is replicated.}
+  \label{tab:d38}
+  \setlength{\tabcolsep}{2pt}
+  \scriptsize
+  \begin{tabular}{lcccc}
+    \toprule
+    & \multicolumn{2}{c}{S10} & \multicolumn{2}{c}{S7} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    & $h{=}1$--3 & $h{=}1$--6 & $h{=}1$--3 & $h{=}1$--6 \\
+    \midrule
+    \textbf{V2} & 0.78/0.80 & 1.01/1.00 & 4.12/4.11 & 5.89/5.90 \\
+    GB, all stored & 1.39 & 4.77 & 3.85 & 5.12 \\
+    GB-ER32 & 1.55 & 5.19 & 3.73 & 5.03 \\
+    Lin.\ extrapolation & 1.21 & 1.90 & 5.31 & 7.90 \\
+    Earlier model & 1.04/1.04 & 1.54/1.55 & 5.20/5.18 & 7.49/7.48 \\
+    Joint residual TFT & 0.81/0.81 & 0.96/1.01 & 4.12/4.33 & 5.79/6.18 \\
+    \midrule
+    Q1 vs.\ GB, all stored & $-0.61$ better & $-3.76$ better & $+0.28$ worse & $+0.77$ worse \\
+    Q2 vs.\ GB-ER32 & $-0.77$ better & $-4.17$ better & $+0.39$ worse & $+0.86$ worse \\
+    Q3 vs.\ lin., H$^+$ & $-0.22$ better & $-0.56$ better & $-0.20$ better & $-0.45$ better \\
+    Q4 vs.\ earlier model & $-0.26$ better & $-0.53$ better & $-1.08$ better & $-1.60$ better \\
+    Q5 90\% coverage & 0.91/0.90 & 0.89/0.90 & 0.90/0.91 & 0.89/0.90 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+On S10, V2 answers all five registered questions positively (Table~\ref{tab:d38}); on S7, Q3--Q5 are positive and Q1 and Q2 negative, as gradient boosting with all conditions stored and GB-ER32 are better (replicated). The S10 gains for Q1 and Q2 come mostly from the conditions where gradient boosting fails (all stored, horizons 1--6: mean 4.77, median 0.83~pp): the median differences are small (Q1: $-0.02$ to $-0.03$~pp for horizons 1--3, $-0.13$ to $-0.14$~pp for 1--6; Q2: $-0.05$ to $-0.06$ and $-0.18$ to $-0.19$~pp), and gradient boosting with all conditions stored is better on 22--23 of 64 conditions for 1--3. On S7 it is better on 43--51 of 60 conditions, most at H$^-$ origins, and the two boosting comparators are better by 0.27--0.87~pp on average. V2 shows no replicated difference from the joint TFT, which stores all data. Replay gives most of the gain over the EWC model (0.26--0.81~pp, replicated); the ensemble adds 0.05--0.14~pp, and calibration leaves the error unchanged. Coverage is uneven by ageing type: 0.82/0.83 on S10 calendar conditions for horizons 1--6, 0.81--0.84 on S7 cyclic ones.
+
 % ============================================================
 % V. DISCUSSION and VI. CONCLUSION (condensed to the IEEE conference length)
 % Every number is taken from docs/RESULTS.md and the committed results files.
@@ -638,18 +680,18 @@ Under the continual constraint, the proposed model beats gradient boosting refit
 \section{Discussion}
 \label{sec:discussion}
 
-\emph{Where the proposed model is strongest.} Extrapolation trails on new conditions and gradient boosting on the stream; Residual TFT-EWC holds up in both. Matching extrapolation is itself hard: fade is smooth and tasks are small (21--27 and 135--225 training samples in S1 and S6). Most of the gap to gradient boosting and joint training on unseen conditions comes from storing earlier data, not from the model (Section~\ref{sec:res-many}). Where earlier data cannot be kept (privacy, ownership, volume), continual learning is the natural choice; here, storing every group was still cheap.
+\emph{Where the proposed model is strongest.} Extrapolation trails on new conditions and gradient boosting on the stream; Residual TFT-EWC holds up in both. Matching extrapolation is itself hard: fade is smooth and tasks are small (21--27 and 135--225 training samples in S1 and S6). Most of the gap to gradient boosting and joint training on unseen conditions comes from storing earlier data, not from the model (Section~\ref{sec:res-many}): storing 40 rows per condition leaves the replay variant V2 with no replicated difference from joint training on S7 and S10, though gradient boosting stays better on S7 (Section~\ref{sec:res-d38}). Where earlier data cannot be kept (privacy, ownership, volume), continual learning is the natural choice; here, storing every group was still cheap.
 
 \emph{What drives its accuracy.} Building on the best simple forecaster mattered most. The ablation points to the inputs, not the architecture: the calendar time between checks helps because at 50~$^\circ$C all 20 S6 cells lose more capacity per cycle when checks are further apart.
 
-\emph{Reuse.} The reuse classes screen on relative capacity alone, while reuse also depends on power, safety, absolute capacity and cost. For a group unlike any seen before, such as the 100\% depth-of-discharge condition, neither forecasts nor intervals can be trusted, and pooled coverage hides this.
+\emph{Reuse.} The reuse classes screen on relative capacity alone, while reuse also depends on power, safety, absolute capacity and cost. For a group unlike any seen before, such as the 100\% depth-of-discharge condition, neither forecasts nor intervals can be trusted, and pooled coverage hides this, as it hides V2's shortfall on S10 calendar and S7 cyclic conditions.
 
-\emph{Limitations.} We switched to forecasting after inspecting the first dataset, and decided the ablation and all later experiments after the main results (all but the ablation registered before being run; the stream test of gradient boosting refitted on the newest condition is post hoc; S7 and S10 were added to find a setting where the model wins, the S10 rule after the S7 results). The second-life datasets are small; S6 is aged at 50~$^\circ$C and its ``second life'' continues the same test; SOH is relative to each cell's first valid measurement; forecasts assume the planned usage is known. The TFT settings for unseen conditions were tuned on validation rows of all seven S6 conditions, from one laboratory, and leave-one-condition-out intervals cover only gradient boosting and extrapolation.
+\emph{Limitations.} We switched to forecasting after inspecting the first dataset, and decided the ablation and all later experiments after the main results (all but the ablation registered before being run; the stream test of gradient boosting refitted on the newest condition is post hoc; S7 and S10 were added to find a setting where the model wins, the S10 rule after the S7 results; V2 was designed after their test results had been read per condition, so it is a development test, and a confirmatory test needs data not used so far). The second-life datasets are small; S6 is aged at 50~$^\circ$C and its ``second life'' continues the same test; SOH is relative to each cell's first valid measurement; forecasts assume the planned usage is known. The TFT settings for unseen conditions were tuned on validation rows of all seven S6 conditions, from one laboratory, and leave-one-condition-out intervals cover only gradient boosting and extrapolation.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-We proposed Residual TFT-EWC, a continual learner that forecasts second-life SOH as a scaled-down correction to linear extrapolation. It is the only model compared that holds up both on the stream (level with extrapolation, ahead of gradient boosting, far less forgetting with EWC) and on unseen conditions (ahead of extrapolation, and of gradient boosting held to the same rule on all 64 unseen S10 conditions). Gradient boosting and joint training, which keep all earlier data, stay more accurate there. Intervals held only when calibrated on conditions left out of training, and not outside the training range. Future work should test settings where data cannot be stored and groups are larger, and add power and safety criteria to the screening.
+We proposed Residual TFT-EWC, a continual learner that forecasts second-life SOH as a scaled-down correction to linear extrapolation. It is the only model compared that holds up both on the stream (level with extrapolation, ahead of gradient boosting, far less forgetting with EWC) and on unseen conditions (ahead of extrapolation, and of gradient boosting held to the same rule on all 64 unseen S10 conditions). Gradient boosting and joint training, which keep all earlier data, stay more accurate there. A post hoc replay variant that keeps 40 rows per condition shows no replicated difference from the joint TFT on S7 and S10 and beats gradient boosting on S10 on average, mostly where boosting fails, but not on S7. Intervals held only when calibrated on conditions left out of training, and not outside the training range. Future work should test settings where data cannot be stored and groups are larger, and add power and safety criteria to the screening.
 
 % ============================================================
 % REFERENCES

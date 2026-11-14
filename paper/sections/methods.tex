@@ -137,6 +137,8 @@ a residual hybrid of a simple and a learned forecaster, as in~\cite{zhang2003hyb
   \end{tabular}
 \end{table}
 
+\emph{Bounded-memory variant (V2).} A last experiment, registered after the S7 and S10 test results had been read per condition (a development test, not a confirmatory one), changes the residual TFT in three ways: (i) experience replay replaces EWC: 32 training and 8 validation rows of each finished condition are kept (second arm: 8 and 2), each mini-batch loss adds the squared error on an equally large batch of stored rows, and early stopping also uses the stored validation rows; (ii) the forecast is the mean of the three models of a seed set; (iii) $\alpha_h$ and the half-widths are fitted, per horizon and for H$^+$ and H$^-$ separately, on the forecasts the ensemble made for each condition of the second half of the stream before training on it. Folds, orders and horizon sets are those of the many-condition tests, with seeds 0--2 (main) and 5--7 (replicate); only the learning rate is tuned. The registered questions are whether V2 is more accurate than gradient boosting with all conditions stored (Q1), than gradient boosting on the newest condition plus V2's stored rows (GB-ER32, Q2), than extrapolation at H$^+$ (Q3) and than the earlier model of Table~\ref{tab:many} (Q4) (Wilcoxon over held-out conditions, Holm correction, replication rule; a win also needs the median difference and most conditions to favour V2 in both seed sets), and whether its pooled 90\% coverage reaches 0.85 (Q5); each must hold for horizons 1--3 and 1--6.
+
 \subsection{Hyperparameters, metrics and statistics}
 \label{sec:tuning}
 \label{sec:metrics}
