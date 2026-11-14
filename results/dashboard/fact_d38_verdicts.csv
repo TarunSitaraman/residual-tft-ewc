@@ -1,0 +1,41 @@
+dataset,experiment,seed_set,question,comparison,mean_diff_pp,median_diff_pp,n_favour_v2,n_conditions,p_holm,verdict,answer,coverage_90
+s10,E1,main,Q1,V2 vs GBM-ALL,-0.6064590704,-0.02934586283,42,64,0.002857859616,"replicated, a better",positive,
+s10,E1,replicate,Q1,V2 vs GBM-ALL,-0.5923059149,-0.02166589433,41,64,0.002396382972,"replicated, a better",positive,
+s10,E1,main,Q2,V2 vs GBM-ER32,-0.7725718522,-0.05657819653,50,64,3.737815726e-05,"replicated, a better",positive,
+s10,E1,replicate,Q2,V2 vs GBM-ER32,-0.7584186967,-0.04698224391,47,64,7.376438971e-05,"replicated, a better",positive,
+s10,E1,main,Q3,V2 vs linear extrapolation (H+),-0.2242925915,-0.1720852214,56,64,6.526149048e-08,"replicated, a better",positive,
+s10,E1,replicate,Q3,V2 vs linear extrapolation (H+),-0.2037263819,-0.1832911857,59,64,1.249182119e-07,"replicated, a better",positive,
+s10,E1,main,Q4,V2 vs SEL (D36 model),-0.2586333161,-0.1994365408,63,64,1.478674437e-11,"replicated, a better",positive,
+s10,E1,replicate,Q4,V2 vs SEL (D36 model),-0.2419271598,-0.1896430329,62,64,4.769588418e-11,"replicated, a better",positive,
+s10,E1,main,Q5,V2 90% interval coverage (at least 0.85),,,,,,,positive,0.9109162799
+s10,E1,replicate,Q5,V2 90% interval coverage (at least 0.85),,,,,,,positive,0.9026646037
+s10,E2,main,Q1,V2 vs GBM-ALL,-3.759002128,-0.1433030911,47,64,7.442367752e-06,"replicated, a better",positive,
+s10,E2,replicate,Q1,V2 vs GBM-ALL,-3.769770563,-0.1344222374,46,64,5.603700281e-06,"replicated, a better",positive,
+s10,E2,main,Q2,V2 vs GBM-ER32,-4.174723219,-0.1850180778,57,64,1.341676427e-08,"replicated, a better",positive,
+s10,E2,replicate,Q2,V2 vs GBM-ER32,-4.185491653,-0.1838225969,55,64,9.35517037e-09,"replicated, a better",positive,
+s10,E2,main,Q3,V2 vs linear extrapolation (H+),-0.564526249,-0.5201543423,56,64,9.361560407e-09,"replicated, a better",positive,
+s10,E2,replicate,Q3,V2 vs linear extrapolation (H+),-0.5694979626,-0.4759986414,57,64,6.218116651e-09,"replicated, a better",positive,
+s10,E2,main,Q4,V2 vs SEL (D36 model),-0.5278955997,-0.4663490759,64,64,1.410199229e-11,"replicated, a better",positive,
+s10,E2,replicate,Q4,V2 vs SEL (D36 model),-0.5488894334,-0.490907115,64,64,1.410199229e-11,"replicated, a better",positive,
+s10,E2,main,Q5,V2 90% interval coverage (at least 0.85),,,,,,,positive,0.8919000604
+s10,E2,replicate,Q5,V2 90% interval coverage (at least 0.85),,,,,,,positive,0.9008664114
+s7,E1,main,Q1,V2 vs GBM-ALL,0.2792241569,0.1786680745,17,60,0.007089288373,"replicated, a worse",negative,
+s7,E1,replicate,Q1,V2 vs GBM-ALL,0.2673722182,0.169971362,15,60,0.002364725692,"replicated, a worse",negative,
+s7,E1,main,Q2,V2 vs GBM-ER32,0.3899789169,0.08342289357,26,60,0.02336740521,"replicated, a worse",negative,
+s7,E1,replicate,Q2,V2 vs GBM-ER32,0.3781269781,0.06176253144,25,60,0.02878663932,"replicated, a worse",negative,
+s7,E1,main,Q3,V2 vs linear extrapolation (H+),-0.197396649,-0.18478821,41,60,0.01717304425,"replicated, a better",positive,
+s7,E1,replicate,Q3,V2 vs linear extrapolation (H+),-0.1927011744,-0.1631137672,43,60,0.009401505356,"replicated, a better",positive,
+s7,E1,main,Q4,V2 vs shrunk TFT-EWC (D34 model),-1.075968722,-0.643074461,55,60,3.535825195e-10,"replicated, a better",positive,
+s7,E1,replicate,Q4,V2 vs shrunk TFT-EWC (D34 model),-1.070925715,-0.6027751958,58,60,2.388348726e-10,"replicated, a better",positive,
+s7,E1,main,Q5,V2 90% interval coverage (at least 0.85),,,,,,,positive,0.9049602508
+s7,E1,replicate,Q5,V2 90% interval coverage (at least 0.85),,,,,,,positive,0.9059455828
+s7,E2,main,Q1,V2 vs GBM-ALL,0.7730900376,0.330737297,9,60,4.765553758e-06,"replicated, a worse",negative,
+s7,E2,replicate,Q1,V2 vs GBM-ALL,0.7880752549,0.4206312859,9,60,5.723291138e-06,"replicated, a worse",negative,
+s7,E2,main,Q2,V2 vs GBM-ER32,0.8586654079,0.4183839139,19,60,1.28037617e-05,"replicated, a worse",negative,
+s7,E2,replicate,Q2,V2 vs GBM-ER32,0.8736506252,0.4367590247,17,60,2.293057676e-05,"replicated, a worse",negative,
+s7,E2,main,Q3,V2 vs linear extrapolation (H+),-0.4512951525,-0.4697459222,43,60,0.004386510217,"replicated, a better",positive,
+s7,E2,replicate,Q3,V2 vs linear extrapolation (H+),-0.3800385518,-0.3508865026,44,60,0.007370501054,"replicated, a better",positive,
+s7,E2,main,Q4,V2 vs shrunk TFT-EWC (D34 model),-1.599142376,-1.098137793,59,60,9.757053306e-11,"replicated, a better",positive,
+s7,E2,replicate,Q4,V2 vs shrunk TFT-EWC (D34 model),-1.576564476,-0.9205384799,59,60,1.865747871e-10,"replicated, a better",positive,
+s7,E2,main,Q5,V2 90% interval coverage (at least 0.85),,,,,,,positive,0.8937772056
+s7,E2,replicate,Q5,V2 90% interval coverage (at least 0.85),,,,,,,positive,0.8956900251

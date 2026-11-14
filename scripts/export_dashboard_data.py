@@ -307,6 +307,90 @@ def many_condition_table(d: dict, experiment: str, dataset: str, setting: str) -
     return pd.DataFrame(rows)
 
 
+# ---------- D38: replay ensemble on S10 and S7 (docs/DECISIONS.md, D38) ----------
+D38_DATASETS = ("s10", "s7")
+D38_V2 = "tft_residual_er32_ens_cal"
+D38_SEED_SETS = ("main", "replicate")
+#: The registered primary questions Q1-Q4 (comparator, metric); Q4's comparator is the file's ``previous_model``
+#: (S10: SEL; S7: shrunk). Q5 is the pooled 90 % coverage of V2 (no test).
+D38_QUESTIONS = (("Q1", "gbm_all", "rmse"), ("Q2", "gbm_er32", "rmse"), ("Q3", "linear_extrapolation", "rmse_hplus"),
+                 ("Q4", None, "rmse"))
+D38_NAMES = {
+    "tft_residual_er32_ens_cal": "V2: replay 32, ensemble, calibrated",
+    "tft_residual_er32_ens": "Replay 32, ensemble", "tft_residual_er32": "Replay 32, single run",
+    "tft_residual_er8_ens_cal": "Replay 8, ensemble, calibrated", "tft_residual_er8_ens": "Replay 8, ensemble",
+    "tft_residual_er8": "Replay 8, single run",
+    "tft_residual_ewc": "A0: residual TFT + EWC, single run", "tft_residual_ewc_ens": "A0 ensemble",
+    "tft_residual_ewc_ens_cal": "A0 ensemble, calibrated",
+    "tft_residual_ewc_selective": "SEL: residual TFT-EWC, shrunk at H+ only (D36)",
+    "tft_residual_ewc_shrunk": "Residual TFT-EWC, shrunk (D34)",
+    "tft_residual_joint": "Residual TFT, joint (all data stored)",
+    "gbm_all": "GBM-ALL (all data stored)", "gbm_er32": "GBM-ER32 (32 stored rows per condition)",
+    "gbm_er8": "GBM-ER8 (8 stored rows per condition)", "gbm_last": "GBM-LAST (latest condition only)",
+    "linear_extrapolation": "Linear extrapolation", "persistence": "Persistence", "ridge_shared": "Ridge",
+}
+D38_SHORT = {"gbm_all": "GBM-ALL", "gbm_er32": "GBM-ER32", "linear_extrapolation": "linear extrapolation (H+)",
+             "tft_residual_ewc_selective": "SEL (D36 model)", "tft_residual_ewc_shrunk": "shrunk TFT-EWC (D34 model)"}
+D38_VERDICT_COLS = ("dataset", "experiment", "seed_set", "question", "comparison", "mean_diff_pp", "median_diff_pp",
+                    "n_favour_v2", "n_conditions", "p_holm", "verdict", "answer", "coverage_90")
+D38_METHOD_COLS = ("dataset", "experiment", "seed_set", "method", "mean_rmse_pp", "median_rmse_pp", "coverage_90",
+                   "coverage_80")
+
+
+def d38_tables(results: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """(verdicts by question, RMSE by method) of results/forecasting_d38_<dataset>_<e>.json.
+
+    Every number is read from the file. ``answer`` applies the registered rule of D38 to stored fields: a question is
+    positive for a dataset only if it holds in E1 and in E2, where Q1-Q4 hold when the verdict is ``in_favour`` (the
+    D38 direction rule) and Q5 holds when ``coverage_check.adequate``; it is empty unless both files are present.
+    Q5 has no test, so its verdict, differences, counts and p-value are empty."""
+    verdicts, methods, holds = [], [], {}
+    for ds in D38_DATASETS:
+        for e in SETTINGS:
+            d = load_json(results, f"forecasting_d38_{ds}_{e}")
+            if d is None:
+                continue
+            v2 = d.get("v2", D38_V2)
+            cov = (d.get("descriptive") or {}).get("coverage") or {}
+            for q, b, metric in D38_QUESTIONS:
+                b = b or d.get("previous_model")
+                ver = next((x for x in d.get("verdicts", []) if x.get("family") == "primary" and x.get("a") == v2
+                            and x.get("b") == b and x.get("metric") == metric), None)
+                holds.setdefault((ds, q), []).append(bool(ver and ver.get("in_favour")))
+                for s in D38_SEED_SETS:
+                    t = next((x for x in d.get("tests", []) if x.get("set") == s and x.get("family") == "primary"
+                              and x.get("a") == v2 and x.get("b") == b and x.get("metric") == metric), {})
+                    verdicts.append({"dataset": ds, "experiment": e.upper(), "seed_set": s, "question": q,
+                                     "comparison": f"V2 vs {D38_SHORT.get(b, b)}", "mean_diff_pp": num(t.get("mean_diff")),
+                                     "median_diff_pp": num(t.get("median_diff")),
+                                     "n_favour_v2": t.get("n_conditions_a_better"), "n_conditions": t.get("n"),
+                                     "p_holm": num(t.get("p_holm")), "verdict": (ver or {}).get("verdict"),
+                                     "coverage_90": math.nan})
+            check = (d.get("descriptive") or {}).get("coverage_check") or {}
+            holds.setdefault((ds, "Q5"), []).append(check.get("method") == v2 and bool(check.get("adequate")))
+            for s in D38_SEED_SETS:
+                verdicts.append({"dataset": ds, "experiment": e.upper(), "seed_set": s, "question": "Q5",
+                                 "comparison": "V2 90% interval coverage (at least 0.85)",
+                                 "coverage_90": num(((cov.get(v2) or {}).get(s) or {}).get("90", {}).get("pooled"))})
+            desc = d.get("descriptive") or {}
+            med = {(r["set"], r["method"]): r.get("rmse") for r in desc.get("median_over_conditions", [])}
+            for r in desc.get("mean_over_conditions", []):
+                c = (cov.get(r["method"]) or {}).get(r["set"]) or {}
+                methods.append({"dataset": ds, "experiment": e.upper(), "seed_set": r["set"],
+                                "method": D38_NAMES.get(r["method"], r["method"]), "mean_rmse_pp": num(r.get("rmse")),
+                                "median_rmse_pp": num(med.get((r["set"], r["method"]))),
+                                "coverage_90": num((c.get("90") or {}).get("pooled")),
+                                "coverage_80": num((c.get("80") or {}).get("pooled"))})
+    vt = pd.DataFrame(verdicts, columns=list(D38_VERDICT_COLS))
+    if len(vt):
+        answer = {k: ("positive" if all(h) else "negative") if len(h) == len(SETTINGS) else None
+                  for k, h in holds.items()}
+        vt["answer"] = [answer[(ds, q)] for ds, q in zip(vt["dataset"], vt["question"])]
+        for c in ("n_favour_v2", "n_conditions"):
+            vt[c] = pd.to_numeric(vt[c], errors="coerce").astype("Int64")
+    return vt, pd.DataFrame(methods, columns=list(D38_METHOD_COLS))
+
+
 # ---------- other committed tables ----------
 def coverage_table(d: dict, setting: str, experiment: str = "D27", names: dict | None = None) -> pd.DataFrame:
     """Split-conformal intervals (D27 rules, D28 arms): pooled and per-condition coverage, interval score and width."""
@@ -648,6 +732,8 @@ def build_results(results: Path) -> dict[str, pd.DataFrame]:
         frames["fact_d30_group"].insert(1, "protocol", "P2")
     frames = {"dim_group": dim_group(), "dim_method": dim_method(m for m in methods if not m.startswith("vs ")),
               **frames}
+    # D38 tables carry readable method names (not keys of dim_method), so they are added after dim_method is built.
+    frames["fact_d38_verdicts"], frames["fact_d38_method"] = d38_tables(results)
     return frames
 
 
