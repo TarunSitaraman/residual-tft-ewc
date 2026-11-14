@@ -1,4 +1,4 @@
-// Studies page: every experiment from D36 back to the first benchmark, newest first.
+// Studies page: every experiment from D38 back to the first benchmark, newest first.
 // Text and numbers are condensed from docs/RESULTS.md (verdicts as registered in docs/DECISIONS.md); E1 = horizons 1-3,
 // E2 = horizons 1-6; two values a / b are the main and replicate seed sets. Update this file when RESULTS.md changes.
 import { el } from "./views.js";
@@ -6,6 +6,21 @@ import { el } from "./views.js";
 // tone: good = the registered result favours the proposed model or the hypothesis; bad = against it; level = equivalent;
 // open = not established or descriptive only.
 export const STUDIES = [
+  { id: "D38", date: "9-13 Nov 2026", kind: "Protocol fixed in advance; development test, not confirmatory", title: "Replay ensemble on the S10 and S7 conditions",
+    q: "Does a residual TFT with a small replay memory, a three-seed ensemble and predict-before-training calibration (V2) beat gradient boosting, linear extrapolation and the earlier model on the held-out conditions of D36 and D34?",
+    setup: "V2 keeps 32 training and 8 validation rows of each earlier condition and replays them while learning later ones (no EWC); its forecast is the mean of three seeds, calibrated on conditions forecast before they were trained on. Same folds, orders and conditions as D36 (S10, 64) and D34 (S7, 60). Not confirmatory: those conditions had already been tested and read per condition. The S7 results files record a dirty tree (paper edits only).",
+    head: ["Method, mean RMSE over conditions (pp)", "S10 E1", "S10 E2", "S7 E1", "S7 E2"],
+    rows: [["V2: replay ensemble, calibrated", "0.782 / 0.796", "1.014 / 1.003", "4.125 / 4.113", "5.890 / 5.905"],
+      ["Earlier proposed model (S10 SEL, S7 shrunk)", "1.040 / 1.038", "1.542 / 1.552", "5.201 / 5.184", "7.489 / 7.481"],
+      ["Joint residual TFT (all stored)", "0.813 / 0.807", "0.961 / 1.009", "4.123 / 4.328", "5.790 / 6.182"],
+      ["GBM-ALL (all conditions stored)", "1.388", "4.773", "3.845", "5.117"], ["GBM-ER32 (the same 32 stored rows)", "1.554", "5.189", "3.735", "5.031"],
+      ["Linear extrapolation", "1.215", "1.900", "5.313", "7.896"]],
+    verdicts: [["S10: all five questions positive in E1 and E2 (better than GBM-ALL, GBM-ER32, extrapolation at H+ and the earlier model, replicated; pooled 90 % coverage 0.89-0.91)", "good"],
+      ["S10: the Q1 and Q2 mean gains come mainly from conditions where gradient boosting fails; median gains 0.02-0.19 pp, and GBM-ALL is better on 22-23 of 64 conditions in E1", "open"],
+      ["S7: Q1 and Q2 negative: GBM-ALL and GBM-ER32 more accurate on most conditions, replicated", "bad"],
+      ["S7: Q3, Q4 and Q5 positive in E1 and E2", "good"]],
+    reading: "Replay accounts for most of the gain over the EWC model, and V2 is about as accurate as the joint residual TFT, which stores all data. Gradient boosting with stored data stays ahead on S7. Intervals are near nominal overall but uneven by ageing type: below 0.85 on S10 calendar conditions in E2 and on S7 cyclic conditions.",
+    link: ["#page=dashboard&tab=d38", "Open the D38 verdict grid on the dashboard"] },
   { id: "D36", date: "4 Nov 2026", kind: "Pre-registered (post hoc in motivation)", title: "64 unseen conditions on a second many-condition dataset (S10)",
     q: "On a new dataset with many usage conditions, does the continual model beat gradient boosting held to the same no-storage rule, condition by condition?",
     setup: "S10 (Stroebl et al. 2024, NMC 21700 cells, calendar and cyclic ageing, 10-45 °C), 64 held-out conditions. The D34 protocol, with the learned correction shrunk only where extrapolation has a fade rate (H+ origins); this rule was fixed after the D34 results.",
@@ -126,7 +141,8 @@ export const STUDIES = [
     reading: "Two artefacts were corrected before any model was trained. The best forecasters beat persistence on both datasets, but not every method does." },
 ];
 
-const AFTER = [["D33", "Exploratory search for a better forecaster", "Exploratory; not reported and not evidence."]];
+const AFTER = [["D37", "Post hoc reading of the D25, D26, D34 and D36 results", "Exploratory; not reported and not evidence. It informed the design of D38."],
+  ["D33", "Exploratory search for a better forecaster", "Exploratory; not reported and not evidence."]];
 
 const TONE_WORD = { good: "For", bad: "Against", level: "Level", open: "Open" };
 
@@ -141,14 +157,15 @@ function card(s) {
         el("thead", {}, el("tr", {}, s.head.map((h, i) => el("th", { scope: "col", class: i ? "num" : "", text: h })))),
         el("tbody", {}, s.rows.map((r) => el("tr", {}, r.map((c, i) => el(i ? "td" : "th", { scope: i ? null : "row", class: i ? "num" : "", text: c }))))))),
       el("ul", { class: "verdicts" }, s.verdicts.map(([t, tone]) => el("li", { class: `vd ${tone}` }, el("span", { class: "vt", text: TONE_WORD[tone] }), el("span", { text: t })))),
-      el("p", { class: "sread", text: s.reading })));
+      el("p", { class: "sread", text: s.reading }),
+      s.link ? el("p", {}, el("a", { href: s.link[0], text: s.link[1] })) : null));
 }
 
 export function renderStudies(root) {
   root.replaceChildren(
     el("header", { class: "pagehead" }, el("h1", { text: "Studies" }),
-      el("p", { class: "deck", text: "Every experiment from D36 back to the first benchmark, newest first. Each was fixed in docs/DECISIONS.md before it ran unless marked otherwise; null and negative results are listed with the positive ones." })),
-    el("section", { class: "sect after" }, el("h2", { text: "After D36" }),
+      el("p", { class: "deck", text: "Every experiment from D38 back to the first benchmark, newest first. Each was fixed in docs/DECISIONS.md before it ran unless marked otherwise; null and negative results are listed with the positive ones." })),
+    el("section", { class: "sect after" }, el("h2", { text: "Exploratory work, not reported" }),
       el("ul", { class: "after-list" }, AFTER.map(([id, t, s]) => el("li", {}, el("b", { text: id }), el("span", { text: t }), el("small", { text: s }))))),
     el("nav", { class: "study-index", "aria-label": "Studies" }, STUDIES.map((s) => el("a", { href: `#page=studies&sec=study-${s.id}`, "data-sec": `study-${s.id}`, text: s.id }))),
     el("div", { class: "studies" }, STUDIES.map(card)),

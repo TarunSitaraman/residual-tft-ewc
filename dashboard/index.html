@@ -29,6 +29,7 @@
     </nav>
     <div class="bar-end">
       <a id="platform-link" href="#">Data platform</a>
+      <button type="button" id="glossary-open" aria-haspopup="dialog" aria-controls="glossary">Glossary</button>
       <button type="button" id="theme" aria-label="Switch colour theme">Auto theme</button>
     </div>
   </div>
@@ -44,6 +45,7 @@
       <button role="tab" id="t-continual" aria-controls="tab-continual" aria-selected="false" tabindex="-1">Continual learning</button>
       <button role="tab" id="t-reuse" aria-controls="tab-reuse" aria-selected="false" tabindex="-1">Reuse and intervals</button>
       <button role="tab" id="t-many" aria-controls="tab-many" aria-selected="false" tabindex="-1">Many conditions</button>
+      <button role="tab" id="t-d38" aria-controls="tab-d38" aria-selected="false" tabindex="-1">Replay ensemble (D38)</button>
       <button role="tab" id="t-evidence" aria-controls="tab-evidence" aria-selected="false" tabindex="-1">Registered results</button>
     </nav>
   </div>
@@ -87,7 +89,7 @@
         <div class="kpis" id="kpis" aria-label="Headline results"></div>
         <div id="overview-finding"></div>
         <figure class="fig">
-          <div class="fig-head"><h2>Test error against the baselines</h2></div>
+          <div class="fig-head"><h2 id="headline-title">Test error against the baselines</h2></div>
           <div class="fig-body" id="headline-chart"></div>
           <figcaption id="headline-caption">Test RMSE of SOH in percentage points. Proposed model: mean of 50 runs in each seed set. Baselines are single deterministic fits. Lower is better.</figcaption>
           <details class="more"><summary>Show the table with significance verdicts</summary><div class="scroll" id="headline"></div></details>
@@ -102,6 +104,7 @@
       <section class="tab" id="tab-continual" role="tabpanel" aria-labelledby="t-continual" hidden></section>
       <section class="tab" id="tab-reuse" role="tabpanel" aria-labelledby="t-reuse" hidden></section>
       <section class="tab" id="tab-many" role="tabpanel" aria-labelledby="t-many" hidden></section>
+      <section class="tab" id="tab-d38" role="tabpanel" aria-labelledby="t-d38" hidden></section>
       <section class="tab" id="tab-evidence" role="tabpanel" aria-labelledby="t-evidence" hidden></section>
     </div>
 
@@ -120,6 +123,11 @@
     <p>Data: Moy et al. 2024 (S1) and Wheeler et al. 2025 (S6), both CC BY 4.0. SOH is relative to each cell's first valid capacity check, not to nominal capacity.</p>
   </footer>
 </div>
+<dialog class="glossary" id="glossary" aria-labelledby="glossary-title">
+  <div class="glossary-head"><h2 id="glossary-title">Glossary</h2>
+    <form method="dialog"><button type="submit" class="close">Close</button></form></div>
+  <dl class="defs" id="glossary-body"></dl>
+</dialog>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

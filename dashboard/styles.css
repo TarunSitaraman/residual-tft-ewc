@@ -59,7 +59,7 @@ button, select { font: inherit; color: inherit; }
 .bar-in { max-width: 1320px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 28px; min-height: 58px; }
 .wordmark { font: 700 19px/1 var(--display); letter-spacing: -.005em; color: var(--bar-ink); text-decoration: none; white-space: nowrap; }
 .wordmark span { font-weight: 400; color: var(--bar-muted); }
-.tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; flex: 1; align-self: stretch; }
+.tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; flex: 1; align-self: stretch; position: relative; }
 .tabs button { background: none; border: 0; padding: 0 12px; color: var(--bar-muted); font: 500 14px/1 var(--sans); cursor: pointer;
   white-space: nowrap; border-bottom: 2px solid transparent; border-top: 2px solid transparent; }
 .tabs button:hover { color: var(--bar-ink); }
@@ -268,7 +268,8 @@ tableau-viz { display: block; width: 100%; }
 .site-nav a { display: flex; align-items: center; padding: 0 11px; color: var(--bar-muted); text-decoration: none; font-weight: 500; font-size: 14px;
   white-space: nowrap; border-bottom: 2px solid transparent; border-top: 2px solid transparent; }
 .site-nav a:hover { color: var(--bar-ink); border-bottom-color: var(--rule); }
-.site-nav a[aria-current="page"] { color: var(--bar-ink); font-weight: 600; border-bottom: 3px solid var(--accent); margin-bottom: -3px; }
+/* Current page: a full-height accent rule inside the link (a negative margin would be clipped by the scrolling nav). */
+.site-nav a[aria-current="page"] { color: var(--bar-ink); font-weight: 600; border-bottom: 3px solid var(--accent); background: var(--accent-soft); }
 .site-nav a:focus-visible { outline-offset: -4px; }
 .dashbar { background: var(--surface-2); border-bottom: 1px solid var(--rule); }
 .dashbar-in { max-width: 1320px; margin: 0 auto; padding: 0 24px; display: flex; align-items: stretch; gap: 18px; min-height: 44px; }
@@ -420,3 +421,48 @@ table.stbl th[scope="row"] { border-bottom: 1px solid var(--rule-soft); }
 .seg button:hover { color: var(--ink); background: var(--surface-2); }
 .seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
 .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+/* ---------- Plain-language summary, reading guide and glossary ---------- */
+.plain { margin: 0; max-width: 78ch; font-size: 16.5px; line-height: 1.65; color: var(--ink); }
+.steps.guide li a { font-weight: 600; font-size: 13.5px; }
+.bar-end button { min-height: 32px; }
+dialog.glossary { width: min(760px, calc(100vw - 32px)); max-height: min(85vh, 900px); padding: 18px 20px 20px; border: 1px solid var(--rule);
+  border-top: 3px solid var(--ink); background: var(--surface); color: var(--ink); box-shadow: 0 18px 48px -18px rgba(0,0,0,.45); }
+dialog.glossary::backdrop { background: rgba(10, 18, 16, .45); }
+.glossary-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+.glossary-head h2 { font-size: 22px; }
+.glossary-head form { margin: 0; }
+.glossary .close { font-size: 14px; padding: 4px 2px; }
+
+/* ---------- D38 verdict grid ---------- */
+table.vgrid { background: var(--surface); }
+table.vgrid th[scope="row"] { white-space: normal; min-width: 160px; color: var(--ink); font-weight: 500; }
+table.vgrid th.colh { text-align: center; }
+table.vgrid td.v { text-align: center; white-space: nowrap; }
+.ans { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13px; }
+.ans::before { content: ""; width: 9px; height: 9px; background: currentColor; }
+.ans.positive { color: var(--good); }
+.ans.negative { color: var(--bad); }
+.ans.negative::before { background: none; border: 2px solid currentColor; box-sizing: border-box; }
+.ans.na { color: var(--muted); font-weight: 400; }
+.ans.na::before { display: none; }
+.vnum { display: block; font-size: 12.5px; color: var(--ink-2); font-weight: 400; }
+
+/* Room for every page name next to the wordmark: the tagline goes first when space runs short. */
+@media (max-width: 1500px) and (min-width: 901px) {
+  .wordmark span { display: none; }
+  .bar-in { gap: 20px; }
+  .site-nav a { padding: 0 9px; }
+}
+
+/* ---------- Phone width ---------- */
+@media (max-width: 600px) {
+  .wordmark span { display: none; }
+  .site-nav { flex-wrap: wrap; overflow: visible; margin: 0; padding-bottom: 6px; gap: 0; }
+  .site-nav a { padding: 9px 9px; }
+  .filters label.off { display: none; }   /* filters the current pane does not read */
+  .page, .filters-in, .bar-in, .dashbar-in { padding-left: 16px; padding-right: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
