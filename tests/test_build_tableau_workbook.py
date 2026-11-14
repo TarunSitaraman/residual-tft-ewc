@@ -1,16 +1,20 @@
 """Tests of the Tableau kit (scripts/build_tableau_workbook.py).
 
 SYNTHETIC TEST DATA ONLY: inputs are written by the dashboard export from synthetic results files in a pytest
-temporary directory; nothing is written into the repository or used for reported results (AGENTS.md).
+temporary directory; nothing is written into the repository or used for reported results (AGENTS.md). The D38
+tests also read the committed D38 results files (read only, copied into the temporary directory) to check the
+export against the run log in docs/DECISIONS.md.
 """
 
 from __future__ import annotations
 
+import json
 import sys
 import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import pytest
 
@@ -139,3 +143,133 @@ def test_main_writes_kit_and_twb_contract(exported, tmp_path: Path, monkeypatch)
     # Calculated fields used by a worksheet carry their formula in its dependencies.
     soh_ws = ET.tostring(sheets["SOH trajectories"], encoding="unicode")
     assert "IF [valid] THEN [soh_pct] END" in soh_ws
+
+
+# ---------- D38 (S10, S7): the committed results files, read only; nothing is written into the repository ----------
+D38_FILES = [f"forecasting_d38_{ds}_{e}.json" for ds in ("s10", "s7") for e in ("e1", "e2")]
+
+
+@pytest.fixture()
+def results_with_d38(results_dir: Path) -> Path:  # noqa: F811
+    for name in D38_FILES:
+        (results_dir / name).write_bytes((ROOT / "results" / name).read_bytes())
+    return results_dir
+
+
+def _d38_row(vt: pd.DataFrame, ds: str, e: str, q: str, s: str = "main") -> pd.Series:
+    return vt[(vt["dataset"] == ds) & (vt["experiment"] == e) & (vt["question"] == q) & (vt["seed_set"] == s)].iloc[0]
+
+
+def test_d38_export_schema_and_run_log_values():
+    vt, mt = X.d38_tables(ROOT / "results")
+    assert list(vt.columns) == ["dataset", "experiment", "seed_set", "question", "comparison", "mean_diff_pp",
+                                "median_diff_pp", "n_favour_v2", "n_conditions", "p_holm", "verdict", "answer",
+                                "coverage_90"]
+    assert list(mt.columns) == ["dataset", "experiment", "seed_set", "method", "mean_rmse_pp", "median_rmse_pp",
+                                "coverage_90", "coverage_80"]
+    # 2 datasets x 2 experiments x 2 seed sets x 5 questions.
+    assert len(vt) == 40 and set(vt["dataset"]) == {"s10", "s7"} and set(vt["experiment"]) == {"E1", "E2"}
+    # docs/DECISIONS.md, D38 run log, 11 Nov 2026 (S10): Q1 E1 -0.606, median -0.029, 42 of 64, p_Holm 0.003.
+    r = _d38_row(vt, "s10", "E1", "Q1")
+    assert r["comparison"] == "V2 vs GBM-ALL" and round(r["mean_diff_pp"], 3) == -0.606
+    assert round(r["median_diff_pp"], 3) == -0.029 and r["n_favour_v2"] == 42 and r["n_conditions"] == 64
+    assert round(r["p_holm"], 3) == 0.003 and r["verdict"] == "replicated, a better" and r["answer"] == "positive"
+    # 13 Nov 2026 (S7): Q1 E2 +0.773, median +0.331, 9 of 60, p_Holm 5e-6, GBM-ALL better.
+    r = _d38_row(vt, "s7", "E2", "Q1")
+    assert round(r["mean_diff_pp"], 3) == 0.773 and round(r["median_diff_pp"], 3) == 0.331
+    assert r["n_favour_v2"] == 9 and r["n_conditions"] == 60 and float(f"{r['p_holm']:.0e}") == 5e-6
+    assert r["verdict"] == "replicated, a worse" and r["answer"] == "negative"
+    # Registered answers, one per dataset and question: S10 all positive; S7 Q1 and Q2 negative, Q3-Q5 positive.
+    ans = vt.groupby(["dataset", "question"])["answer"].agg(lambda a: sorted(set(a)))
+    assert all(len(a) == 1 for a in ans)
+    assert {q: a[0] for (ds, q), a in ans.items() if ds == "s10"} == dict.fromkeys(("Q1", "Q2", "Q3", "Q4", "Q5"),
+                                                                                   "positive")
+    assert {q: a[0] for (ds, q), a in ans.items() if ds == "s7"} == {
+        "Q1": "negative", "Q2": "negative", "Q3": "positive", "Q4": "positive", "Q5": "positive"}
+    # Q4 compares with each dataset's earlier proposed model.
+    assert _d38_row(vt, "s10", "E1", "Q4")["comparison"] == "V2 vs SEL (D36 model)"
+    assert _d38_row(vt, "s7", "E1", "Q4")["comparison"] == "V2 vs shrunk TFT-EWC (D34 model)"
+    # Q5: coverage only (0.911 / 0.903 on S10 E1); Q1-Q4: no coverage.
+    q5 = vt[vt["question"] == "Q5"]
+    assert q5[["mean_diff_pp", "median_diff_pp", "n_favour_v2", "n_conditions", "p_holm", "verdict"]].isna().all().all()
+    assert round(_d38_row(vt, "s10", "E1", "Q5")["coverage_90"], 3) == 0.911
+    assert round(_d38_row(vt, "s10", "E1", "Q5", "replicate")["coverage_90"], 3) == 0.903
+    assert vt.loc[vt["question"] != "Q5", "coverage_90"].isna().all()
+    # Method table: V2 S10 E1 main mean 0.782, median 0.333, coverage 0.911 / 0.820; S7 E1 GBM-ALL 3.845, no coverage.
+    m = mt.set_index(["dataset", "experiment", "seed_set", "method"])
+    v2 = m.loc[("s10", "E1", "main", X.D38_NAMES[X.D38_V2])]
+    assert [round(v2[c], 3) for c in ("mean_rmse_pp", "median_rmse_pp", "coverage_90", "coverage_80")] == \
+        [0.782, 0.333, 0.911, 0.820]
+    g = m.loc[("s7", "E1", "main", X.D38_NAMES["gbm_all"])]
+    assert round(g["mean_rmse_pp"], 3) == 3.845 and np.isnan(g["coverage_90"]) and np.isnan(g["coverage_80"])
+    assert set(mt["method"]) <= set(X.D38_NAMES.values())
+
+
+def test_d38_export_writes_csvs_and_counts(results_with_d38: Path, tmp_path: Path):
+    out_r = tmp_path / "out_r"
+    assert X.main(["--results", str(results_with_d38), "--data-root", str(tmp_path / "none"),
+                   "--out-results", str(out_r), "--out-data", str(tmp_path / "none_out")]) == 0
+    v, m = pd.read_csv(out_r / "fact_d38_verdicts.csv"), pd.read_csv(out_r / "fact_d38_method.csv")
+    assert tuple(v.columns) == X.D38_VERDICT_COLS and tuple(m.columns) == X.D38_METHOD_COLS
+    manifest = json.loads((out_r / "manifest.json").read_text())
+    summary = json.loads((out_r / "summary.json").read_text())
+    for name, df in (("fact_d38_verdicts", v), ("fact_d38_method", m)):
+        assert manifest["row_counts"][name] == summary["counts"][name] == len(df)
+    assert set(D38_FILES) <= {Path(p).name for p in manifest["sources"]}
+    # The readable D38 names are not method keys: dim_method is unchanged by D38.
+    assert not set(pd.read_csv(out_r / "dim_method.csv")["method"]) & set(X.D38_NAMES.values())
+
+
+def test_d38_sheets_placeholder_without_results(exported):
+    tables = T.sheets(*exported, CONTRACT)
+    assert tables["D38Verdicts"].empty and {"Dataset", "answer", "verdict"} <= set(tables["D38Verdicts"])
+    assert tables["D38Methods"].empty and "mean_rmse_pp" in tables["D38Methods"]
+
+
+def test_d38_sources_sheets_and_dashboard(results_with_d38: Path, tmp_path: Path):
+    out_r = tmp_path / "out_r"
+    X.main(["--results", str(results_with_d38), "--data-root", str(tmp_path / "none"), "--out-results", str(out_r),
+            "--out-data", str(tmp_path / "none_out")])
+    tables = T.sheets(out_r, tmp_path / "none" / "dashboard", CONTRACT)
+    assert set(tables["D38Verdicts"]["Dataset"]) == set(tables["D38Methods"]["Dataset"]) == {"S10", "S7"}
+    kit = tmp_path / "kit"
+    assert T.main(["--results-out", str(out_r), "--data-root", str(tmp_path / "none"), "--out", str(kit)]) == 0
+    root = ET.parse(kit / "residual_tft_ewc.twb").getroot()
+    # Each D38 source is an Excel sheet with its own enabled extract (a direct .hyper source is "not an extract").
+    dss = {d.get("caption"): d for d in root.find("datasources") if d.get("name") != "Parameters"}
+    for name in ("D38Verdicts", "D38Methods"):
+        d = dss[name]
+        assert d.find("connection/named-connections/named-connection/connection").get("class") == "excel-direct"
+        assert list(d)[-1].tag == "extract" and d.find("extract").get("enabled") == "true"
+        assert d.find("extract/connection").get("dbname") == T.hyper_rel(name)
+    with zipfile.ZipFile(kit / "residual_tft_ewc.twbx") as z:
+        assert {T.hyper_rel("D38Verdicts"), T.hyper_rel("D38Methods")} <= set(z.namelist())
+    sheets = {w.get("name"): w for w in root.iter("worksheet")}
+    vw, mw = sheets["D38 verdicts by question"], sheets["D38 RMSE by method"]
+    for w, ds in ((vw, "D38Verdicts"), (mw, "D38Methods")):
+        # The sheet's data source is listed first (no Parameters here), and the sheet has a title.
+        assert [d.get("name") for d in w.find("table/view/datasources")] == [T._ds_name(ds)]
+        assert w.find("layout-options/title/formatted-text/run").text
+    # Verdicts: dataset and experiment as columns, questions as rows, colour by the registered answer.
+    cols, rows = vw.find("table/cols").text, vw.find("table/rows").text
+    assert "[none:Dataset:nk]" in cols and "[none:experiment:nk]" in cols and "[none:question:nk]" in rows
+    assert vw.find("table/panes/pane/encodings/color").get("column").endswith("[none:answer:nk]")
+    assert "ISNULL([mean_diff_pp])" in ET.tostring(vw, encoding="unicode")
+    assert "[avg:mean_rmse_pp:qk]" in mw.find("table/cols").text
+    # The dashboard places both sheets, each under a plain-language caption, with the S7/S10 attribution.
+    db = next(d for d in root.iter("dashboard") if d.get("name") == "D38 replay ensemble")
+    assert [z.get("name") for z in db.iter("zone") if z.get("name")] == ["D38 verdicts by question",
+                                                                         "D38 RMSE by method"]
+    texts = [r.text for z in db.iter("zone") if z.get("type-v2") == "text" for r in z.iter("run")]
+    assert any("Lower RMSE is better" in t for t in texts)
+    assert any("Q1-Q4 compare" in t and "positive = V2 better" in t for t in texts)
+    assert any("S7" in t and "S10" in t and "not a confirmatory" in t for t in texts)
+    assert sum(int(z.get("h")) for z in db.find("zones/zone")) <= 100000
+    w = next(w for w in root.iter("window") if w.get("name") == "D38 replay ensemble")
+    assert {v.get("name") for v in w.iter("viewpoint")} == {"D38 verdicts by question", "D38 RMSE by method"}
+    from tableauhyperapi import Connection, HyperProcess, TableName, Telemetry
+    with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU, parameters={"log_dir": str(tmp_path)}) as hp:
+        for name in ("D38Verdicts", "D38Methods"):
+            with Connection(hp.endpoint, str(kit / T.hyper_rel(name))) as con:
+                n = con.execute_scalar_query(f"SELECT COUNT(*) FROM {TableName('Extract', 'Extract')}")
+                assert n == len(tables[name]), name

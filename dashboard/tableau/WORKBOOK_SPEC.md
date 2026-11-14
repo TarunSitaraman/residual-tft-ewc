@@ -6,7 +6,7 @@ Inputs come from `python scripts/export_dashboard_data.py`:
 
 | Folder | Files | In Git |
 |---|---|---|
-| `results/dashboard/` | `dim_group`, `dim_method`, `fact_stream_run`, `fact_stream_task`, `fact_stream_baseline`, `fact_unseen_run`, `fact_unseen_fold`, `fact_tests`, `fact_verdicts`, `fact_coverage`, `fact_horizon`, `fact_d30_group`, `fact_headline` (CSV) | yes |
+| `results/dashboard/` | `dim_group`, `dim_method`, `fact_stream_run`, `fact_stream_task`, `fact_stream_baseline`, `fact_unseen_run`, `fact_unseen_fold`, `fact_tests`, `fact_verdicts`, `fact_coverage`, `fact_horizon`, `fact_d30_group`, `fact_headline`, `fact_d38_verdicts`, `fact_d38_method` (CSV) | yes |
 | `data/dashboard/` | `fact_soh`, `fact_predictions` (CSV, built from the data folder) | no |
 
 **Starting point:** `python scripts/build_tableau_workbook.py` writes `data/dashboard/tableau/Data/tableau_source.xlsx`, with one self-contained, pre-filtered sheet per view, and `residual_tft_ewc.twb`, a starter workbook that implements §1–§3 as generated XML. Open the `.twb` and correct it against this spec rather than building from scratch. It was generated without Tableau, so expect to fix sorts, mark sizes and colours.
@@ -22,6 +22,7 @@ Use **extracts** (Tableau Public has no live connections). Commit the `.twb` to 
 | Dashboard 3 | `Forecast accuracy` | `TABLEAU.views.accuracy` |
 | Dashboard 4 | `Continual learning` | `TABLEAU.views.continual` |
 | Dashboard 5 | `Reuse & uncertainty` | `TABLEAU.views.reuse` |
+| Dashboard 6 | `D38 replay ensemble` | not yet in `dashboard/config.js`; S10 and S7 only, so the S1/S6 `Dataset` filter values do not apply |
 | Field | `Dataset` | rename `dataset`; values `S1`, `S6` |
 | Field | `Setting` | rename `setting`; values `e1`, `e2` (alias them "E1 (h = 1-3)", "E2 (h = 1-6)") |
 | Field | `Protocol` | rename `protocol`; values `P1`, `P2` |
@@ -75,6 +76,9 @@ Family colour order (fixed, never cycled; taken from `scripts/make_d24_outputs.p
    - *Parity plot*: `soh_pred` against `soh_target`, with the 1:1 line.
    - *Coverage* (`fact_coverage`): `coverage` per `Group` at `level` 0.9, by calibration rule, with a reference line at 0.9.
    - *Within one class*: share of `Within one class` by method.
+6. **D38 replay ensemble** (`fact_d38_verdicts`, `fact_d38_method`; docs/DECISIONS.md, D38). Two data sources, one per table (they have different grains), each an extracted Excel sheet like the others. `Dataset` holds `S10` and `S7` (the export writes `s10`, `s7`); the datasets are never pooled. Subtitle: V2 is the residual TFT with experience replay (32 stored rows per condition), a three-seed ensemble and calibrated intervals; this is a post hoc development test on conditions already tested, not a confirmatory one, and the S7 results were collected on a tree with uncommitted paper edits (`git_dirty`). Attribution: Luh and Blank 2024 (S7, CC BY 4.0); Stroebl et al. 2024 (S10, CC BY 4.0).
+   - *D38 verdicts by question* (`fact_d38_verdicts`): rows `question` × `comparison`, columns `Dataset` × `experiment` × `seed_set`, square marks coloured by `answer` (positive / negative, the registered answer per dataset and question: positive only if V2 is better, for Q5 coverage at least 0.85, in both seed sets and in E1 and E2). Label: calculated field `D38 cell label` = `IF ISNULL([mean_diff_pp]) THEN "coverage " + STR(ROUND([coverage_90], 3)) ELSE STR(ROUND([mean_diff_pp], 3)) + " pp, " + [verdict] END`. Caption above the view: "Q1–Q4 compare the new model V2 with a baseline: each cell shows the mean RMSE difference (V2 minus the baseline; negative = V2 more accurate) and the registered verdict. Q5 shows V2's pooled 90% interval coverage. Colour: positive = V2 better in both seed sets and in E1 and E2."
+   - *D38 RMSE by method* (`fact_d38_method`): rows `Dataset` × `method`, columns `experiment` × mean `mean_rmse_pp`, one circle per `seed_set`; tooltip `median_rmse_pp`. Caption: "Lower RMSE is better. One dot per seed set; the tooltip gives the median over conditions." V2 in the accent blue.
 
 ## 4. Publishing checklist
 

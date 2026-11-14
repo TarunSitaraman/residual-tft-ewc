@@ -11,7 +11,8 @@ the data folder):
 - ``Data/tableau_source.hyper``: the same tables as a Tableau extract (Tableau Public saves extracts only).
 - ``residual_tft_ewc.twb`` and the packaged ``residual_tft_ewc.twbx``: a STARTER workbook. One extract data source
   per sheet, the calculated fields and aliases
-  of dashboard/tableau/WORKBOOK_SPEC.md, one worksheet per view and the five dashboards named as the page expects.
+  of dashboard/tableau/WORKBOOK_SPEC.md, one worksheet per view, the five dashboards named as the page expects
+  and the D38 replay ensemble dashboard (S10 and S7).
   It is generated XML that cannot be opened in a Linux container: open it in Tableau Desktop Public Edition, check
   every view against the spec, fix what Tableau reports, then save it to Tableau Public.
 - ``AUTHORING.md``: those steps.
@@ -42,9 +43,25 @@ import export_dashboard_data as X  # noqa: E402
 
 EXCEL_MAX_ROWS = 1_048_575   # data rows below the header
 CONFIG_JS = ROOT / "dashboard" / "config.js"
-DASHBOARDS = ("Overview", "SOH explorer", "Forecast accuracy", "Continual learning", "Reuse & uncertainty")
+DASHBOARDS = ("Overview", "SOH explorer", "Forecast accuracy", "Continual learning", "Reuse & uncertainty",
+              "D38 replay ensemble")
 ATTRIBUTION = ("SOH is relative to each cell's first valid capacity check. Data: Moy et al. 2024 (S1, CC BY 4.0); "
                "Wheeler et al. 2025 (S6, CC BY 4.0). Changes listed in docs/EXTERNAL_DATA.md.")
+#: Dashboards on datasets other than S1 and S6 carry their own attribution.
+DASHBOARD_ATTRIBUTION = {
+    "D38 replay ensemble": (
+        "SOH is relative to each cell's first valid capacity check. Data: Luh and Blank 2024 (S7, CC BY 4.0); "
+        "Stroebl et al. 2024 (S10, CC BY 4.0). Changes listed in docs/EXTERNAL_DATA.md."),
+}
+#: Plain-language subtitle of a dashboard, after its name (the D38 provenance of docs/DECISIONS.md).
+DASHBOARD_NOTES = {
+    "D38 replay ensemble": (
+        "V2 is the residual TFT with experience replay (32 stored rows per usage condition), a three-seed ensemble "
+        "and calibrated intervals, forecasting usage conditions it has not been trained on. S10 and S7 are separate "
+        "datasets and are never pooled. This is a development test on conditions already tested with the earlier "
+        "model (D38), not a confirmatory one; the S7 results were collected with uncommitted paper edits in the "
+        "working tree (git_dirty)."),
+}
 
 
 def contract_fields(config_js: Path = CONFIG_JS) -> dict[str, str]:
@@ -126,6 +143,13 @@ def sheets(results_out: Path, data_out: Path, f: dict[str, str]) -> dict[str, pd
     vd = R("fact_verdicts")
     if len(vd):
         out["Verdicts"] = vd.rename(columns={"setting": f["setting"]})
+
+    # D38: method names are readable already (no dim_method join); dataset codes shown as S10 / S7, like S1 / S6.
+    for name, sheet, cols in (("fact_d38_verdicts", "D38Verdicts", X.D38_VERDICT_COLS),
+                              ("fact_d38_method", "D38Methods", X.D38_METHOD_COLS)):
+        t = R(name)
+        t = t.assign(dataset=t["dataset"].str.upper()) if len(t) else pd.DataFrame(columns=list(cols))
+        out[sheet] = t.rename(columns={"dataset": f["dataset"]})   # empty: the export's columns, as a placeholder
 
     soh = _read(data_out, "fact_soh")
     # Invalid checks stay in: the line skips them (SOH valid checks is null there) and the spec draws them as
@@ -280,6 +304,22 @@ def _views(f: dict[str, str]) -> list[dict]:
          "per_group": True},
         {"name": "Within one class", "sheet": "Predictions", "rows": [s("Method Label")],
          "cols": [avg("Within one class share")], "mark": "Bar", "enc": {"color": s(f["family"])}},
+        {"name": "D38 verdicts by question", "sheet": "D38Verdicts", "rows": [s("question"), s("comparison")],
+         "cols": [s(D), s("experiment"), s("seed_set")], "mark": "Square",
+         "enc": {"color": s("answer"), "text": s("D38 cell label")},
+         "title": "Does V2 beat each comparison? Registered questions Q1-Q5, per dataset, experiment and seed set",
+         "caption": "Q1-Q4 compare the new model V2 with a baseline: each cell shows the mean RMSE difference (V2 "
+                    "minus the baseline, pp of SOH; negative = V2 more accurate) and the registered verdict over "
+                    "both seed sets. Q5 shows V2's pooled 90% interval coverage (adequate at 0.85 or more). Colour "
+                    "is the registered answer: positive = V2 better (Q5: coverage adequate) in both seed sets and "
+                    "in both E1 (1-3 check-ups ahead) and E2 (1-6 ahead)."},
+        {"name": "D38 RMSE by method", "sheet": "D38Methods", "rows": [s(D), s("method")],
+         "cols": [s("experiment"), avg("mean_rmse_pp")], "mark": "Circle",
+         "enc": {"color": s("seed_set"), "tooltip": avg("median_rmse_pp")},
+         "title": "Forecast error of every method: mean RMSE over the test conditions (pp of SOH)",
+         "caption": "Lower RMSE is better. One dot per seed set (main, replicate); the tooltip gives the median "
+                    "over conditions, which is less affected by the few conditions where a method fails. V2 is "
+                    "the proposed model; GBM-ALL stores all data and GBM-ER32 the same 32 rows per condition."},
     ]
 
 
@@ -290,6 +330,7 @@ LAYOUT = {
     "Continual learning": ["Adaptation vs retention", "Forgetting by arrival", "Backward transfer heatmap",
                            "Seed spread"],
     "Reuse & uncertainty": ["Reuse-class confusion", "Forecast parity", "Interval coverage", "Within one class"],
+    "D38 replay ensemble": ["D38 verdicts by question", "D38 RMSE by method"],
 }
 #: Tableau rejects a workbook without source-build; any recent Desktop build opens and re-stamps it on save.
 SOURCE_BUILD = "2024.2.0 (20242.24.0613.1930)"
@@ -314,6 +355,10 @@ def _calcs(sheet: str) -> list[tuple[str, str, str]]:
                 ("SOH valid checks", "real", "IF [valid] THEN [soh_pct] END")]
     if sheet == "D30Metrics":
         return [("D30 metric value", "real", f"IF [metric] = {D30_PARAM} THEN [value] END")]
+    if sheet == "D38Verdicts":
+        return [("D38 cell label", "string",
+                 'IF ISNULL([mean_diff_pp]) THEN "coverage " + STR(ROUND([coverage_90], 3)) '
+                 'ELSE STR(ROUND([mean_diff_pp], 3)) + " pp, " + [verdict] END')]
     return []
 
 
@@ -377,6 +422,10 @@ def _shelf(refs: list[Ref], ds: str) -> str:
 def _worksheet(parent: ET.Element, v: dict, df: pd.DataFrame, f: dict[str, str], param: ET.Element) -> None:
     ds = _ds_name(v["sheet"])
     ws = ET.SubElement(parent, "worksheet", name=v["name"])
+    if v.get("title"):   # the sheet title, as Tableau writes it (before the table)
+        run = ET.SubElement(ET.SubElement(ET.SubElement(ET.SubElement(ws, "layout-options"), "title"),
+                                          "formatted-text"), "run")
+        run.text = v["title"]
     table = ET.SubElement(ws, "table")
     view = ET.SubElement(table, "view")
     calcs = {cap: (dt, formula) for cap, dt, formula in _calcs(v["sheet"])}
@@ -429,7 +478,8 @@ def _worksheet(parent: ET.Element, v: dict, df: pd.DataFrame, f: dict[str, str],
     ET.SubElement(table, "cols").text = _shelf(v["cols"], ds)
 
 
-def _dashboard(parent: ET.Element, name: str, sheets_: list[str], tables_: set[str]) -> None:
+def _dashboard(parent: ET.Element, name: str, sheets_: list[str], tables_: set[str],
+               captions: dict[str, str] | None = None) -> None:
     db = ET.SubElement(parent, "dashboard", name=name)
     ET.SubElement(db, "style")
     ET.SubElement(db, "size", maxheight="1100", maxwidth="1400", minheight="700", minwidth="800")
@@ -437,13 +487,24 @@ def _dashboard(parent: ET.Element, name: str, sheets_: list[str], tables_: set[s
     outer = ET.SubElement(zones, "zone", {"h": "100000", "id": "1", "type-v2": "layout-flow", "param": "vert",
                                           "w": "100000", "x": "0", "y": "0"})
     # Charts get twice the height of text tables, which need only a few rows.
+    # A sheet with a caption gets a text band above it, in plain language for a reader new to the project.
+    captions = {s: c for s, c in (captions or {}).items() if s in sheets_}
+    head, cap_h = (10000 if name in DASHBOARD_NOTES else 6000), 5000
     weight = {s: 1 if s in tables_ else 2 for s in sheets_}
-    unit, zid = (100000 - 6000) // max(sum(weight.values()), 1), 2
-    title = ET.SubElement(outer, "zone", {"h": "6000", "id": str(zid), "type-v2": "text", "w": "100000", "x": "0", "y": "0"})
+    unit, zid = (100000 - head - cap_h * len(captions)) // max(sum(weight.values()), 1), 2
+    title = ET.SubElement(outer, "zone", {"h": str(head), "id": str(zid), "type-v2": "text", "w": "100000", "x": "0",
+                                          "y": "0"})
     run = ET.SubElement(ET.SubElement(title, "formatted-text"), "run")
-    run.text = f"{name}. {ATTRIBUTION}"
-    top = 6000
+    note = f" {DASHBOARD_NOTES[name]}" if name in DASHBOARD_NOTES else ""
+    run.text = f"{name}.{note} {DASHBOARD_ATTRIBUTION.get(name, ATTRIBUTION)}"
+    top = head
     for s in sheets_:
+        if s in captions:
+            zid += 1
+            cz = ET.SubElement(outer, "zone", {"h": str(cap_h), "id": str(zid), "type-v2": "text", "w": "100000",
+                                               "x": "0", "y": str(top)})
+            ET.SubElement(ET.SubElement(cz, "formatted-text"), "run").text = captions[s]
+            top += cap_h
         zid += 1
         h = unit * weight[s]
         ET.SubElement(outer, "zone", {"h": str(h), "id": str(zid), "name": s, "w": "100000", "x": "0", "y": str(top)})
@@ -482,8 +543,9 @@ def build_twb(tables: dict[str, pd.DataFrame], f: dict[str, str]) -> ET.ElementT
         _worksheet(wss, v, tables[v["sheet"]], f, param)
     dbs = ET.SubElement(wb, "dashboards")
     text_sheets = {v["name"] for v in views if v["mark"] == "Text"}
+    captions = {v["name"]: v["caption"] for v in views if v.get("caption")}
     for name in DASHBOARDS:
-        _dashboard(dbs, name, LAYOUT[name], text_sheets)
+        _dashboard(dbs, name, LAYOUT[name], text_sheets, captions)
     wins = ET.SubElement(wb, "windows", {"source-height": "30"})
     for v in views:
         _worksheet_window(wins, v["name"])
@@ -513,7 +575,7 @@ unpacked: `residual_tft_ewc.twb`, `Data/tableau_source.xlsx` (one sheet per view
 3. The workbook is generated and has not been opened before. For every dashboard, check the views against
    `dashboard/tableau/WORKBOOK_SPEC.md` and fix what Tableau reports (missing fields, mark types, sorts). Keep the
    five dashboard names and the fields Dataset, Setting, Protocol, Group and Method Family exactly as they are:
-   the web page filters by those names.
+   the web page filters by those names. The sixth dashboard, D38 replay ensemble, shows S10 and S7.
 4. Finish by hand what the generator cannot write reliably (WORKBOOK_SPEC.md §3):
    - SOH trajectories: reference bands at 95 / 90 / 80 % labelled C0-C3; axis title "SOH, % of first valid
      check"; invalid checks (`valid` = false) as hollow points with no line (the line field, SOH valid checks, is
@@ -523,6 +585,8 @@ unpacked: `residual_tft_ewc.twb`, `Data/tableau_source.xlsx` (one sheet per view
    - Interval coverage: a constant reference line at 0.9.
    - Backward transfer heatmap: diverging palette with grey at zero.
    - Forecast accuracy: check the D30 metric parameter control is shown.
+   - D38 verdicts by question: answer positive and negative in two clearly different colours; keep the cell labels.
+   - D38 RMSE by method: V2 in the accent blue; check that the tooltip shows the median RMSE.
 5. Colours: proposed model in the accent blue `#2a78d6`, baselines grey, families in the fixed order of the spec.
 6. File > Save to Tableau Public (no extract step: the sources are extracts already).
    For each dashboard, copy its share URL
