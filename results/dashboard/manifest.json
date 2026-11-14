@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-11-08T00:10:34+00:00",
-  "commit": "ca32c2e6f7b1ed28cdf887135d34fd534e69ad50",
+  "generated_utc": "2026-11-14T07:40:11+00:00",
+  "commit": "ebd8947f0976736d15c8fa70299d163994ef20e4",
   "row_counts": {
     "dim_group": 13,
     "dim_method": 66,
@@ -16,10 +16,10 @@
     "fact_horizon": 84,
     "fact_d30_group": 2338,
     "fact_headline": 32,
-    "fact_soh": 958,
-    "fact_predictions": 43008
+    "fact_d38_verdicts": 40,
+    "fact_d38_method": 152
   },
-  "data_root": "data",
+  "data_root": "external (DATA_ROOT)",
   "sources": {
     "results/forecasting_d22_e1_f2.json": "8f477cc8f0cb717d9f57a5af8427251234f23dc7c09cf54d6a19b16981de64ee",
     "results/forecasting_d23_e1.json": "213d8ffc655f417ab3a5721a25801a5f5c0e72d96000318726fef05689d3ba8e",
@@ -49,6 +49,10 @@
     "results/forecasting_d35_e2.json": "656b9f6aa5cf3b1a77a6ef78337b6c962b87801df84371912bcc52ad19a3e4f3",
     "results/forecasting_d36_e1.json": "ea139569d192c53280e19c2ba81dd9d9edb0b1798a48487426f7464ad210da09",
     "results/forecasting_d36_e2.json": "d97f53f72f12441a6ee6f8a62e967f5767280b53c2a1dd07abf50885b03f6fd4",
+    "results/forecasting_d38_s10_e1.json": "5390e6ad544597295f7b6bf5303aecd6fa28d0d4bf6e95c0e9938d35a2ec16c7",
+    "results/forecasting_d38_s10_e2.json": "eb2b8a03d4b78f90c6aeb336c3e54562ed905ec91fc64fb24c99adda272c5f12",
+    "results/forecasting_d38_s7_e1.json": "2b4afb54296f634ea40ae70c11461b4affb6180c5b1f8464ffc735af79ae95d4",
+    "results/forecasting_d38_s7_e2.json": "6da2257cd3b475a637fc215ba5c4b250f08471772761e787dcc7162e4bb08432",
     "results/tables/d24_comparison_e1.csv": "0fe2645c9ec95574abb0872cc0c821a7e016ef13ad21695c5486edab7c9991d3",
     "results/tables/d24_comparison_e2.csv": "a2ce9b829ea9de5be7b1257c0adf824309b783db572276c48d3d6a2a3f285abc",
     "results/tables/d24_per_group_e1.csv": "5a7b9640e4362246bf7dac30b5644ef4f2b297030833878d54de223644ff231a",
