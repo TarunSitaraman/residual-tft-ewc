@@ -17,7 +17,7 @@
 
 % Tables and figures of the main paper referred to from here (numbering of the submitted version).
 \makeatletter
-\newlabel{tab:d30_cls_s6}{{\mainref{IV}}{}{}{}{}}
+\newlabel{tab:headline}{{\mainref{II}}{}{}{}{}}
 \makeatother
 \newcommand{\mainref}[1]{#1 of the paper}
 \renewcommand{\thetable}{S\Roman{table}}
@@ -164,14 +164,14 @@ little use of its history.
 % -----------------------------------------------------------------------------
 \section{Additional results}
 
-Tables~\ref{tab:residual} and \ref{tab:d26_classes} and Figs.~\ref{fig:d25}, \ref{fig:d27}, \ref{fig:d26cm} and \ref{fig:d23bar} belong to Sections IV-D to IV-G of the paper and
+Tables~\ref{tab:residual} and \ref{tab:d26_classes} and Figs.~\ref{fig:d25}, \ref{fig:d27}, \ref{fig:d26cm} and \ref{fig:d23bar} belong to Sections IV-A to IV-C of the paper and
 were moved here for space.
 
 \emph{Reproducibility of the comparisons (Section IV-B).} P1 and P2 were re-run in a pinned environment on data rebuilt from the raw archives. Every baseline, every P2 result and the ranking of methods reproduced; the neural models moved by at most 0.059~pp. On S1, five Holm-corrected comparisons with TFT\,+\,EWC crossed $p=0.05$. On S6, validation selected EWC $\lambda=1000$ instead of 100 (a 0.008~pp tie), and the error advantage of TFT\,+\,EWC over fine-tuning moved from $p_{\mathrm{Holm}}=0.005$ to 0.060, while its reduction of forgetting moved from 0.050 to 0.008. These findings motivated the ten tuning orders, the one-standard-error rule and the replication rule used from P3 on. A D30 re-run of P2 on another platform reproduced every baseline exactly and moved the MLP and TFT by at most 0.027~pp per held-out group: neural training is deterministic per platform, not across platforms.
 
 \emph{Reuse classes in the D30 re-run of P2.} On S6 the learned models assign the measured reuse class to 95--97\% of samples (MCC 0.90--0.93), against 94\% (0.88) for linear extrapolation and 86\% (0.72) for persistence, and all errors but one (persistence) are between neighbouring classes; the end-of-first-life decision does not separate the methods (AUC $\ge$0.998), as 69\% of S6 samples are below 80\%.
 
-\emph{Reuse classes on unseen S6 conditions (Section IV-F of the paper).} The proposed model puts 95.5\% of held-out samples in their measured class, against 93.9\% for extrapolation and 85.8\% for persistence, while ridge (96.5\%) and gradient boosting (97.7\%) do better (Table~\ref{tab:d26_classes}, Fig.~\ref{fig:d26cm}). Every error is off by one class. The most common one is also the risky one for reuse: a sample measured as C1 but forecast as C0 (65 of 182 for extrapolation, 42 for the proposed model, 7 for gradient boosting). The pretrained TFT reaches 0.509/0.591~pp against 0.401/0.415~pp from scratch (significant only in the replicate set).
+\emph{Reuse classes on unseen S6 conditions (Section IV-C of the paper).} The proposed model puts 95.5\% of held-out samples in their measured class, against 93.9\% for extrapolation and 85.8\% for persistence, while ridge (96.5\%) and gradient boosting (97.7\%) do better (Table~\ref{tab:d26_classes}, Fig.~\ref{fig:d26cm}). Every error is off by one class. The most common one is also the risky one for reuse: a sample measured as C1 but forecast as C0 (65 of 182 for extrapolation, 42 for the proposed model, 7 for gradient boosting). The pretrained TFT reaches 0.509/0.591~pp against 0.401/0.415~pp from scratch (significant only in the replicate set).
 
 \emph{Intervals on unseen conditions.} Intervals (Fig.~\ref{fig:d27}) calibrated on the pooled validation rows of the training conditions under-cover on the held-out one, for the TFT (pooled 0.66--0.68) and for extrapolation (0.74--0.76) alike. Calibrating extrapolation, which has no fitted parameters, on all origins of those conditions instead of their mid-life validation rows restores 0.89--0.90: the calibration rows caused the shortfall, not only the model. With leave-one-condition-out calibration, gradient-boosting intervals reach the registered threshold of 0.85 (0.90 in both horizon sets) with the lowest mean interval scores (3.2 and 6.7~pp, against 7.1 and 11.8~pp for calibrated extrapolation and 6.1--6.3 and 10.0--10.3~pp for the TFT), lower than calibrated extrapolation's on six of seven conditions (significant only for horizons 1--3, $p=0.047$, against $p=0.30$, so not established). Coverage holds over conditions, not for each: on the 100\% depth-of-discharge condition, outside the range of the others, it is 0.48 and 0.38.
 
@@ -232,13 +232,13 @@ were moved here for space.
 
 \input{tables/d26_classes}
 
-\emph{Shift-adaptive EWC and literature backbones (Sections III-E and IV-D of the paper).} The models fitted once see all tasks at the same time, and the direct literature models were run for horizons 1--3 only. The second registered experiment of the paper lets the EWC strength follow how far the data shift between groups (shift-adaptive EWC, SA-EWC): when task $t$ starts, the EWC penalty (Eq.~(4) of the paper) of each finished task $j$ is multiplied by $d_{j,t}=\big((\lVert\mu_t-\mu_j\rVert^2+\lVert\sigma_t-\sigma_j\rVert^2)/D\big)^{1/2}$, the per-dimension 2-Wasserstein distance between diagonal Gaussians fitted to the two tasks' preprocessed training inputs, with $\lambda_0$ tuned like $\lambda$. BiLSTM, TCN and Transformer-encoder continual learners (TFT input window, within 20\% of its parameters) and GPR, random forest and SVR fitted once are run in residual and direct form. The second registered criterion, for SA-EWC (Table~\ref{tab:residual}), was \emph{not} met either: although the shift weights varied (0.05--1.14), SA-EWC and a fixed $\lambda$ are practically equivalent in final error and forgetting (differences of at most 0.03~pp). For horizons 1--3, the BiLSTM and Transformer with EWC are practically equivalent to the residual TFT; for 1--6 it beats the residual BiLSTM and TCN (replicated) but not the Transformer. Every model fitted once on all tasks is worse than the residual TFT\,+\,SA-EWC (replicated), except the residual SVR for horizons 1--6.
+\emph{Shift-adaptive EWC and literature backbones (Sections III-C and IV-B of the paper).} The models fitted once see all tasks at the same time, and the direct literature models were run for horizons 1--3 only. The second registered experiment of the paper lets the EWC strength follow how far the data shift between groups (shift-adaptive EWC, SA-EWC): when task $t$ starts, the EWC penalty (Eq.~(3) of the paper) of each finished task $j$ is multiplied by $d_{j,t}=\big((\lVert\mu_t-\mu_j\rVert^2+\lVert\sigma_t-\sigma_j\rVert^2)/D\big)^{1/2}$, the per-dimension 2-Wasserstein distance between diagonal Gaussians fitted to the two tasks' preprocessed training inputs, with $\lambda_0$ tuned like $\lambda$. BiLSTM, TCN and Transformer-encoder continual learners (TFT input window, within 20\% of its parameters) and GPR, random forest and SVR fitted once are run in residual and direct form. The second registered criterion, for SA-EWC (Table~\ref{tab:residual}), was \emph{not} met either: although the shift weights varied (0.05--1.14), SA-EWC and a fixed $\lambda$ are practically equivalent in final error and forgetting (differences of at most 0.03~pp). For horizons 1--3, the BiLSTM and Transformer with EWC are practically equivalent to the residual TFT; for 1--6 it beats the residual BiLSTM and TCN (replicated) but not the Transformer. Every model fitted once on all tasks is worse than the residual TFT\,+\,SA-EWC (replicated), except the residual SVR for horizons 1--6.
 
-\emph{Many unseen conditions (S7 and S10, Section IV-G of the paper).} Both tests were registered before any model was fitted on the dataset (D34, D36) and were motivated by the wish to find a setting where the proposed model beats the traditional forecasters. S10 (Stroebl et al., 2024; Samsung INR21700-50E) has 279 cells in two stages; condition = (stage, test point), since test-point names repeat across stages. Its label is the discharge capacity of the last complete 1C\,+\,CV discharge of each 23~$^\circ$C check-up; check-ups were dropped for surface temperature outside 18--28~$^\circ$C at its start (20), dates out of order (13), no complete discharge (3) or no usable date (3), and cells with fewer than five valid check-ups (66 calendar cells have only the entry and final tests) are not used. On S7 the registered model shrinks at every origin; at H$^-$ origins this pulls the forecast towards persistence and made it worse than the raw model (E1: 6.66 against 4.43~pp on H$^-$), so the S10 test shrinks only at H$^+$ origins. On S10 this rule is practically equivalent to shrinking everywhere, and better than the raw model for horizons 1--3 only ($-0.07$~pp). Against gradient boosting refitted on the latest condition, the S10 model is better at both H$^+$ ($-0.94$, $-1.07$~pp) and H$^-$ origins ($-0.61$, $-0.31$~pp; E1, E2; replicated). On S7 the advantage is at H$^+$ ($-2.2$ to $-2.3$~pp) while the model is worse at H$^-$ ($+1.4$ to $+2.1$~pp). Gradient boosting with every condition stored has a larger error than the proposed model on S10 calendar conditions (E2 mean 12.5 against 1.4~pp) and a smaller one on cyclic conditions (1.25 against 1.61~pp). In the registered rule the direction comes from the mean difference, so for S10, horizons 1--3, the test against it reads ``better'' although the median difference ($+0.17$~pp) and 52 of 64 conditions favour gradient boosting; we do not count it as a win. The tuning chose learning rates of $10^{-5}$ to $3\cdot10^{-3}$ and EWC strengths of $10^{-6}$ to $1$, mostly far below the S6 values, so in most folds EWC adds little penalty. Pooled 90\% coverage of the intervals is 0.71/0.57 (S7) and 0.74/0.43 (S10) for E1/E2, below the 0.85 the registration required.
+\emph{Many unseen conditions (S7 and S10, Section IV-D of the paper).} Both tests were registered before any model was fitted on the dataset (D34, D36) and were motivated by the wish to find a setting where the proposed model beats the traditional forecasters. S10 (Stroebl et al., 2024; Samsung INR21700-50E) has 279 cells in two stages; condition = (stage, test point), since test-point names repeat across stages. Its label is the discharge capacity of the last complete 1C\,+\,CV discharge of each 23~$^\circ$C check-up; check-ups were dropped for surface temperature outside 18--28~$^\circ$C at its start (20), dates out of order (13), no complete discharge (3) or no usable date (3), and cells with fewer than five valid check-ups (66 calendar cells have only the entry and final tests) are not used. On S7 the registered model shrinks at every origin; at H$^-$ origins this pulls the forecast towards persistence and made it worse than the raw model (E1: 6.66 against 4.43~pp on H$^-$), so the S10 test shrinks only at H$^+$ origins. On S10 this rule is practically equivalent to shrinking everywhere, and better than the raw model for horizons 1--3 only ($-0.07$~pp). Against gradient boosting refitted on the latest condition, the S10 model is better at both H$^+$ ($-0.94$, $-1.07$~pp) and H$^-$ origins ($-0.61$, $-0.31$~pp; E1, E2; replicated). On S7 the advantage is at H$^+$ ($-2.2$ to $-2.3$~pp) while the model is worse at H$^-$ ($+1.4$ to $+2.1$~pp). Gradient boosting with every condition stored has a larger error than the proposed model on S10 calendar conditions (E2 mean 12.5 against 1.4~pp) and a smaller one on cyclic conditions (1.25 against 1.61~pp). In the registered rule the direction comes from the mean difference, so for S10, horizons 1--3, the test against it reads ``better'' although the median difference ($+0.17$~pp) and 52 of 64 conditions favour gradient boosting; we do not count it as a win. The tuning chose learning rates of $10^{-5}$ to $3\cdot10^{-3}$ and EWC strengths of $10^{-6}$ to $1$, mostly far below the S6 values, so in most folds EWC adds little penalty. Pooled 90\% coverage of the intervals is 0.71/0.57 (S7) and 0.74/0.43 (S10) for E1/E2, below the 0.85 the registration required.
 
-\emph{Refit and tracking (Section IV-F of the paper).} In the sixth experiment on unseen conditions the held-out condition arrives over time: as each target is measured, gradient boosting is refitted with it and the half-width moves by $c\,q_h(e-a)$, with $e=1$ for a miss (quantile tracking; $c$ chosen on the training conditions). Refitting gradient boosting as each check of the held-out condition arrives, and adjusting the interval half-width after every hit or miss, lowers its mean 90\% interval score by 29\%: from 3.22 to 2.29~pp for $h{=}1$--3 (lower on six of seven conditions, $p=0.047$) and from 6.67 to 4.74~pp for $h{=}1$--6 (seven of seven, $p=0.016$), with pooled coverage 0.90--0.91. On the 100\% depth-of-discharge condition coverage rises from 0.48/0.38 to 0.72/0.58, still short of the registered 0.80. Of the held-out intervals, 87--93\% then lie within one reuse class, and 99.2--99.7\% of those name the right class.
+\emph{Refit and tracking (Section IV-C and Fig.~6a of the paper).} In the sixth experiment on unseen conditions the held-out condition arrives over time: as each target is measured, gradient boosting is refitted with it and the half-width moves by $c\,q_h(e-a)$, with $e=1$ for a miss (quantile tracking; $c$ chosen on the training conditions). Refitting gradient boosting as each check of the held-out condition arrives, and adjusting the interval half-width after every hit or miss, lowers its mean 90\% interval score by 29\%: from 3.22 to 2.29~pp for $h{=}1$--3 (lower on six of seven conditions, $p=0.047$) and from 6.67 to 4.74~pp for $h{=}1$--6 (seven of seven, $p=0.016$), with pooled coverage 0.90--0.91. On the 100\% depth-of-discharge condition coverage rises from 0.48/0.38 to 0.72/0.58, still short of the registered 0.80. Of the held-out intervals, 87--93\% then lie within one reuse class, and 99.2--99.7\% of those name the right class.
 
-\emph{Gradient boosting under the continual constraint (D32).} Most of gradient boosting's advantage on unseen conditions comes from storing every training condition. The headline comparison of the paper (its Table~IV) therefore also trains gradient boosting like the proposed model: the six training conditions arrive one at a time and earlier conditions' data are not kept. Under this constraint the two are close. Refitted on the latest condition only, gradient boosting reaches 0.86 and 1.59~pp (horizons 1--3 and 1--6), against 0.92/0.94 and 1.62/1.65~pp for the proposed model (slightly better for 1--3, $+0.06/+0.08$~pp, replicated; not distinguishable for 1--6), whereas with all six conditions stored it reaches 0.54 and 1.05~pp. Table~\ref{tab:p1} is the first P1 benchmark (Section IV-A of the paper). Warm-started condition by condition (200 more trees per condition), it reaches 2.65 and 3.49~pp, and the proposed model is better by 1.7--1.9~pp (replicated). This gap is mostly an artefact: scikit-learn keeps the bin edges of the first condition when warm-starting, and every usage input is constant within a condition, so the later trees cannot use them. We therefore do not count it as evidence against continual gradient boosting in general.
+\emph{Gradient boosting under the continual constraint (D32).} Most of gradient boosting's advantage on unseen conditions comes from storing every training condition. The headline comparison of the paper (its Table~II) therefore also trains gradient boosting like the proposed model: the six training conditions arrive one at a time and earlier conditions' data are not kept. Under this constraint the two are close. Refitted on the latest condition only, gradient boosting reaches 0.86 and 1.59~pp (horizons 1--3 and 1--6), against 0.92/0.94 and 1.62/1.65~pp for the proposed model (slightly better for 1--3, $+0.06/+0.08$~pp, replicated; not distinguishable for 1--6), whereas with all six conditions stored it reaches 0.54 and 1.05~pp. Table~\ref{tab:p1} is the first P1 benchmark (Section IV-B of the paper). Warm-started condition by condition (200 more trees per condition), it reaches 2.65 and 3.49~pp, and the proposed model is better by 1.7--1.9~pp (replicated). This gap is mostly an artefact: scikit-learn keeps the bin edges of the first condition when warm-starting, and every usage input is constant within a condition, so the later trees cannot use them. We therefore do not count it as evidence against continual gradient boosting in general.
 
 \begin{figure}[t]
   \centering
@@ -274,13 +274,13 @@ were moved here for space.
 \begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{figures/many_conditions.png}
-  \caption{Per-condition error on S7 and S10 (horizons 1--3, main seeds; Section IV-G and Table VI of the paper). Points below the diagonal favour the proposed model.}
+  \caption{Per-condition error on S7 and S10 (horizons 1--3, main seeds; Section IV-D and Fig.~6 of the paper; Table~\ref{tab:many}). Points below the diagonal favour the proposed model.}
   \label{fig:many}
 \end{figure}
 
 \section{Replay ensemble V2 on S7 and S10 (D38)}
 
-This section gives the full results of the bounded-memory variant V2 (Section IV-H of the paper),
+This section gives the full results of the bounded-memory variant V2 (Section IV-E and Fig.~8 of the paper),
 written from \texttt{results/forecasting\_d38\_s10\_e1.json}, \texttt{\_s10\_e2}, \texttt{\_s7\_e1} and \texttt{\_s7\_e2}
 and the D38 entry of \texttt{docs/DECISIONS.md}.
 
@@ -468,5 +468,58 @@ times as wide. No calibration cell had to borrow rows from the other origin stra
   \end{tabular}
 \end{table*}
 
+
+% -----------------------------------------------------------------------------
+\section{Tables moved from the paper}
+
+To make room for the dashboard figures (Figs.~5--8 of the paper), four tables of the paper moved here on 15 Nov
+2026: the registered follow-up experiments (Table~\ref{tab:exps}) and the evaluation metrics (Table~\ref{tab:metrics})
+of Section~III, and the many-condition comparison (Table~\ref{tab:many}) and S6 reuse-class metrics
+(Table~\ref{tab:d30_cls_s6}) of Section~IV. Their content is unchanged.
+
+\begin{table}[t]
+  \centering
+  \caption{Registered follow-up experiments (all after P1--P3). Moved from Section III of the paper.}
+  \label{tab:exps}
+  \scriptsize
+  \setlength{\tabcolsep}{2pt}
+  \begin{tabular}{p{1.25cm}p{3.35cm}p{3.6cm}}
+    \toprule
+    Experiment & Setting & Question \\
+    \midrule
+    Residual & S6 stream, P3 inputs, from scratch & residual vs.\ direct target; beats extrapolation? \\
+    SA-EWC & S6 stream & EWC penalty scaled by the input shift vs.\ fixed $\lambda$; BiLSTM, TCN, Transformer, GPR, random forest, SVR (supplement) \\
+    Shrinkage, intervals & S6 stream & shrunk residual model vs.\ extrapolation; interval coverage \\
+    Unseen conditions & S6, P2; six training conditions streamed in the ten orders; shrinkage and intervals fitted once on pooled validation rows & beats extrapolation at H$^+$; vs.\ gradient boosting and joint TFT \\
+    GB intervals & S6, P2; each training condition predicted by a model fitted on the other five (cross-validation interval (Barber et al.), conditions as folds) & coverage on held-out conditions (no finite-sample guarantee) \\
+    Many conditions & S7 (67 conditions), S10 (71); seven tune, the rest (60, 64) form five test folds & beats GB refitted on the stream's last condition, GB on all conditions, extrapolation (Wilcoxon over held-out conditions); S7 shrinks at every origin, S10 only at H$^+$ (rule fixed after S7) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \caption{Evaluation metrics (BWT: backward transfer). Moved from Section III of the paper.}
+  \label{tab:metrics}
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Metric & Definition & Source \\
+    \midrule
+    Average error & $\tfrac{1}{T}\sum_{j} R_{T,j}$ & Lopez-Paz \& Ranzato \\
+    BWT & $\tfrac{1}{T-1}\sum_{j<T} (R_{T,j} - R_{j,j})$ & Lopez-Paz \& Ranzato \\
+    Forgetting & $\tfrac{1}{T-1}\sum_{j<T} \big(R_{T,j} - \min_{j\le i<T} R_{i,j}\big)$ & Chaudhry et al. \\
+    Skill & $1-\mathrm{RMSE}/\mathrm{RMSE}_{\mathrm{persist.}}$ & Hyndman \& Koehler \\
+    Coverage & share of $\Delta$ inside $\hat\Delta\pm q_h$ & Lei et al. \\
+    Interval score & $2q_h + \tfrac{2}{a}\max(|\Delta-\hat\Delta|-q_h,0)$ & Gneiting \& Raftery \\
+    Reuse class & C0 $>$95, C1 90--95, C2 80--90, C3 $\le$80\,\% & ours \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\input{tables/many_conditions}
+
+\input{tables/d30_classification_s6}
 
 \end{document}

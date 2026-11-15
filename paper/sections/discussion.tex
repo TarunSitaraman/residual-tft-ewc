@@ -1,20 +1,18 @@
 % ============================================================
-% V. DISCUSSION and VI. CONCLUSION (condensed to the IEEE conference length)
+% V. DISCUSSION and VI. CONCLUSION (shortened on 15 Nov 2026)
 % Every number is taken from docs/RESULTS.md and the committed results files.
 % ============================================================
 
 \section{Discussion}
 \label{sec:discussion}
 
-\emph{Where the proposed model is strongest.} Extrapolation trails on new conditions and gradient boosting on the stream; Residual TFT-EWC holds up in both, although matching extrapolation is hard when fade is smooth and tasks are small. Most of the gap to gradient boosting and joint training on unseen conditions comes from storing earlier data, not from the model: with 40 stored rows per condition, V2 shows no replicated difference from joint training, though gradient boosting stays better on S7 (Section~\ref{sec:res-d38}). Continual learning suits data that cannot be kept (privacy, ownership, volume); here, storing every group was cheap.
+\emph{Why it works.} Building on the best simple forecaster mattered most: extrapolation fails on new conditions, gradient boosting forgets on the stream, and the residual model inherits extrapolation's stability while learning condition effects (Figs.~\ref{fig:overview}, \ref{fig:dash-s6}a,b). Most of the remaining gap to GB-ALL and joint training comes from storing data, not from the model: with 40 rows per condition, V2 matches joint training. Continual learning therefore suits data that cannot be kept (privacy, ownership, volume).
 
-\emph{What drives its accuracy.} Building on the best simple forecaster mattered most; the ablation credits the inputs, not the architecture, notably the time between checks (at 50~$^\circ$C, S6 cells lose more capacity per cycle when checks are further apart).
+\emph{Reuse.} The classes screen on relative capacity only; power, safety, absolute capacity and cost also matter. For a group unlike any seen before (condition~7, Figs.~\ref{fig:dash-s6}d, \ref{fig:dash-unseen}a), neither forecasts nor intervals can be trusted, and pooled coverage hides it.
 
-\emph{Reuse.} The classes screen on relative capacity alone; reuse also depends on power, safety, absolute capacity and cost. For a group unlike any seen before (100\% depth of discharge), neither forecasts nor intervals can be trusted; pooled coverage hides this, and V2's shortfall on S10 calendar and S7 cyclic conditions.
-
-\emph{Limitations.} We switched to forecasting after inspecting the first dataset and decided the ablation and all later experiments after the main results (all but the ablation registered before being run; the refitted gradient-boosting stream test is post hoc; S7 and S10 were added to find a setting where the model wins, and V2 was designed after their results were read per condition, so a confirmatory test needs new data). The second-life datasets are small; S6 is aged at 50~$^\circ$C and its ``second life'' continues the same test; SOH is relative to each cell's first valid measurement; forecasts assume the planned usage is known. TFT settings for unseen conditions were tuned on all seven S6 conditions (one laboratory), and leave-one-condition-out intervals cover only gradient boosting and extrapolation.
+\emph{Limitations.} We switched to forecasting after seeing S1, and all follow-ups came after the main results (registered except the ablation; the GB stream test and V2 are post hoc, and S7/S10 were added to find a setting where the model wins). Second-life sets are small, S6 is aged at 50~$^\circ$C, SOH is relative to the first check, and planned usage is assumed known.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-Residual TFT-EWC forecasts second-life SOH as a scaled-down correction to linear extrapolation. It is the only model compared that holds up both on the stream (level with extrapolation, ahead of gradient boosting, far less forgetting with EWC) and on unseen conditions (ahead of extrapolation, and of gradient boosting under the same rule on all 64 S10 conditions). Gradient boosting and joint training, keeping all earlier data, stay more accurate there. A post hoc replay variant keeping 40 rows per condition matches the joint TFT (no replicated difference) and beats gradient boosting on S10, mostly where boosting fails, but not on S7. Intervals held only when calibrated on conditions left out of training, and not outside the training range. Future work should test larger groups whose data cannot be stored and add power and safety criteria to screening.
+Residual TFT-EWC forecasts second-life SOH as a shrunk correction to linear extrapolation and is the only model compared that holds up both on a continual stream and on unseen conditions, including all 64 S10 conditions against gradient boosting under the same no-storage rule. Models that store all earlier data remain more accurate; a small replay memory closes most of that gap. Intervals hold only when calibrated on held-out conditions within the training range. Future work: larger groups whose data cannot be stored, and power and safety criteria for screening.
