@@ -144,7 +144,7 @@ def table(data: dict) -> str:
         "    \\midrule",
         *body,
         "    \\midrule",
-        "    \\multicolumn{5}{l}{\\emph{Proposed minus baseline, verdict}} \\\\",
+        "    \\multicolumn{5}{l}{Proposed minus baseline, verdict} \\\\",
         *tbody,
         "    \\bottomrule",
         "  \\end{tabular}",

@@ -4,14 +4,14 @@
 
 \section{Introduction}
 
-A battery retired from an electric vehicle (EV) can often still serve as stationary storage, but only if its state of health (SOH) can be judged reliably. Machine-learning SOH models exist~\cite{ref1,ref2,ref3,ref4}, yet retired batteries differ in chemistry, maker, usage and temperature, so a model trained once may fail on the next group. Continual learning updates the model with each new group while keeping what it learned before.
+A battery retired from an electric vehicle (EV) can often still serve as stationary storage, but only if its state of health (SOH) can be judged reliably. Machine-learning SOH models exist~\cite{ref1,ref2,ref3,ref4}, yet retired batteries differ in chemistry, maker, usage and temperature, so a model trained once may fail on the next group. Continual learning updates the model with each new group while keeping what it learned before. We propose Residual TFT-EWC, a Temporal Fusion Transformer (TFT) trained with Elastic Weight Consolidation (EWC).
 
-We \emph{forecast} SOH one to six capacity checks ahead, because a reuse decision depends on how a battery will age and because estimating today's SOH from cycling data lost to simply repeating the last measurement on our first dataset (\S\ref{sec:methods}). The forecast is sorted into capacity-based reuse classes (Fig.~\ref{fig:system}).
+We forecast SOH one to six capacity checks ahead, because a reuse decision depends on how a battery will age and because estimating today's SOH from cycling data lost to simply repeating the last measurement on our first dataset (\S\ref{sec:methods}). The forecast is sorted into capacity-based reuse classes (Fig.~\ref{fig:system}).
 
 \input{figures/system_architecture}
 
-\emph{Contributions.}
+\textbf{Contributions.}
 (i)~A leakage-free forecasting benchmark of 606 cells from six public datasets, with two label flaws removed.
-(ii)~A comparison of continual strategies, simple forecasters and joint training on a stream of groups, on unseen groups and after first-life pretraining, reporting adaptation \emph{and} forgetting.
+(ii)~A comparison of continual strategies, simple forecasters and joint training on a stream of groups, on unseen groups and after first-life pretraining, reporting adaptation and forgetting.
 (iii)~Residual TFT-EWC, which corrects linear extrapolation instead of replacing it: the only model compared that stays close to the best in both settings.
 (iv)~Interval calibration and a replication rule (two seed sets) that every claimed difference must pass, with all results browsable in an interactive dashboard (Figs.~\ref{fig:dash-s6}, \ref{fig:dash-unseen}).

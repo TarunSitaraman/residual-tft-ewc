@@ -25,31 +25,10 @@
 
 Table~\ref{tab:headline} and Fig.~\ref{fig:overview} give the main result. On the stream, Residual TFT-EWC is equivalent to linear extrapolation (0.32/0.31 against 0.34~pp) and beats GB-LAST by 0.24--0.46~pp. On unseen conditions it beats extrapolation by 0.43--0.68~pp; GB-ALL is better there because it stores every condition. Pretraining on 36{,}711 first-life samples did not help (+0.22~pp, replicated), and the 21 Spark inputs made the model worse.
 
-\begin{figure*}[p]
-  \centering
-  \includegraphics[width=\textwidth]{figures/dash_s6.png}
-  \caption{\textbf{S6 in detail: what is forgotten, and where the error comes from} (dashboard views; $h{=}1$--3, main seeds; the dashboard reads only the committed result exports).
-  (a)~Adaptation (error on the newest task) against retention (final error); points above the diagonal forgot. The proposed model has the lowest final error and one of the lowest adaptation errors.
-  (b)~Forgetting by arrival position: the direct-target TFT forgets up to 0.30~pp of early tasks, every residual variant only 0.06--0.18~pp, so the residual target, not the penalty, removes most forgetting.
-  (c)~Change of each task's error between learning it and the end of the stream (Residual TFT\,+\,EWC; red: forgotten, blue: later tasks helped). 13 of 32 cells move by less than 0.05~pp; condition~6, the only one with a 2C discharge, is overwritten at every position: forgetting follows how unusual a task is.
-  (d)~Error on each held-out condition (P2, log colour scale). Conditions differ by 2.2$\times$, as much as methods do. The proposed model at least halves persistence's error everywhere and is best on condition~7 (100\% depth of discharge, outside the training range), where gradient boosting, best on conditions 1--6, breaks down to 1.49~pp.}
-  \label{fig:dash-s6}
-\end{figure*}
-
-\begin{figure*}[p]
-  \centering
-  \includegraphics[width=\textwidth]{figures/dash_unseen.png}
-  \caption{\textbf{Unseen conditions: intervals on S6 and 124 further conditions in S7 and S10} (dashboard views; P2, $h{=}1$--3).
-  (a)~Coverage of nominal 90\% intervals per held-out S6 condition. Calibrated on the training conditions' validation rows (LIN-val, red), they cover only 0.74; leave-one-condition-out calibration around gradient boosting (GBM-LOCO, purple) reaches 0.90 overall, yet 0.48 on condition~7: pooled coverage hides the one out-of-range group. Refitting on the new condition's checks lifts it to 0.72 and cuts the interval score by 29\% (supplement).
-  (b)~S7 and (c)~S10, one point per held-out condition, log axes; below the diagonal favours the proposed model. Against gradient boosting refitted on the latest condition (GB-LAST) it wins on 39 of 60 S7 conditions (mean $-$1.30~pp), by most on calendar ageing (orange), and on all 64 S10 conditions (mean $-$0.84~pp).
-  (d)~Mean difference by ageing type and temperature (blue favours the proposed model): GB-LAST keeps an edge only on cold S7 ageing (cyclic at 0--10~$^\circ$C, WLTP at 0~$^\circ$C), while calendar ageing favours the proposed model by over 4~pp.}
-  \label{fig:dash-unseen}
-\end{figure*}
-
-\begin{figure*}[p]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/dash_horizon.png}
-  \caption{\textbf{Forecasting pays off most at long horizons} (dashboard views; S6, P2). (a)~Skill against persistence (1 $-$ RMSE ratio; dot: mean, line: range over held-out conditions): every method beats carrying the last SOH forward, and the proposed model lies between extrapolation and gradient boosting. (b)~Pooled RMSE by horizon for the P2 benchmark models (direct targets): persistence's error grows about five times faster than any learned model's.}
+  \caption{\textbf{Forecasting pays off most at long horizons} (dashboard views; S6, P2). (a)~Skill against persistence (1 $-$ ratio of root-mean-square errors, RMSE; dot: mean, line: range over held-out conditions): every method beats carrying the last SOH forward, and the proposed model lies between extrapolation and gradient boosting. (b)~Pooled RMSE by horizon for the P2 benchmark models with direct targets (TFT, multilayer perceptron (MLP), gradient boosting with diagnostic inputs F1): persistence's error grows about five times faster than any learned model's.}
   \label{fig:dash-horizon}
 \end{figure*}
 
@@ -71,10 +50,10 @@ The proposed model puts 95.5\% of held-out S6 samples in their measured reuse cl
 
 Under the no-storage rule the proposed model beats GB-LAST on S10 for both horizon sets ($p_{\mathrm{Holm}}<10^{-10}$) and on S7 for $h{=}1$--3 (Fig.~\ref{fig:dash-unseen}b--d; table: supplement Table~SXIV). GB-ALL, which stores every condition, stays better on 52 of 64 S10 and 50 of 60 S7 conditions; its higher S10 mean comes from a few calendar conditions where it fails (up to 17~pp).
 
-\begin{figure*}[p]
+\begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/dash_d38.png}
-  \caption{\textbf{Bounded memory: the registered questions for the replay ensemble V2} (dashboard view; S7 and S10, P2; post hoc design, protocol fixed before running). Each cell: verdict and mean difference V2 $-$ comparator over held-out conditions, main/replicate seeds (negative favours V2). All five questions hold on S10; on S7, V2 beats extrapolation and the earlier model with 0.89--0.91 coverage, but not gradient boosting with stored data (Q1, Q2).}
+  \caption{\textbf{Bounded memory: the registered questions for the replay ensemble V2} (dashboard view; S7 and S10, P2; post hoc design, protocol fixed before running). Each cell: verdict and mean difference V2 $-$ comparator over held-out conditions, main/replicate seeds (negative favours V2). Comparators: gradient boosting with all conditions stored (GBM-ALL) or with V2's 32 stored rows per condition (GBM-ER32), linear extrapolation at origins with a fade rate (H+), and the earlier proposed model (SEL). All five questions hold on S10; on S7, V2 beats extrapolation and the earlier model with 0.89--0.91 coverage, but not gradient boosting with stored data (Q1, Q2).}
   \label{fig:dash-d38}
 \end{figure*}
 

@@ -32,6 +32,14 @@
 \setcounter{dbltopnumber}{3}
 \setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
 \setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+% Float pages start at the top instead of being centred, so they leave no band of white above the figure.
+\makeatletter
+\setlength{\@fptop}{0pt}\setlength{\@fpbot}{0pt plus 1fil}
+\setlength{\@dblfptop}{0pt}\setlength{\@dblfpbot}{0pt plus 1fil}
+\setlength{\@dblfpsep}{14pt plus 2pt}\setlength{\@fpsep}{14pt plus 2pt}
+\makeatother
+% No stretched gaps between paragraphs and headings in short columns.
+\raggedbottom
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
 T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -111,7 +119,7 @@ banuprip2@srmist.edu.in\\
 % ============================================================
 
 \begin{abstract}
-A model that judges the health of retired electric-vehicle batteries on one group may fail on the next. We propose Residual TFT-EWC, a Temporal Fusion Transformer trained with Elastic Weight Consolidation that learns a shrunk correction to linear extrapolation of the recent capacity fade, and forecast the state of health (SOH) one to six capacity checks ahead on 606 cells from six public datasets. Every claimed difference must replicate on a second seed set. Residual TFT-EWC is the only model compared that does well both when groups arrive in sequence (level with extrapolation, 0.24--0.46 percentage points (pp) ahead of gradient boosting under the same no-storage rule, forgetting cut by two thirds) and on unseen usage conditions (0.43--0.68~pp ahead of extrapolation, 95.5\% correct reuse class, and ahead of gradient boosting on all 64 conditions of a further dataset). Gradient boosting that stores all earlier data remains best on unseen conditions; a replay memory of 40 rows per condition closes most of the gap. Intervals reach their coverage only when calibrated on held-out conditions. All results are shown through an interactive dashboard.
+A model that judges the health of retired electric-vehicle batteries on one group may fail on the next. We propose Residual TFT-EWC, a Temporal Fusion Transformer (TFT) trained with Elastic Weight Consolidation (EWC) that learns a shrunk correction to linear extrapolation of the recent capacity fade, and forecast the state of health (SOH) one to six capacity checks ahead on 606 cells from six public datasets. Every claimed difference must replicate on a second seed set. Residual TFT-EWC is the only model compared that does well both when groups arrive in sequence (level with extrapolation, 0.24--0.46 percentage points (pp) ahead of gradient boosting under the same no-storage rule, forgetting cut by two thirds) and on unseen usage conditions (0.43--0.68~pp ahead of extrapolation, 95.5\% correct reuse class, and ahead of gradient boosting on all 64 conditions of a further dataset). Gradient boosting that stores all earlier data remains best on unseen conditions; a replay memory of 40 rows per condition closes most of the gap. Intervals reach their coverage only when calibrated on held-out conditions. All results are shown through an interactive dashboard.
 \end{abstract}
 
 % ============================================================
@@ -136,8 +144,6 @@ Continual learning, second-life batteries, electric vehicles, state of health, b
 % REFERENCES
 % ============================================================
 
-% Keep the figure pages ahead of the reference list.
-\clearpage
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 

@@ -6,11 +6,11 @@
 \section{Discussion}
 \label{sec:discussion}
 
-\emph{Why it works.} Building on the best simple forecaster mattered most: extrapolation fails on new conditions, gradient boosting forgets on the stream, and the residual model inherits extrapolation's stability while learning condition effects (Figs.~\ref{fig:overview}, \ref{fig:dash-s6}a,b). Most of the remaining gap to GB-ALL and joint training comes from storing data, not from the model: with 40 rows per condition, V2 matches joint training. Continual learning therefore suits data that cannot be kept (privacy, ownership, volume).
+\textbf{Why it works.} Building on the best simple forecaster mattered most: extrapolation fails on new conditions, gradient boosting forgets on the stream, and the residual model inherits extrapolation's stability while learning condition effects (Figs.~\ref{fig:overview}, \ref{fig:dash-s6}a,b). Most of the remaining gap to GB-ALL and joint training comes from storing data, not from the model: with 40 rows per condition, V2 matches joint training. Continual learning therefore suits data that cannot be kept (privacy, ownership, volume).
 
-\emph{Reuse.} The classes screen on relative capacity only; power, safety, absolute capacity and cost also matter. For a group unlike any seen before (condition~7, Figs.~\ref{fig:dash-s6}d, \ref{fig:dash-unseen}a), neither forecasts nor intervals can be trusted, and pooled coverage hides it.
+\textbf{Reuse.} The classes screen on relative capacity only; power, safety, absolute capacity and cost also matter. For a group unlike any seen before (condition~7, Figs.~\ref{fig:dash-s6}d, \ref{fig:dash-unseen}a), neither forecasts nor intervals can be trusted, and pooled coverage hides it.
 
-\emph{Limitations.} We switched to forecasting after seeing S1, and all follow-ups came after the main results (registered except the ablation; the GB stream test and V2 are post hoc, and S7/S10 were added to find a setting where the model wins). Second-life sets are small, S6 is aged at 50~$^\circ$C, SOH is relative to the first check, and planned usage is assumed known.
+\textbf{Limitations.} We switched to forecasting after seeing S1, and all follow-ups came after the main results (registered except the ablation; the GB stream test and V2 are post hoc, and S7/S10 were added to find a setting where the model wins). Second-life sets are small, S6 is aged at 50~$^\circ$C, SOH is relative to the first check, and planned usage is assumed known.
 
 \section{Conclusion}
 \label{sec:conclusion}
