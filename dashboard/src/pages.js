@@ -193,11 +193,11 @@ function tableau(root) {
   const views = Object.entries(TABLEAU.views);
   const live = views.filter(([, u]) => u).length;
   const flow = [["Export", "scripts/export_dashboard_data.py writes tidy CSVs (results/dashboard/, in Git; data/dashboard/, local) plus summary.json and manifest.json with source hashes and the commit."],
-    ["Build the kit", "scripts/build_tableau_workbook.py writes Data/tableau_source.xlsx (one pre-filtered sheet per view, filter fields already named), a starter residual_tft_ewc.twb (data sources, calculated fields, D30 metric parameter, 15 worksheets, 5 dashboards), one Tableau extract per data source (Data/Extracts/), a packaged residual_tft_ewc.twbx to open directly, and AUTHORING.md."],
+    ["Build the kit", "scripts/build_tableau_workbook.py writes Data/tableau_source.xlsx (one pre-filtered sheet per view, filter fields already named), a starter residual_tft_ewc.twb (data sources, calculated fields, D30 metric parameter, 17 worksheets, 6 dashboards), one Tableau extract per data source (Data/Extracts/), a packaged residual_tft_ewc.twbx to open directly, and AUTHORING.md."],
     ["Author", "Open the .twbx in Tableau Desktop Public Edition, check each view against WORKBOOK_SPEC.md and fix what Tableau reports. The .twb was generated without Tableau."],
-    ["Publish", "Save to Tableau Public. The sources are already extracts (Tableau Public has no live connections). Each of the five dashboards gets a public URL."],
-    ["Configure", "Paste the five URLs into dashboard/config.js (TABLEAU.views)."],
-    ["Embed", "This site loads the Tableau Embedding API v3 and mounts a <tableau-viz> under the native figures of the matching dashboard pane; this page shows all five in full."]];
+    ["Publish", "Save to Tableau Public. The sources are already extracts (Tableau Public has no live connections). Each of the six dashboards gets a public URL."],
+    ["Configure", "Paste the six URLs into dashboard/config.js (TABLEAU.views)."],
+    ["Embed", "This site loads the Tableau Embedding API v3 and mounts a <tableau-viz> under the native figures of the matching dashboard pane; this page shows all six in full."]];
   const runtime = [["Loading", "The API script (tableau.embedding.3.latest.min.js from public.tableau.com) is loaded once, only when a pane has a URL."],
     ["Mounting", `A <tableau-viz> element with the view URL, toolbar at the bottom, tabs hidden and full width. Once interactive, the frame takes the dashboard's own height so the whole dashboard shows (${TABLEAU.heightPx} px for dashboards sized Automatic).`],
     ["Readiness", `The view must fire firstinteractive within ${TABLEAU.timeoutS} s; otherwise a notice replaces it and the native figures stand alone.`],
@@ -215,7 +215,7 @@ function tableau(root) {
     section("contract", "Contract between the site and the workbook", "The site relies only on these names; everything else in the workbook is free. Every per-group worksheet keeps Group in the view so selections can be read.",
       table(["Field", "Values"], C.TABLEAU_CONTRACT.fields)),
     section("why", "Why Tableau Public", "After export the data are small (about 850 S6 checks, 111 S1 RPTs, 38.5k saved forecasts, 42k run × task rows) and public (CC BY 4.0). Tableau Public is free to publish and its Embedding API lets a page set filters and read selections. Power BI's JavaScript embedding needs paid capacity and Azure AD. The trade-off: Tableau Public views are public and use extracts."),
-    section("files", "Files", null, defs([["dashboard/tableau/WORKBOOK_SPEC.md", "Build sheet: contract, data model, calculated fields, the five dashboards and the publishing checklist"],
+    section("files", "Files", null, defs([["dashboard/tableau/WORKBOOK_SPEC.md", "Build sheet: contract, data model, calculated fields, the six dashboards and the publishing checklist"],
       ["data/dashboard/tableau/ (local)", "Data/tableau_source.xlsx, Data/Extracts/, residual_tft_ewc.twb/.twbx and AUTHORING.md from build_tableau_workbook.py"],
       ["dashboard/config.js", "View URLs (TABLEAU.views), field names (FIELDS), API script and timeout"],
       ["dashboard/src/embed.js", "Loads the API, mounts views, applies filters, reads selections"]])));

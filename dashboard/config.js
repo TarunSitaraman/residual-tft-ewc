@@ -17,6 +17,7 @@ export const TABLEAU = {
     accuracy: "https://public.tableau.com/views/residual_tft_ewc/Forecastaccuracy",
     continual: "https://public.tableau.com/views/residual_tft_ewc/Continuallearning",
     reuse: "https://public.tableau.com/views/residual_tft_ewc/Reuseuncertainty",
+    d38: "https://public.tableau.com/views/residual_tft_ewc/D38replayensemble",
   },
 };
 

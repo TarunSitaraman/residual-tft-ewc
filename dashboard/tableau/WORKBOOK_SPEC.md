@@ -22,7 +22,7 @@ Use **extracts** (Tableau Public has no live connections). Commit the `.twb` to 
 | Dashboard 3 | `Forecast accuracy` | `TABLEAU.views.accuracy` |
 | Dashboard 4 | `Continual learning` | `TABLEAU.views.continual` |
 | Dashboard 5 | `Reuse & uncertainty` | `TABLEAU.views.reuse` |
-| Dashboard 6 | `D38 replay ensemble` | not yet in `dashboard/config.js`; S10 and S7 only, so the S1/S6 `Dataset` filter values do not apply |
+| Dashboard 6 | `D38 replay ensemble` | `d38`; S10 and S7 only, so the S1/S6 `Dataset` filter values do not apply |
 | Field | `Dataset` | rename `dataset`; values `S1`, `S6` |
 | Field | `Setting` | rename `setting`; values `e1`, `e2` (alias them "E1 (h = 1-3)", "E2 (h = 1-6)") |
 | Field | `Protocol` | rename `protocol`; values `P1`, `P2` |

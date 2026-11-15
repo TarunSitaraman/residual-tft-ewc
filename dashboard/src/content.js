@@ -200,6 +200,6 @@ export const TABLES = [
 ];
 
 export const TABLEAU_CONTRACT = {
-  dashboards: [["Overview", "overview"], ["SOH explorer", "soh"], ["Forecast accuracy", "accuracy"], ["Continual learning", "continual"], ["Reuse & uncertainty", "reuse"]],
+  dashboards: [["Overview", "overview"], ["SOH explorer", "soh"], ["Forecast accuracy", "accuracy"], ["Continual learning", "continual"], ["Reuse & uncertainty", "reuse"], ["D38 replay ensemble", "d38"]],
   fields: [["Dataset", "S1, S6"], ["Setting", "e1, e2 (aliased E1 (h = 1-3), E2 (h = 1-6))"], ["Protocol", "P1, P2"], ["Group", "g1 … w10, case1 … case7, all"], ["Method Family", "from dim_method, joined on method"]],
 };
