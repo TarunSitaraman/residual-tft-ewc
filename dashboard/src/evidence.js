@@ -9,7 +9,7 @@ const SETS = [["S7", "tft_residual_ewc_shrunk", "var(--c2)", "S7: 60 KIT conditi
 const COMPARE = [["gbm_last", "Gradient boosting, latest condition only", false], ["linear_extrapolation", "Linear extrapolation", false],
   ["ridge_shared", "Ridge", false], ["persistence", "Persistence", false],
   ["gbm_all", "Gradient boosting, all conditions stored", true], ["tft_residual_joint", "Joint residual TFT, all conditions stored", true]];
-const AGE = { calendar: ["Calendar", "var(--c4)"], cyclic: ["Cyclic", "var(--c8)"], wltp: ["WLTP drive cycle", "var(--c5)"] };
+const AGE = { calendar: ["Calendar", "var(--c4)"], cyclic: ["Cyclic", "var(--c7)"], wltp: ["WLTP drive cycle", "var(--c5)"] };
 let compareTo = "gbm_last";   // the comparator of the paired views; kept across redraws
 
 /** Per dataset: condition -> {proposed, comparator rows}, main seed set (baselines are deterministic). */
