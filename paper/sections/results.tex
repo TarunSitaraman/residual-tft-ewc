@@ -28,7 +28,7 @@ Table~\ref{tab:headline} and Fig.~\ref{fig:overview} give the main result. On th
 \begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/dash_horizon.png}
-  \caption{\textbf{Forecasting pays off most at long horizons} (dashboard views; S6, P2). (a)~Skill against persistence (1 $-$ ratio of root-mean-square errors, RMSE; dot: mean, line: range over held-out conditions): every method beats carrying the last SOH forward, and the proposed model lies between extrapolation and gradient boosting. (b)~Pooled RMSE by horizon for the P2 benchmark models with direct targets (TFT, multilayer perceptron (MLP), gradient boosting with diagnostic inputs F1): persistence's error grows about five times faster than any learned model's.}
+  \caption{Forecasting pays off most at long horizons (dashboard views; S6, P2). (a)~Skill against persistence (1 $-$ ratio of root-mean-square errors, RMSE; dot: mean, line: range over held-out conditions): every method beats carrying the last SOH forward, and the proposed model lies between extrapolation and gradient boosting. (b)~Pooled RMSE by horizon for the P2 benchmark models with direct targets (TFT, multilayer perceptron (MLP), gradient boosting with diagnostic inputs F1): persistence's error grows about five times faster than any learned model's.}
   \label{fig:dash-horizon}
 \end{figure*}
 
@@ -53,7 +53,7 @@ Under the no-storage rule the proposed model beats GB-LAST on S10 for both horiz
 \begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/dash_d38.png}
-  \caption{\textbf{Bounded memory: the registered questions for the replay ensemble V2} (dashboard view; S7 and S10, P2; post hoc design, protocol fixed before running). Each cell: verdict and mean difference V2 $-$ comparator over held-out conditions, main/replicate seeds (negative favours V2). Comparators: gradient boosting with all conditions stored (GBM-ALL) or with V2's 32 stored rows per condition (GBM-ER32), linear extrapolation at origins with a fade rate (H+), and the earlier proposed model (SEL). All five questions hold on S10; on S7, V2 beats extrapolation and the earlier model with 0.89--0.91 coverage, but not gradient boosting with stored data (Q1, Q2).}
+  \caption{Bounded memory: the registered questions for the replay ensemble V2 (dashboard view; S7 and S10, P2; post hoc design, protocol fixed before running). Each cell: verdict and mean difference V2 $-$ comparator over held-out conditions, main/replicate seeds (negative favours V2). Comparators: gradient boosting with all conditions stored (GBM-ALL) or with V2's 32 stored rows per condition (GBM-ER32), linear extrapolation at origins with a fade rate (H+), and the earlier proposed model (SEL). All five questions hold on S10; on S7, V2 beats extrapolation and the earlier model with 0.89--0.91 coverage, but not gradient boosting with stored data (Q1, Q2).}
   \label{fig:dash-d38}
 \end{figure*}
 

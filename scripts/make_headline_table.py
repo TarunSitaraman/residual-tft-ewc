@@ -96,7 +96,7 @@ def cells(data: dict, key: str) -> list[str]:
         best = min(x for k in ("proposed", "lin", "gbm", "gbm_last")
                    if (x := (np.mean(data[e][p][k]) if data[e][p][k] is not None else None)) is not None)
         txt = f"{v[0]:.2f}/{v[1]:.2f}" if isinstance(v, tuple) else f"{v:.2f}"
-        vals.append(f"\\textbf{{{txt}}}" if abs(np.mean(v) - best) < 5e-3 else txt)
+        vals.append(txt)
     return vals
 
 
@@ -114,7 +114,7 @@ def test_cells(data: dict, key: str) -> list[str]:
 
 
 def table(data: dict) -> str:
-    rows = [("\\textbf{Residual TFT-EWC} (proposed)", "proposed"), ("Linear extrapolation", "lin"),
+    rows = [("Residual TFT-EWC (proposed)", "proposed"), ("Linear extrapolation", "lin"),
             ("Gradient boosting, all conditions stored", "gbm"),
             ("Gradient boosting, latest condition only$^\\dagger$", "gbm_last"), ("Persistence", "persistence")]
     tests = [("vs.\\ linear extrapolation", "v_lin"), ("vs.\\ gradient boosting, all stored", "v_gbm"),
@@ -126,8 +126,8 @@ def table(data: dict) -> str:
         "\\begin{table*}[t]",
         "  \\centering",
         "  \\caption{The proposed model against the two strongest traditional forecasters on S6, in both settings. Top:",
-        "    test RMSE (pp); proposed model: mean over 50 runs, main/replicate seed sets; others: single deterministic fits",
-        "    (bold: best). Bottom: proposed minus baseline (pp, main/replicate; negative favours the proposed model) and the",
+        "    test RMSE (pp); proposed model: mean over 50 runs, main/replicate seed sets; others: single deterministic fits.",
+        "    Bottom: proposed minus baseline (pp, main/replicate; negative favours the proposed model) and the",
         "    verdict of the replication rule (better/worse: significant after Holm in both seed sets, same sign, at least",
         "    0.05~pp; equiv.: below 0.05~pp in both; n.r.: not replicated). $^\\ast$Post hoc for the shrunk model; registered",
         "    for the unshrunk model (D23), with the same verdict. $^\\dagger$Under the continual constraint of the proposed",

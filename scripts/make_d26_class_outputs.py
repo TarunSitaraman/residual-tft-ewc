@@ -25,7 +25,7 @@ ROWS = (  # (key, label)
     ("linear_extrapolation", "Linear extrapolation"),
     ("ridge_shared", "Ridge"),
     ("gbm_shared", "Gradient boosting"),
-    ("tft_residual_ewc_shrunk", "\\textbf{Residual TFT-EWC} (proposed)"),
+    ("tft_residual_ewc_shrunk", "Residual TFT-EWC (proposed)"),
 )
 COLS = (("accuracy", "Acc."), ("recall_macro", "Sens."), ("precision_macro", "Prec."), ("f1_macro", "F1"),
         ("mcc", "MCC"))
@@ -41,7 +41,7 @@ def table(d: dict) -> str:
         cells = []
         for k, _ in COLS:
             v = s[key][k]["mean"]
-            cells.append(f"\\textbf{{{v:.3f}}}" if abs(v - best[k]) < 5e-4 else f"{v:.3f}")
+            cells.append(f"{v:.3f}")
         lines.append(f"    {label} & " + " & ".join(cells) + " \\\\")
         if key == "tft_residual_ewc_shrunk":
             sd = " & ".join(f"$\\pm${s[key][k]['std']:.3f}" for k, _ in COLS)
@@ -54,7 +54,7 @@ def table(d: dict) -> str:
         "  \\centering",
         "  \\caption{Reuse class of the forecast SOH on unseen S6 conditions (P2, horizons 1--3, seven held-out",
         f"    conditions pooled; measured {counts}). Sens., Prec.: macro recall and precision. Proposed model: mean",
-        "    and s.d.\\ over 50 runs; others: single fits. Bold: best.}",
+        "    and s.d.\\ over 50 runs; others: single fits.}",
         "  \\label{tab:d26_classes}",
         "  \\setlength{\\tabcolsep}{2.2pt}",
         "  \\scriptsize",

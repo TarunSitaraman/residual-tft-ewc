@@ -189,7 +189,7 @@ were moved here for space.
     \toprule
     Method & E1: $h{=}1$--3 & E2: $h{=}1$--6 & Forgetting, E2 \\
     \midrule
-    \textbf{TFT\,+\,EWC, residual} & \textbf{0.339 / 0.314} & \textbf{0.561 / 0.534} & \textbf{0.093 / 0.086} \\
+    TFT\,+\,EWC, residual & 0.339 / 0.314 & 0.561 / 0.534 & 0.093 / 0.086 \\
     TFT\,+\,SA-EWC, residual & 0.343 / 0.321 & 0.548 / 0.564 & 0.066 / 0.084 \\
     TFT fine-tuning, residual & 0.347 / 0.337 & 0.673 / 0.612 & 0.282 / 0.220 \\
     TFT\,+\,EWC, direct & 0.504 / 0.487 & 0.802 / 0.835 & 0.135 / 0.166 \\
@@ -222,7 +222,7 @@ were moved here for space.
     TFT\,+\,EWC, residual, shrunk & 0.92 / 0.94 & 0.74 / 0.74 & 1.62 / 1.65 & 1.42 / 1.44 \\
     TFT, residual, joint & 0.57 / 0.58 & 0.54 / 0.55 & 1.21 / 1.18 & 1.22 / 1.19 \\
     \midrule
-    Gradient boosting & \textbf{0.54} & \textbf{0.51} & \textbf{1.05} & \textbf{1.05} \\
+    Gradient boosting & 0.54 & 0.51 & 1.05 & 1.05 \\
     Ridge & 0.77 & 0.69 & 1.30 & 1.26 \\
     Linear extrapolation & 1.37 & 0.86 & 2.30 & 1.62 \\
     Persistence & 2.82 & 2.66 & 4.90 & 4.73 \\
@@ -264,7 +264,7 @@ were moved here for space.
 \begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/d23_comparison.png}
-  \caption{S6 continual stream: final average test RMSE (pp) of every backbone, mean and s.d.\ over the 50 runs of the main seed set; bold, blue: the proposed residual TFT-EWC; dashed: linear extrapolation. Replicate set and forgetting: Table~\ref{tab:residual}.}
+  \caption{S6 continual stream: final average test RMSE (pp) of every backbone, mean and s.d.\ over the 50 runs of the main seed set; blue: the proposed residual TFT-EWC; dashed: linear extrapolation. Replicate set and forgetting: Table~\ref{tab:residual}.}
   \label{fig:d23bar}
 \end{figure*}
 
@@ -383,7 +383,7 @@ times as wide. No calibration cell had to borrow rows from the other origin stra
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
     Method & mean & median & mean & median & mean & median & mean & median \\
     \midrule
-    \textbf{V2}: R32 ensemble, calibrated & 0.782/0.796 & 0.333/0.340 & 1.014/1.003 & 0.548/0.543 & 4.125/4.113 & 2.974/3.010 & 5.890/5.905 & 4.480/4.566 \\
+    V2: R32 ensemble, calibrated & 0.782/0.796 & 0.333/0.340 & 1.014/1.003 & 0.548/0.543 & 4.125/4.113 & 2.974/3.010 & 5.890/5.905 & 4.480/4.566 \\
     R32 ensemble, uncalibrated & 0.782/0.794 & 0.333/0.333 & 1.013/0.998 & 0.543/0.535 & 4.124/4.086 & 2.954/2.981 & 5.868/5.871 & 4.547/4.560 \\
     R32, single model & 0.832/0.845 & 0.380/0.384 & 1.106/1.090 & 0.655/0.651 & 4.237/4.206 & 3.274/3.222 & 6.010/6.007 & 4.752/4.710 \\
     R8 ensemble, calibrated & 0.781/0.783 & 0.344/0.351 & 1.014/0.995 & 0.543/0.568 & 4.035/3.985 & 2.789/2.666 & 5.702/5.615 & 4.267/4.216 \\

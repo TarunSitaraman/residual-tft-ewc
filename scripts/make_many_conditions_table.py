@@ -22,7 +22,7 @@ RUNS = (("S7", "d34", "tft_residual_ewc_shrunk"), ("S10", "d36", "tft_residual_e
 EXPS = ("e1", "e2")
 SHORT = {"replicated, a better": "better", "replicated, a worse": "worse",
          "practically equivalent": "equiv.", "not replicated": "n.r."}
-ROWS = (("\\textbf{Proposed}", "proposed"), ("Lin.\\ extrapolation", "linear_extrapolation"),
+ROWS = (("Proposed", "proposed"), ("Lin.\\ extrapolation", "linear_extrapolation"),
         ("GB, latest only", "gbm_last"), ("GB, all stored", "gbm_all"),
         ("Joint residual TFT", "tft_residual_joint"), ("Persistence", "persistence"))
 TESTS = (("vs.\\ GB, latest only", "gbm_last", "rmse"),

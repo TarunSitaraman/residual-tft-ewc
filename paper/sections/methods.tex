@@ -44,7 +44,7 @@ Six public CC~BY~4.0 datasets are used (Table~\ref{tab:data}); our parsing repro
 \begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/overview.png}
-  \caption{\textbf{Only the proposed model has no weak setting} (S6). (a) Error on the continual stream (P1) against error on an unseen usage condition (P2) for methods that keep no earlier data: extrapolation is good on the stream only, gradient boosting refitted on the latest condition (GB-LAST) on unseen conditions only; the proposed model sits near the origin (hollow grey: gradient boosting with all conditions stored, GB-ALL). (b) Worst-setting shortfall against the best: only the proposed model stays within 0.07~pp. (c) Each design step lowers the Temporal Fusion Transformer's (TFT) stream error, and the residual target brings it to extrapolation's level (lines). (d) Elastic Weight Consolidation (EWC) cuts forgetting over horizons 1--6 by about two thirds. pp: percentage points of SOH.}
+  \caption{Only the proposed model has no weak setting (S6). (a) Error on the continual stream (P1) against error on an unseen usage condition (P2) for methods that keep no earlier data: extrapolation is good on the stream only, gradient boosting refitted on the latest condition (GB-LAST) on unseen conditions only; the proposed model sits near the origin (hollow grey: gradient boosting with all conditions stored, GB-ALL). (b) Worst-setting shortfall against the best: only the proposed model stays within 0.07~pp. (c) Each design step lowers the Temporal Fusion Transformer's (TFT) stream error, and the residual target brings it to extrapolation's level (lines). (d) Elastic Weight Consolidation (EWC) cuts forgetting over horizons 1--6 by about two thirds. pp: percentage points of SOH.}
   \label{fig:overview}
 \end{figure*}
 
@@ -66,12 +66,12 @@ For cell $b$ with check capacities $C_{b,k}$ in time order~\cite{ref6,birkl2017}
 \end{equation}
 so SOH is relative to the first valid check, and a forecast from origin $k$ predicts the change $\Delta$ over $h$ checks ($h{=}1$--3, E1; $h{=}1$--6, E2)~\cite{lim2021tft}. Errors are root-mean-square errors (RMSE) in percentage points (pp). Inputs use only what is known at the origin: SOH history, the fade rate $r_{b,k}$ (least-squares slope over the last three checks~\cite{hastie2009elements}), fixed descriptors, the planned usage until the target, and optional diagnostics (F1). Each cell's checks are cut at 60\% and 80\% into purged train, validation and test periods.
 
-\textbf{Protocols.} \textbf{P1}, continual stream: one task per S1 cell or S6 condition, 10 task orders $\times$ 5 seeds. \textbf{P2}, unseen group: one cell or condition held out. \textbf{P3}: first-life pretraining on S7--S9, then the S6 stream.
+Protocols. P1, continual stream: one task per S1 cell or S6 condition, 10 task orders $\times$ 5 seeds. P2, unseen group: one cell or condition held out. P3: first-life pretraining on S7--S9, then the S6 stream.
 
 \begin{figure*}[p]
   \centering
   \includegraphics[width=\textwidth]{figures/dash_s6.png}
-  \caption{\textbf{S6 in detail: what is forgotten, and where the error comes from} (dashboard views; $h{=}1$--3, main seeds; the dashboard reads only the committed result exports).
+  \caption{S6 in detail: what is forgotten, and where the error comes from (dashboard views; $h{=}1$--3, main seeds; the dashboard reads only the committed result exports).
   (a)~Adaptation (error on the newest task) against retention (final error); points above the diagonal forgot. The proposed model has the lowest final error and one of the lowest adaptation errors.
   (b)~Forgetting by arrival position: the direct-target TFT forgets up to 0.30~pp of early tasks, every residual variant only 0.06--0.18~pp, so the residual target, not the penalty, removes most forgetting.
   (c)~Change of each task's error between learning it and the end of the stream (Residual TFT\,+\,EWC; red: forgotten, blue: later tasks helped). 13 of 32 cells move by less than 0.05~pp; condition~6, the only one with a 2C discharge (C: current that fully discharges the cell in one hour), is overwritten at every position: forgetting follows how unusual a task is.
@@ -82,7 +82,7 @@ so SOH is relative to the first valid check, and a forecast from origin $k$ pred
 \begin{figure*}[p]
   \centering
   \includegraphics[width=\textwidth]{figures/dash_unseen.png}
-  \caption{\textbf{Unseen conditions: intervals on S6 and 124 further conditions in S7 and S10} (dashboard views; P2, $h{=}1$--3).
+  \caption{Unseen conditions: intervals on S6 and 124 further conditions in S7 and S10 (dashboard views; P2, $h{=}1$--3).
   (a)~Coverage of nominal 90\% intervals per held-out S6 condition. Calibrated around linear extrapolation on the training conditions' validation rows (LIN-val, red), they cover only 0.74 (LIN-all, orange: calibrated on all their rows); leave-one-condition-out (LOCO) calibration around gradient boosting (GBM-LOCO, purple) reaches 0.90 overall, yet 0.48 on condition~7: pooled coverage hides the one out-of-range group. Refitting on the new condition's checks lifts it to 0.72 and cuts the interval score by 29\% (supplement).
   (b)~S7 and (c)~S10, one point per held-out condition, log axes; below the diagonal favours the proposed model. Against gradient boosting refitted on the latest condition (GB-LAST) it wins on 39 of 60 S7 conditions (mean $-$1.30~pp), by most on calendar ageing (orange), and on all 64 S10 conditions (mean $-$0.84~pp).
   (d)~Mean difference by ageing type and temperature (blue favours the proposed model; WLTP: Worldwide harmonised Light vehicles Test Procedure drive cycle): GB-LAST keeps an edge only on cold S7 ageing (cyclic at 0--10~$^\circ$C, WLTP at 0~$^\circ$C), while calendar ageing favours the proposed model by over 4~pp.}
@@ -94,7 +94,7 @@ so SOH is relative to the first valid check, and a forecast from origin $k$ pred
 
 The Temporal Fusion Transformer (TFT)~\cite{lim2021tft} sees the four latest origins of a cell (Fig.~\ref{fig:arch}; 12{,}708 parameters). It learns a correction $g_\theta$ to linear extrapolation $\hat\Delta^{\mathrm{lin}}_{b,k,h} = r_{b,k}(t_{b,k+h}-t_{b,k})$, a residual hybrid~\cite{zhang2003hybrid}:
 \begin{equation}
-  \hat\Delta_{b,k,h} = \hat\Delta^{\mathrm{lin}}_{b,k,h} + \alpha_h\, g_\theta(\mathbf{x}_{b,k,h}),
+  \hat\Delta_{b,k,h} = \hat\Delta^{\mathrm{lin}}_{b,k,h} + \alpha_h\, g_\theta(x_{b,k,h}),
   \label{eq:residual}
 \end{equation}
 where $\alpha_h\in[0,1]$ shrinks the correction (least-squares slope on calibration rows). After each task $j$, Elastic Weight Consolidation (EWC)~\cite{kirkpatrick2017ewc} adds
@@ -105,7 +105,7 @@ where $\alpha_h\in[0,1]$ shrinks the correction (least-squares slope on calibrat
 with the diagonal Fisher information $F_j$. Split-conformal intervals~\cite{lei2018conformal} take the calibration-error quantile per horizon.
 
 
-\textbf{Comparators.} Persistence ($\hat\Delta=0$)~\cite{hyndman2006}, linear extrapolation, ridge, histogram gradient boosting (GB)~\cite{friedman2001}, a multilayer perceptron (MLP), fine-tuning, replay~\cite{rolnick2019replay} and joint training. GB is run with all earlier conditions stored (GB-ALL) and, under our no-storage rule, refitted on the latest condition (GB-LAST). V2 (post hoc) swaps EWC for replay of 40 rows per condition, a three-model ensemble and calibration before training.
+Comparators. Persistence ($\hat\Delta=0$)~\cite{hyndman2006}, linear extrapolation, ridge, histogram gradient boosting (GB)~\cite{friedman2001}, a multilayer perceptron (MLP), fine-tuning, replay~\cite{rolnick2019replay} and joint training. GB is run with all earlier conditions stored (GB-ALL) and, under our no-storage rule, refitted on the latest condition (GB-LAST). V2 (post hoc) swaps EWC for replay of 40 rows per condition, a three-model ensemble and calibration before training.
 
 \subsection{Metrics and statistics}
 \label{sec:tuning}
@@ -113,5 +113,5 @@ with the diagonal Fisher information $F_j$. Split-conformal intervals~\cite{lei2
 
 From the error matrix $R_{i,j}$ (task $j$ after step $i$)~\cite{lopezpaz2017gem} we report final average error (retention), error on the newest task (adaptation) and forgetting~\cite{chaudhry2018rwalk}; intervals by coverage and interval score~\cite{gneiting2007scoring}; reuse classes C0 $>$95, C1 90--95, C2 80--90, C3 $\le$80\%. Every follow-up was registered before it ran (supplement Table~SXII). A difference counts as ``replicated'' only if a Wilcoxon test~\cite{wilcoxon1945} with Holm correction~\cite{holm1979} is significant in both seed sets (0--4, 5--9), with the same sign and $|d|\ge0.05$~pp; below 0.05~pp in both it is ``equivalent''.
 
-\textbf{Availability.} Python~3.11, PyTorch~2.14.1, one processor thread, deterministic seeds. Data DOIs are in the references; code, decision log, registrations, results and the dashboard: \url{https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries}.
+Availability. Python~3.11, PyTorch~2.14.1, one processor thread, deterministic seeds. Data DOIs are in the references; code, decision log, registrations, results and the dashboard: \url{https://github.com/TarunSitaraman/continual-learning-heterogeneous-second-life-ev-batteries}.
 \label{sec:repro}

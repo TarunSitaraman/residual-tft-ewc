@@ -13,7 +13,7 @@
     \node[blk, below=of emb] (vsn) {variable selection (GRNs)};
     \node[blk, below=of vsn] (lstm) {LSTM encoder, gate, norm};
     \node[blk, below=of lstm] (att) {masked two-head attention};
-    \node[blk, below=of att] (head) {linear head: $g_\theta(\mathbf{x}_{b,k,h})$};
+    \node[blk, below=of att] (head) {linear head: $g_\theta(x_{b,k,h})$};
     \foreach \a/\b in {x/emb, emb/vsn, vsn/lstm, lstm/att, att/head} \draw[flow] (\a) -- (\b);
     \node[draw, dashed, fit=(x)(head), inner sep=3pt] (tft) {};
     \node[anchor=south west, inner sep=1pt] at (tft.north west) {(a) TFT};

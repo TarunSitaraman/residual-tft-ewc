@@ -2,8 +2,8 @@
 \begin{table*}[t]
   \centering
   \caption{The proposed model against the two strongest traditional forecasters on S6, in both settings. Top:
-    test RMSE (pp); proposed model: mean over 50 runs, main/replicate seed sets; others: single deterministic fits
-    (bold: best). Bottom: proposed minus baseline (pp, main/replicate; negative favours the proposed model) and the
+    test RMSE (pp); proposed model: mean over 50 runs, main/replicate seed sets; others: single deterministic fits.
+    Bottom: proposed minus baseline (pp, main/replicate; negative favours the proposed model) and the
     verdict of the replication rule (better/worse: significant after Holm in both seed sets, same sign, at least
     0.05~pp; equiv.: below 0.05~pp in both; n.r.: not replicated). $^\ast$Post hoc for the shrunk model; registered
     for the unshrunk model (D23), with the same verdict. $^\dagger$Under the continual constraint of the proposed
@@ -18,9 +18,9 @@
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}
     & $h{=}1$--3 & $h{=}1$--6 & $h{=}1$--3 & $h{=}1$--6 \\
     \midrule
-    \textbf{Residual TFT-EWC} (proposed) & \textbf{0.32/0.31} & 0.50/0.49 & 0.92/0.94 & 1.62/1.65 \\
-    Linear extrapolation & 0.34 & \textbf{0.48} & 1.37 & 2.30 \\
-    Gradient boosting, all conditions stored & 0.45 & 0.90 & \textbf{0.54} & \textbf{1.05} \\
+    Residual TFT-EWC (proposed) & 0.32/0.31 & 0.50/0.49 & 0.92/0.94 & 1.62/1.65 \\
+    Linear extrapolation & 0.34 & 0.48 & 1.37 & 2.30 \\
+    Gradient boosting, all conditions stored & 0.45 & 0.90 & 0.54 & 1.05 \\
     Gradient boosting, latest condition only$^\dagger$ & 0.56 & 0.96 & 0.86 & 1.59 \\
     Persistence & 1.64 & 2.67 & 2.82 & 4.90 \\
     \midrule

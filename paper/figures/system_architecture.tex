@@ -7,7 +7,7 @@
       key/.style={box, fill=black!8},
       hero/.style={box, very thick, fill=black!14},
       flow/.style={-{Latex[length=1.7mm]}, thick},
-      tier/.style={font=\fontsize{6.8}{7.8}\selectfont\bfseries, align=center}]
+      tier/.style={font=\fontsize{6.8}{7.8}\selectfont, align=center}]
     % (a) data and preprocessing
     \node[tier, anchor=west] at (0,0.35) {(a) Data and preprocessing};
     \node[box, text width=2.9cm, anchor=north west] (a1) at (0,0) {6 public archives, 606 cells\\S1, S6 second life; S7--S10 first life};
@@ -43,7 +43,7 @@
     % (c) the model inside each state
     \node[tier, anchor=west] at (13.35,0.35) {(c) Residual TFT-EWC (inside each $\theta_t$)};
     \node[box, text width=1.8cm, anchor=north west] (lin) at (13.35,0) {linear\\extrapolation\\$r_{b,k}(t_{k+h}{-}t_k)$};
-    \node[key, text width=1.8cm, anchor=north west] (tft) at (15.85,0) {TFT correction\\$g_\theta(\mathbf{x})$, shrunk\\by $\alpha_h$ (Fig.~\ref{fig:arch})};
+    \node[key, text width=1.8cm, anchor=north west] (tft) at (15.85,0) {TFT correction\\$g_\theta(x)$, shrunk\\by $\alpha_h$ (Fig.~\ref{fig:arch})};
     \node[draw, thick, circle, inner sep=0.3pt, font=\small] (sum) at (15.6,-1.55) {$+$};
     \draw[flow] (lin.south) |- (sum); \draw[flow] (tft.south) |- (sum);
     \node[key, text width=4.1cm, below=0.3cm of sum] (fc) {SOH forecast $\hat\Delta\pm q_h$ (conformal), $h{=}1$--6};

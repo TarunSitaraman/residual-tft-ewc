@@ -191,7 +191,7 @@ def tables(exp: str, d: dict, src: str) -> dict[str, pd.DataFrame]:
         det = r.kind != "continual (stream)"
         rm = fmt(r.rmse_main_mean) if det else f"{fmt(r.rmse_main_mean)} ({fmt(r.rmse_main_sd)})"
         rr = "" if det else f"{fmt(r.rmse_replicate_mean)} ({fmt(r.rmse_replicate_sd)})"
-        name = rf"\textbf{{{tex_escape(r.label)}}}" if r.method == reference(d) else tex_escape(r.label)
+        name = tex_escape(r.label)
         body.append([name, rm, rr, "" if det else fmt(r.forgetting_main), "" if det else fmt(r.bwt_main),
                      "" if det or pd.isna(r.parameters) else f"{int(r.parameters):,}"])
     body = [[b[0]] + [tex_escape(c) for c in b[1:]] for b in body]
