@@ -4,7 +4,7 @@ Every continual-learning strategy (docs/RESEARCH_PLAN.md §3 Stage C) uses the
 same preprocessor and network so that differences between methods come from
 the continual-learning mechanism only. The preprocessor is fitted on training
 rows only; missing values are imputed with the training median *and* flagged
-by an explicit indicator column, so imputation is never silent (AGENTS.md).
+by an explicit indicator column, so imputation is never silent (README, Conventions).
 """
 
 from __future__ import annotations

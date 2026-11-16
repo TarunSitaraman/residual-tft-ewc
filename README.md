@@ -373,7 +373,6 @@ Figures are in `results/figures/`, `paper/figures/` and `docs/figures/spark/`.
 
 ```
 README.md           this file
-AGENTS.md           project conventions (reproducibility, no data in Git, invariants)
 LICENSE             source-available licence (see Section 15)
 data/               datasets (git-ignored) + data/README.md (how to obtain them)
 docs/               RESULTS, DECISIONS (D1–D32), RESEARCH_PLAN, WORK_PLAN, DATA_REPORT, EXTERNAL_DATA,
@@ -392,7 +391,7 @@ results/            committed result JSON files, generated tables (results/table
 paper/              IEEE manuscript, supplement, generated tables and figures
 ```
 
-Conventions (from `AGENTS.md`): datasets and checkpoints stay out of Git; battery-group identity and temporal order are preserved in evaluation; missing temperature is documented, never silently filled; continual-learning evaluation always reports adaptation **and** retention; every reported number traces to code and a clean commit.
+Conventions: datasets and checkpoints stay out of Git; battery-group identity and temporal order are preserved in evaluation; missing temperature is documented, never silently filled; continual-learning evaluation always reports adaptation **and** retention; every reported number traces to code and a clean commit.
 
 ---
 
