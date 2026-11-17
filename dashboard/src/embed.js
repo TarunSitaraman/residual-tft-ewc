@@ -94,17 +94,31 @@ export async function mountViz(container, url, { onReady, onFail, onMarks }) {
  * Only the filters in `keys` (the ones the pane reads) are applied; the others are cleared, so a filter the
  * pane greys out cannot empty its view (the D38 view has no S1/S6 rows).
  */
+const fieldCache = new WeakMap();
+/** The data-source field names of a worksheet (cached) and the fields it currently filters on (read each time). */
+async function sheetFields(ws) {
+  if (!fieldCache.has(ws)) {
+    fieldCache.set(ws, ws.getDataSourcesAsync().then((ds) => new Set(ds.flatMap((d) => d.fields.map((f) => f.name)))));
+  }
+  const [fields, filters] = await Promise.all([fieldCache.get(ws), ws.getFiltersAsync()]);
+  return { fields, filters: new Set(filters.map((f) => f.fieldName)) };
+}
+
 export async function applyState(viz, state, keys = Object.keys(FIELDS)) {
   const sheet = viz?.workbook?.activeSheet;
   if (!sheet) return;
   const sheets = sheet.sheetType === "dashboard" ? sheet.worksheets : [sheet];
   const jobs = [];
   for (const ws of sheets) {
-    for (const [key, field] of Object.entries(FIELDS)) {
-      const v = keys.includes(key) ? ALIASES[key]?.[state[key]] ?? state[key] : "all";
-      const job = v === "all" ? ws.clearFilterAsync(field) : ws.applyFilterAsync(field, [v], "replace");
-      jobs.push(job.catch(() => null));
-    }
+    // Tableau Public shows a "Browser Processing Error" dialog for a filter call on a field the worksheet does not
+    // have, or for clearing a filter that does not exist, so only fields the worksheet has are touched.
+    jobs.push(sheetFields(ws).then(async ({ fields, filters }) => {
+      for (const [key, field] of Object.entries(FIELDS)) {
+        const v = keys.includes(key) ? ALIASES[key]?.[state[key]] ?? state[key] : "all";
+        if (v === "all" ? !filters.has(field) : !fields.has(field)) continue;
+        await (v === "all" ? ws.clearFilterAsync(field) : ws.applyFilterAsync(field, [v], "replace")).catch(() => null);
+      }
+    }).catch(() => null));
   }
   // Parameters with the same names (if the workbook uses parameters instead of filters).
   jobs.push(viz.workbook.getParametersAsync().then((params) => Promise.all(params
