@@ -348,6 +348,8 @@ table.info td, table.info th { white-space: normal; vertical-align: top; }
 .keytable { width: 100%; border-collapse: collapse; font-size: 14px; }
 .keytable caption { text-align: left; font-size: 13px; color: var(--muted); padding-bottom: 8px; caption-side: bottom; padding-top: 8px; }
 .keytable th, .keytable td { padding: 7px 10px; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
+.keytable td .verdict { display: block; width: max-content; margin: 4px 0 0 auto; }
+.keytable caption { white-space: normal; }
 .keytable th.c { text-align: center; } .keytable .r { text-align: right; font-variant-numeric: tabular-nums; }
 .keytable tr.proposed th, .keytable tr.proposed td { color: var(--accent-ink); font-weight: 600; }
 .keytable tr.group th { font-size: 13px; color: var(--muted); font-weight: 500; padding-top: 16px; white-space: normal; }

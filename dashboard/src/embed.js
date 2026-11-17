@@ -34,8 +34,14 @@ const TOOLBAR_PX = 30;
 function fitHeight(viz) {
   try {
     const s = viz.workbook.activeSheet.size;
-    const h = (s.maxSize || s.minSize)?.height;
-    if (h > 0) viz.setAttribute("height", `${h + TOOLBAR_PX}px`);
+    const max = s.maxSize || s.minSize;
+    if (!(max?.height > 0)) return;
+    // A dashboard sized as a range is scaled down to the frame width, keeping its proportions; a frame as tall as
+    // the maximum left blank space under it.
+    const w = viz.getBoundingClientRect().width;
+    const scale = max.width > 0 && w > 0 ? Math.min(1, w / max.width) : 1;
+    const h = Math.max(s.minSize?.height || 0, Math.round(max.height * scale));
+    viz.setAttribute("height", `${h + TOOLBAR_PX}px`);
   } catch { /* size not readable: keep the default height */ }
 }
 
@@ -83,15 +89,19 @@ export async function mountViz(container, url, { onReady, onFail, onMarks }) {
   return viz;
 }
 
-/** Apply the filter-bar state to every worksheet of the view (fields a sheet does not have are skipped). */
-export async function applyState(viz, state) {
+/**
+ * Apply the filter-bar state to every worksheet of the view (fields a sheet does not have are skipped).
+ * Only the filters in `keys` (the ones the pane reads) are applied; the others are cleared, so a filter the
+ * pane greys out cannot empty its view (the D38 view has no S1/S6 rows).
+ */
+export async function applyState(viz, state, keys = Object.keys(FIELDS)) {
   const sheet = viz?.workbook?.activeSheet;
   if (!sheet) return;
   const sheets = sheet.sheetType === "dashboard" ? sheet.worksheets : [sheet];
   const jobs = [];
   for (const ws of sheets) {
     for (const [key, field] of Object.entries(FIELDS)) {
-      const v = ALIASES[key]?.[state[key]] ?? state[key];
+      const v = keys.includes(key) ? ALIASES[key]?.[state[key]] ?? state[key] : "all";
       const job = v === "all" ? ws.clearFilterAsync(field) : ws.applyFilterAsync(field, [v], "replace");
       jobs.push(job.catch(() => null));
     }
@@ -101,7 +111,7 @@ export async function applyState(viz, state) {
     .filter((p) => Object.values(FIELDS).includes(p.name))
     .map((p) => {
       const key = Object.keys(FIELDS).find((k) => FIELDS[k] === p.name);
-      return state[key] === "all" ? null : p.changeValueAsync(state[key]).catch(() => null);
+      return state[key] === "all" || !keys.includes(key) ? null : p.changeValueAsync(state[key]).catch(() => null);
     }))).catch(() => null));
   await Promise.all(jobs);
 }

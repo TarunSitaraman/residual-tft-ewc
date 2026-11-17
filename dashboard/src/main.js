@@ -186,7 +186,7 @@ function ensurePanel(name) {
 function mountTableau(name, holder) {
   holder.replaceChildren(el("p", { class: "sub", style: "padding:16px", text: "Loading the Tableau view…" }));
   mountViz(holder, TABLEAU.views[name], {
-    onReady: (viz) => { vizzes[name] = viz; applyState(viz, state); },
+    onReady: (viz) => { vizzes[name] = viz; applyState(viz, state, APPLIES[name]); },
     onFail: (reason) => {
       vizzes[name] = "failed";
       const retry = el("button", { type: "button", class: "btn", text: "Try again" });
@@ -288,7 +288,7 @@ function update() {
   syncForm();
   renderSide();
   if (state.tab === "overview") renderOverview(); else renderNative(state.tab);
-  for (const v of Object.values(vizzes)) if (v && v !== "failed") applyState(v, state);
+  for (const [name, v] of Object.entries(vizzes)) if (v && v !== "failed") applyState(v, state, APPLIES[name]);
 }
 
 document.getElementById("details-close").addEventListener("click", () => { selection = null; state.group = "all"; update(); });
