@@ -58,7 +58,17 @@ export async function mountViz(container, url, { onReady, onFail, onMarks }) {
   viz.setAttribute("width", "100%");
   viz.setAttribute("height", `${TABLEAU.heightPx}px`);
   let done = false;
-  const timer = setTimeout(() => { if (!done) { done = true; onFail("the view did not respond in time"); } }, TABLEAU.timeoutS * 1000);
+  // A view in a hidden pane does not render, so the clock only runs out while the view is on screen.
+  let timer = 0;
+  const arm = () => {
+    timer = setTimeout(() => {
+      if (done) return;
+      if (!viz.isConnected || viz.offsetParent === null) { arm(); return; }
+      done = true;
+      onFail("the view did not respond in time");
+    }, TABLEAU.timeoutS * 1000);
+  };
+  arm();
   viz.addEventListener("firstinteractive", () => {
     if (done) return;
     done = true;

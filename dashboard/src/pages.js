@@ -6,6 +6,7 @@ import { renderKpis, kpiNote, load } from "./tabs.js";
 import * as C from "./content.js";
 import { mountViz } from "./embed.js";
 import { renderStudies, STUDIES } from "./studies.js";
+import { renderKeyResults } from "./keyresults.js";
 
 // ---------- building blocks ----------
 const section = (id, title, lede, ...kids) => el("section", { class: "sect", id: `s-${id}`, "aria-labelledby": `h-${id}` },
@@ -47,7 +48,8 @@ function home(root, ctx) {
   const { summary, state } = ctx;
   const kpis = el("div", { class: "kpis" });
   renderKpis(kpis, summary, state);
-  const panes = [["project", "Project", "The question, the contributions, the terms used throughout and the limitations."],
+  const panes = [["key", "Key results", "Every claim in the paper with its number, verdict and figure, and where the model does not win."],
+    ["project", "Project", "The question, the contributions, the terms used throughout and the limitations."],
     ["studies", "Studies", "Every experiment from D38 back to the first benchmark, newest first, with its verdicts."],
     ["results", "Results", "The paper's result tables, what was learned, and every registered verdict."],
     ["dashboard", "Dashboard", "Interactive figures: capacity fade, forecast error, continual learning, reuse classes and intervals, many conditions and the D38 replay ensemble."],
@@ -62,7 +64,8 @@ function home(root, ctx) {
       el("h1", { text: "Forecasting the health of second-life batteries, one new group at a time" }),
       el("p", { class: "hero-claim", text: "Of the models compared, the residual TFT with EWC is the only one with no weak side: level with the best baseline on the continual stream, and ahead of extrapolation on usage conditions it has never seen." }),
       el("div", { class: "actions" },
-        el("a", { class: "btn primary", href: "#page=dashboard", text: "Open the dashboard" }),
+        el("a", { class: "btn primary", href: "#page=key", text: "See the key results" }),
+        el("a", { class: "btn", href: "#page=dashboard", text: "Open the dashboard" }),
         el("a", { class: "btn", href: "#page=studies", text: "Browse the studies" }),
         el("a", { class: "btn", href: C.PROJECT.links.paper, target: "_blank", rel: "noopener", text: "Read the paper (PDF)" }))),
     section("plain", "In plain words", null, el("p", { class: "plain", text: PLAIN })),
@@ -221,8 +224,8 @@ function tableau(root) {
       ["dashboard/src/embed.js", "Loads the API, mounts views, applies filters, reads selections"]])));
 }
 
-const PAGES = { home, project, data, methods, studies: renderStudies, results, tableau };
-export const PAGE_TITLES = { home: "Home", project: "Project", data: "Data", methods: "Methods", studies: "Studies", results: "Results", dashboard: "Dashboard", explorer: "Data explorer", tableau: "Tableau" };
+const PAGES = { home, key: renderKeyResults, project, data, methods, studies: renderStudies, results, tableau };
+export const PAGE_TITLES = { home: "Home", key: "Key results", project: "Project", data: "Data", methods: "Methods", studies: "Studies", results: "Results", dashboard: "Dashboard", explorer: "Data explorer", tableau: "Tableau" };
 
 /** Render a content page into `root`; `sec` scrolls to a section once drawn. */
 export async function renderPage(name, root, ctx, sec) {

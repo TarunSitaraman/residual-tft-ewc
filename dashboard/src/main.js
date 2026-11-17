@@ -179,9 +179,20 @@ function ensurePanel(name) {
   const holder = el("div", { class: "viz", "aria-label": `${NAMES[name]} (Tableau)` }, el("p", { class: "sub", style: "padding:16px", text: "Loading the Tableau view…" }));
   c.body.append(holder);
   panel.append(c.node);
+  mountTableau(name, holder);
+}
+
+/** Mount (or remount after a failure) the Tableau view of a pane; a failed view offers a retry. */
+function mountTableau(name, holder) {
+  holder.replaceChildren(el("p", { class: "sub", style: "padding:16px", text: "Loading the Tableau view…" }));
   mountViz(holder, TABLEAU.views[name], {
     onReady: (viz) => { vizzes[name] = viz; applyState(viz, state); },
-    onFail: (reason) => { vizzes[name] = "failed"; holder.replaceWith(el("p", { class: "notice", text: `The Tableau view could not be shown (${reason}). The charts above are complete without it.` })); },
+    onFail: (reason) => {
+      vizzes[name] = "failed";
+      const retry = el("button", { type: "button", class: "btn", text: "Try again" });
+      retry.addEventListener("click", () => { delete vizzes[name]; mountTableau(name, holder); });
+      holder.replaceChildren(el("p", { class: "notice", text: `The Tableau view could not be shown (${reason}). The charts above are complete without it.` }), retry);
+    },
     onMarks: (rows) => {
       if (!rows.length) return;
       selection = { group: rows[0].Group || rows[0][Object.keys(rows[0])[0]], fields: rows[0] };

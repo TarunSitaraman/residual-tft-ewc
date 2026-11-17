@@ -141,7 +141,7 @@ export async function renderEvidence(panel, ctx) {
     .sort((a, z) => z.experiment.localeCompare(a.experiment));
   const ds = (v) => v.dataset || DATASET[v.experiment] || "S6";
 
-  const fp = card("Every registered primary comparison", "Each row is one registered question: model a minus model b, in pp (interval score for the 90 % rows). Filled: main seed set; ring: replicate. Left of zero favours a. Colour gives the verdict under the replication rule.", `All datasets · ${state.setting.toUpperCase()}`);
+  const fp = card("Every registered primary comparison", "Each row is one registered question: model A minus model B, in pp (interval score for the 90 % rows). Filled: main seed set; ring: replicate. Left of zero favours A. Colour gives the verdict under the replication rule.", `All datasets · ${state.setting.toUpperCase()}`);
   const lo = Math.min(0, ...rows.flatMap((v) => [num(v.diff_main), num(v.diff_replicate)]));
   dotRows(fp.body, { tip, labelW: Math.min(430, innerWidth * 0.5), rowH: 30, x: { label: "Difference a − b (pp of SOH)", min: Math.floor(lo * 2) / 2, fmt: (v) => v.toFixed(1) }, refs: [{ x: 0, label: "no difference" }],
     rows: rows.map((v) => {
@@ -151,7 +151,7 @@ export async function renderEvidence(panel, ctx) {
         range: [Math.min(num(v.diff_main), num(v.diff_replicate)), Math.max(num(v.diff_main), num(v.diff_replicate))],
         marks: [{ v: num(v.diff_replicate), color, open: true, r: 6.5, tip: t }, { v: num(v.diff_main), color, r: 4, tip: t }] };   // ring under the dot
     }) });
-  fp.setTitle(`${rows.filter((v) => v.verdict === "replicated, a better").length} of ${rows.length} registered primary comparisons favour model a`);
+  fp.setTitle(`${rows.filter((v) => v.verdict === "replicated, a better").length} of ${rows.length} registered primary comparisons favour the first-named model (A in A − B)`);
   fp.setFoot(legend(Object.values(TONE).map(([w, color]) => ({ label: w, color, kind: "dot" }))));
 
   // Bootstrap confidence intervals of the primary tests (S6 studies). Interval-score tests are in another unit and stay in the table.
@@ -202,7 +202,7 @@ export async function renderEvidence(panel, ctx) {
   listing.body.append(table.table);
 
   panel.replaceChildren(takeaway(
-    `Of ${rows.length} registered primary comparisons in this setting, ${b(`${n("replicated, a better")} favour`)} model a, ${n("practically equivalent")} are practically equivalent, ${n("replicated, a worse")} go against it and ${n("not replicated")} did not replicate.`,
+    `Of ${rows.length} registered primary comparisons in this setting, ${b(`${n("replicated, a better")} favour`)} the first-named model, ${n("practically equivalent")} are practically equivalent, ${n("replicated, a worse")} go against it and ${n("not replicated")} did not replicate.`,
     `Replicated: p_Holm < 0.05 in both seed sets, the same sign, and a difference of at least 0.05 pp; otherwise equivalent or not replicated.${state.setting === "e1" ? " D36 against gradient boosting with all data stored is “better” by the registered rule (it reads the mean), but 52 of 64 conditions favour gradient boosting; the study does not count it as a win." : ""}`),
   fp.node, ci.node, tally.node, listing.node);
 }

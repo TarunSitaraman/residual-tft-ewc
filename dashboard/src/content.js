@@ -35,7 +35,7 @@ export const AT_A_GLANCE = [
 ];
 
 export const CONTRIBUTIONS = [
-  "A leakage-controlled benchmark for forecasting the SOH of second-life cells from five public datasets (395 cells after quality rules), with two label artefacts removed: test currents set from the previous capacity, and pulse charge counted in the capacity.",
+  "A leakage-free forecasting benchmark of 606 cells from six public datasets (S1, S6 second life; S7-S10 first life), with two label artefacts removed: test currents set from the previous capacity, and pulse charge counted in the capacity.",
   "An evaluation of a TFT with EWC against fine-tuning, replay, joint training, simple forecasters and the model families used in the literature (BiLSTM, TCN, Transformer, GPR, random forest, SVR) under three protocols, reporting adaptation, forgetting and retention.",
   "Residual TFT-EWC, a continual learner that corrects linear extrapolation rather than replacing it.",
   "Forecast intervals for unseen usage conditions, calibrated on conditions held out from fitting.",
@@ -182,7 +182,7 @@ export const LIMITATIONS = [
 export const TABLES = [
   ["dim_group", "results", "One row per battery group: S1 cells and S6 usage conditions, with chemistry and the charge and discharge settings."],
   ["dim_method", "results", "One row per method: label, family (TFT, MLP, GBM, baseline, …), kind and whether it is the proposed model."],
-  ["fact_headline", "results", "The paper's headline comparison (Table IV): test RMSE of each method per protocol and setting, plus the proposed-minus-baseline differences and their verdicts."],
+  ["fact_headline", "results", "The paper's headline comparison (headline table): test RMSE of each method per protocol and setting, plus the proposed-minus-baseline differences and their verdicts."],
   ["fact_verdicts", "results", "Registered pairwise comparisons with Holm-corrected p-values in both seed sets and the replication verdict."],
   ["fact_tests", "results", "Every paired test: mean difference, bootstrap CI, p-value, Holm p-value and rank-biserial effect size."],
   ["fact_stream_run", "results", "Continual stream (P1), one row per run (method × seed × task order): final error, forgetting, transfer, per-horizon RMSE, interval coverage."],

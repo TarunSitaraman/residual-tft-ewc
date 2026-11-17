@@ -91,6 +91,8 @@ def _with_dims(df: pd.DataFrame, methods: pd.DataFrame, groups: pd.DataFrame, f:
         on = ["dataset", "group"] if "dataset" in out else ["group"]
         g = g if "dataset" in out else g.drop(columns="dataset").drop_duplicates("group")
         out = out.merge(g, on=on, how="left", validate="many_to_one")
+        # Axis label: S6 usage conditions as "Condition k" (as on the site); other groups keep their code.
+        out["Group Name"] = out["group"].astype(str).str.replace(r"^case(\d+)$", r"Condition \1", regex=True)
     out = out.rename(columns={"dataset": f["dataset"], "setting": f["setting"], "protocol": f["protocol"],
                               "group": f["group"]})
     if f["setting"] in out:
@@ -240,6 +242,19 @@ def _dtype(s: pd.Series) -> str:
     return "string"
 
 
+#: Display names for raw export columns, so axes and headers read in plain words with their unit.
+CAPTIONS = {
+    "Method Label": "Method", "Group Name": "Group", "rmse_main": "RMSE (pp of SOH)", "rmse_mean": "RMSE (pp of SOH)",
+    "rmse_pp": "RMSE (pp of SOH)", "horizon": "Horizon (checks ahead)", "label": "Comparison", "verdict": "Verdict",
+    "experiment": "Study", "final_error": "Final error (pp)", "diagonal_error": "Error right after learning (pp)",
+    "forgetting": "Forgetting (pp)", "backward_transfer": "Backward transfer (pp)", "arrival_pos": "Arrival position",
+    "final_avg_error": "Final average RMSE (pp)", "seed_set": "Seed set", "coverage": "Coverage of 90 % interval",
+    "class_true": "Measured class", "class_pred": "Forecast class", "soh_pred": "Forecast SOH (%)",
+    "soh_target": "Measured SOH (%)", "check_index": "Check", "question": "Question", "comparison": "Comparison",
+    "answer": "Registered answer", "mean_rmse_pp": "Mean RMSE (pp of SOH)", "median_rmse_pp": "Median RMSE (pp of SOH)",
+}
+
+
 def _ds_name(sheet: str) -> str:
     return f"federated.{sheet.lower()}"
 
@@ -275,14 +290,14 @@ def _views(f: dict[str, str]) -> list[dict]:
          "mark": "Text", "enc": {"text": s("verdict")}},
         {"name": "Verdict strip", "sheet": "Verdicts", "rows": [s("experiment")], "cols": [s("verdict")],
          "mark": "Text", "enc": {"text": Ref("verdict", "string", "cnt", discrete=False)}},
-        {"name": "Error heatmap", "sheet": "GroupError", "rows": [s(P), s("Method Label")], "cols": [s(G)],
-         "mark": "Square", "enc": {"color": avg("rmse_mean"), "text": avg("rmse_mean")}, "sort_group": True,
+        {"name": "Error heatmap", "sheet": "GroupError", "rows": [s(P), s("Method Label")], "cols": [s("Group Name")],
+         "mark": "Square", "enc": {"color": avg("rmse_mean"), "text": avg("rmse_mean"), "detail": s(G)}, "sort_group": True,
          "per_group": True},
         {"name": "Error by horizon", "sheet": "Horizon", "rows": [s(D), avg("rmse_pp")], "cols": [i("horizon")],
          "mark": "Line", "enc": {"color": s("Method Label")}},
         {"name": "D30 metric per group", "sheet": "D30Metrics", "rows": [s(D), s("Method Label")],
          "cols": [avg("D30 metric value")],
-         "mark": "Bar", "enc": {"detail": s(G), "color": s(f["family"])}, "per_group": True},
+         "mark": "Bar", "enc": {"color": s(f["family"])}},
         {"name": "SOH trajectories", "sheet": "SOH", "rows": [s(D), avg("SOH valid checks")],
          "cols": [Ref("check_index", "integer", None, discrete=False)], "mark": "Line",
          "enc": {"color": s(G), "detail": s("unit")}, "per_group": True},
@@ -290,14 +305,14 @@ def _views(f: dict[str, str]) -> list[dict]:
          "cols": [avg("diagonal_error")], "mark": "Circle", "enc": {"color": s(f["family"]), "detail": s("Method Label")}},
         {"name": "Forgetting by arrival", "sheet": "StreamTasks", "rows": [s(S), avg("forgetting")],
          "cols": [i("arrival_pos")], "mark": "Line", "enc": {"color": s("Method Label")}},
-        {"name": "Backward transfer heatmap", "sheet": "StreamTasks", "rows": [s(S), s(G)], "cols": [i("arrival_pos")],
-         "mark": "Square", "enc": {"color": avg("backward_transfer")}, "sort_group": True, "per_group": True},
+        {"name": "Backward transfer heatmap", "sheet": "StreamTasks", "rows": [s(S), s("Group Name")], "cols": [i("arrival_pos")],
+         "mark": "Square", "enc": {"color": avg("backward_transfer"), "detail": s(G)}, "sort_group": True, "per_group": True},
         {"name": "Seed spread", "sheet": "StreamRuns",
          "rows": [s("experiment"), Ref("final_avg_error", "real", None, discrete=False)],
          "cols": [s("Method Label"), s("seed_set")], "mark": "Circle", "enc": {"color": s("seed_set")},
          "disaggregate": True},
-        {"name": "Interval coverage", "sheet": "Coverage90", "rows": [s(S), avg("coverage")], "cols": [s(G)],
-         "mark": "Circle", "enc": {"color": s("Method Label")}, "sort_group": True, "per_group": True},
+        {"name": "Interval coverage", "sheet": "Coverage90", "rows": [s(S), avg("coverage")], "cols": [s("Group Name")],
+         "mark": "Circle", "enc": {"color": s("Method Label"), "detail": s(G)}, "sort_group": True, "per_group": True},
         {"name": "Reuse-class confusion", "sheet": "Predictions", "rows": [s("class_true")], "cols": [s("class_pred")],
          "mark": "Square", "enc": {"text": Ref("soh_pred", "real", "cnt", discrete=False),
                                    "color": Ref("soh_pred", "real", "cnt", discrete=False)}},
@@ -398,6 +413,11 @@ def _datasource(parent: ET.Element, sheet: str, df: pd.DataFrame, f: dict[str, s
         al = ET.SubElement(col, "aliases")
         for k, v in X.SETTINGS.items():
             ET.SubElement(al, "alias", key=f'"{k}"', value=v)
+    for c in df.columns:
+        if c in CAPTIONS and c != f["setting"]:
+            num = _dtype(df[c]) in ("real", "integer")
+            ET.SubElement(ds, "column", caption=CAPTIONS[c], datatype=_dtype(df[c]), name=f"[{c}]",
+                          role="measure" if num else "dimension", type="quantitative" if num else "nominal")
     for cap, dt, formula in _calcs(sheet):
         _calc_column(ds, cap, dt, formula)
     # The extract comes last in a data source, as Tableau writes it.
@@ -454,8 +474,10 @@ def _worksheet(parent: ET.Element, v: dict, df: pd.DataFrame, f: dict[str, str],
                 continue
             dt = _dtype(df[r.field]) if r.field in df else r.datatype
             measure = dt in ("real", "integer") and r.agg is not None
-            ET.SubElement(deps, "column", datatype=dt, name=f"[{r.field}]", role="measure" if measure else "dimension",
-                          type="quantitative" if measure else "nominal")
+            col = ET.SubElement(deps, "column", datatype=dt, name=f"[{r.field}]",
+                                role="measure" if measure else "dimension", type="quantitative" if measure else "nominal")
+            if r.field in CAPTIONS:
+                col.set("caption", CAPTIONS[r.field])
     inst = set()
     for r in refs:
         if r.instance not in inst:
@@ -465,7 +487,7 @@ def _worksheet(parent: ET.Element, v: dict, df: pd.DataFrame, f: dict[str, str],
                           name=r.instance, pivot="key", type="quantitative" if not r.discrete else
                           ("nominal" if r.datatype == "string" else "ordinal"))
     if v.get("sort_group"):
-        g = Ref(f["group"], "string")
+        g = Ref("Group Name", "string")
         ET.SubElement(view, "sort", {"class": "computed"}, column=g.full(ds), direction="ASC",
                       using=Ref("Group Order", "integer", "sum", discrete=False).full(ds))
     ET.SubElement(view, "aggregation", value="false" if v.get("disaggregate") else "true")

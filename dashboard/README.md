@@ -1,10 +1,11 @@
 # Project site and results dashboard
 
-A single-page site about the project with the results dashboard at its centre. The top bar has nine pages:
+A single-page site about the project with the results dashboard at its centre. The top bar has ten pages:
 
 | Page | Content |
 |---|---|
 | Home | A plain-language summary with the headline finding, a five-step guide to which page answers which question, headline numbers read live from `summary.json` (proposed model against the best baseline, with the registered verdict), the findings and a map of the site |
+| Key results | Every claim in the paper with its number, verdict under the replication rule, study ID and a link to the dashboard pane that shows it; the headline table read live from `summary.json`; where the model does not win; the paper's figures (`src/keyresults.js`) |
 | Project | Question, contributions, framework and architecture figures (`paper/figures/`), terms, limitations, team, citation and licence |
 | Data | Sources, every battery group (from `dim_group`), integrity rules and the Spark pipeline |
 | Methods | Pipeline, baselines, neural models and strategies, protocols, statistics and reuse screening |
@@ -72,6 +73,6 @@ python -m pytest tests/test_export_dashboard_data.py
 Then serve the page and check, at desktop and phone widths in both themes:
 
 - every section renders its charts with no console errors, in both themes;
-- the numbers match `docs/RESULTS.md` and paper Table III (linear extrapolation 0.34 pp on the stream; gradient boosting 0.54 pp, joint residual TFT 0.57 pp and the proposed model 0.92 / 0.94 pp on unseen conditions, E1);
+- the numbers match `docs/RESULTS.md` and the paper's headline table (linear extrapolation 0.34 pp on the stream; gradient boosting 0.54 pp, joint residual TFT 0.57 pp and the proposed model 0.92 / 0.94 pp on unseen conditions, E1);
 - each finding sentence matches the numbers in the charts below it;
 - once views are configured, changing Group re-filters every embedded view, and selecting a mark opens the details panel.

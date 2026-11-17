@@ -332,6 +332,27 @@ table.info td, table.info th { white-space: normal; vertical-align: top; }
 .pfig img { width: 100%; max-width: 1100px; height: auto; background: #fff; border: 1px solid var(--rule); border-radius: 0; padding: 12px; }
 .pfig figcaption { font-size: 13px; color: var(--muted); }
 .stable.tall { max-height: 520px; }
+/* Key results page */
+.claims { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(460px, 100%), 1fr)); gap: 0 32px; }
+.claim { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; border-top: 1px solid var(--rule); padding: 18px 0 20px; }
+.claim-num { display: grid; align-content: start; gap: 2px; }
+.claim-num .idx { font-size: 12px; color: var(--muted); letter-spacing: .08em; }
+.claim-num b { font: 600 34px/1 var(--display); letter-spacing: -.02em; color: var(--accent-ink); }
+.claim-num small { font-size: 13px; color: var(--muted); }
+.claim-body { display: grid; gap: 6px; align-content: start; }
+.claim-body h3 { font: 600 18px/1.25 var(--display); margin: 0; }
+.claim-body p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+.claim-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 13px; }
+.claim-meta .verdict { margin-left: 0; }
+.claim-meta span:not(.verdict) { color: var(--muted); }
+.keytable { width: 100%; border-collapse: collapse; font-size: 14px; }
+.keytable caption { text-align: left; font-size: 13px; color: var(--muted); padding-bottom: 8px; caption-side: bottom; padding-top: 8px; }
+.keytable th, .keytable td { padding: 7px 10px; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
+.keytable th.c { text-align: center; } .keytable .r { text-align: right; font-variant-numeric: tabular-nums; }
+.keytable tr.proposed th, .keytable tr.proposed td { color: var(--accent-ink); font-weight: 600; }
+.keytable tr.group th { font-size: 13px; color: var(--muted); font-weight: 500; padding-top: 16px; white-space: normal; }
+.keyfigs { display: grid; gap: 28px; }
+@media (max-width: 560px) { .claim { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
 
 /* ---------- Data explorer ---------- */
 .xlist { display: grid; gap: 8px; }
